@@ -1,20 +1,20 @@
-## Types of users:
+## Types of users and their actions:
 
 ### Privelages: 
-Organizers > Spectators
+Organizer/Admin > Team Captains > Players > Spectators
 
-?Club Owner? > Team Captains > PLayers > Spectators
-
-### Organizers
-- Admin
+### Organizers/Admin
 - Create tournament
 - Input results
 - Add teams to tournament / edit: delay or cancel
 - Create clubs and edit
 
-### Players / Teams
-- At least 16 teams in a tournament
-- Teams cannot play in multiple matches at the same time
+#### Team captains  
+- Canot be in more than one team
+- Sign their team into the compatiotion / tournament
+- Creates his team
+- modify team memebers (removing, adding and editing)
+- When leaving a team then they choose a player to take their place as team captain (If no one left then the team is archived where it still holds the score and win information)
 
 #### Player
 - Regester self
@@ -22,28 +22,21 @@ Organizers > Spectators
 - Edit self
 - Create a team and promote themself
 
-#### Team captains  
-- Canot be in more than one team
-- Sign their team into the compatiotion / tournament
-- Creates his team
-- modify team memebers (removing, adding and editing)
-- !! IF we allow team captain to remove them self from team then what happenes??!!
-- !! CLUB OWNER (IS THERE A CLUB OWNER) creates captian who then can create a team !!
-
 ### Spectators
 - TO see maches and tournaments
 - Get game schedule
 - Get results
 - See teams and clubs
 
+
 # Prioritized Requirements
 ### A
-- Each player is in 1 team
-- Team Captains can add, change or modify players in team
+- Each Player is in 1 team
+- Team Captains can add, change or modify Players in team
 - ONLY ONE admin who can create tournament and clubs
 - Admin can add teams to tournaments
 - Admin can delay a tournament or cancel
-- Tournaments automatically arcive after they play out
+- Tournaments automatically arcive after they Play out
 ### B
 - Swich captain
 - Players can be in more than 1 team
@@ -51,29 +44,31 @@ Organizers > Spectators
 ### C
 - Edit arcive (like removing invalid tournaments) 
 
+
 # Use cases for requirements
+
 
 # Test requirements
 
-# Class diagrams
 
+# Class diagrams
 ## Model classes
-### PLayers
+### Players
 - Name
 - Date of Birth
 - Home Address
 - Phone Number
 - Handle: Unqie
 - win counter
-- Points (for playing / winning?)
+- Points (for Playing / winning?)
 
 ### Team
-- List of players 3 <= list <= 5
+- List of Players 3 <= list <= 5
 - Name: Uniqe
-- Captain: player handle
+- Captain: Player handle
 - Optional = usl homepage, ascii art
 - Win counter
-- points (for playing / winning?)
+- points (for Playing / winning?)
 
 ### Club
 - Win counter
@@ -82,7 +77,7 @@ Organizers > Spectators
 - Name
 - created by the organizer
 
-Club -> Team -> PLayer
+Club -> Team -> Player
 
 ### Competition
 - Venues (location)
@@ -95,20 +90,23 @@ Club -> Team -> PLayer
 ### Matches
 - Date time
 - Server ID
-- What teams are playing
+- What teams are Playing
 
 ## 3-tier design
 
+
 # State diagrams
+
 
 # User group analysis
 
+
 # UI-Design
+
+
 - Wireframe where we show "happy paths"
 
 
-
-
-
-
-
+### Players / Teams
+- At least 16 teams in a tournament
+- Teams cannot Play in multiple matches at the same time
