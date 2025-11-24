@@ -11,8 +11,8 @@
 - Task 1...
 
 ## Ísak Elí
-### Time:
-### On site:
+### Time: 8:30 - 
+### On site: YES
 - Task 1...
 
 ## Kristinn Hrafn
