@@ -51,6 +51,7 @@
 
 ### Kristinn
 - I would like to implement code which will not crash or bring any problems, just test the code enough.
+- I am going to make a basic guide on the git commands I will be using with the cli.
 
 ### Ísak
 - To stay consistent.
