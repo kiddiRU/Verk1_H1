@@ -29,7 +29,13 @@
 ### Time:
 ### On site:
 - Task 1...
+## State of the Project
+### TEXT:
 
+### BULLETS:
+-
+-
+-
 ## State of the Group
 ### TEXT:
 
