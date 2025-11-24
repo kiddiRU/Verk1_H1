@@ -26,10 +26,9 @@
 - Task 1...
 
 ## Sindri Freysson
-### Time: 
-10:10
-### On site: 
-Yes
+### Time: 10:10 - 16:30
+### On site: Yes
+
 ## State of the Project
 ### TEXT:
 After our first group meeting, we began dissucsing what the goal was based on the project description and started working on the desing document.
