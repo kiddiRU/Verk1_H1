@@ -1,7 +1,7 @@
 # Diary, 2025-11-24
 
 ## Andri Már
-### Time: 10:10
+### Time: 10:10 - 16:20
 ### On site: YES
 - Task 1...
 
