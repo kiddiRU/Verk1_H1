@@ -8,7 +8,8 @@ Organizers > Spectators
 - Admin
 - Create tournament
 - Input results
-- Add teams to tournamentss
+- Add teams to tournament / edit: delay or cancel
+- Create clubs and edit
 
 ### PLayers / Teams
 - At least 16 teams in a tournament
@@ -75,7 +76,7 @@ Organizers > Spectators
 - Teams associated
 - Club colors
 - Name
-- 
+- created by the organizer
 
 Club -> Team -> PLayer
 
@@ -100,6 +101,7 @@ Club -> Team -> PLayer
 
 # UI-Design
 - Wireframe where we show "happy paths"
+
 
 
 
