@@ -9,7 +9,10 @@
 
 
 ## Basic commands
-- 
+- clone: 
+- commit: 
+- push: 
+- pull: 
 
 
 ## Pull requests and code reviews
