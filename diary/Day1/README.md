@@ -26,9 +26,10 @@
 - Task 1...
 
 ## Sindri Freysson
-### Time: 10:10
-### On site: Yes
-- Task 1...
+### Time: 
+10:10
+### On site: 
+Yes
 ## State of the Project
 ### TEXT:
 
