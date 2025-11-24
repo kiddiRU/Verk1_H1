@@ -40,7 +40,17 @@ Yes
 - Started on the design document
 - Analysed project description to create design stucture
 - Started defining and adding requirements
+
 ## ToDo-list:
+- Requirements - Organizer
+- Requirements - Team Captain
+- Requirements - PLayers
+- Requirements - Spectators
+- State Diagrams / User Flow
+- Ui design - Wireframs + Happy path
+- Git handbook
+- 
+
 ### TEXT:
 
 ### BULLETS:
