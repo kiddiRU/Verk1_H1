@@ -5,7 +5,7 @@
 - Can work at all hours in a pinch
 ### Kristján
 - Has no preference for work hours
-- Will arrive at 8
+- Will arrive at 9
 ### Andri
 - Can make fridays
 - Would like to work from 8:30 to 16:30
