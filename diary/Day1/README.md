@@ -6,14 +6,14 @@
 - Task 1...
 
 ## Elmar
-### Time: 8:30 -
+### Time: 10:00 -
 ### On site: YES
 - Task 1...
 
 ## Ísak Elí
-### Time: 8:30 - 
+### Time: 10:10 - 
 ### On site: YES
-- Task 1...
+- Brainstoming and writing down ideas
 
 ## Kristinn Hrafn
 ### Time:
