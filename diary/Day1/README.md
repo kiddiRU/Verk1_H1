@@ -6,7 +6,7 @@
 - Task 1...
 
 ## Elmar
-### Time: 10:00 -
+### Time: 10:10 -
 ### On site: YES
 - Task 1...
 
@@ -37,7 +37,7 @@ Yes
 - Created repo
 - Concluded initial group meeting
 - Created skeleton for diaries
-- Created design document
+- Started on the design document
 - Analysed project description to create design stucture
 - Started defining and adding requirements
 ## ToDo-list:
