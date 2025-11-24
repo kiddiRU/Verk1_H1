@@ -6,14 +6,14 @@
 - Task 1...
 
 ## Elmar
-### Time:
-### On site:
+### Time: 10:00 -
+### On site: YES
 - Task 1...
 
 ## Ísak Elí
-### Time:
-### On site:
-- Task 1...
+### Time: 10:10 - 
+### On site: YES
+- Brainstoming and writing down ideas
 
 ## Kristinn Hrafn
 ### Time:
@@ -26,9 +26,10 @@
 - Task 1...
 
 ## Sindri Freysson
-### Time: 10:10
-### On site: Yes
-- Task 1...
+### Time: 
+10:10
+### On site: 
+Yes
 ## State of the Project
 ### TEXT:
 
