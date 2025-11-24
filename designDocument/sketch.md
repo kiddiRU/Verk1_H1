@@ -2,6 +2,7 @@
 
 ### Privelages: 
 Organizers > Spectators
+
 ?Club Owner? > Team Captains > PLayers > Spectators
 
 ### Organizers
@@ -25,7 +26,7 @@ Organizers > Spectators
 - Canot be in more than one team
 - Sign their team into the compatiotion / tournament
 - Creates his team
-- modify team memebers (removing and adding)
+- modify team memebers (removing, adding and editing)
 - !! IF we allow team captain to remove them self from team then what happenes??!!
 - !! CLUB OWNER (IS THERE A CLUB OWNER) creates captian who then can create a team !!
 
@@ -38,8 +39,11 @@ Organizers > Spectators
 # Prioritized Requirements
 ### A
 - Each player is in 1 team
-- Captains can add, change or 
-- TO arcive turnoments after they play out
+- Team Captains can add, change or modify players in team
+- ONLY ONE admin who can create tournament and clubs
+- Admin can add teams to tournaments
+- Admin can delay a tournament or cancel
+- Tournaments automatically arcive after they play out
 ### B
 - Swich captain
 - Players can be in more than 1 team
@@ -101,6 +105,7 @@ Club -> Team -> PLayer
 
 # UI-Design
 - Wireframe where we show "happy paths"
+
 
 
 
