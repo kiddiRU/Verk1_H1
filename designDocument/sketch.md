@@ -1,27 +1,42 @@
 ## Types of users:
 
-Privelages: Organizers > ?Club Owner? > Team Captains > PLayers > Spectators
+### Privelages: 
+Organizers > Spectators
+?Club Owner? > Team Captains > PLayers > Spectators
 
 ### Organizers
+- Admin
 - Create tournament
 - Input results
-- Add teams to tournamentss???
+- Add teams to tournamentss
 
 ### PLayers / Teams
 - At least 16 teams in a tournament
 - Teams cannot play in multiple matches at the same time
 
+#### PLayer
+- Regester self
+- Remove from team
+- Edit self
+- Create a team and promote themself
+
 #### Team captains  
 - Canot be in more than one team
 - Sign their team into the compatiotion / tournament
 - Creates his team
-- modify team memebers
+- modify team memebers (removing and adding)
+- !! IF we allow team captain to remove them self from team then what happenes??!!
+- !! CLUB OWNER (IS THERE A CLUB OWNER) creates captian who then can create a team !!
 
 ### Spectators
 - TO see maches and tournaments
+- Get game schedule
+- Get results
+- See teams and clubs
 
 # Prioritized Requirements
 ### A
+- 
 - TO arcive turnoments after they play out
 - Each player is in 1 team
 ### B
@@ -45,7 +60,7 @@ Privelages: Organizers > ?Club Owner? > Team Captains > PLayers > Spectators
 - Phone Number
 - Handle: Unqie
 - win counter
-- 
+- Points (for playing / winning?)
 
 ### Team
 - List of players 3 <= list <= 5
@@ -53,10 +68,14 @@ Privelages: Organizers > ?Club Owner? > Team Captains > PLayers > Spectators
 - Captain: player handle
 - Optional = usl homepage, ascii art
 - Win counter
+- points (for playing / winning?)
 
 ### Club
 - Win counter
 - Teams associated
+- Club colors
+- Name
+- 
 
 Club -> Team -> PLayer
 
@@ -81,6 +100,7 @@ Club -> Team -> PLayer
 
 # UI-Design
 - Wireframe where we show "happy paths"
+
 
 
 
