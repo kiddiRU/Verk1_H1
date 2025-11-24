@@ -32,7 +32,7 @@
 Yes
 ## State of the Project
 ### TEXT:
-
+After our first group meeting, we began dissucsing what the goal was based on the project description and started working on the desing document.
 ### BULLETS:
 - Created repo
 - Concluded initial group meeting
