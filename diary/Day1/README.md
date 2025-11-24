@@ -49,7 +49,7 @@ Yes
 -
 ## State of the Group
 ### TEXT:
-
+We had our first group meeting, where we introduced ourselves and got to know each other. Kristinn was the meeting recorder, where we talked about our expectations of the project, what we wanted a to do, and created rules of conduct. In our meeting we decided to start working by 9:00 until 17:00 and try to work onsite as much as possible. 
 ### BULLETS:
 -
 -
