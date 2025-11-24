@@ -1,5 +1,7 @@
 ## Types of users:
 
+Privelages: Organizers > ?Club Owner? > Team Captains > PLayers > Spectators
+
 ### Organizers
 - Create tournament
 - Input results
@@ -15,7 +17,7 @@
 - Creates his team
 - modify team memebers
 
-### Observers
+### Spectators
 - TO see maches and tournaments
 
 # Prioritized Requirements
@@ -56,6 +58,8 @@
 - Win counter
 - Teams associated
 
+Club -> Team -> PLayer
+
 ### Competition
 - Venues (location)
 - Time: begin - end
@@ -77,5 +81,6 @@
 
 # UI-Design
 - Wireframe where we show "happy paths"
+
 
 
