@@ -44,10 +44,10 @@ Yes
 ## ToDo-list:
 - Requirements - Organizer
 - Requirements - Team Captain
-- Requirements - PLayers
+- Requirements - Players
 - Requirements - Spectators
 - State Diagrams / User Flow
-- Ui design - Wireframs + Happy path
+- UI design - wireframes + Happy path
 - Git handbook
 - 
 
