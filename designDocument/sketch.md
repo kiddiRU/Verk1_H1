@@ -11,11 +11,11 @@ Organizers > Spectators
 - Add teams to tournament / edit: delay or cancel
 - Create clubs and edit
 
-### PLayers / Teams
+### Players / Teams
 - At least 16 teams in a tournament
 - Teams cannot play in multiple matches at the same time
 
-#### PLayer
+#### Player
 - Regester self
 - Remove from team
 - Edit self
@@ -37,9 +37,9 @@ Organizers > Spectators
 
 # Prioritized Requirements
 ### A
-- 
-- TO arcive turnoments after they play out
 - Each player is in 1 team
+- Captains can add, change or 
+- TO arcive turnoments after they play out
 ### B
 - Swich captain
 - Players can be in more than 1 team
@@ -101,6 +101,7 @@ Club -> Team -> PLayer
 
 # UI-Design
 - Wireframe where we show "happy paths"
+
 
 
 
