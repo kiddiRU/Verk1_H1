@@ -1,8 +1,8 @@
 # Diary, 2025-11-24
 
 ## Andri Már
-### Time: 
-### On site: 
+### Time: 10:10
+### On site: YES
 - Task 1...
 
 ## Elmar
