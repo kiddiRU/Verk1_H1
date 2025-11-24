@@ -34,9 +34,12 @@ Yes
 ### TEXT:
 
 ### BULLETS:
--
--
--
+- Created repo
+- Concluded initial group meeting
+- Created skeleton for diaries
+- Created design document
+- Analysed project description to create design stucture
+- Started defining and adding requirements
 ## ToDo-list:
 ### TEXT:
 
