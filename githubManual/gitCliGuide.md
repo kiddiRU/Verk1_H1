@@ -24,9 +24,10 @@ Here you just make your changes to files like you normally do, this is called yo
 
 ## Staging area
 Here you can add changed files you want to commit with the add command, you can add specific files or directories or everything at once.
-- git add . | Adds all changed files to the staging area in your current directory, recursively does the same to directories in your current directory.
-- git add ./file | Adds the file to the staging area if the file has changed since the last commit.
-- git status
+* git add .
+    - Adds all changed files to the staging area that have been changed in your current directory, recursively does the same to directories in your current directory.
+* git add ./file
+    - Adds the file to the staging area if the file has changed since the last commit.
 
 ## Local git repository
 The git repository is just a collection of commits you have done, when you run git commit, all the changed files stored in the staging area get added
