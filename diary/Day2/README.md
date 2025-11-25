@@ -16,9 +16,8 @@
 - Task 1...
 
 ## Kristinn Hrafn
-### Time:
-### On site:
-- Task 1...
+### Time: 10:10 - 16:30, arrived 8:30 for Gylfi's lecture
+### On site: Yes
 
 ## Kristján Hagalín
 ### Time:
