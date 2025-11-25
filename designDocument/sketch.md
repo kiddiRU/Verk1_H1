@@ -42,7 +42,6 @@ Organizer/Admin > Team Captains > Players > Spectators
   - Teams
   - Players
 
-
 - TO see matches and tournaments
 - Get game schedule
 - Get results
@@ -84,11 +83,17 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Change team name
 - Team captain can transfer his authority to a player in team
 - Teams can switch from clubs
+- Need password to login
 
 ## NON-Functional
 ### A
-- Randomize team list for tournaments
-- ??No one but the organizer can create a club or tournament??
+- Menus should have a "back" option when appropriate
+- The system should not crash due to invalid data
+- The players personal data should not be visible to the spectator
+- Only the team captain can modify the team
+- Only the organizer can create tournaments and clubs
+- Code must follow Python type_hinting everywhere
+- Code must follow the snake casing naming convention
 ### B
 
 ### C
@@ -118,7 +123,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - List of Players 3 <= list <= 5
 - Name: Unique
 - Captain: Player handle
-- Optional = usl homepage, ascii art
+- Optional = url homepage, ascii art
 - Win counter
 - points (for Playing / winning?)
 - Tournaments played
@@ -169,6 +174,7 @@ Club -> Team -> Player
 
 # EXTRA NOTES:
 ### Players / Teams
+- Randomize team list for tournaments
 - At least 16 teams in a tournament
 - Teams cannot Play in multiple matches at the same time
 - The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
