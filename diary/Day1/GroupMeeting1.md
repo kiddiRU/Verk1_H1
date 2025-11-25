@@ -25,7 +25,7 @@
 - Would like to keep schedule
 - Would like to work together in person
 - Would like a good dm response time
-- Would like a definced coding standard
+- Would like a defined coding standard
 - Would like each person to setup up a schedule which include work time, lunch and breaks, not mandatory
 
 ### Kristinn
@@ -36,8 +36,8 @@
 
 ### Ísak
 - Same as Sindri with good response time
-- Would like a weel commenented and organized code
-- After the first day and through out the project everyone has a goal to complete or a toodoolist
+- Would like a well commented and organized code
+- After the first day and through out the project everyone has a goal to complete or a todo list
 
 ## What are you expecting from yourself work wise
 

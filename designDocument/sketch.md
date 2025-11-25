@@ -3,7 +3,7 @@
 ### Privileges:  
 Organizer/Admin > Team Captains > Players > Spectators
 
-### Organizers/Admin
+#### Organizers/Admin
 - Create tournament
 - Input results
 - Add teams to tournament / edit: delay or cancel
@@ -22,7 +22,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Edit self
 - Create a team and promote them selves to the team captain
 
-### Spectators
+#### Spectators
 - TO see matches and tournaments
 - Get game schedule
 - Get results
@@ -106,7 +106,7 @@ Club -> Team -> Player
 
 - Wireframe where we show "happy paths"
 
-
+# EXTRA NOTES:
 ### Players / Teams
 - At least 16 teams in a tournament
 - Teams cannot Play in multiple matches at the same time

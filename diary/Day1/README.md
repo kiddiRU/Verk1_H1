@@ -13,7 +13,7 @@
 ## Ísak Elí
 ### Time: 10:10 - 16:30
 ### On site: YES
-- Brainstoming and writing down ideas
+- Brainstorming and writing down ideas
 
 ## Kristinn Hrafn
 ### Time: 10:10 - 16:30
@@ -31,13 +31,13 @@
 
 ## State of the Project
 ### TEXT:
-After our first group meeting, we began dissucsing what the goal was based on the project description and started working on the desing document.
+After our first group meeting, we began discussing what the goal was based on the project description and started working on the design document.
 ### BULLETS:
 - Created repo
 - Concluded initial group meeting
 - Created skeleton for diaries
 - Started on the design document
-- Analysed project description to create design stucture
+- Analyzed project description to create design structure
 - Started defining and adding requirements
 
 ## ToDo-list:
@@ -46,7 +46,7 @@ After our first group meeting, we began dissucsing what the goal was based on th
 - Requirements - Players
 - Requirements - Spectators
 - State Diagrams / User Flow
-- UI design - wireframes + Happy path
+- UI design - wireframs + Happy path
 - Git handbook
 - 
 
