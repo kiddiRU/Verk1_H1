@@ -19,30 +19,56 @@
 
 * git clone
 
-bbbbbbbbbbbbbbbbbbbbbbbbb
+info
 
-<img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> bbbbbbbbbbbbbbbbbbbbbbbbb
+<img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> 
 
+info
 
 <img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%"> 
-bbbbbbbbbbbbbbbbbbbbbbbbb
+
+info
 
 <img alt="cloning step 3" src="github_desktop_images/a_cloning3.png" width="50%">
+
+info
+
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
 * git pull
+
+info
+
 <img alt="pulling step 1" src="github_desktop_images/b_pulling1.png" width="50%">
+
+info
+
 <img alt="pulling step 2" src="github_desktop_images/b_pulling2.png" width="50%">
 
 * git add
+
+info
+
 <img alt="adding step 1" src="github_desktop_images/c_adding1.png" width="50%">
+
+info
+
 <img alt="adding step 2" src="github_desktop_images/c_adding2.png" width="50%">
 
 * git commit -m "message"
+
+info
+
 <img alt="commiting step 1" src="github_desktop_images/d_commit1.png" width="50%">
+
+info
+
 <img alt="commiting step 2" src="github_desktop_images/d_commit2.png" width="50%">
 
 * git push
+
+info
+
 <img alt="pushing step 1" src="github_desktop_images/e_push1.png" width="50%">
 
 # How git is set up.
