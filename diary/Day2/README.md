@@ -11,9 +11,9 @@
 - Task 1...
 
 ## Ísak Elí
-### Time:
-### On site:
-- Task 1...
+### Time: 9:30 - 16:30
+### On site: YES
+
 
 ## Kristinn Hrafn
 ### Time: 10:10 - 16:30, arrived 8:30 for Gylfi's lecture
