@@ -19,7 +19,11 @@
 
 * git clone
 <img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%">
+aaaaaaaaaaaaaaaaaaaaaaaaa
+
 <img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%">
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
 <img alt="cloning step 3" src="github_desktop_images/a_cloning3.png" width="50%">
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
