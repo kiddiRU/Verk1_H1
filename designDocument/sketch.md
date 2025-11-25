@@ -30,6 +30,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 
 
 # Prioritized Requirements
+## Functional
 ### A
 - Each Player is in 1 team
 - Team Captains can add, change or modify Players in team
@@ -43,6 +44,13 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Clubs
 ### C
 - Edit archive (like removing invalid tournaments) 
+## NON-Functional
+### A
+
+### B
+
+### C
+
 
 
 # Use cases for requirements
@@ -86,6 +94,10 @@ Club -> Team -> Player
 
 ### Tournament
 - Receives info from organizers
+- Date: start date - end date
+- Unique name
+- Venue(location)
+- Registered contact person (With e-mail and phone number) 
 
 ### Matches
 - Date time
@@ -110,3 +122,5 @@ Club -> Team -> Player
 ### Players / Teams
 - At least 16 teams in a tournament
 - Teams cannot Play in multiple matches at the same time
+- The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
+- 
