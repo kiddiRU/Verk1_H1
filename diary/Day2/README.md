@@ -1,9 +1,9 @@
 # Diary, yyyy-mm-dd
 
 ## Andri Már
-### Time: 
-### On site: 
-- Task 1...
+### Time: 9:30 - 16:30
+### On site: YES
+
 
 ## Elmar
 ### Time:
