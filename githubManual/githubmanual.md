@@ -18,10 +18,10 @@
 ## How these commands are executed with github desktop
 
 * git clone
-![cloning step 1](github_desktop_images/a_cloning1.png){ width="50%" }
-![cloning step 2](github_desktop_images/a_cloning2.png)
-![cloning step 3](github_desktop_images/a_cloning3.png)
-![cloning step 4](github_desktop_images/a_cloning4.png)
+<img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%">
+<img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%">
+<img alt="cloning step 3" src="github_desktop_images/a_cloning3.png" width="50%">
+<img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
 * git pull
 ![pulling step 1](github_desktop_images/b_pulling1.png)
