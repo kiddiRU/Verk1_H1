@@ -8,7 +8,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Input results
 - Add teams to tournament: need to be >= 16
 - Edit times in tournament: delay or cancel 
-- Create clubs and edit
+- Create / edit clubs
 - Chooses who wins in each round -- If there are odd teams the organizer chooses who sits by that round
 
 #### Team captains  
@@ -22,11 +22,27 @@ Organizer/Admin > Team Captains > Players > Spectators
 
 #### Player
 - Register self
-- leave a team
+- Leave a team
 - Edit self
 - Create a team and promote them selves to the team captain IF they are not already in a team
 
 #### Spectators
+- Game schedule
+- Games:
+  - Results
+  - Teams
+  - PLayers
+  - Tournament?
+
+- Tournament
+  - Date
+  - Teams
+  - Rounds
+  - Clubs
+  - Teams
+  - Players
+
+
 - TO see matches and tournaments
 - Get game schedule
 - Get results
@@ -36,6 +52,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 # Prioritized Requirements
 ## Functional
 ### A
+- Print out the match schedule
 - The User can login as Admin / Organizer
 - The User can register themselves as a player
 - The User can login as a player 
@@ -66,15 +83,15 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Edit archive (like removing invalid tournaments)
 - Change team name
 - Team captain can transfer his authority to a player in team
+- Teams can switch from clubs
+
 ## NON-Functional
 ### A
-- Each player has to be in a 
 - Randomize team list for tournaments
 - ??No one but the organizer can create a club or tournament??
 ### B
 
 ### C
-
 
 
 # Use cases for requirements
@@ -91,8 +108,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Home Address
 - Phone Number
 - Handle: Unique
-- win counter
+- Win counter
 - Points (for Playing / winning?)
+- Teams played for
+- Tournaments played
+- Apart of clubs
 
 ### Team
 - List of Players 3 <= list <= 5
@@ -101,15 +121,17 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Optional = usl homepage, ascii art
 - Win counter
 - points (for Playing / winning?)
+- Tournaments played
+- Club
 
 ### Club
 - Win counter
 - Teams associated
 - Club colors
 - Name
-- created by the organizer
+- Created by the organizer
 
-Club has a built in **Empty Club / NO Club** so that teams can be created (Teams always need to join a club when created)
+The Club file should have **Empty Club / NO Club** hardcoded into the text file so that teams can be created (Teams always need to join a club when created)
 
 Club -> Team -> Player
 
@@ -122,7 +144,7 @@ Club -> Team -> Player
 - Receives info from organizers
 - Date: start date - end date
 - Unique name
-- Venue(location)
+- Venue (location)
 - Registered contact person (With e-mail and phone number) 
 - Is active
 
@@ -166,3 +188,9 @@ Club -> Team -> Player
 - Can input the name of a player directly
 - IF unsure about the player options then should be able to list every name or...
 - The ability to search the for the first letters to narrow down the list
+
+#
+### Schedule
+- 
+-
+-
