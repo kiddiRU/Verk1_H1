@@ -24,19 +24,19 @@
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
 * git pull
-![pulling step 1](github_desktop_images/b_pulling1.png)
-![pulling step 2](github_desktop_images/b_pulling2.png)
+<img alt="pulling step 1" src="github_desktop_images/b_pulling1.png" width="50%">
+<img alt="pulling step 2" src="github_desktop_images/b_pulling2.png" width="50%">
 
 * git add
-![adding step 1](github_desktop_images/c_adding1.png)
-![adding step 2](github_desktop_images/c_adding2.png)
+<img alt="adding step 1" src="github_desktop_images/c_adding1.png" width="50%">
+<img alt="adding step 2" src="github_desktop_images/c_adding2.png" width="50%">
 
 * git commit -m "message"
-![commiting step 1](github_desktop_images/d_commit1.png)
-![commiting step 2](github_desktop_images/d_commit2.png)
+<img alt="commiting step 1" src="github_desktop_images/d_commit1.png" width="50%">
+<img alt="commiting step 2" src="github_desktop_images/d_commit2.png" width="50%">
 
 * git push
-![pushing step 1](github_desktop_images/e_push1.png)
+<img alt="pushing step 1" src="github_desktop_images/e_push1.png" width="50%">
 
 # How git is set up.
 
