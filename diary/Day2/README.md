@@ -26,16 +26,17 @@
 - Task 1...
 
 ## Sindri Freysson
-### Time:
-### On site:
-- Task 1...
+### Time: 9:30 - 
+### On site: Yes
 ## State of the Project
-### TEXT:
+### TEXT: Good progress has been made, 
 
 ### BULLETS:
--
--
--
+- Created Github cli guide
+- Created User group analysis
+- Created Information Access Diagram
+- Major work on Use cases
+- Major work on requirement list. 
 ## ToDo-list:
 ### TEXT:
 
