@@ -15,6 +15,29 @@
 * git push
     - Adds your local git commits to the remote repository.
 
+## How these commands are executed with github desktop
+
+* git clone
+![cloning step 1](github_desktop_images/a_cloning1.png)
+![cloning step 2](github_desktop_images/a_cloning2.png)
+![cloning step 3](github_desktop_images/a_cloning3.png)
+![cloning step 4](github_desktop_images/a_cloning4.png)
+
+* git pull
+![pulling step 1](github_desktop_images/b_pulling1.png)
+![pulling step 2](github_desktop_images/b_pulling2.png)
+
+* git add
+![adding step 1](github_desktop_images/c_adding1.png)
+![adding step 2](github_desktop_images/c_adding2.png)
+
+* git commit -m "message"
+![commiting step 1](github_desktop_images/d_commit1.png)
+![commiting step 2](github_desktop_images/d_commit2.png)
+
+* git push
+![pushing step 1](github_desktop_images/e_push1.png)
+
 # How git is set up.
 
 When you clone a remote repository it sets up a git repository in your current directory, this system is split up into multiple layers.
