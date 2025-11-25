@@ -9,7 +9,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Add teams to tournament: need to be >= 16
 - Edit times in tournament: delay or cancel 
 - Create / edit clubs
-- Chooses who wins in each round -- If there are odd teams the organizer chooses who sits by that round
+- Chooses who wins in each round -- If there are odd teams the last team sits by after shuffling the teams 
 
 #### Team captains  
 - Cannot be in more than one team
@@ -60,7 +60,6 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Organizer can input results for the tournament for each round
 - Organizer can add and kick teams for the tournament before the start
 - Organizer can create clubs
-- Organizer can modify the time of a tournament
 - Player can create a team
 - Player becomes a team captain when team is created
 - Team captain can sign his team into a tournament if valid
@@ -74,16 +73,19 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Spectator can see matches and tournaments
 - Spectator can see teams and clubs
 ### B
+- Organizer can modify the time of a tournament before it has started
 - Organizer can cancel a tournament
 - Switch captain
 - Players can be in more than 1 team
 - Clubs
+- Player handle should be the length of 3-12
 ### C
 - Edit archive (like removing invalid tournaments)
 - Change team name
 - Team captain can transfer his authority to a player in team
 - Teams can switch from clubs
 - Need password to login
+- The Club Name will be printed in its color
 
 ## NON-Functional
 ### A
@@ -148,6 +150,7 @@ Club -> Team -> Player
 ### Tournament
 - Receives info from organizers
 - Date: start date - end date
+  - j
 - Unique name
 - Venue (location)
 - Registered contact person (With e-mail and phone number) 
@@ -174,6 +177,19 @@ Club -> Team -> Player
 
 # EXTRA NOTES:
 ### Players / Teams
+- Color: simple length check
+- Venue: simple length check
+- Email: needs to go through a check
+- Phone number: 7 Numbers
+- Address: (strings)(space)(number)
+- When taking input we will have a validator in the logic layer that returns whether it is valid or not
+- Valid player handle: Just about the length (3-12) NEED TO HAVE **ADMIN** in the handle file
+- Date stored YYYY-MM-DD
+  - Validation:
+    - All need to be numbers that are not the "-"
+    - Year: 
+    - Month: 01 <= month <= 12
+- If the C color requirement will be used then there should only be options for the user (Can only choose color out of few chosen colors)
 - Randomize team list for tournaments
 - At least 16 teams in a tournament
 - Teams cannot Play in multiple matches at the same time
