@@ -55,6 +55,8 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Team captain can modify players in team (add / remove)
 - Each Player is in 1 team
 - Tournaments automatically archive after they play out
+- Spectator can see matches and tournaments
+- Spectator can see teams and clubs
 ### B
 - Organizer can cancel a tournament
 - Switch captain
@@ -149,7 +151,7 @@ Club -> Team -> Player
 - Teams cannot Play in multiple matches at the same time
 - The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
 - 
-
+#
 ### Archive = Split into Tournament and Team
 #### Tournament Archive
 - When the tournament is over then it is archived 
@@ -158,6 +160,7 @@ Club -> Team -> Player
 - The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
 - Stores empty teams and their scores (Should be able to view it)
 
+#
 ### Search Bar
 #### Example: Searching for available players for teams
 - Can input the name of a player directly
