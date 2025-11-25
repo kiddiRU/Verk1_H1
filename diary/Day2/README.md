@@ -24,7 +24,7 @@
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 9:30 - 
+### Time: 9:30 - 16:30
 ### On site: Yes
 ## State of the Project
 ### TEXT: Good progress has been made, 
@@ -39,9 +39,14 @@
 ### TEXT:
 
 ### BULLETS:
--
--
--
+- Consider how TUI will look like
+- State Diagrams / User Flow
+- Move sketch.md from markdown to latex
+- Finish use cases
+- Happy path
+- Decide on implementation details
+- Class Diagram
+- Finish git Desktop manual
 ## State of the Group
 ### TEXT:
 
