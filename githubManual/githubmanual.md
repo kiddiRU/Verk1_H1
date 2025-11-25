@@ -18,8 +18,9 @@
 ## How these commands are executed with github desktop
 
 * git clone
-<img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%">
-aaaaaaaaaaaaaaaaaaaaaaaaa
+ccccccccccccccccccccccccc
+<img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> aaaaaaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbbbbbbbbbbb
 
 <img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%">
 bbbbbbbbbbbbbbbbbbbbbbbbb
