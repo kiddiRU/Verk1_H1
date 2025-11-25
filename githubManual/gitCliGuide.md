@@ -1,19 +1,19 @@
 # Basic git commands
 
 * git clone
-    Copies all files of a git repository into your current directory.
+    - Copies all files of a git repository into your current directory.
 
 * git pull
-    Pulls all commits made on the remote git repository to your local one.
+    - Pulls all commits made on the remote git repository to your local one.
 
 * git add
-    Used to add changed files to your staging area.
+    - Used to add changed files to your staging area.
 
 * git commit -m "message"
-    Adds all the changes in your staging area to your local git repository.
+    - Adds all the changes in your staging area to your local git repository.
 
 * git push
-    Adds your local git commits to the remote repository.
+    - Adds your local git commits to the remote repository.
 
 # How git is set up.
 
@@ -39,10 +39,10 @@ repository, no one can see it until you run git push which pushes all commits ma
 # Useful commands
 
 * git status
-    Will show you which files have changed since last commit and whether they have been added to the staging area or not
+    - Will show you which files have changed since last commit and whether they have been added to the staging area or not
 
 * git diff
-    Shows which files are different from your working directory and staging area.
+    - Shows which files are different from your working directory and staging area.
 
 # Branches
 
@@ -55,19 +55,19 @@ work on other features which rely on that feature.
 You shouldn't keep branches to long or you should rebase regularly to prevent coding against old implementations.
 
 * git branch
-    Shows you a list of available branches and highlights your current branch.
+    - Shows you a list of available branches and highlights your current branch.
 
 * git branch [name]
-    This let's you create a branch with a certain name, this branch is only available on your local git repository.
+    - This let's you create a branch with a certain name, this branch is only available on your local git repository.
 
 * git checkout [name]
-    This let's you switch branches, all differences in files between those branches get changed on your working directory automatically.
+    - This let's you switch branches, all differences in files between those branches get changed on your working directory automatically.
 
 * git merge [name]
-    This let's you merge all changes on the branch [name] to your current branch.
+    - This let's you merge all changes on the branch [name] to your current branch.
 
 * git rebase [name]
-    This let's you move all commits made on branch [name] infront of all commits on your current branch, is recommended before merging for a cleaner commit tree.
+    - This let's you move all commits made on branch [name] infront of all commits on your current branch, is recommended before merging for a cleaner commit tree.
 
 # Merge conflicts
 
