@@ -20,9 +20,8 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
-- Task 1...
+### Time: 10:10 - 
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 9:30 - 
