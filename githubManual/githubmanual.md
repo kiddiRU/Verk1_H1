@@ -18,7 +18,7 @@
 ## How these commands are executed with github desktop
 
 * git clone
-![cloning step 1](github_desktop_images/a_cloning1.png)
+![cloning step 1](github_desktop_images/a_cloning1.png)=50*40
 ![cloning step 2](github_desktop_images/a_cloning2.png)
 ![cloning step 3](github_desktop_images/a_cloning3.png)
 ![cloning step 4](github_desktop_images/a_cloning4.png)
