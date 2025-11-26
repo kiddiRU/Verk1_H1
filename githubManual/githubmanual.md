@@ -216,32 +216,32 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 ## Main-Only
 * The Main-Only branching strategy revolves around using only the main branch for development and all changes are commited directly into it, so it uses no extra branches.
 
-<img alt="Main-Only" src="github_desktop_images/main_only.png" width="">
+<img alt="Main-Only" src="github_desktop_images/main_only.png" width="50%">
 
 ## Feature Branching
 * The Feature Branching branching strategy revolves around creating a new brnch for every feature and bug in the program 
 
-<img alt="Feature Branching" src="github_desktop_images/feature_branching.png" width="">
+<img alt="Feature Branching" src="github_desktop_images/feature_branching.png" width="50%">
 
 ## Gitflow
 * 
 
-<img alt="Gitflow" src="github_desktop_images/gitflow.png" width="">
+<img alt="Gitflow" src="github_desktop_images/gitflow.png" width="50%">
 
 
 ## Github Flow
 * 
 
-<img alt="Github Flow" src="github_desktop_images/github_flow.png" width="">
+<img alt="Github Flow" src="github_desktop_images/github_flow.png" width="50%">
 
 
 ## Trunk-Based Development
 * 
 
-<img alt="Trunk Based Development" src="github_desktop_images/trunk_based.png" width="">
+<img alt="Trunk Based Development" src="github_desktop_images/trunk_based.png" width="50%">
 * 
 
 ## Release Branching 
 * 
 
-<img alt="Release Branching" src="github_desktop_images/release_branching.png" width="">
+<img alt="Release Branching" src="github_desktop_images/release_branching.png" width="50%">
