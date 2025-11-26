@@ -241,7 +241,14 @@ Y: Yes
 N: No
 
 ##### Edit Time of Date
+--> old date: 2025-09-11 -> 2025-12-24
+new start date:
+new end date:
 
+--> The new date is: something -> something
+--> Do you want to continue?
+Y: Yes
+N: No
 
 
 ### Create a Club
