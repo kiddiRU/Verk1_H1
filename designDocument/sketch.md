@@ -78,17 +78,14 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Anyone can see clubs
 - Organizer can modify the time of a tournament before it has started
 - Organizer can delete a tournament before it has been published
+- When Organizer creates a tournament he has to choose between double elimination and normal
 - Switch captain
-- Players can be in more than 1 team
 - Player handle should be the length of 3-12
 - Tournaments can have 16 or more teams
 ### C
-- Edit archive (like removing invalid tournaments)
-- Change team name
+- The Club Name will be printed in its color
 - Team captain can transfer his authority to a player in team
 - Teams can switch from clubs
-- Need password to login
-- The Club Name will be printed in its color
 - Organizer can cancel a tournament
 
 ## NON-Functional
@@ -189,11 +186,6 @@ b Back
 2 Manage Clubs
 b Back
 
-### Manage Clubs
-1 Create Club
-2 See Clubs
-b Back
-
 ### Manage Tournaments
 1 Publish 
 2 Create Tournament
@@ -201,10 +193,14 @@ b Back
 b Back
 
 #### Publish
-@ The list of available tournaments appears
+--> The list of available tournaments
 
 What tournament do you want to publish?: 
-b Back
+
+--> you choose: this tournament
+--> do you want to continue?
+Y: Yes
+N: No
 
 #### Create Tournament
 Name: unique name 
@@ -214,10 +210,10 @@ End Date:  YYYY-MM-DD
 Email: something@something.something
 Phone Number: 0000000
 
-@ You have created a Tournament
+--> You have created a Tournament
 
 #### Edit Tournaments
-@ LIST OF ALL TOURNAMENTS ---
+--> LIST OF ALL TOURNAMENTS ---
 Choose tournament: this_tournament
 
 this_tournament
@@ -250,11 +246,19 @@ new end date:
 Y: Yes
 N: No
 
+### Manage Clubs
+1 Create Club
+2 See Clubs
+b Back
 
-### Create a Club
+#### Create a Club
 Name: Unique name
-Color: 
+Color: some color
 
+--> You have created a Club
+
+#### See Club
+--> list out all clubs
 
 ## Player Page
 1 Edit Self
