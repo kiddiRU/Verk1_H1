@@ -185,15 +185,15 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 * After finishing working on a branch you can create a pull request which will allow others on your team to add comments to the branch and view all the changes before the branch is merged
 * You or another person on the team can then approve the pull request and the branch will then be merged
 
-* To create a pull request, you have to 
+* To create a pull request, you have to go to your branch and press the "Preview Pull Request" button on the "Changes" tab
 
 <img alt="creating a pull request" src="github_desktop_images/pull_request1.png" width="50%">
 
-* 
+* You will then get a window over all the changes made on your branch and you can create the pull request
 
 <img alt="submitting a pull request" src="github_desktop_images/pull_request2.png" width="50%">
 
-* 
+* After creating the pull request you will be directed to github where you or a team member can leave a comment, close or approve your pull request
 
 <img alt="viewing a pull request" src="github_desktop_images/pull_request3.png" width="50%">
 
