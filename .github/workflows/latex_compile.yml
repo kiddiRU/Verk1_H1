@@ -37,12 +37,12 @@ jobs:
         with:
           root_file: designDocument/LaTeX/*.tex
 
-#     - name: Move latex-pdf to directory and overwrite
-#       run: mv -f ./*.pdf ./designDocument/LaTeX/
+      - name: Move latex-pdf to directory and overwrite
+        run: mv -f ./*.pdf ./designDocument/LaTeX/
 
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
           commit_message: Automated LaTeX Compile
-#         repository: designDocument/LaTeX
+          repository: $GITHUB_WORKSPACE/designDocument/LaTeX
