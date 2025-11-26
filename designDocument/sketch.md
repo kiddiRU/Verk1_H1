@@ -57,9 +57,10 @@ Organizer/Admin > Team Captains > Players > Spectators
 - The User can login as a player 
 - To be a spectator the user does not need to sign into anything
 - Organizer can create a tournament
-- Organizer can input results for the tournament for each round
-- Organizer can add and kick teams for the tournament before the start
 - Organizer can create clubs
+- Organizer can add and kick teams for the tournament before the start
+- Organizer can start a tournament
+- Organizer can input results for the tournament for each round
 - Player can create a team
 - Player becomes a team captain when team is created
 - Team captain can leave the team
@@ -216,3 +217,4 @@ Club -> Team -> Player
 -
 
 -
+
