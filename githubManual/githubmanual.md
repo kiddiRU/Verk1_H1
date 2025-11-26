@@ -74,6 +74,8 @@
 
 <img alt="pushing step 1" src="github_desktop_images/e_push1.png" width="50%">
 
+
+
 # How git is set up.
 
 When you clone a remote repository it sets up a git repository in your current directory, this system is split up into multiple layers.
@@ -95,6 +97,8 @@ to a commit and the git repository keeps track of the commits so you can view or
 This is exactly the same as your local git repository but everyone in your group project has access to it, if you have made a commit on your local git
 repository, no one can see it until you run git push which pushes all commits made on your local git repository to the remote one.
 
+
+
 # Useful commands
 
 * git status
@@ -102,6 +106,8 @@ repository, no one can see it until you run git push which pushes all commits ma
 
 * git diff
     - Shows which files are different from your working directory and staging area.
+
+
 
 # Branches
 
@@ -198,6 +204,7 @@ You shouldn't keep branches too long or you should rebase regularly to prevent c
 <img alt="viewing a pull request" src="github_desktop_images/pull_request3.png" width="50%">
 
 
+
 # Common problems
 
 ## Pulling a file that you are editing 
@@ -207,6 +214,7 @@ You shouldn't keep branches too long or you should rebase regularly to prevent c
 <img alt="Editing the same file as someone else" src="github_desktop_images/pulling_a_file.png" width="50%">
 
 * After pulling the other persons changes you will be able to go to the changes tab and recover the changes that were stashed and then combine them with the new version of the file
+
 
 
 # Branching strategies
