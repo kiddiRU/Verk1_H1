@@ -33,7 +33,7 @@
 
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
-## git pull
+### git pull
 
 * After someone has pushed a file, you can see how many files can be pulled in the far right button at the top of the screen, and you click it in order to pull those changes into your working directory
 
@@ -43,7 +43,7 @@
 
 <img alt="pulling step 2" src="github_desktop_images/b_pulling2.png" width="50%">
 
-## git add
+### git add
 
 * After making any changes to a file in your working directory, the file will appear in the "changes" tab
 
@@ -54,7 +54,7 @@
 
 <img alt="adding step 2" src="github_desktop_images/c_adding2.png" width="50%">
 
-## git commit -m "message"
+### git commit -m "message"
 
 * After selecting the files to add, you can add a message to the commit at the bottom of the "changes" tab
 
@@ -64,7 +64,7 @@
 
 <img alt="commiting step 2" src="github_desktop_images/d_commit2.png" width="50%">
 
-## git push
+### git push
 
 * After having commited a file you can push it by pressing the "Push origin" button that pops up on the screen or by pressing the far right button at the top of the screen
 
