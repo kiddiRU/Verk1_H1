@@ -17,13 +17,12 @@
 
 ## Kristinn Hrafn
 ### Time: 10:10 - 16:30
-### On site:
-- Task 1...
+### On site: Yes
+- Active in discussions and deciding what each persons tasks were tomorrow.
 
 ## Kristján Hagalín
 ### Time: 10:10 - 16:30
-### On site:
-- Task 1...
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 10:10 - 16:30
