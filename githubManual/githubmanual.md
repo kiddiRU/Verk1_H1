@@ -164,4 +164,6 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 # Merge conflicts
 
+## Merge conflict solution
+
 Please add information if you run into merge conflicts
