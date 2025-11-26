@@ -23,24 +23,26 @@
 ## Sindri Freysson
 ### Time:
 ### On site:
-## State of the Project
-### TEXT:
 
-### BULLETS:
--
--
--
+# Morning meeting (Briefing)
+## State of project: 
+
+## State of group: 
+
+## Divisions: 
+- UI / UX:
+- System engineer:
+- QC:
+
 ## ToDo-list:
-### TEXT:
 
-### BULLETS:
--
--
--
-## State of the Group
-### TEXT:
+# Evening meeting (Diary)
+## State of project:
 
-### BULLETS:
--
--
--
+## State of group: 
+
+## Divisions:
+- UI / UX:
+- System engineer: 
+- QC: 
+## ToDo-list:
