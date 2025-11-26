@@ -164,6 +164,21 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 # Merge conflicts
 
-## Merge conflict solution
+## Merge conflict error messages
 
-Please add information if you run into merge conflicts
+* When trying to merge branches it is possible for there to be merge conflicts, if that is the case a warning will be shown before creating the merge commit
+
+<img alt="conflicts warning" src="github_desktop_images/mergeconflict_warning.png" width="50%">
+
+* If you decide to press "Create a merge commit" despite the warning another window will pop up that tells you what file has the conflict and gives you the option to open your tool so so you can go and solve the conflict manually
+
+<img alt="conflict merging" src="github_desktop_images/mergeconflict_merging.png" width="50%">
+
+* You will be able to see where the conflict is in the file between the "<<<<<<< HEAD" and ">>>>>>> branch-name" you will have to change the files to remove the conflict and temove the "<<<<<<< HEAD" and ">>>>>>> branch-name" in order to solve the conflict
+
+<img alt="conflict in file" src="github_desktop_images/mergeconflict_in_file.png" width="50%">
+
+* After solving the merge conflict, you can go back to github desktop and you will now be able to continue the merge
+ 
+<img alt="conflict solved" src="github_desktop_images/mergeconflict_solved.png" width="50%">
+
