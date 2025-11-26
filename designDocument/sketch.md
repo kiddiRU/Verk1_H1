@@ -218,6 +218,21 @@ Club -> Team -> Player
 - Stored in file
 - 
 
+#
+### Logic to use for multiple instancis
+Selecting a date
+- Date of birth (Player)
+- Start/End date (Tournament)
+
+Unique Name
+- Name of Tournament
+- Player Handle
+
+Email and PhoneNr
+- Email (Player)
+- PhoneNr (Player)
+- Contact email (Tournament)
+- Contact PhoneNr (Tournament)
 
 # UI DRAFT
 
@@ -259,4 +274,5 @@ b Back
 1 Game Schedule
 2 Clubs
 3 Teams
+
 b Back
