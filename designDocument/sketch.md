@@ -234,10 +234,44 @@ Input your handle:
 b Back
 
 ## Admin Page
-1 Create Tournament
+1 Manage Tournaments
 2 Create a Club
+3 Edit Clubs
 
 b Back
+
+### Manage Tournaments
+1 Create Tournament
+2 Edit a Tournament
+3 See Tournaments
+
+b Back
+
+#### Create Tournament
+Name: unique name 
+Venue: some location
+Start Date: YYYY-MM-DD
+End Date:  YYYY-MM-DD
+Email: something@something.something
+Phone Number: 0000000
+
+b Back
+
+#### Edit Tournament
+LIST OF TOURNAMENTS ---
+Choose tournament: this_tournament
+
+this tournament
+1 Add Teams
+2 Remove Teams
+3 Edit time
+
+b Back
+
+### Create a Club
+Name: Unique name
+Color: 
+
 
 ## Player Page
 1 Edit Self
@@ -247,16 +281,19 @@ b Back
 b Back
 
 ## Register
-Enter Name: 
-Date of Birth: 
-Home Address:
-Phone Number: 
-Handle: 
+Enter Name: any name
+Date of Birth: YYYY-MM-DD
+Home Address: address number
+Phone Number: 0000000
+Handle: unique_handle
 
+c Continue
 b Back
 
 ## Spectate Page
 1 Game Schedule
 2 Clubs
 3 Teams
+4 History of matches
+
 b Back
