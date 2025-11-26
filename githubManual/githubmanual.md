@@ -209,3 +209,39 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 * After pulling the other persons changes you will be able to go to the changes tab and recover the changed that were stashed and them combine them with the new version of the file
 
 <img alt="recover your changes" src="" width="50%">
+
+
+# Branching strategies
+
+## Main-Only
+* The Main-Only branching strategy revolves around using only the main branch for development and all changes are commited directly into it, so it uses no extra branches.
+
+<img alt="Main-Only" src="github_desktop_images/main_only.png" width="">
+
+## Feature Branching
+* The Feature Branching branching strategy revolves around creating a new brnch for every feature and bug in the program 
+
+<img alt="Feature Branching" src="github_desktop_images/feature_branching.png" width="">
+
+## Gitflow
+* 
+
+<img alt="Gitflow" src="github_desktop_images/gitflow.png" width="">
+
+
+## Github Flow
+* 
+
+<img alt="Github Flow" src="github_desktop_images/github_flow.png" width="">
+
+
+## Trunk-Based Development
+* 
+
+<img alt="Trunk Based Development" src="github_desktop_images/trunk_based.png" width="">
+* 
+
+## Release Branching 
+* 
+
+<img alt="Release Branching" src="github_desktop_images/release_branching.png" width="">
