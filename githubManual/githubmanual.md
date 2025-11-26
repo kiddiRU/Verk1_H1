@@ -17,7 +17,7 @@
 
 ## How these commands are executed with github desktop
 
-## git clone
+### git clone
 
 * In order to clone a repository, you first need to go to the overview of you repositories which can be found in the upper left corner
 
