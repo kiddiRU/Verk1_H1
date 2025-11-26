@@ -46,12 +46,11 @@ Decided to split ourselves in more specialized divisions; UI / UX (TUI), System 
 - Happy path
 - Decide on implementation details
 - Class Diagram
-- Finish git Desktop manual
-
 # Evening meeting (Diary)
 ## State of project:
 - Use JSON to store data
 - Model class Player knows what team he is in (needs to be synced with Model class team list of players)
+- Decided not to allow organizer to control when matches happen, matches schedule is controlled by tournament team quantity and tournament time frame. Organizer controlling schedule caused to many problems.
 ## State of group: 
 ## Divisions:
 - UI / UX:
@@ -68,3 +67,4 @@ Decided to split ourselves in more specialized divisions; UI / UX (TUI), System 
 - Decide on implementation details
 - Class Diagram
 - Finish git Desktop manual
+- Design schedule layout 
