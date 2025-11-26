@@ -23,7 +23,7 @@
 
 <img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> 
 
-    - Next you need to select the "Add" dropdown menu and selct "clone repository"
+* Next you need to select the "Add" dropdown menu and selct "clone repository"
 
 <img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%"> 
 
