@@ -258,18 +258,59 @@ Color: some color
 --> list out all clubs
 
 ## Player Page
+--> Name: some name
+--> Date of Birth: 
+--> Home Address:
+--> Phone Number:
+--> ------Non editable----
+-x-> Team: team name 
+-x-> Club: club name
+-x-> Handle: unique handle
+-x-> IS team captain: Bool
+--> ------------STATS--------------
+-x-> Wins:
+-x-> Points:
+-x-> Teams Played For: [list of teams?]
+-x-> Tournaments Played: [List of tournaments]
+
 1 Edit Self
-2 See Team
+2 My Team
 3 Create a Team
 b Back
 
 ### Edit Self
---> Name: 
---> 
---> 
--->
--->
--->
+--> Leave empty to keep old settings
+Name: 
+Date of Birth: 
+Home Address: 
+Phone Number: 
+
+--> Do you want to continue?
+Y: Yes
+N: No
+
+### My Team 
+{NOTE} If team is empty it should let the user know
+{NOTE} If the player is not the captain it should just list the team and have button 2 and b
+
+--> Team: Team name
+
+--> C - captains name
+--> some name
+--> some name
+--> some name
+
+1 Edit Team
+2 Leave Team
+b Back
+
+#### Edit Team
+
+
+### Create a Team
+--> By creating a Team you will automatically be promoted to Team Captain
+
+Input unique name:
 
 
 ## Register
@@ -280,6 +321,9 @@ Phone Number: 0000000
 Handle: unique_handle
 c Continue
 b Back
+
+### Continue
+->->->-> Directs the User to the ## Player Page
 
 ## Spectate Page
 1 Game Schedule
