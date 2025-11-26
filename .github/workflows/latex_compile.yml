@@ -45,3 +45,4 @@ jobs:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
           commit_message: Automated LaTeX Compile
+          repository: ./designDocument/LaTeX
