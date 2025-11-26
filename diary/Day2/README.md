@@ -6,9 +6,9 @@
 
 
 ## Elmar
-### Time:
-### On site:
-- Task 1...
+### Time: 9:30 - 16:30
+### On site: Yes
+
 
 ## Ísak Elí
 ### Time: 9:30 - 16:30
