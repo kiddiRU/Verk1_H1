@@ -1,4 +1,4 @@
-# Diary, yyyy-mm-dd
+# Diary, 2025-11-26
 
 ## Andri Már
 ### Time: 8:40
