@@ -50,7 +50,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 # Prioritized Requirements
 ## Functional
 ### A
-- The User can login as Admin / Organizer
+- The User can login as Organizer / Admin
 - The User can register themselves as a player
 - The User can login as a player 
 - To be a spectator the user does not need to sign into anything
@@ -155,6 +155,7 @@ Club -> Team -> Player
 - Venue (location)
 - Registered contact person (With e-mail and phone number) 
 - Is active
+- IS over
 - Teams playing
 
 ### Matches
@@ -166,7 +167,7 @@ Club -> Team -> Player
 
 
 # State diagrams
-
+SEMI OPTIONAL
 
 # User group analysis
 
@@ -196,7 +197,7 @@ b Back
 ### Manage Tournaments
 1 Publish 
 2 Create Tournament
-3 Edit a Tournament
+3 Edit Tournaments
 b Back
 
 #### Publish
@@ -212,17 +213,36 @@ Start Date: YYYY-MM-DD
 End Date:  YYYY-MM-DD
 Email: something@something.something
 Phone Number: 0000000
-b Back
 
-#### Edit Tournament
-LIST OF TOURNAMENTS ---
+@ You have created a Tournament
+
+#### Edit Tournaments
+@ LIST OF ALL TOURNAMENTS ---
 Choose tournament: this_tournament
 
-this tournament
+this_tournament
 1 Add Teams
 2 Remove Teams
-3 Edit time
+3 Edit time of Date
 b Back
+
+##### Add a Teams
+Enter Team name or l for the list of all team or q to quit: abcd
+
+--> abcd was found, do you want to continue?
+Y: Yes
+N: No
+
+##### Remove a Team
+Enter Team name or l for the list of all teams in the tournament or q to quit: abcd
+
+--> abcd was found, do you want to continue?
+Y: Yes
+N: No
+
+##### Edit Time of Date
+
+
 
 ### Create a Club
 Name: Unique name
@@ -248,7 +268,7 @@ b Back
 1 Game Schedule
 2 Clubs
 3 Teams
-4 History of matches
+4 History of tournaments
 b Back
 
 # EXTRA NOTES:
@@ -271,7 +291,7 @@ b Back
 - Teams cannot Play in multiple matches at the same time
 - The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
 - Everyone should be able to see all active Teams (in an active tournament) 
-#
+##
 ### Archive = Split into Tournament and Team
 #### Tournament Archive
 - When the tournament is over then it is archived 
@@ -280,25 +300,22 @@ b Back
 - The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
 - Stores empty teams and their scores (Should be able to view it)
 
-#
+##
 ### Publish Tournament
-When Managing the tournaments the Admin has the option of publishing a tournament and by pressing that option he will get a list of available tournaments (AKA: Tournaments that have 16 or more teams and tournaments that aren't already published). Then he will input what tournament he wants to publish and that tournament 
+When Managing the tournaments the Organizer has the option of publishing a tournament and by pressing that option he will get a list of available tournaments (AKA: Tournaments that have 16 or more teams and tournaments that aren't already published). Then he will input what tournament he wants to publish and that tournament 
 
-
-
-#
+##
 ### Search Bar
 #### Example: Searching for available players for teams
 - Can input the name of a player directly
 - IF unsure about the player options then should be able to list every name or...
 - The ability to search the for the first letters to narrow down the list
 
-#
+##
 ### Schedule
 - Stored in file
-- 
 
-#
+##
 ### Logic to use for multiple instances
 Selecting a date
 - Date of birth (Player)
@@ -313,3 +330,20 @@ Email and PhoneNr
 - PhoneNr (Player)
 - Contact email (Tournament)
 - Contact PhoneNr (Tournament)
+
+##
+### Response to an error message or confirm message
+
+#### Add a Teams
+Enter Team name or l for the list of all team or q to quit: abcd
+
+--> abcd was found are you sure you want to continue
+Y: Yes
+N: No
+
+#### Remove a Team
+Enter Team name or l for the list of all teams in the tournament or q to quit:
+
+--> abcd is not apart of the tournament, do you want to continue
+Y: Yes
+N: No
