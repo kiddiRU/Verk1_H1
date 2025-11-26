@@ -161,9 +161,7 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 <img alt="" src="github_desktop_images/merge2.png" width="50%">
 
 
-# Merge conflicts
-
-## Merge conflict error messages
+### Merge conflicts
 
 * When trying to merge branches it is possible for there to be merge conflicts, if that is the case a warning will be shown before creating the merge commit
 
@@ -182,6 +180,24 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 <img alt="conflict solved" src="github_desktop_images/mergeconflict_solved.png" width="50%">
 
 
+### Pull requests
+
+* After finishing working on a branch you can create a pull request which will allow others on your team to add comments to the branch and view all the changes before the branch is merged
+* You or another person on the team can then approve the pull request and the branch will then be merged
+
+* To create a pull request, you have to 
+
+<img alt="creating a pull request" src="github_desktop_images/pull_request1.png" width="50%">
+
+* 
+
+<img alt="submitting a pull request" src="github_desktop_images/pull_request2.png" width="50%">
+
+* 
+
+<img alt="viewing a pull request" src="github_desktop_images/pull_request3.png" width="50%">
+
+
 # Common problems
 
 ## Pulling a file that you are editing 
@@ -191,3 +207,5 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 <img alt="Editing the same file as someone else" src="github_desktop_images/pulling_a_file.png" width="50%">
 
 * After pulling the other persons changes you will be able to go to the changes tab and recover the changed that were stashed and them combine them with the new version of the file
+
+<img alt="recover your changes" src="" width="50%">
