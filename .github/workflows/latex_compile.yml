@@ -38,7 +38,7 @@ jobs:
           root_file: designDocument/LaTeX/*.tex
 
       - name: Move latex-pdf to directory and overwrite
-        run: mv -f ./*.pdf ./designDocument/LaTeX/*.pdf
+        run: mv -f ./*.pdf ./designDocument/LaTeX/
 
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
