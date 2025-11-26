@@ -45,4 +45,4 @@ jobs:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
           commit_message: Automated LaTeX Compile
-          repository: $GITHUB_WORKSPACE/designDocument/LaTeX
+          repository: designDocument/LaTeX/
