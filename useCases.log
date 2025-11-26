@@ -3,8 +3,8 @@ entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**designDocument/LaTeX/designDoc.tex
-(./designDocument/LaTeX/designDoc.tex
+**designDocument/LaTeX/useCases.tex
+(./designDocument/LaTeX/useCases.tex
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
 (/opt/texlive/texdir/texmf-dist/tex/latex/base/article.cls
@@ -36,8 +36,8 @@ Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count283
 )
-(./designDoc.aux)
-\openout1 = `designDoc.aux'.
+(./useCases.aux)
+\openout1 = `useCases.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
@@ -58,8 +58,7 @@ LaTeX Font Info:    ... okay on input line 11.
 [1
 
 {/opt/texlive/texdir/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/opt/texlive
-/texdir/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-(./designDoc.aux)
+/texdir/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] (./useCases.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -67,15 +66,15 @@ L3 programming layer <2025-09-02>
  ) 
 Here is how much of TeX's memory you used:
  683 strings out of 467748
- 10552 string characters out of 5429049
- 434693 words of memory out of 5000000
+ 10540 string characters out of 5429049
+ 433693 words of memory out of 5000000
  29447 multiletter control sequences out of 15000+600000
  630027 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,5n,38p,171b,116s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 35i,5n,38p,170b,118s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/texdir/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></op
 t/texlive/texdir/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on designDoc.pdf (1 page, 20341 bytes).
+Output written on useCases.pdf (1 page, 19840 bytes).
 PDF statistics:
  19 PDF objects out of 1000 (max. 8388607)
  11 compressed objects within 1 object stream
