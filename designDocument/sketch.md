@@ -13,7 +13,6 @@ Organizer/Admin > Team Captains > Players > Spectators
 
 #### Team captains  
 - Cannot be in more than one team
-- Sign their team into the competition / tournament
 - Creates his team
 - modify team members (removing, adding and editing)
 - When leaving a team then they choose a player to take their place as team captain (If no one left then the team is archived where it still holds the score and win information)
@@ -109,7 +108,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 
 # Class diagrams
 ## Model classes
-### Players
+### Player
 - Name
 - Date of Birth
 - Home Address
@@ -120,6 +119,8 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Teams played for
 - Tournaments played
 - Apart of clubs
+- is_team_captain
++ create_team()
 
 ### Team
 - List of Players 3 <= list <= 5
@@ -150,16 +151,17 @@ Club -> Team -> Player
 ### Tournament
 - Receives info from organizers
 - Date: start date - end date
-  - j
+- Allowed Time Frame of games
 - Unique name
 - Venue (location)
 - Registered contact person (With e-mail and phone number) 
 - Is active
+- Teams playing
 
 ### Matches
-- Date time
 - Server ID
-- What teams are Playing
+- What teams are Playing and when = Team A + Team B; Time
+  - Time is between the start and end date of the tournament
 
 ## 3-tier design
 
@@ -213,6 +215,48 @@ Club -> Team -> Player
 
 #
 ### Schedule
+- Stored in file
 - 
--
--
+
+
+# UI DRAFT
+
+## Start page
+1 Login
+2 Register
+3 Spectate
+
+q Quit
+
+## Login
+Input your handle: 
+
+b Back
+
+## Admin Page
+1 Create Tournament
+2 Create a Club
+
+b Back
+
+## Player Page
+1 Edit Self
+2 See Team
+3 Create a Team
+
+b Back
+
+## Register
+Enter Name: 
+Date of Birth: 
+Home Address:
+Phone Number: 
+Handle: 
+
+b Back
+
+## Spectate Page
+1 Game Schedule
+2 Clubs
+3 Teams
+b Back
