@@ -123,7 +123,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 ### Team
 - List of Players 3 <= list <= 5
 - Name: Unique
-- Captain: Player handle
+- CaptaiN Player handle
 - Optional = url homepage, ascii art
 - Win counter
 - points (for Playing / winning?)
@@ -184,6 +184,9 @@ b Back
 b Back
 
 ### Manage Tournaments
+
+!! NEED TO ADD THE ACTUAL CONTROL OF THE GAME !!
+
 1 Publish 
 2 Create Tournament
 3 Edit Tournaments
@@ -196,8 +199,8 @@ What tournament do you want to publish?:
 
 --> you choose: this tournament
 --> do you want to continue?
-Y: Yes
-N: No
+Y Yes
+N No
 
 #### Create Tournament
 Name: unique name 
@@ -223,15 +226,15 @@ b Back
 Enter Team name or l for the list of all team or q to quit: abcd
 
 --> abcd was found, do you want to continue?
-Y: Yes
-N: No
+Y Yes
+N No
 
 ##### Remove a Team
 Enter Team name or l for the list of all teams in the tournament or q to quit: abcd
 
 --> abcd was found, do you want to continue?
-Y: Yes
-N: No
+Y Yes
+N No
 
 ##### Edit Time of Date
 --> old date: 2025-09-11 -> 2025-12-24
@@ -240,8 +243,8 @@ new end date:
 
 --> The new date is: something -> something
 --> Do you want to continue?
-Y: Yes
-N: No
+Y Yes
+N No
 
 ### Manage Clubs
 1 Create Club
@@ -266,7 +269,7 @@ Color: some color
 -x-> Team: team name 
 -x-> Club: club name
 -x-> Handle: unique handle
--x-> IS team captain: Bool
+-x-> IS team captaiN Bool
 --> ------------STATS--------------
 -x-> Wins:
 -x-> Points:
@@ -286,8 +289,8 @@ Home Address:
 Phone Number: 
 
 --> Do you want to continue?
-Y: Yes
-N: No
+Y Yes
+N No
 
 ### My Team 
 {NOTE} If team is empty it should let the user know
@@ -305,12 +308,39 @@ N: No
 b Back
 
 #### Edit Team
+1 Add Player
+2 Remove Player
+b Back
 
+##### Add Player
+{NOTE} if the player is already in a team it should show that
+
+Enter a player name or the first letter(s) to search or q to quit: some player handle
+
+--> some player handle is available
+--> Do you want to add them to your team?
+Y Yes
+N No
+
+##### Remove Player
+--> List of player in the team
+Input player to remove or q to quit: 
+
+#### Leave Team
+{NOTE} IF Team Captain and there are still player in the team then promote new team captain
+{NOTE} If Team Captain and he was last in the team then archive the team
+
+--> You have successfully leaved {team_name}
 
 ### Create a Team
---> By creating a Team you will automatically be promoted to Team Captain
+{NOTE} By creating a Team you will automatically be promoted to Team Captain
 
 Input unique name:
+{Maybe} URL / HOMEPAGE:
+{Maybe} ASCII ART:
+
+--> List All clubs
+Join a club: 
 
 
 ## Register
@@ -332,6 +362,19 @@ b Back
 4 History of tournaments
 b Back
 
+### Game Schedule
+"-----------------------------
+Tournament name
+"-----------------------------
+Date: Start - End, Venue
+"-----------------------------
+Number of Teams, ?Number of Rounds?
+"-----------------------------
+
+
+
+
+
 # EXTRA NOTES:
 ### Players / Teams
 - Color: simple length check
@@ -342,7 +385,7 @@ b Back
 - When taking input we will have a validator in the logic layer that returns whether it is valid or not
 - Valid player handle: Just about the length (3-12) NEED TO HAVE **ADMIN** in the handle file
 - Date stored YYYY-MM-DD
-  - Validation:
+  - ValidatioN
     - All need to be numbers that are not the "-"
     - Year: 
     - Month: 01 <= month <= 12
@@ -399,12 +442,12 @@ Email and PhoneNr
 Enter Team name or l for the list of all team or q to quit: abcd
 
 --> abcd was found are you sure you want to continue
-Y: Yes
-N: No
+Y Yes
+N No
 
 #### Remove a Team
 Enter Team name or l for the list of all teams in the tournament or q to quit:
 
 --> abcd is not apart of the tournament, do you want to continue
-Y: Yes
-N: No
+Y Yes
+N No
