@@ -123,7 +123,6 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Tournaments played
 - Apart of clubs
 - is_team_captain
-+ create_team()
 
 ### Team
 - List of Players 3 <= list <= 5
@@ -200,9 +199,11 @@ b Back
 2 See Clubs
 
 ### Manage Tournaments
+@ AUTO LIST TOURNAMENTS
+1 Publish 
 1 Create Tournament
 2 Edit a Tournament
-3 See Tournaments
+
 
 b Back
 
@@ -276,7 +277,7 @@ b Back
 - At least 16 teams in a tournament
 - Teams cannot Play in multiple matches at the same time
 - The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
-- 
+- Everyone should be able to see all active Teams (in an active tournament) 
 #
 ### Archive = Split into Tournament and Team
 #### Tournament Archive
@@ -285,6 +286,12 @@ b Back
 #### Team Archive
 - The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
 - Stores empty teams and their scores (Should be able to view it)
+
+#
+### Publish Tournament
+When Managing the tournaments the Admin has the option of publishing a tournament and by pressing that option he will get a list of available tournaments (AKA: Tournaments that have 16 or more teams and tournaments that aren't already published). Then he will input what tournament he wants to publish and that tournament 
+
+
 
 #
 ### Search Bar
