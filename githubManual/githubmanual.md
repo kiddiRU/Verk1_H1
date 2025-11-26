@@ -214,34 +214,34 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 # Branching strategies
 
 ## Main-Only
-* The Main-Only branching strategy revolves around using only the main branch for development and all changes are commited directly into it, so it uses no extra branches.
+* The Main-Only branching strategy revolves around using only the main branch for development and all changes are commited directly into it, so it uses no extra branches
 
 <img alt="Main-Only" src="github_desktop_images/main_only.png" width="50%">
 
 ## Feature Branching
-* The Feature Branching branching strategy revolves around creating a new brnch for every feature and bug in the program 
+* The Feature Branching branching strategy revolves around creating a new branch for every feature and bug in the program, developers need to regularly merge the main branch into the feature branch to minimise merge conflicts, feature branched are then merged into the main branch when they are finished
 
 <img alt="Feature Branching" src="github_desktop_images/feature_branching.png" width="50%">
 
 ## Gitflow
-* 
+* The Gitflow stragegy revolves around using multiple branches like main, hotfix, release, develop and feature, branch names need to be clear when using this to maintain clarity and consistency
 
 <img alt="Gitflow" src="github_desktop_images/gitflow.png" width="50%">
 
 
-## Github Flow
-* 
+## GitHub Flow
+* The GitHub branching strategy revolves around focusing on continuos delivery where developers create feture branches,merge them into the main branch, and deploy immediately.
 
-<img alt="Github Flow" src="github_desktop_images/github_flow.png" width="50%">
+<img alt="GitHub Flow" src="github_desktop_images/github_flow.png" width="50%">
 
 
 ## Trunk-Based Development
-* 
+* The Trunk-Based Development strategy revolves around using short lived branches or changes are commited directly into the main branch.
 
 <img alt="Trunk Based Development" src="github_desktop_images/trunk_based.png" width="50%">
-* 
+
 
 ## Release Branching 
-* 
+* The Release Branching strategy a branch is created for every release version which helps with long term support of the system
 
 <img alt="Release Branching" src="github_desktop_images/release_branching.png" width="50%">
