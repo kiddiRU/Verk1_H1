@@ -172,69 +172,7 @@ Club -> Team -> Player
 # User group analysis
 
 
-# UI-Design
-
-
-- Wireframe where we show "happy paths"
-
-# EXTRA NOTES:
-### Players / Teams
-- Color: simple length check
-- Venue: simple length check
-- Email: needs to go through a check
-- Phone number: 7 Numbers
-- Address: (strings)(space)(number)
-- When taking input we will have a validator in the logic layer that returns whether it is valid or not
-- Valid player handle: Just about the length (3-12) NEED TO HAVE **ADMIN** in the handle file
-- Date stored YYYY-MM-DD
-  - Validation:
-    - All need to be numbers that are not the "-"
-    - Year: 
-    - Month: 01 <= month <= 12
-- If the C color requirement will be used then there should only be options for the user (Can only choose color out of few chosen colors)
-- Randomize team list for tournaments
-- At least 16 teams in a tournament
-- Teams cannot Play in multiple matches at the same time
-- The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
-- 
-#
-### Archive = Split into Tournament and Team
-#### Tournament Archive
-- When the tournament is over then it is archived 
-
-#### Team Archive
-- The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
-- Stores empty teams and their scores (Should be able to view it)
-
-#
-### Search Bar
-#### Example: Searching for available players for teams
-- Can input the name of a player directly
-- IF unsure about the player options then should be able to list every name or...
-- The ability to search the for the first letters to narrow down the list
-
-#
-### Schedule
-- Stored in file
-- 
-
-#
-### Logic to use for multiple instances
-Selecting a date
-- Date of birth (Player)
-- Start/End date (Tournament)
-
-Unique Name
-- Name of Tournament
-- Player Handle
-
-Email and PhoneNr
-- Email (Player)
-- PhoneNr (Player)
-- Contact email (Tournament)
-- Contact PhoneNr (Tournament)
-
-# UI DRAFT
+# UI-Design = Happy Path / User Flow
 
 ## Start page
 1 Login
@@ -312,3 +250,60 @@ b Back
 4 History of matches
 
 b Back
+
+# EXTRA NOTES:
+### Players / Teams
+- Color: simple length check
+- Venue: simple length check
+- Email: needs to go through a check
+- Phone number: 7 Numbers
+- Address: (strings)(space)(number)
+- When taking input we will have a validator in the logic layer that returns whether it is valid or not
+- Valid player handle: Just about the length (3-12) NEED TO HAVE **ADMIN** in the handle file
+- Date stored YYYY-MM-DD
+  - Validation:
+    - All need to be numbers that are not the "-"
+    - Year: 
+    - Month: 01 <= month <= 12
+- If the C color requirement will be used then there should only be options for the user (Can only choose color out of few chosen colors)
+- Randomize team list for tournaments
+- At least 16 teams in a tournament
+- Teams cannot Play in multiple matches at the same time
+- The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
+- 
+#
+### Archive = Split into Tournament and Team
+#### Tournament Archive
+- When the tournament is over then it is archived 
+
+#### Team Archive
+- The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
+- Stores empty teams and their scores (Should be able to view it)
+
+#
+### Search Bar
+#### Example: Searching for available players for teams
+- Can input the name of a player directly
+- IF unsure about the player options then should be able to list every name or...
+- The ability to search the for the first letters to narrow down the list
+
+#
+### Schedule
+- Stored in file
+- 
+
+#
+### Logic to use for multiple instances
+Selecting a date
+- Date of birth (Player)
+- Start/End date (Tournament)
+
+Unique Name
+- Name of Tournament
+- Player Handle
+
+Email and PhoneNr
+- Email (Player)
+- PhoneNr (Player)
+- Contact email (Tournament)
+- Contact PhoneNr (Tournament)
