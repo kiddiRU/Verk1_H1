@@ -17,9 +17,9 @@
 
 ## How these commands are executed with github desktop
 
-* git clone
+## git clone
 
-    - In order to clone a repository, you first need to go to the overview of you repositories which can be found in the upper left corner
+* In order to clone a repository, you first need to go to the overview of you repositories which can be found in the upper left corner
 
 <img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> 
 
@@ -29,17 +29,17 @@
 
 <img alt="cloning step 3" src="github_desktop_images/a_cloning3.png" width="50%">
 
-    - After copying the repository URL you can paste it in the menu that pops up and you can get a clone of the repository in your github desktop
+* After copying the repository URL you can paste it in the menu that pops up and you can get a clone of the repository in your github desktop
 
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
 ## git pull
 
-    - After someone has pushed a file, you can see how many files can be pulled in the far right button at the top of the screen, and you click it in order to pull those changes into your working directory
+* After someone has pushed a file, you can see how many files can be pulled in the far right button at the top of the screen, and you click it in order to pull those changes into your working directory
 
 <img alt="pulling step 1" src="github_desktop_images/b_pulling1.png" width="50%">
 
-    - After pulling the changes you can see the change history by clicking on the "History" tab
+* After pulling the changes you can see the change history by clicking on the "History" tab
 
 <img alt="pulling step 2" src="github_desktop_images/b_pulling2.png" width="50%">
 
@@ -49,7 +49,8 @@
 
 <img alt="adding step 1" src="github_desktop_images/c_adding1.png" width="50%">
 
-* You only need to select the files you want to add
+* You only need to select the files you want to add and they will be added to your staging area
+
 
 <img alt="adding step 2" src="github_desktop_images/c_adding2.png" width="50%">
 
