@@ -19,55 +19,53 @@
 
 * git clone
 
-info
+    - In order to clone a repository, you first need to go to the overview of you repositories which can be found in the upper left corner
 
 <img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> 
 
-info
+    - Next you need to select the "Add" dropdown menu and selct "clone repository"
 
 <img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%"> 
 
-info
-
 <img alt="cloning step 3" src="github_desktop_images/a_cloning3.png" width="50%">
 
-info
+    - After copying the repository URL you can paste it in the menu that pops up and you can get a clone of the repository in your github desktop
 
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
-* git pull
+## git pull
 
-info
+    - After someone has pushed a file, you can see how many files can be pulled in the far right button at the top of the screen, and you click it in order to pull those changes into your working directory
 
 <img alt="pulling step 1" src="github_desktop_images/b_pulling1.png" width="50%">
 
-info
+    - After pulling the changes you can see the change history by clicking on the "History" tab
 
 <img alt="pulling step 2" src="github_desktop_images/b_pulling2.png" width="50%">
 
-* git add
+## git add
 
-info
+* After making any changes to a file in your working directory, the file will appear in the "changes" tab
 
 <img alt="adding step 1" src="github_desktop_images/c_adding1.png" width="50%">
 
-info
+* You only need to select the files you want to add
 
 <img alt="adding step 2" src="github_desktop_images/c_adding2.png" width="50%">
 
-* git commit -m "message"
+## git commit -m "message"
 
-info
+* After selecting the files to add, you can add a message to the commit at the bottom of the "changes" tab
 
 <img alt="commiting step 1" src="github_desktop_images/d_commit1.png" width="50%">
 
-info
+* After writing the message you want to have with the commit, you only need to press the button at the bottom of the tab and the files will be commited
 
 <img alt="commiting step 2" src="github_desktop_images/d_commit2.png" width="50%">
 
-* git push
+## git push
 
-info
+* After having commited a file you can push it by pressing the "Push origin" button that pops up on the screen or by pressing the far right button at the top of the screen
 
 <img alt="pushing step 1" src="github_desktop_images/e_push1.png" width="50%">
 
