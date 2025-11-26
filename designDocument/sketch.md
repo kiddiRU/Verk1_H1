@@ -50,13 +50,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 # Prioritized Requirements
 ## Functional
 ### A
-- Print out the match schedule
 - The User can login as Admin / Organizer
 - The User can register themselves as a player
 - The User can login as a player 
 - To be a spectator the user does not need to sign into anything
 - Organizer can create a tournament
-- Organizer can create clubs
 - Organizer can add and kick teams for the tournament before the start
 - Organizer can start a tournament
 - Organizer can input results for the tournament for each round
@@ -65,18 +63,22 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Team captain can leave the team
 - When team captain leaves a team he assigns a team member to be the new team captain
 - When team captain leaves a team if he was alone then the team is archived
-- When a team is created it is assigned to a club
 - Team captain can modify players in team (add / remove)
 - Each Player is in 1 team
 - Tournaments automatically archive after they play out
-- Spectator can see matches and tournaments
-- Spectator can see teams and clubs
+- Anyone can see matches and tournaments
+- Anyone can see match schedule
+- Anyone can see teams
 ### B
+- Clubs
+- Organizer can create clubs
+- Organizer can edit clubs
+- When a team is created it is assigned to a club
+- Anyone can see clubs
 - Organizer can modify the time of a tournament before it has started
 - Organizer can cancel a tournament
 - Switch captain
 - Players can be in more than 1 team
-- Clubs
 - Player handle should be the length of 3-12
 ### C
 - Edit archive (like removing invalid tournaments)
@@ -85,6 +87,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Teams can switch from clubs
 - Need password to login
 - The Club Name will be printed in its color
+- 
 
 ## NON-Functional
 ### A
@@ -92,11 +95,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - The system should not crash due to invalid data
 - The players personal data should not be visible to the spectator
 - Only the team captain can modify the team
-- Only the organizer can create tournaments and clubs
+- Only the organizer can create tournaments
 - Code must follow Python type_hinting everywhere
 - Code must follow the snake casing naming convention
 ### B
-
+- Only the organizer can modify clubs
 ### C
 
 
@@ -188,10 +191,13 @@ b Back
 
 ## Admin Page
 1 Manage Tournaments
-2 Create a Club
-3 Edit Clubs
+2 Manage Clubs
 
 b Back
+
+### Manage Clubs
+1 Create Club
+2 See Clubs
 
 ### Manage Tournaments
 1 Create Tournament
