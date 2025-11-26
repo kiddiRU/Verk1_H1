@@ -124,6 +124,15 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 * git rebase [name]
     - This let's you move all commits made on branch [name] infront of all commits on your current branch, is recommended before merging for a cleaner commit tree.
 
+
+## Using branches in github desktop
+
+### Creating a branch
+
+
+### Merging branches
+
+
 # Merge conflicts
 
 Please add information if you run into merge conflicts
