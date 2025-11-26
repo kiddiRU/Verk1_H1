@@ -190,3 +190,4 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 <img alt="Editing the same file as someone else" src="github_desktop_images/pulling_a_file.png" width="50%">
 
+* After pulling the other persons changes you will be able to go to the changes tab and recover the changed that were stashed and them combine them with the new version of the file
