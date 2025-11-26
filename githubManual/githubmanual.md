@@ -161,7 +161,6 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 <img alt="" src="github_desktop_images/merge2.png" width="50%">
 
 
-
 # Merge conflicts
 
 ## Merge conflict error messages
@@ -181,4 +180,13 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 * After solving the merge conflict, you can go back to github desktop and you will now be able to continue the merge
  
 <img alt="conflict solved" src="github_desktop_images/mergeconflict_solved.png" width="50%">
+
+
+# Common problems
+
+## Pulling a file that you are editing 
+
+* It sometimes happens that you are working on the same file at the same time as someone else, if he has pushed the file before you, you might run into a problem when trying to pull his version since it will overwrite your version. Github desktop shows an error when this happenes and gives you the option to "Stash changes and continue", this will stash your version of the file and pull the other version
+
+<img alt="Editing the same file as someone else" src="github_desktop_images/pulling_a_file.png" width="50%">
 
