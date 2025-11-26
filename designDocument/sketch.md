@@ -62,7 +62,6 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Organizer can create clubs
 - Player can create a team
 - Player becomes a team captain when team is created
-- Team captain can sign his team into a tournament if valid
 - Team captain can leave the team
 - When team captain leaves a team he assigns a team member to be the new team captain
 - When team captain leaves a team if he was alone then the team is archived
@@ -215,4 +214,5 @@ Club -> Team -> Player
 ### Schedule
 - 
 -
+
 -
