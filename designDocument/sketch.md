@@ -69,6 +69,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Anyone can see matches and tournaments
 - Anyone can see match schedule
 - Anyone can see teams
+- Tournaments have 16 teams
 ### B
 - Clubs
 - Organizer can create clubs
@@ -76,10 +77,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - When a team is created it is assigned to a club
 - Anyone can see clubs
 - Organizer can modify the time of a tournament before it has started
-- Organizer can cancel a tournament
+- Organizer can delete a tournament before it has been published
 - Switch captain
 - Players can be in more than 1 team
 - Player handle should be the length of 3-12
+- Tournaments can have 16 or more teams
 ### C
 - Edit archive (like removing invalid tournaments)
 - Change team name
@@ -87,11 +89,10 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Teams can switch from clubs
 - Need password to login
 - The Club Name will be printed in its color
-- 
+- Organizer can cancel a tournament
 
 ## NON-Functional
 ### A
-- Menus should have a "back" option when appropriate
 - The system should not crash due to invalid data
 - The players personal data should not be visible to the spectator
 - Only the team captain can modify the team
@@ -100,6 +101,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Code must follow the snake casing naming convention
 ### B
 - Only the organizer can modify clubs
+- Give users options to cancel 
 ### C
 
 
@@ -145,11 +147,6 @@ The Club file should have **Empty Club / NO Club** hardcoded into the text file 
 
 Club -> Team -> Player
 
-### Competition
-- Venues (location)
-- Time: begin - end
-- Teams
-
 ### Tournament
 - Receives info from organizers
 - Date: start date - end date
@@ -180,31 +177,32 @@ Club -> Team -> Player
 1 Login
 2 Register
 3 Spectate
-
 q Quit
 
 ## Login
 Input your handle: 
-
 b Back
 
 ## Admin Page
 1 Manage Tournaments
 2 Manage Clubs
-
 b Back
 
 ### Manage Clubs
 1 Create Club
 2 See Clubs
+b Back
 
 ### Manage Tournaments
-@ AUTO LIST TOURNAMENTS
 1 Publish 
-1 Create Tournament
-2 Edit a Tournament
+2 Create Tournament
+3 Edit a Tournament
+b Back
 
+#### Publish
+@ The list of available tournaments appears
 
+What tournament do you want to publish?: 
 b Back
 
 #### Create Tournament
@@ -214,7 +212,6 @@ Start Date: YYYY-MM-DD
 End Date:  YYYY-MM-DD
 Email: something@something.something
 Phone Number: 0000000
-
 b Back
 
 #### Edit Tournament
@@ -225,7 +222,6 @@ this tournament
 1 Add Teams
 2 Remove Teams
 3 Edit time
-
 b Back
 
 ### Create a Club
@@ -237,7 +233,6 @@ Color:
 1 Edit Self
 2 See Team
 3 Create a Team
-
 b Back
 
 ## Register
@@ -246,7 +241,6 @@ Date of Birth: YYYY-MM-DD
 Home Address: address number
 Phone Number: 0000000
 Handle: unique_handle
-
 c Continue
 b Back
 
@@ -255,7 +249,6 @@ b Back
 2 Clubs
 3 Teams
 4 History of matches
-
 b Back
 
 # EXTRA NOTES:
