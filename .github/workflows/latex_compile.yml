@@ -35,13 +35,13 @@ jobs:
       - name: GitHub Action for LaTeX
         uses: xu-cheng/latex-action@4.0.0
         with:
-          root_file: designDocument/LaTeX/designDoc.tex
+          root_file: designDocument/LaTeX/*.tex
 
       - name: Move latex-pdf to directory and overwrite
-        run: mv -f ./designDoc.pdf ./designDocument/LaTeX/designDoc.pdf
+        run: mv -f ./*.pdf ./designDocument/LaTeX/*.pdf
 
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
-          commit_message: Automated LaTeX Change
+          commit_message: Automated LaTeX Compile
