@@ -174,7 +174,7 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 <img alt="conflict merging" src="github_desktop_images/mergeconflict_merging.png" width="50%">
 
-* You will be able to see where the conflict is in the file between the "<<<<<<< HEAD" and ">>>>>>> branch-name" you will have to change the files to remove the conflict and temove the "<<<<<<< HEAD" and ">>>>>>> branch-name" in order to solve the conflict
+* You will be able to see where the conflict is in the file between the "<<<<<<< HEAD" and ">>>>>>> branch-name" you will have to manually edit the files to keep the desired changes and remove all conflict markers (<<<<<<<, =======, >>>>>>>)
 
 <img alt="conflict in file" src="github_desktop_images/mergeconflict_in_file.png" width="50%">
 
