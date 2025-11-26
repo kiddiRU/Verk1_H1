@@ -15,21 +15,21 @@
 * git push
     - Adds your local git commits to the remote repository.
 
-## How these commands are executed with github desktop
+## How these commands are executed with GitHub Desktop
 
 ### git clone
 
-* In order to clone a repository, you first need to go to the overview of you repositories which can be found in the upper left corner
+* In order to clone a repository, you first need to go to the overview of your repositories, which can be found in the upper left corner
 
 <img alt="cloning step 1" src="github_desktop_images/a_cloning1.png" width="50%"> 
 
-* Next you need to select the "Add" dropdown menu and selct "clone repository"
+* Next you need to select the "Add" dropdown menu and select "clone repository"
 
 <img alt="cloning step 2" src="github_desktop_images/a_cloning2.png" width="50%"> 
 
 <img alt="cloning step 3" src="github_desktop_images/a_cloning3.png" width="50%">
 
-* After copying the repository URL you can paste it in the menu that pops up and you can get a clone of the repository in your github desktop
+* After copying the repository URL you can paste it in the menu that pops up and you can get a clone of the repository in your GitHub Desktop
 
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
@@ -61,16 +61,16 @@
 
 * After selecting the files to add, you can add a message to the commit at the bottom of the "changes" tab
 
-<img alt="commiting step 1" src="github_desktop_images/d_commit1.png" width="50%">
+<img alt="committing step 1" src="github_desktop_images/d_commit1.png" width="50%">
 
-* After writing the message you want to have with the commit, you only need to press the button at the bottom of the tab and the files will be commited
+* After writing the message you want to have with the commit, you only need to press the button at the bottom of the tab and the files will be committed
 
-<img alt="commiting step 2" src="github_desktop_images/d_commit2.png" width="50%">
+<img alt="committing step 2" src="github_desktop_images/d_commit2.png" width="50%">
 
 
 ### git push
 
-* After having commited a file you can push it by pressing the "Push origin" button that pops up on the screen or by pressing the far right button at the top of the screen
+* After having committed a file you can push it by pressing the "Push origin" button that pops up on the screen or by pressing the far right button at the top of the screen
 
 <img alt="pushing step 1" src="github_desktop_images/e_push1.png" width="50%">
 
@@ -105,35 +105,35 @@ repository, no one can see it until you run git push which pushes all commits ma
 
 # Branches
 
-Branches are workspaces which are independant from other branches, the default branch is the main branch, the final product should be all on the main branch.
+Branches are workspaces which are independent from other branches, the default branch is the main branch, the final product should be all on the main branch.
 
-When working on new features you should be creating a branch for that feature and developing it on that branch, when testing is done you should move the
-changes to the main branch, this let's you work on changes for a certain feature which could break it's functionality temporarily while letting other people
+When working on new features, you should be creating a branch for that feature and developing it on that branch, when testing is done you should move the
+changes to the main branch, this lets you work on changes for a certain feature which could break its functionality temporarily while letting other people
 work on other features which rely on that feature.
 
-You shouldn't keep branches to long or you should rebase regularly to prevent coding against old implementations.
+You shouldn't keep branches too long or you should rebase regularly to prevent coding against old implementations.
 
 * git branch
     - Shows you a list of available branches and highlights your current branch.
 
 * git branch [name]
-    - This let's you create a branch with a certain name, this branch is only available on your local git repository.
+    - This lets you create a branch with a certain name, this branch is only available on your local git repository.
 
 * git checkout [name]
-    - This let's you switch branches, all differences in files between those branches get changed on your working directory automatically.
+    - This lets you switch branches, all differences in files between those branches get changed on your working directory automatically.
 
 * git merge [name]
-    - This let's you merge all changes on the branch [name] to your current branch.
+    - This lets you merge all changes on the branch [name] to your current branch.
 
 * git rebase [name]
-    - This let's you move all commits made on branch [name] infront of all commits on your current branch, is recommended before merging for a cleaner commit tree.
+    - This lets you move all commits made on branch [name] in front of all commits on your current branch, is recommended before merging for a cleaner commit tree.
 
 
-## Using branches in github desktop
+## Using branches in GitHub Desktop
 
 ### Creating a branch
 
-* In order to creater a brach in github desktop you need to select middle button at the top of the screen named "Current branch"
+* In order to create a branch in GitHub Desktop you need to select the middle button at the top of the screen named "Current branch"
 
 <img alt="opening branch menu" src="github_desktop_images/create_branch1.png" width="50%">
 
@@ -167,7 +167,7 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 <img alt="conflicts warning" src="github_desktop_images/mergeconflict_warning.png" width="50%">
 
-* If you decide to press "Create a merge commit" despite the warning another window will pop up that tells you what file has the conflict and gives you the option to open your tool so so you can go and solve the conflict manually
+* If you decide to press "Create a merge commit" despite the warning another window will pop up that tells you what file has the conflict and gives you the option to open your tool so you can go and solve the conflict manually
 
 <img alt="conflict merging" src="github_desktop_images/mergeconflict_merging.png" width="50%">
 
@@ -175,7 +175,7 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 <img alt="conflict in file" src="github_desktop_images/mergeconflict_in_file.png" width="50%">
 
-* After solving the merge conflict, you can go back to github desktop and you will now be able to continue the merge
+* After solving the merge conflict, you can go back to GitHub Desktop and you will now be able to continue the merge
  
 <img alt="conflict solved" src="github_desktop_images/mergeconflict_solved.png" width="50%">
 
@@ -193,7 +193,7 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 <img alt="submitting a pull request" src="github_desktop_images/pull_request2.png" width="50%">
 
-* After creating the pull request you will be directed to github where you or a team member can leave a comment, close or approve your pull request
+* After creating the pull request you will be directed to GitHub where you or a team member can leave a comment, close or approve your pull request
 
 <img alt="viewing a pull request" src="github_desktop_images/pull_request3.png" width="50%">
 
@@ -202,46 +202,44 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 
 ## Pulling a file that you are editing 
 
-* It sometimes happens that you are working on the same file at the same time as someone else, if he has pushed the file before you, you might run into a problem when trying to pull his version since it will overwrite your version. Github desktop shows an error when this happenes and gives you the option to "Stash changes and continue", this will stash your version of the file and pull the other version
+* It sometimes happens that you are working on the same file at the same time as someone else, if he has pushed the file before you, you might run into a problem when trying to pull his version since it will overwrite your version. GitHub Desktop shows an error when this happens and gives you the option to "Stash changes and continue", this will stash your version of the file and pull the other version
 
 <img alt="Editing the same file as someone else" src="github_desktop_images/pulling_a_file.png" width="50%">
 
-* After pulling the other persons changes you will be able to go to the changes tab and recover the changed that were stashed and them combine them with the new version of the file
-
-<img alt="recover your changes" src="" width="50%">
+* After pulling the other persons changes you will be able to go to the changes tab and recover the changes that were stashed and then combine them with the new version of the file
 
 
 # Branching strategies
 
 ## Main-Only
-* The Main-Only branching strategy revolves around using only the main branch for development and all changes are commited directly into it, so it uses no extra branches
+* The Main-Only branching strategy revolves around using only the main branch for development and all changes are committed directly into it, so it uses no extra branches
 
 <img alt="Main-Only" src="github_desktop_images/main_only.png" width="50%">
 
 ## Feature Branching
-* The Feature Branching branching strategy revolves around creating a new branch for every feature and bug in the program, developers need to regularly merge the main branch into the feature branch to minimise merge conflicts, feature branched are then merged into the main branch when they are finished
+* The Feature Branching branching strategy revolves around creating a new branch for every feature and bug in the program, developers need to regularly merge the main branch into the feature branch to minimize merge conflicts, feature branches are then merged into the main branch when they are finished
 
 <img alt="Feature Branching" src="github_desktop_images/feature_branching.png" width="50%">
 
 ## Gitflow
-* The Gitflow stragegy revolves around using multiple branches like main, hotfix, release, develop and feature, branch names need to be clear when using this to maintain clarity and consistency
+* The Gitflow strategy revolves around using multiple branches like main, hotfix, release, develop and feature, branch names need to be clear when using this to maintain clarity and consistency
 
 <img alt="Gitflow" src="github_desktop_images/gitflow.png" width="50%">
 
 
 ## GitHub Flow
-* The GitHub branching strategy revolves around focusing on continuos delivery where developers create feture branches,merge them into the main branch, and deploy immediately.
+* The GitHub branching strategy revolves around focusing on continuous delivery where developers create feature branches, merge them into the main branch, and deploy immediately.
 
 <img alt="GitHub Flow" src="github_desktop_images/github_flow.png" width="50%">
 
 
 ## Trunk-Based Development
-* The Trunk-Based Development strategy revolves around using short lived branches or changes are commited directly into the main branch.
+* The Trunk-Based Development strategy revolves around using short-lived branches or changes are committed directly into the main branch.
 
 <img alt="Trunk Based Development" src="github_desktop_images/trunk_based.png" width="50%">
 
 
 ## Release Branching 
-* The Release Branching strategy a branch is created for every release version which helps with long term support of the system
+* The Release Branching strategy revolves around the fact that a branch is created for every release version which helps with long term support of the system
 
 <img alt="Release Branching" src="github_desktop_images/release_branching.png" width="50%">
