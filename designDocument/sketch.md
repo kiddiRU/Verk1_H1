@@ -53,7 +53,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - The User can login as Organizer / Admin
 - The User can register themselves as a player
 - The User can login as a player 
-- To be a spectator the user does not need to sign into anything
+- Spectator does not need to sign in
 - Organizer can create a tournament
 - Organizer can add and kick teams for the tournament before the start
 - Organizer can start a tournament
@@ -62,45 +62,42 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Player becomes a team captain when team is created
 - Team captain can leave the team
 - When team captain leaves a team he assigns a team member to be the new team captain
-- When team captain leaves a team if he was alone then the team is archived
 - Team captain can modify players in team (add / remove)
-- Each Player is in 1 team
-- Tournaments automatically archive after they play out
 - Anyone can see matches and tournaments
 - Anyone can see match schedule
 - Anyone can see teams
-- Tournaments have 16 teams
 ### B
-- Clubs
 - Organizer can create clubs
 - Organizer can edit clubs
-- When a team is created it is assigned to a club
+- When creating a team the player assigns the team to a club
 - Anyone can see clubs
 - Organizer can modify the time of a tournament before it has started
 - Organizer can delete a tournament before it has been published
 - When Organizer creates a tournament he has to choose between double elimination and normal
-- Switch captain
-- Player handle should be the length of 3-12
-- Tournaments can have 16 or more teams
 ### C
-- The Club Name will be printed in its color
 - Team captain can transfer his authority to a player in team
 - Teams can switch from clubs
 - Organizer can cancel a tournament
 
 ## NON-Functional
 ### A
+- Tournaments automatically archive after they play out
+- When team captain leaves a team if he was alone then the team is archived
+- Each Player is in 1 team
 - The system should not crash due to invalid data
 - The players personal data should not be visible to the spectator
 - Only the team captain can modify the team
 - Only the organizer can create tournaments
 - Code must follow Python type_hinting everywhere
 - Code must follow the snake casing naming convention
+- Player handle should be the length of 3-12
+- Tournaments have 16 teams
 ### B
 - Only the organizer can modify clubs
 - Give users options to cancel 
+- Tournaments can have 16 or more teams
 ### C
-
+- The Club Name will be printed in its color
 
 # Use cases for requirements
 
@@ -265,6 +262,15 @@ Color: some color
 2 See Team
 3 Create a Team
 b Back
+
+### Edit Self
+--> Name: 
+--> 
+--> 
+-->
+-->
+-->
+
 
 ## Register
 Enter Name: any name
