@@ -33,6 +33,7 @@
 
 <img alt="cloning step 4" src="github_desktop_images/a_cloning4.png" width="50%">
 
+
 ### git pull
 
 * After someone has pushed a file, you can see how many files can be pulled in the far right button at the top of the screen, and you click it in order to pull those changes into your working directory
@@ -42,6 +43,7 @@
 * After pulling the changes you can see the change history by clicking on the "History" tab
 
 <img alt="pulling step 2" src="github_desktop_images/b_pulling2.png" width="50%">
+
 
 ### git add
 
@@ -54,6 +56,7 @@
 
 <img alt="adding step 2" src="github_desktop_images/c_adding2.png" width="50%">
 
+
 ### git commit -m "message"
 
 * After selecting the files to add, you can add a message to the commit at the bottom of the "changes" tab
@@ -63,6 +66,7 @@
 * After writing the message you want to have with the commit, you only need to press the button at the bottom of the tab and the files will be commited
 
 <img alt="commiting step 2" src="github_desktop_images/d_commit2.png" width="50%">
+
 
 ### git push
 
@@ -128,9 +132,34 @@ You shouldn't keep branches to long or you should rebase regularly to prevent co
 ## Using branches in github desktop
 
 ### Creating a branch
-aaaaaaaaaaaaaa
+
+* In order to creater a brach in github desktop you need to select middle button at the top of the screen named "Current branch"
+
+<img alt="opening branch menu" src="github_desktop_images/create_branch1.png" width="50%">
+
+* A branch menu should open that has a button labeled "New Branch" near the top
+
+<img alt="New branch" src="github_desktop_images/create_branch2.png" width="50%">
+
+* Then you can name the branch and choose another branch to base the new branch from
+
+<img alt="Naming and creating" src="github_desktop_images/create_branch3.png" width="50%">
+
 
 ### Merging branches
+
+* In order to merge branches you need to go to the branch menu
+
+<img alt="opening branch menu" src="github_desktop_images/create_branch1.png" width="50%">
+
+* You need to select the branch that you want to merge INTO and then press the button at the bottom of the menu
+
+<img alt="Select branch" src="github_desktop_images/merge1.png" width="50%">
+
+* You can then select "Create a merge commit" to merge the branches
+
+<img alt="" src="github_desktop_images/merge2.png" width="50%">
+
 
 
 # Merge conflicts
