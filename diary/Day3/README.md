@@ -13,8 +13,8 @@
 ### On site: Yes
 
 ## Kristinn Hrafn
-### Time:
-### On site:
+### Time: 9:15
+### On site: Yes
 
 ## Kristján Hagalín
 ### Time: 9:10
@@ -23,6 +23,7 @@
 ## Sindri Freysson
 ### Time: 8:30
 ### On site: Yes
+
 ## State of the Project
 ### TEXT:
 
