@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: PDF
-          path: designDocument/LaTeX/designDoc.tex
+          path: designDocument/LaTeX/designDoc.pdf
