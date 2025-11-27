@@ -269,7 +269,7 @@ Color: some color
 -x-> Team: team name 
 -x-> Club: club name
 -x-> Handle: unique handle
--x-> IS team captaiN Bool
+-x-> IS team captain Bool
 --> ------------STATS--------------
 -x-> Wins:
 -x-> Points:
