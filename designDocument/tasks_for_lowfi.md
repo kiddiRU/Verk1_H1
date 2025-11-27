@@ -3,7 +3,7 @@
 
 ### Player / Captain
 1. Create a account for a player named Miss Piggy, nickname: BaconBits, date of birth: june 14th 1938, email: mspiggy@gmail.com
-2. Now that you are a player, create a team named TheMuppets with the team color green and add a player named GreenCroaker
+2. Now that you are a player, create a team named TheMuppets in the club Disney and add a player named GreenCroaker
 3. You want to leave your team and select the GreenCroaker as the new captain
 
 ### Admin
