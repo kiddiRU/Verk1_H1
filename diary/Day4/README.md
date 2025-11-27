@@ -42,7 +42,16 @@ The groups feels comfortable and has a good vibe. No problems have been noted.
 - QC: Sindri, Kristinn
 
 ## ToDo-list:
-
+- TUI
+- Happy path
+- Class Diagram
+- Design schedule layout 
+- Design development plan
+- Formatting design doc
+- 3-tier design
+- Design doc structure
+- Test requriements
+- State diagrams
 # Evening meeting (Diary)
 ## State of project:
 
