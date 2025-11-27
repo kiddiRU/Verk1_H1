@@ -1,0 +1,223 @@
+# Start page #
+1 Login
+2 Register
+3 Spectate
+q Quit
+
+    # Login #
+    Input your handle or b to go back: 
+
+        # Admin Page # 
+        1 Create Tournament
+        2 Manage Tournaments
+        3 Create Club
+        b Back
+
+            # Create Tournament #
+            Name: unique name 
+            Venue: some location
+            Start Date: YYYY-MM-DD
+            End Date:  YYYY-MM-DD
+            Email: something@something.something
+            Phone Number: 0000000
+            --> You have created a Tournament
+
+            # Manage tournaments #
+            --> list of all tournaments
+            Choose tournament to manage or type q to quit:
+
+            # Manage Tournament (Un-Active) #
+            1 Manage Teams
+            3 Publish 
+            4 Edit Tournament
+            b Back
+
+                # Manage Teams #
+                1 Add team
+                2 Remove Team
+                b Back
+
+                    # Add team #
+                    Enter Team name or l for the list of all team or q to quit: abcd
+                    --> abcd was found, do you want to continue?
+                    Y Yes
+                    N No
+
+                    # Remove a Team #
+                    Enter Team name or l for the list of all teams in the tournament or q to quit: abcd
+
+                    --> abcd was found, do you want to continue?
+                    Y Yes
+                    N No
+
+                # Publish #
+                --> The list of available tournaments
+                What tournament do you want to publish?: 
+                --> you choose: this tournament
+                --> do you want to continue?
+                Y Yes
+                N No
+
+                # Edit Tournament #
+                --> LIST OF ALL TOURNAMENTS ---
+                Choose tournament: this_tournament
+                --> this_tournament
+                3 Edit time Date
+                4 Edit Info
+                b Back
+
+                    # Edit Date
+                    --> old date: 2025-09-11 -> 2025-12-24
+                    new start date:
+                    new end date:
+
+                    --> The new date is: something -> something
+                    --> Do you want to continue?
+                    Y Yes
+                    N No
+
+                    # Edit Info #
+                    new Name:
+                    new Venue: 
+                    Email:
+                    PhoneNumber: 
+
+            # Manage Tournaments (Active) #
+
+            1 Input Results of Match
+            2 Next Round
+            3 Cancel Tournament
+            b Back
+
+                # Input Results of Match #
+                !! NO IDEA IMPLEMENTED !!
+
+                # Next Round #
+                !! NO IDEA IMPLEMENTED !!
+
+                # Cancel Tournament #
+                !! C REQUIREMENT !!
+
+            # Create a Club #
+            Name: Unique name
+            Color: some color
+            --> You have created a Club
+
+
+        # Player Page #
+        --> Name: some name
+        --> Date of Birth: 
+        --> Home Address:
+        --> Phone Number:
+        --> ------Non editable----
+        -x-> Team: team name 
+        -x-> Club: club name
+        -x-> Handle: unique handle
+        -x-> IS team captain Bool
+        --> ------------STATS--------------
+        -x-> Wins:
+        -x-> Points:
+        -x-> Teams Played For: [list of teams?]
+        -x-> Tournaments Played: [List of tournaments]
+        1 Edit Info
+        2 My Team
+        3 Create a Team
+        b Back
+
+            # Edit Info #
+            --> Leave empty to keep old settings
+            Name: 
+            Date of Birth: 
+            Home Address: 
+            Phone Number: 
+            --> Do you want to continue?
+            Y Yes
+            N No
+
+            # My Team # 
+            {NOTE} If team is empty it should let the user know
+            {NOTE} If the player is not the captain it should just list the team and have button 2 and b
+            --> Team: Team name
+            --> C - captains name
+            --> some name
+            --> some name
+            --> some name
+            1 Edit Team
+            2 Leave Team
+            b Back
+
+                # Edit Team #
+                1 Add Player
+                2 Remove Player
+                b Back
+
+                    # Add Player #
+                    {NOTE} if the player is already in a team it should show that
+                    Enter a player name or the first letter(s) to search or q to quit: some player handle
+                    --> some player handle is available
+                    --> Do you want to add them to your team?
+                    Y Yes
+                    N No
+                    # Remove Player #
+                    --> List of player in the team
+                    Input player to remove or q to quit: 
+
+                # Leave Team #
+                {NOTE} IF Team Captain and there are still player in the team then promote new team captain
+                {NOTE} If Team Captain and he was last in the team then archive the team
+                --> You have successfully leaved {team_name}
+
+            # Create a Team #
+            {NOTE} By creating a Team you will automatically be promoted to Team Captain
+            Input unique name:
+            {Maybe} URL / HOMEPAGE:
+            {Maybe} ASCII ART:
+            --> List All clubs
+            Join a club: 
+
+    # Register #
+    Enter Name: any name
+    Date of Birth: YYYY-MM-DD
+    Home Address: address number
+    Phone Number: 0000000
+    Handle: unique_handle
+    c Continue
+    b Back
+
+        # Continue #
+        ->->->-> Directs the User to the ## Player Page
+
+    # Spectate Page #
+    1 Game Schedule
+    2 Clubs
+    3 Teams
+    4 History of tournaments
+    b Back
+
+        # Game Schedule #
+        -----------------------------
+        Tournament name
+        -----------------------------
+        Date: Start - End, Venue
+        -----------------------------
+        Number of Teams, ?Number of Rounds?
+        -----------------------------
+        !! NO IDEA IMPLEMENTED !!
+
+        # Clubs #
+        --> list of all clubs or the search feature
+
+        # Teams #
+        1 See all teams
+        2 Search for specific teams
+
+            # See all teams #
+            --> List of all TEAMS
+
+            # Search for specific teams #
+            Enter a TEAMS name or the first letter(s) to search or q to quit:
+            --> LIST OF TEAMS
+
+        # History of tournaments #
+        --> some kind of list of all tournaments
+        !! NO IDEA IMPLEMENTED !!
