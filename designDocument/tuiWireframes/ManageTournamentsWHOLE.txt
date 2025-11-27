@@ -1,0 +1,77 @@
+--> list of all tournaments
+Choose tournament to manage or type q to quit:
+
+# Manage Tournament (Un-Active) #
+1 Manage Teams
+2 Edit Info
+3 Publish 
+5 Edit Tournament
+b Back
+
+    # Manage Teams #
+    1 Add team
+    2 Remove Team
+    b Back
+
+        # Add team #
+        Enter Team name or l for the list of all team or q to quit: abcd
+        --> abcd was found, do you want to continue?
+        Y Yes
+        N No
+
+        # Remove a Team #
+        Enter Team name or l for the list of all teams in the tournament or q to quit: abcd
+
+        --> abcd was found, do you want to continue?
+        Y Yes
+        N No
+
+    # Edit Info #
+    new Name:
+    new Venue: 
+    Email:
+    PhoneNumber: 
+
+    # Publish #
+    --> The list of available tournaments
+    What tournament do you want to publish?: 
+    --> you choose: this tournament
+    --> do you want to continue?
+    Y Yes
+    N No
+
+    # Edit Tournament #
+    --> LIST OF ALL TOURNAMENTS ---
+    Choose tournament: this_tournament
+    --> this_tournament
+    1 Add Teams
+    2 Remove Teams
+    3 Edit time Date
+    4 Edit Info
+    b Back
+
+        # Edit Date
+        --> old date: 2025-09-11 -> 2025-12-24
+        new start date:
+        new end date:
+
+        --> The new date is: something -> something
+        --> Do you want to continue?
+        Y Yes
+        N No
+
+# Manage Tournaments (Active) #
+
+1 Input Results of Match
+2 Next Round
+3 Cancel Tournament
+b Back
+
+    # Input Results of Match #
+    !! NO IDEA IMPLEMENTED !!
+
+    # Next Round #
+    !! NO IDEA IMPLEMENTED !!
+
+    # Cancel Tournament #
+    !! C REQUIREMENT !!

@@ -1,3 +1,4 @@
-1 Manage Tournaments
-2 Manage Clubs
+1 Create Tournament
+2 Manage Tournaments
+3 Create Club
 b Back

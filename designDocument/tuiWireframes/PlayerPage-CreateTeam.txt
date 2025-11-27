@@ -1,0 +1,8 @@
+{NOTE} By creating a Team you will automatically be promoted to Team Captain
+
+Input unique name:
+{Maybe} URL / HOMEPAGE:
+{Maybe} ASCII ART:
+
+--> List All clubs
+Join a club: 

@@ -5,8 +5,7 @@
 q Quit
 
     # Login #
-    Input your handle: 
-    b Back
+    Input your handle or b to go back: 
 
         # Admin Page # 
         1 Create Tournament
@@ -31,7 +30,7 @@ q Quit
             1 Manage Teams
             2 Edit Info
             3 Publish 
-            5 Edit Tournament
+            4 Edit Tournament
             b Back
 
                 # Manage Teams #
@@ -70,8 +69,6 @@ q Quit
                 --> LIST OF ALL TOURNAMENTS ---
                 Choose tournament: this_tournament
                 --> this_tournament
-                1 Add Teams
-                2 Remove Teams
                 3 Edit time Date
                 4 Edit Info
                 b Back

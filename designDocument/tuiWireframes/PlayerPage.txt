@@ -1,0 +1,20 @@
+--> Name: some name
+--> Date of Birth: 
+--> Home Address:
+--> Phone Number:
+--> ------Non editable----
+-x-> Team: team name 
+-x-> Club: club name
+-x-> Handle: unique handle
+-x-> IS team captain Bool
+--> ------------STATS--------------
+-x-> Wins:
+-x-> Points:
+-x-> Teams Played For: [list of teams?]
+-x-> Tournaments Played: [List of tournaments]
+
+
+1 Edit Info
+2 My Team
+3 Create a Team
+b Back
