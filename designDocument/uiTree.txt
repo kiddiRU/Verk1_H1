@@ -29,7 +29,6 @@ q Quit
 
             # Manage Tournament (Un-Active) #
             1 Manage Teams
-            2 Edit Info
             3 Publish 
             5 Edit Tournament
             b Back
@@ -52,12 +51,6 @@ q Quit
                     Y Yes
                     N No
 
-                # Edit Info #
-                new Name:
-                new Venue: 
-                Email:
-                PhoneNumber: 
-
                 # Publish #
                 --> The list of available tournaments
                 What tournament do you want to publish?: 
@@ -70,8 +63,6 @@ q Quit
                 --> LIST OF ALL TOURNAMENTS ---
                 Choose tournament: this_tournament
                 --> this_tournament
-                1 Add Teams
-                2 Remove Teams
                 3 Edit time Date
                 4 Edit Info
                 b Back
@@ -85,6 +76,12 @@ q Quit
                     --> Do you want to continue?
                     Y Yes
                     N No
+
+                    # Edit Info #
+                    new Name:
+                    new Venue: 
+                    Email:
+                    PhoneNumber: 
 
             # Manage Tournaments (Active) #
 
