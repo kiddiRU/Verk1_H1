@@ -1,4 +1,5 @@
 ## Tasks for happy paths and lowfi prototypes:
+- Involves pretty much everything covered in the A requirements
 
 ### Player / Captain
 1. Create a account for a player named Miss Piggy, nickname: BaconBits, date of birth: june 14th 1938, email: mspiggy@gmail.com
