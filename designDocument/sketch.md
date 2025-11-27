@@ -371,9 +371,22 @@ Date: Start - End, Venue
 Number of Teams, ?Number of Rounds?
 "-----------------------------
 
+### Clubs
+--> list of all clubs or the search feature
 
+### Teams
+1 See all teams
+2 Search for specific teams
 
+#### See all teams
+--> List of all TEAMS
 
+#### Search for specific teams
+Enter a TEAMS name or the first letter(s) to search or q to quit:
+--> LIST OF TEAMS
+
+### History of tournaments
+--> some kind of list of all tournaments
 
 # EXTRA NOTES:
 ### Players / Teams
