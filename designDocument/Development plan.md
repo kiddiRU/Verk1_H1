@@ -30,11 +30,11 @@ Tournament CRUD
 - start_tournament
   - change status published to active
 - add_match_to_tournament
-  - add matchs to rounds
+  - add matches to rounds
 - archive_tournament
   - change status active to archive
 - read_all_tournaments
 - read_unpublished_tournament
 - read_published_tournament
 - read_active_tournament
-- read_archived_touranment
+- read_archived_tournaments
