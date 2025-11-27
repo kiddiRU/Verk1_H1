@@ -13,15 +13,15 @@
 ### On site: Yes
 
 ## Kristinn Hrafn
-### Time: 8:30
+### Time: 8:30 - 16:40
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time: 9:30
+### Time: 9:30 - 16:40
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 8:30
+### Time: 8:30 - 16:40
 ### On site: Yes
 
 # Morning meeting (Briefing)
@@ -58,14 +58,20 @@ The groups feels comfortable and has a good vibe. No problems have been noted.
 - It was decided that the point system would work on win streaks, because it could work better with odd number matches.
 - Issue brought up with id in tournaments. If tournament use their names as an id, it could cause problems if they could change their names. 
 - It was decided to use UUID for files, because it did not need to be changed.
-
+- DataLayer handels reading files and coverting them to usable model classes.
 ## State of group: 
 - Not available on Friday: Andir, Kristinn
 - Sindri felt like he could do more
 - There was a discusion today about how the point system would work, Kristinn thought about Mario kart rules, then Andri brought swimming competition rules, but all options where not made with knock out tournaments in mind. The group decided to use a win-streak point system, which could work with odd-numbered tournaments. 
 
 ## Divisions:
-- UI / UX:
-- System engineer: 
-- QC: 
+- UI / UX: Andri, Elmar
+- System engineer: Ísak, kristján
+- QC: Sindri, Kristinn
 ## ToDo-list:
+- 3-tier
+- Work on latex design doc
+- State diagrams
+- Happy path
+- Class Diagram
+- Design schedule layout 
