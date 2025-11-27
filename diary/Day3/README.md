@@ -9,7 +9,7 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 8:50
+### Time: 8:50 - 17:30
 ### On site: Yes
 
 ## Kristinn Hrafn
@@ -38,7 +38,7 @@ Decided to split ourselves in more specialized divisions; UI / UX (TUI), System 
 - QC: Sindri, Kristinn, Andri
 ## ToDo-list:
 - Ísak  and Kristján- functionality of classes
-- Andir - finish github desktop guide 
+- Andri - finish github desktop guide 
 - Elmar - Work on TUI
 - Kristinn - converting design doc from Markdown to Latex
 - Sindri - Quality control and work on diary
@@ -59,7 +59,7 @@ Decided to split ourselves in more specialized divisions; UI / UX (TUI), System 
 - Worked on class diagram
 - Major work on model classes
 - Began work on 3-tier design
-- Happy tree almost compleated
+- Happy tree almost completed
 
 ## State of group: 
 - We asked TA if publishing is permissible, they answered that it was permissible and pointed out that the Organizer should be able to change the name of a published tournament. This sparked a debate about changing unique names of players or teams. It was decided to allow changing unique names if the name was not in the system.
