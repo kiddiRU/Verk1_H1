@@ -13,8 +13,49 @@
 -x-> Teams Played For: [list of teams?]
 -x-> Tournaments Played: [List of tournaments]
 
-
 1 Edit Info
 2 My Team
 3 Create a Team
 b Back
+
+
+
+Player Handle
+—————————————————————————————————————————————————————————————
+
+Current Team: ~~~~~~~~~~~~	Current Club: ~~~~~~~~~~~~
+
+
+-----Statistics------
+
+Total Wins: XXX
+Total Ernings: XXX
+
+
+Tournaments		Result
+---------------------------------------
+~~~~~~~~~~~~		Won
+~~~~~~~~~~~~		Lost
+~~~~~~~~~~~~		Lost
+~~~~~~~~~~~~		Won
+~~~~~~~~~~~~		Lost
+~~~~~~~~~~~~		Won
+
+
+Past Teams		Clubs
+---------------------------------------
+~~~~~~~~~~~~		~~~~~~~~~~~~ (Vandamál ef lið breytir um club)
+~~~~~~~~~~~~		~~~~~~~~~~~~ 
+~~~~~~~~~~~~		~~~~~~~~~~~~
+
+
+—————————————————————————————————————————————————————————————
+
+1. Players Team (optional addition)
+2. Players Club (optional addition)
+B: Back
+
+—————————————————————————————————————————————————————————————
+
+Choose action
+
