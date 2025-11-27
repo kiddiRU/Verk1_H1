@@ -55,9 +55,17 @@
 <img src="happy_path_images/path_4.4.6.jpg">
 
 
-## Happy Path 5 "Now you want to start the tournament, add the team TheMuppets and the team DocHopper to the tournament"
+## Happy Path 5 "Now you want to start the tournament, but you first have to add the TheMuppets team and the DocHopper team to the tournament"
 
-
+<img src="happy_path_images/path_5.1.jpg">
+<img src="happy_path_images/path_5.2.jpg">
+<img src="happy_path_images/path_5.3.jpg">
+<img src="happy_path_images/path_5.4.jpg">
+<img src="happy_path_images/path_5.5.jpg">
+<img src="happy_path_images/path_5.6.1.jpg">
+<img src="happy_path_images/path_5.6.2.jpg">
+<img src="happy_path_images/path_5.7.1.jpg">
+<img src="happy_path_images/path_5.7.2.jpg">
 
 
 ## Happy Path 6 "Now that all the rounds have finished exept for the last round of the tournament, you want to input the results that TheMuppets won the tournament"
