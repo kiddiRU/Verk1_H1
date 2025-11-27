@@ -98,6 +98,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Tournaments can have 16 or more teams
 ### C
 - The Club Name will be printed in its color
+- Show tournaments brackets visually 
 
 # Use cases for requirements
 
