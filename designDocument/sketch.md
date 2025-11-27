@@ -50,10 +50,10 @@ Organizer/Admin > Team Captains > Players > Spectators
 # Prioritized Requirements
 ## Functional
 ### A
-- The User can login as Admin / Organizer
+- The User can login as Organizer / Admin
 - The User can register themselves as a player
 - The User can login as a player 
-- To be a spectator the user does not need to sign into anything
+- Spectator does not need to sign in
 - Organizer can create a tournament
 - Organizer can add and kick teams for the tournament before the start
 - Organizer can start a tournament
@@ -62,46 +62,42 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Player becomes a team captain when team is created
 - Team captain can leave the team
 - When team captain leaves a team he assigns a team member to be the new team captain
-- When team captain leaves a team if he was alone then the team is archived
 - Team captain can modify players in team (add / remove)
-- Each Player is in 1 team
-- Tournaments automatically archive after they play out
 - Anyone can see matches and tournaments
 - Anyone can see match schedule
 - Anyone can see teams
 ### B
-- Clubs
 - Organizer can create clubs
 - Organizer can edit clubs
-- When a team is created it is assigned to a club
+- When creating a team the player assigns the team to a club
 - Anyone can see clubs
 - Organizer can modify the time of a tournament before it has started
-- Organizer can cancel a tournament
-- Switch captain
-- Players can be in more than 1 team
-- Player handle should be the length of 3-12
+- Organizer can delete a tournament before it has been published
+- When Organizer creates a tournament he has to choose between double elimination and normal
 ### C
-- Edit archive (like removing invalid tournaments)
-- Change team name
 - Team captain can transfer his authority to a player in team
 - Teams can switch from clubs
-- Need password to login
-- The Club Name will be printed in its color
-- 
+- Organizer can cancel a tournament
 
 ## NON-Functional
 ### A
-- Menus should have a "back" option when appropriate
+- Tournaments automatically archive after they play out
+- When team captain leaves a team if he was alone then the team is archived
+- Each Player is in 1 team
 - The system should not crash due to invalid data
 - The players personal data should not be visible to the spectator
 - Only the team captain can modify the team
 - Only the organizer can create tournaments
 - Code must follow Python type_hinting everywhere
 - Code must follow the snake casing naming convention
+- Player handle should be the length of 3-12
+- Tournaments have 16 teams
 ### B
 - Only the organizer can modify clubs
+- Give users options to cancel 
+- Tournaments can have 16 or more teams
 ### C
-
+- The Club Name will be printed in its color
 
 # Use cases for requirements
 
@@ -123,12 +119,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Tournaments played
 - Apart of clubs
 - is_team_captain
-+ create_team()
 
 ### Team
 - List of Players 3 <= list <= 5
 - Name: Unique
-- Captain: Player handle
+- CaptaiN Player handle
 - Optional = url homepage, ascii art
 - Win counter
 - points (for Playing / winning?)
@@ -146,11 +141,6 @@ The Club file should have **Empty Club / NO Club** hardcoded into the text file 
 
 Club -> Team -> Player
 
-### Competition
-- Venues (location)
-- Time: begin - end
-- Teams
-
 ### Tournament
 - Receives info from organizers
 - Date: start date - end date
@@ -159,6 +149,7 @@ Club -> Team -> Player
 - Venue (location)
 - Registered contact person (With e-mail and phone number) 
 - Is active
+- IS over
 - Teams playing
 
 ### Matches
@@ -170,7 +161,7 @@ Club -> Team -> Player
 
 
 # State diagrams
-
+SEMI OPTIONAL
 
 # User group analysis
 
@@ -181,30 +172,35 @@ Club -> Team -> Player
 1 Login
 2 Register
 3 Spectate
-
 q Quit
 
 ## Login
 Input your handle: 
-
 b Back
 
 ## Admin Page
 1 Manage Tournaments
 2 Manage Clubs
-
 b Back
-
-### Manage Clubs
-1 Create Club
-2 See Clubs
 
 ### Manage Tournaments
-1 Create Tournament
-2 Edit a Tournament
-3 See Tournaments
 
+!! NEED TO ADD THE ACTUAL CONTROL OF THE GAME !!
+
+1 Publish 
+2 Create Tournament
+3 Edit Tournaments
 b Back
+
+#### Publish
+--> The list of available tournaments
+
+What tournament do you want to publish?: 
+
+--> you choose: this tournament
+--> do you want to continue?
+Y Yes
+N No
 
 #### Create Tournament
 Name: unique name 
@@ -214,30 +210,138 @@ End Date:  YYYY-MM-DD
 Email: something@something.something
 Phone Number: 0000000
 
-b Back
+--> You have created a Tournament
 
-#### Edit Tournament
-LIST OF TOURNAMENTS ---
+#### Edit Tournaments
+--> LIST OF ALL TOURNAMENTS ---
 Choose tournament: this_tournament
 
-this tournament
+this_tournament
 1 Add Teams
 2 Remove Teams
-3 Edit time
-
+3 Edit time of Date
 b Back
 
-### Create a Club
-Name: Unique name
-Color: 
+##### Add a Teams
+Enter Team name or l for the list of all team or q to quit: abcd
 
+--> abcd was found, do you want to continue?
+Y Yes
+N No
+
+##### Remove a Team
+Enter Team name or l for the list of all teams in the tournament or q to quit: abcd
+
+--> abcd was found, do you want to continue?
+Y Yes
+N No
+
+##### Edit Time of Date
+--> old date: 2025-09-11 -> 2025-12-24
+new start date:
+new end date:
+
+--> The new date is: something -> something
+--> Do you want to continue?
+Y Yes
+N No
+
+### Manage Clubs
+1 Create Club
+2 See Clubs
+b Back
+
+#### Create a Club
+Name: Unique name
+Color: some color
+
+--> You have created a Club
+
+#### See Club
+--> list out all clubs
 
 ## Player Page
-1 Edit Self
-2 See Team
-3 Create a Team
+--> Name: some name
+--> Date of Birth: 
+--> Home Address:
+--> Phone Number:
+--> ------Non editable----
+-x-> Team: team name 
+-x-> Club: club name
+-x-> Handle: unique handle
+-x-> IS team captaiN Bool
+--> ------------STATS--------------
+-x-> Wins:
+-x-> Points:
+-x-> Teams Played For: [list of teams?]
+-x-> Tournaments Played: [List of tournaments]
 
+1 Edit Self
+2 My Team
+3 Create a Team
 b Back
+
+### Edit Self
+--> Leave empty to keep old settings
+Name: 
+Date of Birth: 
+Home Address: 
+Phone Number: 
+
+--> Do you want to continue?
+Y Yes
+N No
+
+### My Team 
+{NOTE} If team is empty it should let the user know
+{NOTE} If the player is not the captain it should just list the team and have button 2 and b
+
+--> Team: Team name
+
+--> C - captains name
+--> some name
+--> some name
+--> some name
+
+1 Edit Team
+2 Leave Team
+b Back
+
+#### Edit Team
+1 Add Player
+2 Remove Player
+b Back
+
+##### Add Player
+{NOTE} if the player is already in a team it should show that
+
+Enter a player name or the first letter(s) to search or q to quit: some player handle
+
+--> some player handle is available
+--> Do you want to add them to your team?
+Y Yes
+N No
+
+##### Remove Player
+--> List of player in the team
+Input player to remove or q to quit: 
+
+#### Leave Team
+{NOTE} IF Team Captain and there are still player in the team then promote new team captain
+{NOTE} If Team Captain and he was last in the team then archive the team
+
+--> You have successfully leaved {team_name}
+
+### Create a Team
+{NOTE} By creating a Team you will automatically be promoted to Team Captain
+
+Input unique name:
+{Maybe} URL / HOMEPAGE:
+{Maybe} ASCII ART:
+
+--> List All clubs
+Join a club: 
+
 
 ## Register
 Enter Name: any name
@@ -245,17 +349,31 @@ Date of Birth: YYYY-MM-DD
 Home Address: address number
 Phone Number: 0000000
 Handle: unique_handle
-
 c Continue
 b Back
+
+### Continue
+->->->-> Directs the User to the ## Player Page
 
 ## Spectate Page
 1 Game Schedule
 2 Clubs
 3 Teams
-4 History of matches
-
+4 History of tournaments
 b Back
+
+### Game Schedule
+"-----------------------------
+Tournament name
+"-----------------------------
+Date: Start - End, Venue
+"-----------------------------
+Number of Teams, ?Number of Rounds?
+"-----------------------------
+
+
+
+
 
 # EXTRA NOTES:
 ### Players / Teams
@@ -267,7 +385,7 @@ b Back
 - When taking input we will have a validator in the logic layer that returns whether it is valid or not
 - Valid player handle: Just about the length (3-12) NEED TO HAVE **ADMIN** in the handle file
 - Date stored YYYY-MM-DD
-  - Validation:
+  - ValidatioN
     - All need to be numbers that are not the "-"
     - Year: 
     - Month: 01 <= month <= 12
@@ -276,8 +394,8 @@ b Back
 - At least 16 teams in a tournament
 - Teams cannot Play in multiple matches at the same time
 - The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back ... something like that (can also have some commands)
-- 
-#
+- Everyone should be able to see all active Teams (in an active tournament) 
+##
 ### Archive = Split into Tournament and Team
 #### Tournament Archive
 - When the tournament is over then it is archived 
@@ -286,19 +404,22 @@ b Back
 - The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
 - Stores empty teams and their scores (Should be able to view it)
 
-#
+##
+### Publish Tournament
+When Managing the tournaments the Organizer has the option of publishing a tournament and by pressing that option he will get a list of available tournaments (AKA: Tournaments that have 16 or more teams and tournaments that aren't already published). Then he will input what tournament he wants to publish and that tournament 
+
+##
 ### Search Bar
 #### Example: Searching for available players for teams
 - Can input the name of a player directly
 - IF unsure about the player options then should be able to list every name or...
 - The ability to search the for the first letters to narrow down the list
 
-#
+##
 ### Schedule
 - Stored in file
-- 
 
-#
+##
 ### Logic to use for multiple instances
 Selecting a date
 - Date of birth (Player)
@@ -313,3 +434,20 @@ Email and PhoneNr
 - PhoneNr (Player)
 - Contact email (Tournament)
 - Contact PhoneNr (Tournament)
+
+##
+### Response to an error message or confirm message
+
+#### Add a Teams
+Enter Team name or l for the list of all team or q to quit: abcd
+
+--> abcd was found are you sure you want to continue
+Y Yes
+N No
+
+#### Remove a Team
+Enter Team name or l for the list of all teams in the tournament or q to quit:
+
+--> abcd is not apart of the tournament, do you want to continue
+Y Yes
+N No

@@ -3,14 +3,341 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+\usepackage{geometry}
+\geometry{legalpaper, portrait, margin=0.5cm}
+
+\usepackage{multicol}
 
 \title{Design Document}
 \author{Group 1}
-\date{\today}
 
 \begin{document}
+\begin{multicols}{2}
+\begin{center}
 
-\section{P1}
-The quick brown fox jumped over the lazy dog. No elmar here.
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{User logs in as organizer} \\
+  \hline
 
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      &  \\
+  Base flow         & 3. User logs in. \\
+                    & 4. Inputs details for the organizer. \\
+                    & \quad \textbullet{ Organizer username. } \\
+  Alternative flow  & \\
+  Post condition    & User is now an Organizer and can create and manage tournaments. \\
+  Actors            & User/Organizer \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{User registers as player} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      &  \\
+  Base flow         & 6. User selects Sign up. \\
+                    & 7. User inputs his information. \\
+                    & \quad \textbullet { Full name } \\
+                    & \quad \textbullet { Date of birth} \\
+                    & \quad \textbullet { Address } \\
+                    & \quad \textbullet { Phone } \\
+                    & \quad \textbullet { Email } \\
+                    & \quad \textbullet { Link } \\
+                    & \quad \textbullet { Handle } \\
+                    & 8. User is now registered as a player. \\
+                    & 9. User is now logged in \\
+  Alternative flow  & \textbullet { User tries to sign up with an existing account. User needs to login to his account. See use case(A player logs in) } \\
+  Post condition    & User is now a player and cannot be registered as a player again. \\
+  Actors            & User becomes a player. \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{A player logs in} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      &  \\
+  Base flow         & 1. A player logs in. \\
+                    & 2. Player inputs his handle. \\
+                    & 3. Player is now logged in. \\
+  Alternative flow  & \textbullet { User doesn't have a player account. User needs to sign up as a player. Use case (User registers as player) } \\
+  Post condition    & The player is now logged in and can access what the players can access. \\
+  Actors            & Player \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{User enters a spectator} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      &  \\
+  Base flow         & 1. The user selects the Spectator option. \\
+                    & 2. Now the user is a spectator. \\
+  Alternative flow  & \\
+  Post condition    & The user is now a spectator and can view details from the tournament (schedule, match results, clubs, teams and players). \\
+  Actors            & User \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer can create a tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & Logged in as organizer, use case(x) \\
+  Base flow         & 4. Admin selects Create Tournament. \\
+                    & 5. Admin inputs information. \\
+                    & \quad \textbullet { Start date } \\
+                    & \quad \textbullet { End date} \\
+                    & \quad \textbullet { Unique name } \\
+                    & \quad \textbullet { Venue } \\
+                    & \quad \textbullet { Contact email } \\
+                    & \quad \textbullet { Contact number } \\
+                    & 6. Admin has created a tournament. \\
+  Alternative flow  & \\
+  Post condition    & Admin has now access to a new unique tournament. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer adds team to tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & Organizer has already created a tournament. \\
+  Base flow         & 1. Organizer selects tournament. \\
+                    & 2. Organizer selects view teams. \\
+                    & 3. Organizer selects add team. \\
+                    & 4. Organizer inputs team name. \\
+  Alternative flow  & \textbullet { No team has been made, a player needs to make a team, use case(x). } \\
+                    & \textbullet { The team doesn't have enough players, the team captain needs to add players to his team, use case(x). } \\
+  Post condition    & That team is now apart of the tournament. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer removes team from a tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & A team has been added to the tournament. \\
+  Base flow         & 1. Organizer selects tournament. \\
+                    & 2. Organizer selects view team. \\
+                    & 3. Organizer selects remove team. \\
+                    & 4. Organizer inputs team name. \\
+  Alternative flow  & \\
+  Post condition    & That team is no longer apart of the tournament. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer starts a tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & The tournament needs to have enough teams. \\
+  Base flow         & 1. Admin selects a tournament. \\
+                    & 2. Admin selects Start tournament. \\
+  Alternative flow  & \textbullet { Tournament doesn't have enought teams in it, organizer needs to add teams to tournament, use case(x). } \\
+  Post condition    & \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer inputs result of a match.} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & A tournament has to have been created and a match has to be completed. \\
+  Base flow         & 1. Admin selects input results. \\
+                    & 2. Admin selects match to input results. \\
+                    & 3. Admin inputs result of match. \\
+  Alternative flow  & \\
+  Post condition    & Results of a specific match have been made so the winner of that match goes to the next round. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Player creates a team} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & Player needs to be logged in. \\
+  Base flow         & 1. Player selects create team. \\
+                    & 2. Player inputs team information. \\
+                    & \quad \textbullet { Team name } \\
+                    & \quad \textbullet { Club } \\
+                    & 3. Player is now team captain of the newly created team. \\
+  Alternative flow  & \textbullet { Player is already apart of a team, player needs to leave team, use case(x). } \\
+  Post condition    & Player is now apart of a team and a team captain. \\
+  Actors            & Player \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Team captain adds a player to his team} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & Player must have created a team, use case(x). \\
+  Base flow         & 1. Captain selects view team. \\
+                    & 2. Captain selects Add player to team. \\
+                    & 3. Captain inputs Player handle. \\
+                    & 4. That player is now apart of a team. \\
+  Alternative flow  & \textbullet { A player is already in another team. That player needs to leave his team, see case (XXX),
+                                    then the Captain can add that player to his team. } \\
+  Post condition    & Team captain has now added a player to his team. \\
+  Actors            & Team captain, player \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Team captain removes player from his team.} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & \\
+  Base flow         & 1. Captain selects view team. \\
+                    & 2. Captain selects remove player. \\
+                    & 3. Captain inputes player handle. \\
+                    & 4. Player has been removed from the team. \\
+  Alternative flow  & \textbullet { That player removes himself from the team, use case(x). \\
+  Post condition    & Team no longer has That Player in their team \\
+  Actors            & Team captain, player \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Player leaves his team} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          &  \\
+  Precondition      & \\
+  Base flow         & \\
+  Alternative flow  & \\
+  Post condition    & \\
+  Actors            & \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Title} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & \\
+  Base flow         & \\
+  Alternative flow  & \\
+  Post condition    & \\
+  Actors            & \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Title} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & \\
+  Base flow         & \\
+  Alternative flow  & \\
+  Post condition    & \\
+  Actors            & \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Title} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & \\
+  Base flow         & \\
+  Alternative flow  & \\
+  Post condition    & \\
+  Actors            & \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Title} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & \\
+  Base flow         & \\
+  Alternative flow  & \\
+  Post condition    & \\
+  Actors            & \\
+
+  \hline
+\end{tabular}
+
+\end{center}
+\end{multicols}
 \end{document}
