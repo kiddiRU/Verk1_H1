@@ -15,7 +15,10 @@
 
 ## Happy Path 1 "You want to create a account for a player named Miss Piggy, nickname: BaconBits, date of birth: june 14th 1938, email: mspiggy@gmail.com"
 
+- User starts the program and chooses option "2" to register themselfs as a new user
 <img src="happy_path_images/path_1.1.jpg">
+
+- User inputs all necessary infromation they are prompted to give
 <img src="happy_path_images/path_1.2.1.jpg">
 <img src="happy_path_images/path_1.2.2.jpg">
 <img src="happy_path_images/path_1.2.3.jpg">
@@ -23,23 +26,36 @@
 <img src="happy_path_images/path_1.2.5.jpg">
 <img src="happy_path_images/path_1.2.6.jpg">
 
+- User is taken to their player menu where they can see their information
+<img src="happy_path_images/path_1.3.jpg">
+
 
 ## Happy Path 2 "Now that you are a player, you want to create a team named TheMuppets in the club Disney and add a player named GreenCroaker"
 
+- User starts the program and chooses option "1" to log in
 <img src="happy_path_images/path_2.1.jpg">
+
+- User inputs their user handle
 <img src="happy_path_images/path_2.2.jpg">
+
+- User is taken to their player menu where they can see their information and chooses option 3 to create a new team
 <img src="happy_path_images/path_2.3.jpg">
+
+- User is made aware that they will be made captain of the team they are creating and choose "c" to continue 
 <img src="happy_path_images/path_2.4.jpg">
+
+- User is prompted to give information and inputs "TheMuppets" as a name and leaves the rest blank since it is not needed
+- User then gets a list of all available clubs and chooses the "Disney" club to join it
 <img src="happy_path_images/path_2.5.jpg">
 
 
 ## Happy Path 3 "You want to leave your team and select the GreenCroaker as the new captain"
 
-<img src="happy_path_images/path_3.1.jpg">
-<img src="happy_path_images/path_3.2.jpg">
-<img src="happy_path_images/path_3.3.jpg">
+<img src="happy_path_images/path_3.1.jpeg"> 
+<img src="happy_path_images/path_3.2.jpeg">
+<img src="happy_path_images/path_3.3.jpeg">
 <img src="happy_path_images/path_3.4.jpg">
-<img src="happy_path_images/path_3.5.jpg">
+<img src="happy_path_images/path_3.5.jpeg">
 
 
 ## Happy Path 4 "You want to log in as an admin (the handle is just "admin") and create a tournament named MuppetsVsDocHopper that will take place in Sesame Street, it will start 27th of november 2025 and end the 29th of november 2025, the contact info is the gmail: something@something.com, and phone number: 1234567."
@@ -57,10 +73,10 @@
 
 ## Happy Path 5 "Now you want to start the tournament, but you first have to add the TheMuppets team and the DocHopper team to the tournament"
 
-<img src="happy_path_images/path_5.1.jpg">
-<img src="happy_path_images/path_5.2.jpg">
-<img src="happy_path_images/path_5.3.jpg">
-<img src="happy_path_images/path_5.4.jpg">
+<img src="happy_path_images/path_5.1.jpeg">
+<img src="happy_path_images/path_5.2.jpeg">
+<img src="happy_path_images/path_5.3.jpeg">
+<img src="happy_path_images/path_5.4.jpeg">
 <img src="happy_path_images/path_5.5.jpg">
 <img src="happy_path_images/path_5.6.1.jpg">
 <img src="happy_path_images/path_5.6.2.jpg">
@@ -70,12 +86,14 @@
 
 ## Happy Path 6 "Now that all the rounds have finished exept for the last round of the tournament, you want to input the results that TheMuppets won the tournament"
 
-
+- Not yet implemented
 
 
 ## Happy Path 7 "You want to log in as a spectator and go to view the results of the MuppetsVsDocHopper tournament"
 
-
+<img src="happy_path_images/path_7.1.jpg">
+<img src="happy_path_images/path_7.2.jpg">
+<img src="happy_path_images/path_7.3.jpg">
 
 
 ## Happy Path 8 "You want to see the information on TheMuppets team and see how many games they have won in the past"
