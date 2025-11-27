@@ -246,7 +246,7 @@
                     & 2. Captain selects remove player. \\
                     & 3. Captain inputes player handle. \\
                     & 4. Player has been removed from the team. \\
-  Alternative flow  & \textbullet { That player removes himself from the team, use case(x). \\
+  Alternative flow  & \textbullet { That player removes himself from the team, use case(x). } \\
   Post condition    & Team no longer has That Player in their team \\
   Actors            & Team captain, player \\
 
@@ -260,12 +260,14 @@
   \hline
 
   Number            & xxx \\
-  Priority          &  \\
-  Precondition      & \\
-  Base flow         & \\
-  Alternative flow  & \\
-  Post condition    & \\
-  Actors            & \\
+  Priority          & A \\
+  Precondition      & Player needs to be in a team. \\
+  Base flow         & 1. Player selects view team. \\
+                    & 2. Player selects leave team. \\
+                    & 3. Player confirms leave action. \\
+  Alternative flow  & \textbullet { Team captain removes player from team, use case(x). } \\
+  Post condition    & The player is no longer apart of a team and can now be added to new teams or create his own. \\
+  Actors            & Player \\
 
   \hline
 \end{tabular}
@@ -273,16 +275,21 @@
 
 \begin{tabular}{ | p{3cm} | p{6cm} | }
   \hline
-  \multicolumn{2}{|c|}{Title} \\
+  \multicolumn{2}{|c|}{Team captain leaving his team.} \\
   \hline
 
   Number            & xxx \\
   Priority          & A \\
-  Precondition      & \\
-  Base flow         & \\
-  Alternative flow  & \\
-  Post condition    & \\
-  Actors            & \\
+  Precondition      & Needs to be a team captain. \\
+  Base flow         & 1. Captain selects view team. \\
+                    & 2. Captain selects leave team. \\
+                    & 3. Player confirms leave action. \\
+                    & 4. Captain selects a player from the team to be the new team captain. \\
+                    & 5. The captain has left the team. \\
+  Alternative flow  & \textbullet { If the team the Captain is leaving has no other players the team is archived, but still has its statistics (wins, etc.) } \\
+  Post condition    & The Captain is no longer a part of the team and is now has the status of just Player (not in team), and the player he selected has
+                      the status team Captain of that team. \\
+  Actors            & Captain, player \\
 
   \hline
 \end{tabular}
@@ -290,16 +297,19 @@
 
 \begin{tabular}{ | p{3cm} | p{6cm} | }
   \hline
-  \multicolumn{2}{|c|}{Title} \\
+  \multicolumn{2}{|c|}{Any user can see tournaments} \\
   \hline
 
   Number            & xxx \\
   Priority          & A \\
   Precondition      & \\
-  Base flow         & \\
-  Alternative flow  & \\
-  Post condition    & \\
-  Actors            & \\
+  Base flow         & 1. User selects Tournaments. \\
+                    & 2. User selects which tournament. \\
+                    & 3. User is now viewing a specific tournament. \\
+  Alternative flow  & \textbullet { There are no tournaments available, the organizer needs to create a tournament, use case(x). } \\
+                    & \textbullet { A tournament has not started, so the organizer needs to start the tournaments, use case(x). } \\
+  Post condition    & User can now look through that tournament. \\
+  Actors            & Any user \\
 
   \hline
 \end{tabular}
@@ -307,16 +317,18 @@
 
 \begin{tabular}{ | p{3cm} | p{6cm} | }
   \hline
-  \multicolumn{2}{|c|}{Title} \\
+  \multicolumn{2}{|c|}{Any user can see tournament schedule} \\
   \hline
 
   Number            & xxx \\
   Priority          & A \\
   Precondition      & \\
-  Base flow         & \\
+  Base flow         & 1. User selects a tournament. \\
+                    & 2. User selects Schedule. \\
+                    & 3. User is new viewing the schedule of a tournament. \\
   Alternative flow  & \\
-  Post condition    & \\
-  Actors            & \\
+  Post condition    & User can view the schedule of the next round of the tournament (or whole tournament, date). \\
+  Actors            & Any user \\
 
   \hline
 \end{tabular}
@@ -324,19 +336,200 @@
 
 \begin{tabular}{ | p{3cm} | p{6cm} | }
   \hline
-  \multicolumn{2}{|c|}{Title} \\
+  \multicolumn{2}{|c|}{Any user can view teams} \\
   \hline
 
   Number            & xxx \\
   Priority          & A \\
   Precondition      & \\
-  Base flow         & \\
-  Alternative flow  & \\
-  Post condition    & \\
-  Actors            & \\
+  Base flow         & 1. User selects teams (from main menu). \\
+                    & 2. User is viewing a list of teams. \\
+  Alternative flow  & \textbullet { User can select a tournament see use case (XXX), and in that menu select teams and then the user is viewing only
+                                    the teams in that tournament. } \\
+  Post condition    & The user is viewing a list of teams that he can select from see that teams information (players, statistics). \\
+  Actors            & Any user \\
 
   \hline
 \end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Any user can view players} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & A \\
+  Precondition      & \\
+  Base flow         & 1. User selects players (from main menu). \\
+                    & 2. User is viewing a list of all registered players. \\
+  Alternative flow  & \textbullet { User can select a tournament see use case (XXX), and in that menu select players and then the user is viewing only
+                                    the players in that tournament. } \\
+                    & \textbullet { User selects a team, use case (XX), and from the team menu the user can view a list of that teams players. } \\
+  Post condition    & The user is viewing list of players that he can select from to see that players information (handle, statistics). \\
+  Actors            & Any user \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer can create clubs} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & B \\
+  Precondition      & \\
+  Base flow         & 3. Organizer selects View Clubs. \\
+                    & 4. Organizer selects add club. \\
+                    & 5. Organizer inputes information. \\
+                    & \quad \textbullet { Name } \\
+                    & \quad \textbullet { Club color } \\
+                    & \quad \textbullet { Country } \\
+  Alternative flow  & \\
+  Post condition    & Organizer has added a new club. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer can edit time frame of tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & B \\
+  Precondition      & Tournament has to be created and not started. \\
+  Base flow         & 4. Organizer selects Edit Time Frame. \\
+                    & 5. Organizer inputs new information. \\
+                    & \quad \textbullet { Start date } \\
+                    & \quad \textbullet { End date } \\
+  Alternative flow  & \\
+  Post condition    & The time frame has been updated. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Player edits their information.} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & B \\
+  Precondition      & \\
+  Base flow         & 1. Player selects Edit information. \\
+                    & 2. Player selects the information they want to edit. \\
+                    & \quad \textbullet { Email } \\
+                    & \quad \textbullet { Address } \\
+                    & \quad \textbullet { Link } \\
+                    & 3. Player has changed their information. \\
+  Alternative flow  & \\
+  Post condition    & Player has updated their information . \\
+  Actors            & Player \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Any user can view clubs} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & B \\
+  Precondition      & \\
+  Base flow         & 1. User selects clubs (from main menu) \\
+                    & 2. User is now viewing a list of clubs. \\
+  Alternative flow  & \\
+  Post condition    & User can view all the clubs created, and can select any club to see that clubs teams. \\
+  Actors            & Any user \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer can delete a tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & B \\
+  Precondition      & A tournament cannot be published. \\
+  Base flow         & 1. Organizer selects a tournament, use case(x) \\
+                    & 2. In the tournament menu, organizer selects Delete. \\
+                    & 3. Organizer confirms deletion. \\
+  Alternative flow  & \\
+  Post condition    & Now the tournament has been deleted and no records of it are left. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Organizer can cancel a tournament} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & C \\
+  Precondition      & A tournament has to have been published. \\
+  Base flow         & 1. Organizer selects a tournament. \\
+                    & 2. Organizer selects Cance tournament. \\
+                    & 3. Tournament is now canceled. \\
+  Alternative flow  & \\
+  Post condition    & The tournament is cancelled, all records are not kept, the statistics for the teams is reverted to the state before the tournament started. \\
+  Actors            & Organizer \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Team captain can edit team name} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & C \\
+  Precondition      & \\
+  Base flow         & 1. Captain is logged in. \\
+                    & 2. From View Team menu Captain selects Change Team Name. \\
+                    & 3. Captain inputs the new team name (has to be unique). \\
+  Alternative flow  & \\
+  Post condition    & Now that teams name has a new name, and new or other teams cannot use that name, but can use the previous team name. \\
+  Actors            & Team captain \\
+
+  \hline
+\end{tabular}
+
+
+\begin{tabular}{ | p{3cm} | p{6cm} | }
+  \hline
+  \multicolumn{2}{|c|}{Team captain can change the teams club} \\
+  \hline
+
+  Number            & xxx \\
+  Priority          & C \\
+  Precondition      & \\
+  Base flow         & 1. Team captain is logged in, and selects View Team. \\
+                    & 2. From View Team menu Captain selects Change Club. \\
+                    & 3. Captain has a list of the clubs and can select what his teams new club is. \\
+  Alternative flow  & \\
+  Post condition    & Now the Captains team is in a new club, so the team is listened in the their new club and no longer in the old club. \\
+  Actors            & Team captain \\
+
+  \hline
+\end{tabular}
+
 
 \end{center}
 \end{multicols}
