@@ -26,13 +26,20 @@
 
 # Morning meeting (Briefing)
 ## State of project: 
+Progress is steady and everybody is doing his part. 
 
 ## State of group: 
+The groups feels comfortable and has a good vibe. No problems have been noted.
+
+- Ísak: Working 3-tier design
+- Elmar and Andri: TUI
+- Kristinn: Forrmating design doc
+- Sindri: Designing development plan
 
 ## Divisions: 
-- UI / UX:
-- System engineer:
-- QC:
+- UI / UX: Andir, Elmar
+- System engineer: Ísak
+- QC: Sindri, Kristinn
 
 ## ToDo-list:
 
