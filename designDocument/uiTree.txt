@@ -5,8 +5,7 @@
 q Quit
 
     # Login #
-    Input your handle: 
-    b Back
+    Input your handle or b to go back: 
 
         # Admin Page # 
         1 Create Tournament
@@ -30,7 +29,7 @@ q Quit
             # Manage Tournament (Un-Active) #
             1 Manage Teams
             3 Publish 
-            5 Edit Tournament
+            4 Edit Tournament
             b Back
 
                 # Manage Teams #

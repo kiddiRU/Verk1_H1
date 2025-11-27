@@ -1,0 +1,10 @@
+Enter Name: any name
+    Date of Birth: YYYY-MM-DD
+    Home Address: address number
+    Phone Number: 0000000
+    Handle: unique_handle
+    c Continue
+    b Back
+
+        # Continue #
+        ->->->-> Directs the User to the ## Player Page

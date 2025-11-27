@@ -1,0 +1,6 @@
+Name: Unique name
+Color: some color
+
+--> You have created a Club
+
+!! NO COMPLETELY IMPLEMENTED I THINK !!
