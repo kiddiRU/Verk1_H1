@@ -17,8 +17,8 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
+### Time: 9:30
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:30
@@ -35,10 +35,11 @@ The groups feels comfortable and has a good vibe. No problems have been noted.
 - Elmar and Andri: TUI
 - Kristinn: Forrmating design doc
 - Sindri: Designing development plan
+- Kristján: UI flow
 
 ## Divisions: 
 - UI / UX: Andir, Elmar
-- System engineer: Ísak
+- System engineer: Ísak, Kristján
 - QC: Sindri, Kristinn
 
 ## ToDo-list:
