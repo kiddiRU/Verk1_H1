@@ -19,10 +19,22 @@ Tournament CRUD
   - phone_number
 - add_team_to_tournament
   - add team UUID to teams list
+- remove_team_from_tournament
+  - remove team UUID from teams list
 - publish_tournament
   - change status unpublished to published
 - update_published_tournament
   - tournament_name
   - email
   - phone_number
-- 
+- start_tournament
+  - change status published to active
+- add_match_to_tournament
+  - add matchs to rounds
+- archive_tournament
+  - change status active to archive
+- read_all_tournaments
+- read_unpublished_tournament
+- read_published_tournament
+- read_active_tournament
+- read_archived_touranment
