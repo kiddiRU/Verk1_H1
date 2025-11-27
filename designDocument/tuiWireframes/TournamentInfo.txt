@@ -1,0 +1,103 @@
+###A tournaments menu
+
+Tournament Name
+——————————————————————————
+
+Venue: ~~~~~~~~~~~~
+Date: XXXX/XX/XX - XXXX/XX/XX
+Rounds: XX
+
+——————————————————————————
+
+	Tournament Menu
+
+1. Schedule
+2. Matches
+4. 
+5.
+6. Contact info
+B: Back
+
+——————————————————————————
+
+Choose action:
+
+******************************************************************************
+
+
+###Tournaments schedule
+
+Tournament Name
+——————————————————————————
+
+Location: ~~~~~~~~~~~~
+Date: XXXX/XX/XX - XXXX/XX/XX
+Rounds: XX
+
+——————————————————————————
+
+	Schedule
+
+Round 1
+—————————————
+Match 1
+
+Team A VS Team B
+Results: Team A won
+
+-----------------
+
+Match 2
+
+Team A VS Team B
+Results: On going
+
+----------------
+——————————————————————————
+
+B:  Back
+
+——————————————————————————
+
+Choose action:
+
+************************************************************************
+
+###Tournaments Matches
+
+——————————————————————————
+
+	Past Matches
+
+Round 1
+—————————————
+Match 1
+
+Team A VS Team B
+Results: Team A won
+
+----------------
+
+Match 2
+
+Team A VS Team B
+Results: On going
+
+
+Round 2
+—————————————
+Match Final
+
+Team A VS Team B
+results Team A won
+
+——————————————————————————
+
+B: Back
+
+——————————————————————————
+
+Choose action: 
+
+
+
