@@ -92,6 +92,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Code must follow the snake casing naming convention
 - Player handle should be the length of 3-12
 - Tournaments have 16 teams
+- Tournaments generate UUID on creation
 ### B
 - Only the organizer can modify clubs
 - Give users options to cancel 
