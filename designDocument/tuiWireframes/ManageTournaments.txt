@@ -1,0 +1,19 @@
+--> list of all tournaments
+
+Choose tournament to manage or type new to create a new tournament:
+
+## Manage Tournaments (Un-Active)
+
+1 Manage Teams
+2 Edit Info
+3 Publish 
+4 Create Tournament
+5 Edit Tournaments
+b Back
+
+## Manage Tournaments (Active)
+
+1 Input Results of Match
+2 Next Round
+3 Cancel Tournament
+b Back

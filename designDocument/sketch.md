@@ -98,6 +98,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Tournaments can have 16 or more teams
 ### C
 - The Club Name will be printed in its color
+- Show tournaments brackets visually 
 
 # Use cases for requirements
 
@@ -269,7 +270,7 @@ Color: some color
 -x-> Team: team name 
 -x-> Club: club name
 -x-> Handle: unique handle
--x-> IS team captaiN Bool
+-x-> IS team captain Bool
 --> ------------STATS--------------
 -x-> Wins:
 -x-> Points:
@@ -371,9 +372,22 @@ Date: Start - End, Venue
 Number of Teams, ?Number of Rounds?
 "-----------------------------
 
+### Clubs
+--> list of all clubs or the search feature
 
+### Teams
+1 See all teams
+2 Search for specific teams
 
+#### See all teams
+--> List of all TEAMS
 
+#### Search for specific teams
+Enter a TEAMS name or the first letter(s) to search or q to quit:
+--> LIST OF TEAMS
+
+### History of tournaments
+--> some kind of list of all tournaments
 
 # EXTRA NOTES:
 ### Players / Teams
