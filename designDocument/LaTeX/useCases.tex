@@ -105,17 +105,17 @@
   Number            & 5 \\
   Priority          & A \\
   Precondition      & Logged in as organizer, use case(1) \\
-  Base flow         & 4. Admin selects Create Tournament. \\
-                    & 5. Admin inputs information. \\
+  Base flow         & 4. Organizer selects Create Tournament. \\
+                    & 5. Organizer inputs information. \\
                     & \quad \textbullet { Start date } \\
                     & \quad \textbullet { End date} \\
                     & \quad \textbullet { Unique name } \\
                     & \quad \textbullet { Venue } \\
                     & \quad \textbullet { Contact email } \\
                     & \quad \textbullet { Contact number } \\
-                    & 6. Admin has created a tournament. \\
+                    & 6. Organizer has created a tournament. \\
   Alternative flow  & \\
-  Post condition    & Admin has now access to a new unique tournament. \\
+  Post condition    & Organizer has now access to a new unique tournament. \\
   Actors            & Organizer \\
 
   \hline
@@ -168,8 +168,8 @@
   Number            & 8 \\
   Priority          & A \\
   Precondition      & The tournament needs to have enough teams. \\
-  Base flow         & 1. Admin selects a tournament. \\
-                    & 2. Admin selects Start tournament. \\
+  Base flow         & 1. Organizer selects a tournament. \\
+                    & 2. Organizer selects Start tournament. \\
   Alternative flow  & \textbullet { Tournament doesn't have enough teams in it, organizer needs to add teams to the tournament, use case(6). } \\
   Post condition    & \\
   Actors            & Organizer \\
@@ -185,9 +185,9 @@
   Number            & 9 \\
   Priority          & A \\
   Precondition      & A tournament has to have been created and a match has to be completed. \\
-  Base flow         & 1. Admin selects input results. \\
-                    & 2. Admin selects match to input results. \\
-                    & 3. Admin inputs result of match. \\
+  Base flow         & 1. Organizer selects input results. \\
+                    & 2. Organizer selects match to input results. \\
+                    & 3. Organizer inputs result of match. \\
   Alternative flow  & \\
   Post condition    & Results of a specific match have been made so the winner of that match goes to the next round. \\
   Actors            & Organizer \\
