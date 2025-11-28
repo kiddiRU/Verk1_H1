@@ -105,10 +105,10 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Show tournaments brackets visually 
 
 # Use cases for requirements
-
+...
 
 # Test requirements
-
+OPTIONAL BUT VERY IMPORTANT FOR GOOD UI
 
 # Class diagrams
 ## Model classes
