@@ -1,7 +1,7 @@
 ## Tasks
 
 ### Player / Captain
-1. You want to create a account for a player named Miss Piggy, nickname: BaconBits, date of birth: june 14th 1938, email: mspiggy@gmail.com
+1. You want to create a account for a player named Miss Piggy, handle: BaconBits, date of birth: june 14th 1938, home address: 44 Bronson Lane, phone_number: 1234567, email: mspiggy@gmail.com, socials: none.
 2. Now that you are a player, you want to create a team named TheMuppets in the club Disney
 3. Now that you have created a team you want to add another player called GreenCroaker to your team
 
