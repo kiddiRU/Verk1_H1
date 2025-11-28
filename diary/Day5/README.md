@@ -26,16 +26,20 @@
 
 # Morning meeting (Briefing)
 ## State of project: 
-
+Design phase is almost complete, the only critical tasks left are the class diagram and formatting the design sketch into a polished design document. 
 ## State of group: 
-
+Kristinn and Andri where not available, so they could not work today. The team on site expect to work until the desing document is delivered.
 ## Divisions: 
-- UI / UX:
-- System engineer:
-- QC:
+- UI / UX: Elmar
+- System engineer: Ísak, Kristján 
+- QC: Sindri
 
 ## ToDo-list:
-
+- Class diagram
+- Turning sketch to design doc
+- TUI
+- Happy path
+- Finish JSON data format
 # Evening meeting (Diary)
 ## State of project:
 
