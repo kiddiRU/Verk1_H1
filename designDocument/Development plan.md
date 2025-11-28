@@ -1,8 +1,8 @@
 # Project structure
 
-Project folder  
-Main.py  
-DataLayer folder
+## Project folder  
+## Main.py  
+### DataLayer folder
 - DataLayerAPI.py
 - Repository folder
   - Tournament.json
@@ -10,13 +10,13 @@ DataLayer folder
   - Club.json
   - Player.json
 
-LogicLayer folder
+### LogicLayer folder
 - LogicLayerAPI.py
 
-UILayer folder
+### UILayer folder
 - UILayerAPI.py
 
-Models folder  
+### Models folder 
 - ModelPlayer.py
 - ModelTeams.py
 - ModelClub.py
