@@ -1,7 +1,7 @@
 # Project structure
 
 ## Project folder  
-## Main.py  
+Main.py  
 ### DataLayer folder
 - DataLayerAPI.py
 - Repository folder
