@@ -1,7 +1,7 @@
 # Diary, 2025-11-28
 
 ## Andri Már
-### Time: 11:50
+### Time: 11:50 - 14:00
 ### On site: Remote
 
 ## Elmar
