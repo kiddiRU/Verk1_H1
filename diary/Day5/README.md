@@ -49,8 +49,10 @@ Kristinn and Andri where not available, so they could not work today. The team o
 - Finished draft of design doc
 
 ## State of group: 
-Were in disagreement over how the system should keep track of user path. Sindri proposed that a singular class should keep track of user path, but Elmar brought up the option of having individual classes handaling user path.  
-Ísak proposed the idea that the TUI should have "handle" as "username", becasue we dont know if the user knows what a "handle" is. 
+- Were in disagreement over how the system should keep track of user path. Sindri proposed that a singular class should keep track of user path, but Elmar brought up the option of having individual classes handaling user path.  
+- Ísak proposed the idea that the TUI should have "handle" as "username", becasue we dont know if the user knows what a "handle" is. 
+- We forgot about servers being a thing, servers host matches. 
+- TA will allow us to have the system to manage scheduling, but the organnizer should have option to edit schedule. Decided that it was a c-req
 ## Divisions:
 - UI / UX: Elmar
 - System engineer: Ísak, Kristján 
