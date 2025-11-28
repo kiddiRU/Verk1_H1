@@ -1,0 +1,458 @@
+
+@startuml
+
+interface StartPage{
+  1. Login
+  2. Register
+  3. Spectate
+  ---
+  q: Quit
+}
+
+interface Login{
+  Input your handle:
+  ---
+  b: Back
+}
+
+interface AdminPage {
+  1. Create Tournament
+  2. Manage Tournaments
+  2. Create Club
+  ---
+  b: Back
+}
+
+interface CreateTournament {
+  Name: <unique_name>
+  Venue: <some_location>
+  Start Date: <YYYY-MM-DD>
+  End Date: <YYYY-MM-DD>
+  Email: <some_email>
+  Phone Number: <phone_number>
+  
+  c: Continue
+  b: Back
+}
+
+interface ManageTournaments{
+  <LIST_OF_TOURNAMENTS>
+  ---
+  Choose a tournament to manage:
+  ---
+  b: Back
+}
+
+interface ManageUnactiveTournament{
+  1. Manage Teams
+  2. Publish
+  3. Edit Tournament
+  ---
+  b: Back
+}
+
+interface ManageTeams{
+  1. Add Team
+  2. Remove Team
+  ---
+  b: Back
+}
+
+interface AddTeam{
+  Enter Team name or 'l' to list all: <some_team>  
+  
+  <some_team> was found, do you want to continue? Y/N:
+  ---
+  b: Back
+}
+
+interface RemoveTeam{
+  Enter Team name or 'l' to list all: <some_team>  
+  
+  <some_team> was found, do you want to continue? Y/N:
+  ---
+  b: Back
+}
+
+interface Publish {
+  <LIST_OF_TOURNAMENTS>
+  ---
+  What tournament do you want to publish?: <some_tournament>
+  
+  <some_tournament> is selected, do you want do continue? Y/N:
+  ---
+  b: Back
+}
+
+interface EditTournament{
+  <LIST_OF_TOURNAMENTS>
+  --
+  Choose Tournament: <this_tournament>
+  
+  <this_tournament>
+  1. Edit Time/Date
+  2. Edit Info
+  ---
+  b: Back
+}
+
+interface EditTime{
+  Old date: 2025-09-11 -> 2025-12-24
+  
+  New start date: <some_date>
+  New end date: <some_other_date>
+  
+  The new date is: <some_date> -> <some_other_date>
+  
+  Do you want to continue? Y/N:
+  ---
+  b: Back
+}
+
+interface EditTournamentInfo{
+  Leave empty to keep old settings
+  ---
+  Name:
+  Venue:
+  Email:
+  Phone Number:
+  
+  Do you want to continue? Y/N:
+}
+
+interface ManageActiveTournament{
+  1. Input Results of Match
+  2. Next Round
+  3. Cancel Tournament
+  ---
+  b: Back
+}
+
+interface Matches{
+  <id> <match0>
+  <id> <match1>
+  <id> <match2>
+  ...
+  
+  Select match ID: <id>
+  ---
+  b: Back
+}
+
+interface MatchResults{
+  Match: <some_team> vs <other_team>
+  
+  Select team to advance: <other_team>
+  ---
+  b: Back
+}
+
+interface NextRound{
+  !! not implemented !!
+}
+
+interface CancelTournament{
+  !! not implemented !!
+}
+
+interface CreateClub{
+  Name: <unique_name>
+  Colour: <some_colour>
+  
+  You have created the club <unique_name>!
+  ---
+  b: Back
+}
+
+interface PlayerPage{
+  <personal_info>
+  
+  <player_info>
+  
+  <player_stats>
+  ---
+  1. Edit Info
+  2. My Team
+  3. Create a Team
+  ---
+  b: Back
+}
+
+interface EditPlayerInfo{
+  Leave empty to keep old settings
+  ---
+  Name:
+  Date of Birth:
+  Home Address:
+  Phone Number:
+  
+  Do you want to contiue? Y/N:
+}
+
+interface MyTeam_PlayerNotInTeam{
+  You are not in a team!
+  ---
+  b: Back
+}
+
+interface MyTeam_PlayerInTeam{
+  Team: <team_name>
+  
+  C - <captains_name>
+  <some_name>
+  <some_name
+  <some_name
+  ---
+  1. Edit Team
+  2. Leave Team
+  b: Back
+}
+
+interface EditTeam{
+  <team_overview>
+  ---
+  1. Add Player
+  2. Remove Player
+  b: Back 
+}
+
+interface AddPlayer{
+  Enter a players name or the first letter(s) to search:
+  
+  The handle <some_player> was found, do you want to add them to your team? Y/N:
+  ---
+  b: Back
+}
+
+interface RemovePlayer{
+  <LIST_OF_PLAYERS_IN_TEAM>
+  ---
+  Input player name to remove:
+  ---
+  b: Back
+}
+
+interface LeaveTeam_IfCaptain{
+  <LIST_OF_PLAYERS_IN_TEAM>
+  ---
+  Select a new captain: <some_player>
+  
+  You have succesfully left the team!
+  ---
+  b: Back
+}
+
+interface LeaveTeam_IfNotCaptain{
+  Are you sure? Y/N: Y
+  
+  You have succesfully left the team!
+}
+
+interface CreateTeam{
+  By creating a team you get assigned as the captain of it!
+  Team name: <unique_name>
+  URL: ?
+  ASCII: ?
+  
+  <LIST_OF_CLUBS>
+  
+  Join a club:
+  ---
+  b: Back
+}
+
+interface Register{
+  Enter Name: <name>
+  Date of Birth: <YYYY-MM-DD>
+  Home Address: <address>
+  Email: <email>
+  Phone Number: <phone_number>
+  Handle: <unique_handle>
+  ---
+  c: Continue
+  b: Back
+}
+
+interface SpectatePage{
+  1. Players
+  2. Clubs
+  3. Teams
+  4. Tournaments
+  ---
+  b: Back
+}
+
+interface Players{
+  <LIST_OF_PLAYERS>
+  ---
+  Enter a players name or the first letter(s) to search:
+  ---
+  b: Back
+}
+
+interface ViewPlayerStats{
+  <some_player>
+  
+  <some_stats>
+  ---
+  b: Back
+}
+
+interface Clubs{
+  <LIST_OF_CLUBS>
+  ---
+  Enter a teams name or the first letter(s) to search:
+  ---
+  b: Back
+}
+
+interface ViewClubStats{
+  <some_club>
+  
+  <some_stats>
+  ---
+  b: Back
+}
+
+interface Teams{
+  <LIST_OF_TEAMS>
+  ---
+  Enter a teams name or the first letter(s) to search:
+  ---
+  b: Back
+}
+
+interface ViewTeamStats{
+  <some_team>
+  
+  <some_stats>
+  ---
+  b: Back
+}
+
+interface Tournaments{
+  <some_tournament> - <status>
+  <tournament0> - active
+  <tournament1> - archived
+  
+  Select tournament: <tournament0>
+  ---
+  b: Back
+}
+
+interface ActiveTournament{
+  <tournament0>
+  ---
+  1. Game schedule
+  2. Teams
+  3. Brackets
+  ---
+  b: Back
+}
+
+interface GameSchedule{
+  <tournament_name>
+  
+  Date: Start - End, Venue
+  
+  Number of Teams, Number of Rounds
+  ---
+  !! rest not implemented !!
+  ---
+  b: Back
+}
+
+interface TeamsInTournament{
+  <LIST_OF_TEAMS>
+  ---
+  Select team:
+  ---
+  b: Back
+}
+
+interface TeamTournamentStats{
+  <some_team>
+  
+  <some_stats>
+  ---
+  b: Back
+}
+
+interface Brackets{
+  T1 ─────┐
+  .              ├── Match 1 ───┐
+  T2 ─────┘                         │
+  .                                         ├─
+  T3 ─────┐                         │
+  .              ├── Match 2 ───┘
+  T4 ─────┘
+  ---
+  b: Back
+}
+
+StartPage "1"-- Login
+StartPage "2"-- Register
+StartPage "3"- SpectatePage
+
+Login -- AdminPage
+Login --- PlayerPage
+
+AdminPage "1"-- CreateTournament
+AdminPage "2"-- ManageTournaments
+AdminPage "3"-- CreateClub
+
+CreateTournament "c: Continue"--> ManageUnactiveTournament
+
+ManageTournaments -- ManageUnactiveTournament : if tournament is unactive
+ManageTournaments -- ManageActiveTournament : if tournament is active
+
+ManageUnactiveTournament "1"-- ManageTeams
+ManageUnactiveTournament "2"-- Publish
+ManageUnactiveTournament "3"-- EditTournament
+
+ManageTeams "1"-- AddTeam
+ManageTeams "2"-- RemoveTeam
+
+EditTournament "1"-- EditTime
+EditTournament "2"-- EditTournamentInfo
+
+ManageActiveTournament "1"-- Matches
+ManageActiveTournament "2"-- NextRound
+ManageActiveTournament "3"-- CancelTournament
+
+Matches -- MatchResults
+
+PlayerPage "1"-- EditPlayerInfo
+PlayerPage "2"-- MyTeam_PlayerNotInTeam : if player not in team
+PlayerPage "2"-- MyTeam_PlayerInTeam : if player in team
+PlayerPage "3"-- CreateTeam
+
+MyTeam_PlayerInTeam "1"-- EditTeam
+MyTeam_PlayerInTeam "2"-- LeaveTeam_IfCaptain : if player is captain
+MyTeam_PlayerInTeam "2"-- LeaveTeam_IfNotCaptain : if player is not captain
+
+EditTeam "1"-- AddPlayer
+EditTeam "2"-- RemovePlayer
+
+Register "c: Continue"---> PlayerPage
+
+SpectatePage "1"-- Players
+SpectatePage "2"-- Clubs
+SpectatePage "3"-- Teams
+SpectatePage "4"-- Tournaments
+
+Tournaments -- ActiveTournament
+
+ActiveTournament "1"-- GameSchedule
+ActiveTournament "2"--- TeamsInTournament
+ActiveTournament "3"-- Brackets
+
+TeamsInTournament -- TeamTournamentStats
+
+Players -- ViewPlayerStats
+
+Teams -- ViewTeamStats
+
+Clubs -- ViewClubStats
+
+@enduml

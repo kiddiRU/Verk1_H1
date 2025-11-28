@@ -37,16 +37,26 @@ Kristinn and Andri where not available, so they could not work today. The team o
 ## ToDo-list:
 - Class diagram
 - Turning sketch to design doc
-- TUI
 - Happy path
 - Finish JSON data format
 # Evening meeting (Diary)
 ## State of project:
+- Is it allowed to use try & except with dict? Sindri asked the TA if it was allowed to use try & except with dict. They allowed try & except but not if it was being abused, when there was a better alternative. Dict has a get function that should be used.
+- Finished Ui-tree
+- Finished JSON data format
+- Finished Happy path
+- Created Class diagram
+- Finished draft of design doc
 
 ## State of group: 
-
+- Were in disagreement over how the system should keep track of user path. Sindri proposed that a singular class should keep track of user path, but Elmar brought up the option of having individual classes handaling user path.  
+- Ísak proposed the idea that the TUI should have "handle" as "username", becasue we dont know if the user knows what a "handle" is. 
+- We forgot about servers being a thing, servers host matches. 
+- TA will allow us to have the system to manage scheduling, but the organnizer should have option to edit schedule. Decided that it was a c-req
 ## Divisions:
-- UI / UX:
-- System engineer: 
-- QC: 
+- UI / UX: Elmar
+- System engineer: Ísak, Kristján 
+- QC: Sindri
 ## ToDo-list:
+- Start development phase
+- Resolve path tracking
