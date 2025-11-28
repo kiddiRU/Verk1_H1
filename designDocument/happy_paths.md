@@ -7,8 +7,9 @@
 
 ### Admin
 4. You want to log in as an admin (the handle is just "admin") and create a tournament named MuppetsVsDocHopper that will take place in Sesame Street, it will start 27th of november 2025 and end the 29th of november 2025, the contact info is the gmail: something@something.com, and phone number: 1234567.
-5. Now you want to start the tournament, but you first have to add the TheMuppets team and the DocHopper team to the tournament
-6. Now that all the rounds have finished exept for the last round of the tournament, you want to input the results that TheMuppets won the tournament
+5. Now you want to publish the tournament, but you first have to add the TheMuppets team, DocHopper team to the tournament and 14 other teams.
+6. After publishing the tournament, you start the tournament. The system creates matches between two unique teams.
+7. You input the results of the matches, with TheMuppets winning every match. This happens until they win the tournament.
 
 ### Spectator
 7. You want to log in as a spectator and go to view the results of the MuppetsVsDocHopper tournament
