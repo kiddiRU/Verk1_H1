@@ -61,11 +61,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Player can create a team
 - Player becomes a team captain when team is created
 - Team captain can leave the team
-- When team captain leaves a team he assigns a team member to be the new team captain
 - Team captain can modify players in team (add / remove)
 - Anyone can see matches and tournaments
 - Anyone can see match schedule
 - Anyone can see teams
+- Organizer can view created tournaments
 ### B
 - Organizer can create clubs
 - Organizer can edit clubs
@@ -76,11 +76,14 @@ Organizer/Admin > Team Captains > Players > Spectators
 - When Organizer creates a tournament he has to choose between double elimination and normal
 ### C
 - Team captain can transfer his authority to a player in team
-- Teams can switch from clubs
+- Team captain can switch from clubs
 - Organizer can cancel a tournament
+- Team captain can add ascii art to his team
 
 ## NON-Functional
 ### A
+- System automatically shuffles and arrange teams in a tournament match, based on quantity of teams and the time frame
+- When team captain leaves a team he assigns a team member to be the new team captain
 - Tournaments automatically archive after they play out
 - When team captain leaves a team if he was alone then the team is archived
 - Each Player is in 1 team
@@ -451,7 +454,7 @@ Email and PhoneNr
 - Contact PhoneNr (Tournament)
 
 ##
-### Response to an error message or confirm message
+### Response to an error message or confirm message SHOULD MAYBE HAVE SPECIAL VALIDATOR FOR MOST ACTIONS
 
 #### Add a Teams
 Enter Team name or l for the list of all team or q to quit: abcd
