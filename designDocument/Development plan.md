@@ -13,10 +13,10 @@ DataLayer folder
 LogicLayer folder
 - LogicLayerAPI.py
 
-
 UILayer folder
 - UILayerAPI.py
-Models folder
+
+Models folder  
 - ModelPlayer.py
 - ModelTeams.py
 - ModelClub.py
