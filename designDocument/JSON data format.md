@@ -68,3 +68,22 @@
   }
 }
 ```
+### Club
+```json
+{
+  "e78402e0-6d0f-4dd0-9906-317d852477e4": {
+    "name": "Hamstur",
+    "home_town": "Kopavogur",
+    "country": "Iceland",
+    "win_counter": 1,
+    "teams_associated": [
+      "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
+    ],
+    "club_color": "yellow",
+    "history": {
+      "all_teams": [],
+      "tournaments_played": []
+    }
+  }
+}
+```
