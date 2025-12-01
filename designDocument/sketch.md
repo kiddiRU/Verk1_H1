@@ -108,7 +108,8 @@ Organizer/Admin > Team Captains > Players > Spectators
 ...
 
 # Test requirements
-OPTIONAL BUT VERY IMPORTANT FOR GOOD UI
+Quick figma mockup of the Ui Tree for simple testing:
+https://www.figma.com/make/7GaDzqk5EuvAJkSGKatGtw/Implement-Screen-Navigation?node-id=0-1&t=PODHvbwtQVkfULgC-1
 
 # Class diagrams
 ## Model classes
