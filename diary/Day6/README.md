@@ -30,8 +30,8 @@ Need TA or someone with authority to review our design document so we know what 
 ## State of group: 
 Kristinn is away on competiton, while Kristján is sick. 
 ## Divisions: 
-- UI / UX: 
-- System engineer:
+- UI / UX: Andri
+- System engineer: Elmar, Ísak
 - QC: Sindri
 
 ## ToDo-list:
@@ -41,15 +41,25 @@ Kristinn is away on competiton, while Kristján is sick.
 - Review 3-tierd design
 - Test happy path
 - Convert word design doc into latex
-- 
 # Evening meeting (Diary)
 ## State of project:
+We were only four today, we mostly focused on reviewing the feedback from the TA's and fixing our mistakes. We changed the model classes and JSON format to remove boolians, remove data on history and counters because it could be calculated when needed. 
 - Breadcrumbs to show user path and shortcuts to navigate.
 
 ## State of group: 
-
+Today, the group went over the coding standard we would use during development. We discused at length about what functions were needed and how to prevent inconsistancy. The group underestimated the compounding complexity of the project, but are excited to start programming.
 ## Divisions:
-- UI / UX:
-- System engineer: 
-- QC: 
+- UI / UX: Andri
+- System engineer: Elmar, Ísak 
+- QC: Sindri
 ## ToDo-list:
+- Test UI tree with users
+- Setup of project
+- Test happy path
+- Convert word design doc into latex
+- Create start page TUI
+- Create data manager for DataLayer
+- Create store function for player
+- Create load function for player
+- Create update function for player
+- Create discard function for player
