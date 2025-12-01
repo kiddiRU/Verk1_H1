@@ -1,0 +1,1 @@
+'''8. You want to log in as a spectator and go to view the results of the MuppetsVsDocHopper tournament'''
