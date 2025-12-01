@@ -34,15 +34,7 @@
     "name": "Hamstur",
     "home_town": "Kopavogur",
     "country": "Iceland",
-    "win_counter": 1,
-    "teams_associated": [
-      "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
-    ],
-    "club_color": "yellow",
-    "history": {
-      "all_teams": [],
-      "tournaments_played": []
-    }
+    "club_color": "yellow"
   }
 }
 ```
@@ -85,19 +77,17 @@
 ### Matches
 ```json
 {
-  "active": {},
-  "archive": {
-    "e78402e0-6d0f-4dd0-9906-317d852477e4": {
-      "serverID": "966b1815-1376-438f-8008-44b14832412b",
-      "part_of_tournament": "d4547d21-59fc-45a4-a407-8fce97a29ade",
-      "team1": "e78402e0-6d0f-4dd0-9906-317d852477e4",
-      "team2": "988a09a6-236f-4439-8b2b-e1d9cb349e32",
-      "time_of_match": {
-        "date": "2025-11-27",
-        "time": "12:00"
-      },
-      "winner": "988a09a6-236f-4439-8b2b-e1d9cb349e32"
-    }
+  "e78402e0-6d0f-4dd0-9906-317d852477e4": {
+    "serverID": "966b1815-1376-438f-8008-44b14832412b",
+    "part_of_tournament": "d4547d21-59fc-45a4-a407-8fce97a29ade",
+    "team1": "e78402e0-6d0f-4dd0-9906-317d852477e4",
+    "team2": "988a09a6-236f-4439-8b2b-e1d9cb349e32",
+    "time_of_match": {
+      "date": "2025-11-27",
+      "time": "12:00"
+    },
+    "winner": "988a09a6-236f-4439-8b2b-e1d9cb349e32",
+    "status": "archived"
   }
 }
 ```
