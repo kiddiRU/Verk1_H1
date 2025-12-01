@@ -25,27 +25,25 @@
 ### Team
 ```json
 {
-  "Active": {},
-  "Archive": {
-    "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4": {
-      "name": "WarDove",
-      "list_of_players": [
+  "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4": {
+    "name": "WarDove",
+    "list_of_players": [
+      "c33430c2-8b58-4652-af49-0b6d6d17e6d2"
+    ],
+    "team_captain": "c33430c2-8b58-4652-af49-0b6d6d17e6d2",
+    "win_counter": 1,
+    "club": "Hamstur",
+    "history": {
+      "tournaments_played": [],
+      "club_played_for": [],
+      "all_team_members": [
         "c33430c2-8b58-4652-af49-0b6d6d17e6d2"
-      ],
-      "team_captain": "c33430c2-8b58-4652-af49-0b6d6d17e6d2",
-      "win_counter": 1,
-      "club": "Hamstur",
-      "history": {
-        "tournaments_played": [],
-        "club_played_for": [],
-        "all_team_members": [
-          "c33430c2-8b58-4652-af49-0b6d6d17e6d2"
-        ]
-      },
-      "points": 1,
-      "url_homepage": "",
-      "ascii_art": "(╯°□°)╯︵ ┻━┻"
-    }
+      ]
+    },
+    "points": 1,
+    "url_homepage": "",
+    "ascii_art": "(╯°□°)╯︵ ┻━┻",
+    "status": "archive"
   }
 }
 ```
