@@ -7,6 +7,9 @@
       "teams_in_tournament": [
         "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
       ],
+      "tournament_servers": [
+        "966b1815-1376-438f-8008-44b14832412b"
+      ],
       "rounds_in_tournament": {},
       "start": "2025-11-27",
       "end": "2025-11-27",
