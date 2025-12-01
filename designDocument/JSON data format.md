@@ -22,8 +22,7 @@
     ],
     "club": "UUID",
     "url_homepage": "",
-    "ascii_art": "(╯°□°)╯︵ ┻━┻",
-    "status": "archived"
+    "ascii_art": "(╯°□°)╯︵ ┻━┻"
   }
 }
 ```
