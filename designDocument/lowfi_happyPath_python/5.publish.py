@@ -2,3 +2,31 @@
 add the TheMuppets team
 add DocHopper team to the tournament 
 and 14 other teams.'''
+
+
+print('''''')
+
+a = input()
+print()
+print()
+
+
+print('''''')
+
+a = input()
+print()
+print()
+
+
+print('''''')
+
+a = input()
+print()
+print()
+
+
+print('''''')
+
+a = input()
+print()
+print()
