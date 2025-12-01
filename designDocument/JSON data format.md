@@ -58,9 +58,12 @@
 {
   "d4547d21-59fc-45a4-a407-8fce97a29ade": {
     "name": "e-girl sports",
-    "teams_in_tournament": [
-      "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
-    ],
+    "teams_in_tournament": {
+      "0a6fd7d6-f1c7-4588-ae34-4938c1f": {
+        "team_members": {},
+        "team_club": "UUID"
+      }
+    },
     "tournament_servers": [
       "966b1815-1376-438f-8008-44b14832412b"
     ],
