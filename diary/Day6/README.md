@@ -1,15 +1,15 @@
 # Diary, 2025-12-01
 
 ## Andri Már
-### Time: 8:30
+### Time: 8:30 - 16.30
 ### On site: Yes
 
 ## Elmar
-### Time: 8:30
+### Time: 8:30 - 16:30
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 8:30 - 12:00, 13:45 -
+### Time: 8:30 - 12:00, 13:45 - 16:30
 ### On site: Yes
 
 ## Kristinn Hrafn
@@ -21,7 +21,7 @@
 ### On site: Sick
 
 ## Sindri Freysson
-### Time: 8:30
+### Time: 8:30 - 16:30
 ### On site: Yes 
 
 # Morning meeting (Briefing)
