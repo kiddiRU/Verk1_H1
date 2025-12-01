@@ -1,5 +1,5 @@
 '''4. You want to log in as an admin (the handle is just "admin") and create a tournament 
-name: MuppetsVsDocHopper
+name: TheMuppetsVsDocHopper
 Venue: Sesame Street
 start: 27th of november 2025 
 end: the 29th of november 2025
@@ -59,7 +59,7 @@ print()
 print('''Create Tournament
 ——————————————
 Enter Tournament Name:
-MuppetsVsDocHopper
+TheMuppetsVsDocHopper
 ——————————————
 Enter Venue:''')
 
@@ -71,7 +71,7 @@ print()
 print('''Create Tournament
 ——————————————
 Enter Tournament Name:
-MuppetsVsDocHopper
+TheMuppetsVsDocHopper
 ——————————————
 Enter Venue:
 Sesame Street
@@ -86,7 +86,7 @@ print()
 print('''Create Tournament
 ——————————————
 Enter Tournament Name:
-MuppetsVsDocHopper
+TheMuppetsVsDocHopper
 ——————————————
 Enter Venue:
 Sesame Street
@@ -104,7 +104,7 @@ print()
 print('''Create Tournament
 ——————————————
 Enter Tournament Name:
-MuppetsVsDocHopper
+TheMuppetsVsDocHopper
 ——————————————
 Enter Venue:
 Sesame Street
@@ -125,7 +125,7 @@ print()
 print('''Create Tournament
 ——————————————
 Enter Tournament Name:
-MuppetsVsDocHopper
+TheMuppetsVsDocHopper
 ——————————————
 Enter Venue:
 Sesame Street
@@ -149,7 +149,7 @@ print()
 print('''Create Tournament
 ——————————————
 Enter Tournament Name:
-MuppetsVsDocHopper
+TheMuppetsVsDocHopper
 ——————————————
 Enter Venue:
 Sesame Street
