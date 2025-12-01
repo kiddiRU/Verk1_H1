@@ -45,7 +45,7 @@ Kristinn is away on competiton, while Kristján is sick.
 ## State of project:
 We were only four today, we mostly focused on reviewing the feedback from the TA's and fixing our mistakes. We changed the model classes and JSON format to remove boolians, remove data on history and counters because it could be calculated when needed. 
 - Breadcrumbs to show user path and shortcuts to navigate.
-
+- Andri created a lo-fi python prototype, which can be used for user testing.
 ## State of group: 
 Today, the group went over the coding standard we would use during development. We discused at length about what functions were needed and how to prevent inconsistancy. The group underestimated the compounding complexity of the project, but are excited to start programming.
 ## Divisions:
