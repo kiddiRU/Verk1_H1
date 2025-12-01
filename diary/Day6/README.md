@@ -32,10 +32,16 @@
 ## Divisions: 
 - UI / UX:
 - System engineer:
-- QC:
+- QC: Sindri
 
 ## ToDo-list:
-
+- Test UI tree with users
+- Setup of project
+- Fix requriements
+- Review 3-tierd design
+- Test happy path
+- Convert word design doc into latex
+- 
 # Evening meeting (Diary)
 ## State of project:
 
