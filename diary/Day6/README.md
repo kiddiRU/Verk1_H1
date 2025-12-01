@@ -26,11 +26,11 @@
 
 # Morning meeting (Briefing)
 ## State of project: 
-
+Need TA or someone with authority to review our design document so we know what we should review, before we start the development phase of the project. 
 ## State of group: 
-
+Kristinn is away on competiton, while Kristján is sick. 
 ## Divisions: 
-- UI / UX:
+- UI / UX: 
 - System engineer:
 - QC: Sindri
 
@@ -44,6 +44,7 @@
 - 
 # Evening meeting (Diary)
 ## State of project:
+- Breadcrumbs to show user path and shortcuts to navigate.
 
 ## State of group: 
 
