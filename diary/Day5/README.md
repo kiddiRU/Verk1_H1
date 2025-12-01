@@ -5,11 +5,11 @@
 ### On site: Remote
 
 ## Elmar
-### Time: 9:15
+### Time: 9:15 - 17:20
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 9:10
+### Time: 9:10 -17:20
 ### On site: Yes
 
 ## Kristinn Hrafn
@@ -17,11 +17,11 @@
 ### On site:
 
 ## Kristján Hagalín
-### Time: 9:05
+### Time: 9:05 - 17:20
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 8:30
+### Time: 8:30 - 17:20
 ### On site: Yes
 
 # Morning meeting (Briefing)

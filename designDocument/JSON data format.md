@@ -7,6 +7,9 @@
       "teams_in_tournament": [
         "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
       ],
+      "tournament_servers": [
+        "966b1815-1376-438f-8008-44b14832412b"
+      ],
       "rounds_in_tournament": {},
       "start": "2025-11-27",
       "end": "2025-11-27",
@@ -96,6 +99,7 @@
   "active": {},
   "archive": {
     "e78402e0-6d0f-4dd0-9906-317d852477e4": {
+      "serverID": "966b1815-1376-438f-8008-44b14832412b",
       "team1": "e78402e0-6d0f-4dd0-9906-317d852477e4",
       "team2": "988a09a6-236f-4439-8b2b-e1d9cb349e32",
       "time_of_match": {
