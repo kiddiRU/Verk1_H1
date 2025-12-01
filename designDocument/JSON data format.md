@@ -8,19 +8,8 @@
     "home_address": "I am not doxxing myself",
     "phone_number": 7830880,
     "email": "notReal@gmail.com",
-    "social": "hamster.com",
-    "win_counter": 1,
-    "history": {
-      "teams_played_for": [],
-      "tournaments_played": [],
-      "club_played_for": []
-    },
-    "points": 1,
-    "is_team_captain": "True",
-    "is_in_team": "True",
-    "team_member_of": "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
+    "social": "hamster.com"
   }
-}
 ```
 ### Team
 ```json
@@ -30,7 +19,6 @@
     "list_of_players": [
       "c33430c2-8b58-4652-af49-0b6d6d17e6d2"
     ],
-    "team_captain": "c33430c2-8b58-4652-af49-0b6d6d17e6d2",
     "win_counter": 1,
     "club": "Hamstur",
     "history": {
@@ -40,7 +28,6 @@
         "c33430c2-8b58-4652-af49-0b6d6d17e6d2"
       ]
     },
-    "points": 1,
     "url_homepage": "",
     "ascii_art": "(╯°□°)╯︵ ┻━┻",
     "status": "archive"
@@ -65,31 +52,29 @@
     }
   }
 }
-
 ```
 ### Tournament
 ```json
 {
-  "unpublished": {
-    "d4547d21-59fc-45a4-a407-8fce97a29ade": {
-      "name": "e-girl sports",
-      "teams_in_tournament": [
-        "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
-      ],
-      "tournament_servers": [
-        "966b1815-1376-438f-8008-44b14832412b"
-      ],
-      "rounds_in_tournament": {},
-      "start": "2025-11-27",
-      "end": "2025-11-27",
-      "venue": "HR",
-      "email": "notReal@gmail.com",
-      "phone_number": 1234567
+  "d4547d21-59fc-45a4-a407-8fce97a29ade": {
+    "name": "e-girl sports",
+    "teams_in_tournament": [
+      "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4"
+    ],
+    "tournament_servers": [
+      "966b1815-1376-438f-8008-44b14832412b"
+    ],
+    "rounds_in_tournament": {},
+    "start": "2025-11-27",
+    "end": "2025-11-27",
+    "venue": "HR",
+    "email": "notReal@gmail.com",
+    "phone_number": 1234567,
+    "status": "unpublished",
+    "results": {
+      "0a6fd7d6-f1c7-4588-ae34-4938c1f942c4": 1
     }
-  },
-  "published": {},
-  "active": {},
-  "archived": {}
+  }
 }
 ```
 ### Servers
