@@ -1,4 +1,9 @@
-'''Team model class (Project.Models.Team), Created by Ísak'''
+"""
+Author: Ísak Eli Hauksson
+Date: 2025-12-02
+
+Team Model Class
+"""
 
 
 class Team:
@@ -18,7 +23,7 @@ class Team:
         The initializer for the Team model class
 
         Args:
-            name (str): an unique name for the team 
+            name (str): an unique name for the team (3-30 char length)
             list_player_uuid (list[str]): players apart of the team
             team_captain_uuid (str): uuid of the player captain
             club_uuid (str): uuid of the club connected to the team
