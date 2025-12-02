@@ -1,4 +1,5 @@
-'''6. After publishing the tournament, you want to publish the tournament. 
+'''6. After publishing the tournament, 
+you want to publish the tournament. 
 The system creates matches between two unique teams.'''
 
 print()

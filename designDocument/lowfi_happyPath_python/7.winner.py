@@ -1,4 +1,5 @@
-'''The last match of the tournament just finished, you want to input that TheMuppets won the last round'''
+'''The last match of the tournament just finished, 
+you want to input that TheMuppets won the last round'''
 
 
 print()

@@ -1,4 +1,5 @@
-'''4. You want to log in as an admin (the handle is just "admin") and create a tournament 
+'''4. You want to log in as an admin (the handle is just "admin") 
+and create a tournament 
 name: TheMuppetsVsDocHopper
 Venue: Sesame Street
 start: 27th of november 2025 
