@@ -15,5 +15,10 @@
 - LogicLayer: Create, get, change, Delete
 - DataLayer: Store, load, Update, Discard
 
+### Header of file
+- Author: Full Name
+- Date: YYYY-MM-DD
+- Description of purpose
+
 ## TODO
 
