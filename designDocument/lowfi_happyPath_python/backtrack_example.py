@@ -1,7 +1,8 @@
 print()
 a = 0
 while a != "q":
-    print("\n" + '''Admin Page [b ap] | Manage Tournaments [b mt] | Manage Unactive Tournament [b mut]
+    print("\n" + '''    - - -User Path- - -
+    Admin Page [b ap] -> Manage Tournaments [b mt] -> Manage Unactive Tournament [b mut]
     ————————————————————————————————————————————————————————————————————————————
                                     Edit Tournament
     ————————————————————————————————————————————————————————————————————————————
