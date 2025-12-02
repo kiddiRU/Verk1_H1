@@ -6,3 +6,4 @@ designDocument/LaTeX/designDoc.fls
 designDocument/LaTeX/designDoc.fdb_latexmk
 designDocument/LaTeX/designDoc.aux
 designDocument/LaTeX/designDoc.pdf
+__pycache__/
