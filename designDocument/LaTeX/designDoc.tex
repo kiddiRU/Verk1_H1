@@ -2,7 +2,22 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{tabularray}
+\geometry{legalpaper, portrait, margin=0.5cm}
 
+\usepackage{multicol}
 
 \title{Design Document}
 \author{Group 1}
@@ -10,8 +25,8 @@
 
 \begin{document}
 
-\section{P1}
-The quick brown fox jumped over the lazy dog.
+\input{frontPage.tex}
 
-Hæ eg er elmar
+\input{requirements.tex}
+\input{useCases.tex}
 \end{document}

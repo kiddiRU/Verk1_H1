@@ -47,7 +47,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - See teams and clubs
 
 
-# Prioritized Requirements
+# Prioritized Requirements -
 ## Functional
 ### A
 - The User can login as Organizer / Admin
@@ -61,11 +61,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Player can create a team
 - Player becomes a team captain when team is created
 - Team captain can leave the team
-- When team captain leaves a team he assigns a team member to be the new team captain
 - Team captain can modify players in team (add / remove)
 - Anyone can see matches and tournaments
 - Anyone can see match schedule
 - Anyone can see teams
+- Organizer can view created tournaments
 ### B
 - Organizer can create clubs
 - Organizer can edit clubs
@@ -76,11 +76,14 @@ Organizer/Admin > Team Captains > Players > Spectators
 - When Organizer creates a tournament he has to choose between double elimination and normal
 ### C
 - Team captain can transfer his authority to a player in team
-- Teams can switch from clubs
+- Team captain can switch from clubs
 - Organizer can cancel a tournament
+- Team captain can add ascii art to his team
 
 ## NON-Functional
 ### A
+- System automatically shuffles and arrange teams in a tournament match, based on quantity of teams and the time frame
+- When team captain leaves a team he assigns a team member to be the new team captain
 - Tournaments automatically archive after they play out
 - When team captain leaves a team if he was alone then the team is archived
 - Each Player is in 1 team
@@ -92,6 +95,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Code must follow the snake casing naming convention
 - Player handle should be the length of 3-12
 - Tournaments have 16 teams
+- Tournaments generate UUID on creation
 ### B
 - Only the organizer can modify clubs
 - Give users options to cancel 
@@ -101,10 +105,11 @@ Organizer/Admin > Team Captains > Players > Spectators
 - Show tournaments brackets visually 
 
 # Use cases for requirements
-
+...
 
 # Test requirements
-
+Quick figma mockup of the Ui Tree for simple testing:
+https://www.figma.com/make/7GaDzqk5EuvAJkSGKatGtw/Implement-Screen-Navigation?node-id=0-1&t=PODHvbwtQVkfULgC-1
 
 # Class diagrams
 ## Model classes
@@ -162,7 +167,26 @@ Club -> Team -> Player
 
 
 # State diagrams
-SEMI OPTIONAL
+Teams
+A team needs to have at least 3 amount of players to join a tournament
+A team can have a maximum of 5 players? If it has 5 players, the captain cannot add more.
+A player can have 3 states (Captain, In Team, Not In Team)
+  •	Captain: Can view team and add or remove players
+  •	Player in team: Can view his team, and can leave his team
+  •	Player NOT in team: Can create a team
+If captain leaves his team there can be two outcomes
+  •	Captain leaves and selects a new captain from the team
+  •	If the team is empty the captain leaves but the team still exists and has all statistics
+A player can NOT leave his team if the team is in a tournament
+
+Tournament
+A Tournament has 3 states, and organizers capability is dependent on the state
+  1.	A  Tournament is created but not published: in this state the organizer can still edit some information about the tournament. Add or remove teams, change date, venue, name and has the option to publish the                 tournament.
+  2.	A Tournament is published: in this  state the organizer can no longer change the teams, date, venue, but can still change the name. Now the organizer has the option to input match results and  after all the matches        of that round have gotten a result he can start the next round.
+  3.	A Tournament is archived: After all the rounds are over in a tournament the tournament goes to be archived, when its archived the organizer can no longer have any input into it, but it is still available for               everyone to see.
+A tournament cannot start unless it has at least 16 teams
+When organizer is adding a team, only teams with at least 3 players can be listed
+
 
 # User group analysis
 
@@ -450,7 +474,7 @@ Email and PhoneNr
 - Contact PhoneNr (Tournament)
 
 ##
-### Response to an error message or confirm message
+### Response to an error message or confirm message SHOULD MAYBE HAVE SPECIAL VALIDATOR FOR MOST ACTIONS
 
 #### Add a Teams
 Enter Team name or l for the list of all team or q to quit: abcd
@@ -465,3 +489,4 @@ Enter Team name or l for the list of all teams in the tournament or q to quit:
 --> abcd is not apart of the tournament, do you want to continue
 Y Yes
 N No
+

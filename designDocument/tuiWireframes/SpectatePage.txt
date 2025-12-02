@@ -1,7 +1,8 @@
 1 Game Schedule
 2 Clubs
 3 Teams
-4 History of tournaments
+4 Players
+5 History of tournaments
 b Back
 
     # Game Schedule #
@@ -31,3 +32,50 @@ b Back
     # History of tournaments #
     --> some kind of list of all tournaments
     !! NO IDEA IMPLEMENTED !!
+
+
+
+*****************************************************************
+###Teams List
+
+
+Team		Club		Points
+——————————————————————————————————————————
+
+~~~~~~~~~~~~	~~~~~~~~~~~~	XXXX
+~~~~~~~~~~~~	~~~~~~~~~~~~	XXXX
+~~~~~~~~~~~~	~~~~~~~~~~~~	XXXX
+~~~~~~~~~~~~	~~~~~~~~~~~~	XXXX
+~~~~~~~~~~~~	~~~~~~~~~~~~	XXXX
+~~~~~~~~~~~~	~~~~~~~~~~~~	XXXX
+
+——————————————————————————————————————————
+
+Select Team
+B: Back
+
+——————————————————————————————————————————
+
+Choose action:
+
+*******************************************************************
+
+###Players List
+
+
+Handle		Team		Club		Points (Þarf kanski ekki)
+—————————————————————————————————————————————————————————————
+XXXX		XXXX		XXXX		XXX
+XXXX		XXXX		XXXX		XXX
+XXXX		XXXX		XXXX		XXX
+XXXX		XXXX		XXXX		XXX
+XXXX		XXXX		XXXX		XXX
+XXXX		XXXX		XXXX		XXX
+—————————————————————————————————————————————————————————————
+
+Select Players
+B: Back
+
+—————————————————————————————————————————————————————————————
+
+Choose action:

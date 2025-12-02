@@ -28,7 +28,6 @@ q Quit
 
             # Manage Tournament (Un-Active) #
             1 Manage Teams
-            2 Edit Info
             3 Publish 
             4 Edit Tournament
             b Back
@@ -50,12 +49,6 @@ q Quit
                     --> abcd was found, do you want to continue?
                     Y Yes
                     N No
-
-                # Edit Info #
-                new Name:
-                new Venue: 
-                Email:
-                PhoneNumber: 
 
                 # Publish #
                 --> The list of available tournaments
@@ -82,6 +75,12 @@ q Quit
                     --> Do you want to continue?
                     Y Yes
                     N No
+
+                    # Edit Info #
+                    new Name:
+                    new Venue: 
+                    Email:
+                    PhoneNumber: 
 
             # Manage Tournaments (Active) #
 
