@@ -1,5 +1,5 @@
 """
-Author: Ísak Eli Hauksson
+Author: Ísak Eli Hauksson > isak25@ru.is <
 Date: 2025-12-02
 
 Team Model Class
@@ -7,8 +7,6 @@ Team Model Class
 
 
 class Team:
-    """Team model class"""
-
     def __init__(
         self,
         name: str,
