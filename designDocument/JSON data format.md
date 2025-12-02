@@ -85,8 +85,7 @@
       "date": "2025-11-27",
       "time": "12:00"
     },
-    "winner": "988a09a6-236f-4439-8b2b-e1d9cb349e32",
-    "status": "archived"
+    "winner": "988a09a6-236f-4439-8b2b-e1d9cb349e32"
   }
 }
 ```

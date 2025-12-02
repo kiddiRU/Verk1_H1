@@ -4,7 +4,7 @@ class Player():
     """Player model class"""
     def __init__(self,
                  name: str,
-                 date_of_birht: str,
+                 date_of_birth: str,
                  home_adress: str,
                  email: str,
                  phone_number: int,
@@ -23,7 +23,7 @@ class Player():
         """
 
         self.name = name
-        self.date_of_birth = date_of_birht
+        self.date_of_birth = date_of_birth
         self.home_adress = home_adress
         self.email = email
         self.phone_number = phone_number
