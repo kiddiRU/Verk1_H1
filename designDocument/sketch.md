@@ -47,7 +47,7 @@ Organizer/Admin > Team Captains > Players > Spectators
 - See teams and clubs
 
 
-# Prioritized Requirements
+# Prioritized Requirements -
 ## Functional
 ### A
 - The User can login as Organizer / Admin
