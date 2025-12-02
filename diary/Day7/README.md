@@ -5,11 +5,11 @@
 ### On site: Yes
 
 ## Elmar
-### Time: 9:05
+### Time: 9:05 - 18:00
 ### On site: Yes
 
-## Ísak Elí ---
-### Time: 9:10 
+## Ísak Elí
+### Time: 9:10 - 12:20, 13:45 - 18:00
 ### On site: Yes
 
 ## Kristinn Hrafn
