@@ -1,7 +1,7 @@
 '''6. After publishing the tournament, you want to publish the tournament. 
 The system creates matches between two unique teams.'''
 
-
+print()
 print('''Manage Unactive Tournaments
 ——————————————————
 - - -TheMuppetsVsDocHopper- - -

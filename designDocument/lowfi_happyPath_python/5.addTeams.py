@@ -1,6 +1,6 @@
 '''5. You have already added 15 teams to the tournament you created and now you just need to add the team TheMuppets'''
 
-
+print()
 print('''Admin Page
 —————————————
 1 Create Tournament

@@ -1,6 +1,6 @@
 '''8. You want to log in as a spectator and go to see who won the MuppetsVsDocHopper tournament'''
 
-
+print()
 print('''Main Menu
 —————————
 1 Login

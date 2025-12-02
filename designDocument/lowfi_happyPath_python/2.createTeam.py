@@ -1,6 +1,6 @@
 '''2. Now that you are a player, you want to create a team named TheMuppets in the club Disney'''
 
-
+print()
 print('''Player Page
 ————————————————————————
 Name: Miss Piggy
