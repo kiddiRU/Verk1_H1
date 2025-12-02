@@ -1,1 +1,8 @@
 .DS_Store
+designDocument/LaTeX/designDoc.synctex.gz
+designDocument/LaTeX/designDoc.out
+designDocument/LaTeX/designDoc.log
+designDocument/LaTeX/designDoc.fls
+designDocument/LaTeX/designDoc.fdb_latexmk
+designDocument/LaTeX/designDoc.aux
+.gitignore
