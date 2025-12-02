@@ -25,14 +25,14 @@
 ### On site: Yes
 
 # Morning meeting (Briefing)
-## State of project: 
-
+## State of project:
+Critical preparations and project set up are complete. We can now begin development.  
 ## State of group: 
-
+Briefed Kristján and Kristinn about the current state of the project, about the coding standard that we are using, the changes we made to the model classes. Everyone has cloned the github repository and can start working after "Python gleði Rikka og Konna". Sindri decided to stay behind to work on the diary and latex doc.  
 ## Divisions: 
 - UI / UX:
 - System engineer:
-- QC:
+- QC: Sindri
 
 ## ToDo-list:
 
