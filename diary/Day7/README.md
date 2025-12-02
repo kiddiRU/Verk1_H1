@@ -5,8 +5,8 @@
 ### On site: Yes
 
 ## Elmar
-### Time:
-### On site:
+### Time: 9:05
+### On site: Yes
 
 ## Ísak Elí
 ### Time:
