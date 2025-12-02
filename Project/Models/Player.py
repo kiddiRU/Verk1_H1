@@ -1,7 +1,7 @@
 """ Created by: Elmar Sig """
 
 class Player():
-    """docstring for Player"""
+    """Player model class"""
     def __init__(self,
                  name: str,
                  date_of_birht: str,
@@ -13,12 +13,12 @@ class Player():
         
         """
         Arguments:
-            name (str): full name
+            name (str): full name (3-30 char lengt)
             date_of_birth (str): players date of birth (YYYY-MM-DD)
             home_adress (str): players home_adress (street_name street_number, Frostafold 12)
             email (str): players email (johnDoe@gmail.com) 
             phone_number (int): 1234567
-            handle (str): players handle ingame has to be UNIQE
+            handle (str): players handle ingame has to be UNIQE (3-30 char lengt)
             url (str): url to players social (optional)
         """
 
