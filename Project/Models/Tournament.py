@@ -36,12 +36,16 @@ class Tournament:
 
         Args:
             name (str): Unique name for the tournament
-            start_date (str): Start date of the tournament (YYYY-MM-DD)
-            end_date (str): End date of the tournament (YYYY-MM-DD)
+            start_date (date): Start date of the tournament (YYYY-MM-DD)
+            end_date (date): End date of the tournament (YYYY-MM-DD)
             venue (str): Location of the tournament
             email (str): Tournament email (length <= 64)
             phone_number (str): Tournament phone number 
                         (length of 8  = 000-0000)
+            time_frame_start (time, optional): Start of the event per day. 
+                        Defaults to time(hour=8,minute=0).
+            time_frame_end (time, optional): End of the event per day. 
+                        Defaults to time(hour=16,minute=0).
             status (StatusType, optional): Tournament status.
                         Defaults to StatusType.inactive.
             list_servers (list[str], optional): 
