@@ -14,11 +14,11 @@
 
 ## Kristinn Hrafn
 ### Time: 8:30 - 16:40
-### On site:
+### On site: Yes
 
 ## Kristján Hagalín
 ### Time: 9:00 
-### On site:
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:00 - 16:40
