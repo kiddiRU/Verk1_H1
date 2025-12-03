@@ -10,6 +10,7 @@
     "email": "notReal@gmail.com",
     "social": "hamster.com"
   }
+}
 ```
 ### Team
 ```json
