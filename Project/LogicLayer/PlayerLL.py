@@ -73,7 +73,7 @@ class PlayerLL():
 
         # Sends the player info to validation file to check for validation
         #TODO implement what to do if the validation returns False
-        uuid = uuid4
+        uuid = str(uuid4())
         final_name = validate_name(name_stripped)
         final_date_of_birth = validate_date(date_of_birth_stripped)
         final_home_address = validate_home_address(home_address_stripped)
