@@ -1,4 +1,9 @@
-""" Created by: Elmar Sig """
+"""
+Author: Elmar Sigmarsson > elmars25@ru.is <
+Date: 2025-12-02
+
+Player model class
+"""
 
 class Player():
     """Player model class"""
@@ -12,7 +17,7 @@ class Player():
                  url: str = "") -> None:
         
         """
-        Arguments:
+        Args:
             name (str): full name (3-30 char lengt)
             date_of_birth (str): players date of birth (YYYY-MM-DD)
             home_adress (str): players home_adress (street_name street_number, Frostafold 12)
