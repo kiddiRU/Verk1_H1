@@ -1,5 +1,5 @@
 """ 
-Author: Kristinn Hrafn
+Author: Kristinn Hrafn <kristinnd25@ru.is>
 Date: 2025-12-02
 
 Functions which let you read, write and update players
@@ -13,7 +13,9 @@ FILE_PATH = "./DataLayer/Repository/players.json"
 
 """
 Takes in model class Player.
-Inserts information about the Player class into a json file for storage.
+
+Inserts information about the Player class into a json file
+for storage.
 """
 def store_player(player: Player) -> None:
     data = {
@@ -37,7 +39,10 @@ def store_player(player: Player) -> None:
 
 """
 No parameters
-Reads json file containing players and creates a list of Player model objects of each entry in the json file.
+
+Reads json file containing players and creates a list of
+Player model objects of each entry in the json file.
+
 Returns the created player list.
 """
 def load_players() -> list[Player]:
@@ -59,15 +64,19 @@ def load_players() -> list[Player]:
        
 """
 Takes in uuid, key and value as parameters.
+
 uuid and key have to exist in the json file.
-Will update the value tied to the key given of the player with the given uuid.
+
+Will attempt to find player with given uuid and update the
+value tied to given key of that player
 """
 def update_player(uuid: str, key: str, value: str) -> None:
     with open(FILE_PATH, "r") as player_file:
         file_content = dict(json.load(player_file))
 
     if uuid in file_content:
-        file_content[uuid][key] = value
+        if key in file_content[uuid]:
+            file_content[uuid][key] = value
 
     with open(FILE_PATH, "w") as player_file:
         json.dump(file_content, player_file)
