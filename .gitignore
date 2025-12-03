@@ -7,3 +7,4 @@ designDocument/LaTeX/designDoc.fdb_latexmk
 designDocument/LaTeX/designDoc.aux
 designDocument/LaTeX/designDoc.pdf
 __pycache__/
+Project/kristinn_debug.py
