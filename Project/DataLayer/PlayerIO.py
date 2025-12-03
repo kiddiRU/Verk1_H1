@@ -51,14 +51,14 @@ def load_players() -> list[Player]:
         
     player_list: list[Player] = []
     for uuid, value in file_content.items():
-        player.append(Player(uuid,
-                             value["name"],
-                             value["date_of_birth"],
-                             value["home_address"],
-                             value["email"],
-                             value["phone_number"],
-                             value["handle"],
-                             value["url"],))
+        player_list.append(Player(uuid,
+                                  value["name"],
+                                  value["date_of_birth"],
+                                  value["home_address"],
+                                  value["email"],
+                                  value["phone_number"],
+                                  value["handle"],
+                                  value["url"],))
         
     return player_list
        
