@@ -4,11 +4,10 @@ Date: 2025-12-03
 
 File that holds all the menus
 """
-# from LogicLayer.LogicLayerAPI import LogicAPI
+from LogicLayer.LogicLayerAPI import LogicAPI
 
 class MenuUI:
-    # def __init__(self, logic_api: LogicAPI) -> None:
-    def __init__(self, logic_api) -> None:
+    def __init__(self, logic_api: LogicAPI) -> None:
         self.logic_api = logic_api
 
     def _prompt_choice(self, valid_choices: list[str]) -> str:
