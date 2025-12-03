@@ -4,22 +4,36 @@ Date: 2025-12-03
 
 File that holds the main state machine.
 """
-# from LogicLayer.LogicLayerAPI import LogicAPI
-from MenuUI import MenuUI
+
+
+from UILayer.MenuUI import MenuUI
+from UILayer.MenuOptions import MenuOptions
+
 
 class MainUI:
-    """ Main UI State Machine"""
+    """Main UI State Machine"""
 
     def __init__(self) -> None:
-    #    logic_api = LogicAPI()
-    #    self._menu_ui = MenuUI(logic_api)
-        self.current_screen = "MAIN_MENU"
-
+        self._menu_ui = MenuUI()
+        self.current_screen = MenuOptions.main_menu
 
     def run(self) -> None:
-        """ Main navigation loop """
-        
-        while True:
-            if self.current_screen == "MAIN_MENU":
-                print(f"MAIN MENU")
+        """Main navigation loop"""
 
+        while True:
+            if self.current_screen == MenuOptions.main_menu:
+                self.current_screen = self._menu_ui.show_start_screen()
+
+            if self.current_screen == MenuOptions.login:
+                self.current_screen = self._menu_ui.show_login_screen()
+
+            if self.current_screen == "ADMIN":
+                print("you are admin")
+
+            if self.current_screen == "LOGOUT":
+                self.current_screen = MenuOptions.main_menu
+
+            if self.current_screen == "QUIT":
+                exit()
+
+            self.current_screen = MenuOptions.main_menu
