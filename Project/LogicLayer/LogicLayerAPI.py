@@ -7,7 +7,6 @@ Logic layer API
 
 from Models import Club, Match, Player, Server, Team, Tournament
 
-
 ''' Player API '''
 
 # TODO implement validate_info and call it / or not?
