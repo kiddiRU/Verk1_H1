@@ -1,6 +1,6 @@
 """
 Author: Elmar Sigmarsson > elmars25@ru.is <
-Date: 2025/12/02
+Date: 2025-12-02
 
 Match model class
 """
