@@ -1,23 +1,28 @@
 """ Data layer API """
+from Models.Club import Club
+from Models.Match import Match
+from Models.Player import Player
+from Models.Server import Server
+from Models.Team import Team
+from Models.Tournament import Tournament
+import DataLayer.PlayerIO
+
 
 """ Player API """
 
-# TODO implement load_players and call it
-def load_players() -> List[Player]:
-    pass
+def load_players() -> list[Player]:
+    return PlayerIO.load_players()
 
-# TODO implement store_player and call it
 def store_player(player: Player) -> None:
-    pass
+    PlayerIO.store_player(player)
 
-# TODO implement update_player and call it
 def update_player(uuid: str, key: str, value: str) -> None:
-    pass
+    PlayerIO.update_player(uuid, key, value)
 
 """ Team API """
 
 # TODO implement load_teams and call it
-def load_teams() -> List[Teams]:
+def load_teams() -> list[Teams]:
     pass
 
 # TODO implement update_team and call it
@@ -37,7 +42,7 @@ def store_club(club: Club) -> None:
 # def update_club(uuid: str, key: str, value: str) -> None:
 
 # TODO implement load_clubs and call it
-def load_clubs() -> List[Club]:
+def load_clubs() -> list[Club]:
     pass
 
 """ Tournament API """
@@ -51,7 +56,7 @@ def update_tournament(uuid: str, key: str, value: str) -> None:
     pass
 
 # TODO implement load_tournaments and call it
-def load_tournaments() -> List[Tournament]:
+def load_tournaments() -> list[Tournament]:
     pass
 
 """ Match API """
@@ -65,5 +70,5 @@ def update_match(uuid: str, key: str, value: str) -> None:
     pass
 
 # TODO implement load_matches and call it
-def load_matches() -> List[Match]:
+def load_matches() -> list[Match]:
     pass
