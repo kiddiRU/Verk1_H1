@@ -1,9 +1,9 @@
-from Club import Club
-from Match import Match
-from Player import Player
-from Server import Server
-from Team import Team
-from Tournament import Tournament
+from Models.Club import Club
+from Models.Match import Match
+from Models.Player import Player
+from Models.Server import Server
+from Models.Team import Team
+from Models.Tournament import Tournament
 
 __all__ = [
     "Club",
