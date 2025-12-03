@@ -1,5 +1,5 @@
 """
-Author: Ísak Elí Hauksson > isak25@ru.is <
+Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-02
 
 Tournament Model Class
