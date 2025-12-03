@@ -1,6 +1,9 @@
 from Models.Player import Player
 import DataLayer.DataLayerAPI as dlapi
 
+from LogicLayer import LogicLayerAPI
+from LogicLayer import PlayerLL
+
 from uuid import uuid4
 
 uuid = str(uuid4())
@@ -14,6 +17,17 @@ p = Player(uuid,
            "kiddi",
            "",)
 
-dlapi.store_player(p)
+# dlapi.store_player(p)
 
-dlapi.update_player(uuid, "home_address", "brog 36")
+# dlapi.update_player(uuid, "home_address", "brog 36")
+
+p = PlayerLL()
+p.create_player(
+    "Kristinn Hrafn",
+    "2006-07-13",
+    "hraunbraut 43",
+    "kristinnd25@ru.is",
+    "855-2006",
+    "kiddi",
+    ""
+)
