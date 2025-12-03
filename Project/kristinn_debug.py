@@ -21,8 +21,18 @@ p = Player(uuid,
 
 # dlapi.update_player(uuid, "home_address", "brog 36")
 
-p = PlayerLL()
-p.create_player(
+# p = PlayerLL()
+# p.create_player(
+#     "Kristinn Hrafn",
+#     "2006-07-13",
+#     "hraunbraut 43",
+#     "kristinnd25@ru.is",
+#     "855-2006",
+#     "kiddi",
+#     ""
+# )
+
+LogicLayerAPI.create_player(
     "Kristinn Hrafn",
     "2006-07-13",
     "hraunbraut 43",

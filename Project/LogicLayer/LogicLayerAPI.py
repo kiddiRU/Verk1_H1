@@ -26,7 +26,7 @@ def create_player(
         url: str = ''
         ) -> Player:
 
-    return player_logic.create_play(
+    return player_logic.create_player(
         name,
         date_of_birth,
         home_address,
