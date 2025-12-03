@@ -47,5 +47,3 @@ def validate_time_frame(time_1, time_2): # Time frame of tournament
 def club_color(): # Club
     """Checks if color is on of the colors implemented (RED, BLUE, YELLOW, GREEN)"""
     pass
-
-
