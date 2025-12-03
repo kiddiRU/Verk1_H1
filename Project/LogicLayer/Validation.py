@@ -5,31 +5,31 @@ Date: 2025-12-03
 A validation file that takes inn all info that would need to be validated
 """
 
-def validate_unique_name(): # Player Handle, Tournament, Team, Club names
+def validate_unique_name(unique_name): # Player Handle, Tournament, Team, Club names
     """Checks if the name is unique and is between 3-30 char in length"""
-    pass
+    return unique_name
 
-def validate_name(): # Players full name
+def validate_name(name): # Players full name
     """Checks if the name is in between 3-30 char in length and has only letters"""
-    pass
+    return name
 
 
-def validate_home_address(): # Players home address
+def validate_home_address(home_address): # Players home address
     """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
-    pass
+    return home_address
 
-def validate_phone_number(): # Players and tournament contact phone number
+def validate_phone_number(phone_number): # Players and tournament contact phone number
     """Checks if phone number is eight in length 7 nums and a dash (123-4567)"""
-    pass
+    return phone_number
 
 
-def validate_email(): # Players and tournament contact email
+def validate_email(email): # Players and tournament contact email
     """Checks if email has @, something before the @ and behind it and .XX in the end (johndoe@gmail.com)"""
-    pass
+    return email
 
-def validate_date(): # Date of Birth, Date of Tournament
+def validate_date(date): # Date of Birth, Date of Tournament
     """Checks if date format is correct YYYY-MM-DD"""
-    pass
+    return date
 
 def validate_date_frame(date_1, date_2): # Date frame of tournament
     """Checks if date frame is correct, date_1 is before date_2 (2025-12-01 -> 2025-12-06)"""
