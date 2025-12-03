@@ -3,7 +3,7 @@
 ''' Player API '''
 
 # TODO implement validate_info and call it
-def validate_info() -> None: # validate_info(key: str = '', value: str = '') ?
+def validate_info() -> None: # validate_info(key: str = '', value: str = '') ? 
     pass
 
 # TODO implement create_player and call it
