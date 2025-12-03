@@ -5,19 +5,19 @@
 ### On site: Yes
 
 ## Elmar
-### Time:
-### On site:
+### Time: 8:30
+### On site: Yes
 
 ## Ísak Elí
 ### Time: 8:30
 ### On site: Yes
 
 ## Kristinn Hrafn
-### Time:
+### Time: 8:30
 ### On site:
 
 ## Kristján Hagalín
-### Time:
+### Time: 9:00
 ### On site:
 
 ## Sindri Freysson
@@ -31,7 +31,7 @@
 
 ## Divisions: 
 - UI / UX: Andri
-- System engineer:
+- System engineer: Elmar, Ísak, Kristinn, Kristján
 - QC: Sindri
 
 ## ToDo-list:
