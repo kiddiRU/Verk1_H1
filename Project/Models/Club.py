@@ -1,4 +1,9 @@
-"""Creator Elmar Sig"""
+"""
+Author: Elmar Sigmarsson > elmars25@ru.is <
+Date: 2025-12-02
+
+Club model class
+"""
 
 
 class Club:
@@ -15,11 +20,12 @@ class Club:
         """
         The initializer for the Club model class
 
-        name (str): name of club (3-30 char length)
-        list_teams_uuid (list[str]): list of all teams associated with the club
-        club_color (str): name of the club color (RED, BLUE, YELLOW, GREEN)
-        country (str): clubs home country (3-30 char length)
-        home_town (str): clubs home town (3-30 char length)
+        Args:
+            name (str): name of club (3-30 char length)
+            list_teams_uuid (list[str]): list of all teams associated with the club
+            club_color (str): name of the club color (RED, BLUE, YELLOW, GREEN)
+            country (str): clubs home country (3-30 char length)
+            home_town (str): clubs home town (3-30 char length)
         """
 
         self.name = name
