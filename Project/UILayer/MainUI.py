@@ -4,15 +4,15 @@ Date: 2025-12-03
 
 File that holds the main state machine.
 """
-#from LogicLayer.LogicLayerAPI import LogicAPI
+# from LogicLayer.LogicLayerAPI import LogicAPI
 from MenuUI import MenuUI
 
 class MainUI:
     """ Main UI State Machine"""
 
     def __init__(self) -> None:
- #       logic_api = LogicAPI()
-  #      self._menu_ui = MenuUI(logic_api)
+    #    logic_api = LogicAPI()
+    #    self._menu_ui = MenuUI(logic_api)
         self.current_screen = "MAIN_MENU"
 
 
