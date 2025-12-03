@@ -1,5 +1,5 @@
 """
-Author: Ísak Elí Hauksson > isak25@ru.is <
+Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-02
 
 Tournament Model Class
@@ -19,6 +19,7 @@ class Tournament:
 
     def __init__(
         self,
+        uuid: str,
         name: str,
         start_date: date,
         end_date: date,
@@ -35,13 +36,18 @@ class Tournament:
         The initialization function of the Tournament model class
 
         Args:
+            uuid (str): unique identifier
             name (str): Unique name for the tournament
-            start_date (str): Start date of the tournament (YYYY-MM-DD)
-            end_date (str): End date of the tournament (YYYY-MM-DD)
+            start_date (date): Start date of the tournament (YYYY-MM-DD)
+            end_date (date): End date of the tournament (YYYY-MM-DD)
             venue (str): Location of the tournament
             email (str): Tournament email (length <= 64)
             phone_number (str): Tournament phone number 
                         (length of 8  = 000-0000)
+            time_frame_start (time, optional): Start of the event per day. 
+                        Defaults to time(hour=8,minute=0).
+            time_frame_end (time, optional): End of the event per day. 
+                        Defaults to time(hour=16,minute=0).
             status (StatusType, optional): Tournament status.
                         Defaults to StatusType.inactive.
             list_servers (list[str], optional): 
@@ -49,7 +55,8 @@ class Tournament:
             teams_playing (list[str], optional): 
                         List containing uuid's of teams. Defaults to [].
         """
-
+        
+        self.uuid = uuid
         self.name = name
         self.start_date = start_date
         self.end_date = end_date

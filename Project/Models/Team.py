@@ -1,5 +1,5 @@
 """
-Author: Ísak Eli Hauksson > isak25@ru.is <
+Author: Ísak Eli Hauksson <isak25@ru.is>
 Date: 2025-12-02
 
 Team Model Class
@@ -9,6 +9,7 @@ Team Model Class
 class Team:
     def __init__(
         self,
+        uuid: str,
         name: str,
         list_player_uuid: list[str],
         team_captain_uuid: str,
@@ -21,6 +22,7 @@ class Team:
         The initializer for the Team model class
 
         Args:
+            uuid (str): unique identifier
             name (str): an unique name for the team (3-30 char length)
             list_player_uuid (list[str]): players apart of the team
             team_captain_uuid (str): uuid of the player captain
@@ -30,6 +32,7 @@ class Team:
             ascii_art (str, optional): ascii art logo for a team. Defaults to "".
         """
 
+        self.uuid = uuid
         self.name = name
         self.list_player_uuid = list_player_uuid
         self.team_captain_uuid = team_captain_uuid
