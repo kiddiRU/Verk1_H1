@@ -1,5 +1,5 @@
 """
-Author: Elmar Sigmarsson
+Author: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
 
 Created the PlayerLL class and added the functions
@@ -7,11 +7,15 @@ Created the PlayerLL class and added the functions
 
 ##TODO add nessecery imports
 from uuid import uuid4
+from DataLayer import DataLayerAPI
 from Models.Player import Player
 from Models.Team import Team
+from LogicLayer.Validation import validate_name, validate_home_address, validate_phone_number, validate_date, validate_unique_name, validate_email
 
 class PlayerLL():
-    def __init__(self):
+
+
+    def __init__(self) -> None:
         pass
 
 
@@ -47,22 +51,48 @@ class PlayerLL():
     #TODO implement creating a player
     def create_player(self,
                 name: str,
-                home_address: str,
-                phone_number: str,
                 date_of_birth: str,
-                handle: str,
+                home_address: str,
                 email: str,
+                phone_number: str,
+                handle: str,
                 url: str
                 ) -> Player:
         
-        # sends name to a validation file to check for validation
-        # sends home address to a validation file to check for validation
-        # sends phone number to a validation file to check for validation
-        # sends date of birth to a validation file to check for validation
-        # sends handle to a validation file to check for validation 
-        # sends email to a validation file to check for validation 
+        """
+        Validates player info, sends info to Player file in Module folder
+        to create a player
+        """
+        name_stripped: str = name.strip()
+        date_of_birth_stripped: str = date_of_birth.strip()
+        home_address_stripped: str = home_address.strip()
+        email_stripped: str = email.strip()
+        phone_number_stripped: str = phone_number.strip()
+        handle_stripped: str = handle.strip()
+        url_stripped: str = url.strip()
 
-        self.uuid = uuid4
+        # Sends the player info to validation file to check for validation
+        #TODO implement what to do if the validation returns False
+        uuid = uuid4
+        final_name = validate_name(name_stripped)
+        final_date_of_birth = validate_date(date_of_birth_stripped)
+        final_home_address = validate_home_address(home_address_stripped)
+        final_email = validate_email(email_stripped)
+        final_phone_number = validate_phone_number(phone_number_stripped)
+        final_handle = validate_unique_name(handle_stripped)
+        final_url = url_stripped
+
+        # sends the info to the Player module class to create a player
+        player = Player(uuid, final_name, final_date_of_birth, final_home_address, final_email, final_phone_number, final_handle, final_url)
+
+        # tries to input the player to the DataLayerAPI
+        try:
+            DataLayerAPI.store_player(player)
+
+        #TODO add error message 
+        except:
+            return ""
+
 
     #TODO implement changing player info
     def change_player_info(self, ) -> None:
