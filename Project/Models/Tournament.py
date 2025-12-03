@@ -19,6 +19,7 @@ class Tournament:
 
     def __init__(
         self,
+        uuid: str,
         name: str,
         start_date: date,
         end_date: date,
@@ -35,6 +36,7 @@ class Tournament:
         The initialization function of the Tournament model class
 
         Args:
+            uuid (str): unique identifier
             name (str): Unique name for the tournament
             start_date (date): Start date of the tournament (YYYY-MM-DD)
             end_date (date): End date of the tournament (YYYY-MM-DD)
@@ -53,7 +55,8 @@ class Tournament:
             teams_playing (list[str], optional): 
                         List containing uuid's of teams. Defaults to [].
         """
-
+        
+        self.uuid = uuid
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
