@@ -1,5 +1,5 @@
 """
-Author: Ísak Eli Hauksson > isak25@ru.is <
+Author: Ísak Eli Hauksson <isak25@ru.is>
 Date: 2025-12-02
 
 Team Model Class
