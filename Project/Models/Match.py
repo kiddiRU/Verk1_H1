@@ -1,4 +1,4 @@
-""" 
+"""
 Author: Elmar Sigmarsson > elmars25@ru.is <
 Date: 2025/12/02
 
@@ -7,7 +7,8 @@ Match model class
 
 from datetime import date, time
 
-class Match():
+
+class Match:
     """Match model class"""
 
     def __init__(
@@ -18,9 +19,8 @@ class Match():
         match_time: time,
         team_1: str,
         team_2: str,
-        winner: None | str
-        ) -> None:
-
+        winner: None | str,
+    ) -> None:
         """
         Initializer for Match model class
 

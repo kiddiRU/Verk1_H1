@@ -1,7 +1,9 @@
-""" Creator Elmar Sig"""
+"""Creator Elmar Sig"""
 
-class Club():
-    """ Club model class"""
+
+class Club:
+    """Club model class"""
+
     def __init__(
         self,
         name: str,
@@ -10,15 +12,14 @@ class Club():
         country: str,
         home_town: str,
     ) -> None:
-
         """
         The initializer for the Club model class
 
-        name (str): name of club (3-30 char lengt)
+        name (str): name of club (3-30 char length)
         list_teams_uuid (list[str]): list of all teams associated with the club
         club_color (str): name of the club color (RED, BLUE, YELLOW, GREEN)
-        country (str): clubs home country (3-30 char lengt)
-        home_town (str): clubs home town (3-30 char lengt)
+        country (str): clubs home country (3-30 char length)
+        home_town (str): clubs home town (3-30 char length)
         """
 
         self.name = name
