@@ -18,7 +18,7 @@ Inserts information about the Player class into a json file
 for storage.
 """
 def store_player(player: Player) -> None:
-    data = {
+    data: dict[str, str] = {
         "name": player.name, 
         "date_of_birth": player.date_of_birth,
         "home_address": player.home_address,
@@ -29,7 +29,7 @@ def store_player(player: Player) -> None:
     }
         
     with open(FILE_PATH, "r") as player_file:
-        file_content = dict(json.load(player_file))
+        file_content: dict[str, dict[str, str]] = dict(json.load(player_file))
 
     file_content[player.uuid] = data
         
@@ -47,9 +47,9 @@ Returns the created player list.
 """
 def load_players() -> list[Player]:
     with open(FILE_PATH, "r") as player_file:
-        file_content = dict(json.load(player_file))
+        file_content: dict[str, dict[str, str]] = dict(json.load(player_file))
         
-    player_list = []
+    player_list: list[Player] = []
     for uuid, value in file_content.items():
         player.append(Player(uuid,
                              value["name"],
@@ -72,7 +72,7 @@ value tied to given key of that player
 """
 def update_player(uuid: str, key: str, value: str) -> None:
     with open(FILE_PATH, "r") as player_file:
-        file_content = dict(json.load(player_file))
+        file_content: dict[str, dict[str, str]] = dict(json.load(player_file))
 
     if uuid in file_content:
         if key in file_content[uuid]:
