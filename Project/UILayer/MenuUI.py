@@ -4,11 +4,14 @@ Date: 2025-12-03
 
 File that holds all the menus
 """
-from LogicLayer.LogicLayerAPI import LogicAPI
+
+from UILayer.MenuOptions import MenuOptions
 
 class MenuUI:
-    def __init__(self, logic_api: LogicAPI) -> None:
-        self.logic_api = logic_api
+    def __init__(
+        self,
+    ) -> None:
+        pass
 
     def _prompt_choice(self, valid_choices: list[str]) -> str:
         valid_choices_lower: list[str] = [x.lower() for x in valid_choices]
@@ -17,7 +20,7 @@ class MenuUI:
             choice: str = input("-> ").strip().lower()
             if choice in valid_choices_lower:
                 return choice
-            
+
             print("not a valid option try again")
 
     def show_start_screen(self) -> str:
@@ -27,14 +30,21 @@ class MenuUI:
         print(f"3. Spectate")
         print(f"q. Quit")
 
-        choice: str = self._prompt_choice(["1","2","3","q"])
+        choice: str = self._prompt_choice(["1", "2", "3", "q"])
         if choice == "1":
-            return "LOGIN"
+            return MenuOptions.main_menu
         if choice == "2":
             return "REGISTER"
         if choice == "3":
             return "SPECTATE"
-        return "Quit"
+        print("EXIT???")
+        return "QUIT"
 
-
-
+    def show_login_screen(self) -> str:
+        print("THIS IS THE LOGIN SCREEN")
+        choice: str = input("Input handle here: ")
+        if choice == "admin":
+            return "ADMIN"
+        # if choice in Player_list:
+        #     return "PLAYER_SCREEN"
+        return "QUIT"
