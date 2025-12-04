@@ -49,13 +49,51 @@ def validate_name(name) -> str | ValidationError: # Players full name
         return name
     
     
-def validate_home_address(home_address) -> bool: # Players home address
+def validate_home_address(home_address) -> str | ValidationError: # Players home address
     """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
-    return home_address
+    
+    try:
+        address_list: str = home_address.split()
+        street_name: str = address_list[0]
+        street_number: str = address_list[1]
+        area_name: str = address_list[2]
+        
+        is_string_street_name: bool = street_name.isalpha()
+        is_digit_street_number: bool = street_number.isdigit()
+        is_string_area_name: bool = area_name.isalpha()
 
-def validate_phone_number(phone_number) -> bool: # Players and tournament contact phone number
+        if is_string_street_name and is_digit_street_number and is_string_area_name:
+            return home_address
+
+        else:
+            raise ValidationError
+
+
+    except:
+        raise ValidationError
+
+
+def validate_phone_number(phone_number) -> str | ValidationError: # Players and tournament contact phone number
     """Checks if phone number is eight in length 7 nums and a dash (123-4567)"""
-    return phone_number
+    
+    if "-" in phone_number:
+        phone_number_list: list = phone_number.split("-")
+        first_half_phone_nr: str = phone_number_list[0]
+        second_half_phone_nr: str = phone_number_list[1]
+
+        is_digit_first_half: bool = first_half_phone_nr.isdigit()
+        is_digit_second_half: bool = second_half_phone_nr.isdigit()
+        length_first_half: bool = len(first_half_phone_nr) == 3
+        length_second_half: bool = len(second_half_phone_nr) == 4
+
+        if is_digit_first_half and is_digit_second_half and length_first_half and length_second_half:
+            return phone_number
+
+        else:
+            raise ValidationError("Phone number inputted incorrectly")
+    
+    else:
+        raise ValidationError("Phone number inputted incorrectly")
 
 
 def validate_email(email) -> bool: # Players and tournament contact email
@@ -65,10 +103,14 @@ def validate_email(email) -> bool: # Players and tournament contact email
 def validate_date(date_input) -> str | ValidationError: # Date of Birth, Date of Tournament
     """Checks if date format is correct YYYY-MM-DD"""
 
-    date_list = date_input.split("-")
-    year: int = int(date_list[0])
-    month: int =  int(date_list[1])
-    day: int = int(date_list[2])
+    try:
+        date_list = date_input.split("-")
+        year: int = int(date_list[0])
+        month: int =  int(date_list[1])
+        day: int = int(date_list[2])
+
+    except:
+        raise ValidationError("Date inputted incorrectly")
 
     try:
         validate_date = date(year, month, day)
