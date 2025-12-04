@@ -43,10 +43,12 @@ class PlayerLL():
     def validate_handle(self):
         pass
 
-    
-    """functions for player"""
+    """
+    Takes in player info.
 
-    #TODO implement creating a player
+    Validates the given info, creates a player object if valid. Sends the 
+    object to the data layer to be stored and returns the new player
+    """
     def create_player(self,
                 name: str,
                 date_of_birth: str,
@@ -57,33 +59,38 @@ class PlayerLL():
                 url: str
                 ) -> Player:
         
-        """
-        Validates player info, sends info to Player file in Module folder
-        to create a player
-        """
         uuid = str(uuid4())
 
-        params = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
             try:
                 validate(attr, value.strip(), name_type = 'PLAYER')
-                
             except Exception as error:
                 raise error
 
-        player = Player(uuid, params['name'], params['date_of_birth'], params['home_address'], params['email'], params['phone_number'], params['handle'], params['url'])
+        new_player = Player(
+            uuid,
+            params["name"],
+            params["date_of_birth"],
+            params["home_address"],
+            params["email"],
+            params["phone_number"],
+            params["handle"],
+            params["url"],
+        )
 
         try:
-            DataLayerAPI.store_player(player)
+            DataLayerAPI.store_player(new_player)
         except Exception as error:
             raise error
+        
+        return new_player
 
     '''
     Takes in a Player object and potential attribute updates.
 
     Sends updated values to the data layer, and returns and updated Player object.
     '''
-    # TODO implement validation
     def change_player_info(
             self,
             player: Player,
@@ -111,11 +118,15 @@ class PlayerLL():
         for k, v in player_attr:
             self._data_api.update_player(player.uuid, k, v)
 
-        updated_player: Player = player
+        updated_player = player
         return updated_player
     
-    
-    #TODO implement creating a team
+    '''
+    Takes in the teams name, its captain, club, url and ascii art.
+
+    Creates a new Team object and sends it the data layer to be stored.
+    '''
+    # TODO Fetch club uuid once ClubIO has been implemented. Return new Team? 
     def create_team(self, name: str, team_captain: Player, club: str, url: str, ascii_art: str) -> Team:
         self.uuid = str(uuid4())
 
