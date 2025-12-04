@@ -1,17 +1,18 @@
-"""404 Andri Not Found"""
+"""
+Author: Andri Már Kristjánsson <andrik25@ru.is>
+Date: 2025-12-04
+
+File that takes in table info, creates the table and can clear the terminal
+"""
 import os
 
 class Drawer():
 
-    def __init__(self, table_name, table_path = [], table_info = [], table_options = ["b Back"]) -> None:
+    def __init__(self) -> None:
         "Initializes the class"
+        
 
-        self.table_name: str = table_name
-        self.table_path: list = table_path
-        self.table_info: list = table_info
-        self.table_options: list = table_options
         #Colours
-
         RED = "\033[31m"
         REDHIGH = "\033[41m"
         GREEN = "\033[32m"
@@ -19,6 +20,7 @@ class Drawer():
         BLUE = "\033[34m"
         PINK = "\033[35m"
         CYAN = "\033[36m"
+
 
         #Text change
         self.RESET = "\033[0m"
@@ -32,7 +34,7 @@ class Drawer():
 
 
     def clear(self) -> None:
-        "Clears the system"
+        "Clears the terminal"
 
         os.system("cls" if os.name == "nt" else "clear")
 
@@ -60,41 +62,45 @@ class Drawer():
     
 
 
-    def table(self) -> str:
+    def table(self, table_name, table_path = [], table_info = [], table_options = []) -> str:
         "Creates and returns the UI tables"
+
+        self.clear()
+        print(self.banner())
+
 
         table = """"""
         path = ""
         line = "————————————————————————————————————————————————————————————————————————————————" + "\n"
 
-        if self.table_path:
-            path += self.table_path[0]
-            for step in self.table_path[1:]:
+        if table_path:
+            path += table_path[0]
+            for step in table_path[1:]:
                 path += " -> " + step
 
 
             table += path + "\n"
             table += line
             
-        table += f"{self.table_name: ^80}" + "\n"
+        table += f"{table_name: ^80}" + "\n"
         table += line
 
-        if self.table_info:
-            for info in self.table_info:
+        if table_info:
+            for info in table_info:
                 table += info + "\n"
 
             table += line
 
-        if self.table_options:
-            for option in self.table_options:
+        if table_options:
+            for option in table_options:
                 table += option + "\n"
 
             table += line
-            table += "Choose Action"
+            table += "Choose Action:"
             
 
 
-        return self.table_color + table
+        return self.table_color + table + self.RESET
 
 
 
