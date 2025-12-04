@@ -2,8 +2,8 @@
 Author: Andri Már Kristjánsson <andrik25@ru.is>
 Date: 2025-12-04
 
-File that takes in table info, creates the table and can clear the terminal, also can save previous user inputs
-that need to be displayed on the table
+File that takes in table info, creates the table and can clear the terminal, 
+also can save previous user inputsthat need to be displayed on the table
 
 takes 5 arguments:
      table name, user path, table info, table options, message to be displayed
@@ -14,7 +14,7 @@ import os
 class Drawer():
 
     def __init__(self) -> None:
-        "Initializes the class"
+        """Initializes the class"""
         
         self.previous_inputs: list = []
 
@@ -36,6 +36,9 @@ class Drawer():
         self.path_color: str = RED
         self.table_color: str = self.BOLD 
 
+    
+        self.line: str = 80 * "—" + "\n"
+
 
 
     def clear(self) -> None:
@@ -46,11 +49,11 @@ class Drawer():
 
 
     def banner(self) -> str:
-        "Prints the banner"
+        """Prints the banner"""
 
 
         return f"""{self.banner_border}
-————————————————————————————————————————————————————————————————————————————————{self.RESET}                                           
+{self.line}{self.RESET}                                           
 
         ▄▄▄   ▄▄▄ ▄▄▄▄▄▄▄                  ▄▄▄▄▄▄▄                                 
         ███   ███ ███▀▀███▄               █████▀▀▀                    ██           
@@ -67,20 +70,19 @@ class Drawer():
     ▀███████ ██ ██  ██   ██    ▀█▄██  ▀█▀  ▀█▄██ ▀████ ▀█▄██ ██ ██ ▄██▄▄ ▀█▄██ 
                                                     ██                         
                                                   ▀▀▀                          
-                                                                                                    {self.RESET}
-{self.banner_border}————————————————————————————————————————————————————————————————————————————————{self.RESET} \n\n"""
+{self.RESET}
+{self.banner_border}{self.line}{self.RESET} \n\n"""
     
 
 
     def table(self, table_name, table_path = [], table_info = [], table_options = [], message = "") -> str:
-        "Creates and returns the UI tables"
+        """Creates and returns the UI tables"""
 
         self.clear()
         print(self.banner())
 
         table: str = """"""
         path: str = ""
-        line: str = "————————————————————————————————————————————————————————————————————————————————" + "\n"
 
         if table_path:
             path += table_path[0]
@@ -89,34 +91,34 @@ class Drawer():
 
 
             table += path + "\n"
-            table += line
+            table += self.line
             
         table += f"{table_name: ^80}" + "\n"
-        table += line
+        table += self.line
 
         if self.previous_inputs:
             for info in self.previous_inputs:
                 table += info + "\n"
 
-            table += line
+            table += self.line
 
         if table_info:
             for i in table_info:
                 table += i + "\n"
 
-            table += line
+            table += self.line
 
 
         if message:
             table += message + "\n"
-            table += line
+            table += self.line
 
 
         if table_options:
             for option in table_options:
                 table += option + "\n"
 
-            table += line
+            table += self.line
             table += "Choose Action:"
 
 
@@ -127,7 +129,7 @@ class Drawer():
 
 
     def save_input(self, user_input) -> list:
-
+        """Saves data so that it will be printed at the top of the table"""
 
         self.previous_inputs.append(user_input)
 
