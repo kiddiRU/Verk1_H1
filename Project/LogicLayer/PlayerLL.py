@@ -10,7 +10,7 @@ from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models.Player import Player
 from Models.Team import Team
-from LogicLayer.Validation import validate_name, validate_home_address, validate_phone_number, validate_date, validate_unique_name, validate_email
+from LogicLayer.Validation import validate, validate_name, validate_home_address, validate_phone_number, validate_date, validate_unique_name, validate_email
 
 class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
@@ -61,35 +61,22 @@ class PlayerLL():
         Validates player info, sends info to Player file in Module folder
         to create a player
         """
-        name_stripped: str = name.strip()
-        date_of_birth_stripped: str = date_of_birth.strip()
-        home_address_stripped: str = home_address.strip()
-        email_stripped: str = email.strip()
-        phone_number_stripped: str = phone_number.strip()
-        handle_stripped: str = handle.strip()
-        url_stripped: str = url.strip()
-
-        # Sends the player info to validation file to check for validation
-        #TODO implement what to do if the validation returns False
         uuid = str(uuid4())
-        final_name = validate_name(name_stripped)
-        final_date_of_birth = validate_date(date_of_birth_stripped)
-        final_home_address = validate_home_address(home_address_stripped)
-        final_email = validate_email(email_stripped)
-        final_phone_number = validate_phone_number(phone_number_stripped)
-        final_handle = validate_unique_name(handle_stripped)
-        final_url = url_stripped
 
-        # sends the info to the Player module class to create a player
-        player = Player(uuid, final_name, final_date_of_birth, final_home_address, final_email, final_phone_number, final_handle, final_url)
-        
-        # tries to input the player to the DataLayerAPI
+        params = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        for attr, value in params.items():
+            try:
+                validate(attr, value.strip(), name_type = 'PLAYER')
+                
+            except Exception as error:
+                raise error
+
+        player = Player(uuid, params['name'], params['date_of_birth'], params['home_address'], params['email'], params['phone_number'], params['handle'], params['url'])
+
         try:
             DataLayerAPI.store_player(player)
-
-        #TODO add error message 
-        except:
-            return ""
+        except Exception as error:
+            raise error
 
     '''
     Takes in a Player object and potential attribute updates.
@@ -109,27 +96,37 @@ class PlayerLL():
             url: str
             ) -> Player:
         
-        params: dict = {k: v for k, v in locals().items() if k not in ("self", "player")}
+        params: dict[str, str] = {k: v for k, v in locals().items() if k not in ('self', 'player')}
         for attr, value in params.items():
             if value == '':
                 continue
-                
-            setattr(player, attr, value)
+            
+            try:
+                validate(attr, value, name_type='PLAYER')
+                setattr(player, attr, value)
+            except Exception as error:
+                raise error
         
-        player_attr: dict = player.__dict__.items()
+        player_attr: dict[str, str] = player.__dict__.items()
         for k, v in player_attr:
             self._data_api.update_player(player.uuid, k, v)
 
-        updated_player = player
+        updated_player: Player = player
         return updated_player
     
     
     #TODO implement creating a team
-    def create_team(self, name: str, club: str, url: str, ascii_art: str) -> Team:
-        
-        # Calls a function 
+    def create_team(self, name: str, team_captain: Player, club: str, url: str, ascii_art: str) -> Team:
+        self.uuid = str(uuid4())
 
-        self.uuid = uuid4
+        # At the moment the clubs name is registerd, not its uuid
+        new_team = Team(self.uuid, name, [team_captain.uuid], team_captain.uuid, club, None, url, ascii_art)
+
+        self._data_api.store_team(new_team)
+        
+        # return new_team ?
+
+        
 
     #TODO implement leaving a team
     def leave_team(self, name: str, team: str) -> None:
