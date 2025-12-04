@@ -21,7 +21,7 @@
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 8:17
+### Time: 8:17 - 18:00
 ### On site: Yes
 
 # Morning meeting (Briefing)
