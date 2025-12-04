@@ -87,12 +87,12 @@ class PlayerLL():
             except Exception as error:
                 raise error
         
-        player_attr: dict[str, str] = player.__dict__.items()
-        for k, v in player_attr:
-            self._data_api.update_player(player.uuid, k, v)
+        try:
+            self._data_api.update_player(player.uuid, player)
+        except Exception as error:
+            raise error
 
-        updated_player = player
-        return updated_player
+        return player
     
     '''
     Takes in the teams name, its captain, club, url and ascii art.
