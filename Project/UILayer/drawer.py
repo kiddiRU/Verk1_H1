@@ -8,6 +8,7 @@ that need to be displayed on the table
 takes 5 arguments:
      table name, user path, table info, table options, message to be displayed
 """
+
 import os
 
 class Drawer():
