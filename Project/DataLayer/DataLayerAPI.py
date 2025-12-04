@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO
+from DataLayer import PlayerIO, TeamIO
 
 """ Player API """
 
@@ -49,17 +49,40 @@ def update_player(uuid: str, key: str, value: str) -> None:
 
 """ Team API """
 
-# TODO implement load_teams and call it
+"""
+No parameters
+
+Reads json file containing teams and creates a list of
+Team model objects of each entry in the json file.
+
+Returns the created team list.
+
+Have to call within try except.
+"""
 def load_teams() -> list[Team]:
-    pass
+    return TeamIO.load_teams()
 
-# TODO implement update_team and call it
+"""
+Takes in uuid, key and value as parameters.
+
+uuid and key have to exist in the json file.
+
+Will attempt to find team with given uuid and update the
+value tied to given key of that team.
+
+Have to call within try except.
+"""
 def update_team(uuid: str, key: str, value:str) -> None:
-    pass
+    TeamIO.update_team(uuid, key, value)
 
-# TODO implement store_team and call it
+"""
+Takes in model class Team
+
+Inserts information about the Team class into a json file
+for storage.
+"""
 def store_team(team: Team) -> None:
-    pass
+    TeamIO.store_team(team)
 
 """ Club API """
 

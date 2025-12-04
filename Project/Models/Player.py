@@ -16,7 +16,7 @@ class Player():
                  date_of_birth: str,
                  home_address: str,
                  email: str,
-                 phone_number: int,
+                 phone_number: str,
                  handle: str,
                  url: str = "") -> None:
         
@@ -27,7 +27,7 @@ class Player():
             date_of_birth (str): players date of birth (YYYY-MM-DD)
             home_address (str): players home_address (street_name street_number, Frostafold 12)
             email (str): players email (johnDoe@gmail.com) 
-            phone_number (int): 1234567
+            phone_number (str): 1234567
             handle (str): players handle ingame has to be UNIQE (3-30 char lengt)
             url (str): url to players social (optional)
         """

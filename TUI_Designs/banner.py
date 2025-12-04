@@ -14,7 +14,7 @@ CYAN = "\033[36m"
 
 RESET = "\033[0m"
 BOLD = "\033[1m"
-EXTRABOLD = BOLD + "\033[37m"
+EXTRABOLD = "\033[37m"
 
 banner_border = REDHIGH
 path_color = RED
@@ -41,6 +41,10 @@ print("\n" + banner_border + BOLD +
                                       /____/                                   
 """ + REDHIGH +
 "————————————————————————————————————————————————————————————————————————————————" + RESET + "\n")
+
+
+print(BOLD + "HELLO WORLD THIS IS BOLD")
+print(EXTRABOLD + "HELLO WORLD THIS IS EXTRA BOLD")
 
 
 print( 
