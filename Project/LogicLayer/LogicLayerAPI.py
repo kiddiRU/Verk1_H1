@@ -45,7 +45,7 @@ def update_player_info(
         url: str = ''
         ) -> None:
     
-    return player_logic.update_player_info_player_info(
+    return player_logic.update_player_info(
         player,
         name,
         date_of_birth,
