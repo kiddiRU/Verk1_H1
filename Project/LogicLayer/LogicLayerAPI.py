@@ -6,10 +6,11 @@ Logic layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
+from DataLayer import DataLayerAPI
 from LogicLayer.PlayerLL import PlayerLL
 
 ''' Player API '''
-player_logic: PlayerLL = PlayerLL()
+player_logic: PlayerLL = PlayerLL(DataLayerAPI)
 
 # TODO implement validate_info and call it / or not?
 def validate_info() -> None:
@@ -37,8 +38,27 @@ def create_player(
     )
 
 # TODO implement change_player_info and call it
-def change_player_info(player: Player) -> None:
-    pass
+def change_player_info(
+        player: Player,
+        name: str = '',
+        date_of_birth: str = '', 
+        home_address: str = '',
+        email: str = '',
+        phone_number: str = '', 
+        handle: str = '', 
+        url: str = ''
+        ) -> None:
+    
+    return player_logic.change_player_info(
+        player,
+        name,
+        date_of_birth,
+        home_address,
+        email,
+        phone_number,
+        handle,
+        url
+    )
 
 # TODO implement create_team and call it
 def create_team(name: str, team_captain: Player, club: Club) -> Team:

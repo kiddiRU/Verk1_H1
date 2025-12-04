@@ -7,7 +7,7 @@ stored in the ./DataLayer/Repository/players.json
 """
 
 import json
-from Models.Player import Player
+from Models import Player
 
 FILE_PATH = "./DataLayer/Repository/players.json"
 
