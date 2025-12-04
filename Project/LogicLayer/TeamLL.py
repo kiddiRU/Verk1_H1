@@ -16,12 +16,23 @@ class TeamLL():
 
 
     #TODO implement letting the captain to add player to his team
-    def add_player(self, player_uuid) -> Team:
-        pass
+    def add_player(self, team_uuid: str, player_uuid: str) -> Team:
+        
+        model_teams: list = DataLayerAPI.update_team()
+        for team in model_teams:
+            if team.uuid == team_uuid:
+                (team.player).append(player_uuid)
+        
+        
 
     #TODO implement letting the captain to remove a player from his team
-    def remove_player(self):
-        pass
+    def remove_player(self, team_uuid: str, player_uuid: str):
+
+        model_teams: list = DataLayerAPI.update_team()
+        for team in model_teams:
+            if team.uuid == team_uuid:
+                (team.player).remove(player_uuid)
+        
 
 
     def get_team_members(self, team_uuid):
