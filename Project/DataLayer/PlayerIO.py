@@ -48,7 +48,7 @@ def load_players() -> list[Player]:
     
     # Creates a list of all players in the player_file as a Player model object.
     player_list: list[Player] = []
-   for value in file_content.values():
+    for value in file_content.values():
         # Uses **value to unpack the dictionary into a Player model object.
         player_list.append(Player(**value))
         
