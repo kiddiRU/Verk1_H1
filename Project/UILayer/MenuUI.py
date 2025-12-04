@@ -104,3 +104,9 @@ StartPage -> Login
         #     return "PLAYER_SCREEN"
         return MenuOptions.quit
 
+
+
+
+
+test = MenuUI()
+print(test.show_start_screen)
