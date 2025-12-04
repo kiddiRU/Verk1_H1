@@ -98,6 +98,7 @@ StartPage -> Login
         if choice == "admin":
             return MenuOptions.admin_page
         
+        
         # LogicLayerAPI.validate_unique_name(choice)
         
         # if choice in Player_list:
@@ -126,5 +127,5 @@ Choose Action:
 ————————————————————————————————————————————————————————————————————————————————
 """
         )
-        input("INOUT AS ADMIN")
+        input("INPUT AS ADMIN: ")
         return MenuOptions.main_menu

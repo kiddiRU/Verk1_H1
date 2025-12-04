@@ -32,10 +32,12 @@ class MainUI:
             
             # main menu
             if self.current_screen == MenuOptions.main_menu:
+                self.__clear()
                 self.current_screen = self._menu_ui.show_start_screen()
 
             # login
             if self.current_screen == MenuOptions.login:
+                self.__clear()
                 self.current_screen = self._menu_ui.show_login_screen()
 
             # admin page
