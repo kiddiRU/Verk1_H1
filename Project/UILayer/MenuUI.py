@@ -28,11 +28,11 @@ class MenuUI:
             if choice in valid_choices_lower:
                 return choice
 
-            print("not a valid option try again")
+            print("Not a valid option try again")
 
     def __input_info(self, message: str) -> str:
         """
-        A helper function for inputted string
+        A helper function for inputted string that checks for too long strings
 
         Args:
             message (str): The input message to the user
@@ -40,11 +40,14 @@ class MenuUI:
         Returns:
             str: The input from the user
         """
-        choice: str = input(message)
-        return choice.strip()
+        while True:
+            choice: str = input(message)
+            if len(choice) >= 3 and len(choice) <= 40:
+                return choice.strip()
+            print("Not a valid length")
 
     def show_start_screen(self) -> str:
-        """ Start screen with choices: 1, 2, 3 and q """
+        """Start screen with choices: 1, 2, 3 and q"""
         print(
             r"""
 ————————————————————————————————————————————————————————————————————————————————
@@ -70,7 +73,8 @@ StartPage
 3 Spectate
 q Quit
 ————————————————————————————————————————————————————————————————————————————————
-""")
+"""
+        )
         choice: str = self.__prompt_choice(["1", "2", "3", "q"])
         match choice:
             case "1":
@@ -85,26 +89,26 @@ q Quit
         return MenuOptions.back
 
     def show_login_screen(self) -> str:
-        """ Login screen which asks for a player handle"""
+        """Login screen which asks for a player handle"""
 
-        print(r"""
+        print(
+            r"""
 * User Path *
 StartPage -> Login
 ————————————————————————————————————————————————————————————————————————————————
                                     Login
 ————————————————————————————————————————————————————————————————————————————————
-""")
+"""
+        )
         choice: str = self.__input_info("Input Your Handle: ")
         if choice == "admin":
             return MenuOptions.admin_page
         
-        
-        # LogicLayerAPI.validate_unique_name(choice)
-        
+        # TODO: check if handle exists from LL API
         # if choice in Player_list:
-        #     return "PLAYER_SCREEN"
-        return MenuOptions.quit
+        #     return MenuOption.player_page
 
+        return MenuOptions.quit
 
     def show_register_screen(self) -> str:
         choice: str = self.__prompt_choice(["1"])
@@ -112,7 +116,8 @@ StartPage -> Login
         return MenuOptions.main_menu
 
     def show_admin_page(self) -> str:
-        print(r"""
+        print(
+            r"""
 * User Path *
 StartPage -> AdminPage
 ————————————————————————————————————————————————————————————————————————————————
@@ -127,5 +132,14 @@ Choose Action:
 ————————————————————————————————————————————————————————————————————————————————
 """
         )
-        input("INPUT AS ADMIN: ")
+        choice: str = self.__prompt_choice(["1", "2", "3", "b"])
+        match choice:
+            case "1":
+                return MenuOptions.create_tournament
+            case "2":
+                return MenuOptions.manage_tournament
+            case "3":
+                return MenuOptions.create_club
+            case "b":
+                return MenuOptions.main_menu
         return MenuOptions.main_menu
