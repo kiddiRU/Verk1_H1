@@ -10,7 +10,7 @@ from DataLayer import DataLayerAPI
 from LogicLayer.PlayerLL import PlayerLL
 
 ''' Player API '''
-player_logic: PlayerLL = PlayerLL(DataLayerAPI)
+player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
 
 # TODO implement create_player and call it 
 def create_player(
