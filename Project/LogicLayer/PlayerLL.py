@@ -10,38 +10,11 @@ from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models.Player import Player
 from Models.Team import Team
-from LogicLayer.Validation import validate, validate_name, validate_home_address, validate_phone_number, validate_date, validate_unique_name, validate_email
+from LogicLayer.Validation import validate
 
 class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
         self._data_api: DataLayerAPI = data_api
-
-
-    """info from player to validate"""
-
-    #TODO call a file that checks validations for name
-    def validate_name(self):
-        pass
-
-    #TODO call a file that checks validations for date of birth
-    def validate_date_of_birth(self):
-        pass
-
-    #TODO call a file that checks validations for name
-    def validate_home_address(self):
-        pass
-    
-    #TODO call a file that checks validations for email
-    def validate_email(self):
-        pass
-    
-    #TODO call a file that checks validations for phone number
-    def validate_phone_number(self):
-        pass
-    
-    #TODO call a file that checks validations for unique handle
-    def validate_handle(self):
-        pass
 
     """
     Takes in player info.
