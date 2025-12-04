@@ -13,7 +13,7 @@ class Match:
 
     def __init__(
         self,
-        match_id: str,
+        uuid: str,
         server_id: str,
         match_date: date,
         match_time: time,
@@ -25,7 +25,7 @@ class Match:
         Initializer for Match model class
 
         Args:
-            match_id (str): uuid of a match
+            uuid (str): uuid of a match
             server_id (str): uuid of the server the match is held in
             date (str): date of the match (YYYY-MM-DD)
             time_of_match (str): time of the match (12:34)
@@ -34,7 +34,7 @@ class Match:
             winner (str): None | uuid of the winning team of the match (when a winner is chosen the match is marked as completed)
         """
 
-        self.match_id = match_id
+        self.uuid = uuid
         self.server_id = server_id
         self.match_date = match_date
         self.match_time = match_time
