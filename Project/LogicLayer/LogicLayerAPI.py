@@ -34,7 +34,7 @@ def create_player(
     )
 
 # TODO implement change_player_info and call it
-def change_player_info(
+def update_player_info(
         player: Player,
         name: str = '',
         date_of_birth: str = '', 
@@ -45,7 +45,7 @@ def change_player_info(
         url: str = ''
         ) -> None:
     
-    return player_logic.change_player_info(
+    return player_logic.update_player_info_player_info(
         player,
         name,
         date_of_birth,
