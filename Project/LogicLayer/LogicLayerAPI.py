@@ -78,7 +78,7 @@ def create_tournament(
         teams_playing: list[Team],
         email: str,
         phone_number: str,
-        status: Status = Status.INACTIVE
+        status: Tournament.StatusType = Tournament.StatusType.inactive
         # list_of_servers: list[uuid: str] ?
         ) -> Tournament:
 
