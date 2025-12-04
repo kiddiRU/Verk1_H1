@@ -33,7 +33,8 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
-            self.__clear()
+
+            # ------------------ Main Paths ------------------
             # main menu
             if self.current_screen == MenuOptions.main_menu:
                 self.current_screen = self._player_ui.start_screen()
@@ -42,10 +43,32 @@ class MainUI:
             elif self.current_screen == MenuOptions.login:
                 self.current_screen = self._player_ui.login_screen()
 
+            # register
+            elif self.current_screen == MenuOptions.register:
+                self.current_screen = self._player_ui.register_screen()
+
+            # spectate
+            elif self.current_screen == MenuOptions.spectate_screen:
+                self.current_screen = self._spectate_ui.spectate_screen()
+
+            # ------------------ Admin Paths ------------------
             # admin page
             elif self.current_screen == MenuOptions.admin_page:
                 self.current_screen = self._admin_ui.admin_screen()
+            
+            # create tournament
+            elif self.current_screen == MenuOptions.create_tournament:
+                self.current_screen = self._admin_ui.create_tournament()
+            
+            # manage tournament
+            elif self.current_screen == MenuOptions.manage_tournament:
+                self.current_screen = self._admin_ui.manage_tournaments()
+            
+            # create club
+            elif self.current_screen == MenuOptions.create_club:
+                self.current_screen = self._admin_ui.create_club()
 
+            # ------------------ Misc Paths ------------------
             # go to main menu if logout
             elif self.current_screen == MenuOptions.logout:
                 self.current_screen = MenuOptions.main_menu
@@ -56,4 +79,4 @@ class MainUI:
                 exit()
 
             else:
-                self.current_screen = self._utility_ui.screen_exist_error()
+                self.current_screen = self._utility_ui.screen_not_exist_error()
