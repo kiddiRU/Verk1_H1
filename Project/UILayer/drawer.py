@@ -127,7 +127,7 @@ class Drawer():
 
 
 
-    def table_input(self, user_input) -> list:
+    def save_input(self, user_input) -> list:
 
 
         self.previous_inputs.append(user_input)
