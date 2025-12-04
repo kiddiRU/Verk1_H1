@@ -9,7 +9,7 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 8:30
+### Time: 8:30 - 18:50
 ### On site: Yes
 
 ## Kristinn Hrafn
@@ -17,7 +17,7 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time: 9:00 
+### Time: 9:00 - 17:10
 ### On site: Yes
 
 ## Sindri Freysson
