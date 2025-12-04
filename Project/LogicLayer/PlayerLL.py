@@ -64,7 +64,7 @@ class PlayerLL():
 
     Sends updated values to the data layer, and returns and updated Player object.
     '''
-    def change_player_info(
+    def update_player_info(
             self,
             player: Player,
             name: str,
