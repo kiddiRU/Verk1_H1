@@ -18,22 +18,17 @@ Inserts information about the Team class into a json file
 for storage
 """
 def store_team(team: Team) -> None:
-    data: dict[str, str | list[str] | None] = {
-        "name": team.name,
-        "list_player_uuid": team.list_player_uuid,
-        "team_captain_uuid": team.team_captain_uuid,
-        "club_uuid": team.club_uuid,
-        "in_tournament": team.in_tournament,
-        "url_homepage": team.url_homepage,
-        "ascii_art": team.ascii_art
-    }
-    
+    # Changes object team int a dictionary mapping attributes to keys.
+    data = team.__dict__
+   
+    # Reads json file containing teams and stores it as a dictionary.
     with open(FILE_PATH, "r") as team_file:
-        file_content: dict[str, dict[str, str | list[str] | None]]
-        file_content = json.load(team_file)
-
+        file_content = dict(json.load(team_file))
+    
+    # Updates the dictionary adding the new team int the file content.
     file_content[team.uuid] = data
-
+    
+    # Writes the updated file content into the file containing teams.
     with open(FILE_PATH, "w") as team_file:
         json.dump(file_content, team_file)
 
@@ -46,21 +41,16 @@ Team model objects of each entry in the json file.
 Returns the created team list.
 """
 def load_teams() -> list[Team]:
+    # Reads the json file containing teams and stores it as a dictionary.
     with open(FILE_PATH, "r") as team_file:
-        file_content: dict[str, dict[str, str | list[str] | None]]
         file_content = dict(json.load(team_file))
 
+    # Creates a list of all teams in the team file.
+    # each team stored as a Team model object.
     team_list: list[Team] = []
-    for uuid, value in file_content.items():
-        value: dict[str, str | list[str] | None]
-        team_list.append(Team(uuid,
-                              value["name"],
-                              value["list_player_uuid"],
-                              value["team_captain_uuid"],
-                              value["club_uuid"],
-                              value["in_tournament"],
-                              value["url_homepage"],
-                              value["ascii_art"]))
+    for value in file_content.values():
+        # Uses **value to unpack the dictionary into a Team model object.
+        team_list.append(Team(**value))
 
     return team_list
 
@@ -73,14 +63,16 @@ Will attempt to find team with given uuid and update the
 value tied to given key of that team.
 """
 def update_team(uuid: str, key: str, value: str | list[str] | None) -> None:
+    # Reads the json file containing players and stores it as a dictionary.
     with open(FILE_PATH, "r") as team_file:
-        file_content: dict[str, dict[str, str | list[str] | None]]
         file_content = dict(json.load(team_file))
-    
-    print(uuid, key, value)
+   
+    # Updates the file content, checking if the uuid and key exist
+    # in the dictionary.
     if uuid in file_content:
         if key in file_content[uuid]:
             file_content[uuid][key] = value
-
+    
+    # Writes the updated dictionary into the player file.
     with open(FILE_PATH, "w") as team_file:
         json.dump(file_content, team_file)

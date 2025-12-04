@@ -9,40 +9,48 @@ from Models.Exception import ValidationError
 from DataLayer import DataLayerAPI
 from datetime import date
 
-
+def validate(attribute: str, value: str, name_type: str = ''):
+    if attribute == 'name': return validate_name(value)
+    elif attribute == 'date_of_birth': return validate_date(value)
+    elif attribute == 'home_address': return validate_home_address(value)
+    elif attribute == 'email': return validate_email(value)
+    elif attribute == 'phone_number': return validate_phone_number(value)
+    elif attribute == 'handle': return validate_unique_name(value, name_type)
+    else: return
+    
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | ValidationError:
     """
     Checks if the name is unique and is between 3-40 char in length
     Used for unique player handle, team tournament and club names
     """
 
-    if len(unique_name) < 3 and len(unique_name) > 40:
+    if len(unique_name) < 3 or len(unique_name) > 40:
         raise ValidationError("Name needs to be between 3 to 40 characters in length")
         
-    if type_of_name is "PLAYER":
+    if type_of_name == "PLAYER":
         model_player: list = DataLayerAPI.load_players()
 
         for player in model_player:
-            if player.name == unique_name:
+            if player.handle == unique_name:
                 raise ValidationError("Name is already taken")
         
         return unique_name
 
     #TODO implement check for unique names in team, tournament and club
-    elif type_of_name is "TEAM":
+    elif type_of_name == "TEAM":
         pass
 
-    elif type_of_name is "TOURNAMENT":
+    elif type_of_name == "TOURNAMENT":
         pass
 
-    elif type_of_name is "CLUB":
+    elif type_of_name == "CLUB":
         pass
 
 
 def validate_name(name) -> str | ValidationError: # Players full name
     """Checks if the name is in between 3-40 char in length and has only letters"""
     
-    if len(name) < 3 and len(name) > 40:
+    if len(name) < 3 or len(name) > 40:
         raise ValidationError("Name needs to be between 3 to 40 characters in length")
     
     else:
@@ -67,7 +75,6 @@ def validate_home_address(home_address) -> str | ValidationError: # Players home
 
         else:
             raise ValidationError
-
 
     except:
         raise ValidationError

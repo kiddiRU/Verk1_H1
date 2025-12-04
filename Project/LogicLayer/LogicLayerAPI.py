@@ -61,8 +61,8 @@ def change_player_info(
     )
 
 # TODO implement create_team and call it
-def create_team(name: str, team_captain: Player, club: Club) -> Team:
-    pass
+def create_team(name: str, team_captain: Player, club: Club, url: str, ascii_art: str) -> Team:
+    return player_logic.create_team(name, team_captain, club, url, ascii_art)
 
 # TODO implement leave_team and call it
 def leave_team(team: Team, player: Player) -> None:
