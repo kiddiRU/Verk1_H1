@@ -2,7 +2,8 @@
 Author: Andri Már Kristjánsson <andrik25@ru.is>
 Date: 2025-12-04
 
-File that takes in table info, creates the table and can clear the terminal
+File that takes in table info, creates the table and can clear the terminal, also can save previous user inputs
+that need to be displayed on the table
 
 takes 5 arguments:
      table name, user path, table info, table options, message to be displayed
