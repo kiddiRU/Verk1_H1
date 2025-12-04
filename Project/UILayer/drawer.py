@@ -3,8 +3,13 @@ import os
 
 class Drawer():
 
-    def __init__(self) -> None:
+    def __init__(self, table_name, table_path = "", table_info = "", table_options = "b Back") -> None:
         "Initializes the class"
+
+        self.table_name = table_name
+        self.table_path = table_path
+        self.table_info = table_info
+        self.table_options = table_options
         #Colours
 
         RED = "\033[31m"
@@ -50,32 +55,30 @@ class Drawer():
     / /___ >  </ /_/ /  / /_/ /| |/ / /_/ / /_/ / /_/ / / / / / /_/ /_/ /          
    /_____/_/|_|\__/_/   \__,_/ |___/\__,_/\__, /\__,_/_/ /_/ /___/\__,_/           
                                          /____/                             
-{self.banner_border}————————————————————————————————————————————————————————————————————————————————{self.RESET}"""
+{self.banner_border}————————————————————————————————————————————————————————————————————————————————{self.RESET} \n\n"""
     
 
 
-    def table_create(self):
-        "Creates the UI tables"
-    
+    def table(self) -> str:
+        "Creates and returns the UI tables"
 
-    def table_print(self):
-        "Prints the UI table"
+        table = """"""
 
+        if self.table_path:
+            table += f"""* User Path *
+{self.table_path}
+———————————————————————————————————————————————————————————————————————————————— \n"""
+            
+        table += f"{self.table_name: ^80} \n"
+        table += "————————————————————————————————————————————————————————————————————————————————"
 
-
-
-
-
-
-test = Drawer()
-
-a = "" 
-
-while a != "0":
-    test.clear()
-    print(test.banner())
-    a = input()
+        return table
 
 
 
- 
+
+
+
+
+
+
