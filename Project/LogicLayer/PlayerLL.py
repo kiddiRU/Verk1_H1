@@ -84,7 +84,6 @@ class PlayerLL():
 
         # sends the info to the Player module class to create a player
         player = Player(uuid, final_name, final_date_of_birth, final_home_address, final_email, final_phone_number, final_handle, final_url)
-        #player = Player('uuid', 'name', 'dob', 'address', 'email', 'phone', 'handle' )
         
         # tries to input the player to the DataLayerAPI
         try:
