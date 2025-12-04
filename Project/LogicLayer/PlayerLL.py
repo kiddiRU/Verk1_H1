@@ -91,8 +91,12 @@ class PlayerLL():
         except:
             return ""
 
+    '''
+    Takes in a Player object and potential attribute updates.
 
-    #TODO implement changing player info
+    Sends updated values to the data layer, and returns and updated Player object.
+    '''
+    # TODO implement validation
     def change_player_info(
             self,
             player: Player,
