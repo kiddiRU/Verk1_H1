@@ -12,10 +12,6 @@ from LogicLayer.PlayerLL import PlayerLL
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI)
 
-# TODO implement validate_info and call it / or not?
-def validate_info() -> None:
-    pass
-
 # TODO implement create_player and call it 
 def create_player(
         name: str,
