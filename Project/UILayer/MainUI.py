@@ -42,7 +42,7 @@ class MainUI:
 
             # admin page
             if self.current_screen == MenuOptions.admin_page:
-                print("you are admin")
+                self.current_screen = self._menu_ui.show_admin_page()
 
             # go to main menu if logout
             if self.current_screen == MenuOptions.logout:

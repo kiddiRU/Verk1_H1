@@ -9,16 +9,16 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time:
-### On site:
+### Time: 9:20
+### On site: Yes
 
 ## Kristinn Hrafn
 ### Time: 8:55
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
+### Time: 9:25
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:17
