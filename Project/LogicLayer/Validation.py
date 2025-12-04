@@ -48,7 +48,7 @@ def validate_name(name) -> str | ValidationError: # Players full name
     else:
         return name
     
-    
+
 def validate_home_address(home_address) -> str | ValidationError: # Players home address
     """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
     
@@ -96,9 +96,24 @@ def validate_phone_number(phone_number) -> str | ValidationError: # Players and 
         raise ValidationError("Phone number inputted incorrectly")
 
 
-def validate_email(email) -> bool: # Players and tournament contact email
-    """Checks if email has @, something before the @ and behind it and .XX in the end (johndoe@gmail.com)"""
-    return email
+def validate_email(email) -> str | ValidationError: # Players and tournament contact email
+    """Checks if email has @, and that there is something before and after the @"""
+
+    if "@" in email:
+        email_list: list = email.split("@")
+        before_at_symbol: str = email_list[0]
+        after_at_symbol: str = email_list[1]
+
+        if before_at_symbol == "" or after_at_symbol == "":
+            raise ValidationError
+
+        else:
+            return email
+
+
+    else:
+        raise ValidationError
+
 
 def validate_date(date_input) -> str | ValidationError: # Date of Birth, Date of Tournament
     """Checks if date format is correct YYYY-MM-DD"""
@@ -120,6 +135,7 @@ def validate_date(date_input) -> str | ValidationError: # Date of Birth, Date of
         raise ValidationError("Date inputted incorrectly")
 
 
+#TODO add functionality to all function bellow
 def validate_date_frame(date_1, date_2) -> bool: # Date frame of tournament
     """Checks if date frame is correct, date_1 is before date_2 (2025-12-01 -> 2025-12-06)"""
     pass
