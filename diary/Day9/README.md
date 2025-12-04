@@ -1,7 +1,7 @@
 # Diary, 2025-12-04
 
 ## Andri Már
-### Time: 8:17
+### Time: 8:17 - 16:50
 ### On site: Yes
 
 ## Elmar
@@ -9,7 +9,7 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 9:20
+### Time: 9:20 - 16:50
 ### On site: Yes
 
 ## Kristinn Hrafn
@@ -53,6 +53,7 @@ Found a much simpler solution of creating a dictionary out of class attributes f
 - Major work on validation
 - Team CRU in DataLayer implemented
 - Work started on CRU tournament
+- Implemented get team member and team history
 ## State of group: 
 There were some issues with type hinting, a TA recommended that we ignore type printing for now. The group is starting to feel the pressure. 
 ## Divisions:
