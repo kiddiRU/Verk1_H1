@@ -13,10 +13,8 @@ from Models.Team import Team
 from LogicLayer.Validation import validate_name, validate_home_address, validate_phone_number, validate_date, validate_unique_name, validate_email
 
 class PlayerLL():
-
-
-    def __init__(self) -> None:
-        pass
+    def __init__(self, data_api: DataLayerAPI) -> None:
+        self._data_api: DataLayerAPI = data_api
 
 
     """info from player to validate"""
@@ -95,9 +93,33 @@ class PlayerLL():
 
 
     #TODO implement changing player info
-    def change_player_info(self, ) -> None:
-        pass
+    def change_player_info(
+            self,
+            player: Player,
+            name: str,
+            date_of_birth: str,
+            home_address: str,
+            email: str,
+            phone_number: str,
+            handle: str,
+            url: str
+            ) -> Player:
+        
+        params: dict = {k: v for k, v in locals().items() if k not in ("self", "player")}
+        for attr, value in params.items():
+            if value == '':
+                continue
+                
+            setattr(player, attr, value)
+        
+        player_attr: dict = player.__dict__.items()
+        for k, v in player_attr:
+            self._data_api.update_player(player.uuid, k, v)
 
+        updated_player = player
+        return updated_player
+    
+    
     #TODO implement creating a team
     def create_team(self, name: str, club: str, url: str, ascii_art: str) -> Team:
         
