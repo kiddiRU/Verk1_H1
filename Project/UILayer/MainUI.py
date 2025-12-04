@@ -50,11 +50,6 @@ class MainUI:
             elif self.current_screen == MenuOptions.logout:
                 self.current_screen = MenuOptions.main_menu
 
-            # back function
-            elif self.current_screen == MenuOptions.back:
-                # TODO: need to add a way to keep track of paths traveled
-                pass
-
             # stop when quit
             elif self.current_screen == MenuOptions.quit:
                 print("Quitting program")

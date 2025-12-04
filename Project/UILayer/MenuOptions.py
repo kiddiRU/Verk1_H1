@@ -1,24 +1,24 @@
 from enum import StrEnum
 
+
 class MenuOptions(StrEnum):
-    """ Enum representing the available menu options in the UI layer. """
+    """Enum representing the available menu options in the UI layer."""
 
     main_menu = "MAIN_MENU"
-    back = "BACK"
     quit = "QUIT"
     logout = "LOGOUT"
 
     # StartPage
     login = "LOGIN"
     register = "REGISTER"
-    spectate_page = "SPECTATE_PAGE"
+    spectate_screen = "SPECTATE_SCREEN"
 
     # Login
     admin_page = "ADMIN_PAGE"
-    
+
     # Login + Register
     player_page = "PLAYER_PAGE"
-     
+
     # AdminPage
     create_tournament = "CREATE_TOURNAMENT"
     manage_tournament = "MANAGE_TOURNAMENT"
@@ -44,3 +44,42 @@ class MenuOptions(StrEnum):
     # EditTournament
     edit_tournament_time = "EDIT_TOURNAMENT_TIME"
     edit_tournament_info = "EDIT_TOURNAMENT_INFO"
+
+    # PlayerPage
+    edit_player_info = "EDIT_PLAYER_INFO"
+    my_team_empty = "MY_TEAM_EMPTY"
+    my_team_not_empty = "My_TEAM_NOT_EMPTY"
+    create_team = "CREATE_TEAM"
+
+    # MyTEAM
+    edit_team = "EDIT_TEAM"
+    leave_team_if_captain = "LEAVE_TEAM_IF_CAPTAIN"
+    leave_team_if_not_captain = "LEAVE_TEAM_IF_NOT_CAPTAIN"
+
+    # EditTeam
+    add_player = "ADD_PLAYER"
+    remove_player = "REMOVE_PLAYER"
+
+    # SpectatePage
+
+
+    spectate_players = "SPECTATE_PLAYERS"
+    view_player_stats = "VIEW_PLAYER_STATS"
+
+    spectate_clubs = "SPECTATE_CLUBS"
+    view_club_stats = "VIEW_CLUB_STATS"
+
+    spectate_teams = "SPECTATE_TEAMS"
+    view_team_stats = "VIEW_TEAM_STATS"
+
+    spectate_tournaments = "SPECTATE_TOURNAMENTS"
+
+    # TournamentPage
+    active_tournament = "ACTIVE_TOURNAMENT"
+    archived_tournament = "ARCHIVED_TOURNAMENT"
+
+    # ActiveTournamentPage
+    game_schedule = "GAME_SCHEDULE"
+    teams_in_tournament = "TEAMS_IN_TOURNAMENT"
+    team_tournament_stats = "TEAM_TOURNAMENT_STATS"
+    view_bracket = "VIEW_BRACKET"

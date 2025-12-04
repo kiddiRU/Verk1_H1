@@ -89,7 +89,7 @@ Choose Action:
             # case "2":
             #     return MenuOptions.cancel_tournament  #TODO: Optional C requirement
             case "b":
-                return MenuOptions.back
+                return MenuOptions.manage_tournament
         return MenuOptions.manage_tournament
 
     def matches(self) -> MenuOptions:

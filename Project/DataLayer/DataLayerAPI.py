@@ -35,17 +35,17 @@ def load_players() -> list[Player]:
     return PlayerIO.load_players()
 
 """
-Takes in uuid, key and value as parameters.
+Takes in uuid and update team model object.
 
-uuid and key have to exist in the json file.
+uuid has to exist in the json file.
 
-Will attempt to find player with given uuid and update the
-value tied to given key of that player.
+Will attempt to find player with given uuid and update that
+player with the new updated player object.
 
 Have to call withing try except.
 """
-def update_player(uuid: str, key: str, value: str) -> None:
-    PlayerIO.update_player(uuid, key, value)
+def update_player(uuid: str, updated_player: Player) -> None:
+    PlayerIO.update_player(uuid, updated_player)
 
 """ Team API """
 
@@ -67,13 +67,13 @@ Takes in uuid, key and value as parameters.
 
 uuid and key have to exist in the json file.
 
-Will attempt to find team with given uuid and update the
-value tied to given key of that team.
+Will attempt to find team with given uuid and update that
+team with the new updated team object.
 
 Have to call within try except.
 """
-def update_team(uuid: str, key: str, value:str) -> None:
-    TeamIO.update_team(uuid, key, value)
+def update_team(uuid: str, updated_team: Team) -> None:
+    TeamIO.update_team(uuid, updated_team)
 
 """
 Takes in model class Team
