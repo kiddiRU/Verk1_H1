@@ -11,6 +11,12 @@ from Models import Team
 
 FILE_PATH = "DataLayer/Repository/teams.json"
 
+"""
+Takes in model class Team
+
+Inserts information about the Team class into a json file
+for storage
+"""
 def store_team(team: Team) -> None:
     data: dict[str, str | list[str] | None] = {
         "name": team.name,
@@ -23,16 +29,26 @@ def store_team(team: Team) -> None:
     }
     
     with open(FILE_PATH, "r") as team_file:
-        file_content: dict[str, dict[str, str | list[str] | None]] = json.load(team_file)
+        file_content: dict[str, dict[str, str | list[str] | None]]
+        file_content = json.load(team_file)
 
     file_content[team.uuid] = data
 
     with open(FILE_PATH, "w") as team_file:
         json.dump(file_content, team_file)
 
+"""
+No parameters
+
+Reads json file containing teams and creates a list of
+Team model objects of each entry in the json file.
+
+Returns the created team list.
+"""
 def load_teams() -> list[Team]:
     with open(FILE_PATH, "r") as team_file:
-        file_content: dict[str, dict[str, str | list[str] | None]] = dict(json.load(team_file))
+        file_content: dict[str, dict[str, str | list[str] | None]]
+        file_content = dict(json.load(team_file))
 
     team_list: list[Team] = []
     for uuid, value in file_content.items():
@@ -48,9 +64,18 @@ def load_teams() -> list[Team]:
 
     return team_list
 
+"""
+Takes in uuid, key and value as parameters.
+
+uuid and key have to exist in the json file.
+
+Will attempt to find team with given uuid and update the
+value tied to given key of that team.
+"""
 def update_team(uuid: str, key: str, value: str | list[str] | None) -> None:
     with open(FILE_PATH, "r") as team_file:
-        file_content: dict[str, dict[str, str | list[str] | None]] = dict(json.load(team_file))
+        file_content: dict[str, dict[str, str | list[str] | None]]
+        file_content = dict(json.load(team_file))
     
     print(uuid, key, value)
     if uuid in file_content:
