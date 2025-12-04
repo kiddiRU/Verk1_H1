@@ -41,7 +41,7 @@ class MenuUI:
             str: The input from the user
         """
         choice: str = input(message)
-        return choice
+        return choice.strip()
 
     def show_start_screen(self) -> str:
         """ Start screen with choices: 1, 2, 3 and q """
@@ -76,9 +76,9 @@ q Quit
             case "1":
                 return MenuOptions.login
             case "2":
-                return MenuOptions.login
-            case "3":
                 return MenuOptions.register
+            case "3":
+                return MenuOptions.spectate_page
             case "q":
                 return MenuOptions.quit
 
@@ -88,7 +88,7 @@ q Quit
         """ Login screen which asks for a player handle"""
 
         print(r"""
-
+* User Path *
 StartPage -> Login
 ————————————————————————————————————————————————————————————————————————————————
                                     Login
@@ -105,8 +105,26 @@ StartPage -> Login
         return MenuOptions.quit
 
 
+    def show_register_screen(self) -> str:
+        choice: str = self.__prompt_choice(["1"])
+        print("THIS IS REGISTER")
+        return MenuOptions.main_menu
 
-
-
-test = MenuUI()
-print(test.show_start_screen)
+    def show_admin_page(self) -> str:
+        print(r"""
+* User Path *
+StartPage -> AdminPage
+————————————————————————————————————————————————————————————————————————————————
+                                Admin Page
+————————————————————————————————————————————————————————————————————————————————
+1 Create Tournament
+2 Manage Tournaments
+3 Create Club
+b Back
+————————————————————————————————————————————————————————————————————————————————
+Choose Action:
+————————————————————————————————————————————————————————————————————————————————
+"""
+        )
+        input("INOUT AS ADMIN")
+        return MenuOptions.main_menu
