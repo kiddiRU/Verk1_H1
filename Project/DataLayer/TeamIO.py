@@ -9,10 +9,10 @@ stored in the ./DataLayer/Repository/teams.json
 import json
 from Models import Team
 
-FILE_PATH = "./DataLayer/Repository/teams.json"
+FILE_PATH = "DataLayer/Repository/teams.json"
 
 def store_team(team: Team) -> None:
-    data = {
+    data: dict[str, str | list[str] | None] = {
         "name": team.name,
         "list_player_uuid": team.list_player_uuid,
         "team_captain_uuid": team.team_captain_uuid,
@@ -23,7 +23,7 @@ def store_team(team: Team) -> None:
     }
     
     with open(FILE_PATH, "r") as team_file:
-        file_content = json.load(team_file)
+        file_content: dict[str, dict[str, str | list[str] | None]] = json.load(team_file)
 
     file_content[team.uuid] = data
 
@@ -32,10 +32,11 @@ def store_team(team: Team) -> None:
 
 def load_teams() -> list[Team]:
     with open(FILE_PATH, "r") as team_file:
-        file_content = dict(json.load(team_file))
+        file_content: dict[str, dict[str, str | list[str] | None]] = dict(json.load(team_file))
 
     team_list: list[Team] = []
     for uuid, value in file_content.items():
+        value: dict[str, str | list[str] | None]
         team_list.append(Team(uuid,
                               value["name"],
                               value["list_player_uuid"],
@@ -47,12 +48,13 @@ def load_teams() -> list[Team]:
 
     return team_list
 
-def update_team(uuid: str, key: str, value) -> None:
+def update_team(uuid: str, key: str, value: str | list[str] | None) -> None:
     with open(FILE_PATH, "r") as team_file:
-        file_content = dict(json.load(team_file))
-
+        file_content: dict[str, dict[str, str | list[str] | None]] = dict(json.load(team_file))
+    
+    print(uuid, key, value)
     if uuid in file_content:
-        if key in file_content:
+        if key in file_content[uuid]:
             file_content[uuid][key] = value
 
     with open(FILE_PATH, "w") as team_file:

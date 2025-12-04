@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO
+from DataLayer import PlayerIO, TeamIO
 
 """ Player API """
 
@@ -51,15 +51,15 @@ def update_player(uuid: str, key: str, value: str) -> None:
 
 # TODO implement load_teams and call it
 def load_teams() -> list[Team]:
-    pass
+    return TeamIO.load_teams()
 
 # TODO implement update_team and call it
 def update_team(uuid: str, key: str, value:str) -> None:
-    pass
+    TeamIO.update_team(uuid, key, value)
 
 # TODO implement store_team and call it
 def store_team(team: Team) -> None:
-    pass
+    TeamIO.store_team(team)
 
 """ Club API """
 
