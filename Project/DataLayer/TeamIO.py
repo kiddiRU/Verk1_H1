@@ -35,7 +35,7 @@ def load_teams() -> list[Team]:
     with open(FILE_PATH, "r") as team_file:
         # This is only here so pyright does not complain
         class TeamDict(TypedDict): 
-            name: int
+            name: str
             list_player_uuid: list[str]
             team_captain_uuid: str
             club_uuid: str | None
