@@ -16,8 +16,8 @@ class MainUI:
     def __init__(self) -> None:
         """Initializes the class"""
 
-        self._menu_ui = MenuUI()
-        self.current_screen = MenuOptions.main_menu
+        self._menu_ui: MenuUI = MenuUI()
+        self.current_screen: MenuOptions = MenuOptions.main_menu
 
     def __clear(self):
         """Helper function that clears the screen"""
@@ -42,7 +42,7 @@ class MainUI:
             # admin page
             if self.current_screen == MenuOptions.admin_page:
                 self.__clear()
-                self.current_screen = self._menu_ui.show_admin_page()
+                self.current_screen = self._menu_ui.show_admin_screen()
 
             # go to main menu if logout
             if self.current_screen == MenuOptions.logout:

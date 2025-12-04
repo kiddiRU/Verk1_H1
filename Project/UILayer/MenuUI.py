@@ -46,8 +46,12 @@ class MenuUI:
                 return choice.strip()
             print("Not a valid length")
 
-    def show_start_screen(self) -> str:
-        """Start screen with choices: 1, 2, 3 and q"""
+    def show_start_screen(self) -> MenuOptions:
+        """Start screen with choices: 1, 2, 3 and q
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
         print(
             r"""
 ————————————————————————————————————————————————————————————————————————————————
@@ -88,9 +92,12 @@ q Quit
 
         return MenuOptions.back
 
-    def show_login_screen(self) -> str:
-        """Login screen which asks for a player handle"""
+    def show_login_screen(self) -> MenuOptions:
+        """Login screen, choices: fill info with input
 
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
         print(
             r"""
 * User Path *
@@ -110,12 +117,23 @@ StartPage -> Login
 
         return MenuOptions.quit
 
-    def show_register_screen(self) -> str:
-        choice: str = self.__prompt_choice(["1"])
-        print("THIS IS REGISTER")
+    def show_register_screen(self) -> MenuOptions:
+        """ Register screen, choices: fill info with input
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+        #TODO: add fill in option
+        print("This is the register page")
         return MenuOptions.main_menu
 
-    def show_admin_page(self) -> str:
+
+    def show_admin_screen(self) -> MenuOptions:
+        """ Admin screen, choices: 1,2,3 and b
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
         print(
             r"""
 * User Path *
@@ -143,3 +161,126 @@ Choose Action:
             case "b":
                 return MenuOptions.main_menu
         return MenuOptions.main_menu
+
+    def show_create_tournament(self) -> MenuOptions:
+        """ Create tournament screen, choices: fill info with input
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+
+        print("This is the create tournament page")
+        #TODO: add fill in options
+        return MenuOptions.admin_page
+
+    
+    def show_manage_tournaments(self) -> MenuOptions:
+        """ Manage tournaments screen, choices: choose with input
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+
+        print("This is the manage tournaments screen")
+        print("HERE a list of all the tournaments shows")
+
+        #TODO: add input for tournament to manage
+        #TODO: if active the go to active screen else inactive screen
+        return MenuOptions.admin_page
+
+    
+    def manage_active_tournament(self) -> MenuOptions:
+        """ Active tournament screen, choices: 1,2,3(c requirement) and b
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+
+        print("This is the active tournaments screen")
+        choice: str = self.__prompt_choice(["1", "2", "3", "b"])
+        match choice:
+            case "1":
+                return MenuOptions.select_match
+            # case "2": 
+            #     return MenuOptions.cancel_tournament  #TODO: Optional C requirement
+            case "b":
+                return MenuOptions.back
+        return MenuOptions.manage_tournament
+    
+    def matches(self) -> MenuOptions:
+        """ Matches screen, choices: input to select match
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+        print("HERE COMES A LIST OF MATCHES")
+        #TODO: function for user to input to select match to manage
+        return MenuOptions.manage_tournament
+    
+    def match_results(self) -> MenuOptions:
+        """ Match results screen, choices: input a match that won
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+
+        print("This is where you choose match results")
+        #TODO: function to choose a team that won update the team and match
+        return MenuOptions.manage_active_tournament
+    
+    def manage_inactive_tournament(self) -> MenuOptions:
+        """ Inactive tournament screen, choices: 1,2,3 and b
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+        print("This is an inactive tournament")
+        choice: str = self.__prompt_choice(["1", "2", "3", "b"])
+        match choice:
+            case "1":
+                return MenuOptions.manage_teams
+            case "2":
+                return MenuOptions.publish
+            case "3":
+                return MenuOptions.edit_tournament
+            case "b":
+                return MenuOptions.manage_tournament
+        return MenuOptions.manage_tournament
+    
+    def manage_teams(self) -> MenuOptions:
+        """ Manage teams screen, choices: 1,2 and b
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+        choice: str = self.__prompt_choice(["1", "2", "b"])
+        match choice:
+            case "1":
+                return MenuOptions.add_team
+            case "2":
+                return MenuOptions.remove_team
+            case "b":
+                return MenuOptions.manage_inactive_tournament
+        return MenuOptions.manage_inactive_tournament
+    
+    def add_team(self) -> MenuOptions:
+        """ Add team screen, choices: input a team to add or l to list all team
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+        print("This is the add team screen")
+
+        #TODO: Add function to list teams and to choose a team by the name
+        
+        return MenuOptions.manage_teams
+    
+    def remove_team(self) -> MenuOptions:
+        """ Remove team screen, choices: input a team to add or l to list all team
+
+        Returns:
+            MenuOptions: The next menu to navigate to 
+        """
+        print("This is the remove team screen")
+        # TODO: same as add team but not remove
+        return MenuOptions.manage_teams
