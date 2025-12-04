@@ -1,12 +1,14 @@
 """
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
+Co-author: Andri Már Kristjánsson <andrik25@ru.is>
 
 File that holds all the menus that the player can access
 """
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
+from UILayer.drawer import Drawer
 
 
 class PlayerUI:
@@ -21,33 +23,14 @@ class PlayerUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print(
-            r"""
-————————————————————————————————————————————————————————————————————————————————
-             _____                  __ 
-  ___       / ___/____  ____  _____/ /_
- / _ \______\__ \/ __ \/ __ \/ ___/ __/
-/  __/_____/__/ / /_/ / /_/ / /  / /_  
-\___/     /____/ .___/\____/_/   \__/  
-            /_/                      
-    ______     __                                                      
-   / ____/  __/ /__________ __   ______ _____ _____ _____  ____  ____ _
-  / __/ | |/_/ __/ ___/ __ `/ | / / __ `/ __ `/ __ `/ __ \/_  / / __ `/
- / /____>  </ /_/ /  / /_/ /| |/ / /_/ / /_/ / /_/ / / / / / /_/ /_/ / 
-/_____/_/|_|\__/_/   \__,_/ |___/\__,_/\__, /\__,_/_/ /_/ /___/\__,_/  
-                                    /____/          
-————————————————————————————————————————————————————————————————————————————————
-StartPage
-————————————————————————————————————————————————————————————————————————————————
-                                 Start Page
-————————————————————————————————————————————————————————————————————————————————
-1 Login
-2 Register 
-3 Spectate
-q Quit
-————————————————————————————————————————————————————————————————————————————————
-"""
-        )
+        menu = "Start Page"
+        user_path = ["StartPage"]
+        options = ["1 Log In", "2 Register", "3 Spectate", "q Quit"]
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, options))
+
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
         match choice:
             case "1":
@@ -67,15 +50,14 @@ q Quit
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print(
-            r"""
-* User Path *
-StartPage -> Login
-————————————————————————————————————————————————————————————————————————————————
-                                    Login
-————————————————————————————————————————————————————————————————————————————————
-"""
-        )
+
+        menu = "Login"
+        user_path = ["StartPage", "Login"]
+
+        tui = Drawer()
+        print(tui.table(menu, user_path))        
+
+
         choice: str = self.utility._input_info("Input Your Handle: ")
         if choice == "admin":
             return MenuOptions.admin_page
@@ -93,5 +75,14 @@ StartPage -> Login
             MenuOptions: The next menu to navigate to
         """
         # TODO: add fill in option
-        print("This is the register page")
+        
+        
+        menu = "Register"
+        user_path = ["StartPage", "Register"]
+
+        tui = Drawer()
+        print(tui.table(menu, user_path))   
+        choice = input()
+        
+
         return MenuOptions.main_menu

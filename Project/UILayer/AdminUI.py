@@ -7,6 +7,7 @@ File that holds all the menus that the admin can access
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
+from UILayer.drawer import Drawer
 
 
 class AdminUI:
@@ -21,22 +22,15 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print(
-            r"""
-* User Path *
-StartPage -> AdminPage
-————————————————————————————————————————————————————————————————————————————————
-                                Admin Page
-————————————————————————————————————————————————————————————————————————————————
-1 Create Tournament
-2 Manage Tournaments
-3 Create Club
-b Back
-————————————————————————————————————————————————————————————————————————————————
-Choose Action:
-————————————————————————————————————————————————————————————————————————————————
-"""
-        )
+        
+        menu = "Admin Page"
+        user_path = ["StartPage", "Admin Page"]
+        options = ["1 Create Tournament", "2 Manage Tournaments", "3 Create Club", "b Back"]
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, options))   
+        
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
         match choice:
             case "1":

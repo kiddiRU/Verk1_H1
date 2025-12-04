@@ -1,6 +1,7 @@
 """
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
+Co-author: Andri Már Kristjánsson <andrik25@ru.is>
 
 File that holds the main state machine.
 """
@@ -33,7 +34,7 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
-            self.__clear()
+            #self.__clear()
             # main menu
             if self.current_screen == MenuOptions.main_menu:
                 self.current_screen = self._player_ui.start_screen()
@@ -45,6 +46,10 @@ class MainUI:
             # admin page
             elif self.current_screen == MenuOptions.admin_page:
                 self.current_screen = self._admin_ui.admin_screen()
+
+            # register page
+            elif self.current_screen == MenuOptions.register:
+                self.current_screen = self._player_ui.register_screen()
 
             # go to main menu if logout
             elif self.current_screen == MenuOptions.logout:
