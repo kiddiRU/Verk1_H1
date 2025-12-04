@@ -1,7 +1,7 @@
-from LogicLayer import LogicLayerAPI
 from LogicLayer.PlayerLL import PlayerLL
+from LogicLayer.TeamLL import TeamLL
 
 __all__ = [
-    'LogicLayerAPI',
-    'PlayerLL'
+    'PlayerLL',
+    'TeamLL'
 ]
