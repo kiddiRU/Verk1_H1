@@ -21,8 +21,12 @@ class TeamLL():
         model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
             if team.uuid == team_uuid:
-                team.list_player_uuid.append(player_uuid)
-                DataLayerAPI.update_team(team_uuid, "list_player_uuid", team.list_player_uuid)
+                if len(team.list_player_uuid) == 5:
+                    continue
+
+                else:
+                    team.list_player_uuid.append(player_uuid)
+                    DataLayerAPI.update_team(team_uuid, team)
                 
 
 
@@ -32,7 +36,7 @@ class TeamLL():
         for team in model_teams:
             if team.uuid == team_uuid:
                 team.list_player_uuid.remove(player_uuid)
-                DataLayerAPI.update_team(team_uuid, "list_player_uuid", team.list_player_uuid)
+                DataLayerAPI.update_team(team_uuid, team)
         
 
 
