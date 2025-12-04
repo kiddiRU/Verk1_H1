@@ -137,9 +137,21 @@ class PlayerLL():
 
     #TODO implement 
     def list_players(self) -> list[Player]:
-        pass
+        
+        model_players: list = DataLayerAPI.load_players()
+        return model_players
     
     
+<<<<<<< HEAD
     def get_player_info(self) -> Player:
         pass
     
+=======
+    def get_player_info(self, player_uuid) -> Player:
+        
+        model_players: list = DataLayerAPI.load_players()
+        
+        for player in model_players:
+            if player.uuid == player_uuid:
+                return player
+>>>>>>> e5593a6721cc8bbce28efe8bf414b22ab5ba9452
