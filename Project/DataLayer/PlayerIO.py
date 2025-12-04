@@ -7,7 +7,7 @@ stored in the ./DataLayer/Repository/players.json
 """
 
 import json
-from Models.Player import Player
+from Models import Player
 
 FILE_PATH = "./DataLayer/Repository/players.json"
 
@@ -51,7 +51,7 @@ def load_players() -> list[Player]:
         
     player_list: list[Player] = []
     for uuid, value in file_content.items():
-        player.append(Player(uuid,
+        player_list.append(Player(uuid,
                              value["name"],
                              value["date_of_birth"],
                              value["home_address"],

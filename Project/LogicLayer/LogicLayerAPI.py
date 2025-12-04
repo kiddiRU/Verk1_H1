@@ -6,30 +6,59 @@ Logic layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-
+from DataLayer import DataLayerAPI
+from LogicLayer.PlayerLL import PlayerLL
 
 ''' Player API '''
+player_logic: PlayerLL = PlayerLL(DataLayerAPI)
 
 # TODO implement validate_info and call it / or not?
 def validate_info() -> None:
     pass
 
-# TODO implement create_player and call it
+# TODO implement create_player and call it 
 def create_player(
         name: str,
-        home_address: str,
-        phone_number: str, 
         date_of_birth: str, 
+        home_address: str,
+        email: str,
+        phone_number: str, 
         handle: str, 
-        email: str = '',
         url: str = ''
         ) -> Player:
 
-    pass
+    return player_logic.create_player(
+        name,
+        date_of_birth,
+        home_address,
+        email,
+        phone_number,
+        handle,
+        url
+    )
 
 # TODO implement change_player_info and call it
-def change_player_info(player: Player) -> None:
-    pass
+def change_player_info(
+        player: Player,
+        name: str = '',
+        date_of_birth: str = '', 
+        home_address: str = '',
+        email: str = '',
+        phone_number: str = '', 
+        handle: str = '', 
+        url: str = ''
+        ) -> None:
+    
+    return player_logic.change_player_info(
+        player,
+        name,
+        date_of_birth,
+        home_address,
+        email,
+        phone_number,
+        handle,
+        url
+    )
 
 # TODO implement create_team and call it
 def create_team(name: str, team_captain: Player, club: Club) -> Team:
@@ -69,16 +98,15 @@ def validate_unique_name(name: str) -> bool:
 
 # TODO implement create_tournament and call it
 def create_tournament(
-        
         name: str,
         start_date: str,
         end_date: str,
         venue: str,
-        teams: dict[Team.uuid, list[Player]],
+        teams: dict[Team, list[Player]],
         teams_playing: list[Team],
         email: str,
         phone_number: str,
-        status: Status = Status.INACTIVE
+        status: Tournament.StatusType = Tournament.StatusType.inactive
         # list_of_servers: list[uuid: str] ?
         ) -> Tournament:
 
