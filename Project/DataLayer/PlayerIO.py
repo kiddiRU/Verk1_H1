@@ -18,7 +18,7 @@ Inserts information about the Player class into a json file
 for storage.
 """
 def store_player(player: Player) -> None:
-    # Changes object player into a dictionary mapping keys to attributes.
+    # Changes object player into a dictionary mapping attributes to keys.
     data = player.__dict__
     
     # Reads json file containing players and stores it as a dictionary.
@@ -76,4 +76,3 @@ def update_player(uuid: str, key: str, value: str) -> None:
     # Wriets the updated dictionary into the player file.
     with open(FILE_PATH, "w") as player_file:
         json.dump(file_content, player_file)
-
