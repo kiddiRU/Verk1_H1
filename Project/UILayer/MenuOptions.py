@@ -40,3 +40,7 @@ class MenuOptions(StrEnum):
     # ManageTeam
     add_team = "ADD_TEAM"
     remove_team = "REMOVE_TEAM"
+
+    # EditTournament
+    edit_tournament_time = "EDIT_TOURNAMENT_TIME"
+    edit_tournament_info = "EDIT_TOURNAMENT_INFO"
