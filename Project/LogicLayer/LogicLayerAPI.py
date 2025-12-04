@@ -15,7 +15,7 @@ player_logic: PlayerLL = PlayerLL()
 def validate_info() -> None:
     pass
 
-# TODO implement create_player and call it
+# TODO implement create_player and call it 
 def create_player(
         name: str,
         date_of_birth: str, 
