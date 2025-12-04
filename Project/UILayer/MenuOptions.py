@@ -24,4 +24,19 @@ class MenuOptions(StrEnum):
     manage_tournament = "MANAGE_TOURNAMENT"
     create_club = "CREATE_CLUB"
 
-    # ManageTournament + 
+    # Manage Tournament
+    manage_active_tournament = "MANAGE_ACTIVE_TOURNAMENT"
+    manage_inactive_tournament = "MANAGE_INACTIVE_TOURNAMENT"
+
+    # ManageActiveTournament
+    input_results = "INPUT_RESULTS"
+    select_match = "SELECT_MATCH"
+
+    # ManageInactiveTournament
+    manage_teams = "MANAGE_TEAMS"
+    publish = "PUBLISH"
+    edit_tournament = "EDIT_TOURNAMENT"
+
+    # ManageTeam
+    add_team = "ADD_TEAM"
+    remove_team = "REMOVE_TEAM"
