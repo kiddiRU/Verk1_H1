@@ -10,11 +10,7 @@ from DataLayer import DataLayerAPI
 from LogicLayer.PlayerLL import PlayerLL
 
 ''' Player API '''
-player_logic: PlayerLL = PlayerLL(DataLayerAPI)
-
-# TODO implement validate_info and call it / or not?
-def validate_info() -> None:
-    pass
+player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
 
 # TODO implement create_player and call it 
 def create_player(
@@ -38,7 +34,7 @@ def create_player(
     )
 
 # TODO implement change_player_info and call it
-def change_player_info(
+def update_player_info(
         player: Player,
         name: str = '',
         date_of_birth: str = '', 
@@ -49,7 +45,7 @@ def change_player_info(
         url: str = ''
         ) -> None:
     
-    return player_logic.change_player_info(
+    return player_logic.update_player_info(
         player,
         name,
         date_of_birth,

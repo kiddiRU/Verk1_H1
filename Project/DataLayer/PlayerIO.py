@@ -70,7 +70,7 @@ def update_player(uuid: str, updated_player: Player) -> None:
     # Updates the file content, checking if the uuid and exists in
     # the dictionary.
     if uuid in file_content:
-        file_content[uuid] = updated_player
+        file_content[uuid] = updated_player.__dict__
 
     # Wriets the updated dictionary into the player file.
     with open(FILE_PATH, "w") as player_file:

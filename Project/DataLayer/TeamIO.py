@@ -70,7 +70,7 @@ def update_team(uuid: str, updated_team: Team) -> None:
     # Updates the file content, checking if the uuid exists
     # in the dictionary.
     if uuid in file_content:
-        file_content[uuid] = updated_team
+        file_content[uuid] = updated_team.__dict__
     
     # Writes the updated dictionary into the player file.
     with open(FILE_PATH, "w") as team_file:
