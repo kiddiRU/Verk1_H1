@@ -14,25 +14,26 @@ class Drawer():
     def __init__(self) -> None:
         "Initializes the class"
         
+        self.previous_inputs: list = []
 
         #Colours
-        RED = "\033[31m"
-        REDHIGH = "\033[41m"
-        GREEN = "\033[32m"
-        YELLOW = "\033[33m"        
-        BLUE = "\033[34m"
-        PINK = "\033[35m"
-        CYAN = "\033[36m"
+        RED: str = "\033[31m"
+        REDHIGH: str = "\033[41m"
+        GREEN: str = "\033[32m"
+        YELLOW: str = "\033[33m"        
+        BLUE: str = "\033[34m"
+        PINK: str = "\033[35m"
+        CYAN: str = "\033[36m"
 
 
         #Text change
-        self.RESET = "\033[0m"
-        self.BOLD = "\033[1m"
-        self.BRIGHTER = "\033[37m"
+        self.RESET: str = "\033[0m"
+        self.BOLD: str = "\033[1m"
+        self.BRIGHTER: str = "\033[37m"
 
-        self.banner_border = REDHIGH
-        self.path_color = RED
-        self.table_color = self.BRIGHTER + BLUE
+        self.banner_border: str = REDHIGH
+        self.path_color: str = RED
+        self.table_color: str = self.BRIGHTER + PINK
 
 
 
@@ -76,10 +77,9 @@ class Drawer():
         self.clear()
         print(self.banner())
 
-
-        table = """"""
-        path = ""
-        line = "————————————————————————————————————————————————————————————————————————————————" + "\n"
+        table: str = """"""
+        path: str = ""
+        line: str = "————————————————————————————————————————————————————————————————————————————————" + "\n"
 
         if table_path:
             path += table_path[0]
@@ -93,9 +93,15 @@ class Drawer():
         table += f"{table_name: ^80}" + "\n"
         table += line
 
-        if table_info:
-            for info in table_info:
+        if self.previous_inputs:
+            for info in self.previous_inputs:
                 table += info + "\n"
+
+            table += line
+
+        if table_info:
+            for i in table_info:
+                table += i + "\n"
 
             table += line
 
@@ -119,7 +125,12 @@ class Drawer():
 
 
 
+    def table_input(self, user_input) -> list:
 
+
+        self.previous_inputs.append(user_input)
+
+        return self.previous_inputs
 
 
 
