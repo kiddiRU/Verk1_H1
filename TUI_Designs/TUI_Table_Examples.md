@@ -61,7 +61,7 @@ print("\n" + banner_border + BOLD +
 ————————————————————————————————————————————————————————————————————————————————
 
 
-* User Path
+
 ————————————————————————————————————————————————————————————————————————————————
                                  Start Page
 ————————————————————————————————————————————————————————————————————————————————
@@ -73,6 +73,7 @@ q Quit
 Choose Action:
 ————————————————————————————————————————————————————————————————————————————————
 
+
 ```
 
 
@@ -83,7 +84,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 StartPage -> Login
 ————————————————————————————————————————————————————————————————————————————————
                                     Login
@@ -102,7 +103,7 @@ PLAYERHANDLE
 
 ```
 
-* User Path *
+
 StartPage -> AdminPage
 ————————————————————————————————————————————————————————————————————————————————
                                 Admin Page
@@ -143,7 +144,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 
 ```
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
@@ -182,7 +183,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 AdminPage -> ManageTournaments
 ————————————————————————————————————————————————————————————————————————————————
                             Manage Tournaments
@@ -224,7 +225,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 AdminPage -> CreateClub
 ————————————————————————————————————————————————————————————————————————————————
                                 Create Club
@@ -250,7 +251,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageUnactiveTournaments
 ————————————————————————————————————————————————————————————————————————————————
                          Manage Unactive Tournaments
@@ -273,13 +274,12 @@ Choose Action:
 ### Manage Active Tournament
 
 ```
-* User Path *
+
 ManageTournaments -> ManageActiveTournaments
 ————————————————————————————————————————————————————————————————————————————————
                         Manage Active Tournaments
 ————————————————————————————————————————————————————————————————————————————————
-- - - -TournamentName- - - -
-
+- - - -TOURNAMENTNAME- - - -
 1 Input Results Of Match
 2 Next Round
 3 Cancel Tournament
@@ -312,7 +312,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 
 ```
-* User Path *
+
 ManageTournaments -> ManageUnactiveTournament -> Publish
 ————————————————————————————————————————————————————————————————————————————————
                                     Publish 
@@ -338,12 +338,12 @@ Choose Action:
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageUnactiveTournament -> EditTournament
 ————————————————————————————————————————————————————————————————————————————————
 					             Edit Tournament
 ————————————————————————————————————————————————————————————————————————————————
-- - - -TournamentName- - - -
+- - - -TOURNAMENTNAME- - - -
 
 Date: YYYY MM DD - YYYY MM DD
 Venue: 123 PLACENAME, CITYNAME
@@ -366,7 +366,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageUnactiveTournament -> ManageTeams
 ————————————————————————————————————————————————————————————————————————————————
                                 Manage Teams
@@ -406,7 +406,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageUnactiveTournament -> ManageTeams -> AddTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Add Team
@@ -452,7 +452,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageUnactiveTournament -> ManageTeams -> RemoveTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Remove Team
@@ -499,12 +499,12 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 EditTournament -> EditTime
 ————————————————————————————————————————————————————————————————————————————————
                                 Edit Time
 ————————————————————————————————————————————————————————————————————————————————
-- - - -TournamentName- - - -
+- - - -TOURNAMENTNAME- - - -
 Old Date: YYYY MM DD - YYYY MM DD
 ————————————————————————————————————————————————————————————————————————————————
 Enter New Start Date:
@@ -546,7 +546,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 EditTournament -> EditTournamentInfo
 ————————————————————————————————————————————————————————————————————————————————
                             Edit Tournament Info
@@ -582,7 +582,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageActiveTournament -> Matches
 ————————————————————————————————————————————————————————————————————————————————                        
                                     Matches
@@ -616,7 +616,7 @@ Select Match ID:
 MISSING (Not Yet Implemented)
 ```
 
-* User Path *
+
 ManageTournaments -> ManageActiveTournament -> NextRound
 ————————————————————————————————————————————————————————————————————————————————
 
@@ -630,12 +630,12 @@ ManageTournaments -> ManageActiveTournament -> NextRound
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageActiveTournament -> CancelTournament
 ————————————————————————————————————————————————————————————————————————————————
                                 CancelTournament
 ————————————————————————————————————————————————————————————————————————————————
-Are You Sure That You Want To Cancel TournamentName? Y/N:
+Are You Sure That You Want To Cancel TOURNAMENTNAME? Y/N:
 Y
 ————————————————————————————————————————————————————————————————————————————————
 TOURNAMENTNAME Has Been Cancelled
@@ -647,7 +647,7 @@ TOURNAMENTNAME Has Been Cancelled
 
 ```
 
-* User Path *
+
 ManageTournaments -> ManageActiveTournament -> Matches -> MatchResults
 ————————————————————————————————————————————————————————————————————————————————
                                 Match Results
@@ -665,7 +665,7 @@ Select Team To Advance:
 
 ```
 
-* User Path *
+
 Login -> PlayerPage
 ————————————————————————————————————————————————————————————————————————————————
                                 Player Page
@@ -720,7 +720,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 PlayerPage -> EditPlayerInfo 
 ————————————————————————————————————————————————————————————————————————————————
                                 Edit Player Info 
@@ -757,7 +757,7 @@ Choose Action:
 ### My Team
 
 ```
-* User Path *
+
 PlayerPage -> MyTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 My Team
@@ -787,7 +787,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 PlayerPage -> MyTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 My Team
@@ -823,7 +823,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 PlayerPage -> CreateTeam
 ————————————————————————————————————————————————————————————————————————————————
                                Create Team
@@ -866,7 +866,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 PlayerPage -> CreateTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Create Team
@@ -890,7 +890,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 PlayerPage -> MyTeam -> EditTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Edit Team
@@ -936,7 +936,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 PlayerPage -> MyTeam -> LeaveTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Leave Team
@@ -985,7 +985,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 PlayerPage -> MyTeam -> LeaveTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Leave Team
@@ -1026,7 +1026,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 PlayerPage -> MyTeam -> EditTeam -> AddPlayer
 ————————————————————————————————————————————————————————————————————————————————
                                 Add Player
@@ -1070,7 +1070,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 PlayerPage -> MyTeam -> EditTeam -> RemovePlayer
 ————————————————————————————————————————————————————————————————————————————————
                                 Remove Player
@@ -1104,7 +1104,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 Login -> SpectatorPage
 ————————————————————————————————————————————————————————————————————————————————
                                 Spectator Page
@@ -1126,7 +1126,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Players
 ————————————————————————————————————————————————————————————————————————————————
                                 Players
@@ -1152,7 +1152,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Clubs
 ————————————————————————————————————————————————————————————————————————————————
                                 Clubs
@@ -1177,7 +1177,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Teams
 ————————————————————————————————————————————————————————————————————————————————
                                 Teams
@@ -1203,7 +1203,7 @@ Y
 ### View Player Stats
 ```
 
-* User Path *
+
 SpectatorPage -> Players -> ViewPlayerStats
 ————————————————————————————————————————————————————————————————————————————————
                             View Player Stats
@@ -1230,7 +1230,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Clubs -> ViewClubStats
 ————————————————————————————————————————————————————————————————————————————————
                                 View Club Stats
@@ -1254,7 +1254,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Teams -> ViewTeamStats
 ————————————————————————————————————————————————————————————————————————————————
                                 View Team Stats
@@ -1283,7 +1283,7 @@ Choose Action:
 ### Tournaments
 
 ```
-* User Path *
+
 SpectatorPage -> Tournaments
 ————————————————————————————————————————————————————————————————————————————————
                                 Tournaments
@@ -1306,7 +1306,7 @@ Select Tournament:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Tournaments -> ActiveTournament
 ————————————————————————————————————————————————————————————————————————————————
                             Active Tournament
@@ -1328,7 +1328,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Tournaments -> ActiveTournament -> GameSchedule -> GameInfo
 ————————————————————————————————————————————————————————————————————————————————
                             Game Info And Schedule
@@ -1360,7 +1360,7 @@ Choose Actions:
 MISSING IMPLEMENTATION (visable brackets)
 ```
 
-* User Path *
+
 SpectatorPage -> Tournaments -> ActiveTournament -> Brackets
 ————————————————————————————————————————————————————————————————————————————————
                                 Brackets
@@ -1426,7 +1426,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Tournaments -> ActiveTournament -> TeamsInTournament
 ————————————————————————————————————————————————————————————————————————————————
                                 Teams In Tournament
@@ -1451,7 +1451,7 @@ Choose Action:
 
 ```
 
-* User Path *
+
 SpectatorPage -> Tournaments -> ActiveTournament -> TeamsInTournament
 ————————————————————————————————————————————————————————————————————————————————
                                 Teams In Tournament
@@ -1476,7 +1476,7 @@ TEAMNAME
 
 ```
 
-* User Path *
+
 ActiveTournament -> TeamsInTournament -> TeamTournamentStats
 ————————————————————————————————————————————————————————————————————————————————
                             Team Tournament Stats
@@ -1524,7 +1524,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-* User Path *
+
 StartPage -> Register
 ————————————————————————————————————————————————————————————————————————————————
                                 Register
@@ -1565,13 +1565,13 @@ Choose Action:
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+TOURNAMENTNAME
 
 
 
@@ -1579,50 +1579,13 @@ Inputed TournamentName
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
-————————————————————————————————————————————————————————————————————————————————
-c Continue
-b Back
-————————————————————————————————————————————————————————————————————————————————
-Choose Action:
-————————————————————————————————————————————————————————————————————————————————
-c
-
-
-
-
-* User Path *
-AdminPage -> CreateTournament
-————————————————————————————————————————————————————————————————————————————————
-                              Create Tournament
-————————————————————————————————————————————————————————————————————————————————
-Enter Tournament Name:
-Inputed TournamentName
-————————————————————————————————————————————————————————————————————————————————
-Enter Venue:
-123 placename, cityname
-
-
-
-
-
-
-* User Path *
-AdminPage -> CreateTournament
-————————————————————————————————————————————————————————————————————————————————
-                              Create Tournament
-————————————————————————————————————————————————————————————————————————————————
-Enter Tournament Name:
-Inputed TournamentName
-————————————————————————————————————————————————————————————————————————————————
-Enter Venue:
-123 placename, cityname
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 c Continue
 b Back
@@ -1635,14 +1598,51 @@ c
 
 
 
-
-* User Path *
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
+————————————————————————————————————————————————————————————————————————————————
+Enter Venue:
+123 placename, cityname
+
+
+
+
+
+
+
+AdminPage -> CreateTournament
+————————————————————————————————————————————————————————————————————————————————
+                              Create Tournament
+————————————————————————————————————————————————————————————————————————————————
+Enter Tournament Name:
+Inputed TOURNAMENTNAME
+————————————————————————————————————————————————————————————————————————————————
+Enter Venue:
+123 placename, cityname
+————————————————————————————————————————————————————————————————————————————————
+c Continue
+b Back
+————————————————————————————————————————————————————————————————————————————————
+Choose Action:
+————————————————————————————————————————————————————————————————————————————————
+c
+
+
+
+
+
+
+
+AdminPage -> CreateTournament
+————————————————————————————————————————————————————————————————————————————————
+                              Create Tournament
+————————————————————————————————————————————————————————————————————————————————
+Enter Tournament Name:
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1653,13 +1653,13 @@ yyyy mm dd
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1677,13 +1677,13 @@ Choose Action:
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1698,13 +1698,13 @@ yyyy mm dd
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1725,13 +1725,13 @@ Choose Action:
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1748,13 +1748,13 @@ something@something.com
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1778,13 +1778,13 @@ Choose Action:
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
@@ -1804,13 +1804,13 @@ Enter Contact Phone Number:
 
 
 
-* User Path *
+
 AdminPage -> CreateTournament
 ————————————————————————————————————————————————————————————————————————————————
                               Create Tournament
 ————————————————————————————————————————————————————————————————————————————————
 Enter Tournament Name:
-Inputed TournamentName
+Inputed TOURNAMENTNAME
 ————————————————————————————————————————————————————————————————————————————————
 Enter Venue:
 123 placename, cityname
