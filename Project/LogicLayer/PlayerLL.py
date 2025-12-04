@@ -115,16 +115,19 @@ class PlayerLL():
         return updated_player
     
     
+    '''
+    Docstring
+    '''
     #TODO implement creating a team
     def create_team(self, name: str, team_captain: Player, club: str, url: str, ascii_art: str) -> Team:
-        self.uuid = str(uuid4())
+        uuid = str(uuid4())
 
         # At the moment the clubs name is registerd, not its uuid
-        new_team = Team(self.uuid, name, [team_captain.uuid], team_captain.uuid, club, None, url, ascii_art)
+        new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club, None, url, ascii_art)
 
         self._data_api.store_team(new_team)
         
-        # return new_team ?
+        # return new_team? What else?
 
         
 
