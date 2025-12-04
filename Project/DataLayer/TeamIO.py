@@ -7,6 +7,7 @@ stored in the ./DataLayer/Repository/teams.json
 """
 
 import json
+from typing import TypedDict
 from Models import Team
 
 FILE_PATH = "./DataLayer/Repository/teams.json"
@@ -32,6 +33,18 @@ def store_team(team: Team) -> None:
 
 def load_teams() -> list[Team]:
     with open(FILE_PATH, "r") as team_file:
+        # This is only here so pyright does not complain
+        class TeamDict(TypedDict): 
+            name: int
+            list_player_uuid: list[str]
+            team_captain_uuid: str
+            club_uuid: str | None
+            in_tournament: str | None
+            url_homepage: str | None
+            ascii_art: str | None
+            
+
+        file_content: dict[str, TeamDict]
         file_content = dict(json.load(team_file))
 
     team_list: list[Team] = []
