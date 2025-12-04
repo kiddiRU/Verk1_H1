@@ -15,31 +15,44 @@ class TeamLL():
         self._data_api: DataLayerAPI = data_api
 
 
-    #TODO implement letting the captain to add player to his team
+
     def add_player(self, team_uuid: str, player_uuid: str) -> Team:
         
-        model_teams: list = DataLayerAPI.update_team()
+        model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
             if team.uuid == team_uuid:
-                (team.player).append(player_uuid)
-        
-        
+                team.list_player_uuid.append(player_uuid)
+                DataLayerAPI.update_team(team_uuid, "list_player_uuid", team.list_player_uuid)
+                
 
-    #TODO implement letting the captain to remove a player from his team
-    def remove_player(self, team_uuid: str, player_uuid: str):
 
-        model_teams: list = DataLayerAPI.update_team()
+    def remove_player(self, team_uuid: str, player_uuid: str) -> Team:
+
+        model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
             if team.uuid == team_uuid:
-                (team.player).remove(player_uuid)
+                team.list_player_uuid.remove(player_uuid)
+                DataLayerAPI.update_team(team_uuid, "list_player_uuid", team.list_player_uuid)
         
 
 
-    def get_team_members(self, team_uuid):
-        pass
+    def get_team_members(self, team_uuid: str) -> list:
+        
+        model_teams: list = DataLayerAPI.load_teams()
+        for team in model_teams:
+            if team.uuid == team_uuid:
+                return team.list_player_uuid 
 
 
-    # Every tournament a team has played and the result (WON/LOST)
-    def get_team_history():
-        pass
 
+    #TODO implement if the team won the tournament add WIN and LOST to if they lost
+    def get_team_history(self, team_uuid) -> list:
+        
+        teams_history: list = []
+
+        model_tournaments: list = DataLayerAPI.load_tournaments()
+        for tournament in model_tournaments:
+            if team_uuid in tournament.teams_playing: 
+                teams_history.append(tournament.name)
+
+        return teams_history
