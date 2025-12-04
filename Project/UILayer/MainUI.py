@@ -4,22 +4,54 @@ Date: 2025-12-03
 
 File that holds the main state machine.
 """
-# from LogicLayer.LogicLayerAPI import LogicAPI
-from MenuUI import MenuUI
+
+
+from UILayer.MenuUI import MenuUI
+from UILayer.MenuOptions import MenuOptions
+import os
+
 
 class MainUI:
-    """ Main UI State Machine"""
+    """Main UI State Machine"""
 
     def __init__(self) -> None:
-    #    logic_api = LogicAPI()
-    #    self._menu_ui = MenuUI(logic_api)
-        self.current_screen = "MAIN_MENU"
+        """ Initializes the class """
 
+        self._menu_ui = MenuUI()
+        self.current_screen = MenuOptions.main_menu
+    
+    def __clear(self):
+        """ Helper function that clears the screen """
+
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def run(self) -> None:
-        """ Main navigation loop """
-        
-        while True:
-            if self.current_screen == "MAIN_MENU":
-                print(f"MAIN MENU")
+        """Main navigation loop"""
 
+        while True:
+            
+            # main menu
+            if self.current_screen == MenuOptions.main_menu:
+                self.__clear()
+                self.current_screen = self._menu_ui.show_start_screen()
+
+            # login
+            if self.current_screen == MenuOptions.login:
+                self.__clear()
+                self.current_screen = self._menu_ui.show_login_screen()
+
+            # admin page
+            if self.current_screen == MenuOptions.admin_page:
+                print("you are admin")
+
+            # go to main menu if logout
+            if self.current_screen == MenuOptions.logout:
+                self.current_screen = MenuOptions.main_menu
+
+            # stop when quit
+            if self.current_screen == MenuOptions.quit:
+                print("Quitting program")
+                exit()
+
+            # if nothing works then go to the main menu
+            self.current_screen = MenuOptions.main_menu
