@@ -1,1 +1,11 @@
-{}
+{
+    "6cd06e3e-fb75-44f5-a9c3-2b55e9ae05cb": {
+        "uuid": "6cd06e3e-fb75-44f5-a9c3-2b55e9ae05cb",
+        "server_id": "ID",
+        "match_date": "2025-12-12",
+        "match_time": "00:00:00",
+        "team_1": "Iceland",
+        "team_2": "Kop",
+        "winner": "Kop"
+    }
+}
