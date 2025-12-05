@@ -207,7 +207,16 @@ Rank: Player"""]
         tui = Drawer()
         print(tui.table(menu, user_path, info, options, message))
         choice_tname: str = input("Enter Team Name: \n")
-        tui.save_input("Team Name: " )
+        tui.save_input("Team Name: " + choice_tname)
+
+        print(tui.table(menu, user_path, info, options, message))
+        choice_tname: str = input("Enter Team Name: \n")
+        tui.save_input("Team Name: " + choice_tname)
+
+        print(tui.table(menu, user_path, info, options, message))
+        choice_tname: str = input("Enter Team Name: \n")
+        tui.save_input("Team Name: " + choice_tname)
+
 
         
 
