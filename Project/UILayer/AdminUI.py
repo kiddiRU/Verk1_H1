@@ -150,7 +150,24 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("HERE COMES A LIST OF MATCHES")
+
+        menu: str = "Tournaments"
+        user_path: list[str] = [
+            MenuOptions.admin_screen,
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_active_tournament,
+            MenuOptions.input_results
+        ]
+        info: list = []
+        options: dict[str, str] = {
+            "Choose a match": ""
+        }
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        input("HERE COMES A LIST OF MATCHES")
         # TODO: function for user to input to select match to manage
         return MenuOptions.manage_tournament
 
