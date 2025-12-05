@@ -148,15 +148,15 @@ class PlayerUI:
         menu: str = "Player Page"
         user_path: list = ["StartPage", "PlayerPage"]
 
-        #Temporary info for testing
+        #Temporary info for testing, needs to get info from the actual info files
         info: list = [f"""Name: {self.choice_name}
 Date of Birth: {self.choice_dob}
 Home Address: {self.choice_addr}
 Phone Number: {self.choice_pnum}
 Email: {self.choice_email}
-Team: TEAMNAME (can be “NONE”)
-Club: TEAMNAME (can be “NONE”)
-Handle: PLAYERHANDLE
+Handle: {self.choice_handle}
+Team: NONE
+Club: NONE
 Rank: Player"""]
         
         options: dict = {1: "Edit Info", 2: "My Team", 3: "Create a Team", "q": "Log Out"}
@@ -175,9 +175,9 @@ Rank: Player"""]
                 else:
                     return MenuOptions.my_team_empty
             case "3":
-                if ...:  # TODO: check if player is already in a team
-                    print("You are already in a team")
-                    return MenuOptions.player_page
+                # if ...:  # TODO: check if player is already in a team
+                #     print("You are already in a team")
+                #     return MenuOptions.player_page
                 return MenuOptions.create_team
             case "q":
                 return MenuOptions.quit
@@ -191,7 +191,26 @@ Rank: Player"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the create team page")
+        
+        menu: str = "Create Team"
+        user_path: list = ["PlayerPage -> CreateTeam"]
+        #temporary info
+        info: list = ["""- - - -List Of Clubs- - - -
+                      Club1
+                      Club2
+                      Club3
+                      Club4"""]
+        
+        options: dict = {}
+        message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, info, options, message))
+        choice_tname: str = input("Enter Team Name: \n")
+        tui.save_input("Team Name: " )
+
+        
+
         return MenuOptions.player_page
 
     def edit_player_info(self) -> MenuOptions:
