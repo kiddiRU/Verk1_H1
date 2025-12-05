@@ -98,15 +98,39 @@ def load_clubs() -> list[Club]:
 
 """ Tournament API """
 
-# TODO implement store_tournament and call it
+"""
+Takes in model class Tournament.
+
+Inserts information about the class into a json file for.
+
+Have to call within try except.
+"""
 def store_tournament(tournament: Tournament) -> None:
     TournamentIO.store_tournament(tournament)
 
-# TODO implement update_tournament and call it
+"""
+No parameters
+
+Reads the json file containing tournaments and creates a list of
+Tournament model objects of each entry in the json file.
+
+Returns the created list.
+
+Have to call within try except.
+"""
 def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     TournamentIO.update_tournament(uuid, updated_tournament)
 
-# TODO implement load_tournaments and call it
+"""
+Takes in uuid and the updated Tournament model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find tournament with given uuid and update
+that team with the new updated tournament object.
+
+Have to call within try except.
+"""
 def load_tournaments() -> list[Tournament]:
     return TournamentIO.load_tournaments()
 
