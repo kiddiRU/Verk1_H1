@@ -7,7 +7,7 @@ Logic layer API
 
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
-from LogicLayer.PlayerLL import PlayerLL
+from LogicLayer import PlayerLL, TeamLL
 
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
@@ -62,25 +62,24 @@ def leave_team(team_name: str, player: Player) -> None:
 
 ''' Team API '''
 
-# TODO implement validate_unique and call it
-def validate_unique_name(name: str) -> bool:
-    pass
-
 # TODO implement add_player and call it
-def add_player(team: Team, player: Player) -> None:
-    pass
+def add_player(player_handle: str, current_player_handle: str) -> Team:
+    return TeamLL.add_player(player_handle, current_player_handle)
 
 # TODO implement remove_player and call it
-def remove_player(team: Team, player: Player) -> None:
-    pass
+def remove_player(player_handle: str, current_player_handle: str) -> Team:
+    return TeamLL.remove_player(player_handle, current_player_handle)
 
 # TODO implement get_team_members and call it
-def get_team_members(team: Team) -> list[Player]:
-    pass
+def get_team_members(team_name: str) -> list[str]:
+    return TeamLL.get_team_members(team_name)
+
+def get_team_object(team_name: str) -> Team:
+    return TeamLL.get_team_object(team_name)
 
 # TODO implement get_team_history and call it
-def get_team_history(team: Team) -> list:       
-    pass
+def get_team_history(team_name: str) -> list[str]:       
+    return get_team_history(team_name)
 
 ''' Tournament API '''
 
