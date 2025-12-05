@@ -25,8 +25,8 @@ class AdminUI:
         
         menu = "Admin Page"
         user_path = ["StartPage", "Admin Page"]
-        info = []
-        options = ["1 Create Tournament", "2 Manage Tournaments", "3 Create Club", "b Back"]
+        info: list[str] = []
+        options: dict[str, str] = {"1": "Create Tournament", "2": "Manage Tournaments", "3": "Create Club", "b": "Back"}
         message = ""
 
         tui = Drawer()
@@ -54,8 +54,8 @@ class AdminUI:
 
         menu: str = "Create Tournament"
         user_path: list = ["StartPage", "Admin Page"]
-        info: list = []
-        options: dict = {1: "Create Tournament", 2: "Manage Tournaments", 3: "Create Club", "b": "Back"}
+        info: list[str]= []
+        options: dict[str, str] = {"1": "Create Tournament", "2": "Manage Tournaments", "3": "Create Club", "b": "Back"}
         message: str = ""
 
         tui = Drawer()
