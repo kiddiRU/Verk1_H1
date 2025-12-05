@@ -29,7 +29,7 @@ class Drawer():
     def __init__(self) -> None:
         """Initializes the class"""
         
-        self.previous_inputs: list = []
+        self.previous_inputs: list[str] = []
 
         #Colours
         red: str = "\033[31m"
@@ -88,7 +88,8 @@ class Drawer():
     
 
 
-    def table(self, table_name, table_path = [], table_info = [], table_options = {}, message = "") -> str:
+    def table(self, table_name: str, table_path: list[str] = [], table_info: list[str] = [], 
+              table_options: dict[str, str] = {}, message: str = "") -> str:
         """Creates and returns the UI tables"""
 
         self.clear()
@@ -128,8 +129,8 @@ class Drawer():
 
 
         if table_options:
-            for num, option in table_options.items():
-                table += str(num) + " " + option + "\n"
+            for opt, option in table_options.items():
+                table += opt + " " + option + "\n"
 
             table += self.line
             table += "Choose Action:"
@@ -141,12 +142,16 @@ class Drawer():
 
 
 
-    def save_input(self, user_input: str) -> list:
+    def save_input(self, user_input: str) -> None:
         """Saves data so that it will be printed at the top of the table"""
 
         self.previous_inputs.append(user_input)
+    
 
-        return self.previous_inputs
+    def clear_saved_data(self) -> None:
+        
+        self.previous_inputs.clear()
+
     
 
 
