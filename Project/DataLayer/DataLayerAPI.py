@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO, TeamIO
+from DataLayer import PlayerIO, TeamIO, TournamentIO
 
 """ Player API """
 
@@ -98,17 +98,41 @@ def load_clubs() -> list[Club]:
 
 """ Tournament API """
 
-# TODO implement store_tournament and call it
+"""
+Takes in model class Tournament.
+
+Inserts information about the class into a json file for.
+
+Have to call within try except.
+"""
 def store_tournament(tournament: Tournament) -> None:
-    pass
+    TournamentIO.store_tournament(tournament)
 
-# TODO implement update_tournament and call it
-def update_tournament(uuid: str, key: str, value: str) -> None:
-    pass
+"""
+No parameters
 
-# TODO implement load_tournaments and call it
+Reads the json file containing tournaments and creates a list of
+Tournament model objects of each entry in the json file.
+
+Returns the created list.
+
+Have to call within try except.
+"""
+def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
+    TournamentIO.update_tournament(uuid, updated_tournament)
+
+"""
+Takes in uuid and the updated Tournament model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find tournament with given uuid and update
+that team with the new updated tournament object.
+
+Have to call within try except.
+"""
 def load_tournaments() -> list[Tournament]:
-    pass
+    return TournamentIO.load_tournaments()
 
 """ Match API """
 
