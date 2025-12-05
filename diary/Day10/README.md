@@ -21,7 +21,7 @@
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 8:30
+### Time: 8:30 - 20:25
 ### On site: Yes
 
 # Morning meeting (Briefing)
@@ -60,6 +60,7 @@ The DataLayer is implemented and hopefully everything is working as intended. Th
 - UILAYER Player UI roughly done 
 - UILAYER Drawer implemented
 - Added class diagrams to latex doc
+- Added user group analysis
 - TeamLogic implemented 
 - PlayerLogic implemented
 - LogicLayer validation implemented
@@ -76,7 +77,6 @@ Sindri threatened Kristinn with physical violence because of the mere mention of
 - Conduct user test
 - Get Player UI, Logic and Data to work together
 - QC:
-    - Add user group analysis to latex doc
     - Add tasks to latex doc
     - Add happy paths
     - Add TUI graphics to latex doc
