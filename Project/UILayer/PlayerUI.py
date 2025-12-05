@@ -27,7 +27,7 @@ class PlayerUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        menu: list = "Start Page"
+        menu: str = "Start Page"
         user_path: list = ["StartPage"]
         info: list = []
         options: dict = {1: "Log in", 2: "Register", 3: "Spectate", "q": "Quit program"}
@@ -57,7 +57,7 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
 
-        menu: list = "Login"
+        menu: str = "Login"
         user_path: list = ["StartPage", "Login"]
         info: list = []
         options: dict = {}
@@ -85,7 +85,7 @@ class PlayerUI:
         """
         # TODO: add fill in option  
         
-        menu: list = "Register"
+        menu: str = "Register"
         user_path: list = ["StartPage", "Login", "Register"]
         info: list = []
         options: dict = {"c": "Continue"}
@@ -139,7 +139,7 @@ class PlayerUI:
         """
         
 
-        menu: list = "Player Page"
+        menu: str = "Player Page"
         user_path: list = ["StartPage", "PlayerPage"]
         info: list = []
         options: dict = {"c": "Continue"}
