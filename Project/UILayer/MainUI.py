@@ -78,9 +78,7 @@ class MainUI:
 
             # manage inactive tournament
             elif self.current_screen == MenuOptions.manage_inactive_tournament:
-                self.current_screen = (
-                    self._admin_ui.manage_inactive_tournament()
-                )
+                self.current_screen = self._admin_ui.manage_inactive_tournament()
 
             # select match
             elif self.current_screen == MenuOptions.select_match:
