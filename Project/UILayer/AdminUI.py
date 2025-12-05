@@ -42,7 +42,6 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        print(MenuOptions.admin_screen)
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "lo"])
         match choice:
