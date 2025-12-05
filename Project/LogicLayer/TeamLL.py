@@ -7,26 +7,17 @@ Created the TeamLL class and added the functions
 
 from Models import Team, Player, ValidationError
 from DataLayer import DataLayerAPI
-from LogicLayer.LogicUtility import get_player_uuid
+from Models.Team import Team
+from Models.Player import Player
+from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid
 
 class TeamLL():
 
     def __init__(self) -> None:
         pass
 
-    
-    def get_team_uuid(self, player: Player) -> str:
-        player_uuid = player.uuid
-        model_teams: list = DataLayerAPI.load_teams()
 
-        for team in model_teams:
-            if player_uuid in team.list_player_uuid:
-                self.team_uuid = team.uuid
-
-
-
-
-    def add_player(self, team_uuid: str, player_handle) -> Team:
+    def add_player(self, player_handle: str, current_player_handle: str) -> Team:
         """
         Takes in team uuid and a player,
         First looks through all teams to see if the player uuid is already in a team
@@ -35,6 +26,7 @@ class TeamLL():
         adds the new player uuid to the teams player list 
         """
         player_uuid: str = get_player_uuid(player_handle)
+        team_uuid: str = get_players_team_uuid(current_player_handle)
         model_teams: list = DataLayerAPI.load_teams()
         
         for team in model_teams:
@@ -53,7 +45,7 @@ class TeamLL():
                     
 
 
-    def remove_player(self, team_uuid: str, player_uuid: str) -> Team:
+    def remove_player(self, player_handle: str, current_player_handle) -> Team:
         """
         Takes in team uuid and a player uuid,
         Looks through a list of all the teams and 
@@ -62,7 +54,10 @@ class TeamLL():
         otherwise removes the player uuid from the teams player list
         try-except for if the player uuid is not in the team 
         """
+        player_uuid: str = get_player_uuid(player_handle)
+        team_uuid: str = get_players_team_uuid(current_player_handle)
         model_teams: list = DataLayerAPI.load_teams()
+        
         for team in model_teams:
             if team.uuid == team_uuid:
                 if player_uuid == team.team_captain_uuid:
@@ -77,7 +72,7 @@ class TeamLL():
                         raise ValidationError("Player not in team")
 
 
-    def get_team_members(self, team_uuid: str) -> list:
+    def get_team_members(self, team_handle: str) -> list:
         """
         Takes in team uuid
         Looks through a list of all the teams and
@@ -86,12 +81,12 @@ class TeamLL():
         """        
         model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
-            if team.uuid == team_uuid:
+            if team.handle == team_handle:
                 return team.list_player_uuid 
             
+        raise ValidationError("Team not found")
 
-
-    def get_team_info(self, team_uuid: str) -> Team:
+    def get_team_info(self, team_handle: str) -> Team:
         """
         Takes in the uuid
         Looks through a list of all the teams and
@@ -101,9 +96,10 @@ class TeamLL():
         
         model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
-            if team.uuid == team_uuid:
+            if team.handle == team_handle:
                 return team
 
+        raise ValidationError("Team not found")
 
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost

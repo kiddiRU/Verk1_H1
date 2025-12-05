@@ -9,7 +9,7 @@ from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
 from datetime import date
 
-def validate(attribute: str, value: str, name_type: str = ''):
+def validate_attr(attribute: str, value: str, name_type: str = ''):
     if attribute == 'name': return validate_name(value)
     elif attribute == 'date_of_birth': return validate_date(value)
     elif attribute == 'home_address': return validate_home_address(value)
@@ -41,7 +41,7 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
         team_names: list[str] = [team.name for team in DataLayerAPI.load_teams()]
 
         if unique_name in team_names:
-            raise ValidationError('Team name is aldready taken!')
+            raise ValidationError('Team name is already taken!')
     
         return unique_name
 
