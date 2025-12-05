@@ -1,12 +1,23 @@
 {
-    "3c02a802-9ea2-4cdc-9f3e-69d26efbcc50": {
-        "uuid": "3c02a802-9ea2-4cdc-9f3e-69d26efbcc50",
-        "name": "ClubDD",
-        "list_teams_uuid": [
-            "60159be3-3554-43c0-97f5-9db5e160aec6"
-        ],
+    "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa": {
+        "uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
+        "name": "NoClub",
         "club_color": "RED",
+        "country": "",
+        "home_town": ""
+    },
+    "269fcfc5-f629-4921-af37-0c592373717c": {
+        "uuid": "269fcfc5-f629-4921-af37-0c592373717c",
+        "name": "Matrix",
+        "club_color": "GREEN",
+        "country": "Canada",
+        "home_town": "Toronto"
+    },
+    "506657f8-0e54-42a7-ba1a-be401dc9b39b": {
+        "uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
+        "name": "Tviund",
+        "club_color": "BLUE",
         "country": "Iceland",
-        "home_town": "Kop"
+        "home_town": "Reykjavik"
     }
 }
