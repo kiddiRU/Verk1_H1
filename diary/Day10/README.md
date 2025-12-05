@@ -26,12 +26,12 @@
 
 # Morning meeting (Briefing)
 ## State of project: 
-Progress is steady but slower then desired.
+Progress is steady but slower then desired. The goal of the UI/Team
 ## State of group: 
 We need to work longer than normal because of the state of the project. 
 ## Divisions: 
 - UI / UX: Andri, Ísak
-- System engineer: Elmar, Kristinn
+- System engineer: Elmar, Kristinn, Kristján
 - QC: Sindri
 
 ## ToDo-list:
@@ -49,7 +49,7 @@ We need to work longer than normal because of the state of the project.
 ## State of project:
 
 ## State of group: 
-
+Sindri recommended Elmar to create a Utility class for player handle to uuid.
 ## Divisions:
 - UI / UX:
 - System engineer: 
