@@ -17,7 +17,7 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time: 10:30
+### Time: 10:30 - 18:00
 ### On site: Yes
 
 ## Sindri Freysson
