@@ -14,7 +14,6 @@ from LogicLayer.Validation import validate_attr
 def validate(attr, value, name_type):
     validate_attr(attr, value, name_type)
 
-
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
 
@@ -60,11 +59,17 @@ def update_player_info(
         url
     )
 
-def create_team(name: str, team_captain: Player, club: Club, url: str, ascii_art: str) -> Team:
-    return player_logic.create_team(name, team_captain, club, url, ascii_art)
+def create_team(name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str) -> Team:
+    return player_logic.create_team(name, team_captain, club_name, url, ascii_art)
 
 def leave_team(team_name: str, player: Player) -> None:
     return player_logic.leave_team(team_name, player)
+
+def list_players() -> list[Player]:
+    return player_logic.list_players()
+
+def get_player_object(player_uuid: str) -> Player:
+    return player_logic.get_player_object(player_uuid)
 
 ''' Team API '''
 
