@@ -1,7 +1,7 @@
 """
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
-Co-author: Andri Már Kristjánsson <andrik25@ru.is>
+Co-author: Andri Már Kristjá.nsson <andrik25@ru.is>
 
 File that holds all the menus that the player can access
 """
