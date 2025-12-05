@@ -55,7 +55,7 @@ class PlayerUI:
             case "q":
                 return MenuOptions.quit
 
-        return MenuOptions.main_menu
+        return MenuOptions.start_screen
 
     def login_screen(self) -> MenuOptions:
         """Login screen, choices: fill info with input
@@ -78,7 +78,7 @@ class PlayerUI:
         choice: str = self.utility._input_info(self.message_color + "Input Your Handle: " + self.reset)
 
         if choice == "admin":
-            return MenuOptions.admin_page
+            return MenuOptions.admin_screen
 
         # TODO: check if handle exists from LL API
         # if choice in Player_list:
@@ -139,10 +139,10 @@ class PlayerUI:
 
         
         #if register
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
         #if cancel: return MenuOptions.main_menu
 
-    def player_page(self) -> MenuOptions:
+    def player_screen(self) -> MenuOptions:
         """Player page, choices: 1,2,3 and b
         1: Edit info
         2: See team
@@ -194,7 +194,7 @@ Rank: {"PLAYERRANK"}"""]
                 return MenuOptions.quit
 
 
-        return MenuOptions.main_menu
+        return MenuOptions.start_screen
     
     def create_team(self) -> MenuOptions:
         """Create team screen, choices: fill info with input
@@ -243,7 +243,7 @@ Club4"""]
         choice: str = self.utility._prompt_choice(["c", "b"])
         
 
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
 
     def edit_player_info(self) -> MenuOptions:
         """Edit player info screen, choices: fill info with input
@@ -299,7 +299,7 @@ Club4"""]
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
     
     def my_team_empty(self) -> MenuOptions:
         """My team screen when team is empty, choices: b to go back
@@ -321,8 +321,8 @@ Club4"""]
         choice: str = self.utility._prompt_choice(["b"])
         match choice:
             case "b":
-                return MenuOptions.player_page
-        return MenuOptions.player_page
+                return MenuOptions.player_screen
+        return MenuOptions.player_screen
     
     def my_team_not_empty(self) -> MenuOptions:
         """My team screen when team is not empty, choices: 1,2 and b
@@ -356,8 +356,8 @@ Club4"""]
                 if ...:  # TODO: check if player is captain
                     return MenuOptions.leave_team
             case "b":
-                return MenuOptions.player_page
-        return MenuOptions.player_page
+                return MenuOptions.player_screen
+        return MenuOptions.player_screen
     
     def edit_team(self) -> MenuOptions:
         """Edit team screen, choices: 1,2 and b
@@ -391,7 +391,7 @@ Club4"""]
                     return MenuOptions.remove_player
             case "b":
                 return MenuOptions.my_team_not_empty
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
     
     
     def add_player(self) -> MenuOptions:
@@ -465,4 +465,4 @@ Club4"""]
         if ...:  # TODO: check if player is captain
             print("You are the captain, please choose a new captain before leaving")
 
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
