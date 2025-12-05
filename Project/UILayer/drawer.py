@@ -2,8 +2,8 @@
 Author: Andri Már Kristjánsson <andrik25@ru.is>
 Date: 2025-12-04
 
-File that takes in table info, creates the table and can clear the terminal, also can save previous user inputs
-that need to be displayed on the table
+File that takes in table info, creates the table and can clear the terminal, 
+also can save previous user inputsthat need to be displayed on the table
 
 takes 5 arguments:
      table name, user path, table info, table options, message to be displayed
@@ -12,30 +12,33 @@ takes 5 arguments:
 import os
 
 class Drawer():
+    """Draws TUI tables"""
 
     def __init__(self) -> None:
-        "Initializes the class"
+        """Initializes the class"""
         
         self.previous_inputs: list = []
 
         #Colours
-        RED: str = "\033[31m"
-        REDHIGH: str = "\033[41m"
-        GREEN: str = "\033[32m"
-        YELLOW: str = "\033[33m"        
-        BLUE: str = "\033[34m"
-        PINK: str = "\033[35m"
-        CYAN: str = "\033[36m"
+        red: str = "\033[31m"
+        red_high: str = "\033[41m"
+        # green: str = "\033[32m"
+        # yellow: str = "\033[33m"        
+        # blue: str = "\033[34m"
+        # pink: str = "\033[35m"
+        # cyan: str = "\033[36m"
 
 
         #Text change
-        self.RESET: str = "\033[0m"
-        self.BOLD: str = "\033[1m"
-        self.BRIGHTER: str = "\033[37m"
+        self.reset: str = "\033[0m"
+        self.bold: str = "\033[1m"
 
-        self.banner_border: str = REDHIGH
-        self.path_color: str = RED
-        self.table_color: str = self.BRIGHTER + PINK
+        self.banner_border: str = red_high
+        self.path_color: str = red
+        self.table_color: str = self.bold 
+
+    
+        self.line: str = 80 * "—" + "\n"
 
 
 
@@ -47,41 +50,40 @@ class Drawer():
 
 
     def banner(self) -> str:
-        "Prints the banner"
+        """Prints the banner"""
 
 
         return f"""{self.banner_border}
-————————————————————————————————————————————————————————————————————————————————{self.RESET}                                           
-            ▗▖ ▗▖▗▄▄▖                 ▗▄▖                          
-            ▐▌ ▐▌▐▛▀▜▌               ▗▛▀▜                 ▐▌       
-            ▐▌ ▐▌▐▌ ▐▌      ▟█▙      ▐▙   ▐▙█▙  ▟█▙  █▟█▌▐███ ▗▟██▖
-            ▐███▌▐███      ▐▙▄▟▌      ▜█▙ ▐▛ ▜▌▐▛ ▜▌ █▘   ▐▌  ▐▙▄▖▘
-            ▐▌ ▐▌▐▌▝█▖     ▐▛▀▀▘ ██▌    ▜▌▐▌ ▐▌▐▌ ▐▌ █    ▐▌   ▀▀█▖
-            ▐▌ ▐▌▐▌ ▐▌     ▝█▄▄▌     ▐▄▄▟▘▐█▄█▘▝█▄█▘ █    ▐▙▄ ▐▄▄▟▌
-            ▝▘ ▝▘▝▘ ▝▀      ▝▀▀       ▀▀▘ ▐▌▀▘  ▝▀▘  ▀     ▀▀  ▀▀▀ 
-                                          ▐▌                                                                     
-                                                                
-            ▗▄▄▄▖                      █                           
-            ▐▛▀▀▘      ▐▌              ▀                           
-            ▐▌   ▝█ █▘▐███  ▟██▖▐▙ ▟▌ ██   ▟█▟▌ ▟██▖▐▙██▖▐███▌ ▟██▖
-            ▐███  ▐█▌  ▐▌   ▘▄▟▌ █ █   █  ▐▛ ▜▌ ▘▄▟▌▐▛ ▐▌  ▗▛  ▘▄▟▌
-            ▐▌    ▗█▖  ▐▌  ▗█▀▜▌ ▜▄▛   █  ▐▌ ▐▌▗█▀▜▌▐▌ ▐▌ ▗▛  ▗█▀▜▌
-            ▐▙▄▄▖ ▟▀▙  ▐▙▄ ▐▙▄█▌ ▐█▌ ▗▄█▄▖▝█▄█▌▐▙▄█▌▐▌ ▐▌▗█▄▄▖▐▙▄█▌
-            ▝▀▀▀▘▝▀ ▀▘  ▀▀  ▀▀▝▘  ▀  ▝▀▀▀▘   ▐▌ ▀▀▝▘▝▘ ▝▘▝▀▀▀▘ ▀▀▝▘
-                                           ▜█▛▘                                          {self.RESET}
-{self.banner_border}————————————————————————————————————————————————————————————————————————————————{self.RESET} \n\n"""
+{self.line}{self.reset}                                           
+
+        ▄▄▄   ▄▄▄ ▄▄▄▄▄▄▄                  ▄▄▄▄▄▄▄                                 
+        ███   ███ ███▀▀███▄               █████▀▀▀                    ██           
+        █████████ ███▄▄███▀   ▄█▀█▄        ▀████▄  ████▄ ▄███▄ ████▄ ▀██▀▀         
+        ███▀▀▀███ ███▀▀██▄    ██▄█▀ ▀▀▀▀▀    ▀████ ██ ██ ██ ██ ██ ▀▀  ██           
+        ███   ███ ███  ▀███   ▀█▄▄▄       ███████▀ ████▀ ▀███▀ ██     ██           
+                                                   ██                              
+                                                   ▀▀                              
+
+    ▄▄▄▄▄▄▄                                                                   
+    ███▀▀▀▀▀        ██                                                         
+    ███▄▄    ██ ██ ▀██▀▀ ████▄  ▀▀█▄ ██ ██  ▀▀█▄ ▄████  ▀▀█▄ ████▄ ▀▀▀██  ▀▀█▄ 
+    ███       ███   ██   ██ ▀▀ ▄█▀██ ██▄██ ▄█▀██ ██ ██ ▄█▀██ ██ ██   ▄█▀ ▄█▀██ 
+    ▀███████ ██ ██  ██   ██    ▀█▄██  ▀█▀  ▀█▄██ ▀████ ▀█▄██ ██ ██ ▄██▄▄ ▀█▄██ 
+                                                    ██                         
+                                                  ▀▀▀                          
+{self.reset}
+{self.banner_border}{self.line}{self.reset} \n\n"""
     
 
 
-    def table(self, table_name, table_path = [], table_info = [], table_options = [], message = "") -> str:
-        "Creates and returns the UI tables"
+    def table(self, table_name, table_path = [], table_info = [], table_options = {}, message = "") -> str:
+        """Creates and returns the UI tables"""
 
         self.clear()
         print(self.banner())
 
         table: str = """"""
         path: str = ""
-        line: str = "————————————————————————————————————————————————————————————————————————————————" + "\n"
 
         if table_path:
             path += table_path[0]
@@ -90,49 +92,51 @@ class Drawer():
 
 
             table += path + "\n"
-            table += line
+            table += self.line
             
         table += f"{table_name: ^80}" + "\n"
-        table += line
+        table += self.line
 
         if self.previous_inputs:
             for info in self.previous_inputs:
                 table += info + "\n"
 
-            table += line
+            table += self.line
 
         if table_info:
             for i in table_info:
                 table += i + "\n"
 
-            table += line
+            table += self.line
 
 
         if message:
             table += message + "\n"
-            table += line
+            table += self.line
 
 
         if table_options:
-            for option in table_options:
-                table += option + "\n"
+            for num, option in table_options.items():
+                table += str(num) + " " + option + "\n"
 
-            table += line
+            table += self.line
             table += "Choose Action:"
 
 
 
-        return self.table_color + table + self.RESET
+        return self.table_color + table + self.reset
 
 
 
 
-    def save_input(self, user_input) -> list:
-
+    def save_input(self, user_input: str) -> list:
+        """Saves data so that it will be printed at the top of the table"""
 
         self.previous_inputs.append(user_input)
 
         return self.previous_inputs
+    
+
 
 
 

@@ -1,12 +1,14 @@
 """
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
+Co-author: Andri Már Kristjánsson <andrik25@ru.is>
 
 File that holds all the menus that the player can access
 """
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
+from UILayer.Drawer import Drawer
 
 
 class PlayerUI:
@@ -25,33 +27,16 @@ class PlayerUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print(
-            r"""
-————————————————————————————————————————————————————————————————————————————————
-             _____                  __ 
-  ___       / ___/____  ____  _____/ /_
- / _ \______\__ \/ __ \/ __ \/ ___/ __/
-/  __/_____/__/ / /_/ / /_/ / /  / /_  
-\___/     /____/ .___/\____/_/   \__/  
-            /_/                      
-    ______     __                                                      
-   / ____/  __/ /__________ __   ______ _____ _____ _____  ____  ____ _
-  / __/ | |/_/ __/ ___/ __ `/ | / / __ `/ __ `/ __ `/ __ \/_  / / __ `/
- / /____>  </ /_/ /  / /_/ /| |/ / /_/ / /_/ / /_/ / / / / / /_/ /_/ / 
-/_____/_/|_|\__/_/   \__,_/ |___/\__,_/\__, /\__,_/_/ /_/ /___/\__,_/  
-                                    /____/          
-————————————————————————————————————————————————————————————————————————————————
-StartPage
-————————————————————————————————————————————————————————————————————————————————
-                                 Start Page
-————————————————————————————————————————————————————————————————————————————————
-1 Login
-2 Register 
-3 Spectate
-q Quit
-————————————————————————————————————————————————————————————————————————————————
-"""
-        )
+        menu: list = "Start Page"
+        user_path: list = ["StartPage"]
+        info: list = []
+        options: dict = {1: "Log in", 2: "Register", 3: "Spectate", "q": "Quit program"}
+        message: str = ""
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, info, options, message))  
+
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
         match choice:
             case "1":
@@ -71,16 +56,18 @@ q Quit
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print(
-            r"""
-* User Path *
-StartPage -> Login
-————————————————————————————————————————————————————————————————————————————————
-                                    Login
-————————————————————————————————————————————————————————————————————————————————
-"""
-        )
+
+        menu: list = "Login"
+        user_path: list = ["StartPage", "Login"]
+        info: list = []
+        options: dict = {}
+        message: str = ""
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, info, options, message))        
+
         choice: str = self.utility._input_info("Input Your Handle: ")
+
         if choice == "admin":
             return MenuOptions.admin_page
 
@@ -96,8 +83,46 @@ StartPage -> Login
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        # TODO: add fill in option
-        print("This is the register page")
+        # TODO: add fill in option  
+        
+        menu: list = "Register"
+        user_path: list = ["StartPage", "Login", "Register"]
+        info: list = []
+        options: dict = {"c": "Continue"}
+        message: str = "You Have Created A User"
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, info))  
+        choice_name: str = input("Enter Name: \n")
+        tui.save_input("Name: " + choice_name)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info)) 
+        choice_dob: str = input("Enter Date Of Birth: \n")
+        tui.save_input("Date Of Birth: " + choice_dob)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info)) 
+        choice_addr: str = input("Enter Home Adderess: \n")
+        tui.save_input("Home Address: " + choice_addr)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info))
+        choice_email: str = input("Enter Email: \n")
+        tui.save_input("Email: " + choice_email)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info))   
+        choice_pnum: str = input("Enter Phone Number: \n")
+        tui.save_input("Phone Number: " + choice_pnum)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info))   
+        choice_handle: str = input("Enter Handle: \n")
+        tui.save_input("Handle: " + choice_handle)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        
         #if register
         return MenuOptions.player_page
         #if cancel: return MenuOptions.main_menu
@@ -112,7 +137,16 @@ StartPage -> Login
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("YOU are now in the player page")
+        
+
+        menu: list = "Player Page"
+        user_path: list = ["StartPage", "PlayerPage"]
+        info: list = []
+        options: dict = {"c": "Continue"}
+        message: str = "You Have Created A User"
+
+
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
         match choice:
             case "1":
@@ -129,6 +163,7 @@ StartPage -> Login
                 return MenuOptions.create_team
             case "q":
                 return MenuOptions.quit
+
 
         return MenuOptions.main_menu
     

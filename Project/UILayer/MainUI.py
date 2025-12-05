@@ -33,8 +33,7 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
-
-            # ------------------ Main Paths ------------------
+            
             # main menu
             if self.current_screen == MenuOptions.main_menu:
                 self.current_screen = self._player_ui.start_screen()
@@ -211,6 +210,7 @@ class MainUI:
                 self.current_screen = self._spectate_ui.team_tournament_stats()
 
             # ------------------ Misc Paths ------------------
+
             # go to main menu if logout
             elif self.current_screen == MenuOptions.logout:
                 self.current_screen = MenuOptions.main_menu
