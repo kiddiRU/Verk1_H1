@@ -75,7 +75,7 @@ class Drawer():
     
 
 
-    def table(self, table_name, table_path = [], table_info = [], table_options = [], message = "") -> str:
+    def table(self, table_name, table_path = [], table_info = [], table_options = {}, message = "") -> str:
         """Creates and returns the UI tables"""
 
         self.clear()
@@ -115,8 +115,8 @@ class Drawer():
 
 
         if table_options:
-            for option in table_options:
-                table += option + "\n"
+            for num, option in table_options.items():
+                table += str(num) + " " + option + "\n"
 
             table += self.line
             table += "Choose Action:"
@@ -128,12 +128,14 @@ class Drawer():
 
 
 
-    def save_input(self, user_input) -> list:
+    def save_input(self, user_input: str) -> list:
         """Saves data so that it will be printed at the top of the table"""
 
         self.previous_inputs.append(user_input)
 
         return self.previous_inputs
+    
+
 
 
 

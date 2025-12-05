@@ -27,12 +27,14 @@ class PlayerUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        menu = "Start Page"
-        user_path = ["StartPage"]
-        options = ["1 Log In", "2 Register", "3 Spectate", "q Quit"]
+        menu: list = "Start Page"
+        user_path: list = ["StartPage"]
+        info: list = []
+        options: dict = {1: "Log in", 2: "Register", 3: "Spectate", "q": "Quit program"}
+        message: str = ""
 
         tui = Drawer()
-        print(tui.table(menu, user_path, options))
+        print(tui.table(menu, user_path, info, options, message))  
 
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
@@ -55,14 +57,17 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
 
-        menu = "Login"
-        user_path = ["StartPage", "Login"]
+        menu: list = "Login"
+        user_path: list = ["StartPage", "Login"]
+        info: list = []
+        options: dict = {}
+        message: str = ""
 
         tui = Drawer()
-        print(tui.table(menu, user_path))        
-
+        print(tui.table(menu, user_path, info, options, message))        
 
         choice: str = self.utility._input_info("Input Your Handle: ")
+
         if choice == "admin":
             return MenuOptions.admin_page
 
@@ -80,12 +85,39 @@ class PlayerUI:
         """
         # TODO: add fill in option  
         
-        menu = "Register"
-        user_path = ["StartPage", "Register"]
+        menu: list = "Register"
+        user_path: list = ["StartPage", "Login", "Register"]
+        info: list = []
+        options: dict = {"c": "Continue"}
+        message: str = "You Have Created A User"
 
         tui = Drawer()
-        print(tui.table(menu, user_path))   
-        choice = input()
+        print(tui.table(menu, user_path, info))  
+        choice_name: str = input("Enter Name: \n")
+        tui.save_input("Name: " + choice_name)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info)) 
+        choice_dob: str = input("Enter Date Of Birth: \n")
+        tui.save_input("Date Of Birth: " + choice_dob)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info)) 
+        choice_addr: str = input("Enter Home Adderess: \n")
+        tui.save_input("Home Address: " + choice_addr)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info))
+        choice_email: str = input("Enter Email: \n")
+        tui.save_input("Email: " + choice_email)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info))   
+        choice_handle: str = input("Enter Handle: \n")
+        tui.save_input("Handle: " + choice_handle)
+        print(tui.table(menu, user_path, info, options, message))  
+
+
         
         #if register
         return MenuOptions.player_page
