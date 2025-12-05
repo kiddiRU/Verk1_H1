@@ -22,6 +22,7 @@ class PlayerLL():
     Validates the given info, creates a player object if valid. Sends the 
     object to the data layer to be stored and returns the new player
     """
+    # B-requirement allow player to input attribute one at a time which allows the user to know errors
     def create_player(self,
                 name: str,
                 date_of_birth: str,
