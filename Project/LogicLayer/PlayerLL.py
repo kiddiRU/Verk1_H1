@@ -37,10 +37,7 @@ class PlayerLL():
 
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
-            try:
-                validate(attr, value.strip(), name_type = 'PLAYER')
-            except Exception:
-                raise
+            validate(attr, value.strip(), name_type = 'PLAYER')
 
         new_player = Player(
             uuid,
@@ -53,11 +50,7 @@ class PlayerLL():
             params["url"],
         )
 
-        try:
-            DataLayerAPI.store_player(new_player)
-        except Exception:
-            raise
-        
+        DataLayerAPI.store_player(new_player)
         return new_player
 
     # TODO Alter validation functionality?
@@ -84,17 +77,10 @@ class PlayerLL():
             if value == '':
                 continue
             
-            try:
-                validate(attr, value, name_type='PLAYER')
-                setattr(player, attr, value)
-            except Exception:
-                raise
+            validate(attr, value, name_type='PLAYER')
+            setattr(player, attr, value)
         
-        try:
-            self._data_api.update_player(player.uuid, player)
-        except Exception:
-            raise
-
+        self._data_api.update_player(player.uuid, player)
         return player
     
     # TODO Fetch club uuid once ClubIO has been implemented. Return new Team? 
@@ -105,16 +91,13 @@ class PlayerLL():
         Creates a new Team object, sends it the data layer to be stored and returns it.
         '''
 
+        validate('handle', name, 'TEAM')
         uuid = str(uuid4())
 
         # At the moment the clubs name is registerd, not its uuid
         new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club, None, url, ascii_art)
 
-        try:
-            self._data_api.store_team(new_team)
-        except Exception:
-            raise
-        
+        self._data_api.store_team(new_team)
         return new_team
         
 
