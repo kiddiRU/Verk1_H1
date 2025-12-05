@@ -32,8 +32,6 @@ class AdminUI:
 
         tui = Drawer()
         print(tui.table(menu, user_path, info, options, message))   
-        
-        print(MenuOptions.admin_screen)
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
         match choice:
