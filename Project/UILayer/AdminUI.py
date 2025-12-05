@@ -7,6 +7,7 @@ File that holds all the menus that the admin can access
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
+from UILayer.Drawer import Drawer
 
 
 class AdminUI:
@@ -21,22 +22,17 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print(
-            r"""
-* User Path *
-StartPage -> AdminPage
-————————————————————————————————————————————————————————————————————————————————
-                                Admin Page
-————————————————————————————————————————————————————————————————————————————————
-1 Create Tournament
-2 Manage Tournaments
-3 Create Club
-b Back
-————————————————————————————————————————————————————————————————————————————————
-Choose Action:
-————————————————————————————————————————————————————————————————————————————————
-"""
-        )
+        
+        menu = "Admin Page"
+        user_path = ["StartPage", "Admin Page"]
+        info = []
+        options = ["1 Create Tournament", "2 Manage Tournaments", "3 Create Club", "b Back"]
+        message = ""
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, info, options, message))   
+        
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
         match choice:
             case "1":
@@ -56,7 +52,20 @@ Choose Action:
             MenuOptions: The next menu to navigate to
         """
 
-        print("This is the create tournament page")
+        menu = "Create Tournament"
+        user_path = ["StartPage", "Admin Page"]
+        info = []
+        options = ["1 Create Tournament", "2 Manage Tournaments", "3 Create Club", "b Back"]
+        message = ""
+
+        tui = Drawer()
+        print(tui.table(menu, user_path, info, options, message))   
+        
+
+        tournament_create = Drawer()
+        print(tournament_create.table())
+
+
         # TODO: add fill in options
         return MenuOptions.admin_page
 

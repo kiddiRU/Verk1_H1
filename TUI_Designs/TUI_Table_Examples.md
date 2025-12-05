@@ -1340,7 +1340,7 @@ Contact Email: EMAIL@EMAIL.COM
 Phone Number: PHONENUMBER
 Nuber Of Teams: XX
 Number Of Rounds: XX
-————————————————————————————————————————————————————————————————————————————————
+
 - - - -Schedule- - - -
 Match1: TEAMNAME vs TEAMNAME
 Match2: TEAMNAME vs TEAMNAME

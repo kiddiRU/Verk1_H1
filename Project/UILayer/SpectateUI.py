@@ -148,8 +148,13 @@ class SpectateUI:
         return MenuOptions.spectate_tournaments
 
     def archived_tournament(self) -> MenuOptions:
+        """Archived tournaments
+
+        Returns:
+            MenuOptions: The next menu to navigate to
+        """
         # TODO: implement archived tournament screen
-        ...
+        return MenuOptions.spectate_tournaments
 
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
