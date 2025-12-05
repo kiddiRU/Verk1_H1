@@ -34,8 +34,9 @@ class PlayerUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        
         menu: str = "Start Page"
-        user_path: list[str]= ["StartPage"]
+        user_path: list[str] = [MenuOptions.start_screen]
         info: list[str]= []
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
         message: str = ""
@@ -69,7 +70,7 @@ class PlayerUI:
         """
 
         menu: str = "Login"
-        user_path: list[str]= ["StartPage", "Login"]
+        user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login]
         info: list[str]= []
         options: dict[str, str]= {}
         message: str = ""
@@ -83,6 +84,10 @@ class PlayerUI:
 
         if choice == "admin":
             return MenuOptions.admin_screen
+        
+        elif choice == "Shrek":
+            return MenuOptions.onion
+        return MenuOptions.start_screen
 
         # TODO: check if handle exists from LL API
         # if choice in Player_list:
@@ -101,7 +106,7 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list[str]= ["StartPage", "Login", "Register"]
+        user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue"}
         message: str = "You Have Created A Player!"
@@ -163,7 +168,7 @@ class PlayerUI:
         
 
         menu: str = "Player Page"
-        user_path: list[str]= ["PlayerPage"]
+        user_path: list[str] = [MenuOptions.player_screen]
 
         #Temporary info for testing, needs to get info from the actual info files
         info: list[str]= [f"""Name: {"PLAYERNAME"}
@@ -211,7 +216,7 @@ Rank: {"PLAYERRANK"}"""]
         """
         
         menu: str = "Create Team"
-        user_path: list[str]= ["PlayerPage -> CreateTeam"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.create_team]
 
         #temporary info
         info: list[str]= ["""- - - -List Of Clubs- - - -
@@ -271,7 +276,7 @@ Club4"""]
 
 
         menu: str = "Edit Player Info"
-        user_path: list[str]= ["PlayerPage", "EditPlayerInfo"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.edit_player_info]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Changed Your Info!"
@@ -332,7 +337,7 @@ Club4"""]
         """
 
         menu: str = "My Team"
-        user_path: list[str]= ["PlayerPage", "MyTeam"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_empty]
         info: list[str]= []
         options: dict[str, str]= {"b": "Back"}
         message: str = "You Are Not In A Team!"
@@ -360,7 +365,7 @@ Club4"""]
         """
        
         menu: str = "My Team"
-        user_path: list[str]= ["PlayerPage", "MyTeam"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty]
         info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
 {self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
 {self.reset + "Captain"}{"PLAYERHANDLE": >20}
@@ -398,7 +403,7 @@ Club4"""]
         """
 
         menu: str = "Edit Team"
-        user_path: list = ["PlayerPage", "MyTeam", "EditTeam"]
+        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team]
         info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
 {self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
 {self.reset + "Captain"}{"PLAYERHANDLE": >20}
@@ -432,7 +437,7 @@ Club4"""]
         """
         
         menu: str = "Add Player"
-        user_path: list = ["PlayerPage", "MyTeam", "EditTeam", "AddPlayer"]
+        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, MenuOptions.add_player]
         info: list = []
         options: dict = {"c": "Continue"}
 
@@ -484,7 +489,8 @@ Club4"""]
         """
 
         menu: str = "Remove Player"
-        user_path: list = ["PlayerPage", "MyTeam", "EditTeam", ]
+        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, 
+                           MenuOptions.remove_player]
         info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
 {self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
 {self.reset + "Captain"}{"PLAYERHANDLE": >20}
@@ -560,3 +566,101 @@ Club4"""]
             return MenuOptions.my_team_empty
 
         return MenuOptions.my_team_empty
+
+
+
+    def onion(self) -> MenuOptions:
+        return MenuOptions.start_screen
+        #         """This Program Has Layers"""
+
+        #         print("""
+        # ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆ 
+        # ⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿ 
+        # ⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀ 
+        # ⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+        # ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+                    
+                    
+        # Somebody once told me the world is gonna roll me
+        # I ain't the sharpest tool in the shed
+        # She was looking kind of dumb with her finger and her thumb
+        # In the shape of an "L" on her forehead
+        # Well, the years start comin' and they don't stop comin'
+        # Fed to the rules and I hit the ground runnin'
+        # Didn't make sense not to live for fun
+        # Your brain gets smart, but your head gets dumb
+        # So much to do, so much to see
+        # So, what's wrong with taking the backstreets?
+        # You'll never know if you don't go (go)
+        # You'll never shine if you don't glow
+        # Hey now, you're an all-star
+        # Get your game on, go play
+        # Hey now, you're a rock star
+        # Get the show on, get paid
+        # (And all that glitters is gold)
+        # Only shootin' stars break the mold
+        # It's a cool place, and they say it gets colder
+        # You're bundled up now, wait 'til you get older
+        # But the meteor men beg to differ
+        # Judging by the hole in the satellite picture
+        # The ice we skate is gettin' pretty thin
+        # The water's gettin' warm, so you might as well swim
+        # My world's on fire, how 'bout yours?
+        # That's the way I like it, and I'll never get bored
+        # Hey now, you're an all-star
+        # Get your game on, go play
+        # Hey now, you're a rock star
+        # Get the show on, get paid
+        # (All that glitters is gold)
+        # Only shootin' stars break the mold
+        # Go for the moon
+        # (Go, go, go) go for the moon
+        # (Go, go, go) go for the moon
+        # Go (go), go for the moon
+        # Hey now, you're an all-star
+        # Get your game on, go play
+        # Hey now, you're a rock star
+        # Get the show on, get paid
+        # (And all that glitters is gold)
+        # Only shooting stars
+        # Somebody once asked, "Could I spare some change for gas?
+        # I need to get myself away from this place"
+        # I said, "Yep, what a concept, I could use a little fuel myself
+        # And we could all use a little change"
+        # Well, the years start comin' and they don't stop comin'
+        # Fed to the rules and I hit the ground runnin'
+        # Didn't make sense not to live for fun
+        # Your brain gets smart, but your head gets dumb
+        # So much to do, so much to see
+        # So, what's wrong with taking the backstreets?
+        # You'll never know if you don't go (go!)
+        # You'll never shine if you don't glow
+        # Hey now, you're an all-star
+        # Get your game on, go play
+        # Hey now, you're a rock star
+        # Get the show on, get paid
+        # (And all that glitters is gold)
+        # Only shootin' stars break the mold
+        # Only shootin' stars break the mold
+        # Go for the moon
+        # Go for the moon
+        # Go for the moon
+        # This is how we do it""")
+                
+
+        #         a = input()
+        #         if a == "GET OUTTA MA SWAMP!":
+        #             return MenuOptions.start_screen
+                
+        #         return MenuOptions.onion
+                

@@ -220,5 +220,9 @@ class MainUI:
                 print("Quitting program")
                 exit()
 
+
+            elif self.current_screen == MenuOptions.onion:
+                self.current_screen = self._player_ui.onion()
+
             else:
                 self.current_screen = self._utility_ui.screen_not_exist_error()
