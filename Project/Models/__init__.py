@@ -4,6 +4,7 @@ from Models.Player import Player
 from Models.Server import Server
 from Models.Team import Team
 from Models.Tournament import Tournament
+from Models.Exceptions import ValidationError
 
 __all__ = [
     "Club",
@@ -12,4 +13,5 @@ __all__ = [
     "Server",
     "Team",
     "Tournament",
+    "ValidationError"
 ]
