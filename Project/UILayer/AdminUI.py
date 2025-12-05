@@ -52,18 +52,18 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        menu = "Create Tournament"
-        user_path = ["StartPage", "Admin Page"]
-        info = []
-        options = ["1 Create Tournament", "2 Manage Tournaments", "3 Create Club", "b Back"]
-        message = ""
+        menu: str = "Create Tournament"
+        user_path: list = ["StartPage", "Admin Page"]
+        info: list = []
+        options: dict = {1: "Create Tournament", 2: "Manage Tournaments", 3: "Create Club", "b": "Back"}
+        message: str = ""
 
         tui = Drawer()
         print(tui.table(menu, user_path, info, options, message))   
         
 
         tournament_create = Drawer()
-        print(tournament_create.table())
+        print(tournament_create.table(menu))
 
 
         # TODO: add fill in options
