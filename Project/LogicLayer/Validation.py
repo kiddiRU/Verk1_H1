@@ -9,7 +9,7 @@ from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
 from datetime import date
 
-def validate(attribute: str, value: str, name_type: str = ''):
+def validate_attr(attribute: str, value: str, name_type: str = ''):
     if attribute == 'name': return validate_name(value)
     elif attribute == 'date_of_birth': return validate_date(value)
     elif attribute == 'home_address': return validate_home_address(value)

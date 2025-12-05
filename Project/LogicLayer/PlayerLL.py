@@ -9,7 +9,7 @@ Created the PlayerLL class and added the functions
 from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models import Player, Team, ValidationError
-from LogicLayer.Validation import validate
+from LogicLayer.Validation import validate_attr
 
 class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
@@ -37,7 +37,7 @@ class PlayerLL():
 
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
-            validate(attr, value.strip(), name_type = 'PLAYER')
+            validate_attr(attr, value.strip(), name_type = 'PLAYER')
 
         new_player = Player(
             uuid,
@@ -77,7 +77,7 @@ class PlayerLL():
             if value == '':
                 continue
             
-            validate(attr, value, name_type='PLAYER')
+            validate_attr(attr, value, name_type='PLAYER')
             setattr(player, attr, value)
         
         self._data_api.update_player(player.uuid, player)
@@ -91,7 +91,7 @@ class PlayerLL():
         Creates a new Team object, sends it the data layer to be stored and returns it.
         '''
 
-        validate('handle', name, 'TEAM')
+        validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
 
         # At the moment the clubs name is registerd, not its uuid
@@ -110,7 +110,6 @@ class PlayerLL():
         '''
             
         teams: list[Team] = self._data_api.load_teams()
-
         team = next((t for t in teams if t.uuid == team_uuid), None)
 
         if team is None:
@@ -126,13 +125,18 @@ class PlayerLL():
     def list_players(self) -> list[Player]:
         """ Returns a list of stored players. """
 
-        model_players: list = DataLayerAPI.load_players()
-        return model_players
+        players: list = DataLayerAPI.load_players()
+        return players
     
     
-    def get_player_info(self, player_uuid) -> Player:
-        model_players: list = DataLayerAPI.load_players()
+    def get_player_object(self, player_uuid) -> Player:
+        ''' Takes in a players UUID and returns the players object. '''
         
-        for player in model_players:
-            if player.uuid == player_uuid:
-                return player
+        players: list = DataLayerAPI.load_players()
+        player = next((p for p in players if p.uuid == player_uuid))
+
+        if player is None:
+            raise Exception(f"No player found with UUID: {player_uuid}")
+        
+        return player
+

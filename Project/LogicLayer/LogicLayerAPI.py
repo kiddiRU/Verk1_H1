@@ -7,7 +7,13 @@ Logic layer API
 
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
-from LogicLayer.PlayerLL import PlayerLL
+from LogicLayer import PlayerLL
+from LogicLayer.Validation import validate_attr
+
+''' Validation API '''
+def validate(attr, value, name_type):
+    validate_attr(attr, value, name_type)
+
 
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
@@ -61,10 +67,6 @@ def leave_team(team_name: str, player: Player) -> None:
     return player_logic.leave_team(team_name, player)
 
 ''' Team API '''
-
-# TODO implement validate_unique and call it
-def validate_unique_name(name: str) -> bool:
-    pass
 
 # TODO implement add_player and call it
 def add_player(team: Team, player: Player) -> None:
