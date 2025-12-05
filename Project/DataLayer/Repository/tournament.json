@@ -1,1 +1,16 @@
-{}
+{
+    "3ff31637-6d55-4322-be0c-d7a1a1b0a28a": {
+        "uuid": "3ff31637-6d55-4322-be0c-d7a1a1b0a28a",
+        "name": "RUnning Man",
+        "start_date": "2025-12-05",
+        "end_date": "2026-01-01",
+        "time_frame_start": "08:00:00",
+        "time_frame_end": "16:00:00",
+        "venue": "Solin",
+        "email": "ru@ru.is",
+        "phone_number": "123-4567",
+        "status": "INACTIVE",
+        "list_servers": [],
+        "teams_playing": []
+    }
+}

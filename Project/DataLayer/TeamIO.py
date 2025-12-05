@@ -55,9 +55,9 @@ def load_teams() -> list[Team]:
     return team_list
 
 """
-Takes in uuid, key and value as parameters.
+Takes in uuid and the updated Team model object.
 
-uuid and key have to exist in the json file.
+uuid has to exist in the json file
 
 Will attempt to find team with given uuid and update that
 team with the new updated team object.
