@@ -113,10 +113,14 @@ class PlayerUI:
         print(tui.table(menu, user_path, info, options, message))  
 
         print(tui.table(menu, user_path, info))   
+        choice_pnum: str = input("Enter Phone Number: \n")
+        tui.save_input("Phone Number: " + choice_pnum)
+        print(tui.table(menu, user_path, info, options, message))  
+
+        print(tui.table(menu, user_path, info))   
         choice_handle: str = input("Enter Handle: \n")
         tui.save_input("Handle: " + choice_handle)
         print(tui.table(menu, user_path, info, options, message))  
-
 
         
         #if register
