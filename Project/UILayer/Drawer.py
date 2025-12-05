@@ -34,13 +34,11 @@ class Drawer():
         #Colors
         red: str = "\033[31m"
         red_high: str = "\033[41m"
-        # green: str = "\033[32m"
-        # yellow: str = "\033[33m"        
         green: str = "\033[32m"
         yellow: str = "\033[33m"        
         # blue: str = "\033[34m"
         # pink: str = "\033[35m"
-        cyan: str = "\033[36m"
+        # cyan: str = "\033[36m"
 
 
         #Text change
@@ -94,7 +92,7 @@ class Drawer():
 
 
 
-    def table(self, table_name: str, table_path: list[str] = [], table_info: list[str] = [], 
+    def table(self, table_name: str, table_path: list[str], table_info: list[str] = [], 
               table_options: dict[str, str] = {}, message: str = "") -> str:
         """Creates and returns the UI tables"""
 

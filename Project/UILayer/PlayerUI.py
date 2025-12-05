@@ -358,6 +358,7 @@ Club4"""]
             case "b":
                 return MenuOptions.player_screen
         return MenuOptions.player_screen
+
     
     def edit_team(self) -> MenuOptions:
         """Edit team screen, choices: 1,2 and b
@@ -392,6 +393,7 @@ Club4"""]
             case "b":
                 return MenuOptions.my_team_not_empty
         return MenuOptions.player_screen
+
     
     
     def add_player(self) -> MenuOptions:
@@ -410,7 +412,8 @@ Club4"""]
         print(self.tui.table(menu, user_path))
 
         # Might add to the message if the search will be implemented
-        add_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Add Them:")
+        add_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Add Them: \n")
+
         self.tui.save_input("Player To Add: " + add_handle)
 
         if...: #TODO: check if player is found and is not in a team
