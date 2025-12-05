@@ -7,6 +7,18 @@ also can save previous user inputsthat need to be displayed on the table
 
 takes 5 arguments:
      table name, user path, table info, table options, message to be displayed
+
+
+arguments and calling:
+
+    menu: str = ""
+    user_path: list = []
+    info: list = []
+    options: dict = {}
+    message: str = ""
+
+    tui = Drawer()
+    print(tui.table(menu, user_path, info, options, message))        
 """
 
 import os
