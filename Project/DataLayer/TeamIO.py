@@ -63,7 +63,7 @@ Will attempt to find team with given uuid and update that
 team with the new updated team object.
 """
 def update_team(uuid: str, updated_team: Team) -> None:
-    # Reads the json file containing players and stores it as a dictionary.
+    # Reads the json file containing teams and stores it as a dictionary.
     with open(FILE_PATH, "r") as team_file:
         file_content = dict(json.load(team_file))
    
@@ -72,6 +72,6 @@ def update_team(uuid: str, updated_team: Team) -> None:
     if uuid in file_content:
         file_content[uuid] = updated_team.__dict__
     
-    # Writes the updated dictionary into the player file.
+    # Writes the updated dictionary into the team file.
     with open(FILE_PATH, "w") as team_file:
         json.dump(file_content, team_file, indent=4)

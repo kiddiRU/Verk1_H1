@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO, TeamIO, TournamentIO
+from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO
 
 """ Player API """
 
@@ -88,13 +88,14 @@ def store_team(team: Team) -> None:
 
 # TODO implement store_club and call it
 def store_club(club: Club) -> None:
-    pass
+    ClubIO.store_club(club)
 
-# def update_club(uuid: str, key: str, value: str) -> None:
+def update_club(uuid: str, updated_club: Club) -> None:
+    ClubIO.update_club(uuid, updated_club)
 
 # TODO implement load_clubs and call it
 def load_clubs() -> list[Club]:
-    pass
+    return ClubIO.load_club()
 
 """ Tournament API """
 
