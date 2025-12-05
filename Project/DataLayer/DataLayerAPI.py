@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO
+from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 
 """ Player API """
 
@@ -105,8 +105,8 @@ Club model objects of each entry in the json file.
 
 Returns the created list.
 """
-def update_club(uuid: str, updated_club: Club) -> None:
-    ClubIO.update_club(uuid, updated_club)
+def load_clubs() -> list[Club]:
+    return ClubIO.load_club()
 
 """
 Takes in uuid and the updated Club model object.
@@ -116,8 +116,8 @@ uuid has to exist in the json file.
 Will attempt to find a blub with given uuid and update that
 club with the new updated club object.
 """
-def load_clubs() -> list[Club]:
-    return ClubIO.load_club()
+def update_club(uuid: str, updated_club: Club) -> None:
+    ClubIO.update_club(uuid, updated_club)
 
 """ Tournament API """
 
@@ -189,3 +189,39 @@ Returns the created match list.
 """
 def load_matches() -> list[Match]:
     return MatchIO.load_match()
+
+
+""" Server API """
+
+"""
+Takes in model class Server
+
+Inserts information about the Server class into a json file
+for storage
+
+Have to call within try except
+"""
+def store_server(server: Server) -> None:
+    ServerIO.store_server(server)
+
+"""
+No parameters
+
+Reads json file containing server and creates a list of
+Server model objects of each entry in the json file.
+
+Returns the created list.
+"""
+def load_servers() -> list[Server]:
+    return ServerIO.load_server()
+
+"""
+Takes in uuid and the updated Server model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find a server with given uuid and update that
+server with the new updated server object.
+"""
+def update_server(uuid: str, updated_server: Server) -> None:
+    ServerIO.update_server(uuid, updated_server)

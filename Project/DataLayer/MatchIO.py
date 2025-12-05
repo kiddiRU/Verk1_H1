@@ -2,7 +2,7 @@
 Author: Kristinn Hrafn <kristinnd25@ru.is>
 Date: 2025-12-05
 
-Functions which let you read, write and update clubs
+Functions which let you read, write and update servers
 stored in the ./DataLayer/Repository/match.json
 """
 
@@ -47,7 +47,7 @@ def load_match() -> list[Match]:
     with open(FILE_PATH, "r") as match_file:
         file_content = dict(json.load(match_file))
 
-    # Creates a list of all matches in the club file.
+    # Creates a list of all matches in the server file.
     # Each match is stored as a Match model object.
     match_list: list[Match] = []
     for value in file_content.values():
