@@ -28,25 +28,26 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
         raise ValidationError("Name needs to be between 3 to 40 characters in length")
         
     if type_of_name == "PLAYER":
-        model_player: list = DataLayerAPI.load_players()
+        player_names: list[str] = [player.name for player in DataLayerAPI.load_teams()]
+        if unique_name in player_names:
+            raise ValidationError(f'The handle \'{unique_name}\' is already taken!')
 
-        for player in model_player:
-            if player.handle == unique_name:
-                raise ValidationError("Handle is already taken")
-        
         return unique_name
 
-    #TODO implement check for unique names in team, tournament and club
+    # TODO implement check for unique names in team, tournament and club
     elif type_of_name == "TEAM":
         team_names: list[str] = [team.name for team in DataLayerAPI.load_teams()]
 
         if unique_name in team_names:
-            raise ValidationError('Team name is already taken!')
+            raise ValidationError(f'The name \'{unique_name}\' is already taken!')
     
         return unique_name
 
     elif type_of_name == "TOURNAMENT":
-        pass
+        tournament_names: list[str] = [t.name for t in DataLayerAPI.load_tournaments()]
+
+        if unique_name in tournament_names:
+            raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
     elif type_of_name == "CLUB":
         pass
