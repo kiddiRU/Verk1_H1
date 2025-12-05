@@ -205,9 +205,7 @@ class PlayerUI:
                 return MenuOptions.edit_team
             case "2":
                 if ...:  # TODO: check if player is captain
-                    return MenuOptions.leave_team_if_captain
-                else:
-                    return MenuOptions.leave_team_if_not_captain
+                    return MenuOptions.leave_team
             case "b":
                 return MenuOptions.my_team_not_empty
         return MenuOptions.player_page
@@ -224,7 +222,7 @@ class PlayerUI:
         print("This is the edit team page")
         return MenuOptions.my_team_not_empty
     
-    def add_player_to_team(self) -> MenuOptions:
+    def add_player(self) -> MenuOptions:
         """Add player to team screen, choices: input player handle to add
 
         Returns:
