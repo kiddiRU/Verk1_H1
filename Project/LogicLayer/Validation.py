@@ -33,8 +33,7 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
             raise ValidationError(f'The handle \'{unique_name}\' is already taken!')
 
         return unique_name
-
-    # TODO implement check for unique names in team, tournament and club
+    
     elif type_of_name == "TEAM":
         team_names: list[str] = [team.name for team in DataLayerAPI.load_teams()]
 
@@ -50,8 +49,10 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
             raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
     elif type_of_name == "CLUB":
-        pass
+        club_names: list[str] = [c.name for c in DataLayerAPI.load_clubs()]
 
+        if unique_name in club_names:
+            raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
 def validate_name(name) -> str | ValidationError: # Players full name
     """Checks if the name is in between 3-40 char in length and has only letters"""
