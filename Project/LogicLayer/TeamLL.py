@@ -9,7 +9,7 @@ from Models import Team, Player, ValidationError
 from DataLayer import DataLayerAPI
 from Models.Team import Team
 from Models.Player import Player
-from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid
+from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
 
@@ -42,6 +42,7 @@ class TeamLL():
                         else:
                             team.list_player_uuid.append(player_uuid)
                             DataLayerAPI.update_team(team_uuid, team)
+                            return team
                     
 
 
@@ -67,12 +68,13 @@ class TeamLL():
                     try:
                         team.list_player_uuid.remove(player_uuid)
                         DataLayerAPI.update_team(team_uuid, team)
+                        return team
 
                     except ValueError:
                         raise ValidationError("Player not in team")
 
 
-    def get_team_members(self, team_handle: str) -> list:
+    def get_team_members(self, team_name: str) -> list[str]:
         """
         Takes in team uuid
         Looks through a list of all the teams and
@@ -81,12 +83,12 @@ class TeamLL():
         """        
         model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
-            if team.handle == team_handle:
+            if team.handle == team_name:
                 return team.list_player_uuid 
             
         raise ValidationError("Team not found")
 
-    def get_team_info(self, team_handle: str) -> Team:
+    def get_team_object(self, team_name: str) -> Team:
         """
         Takes in the uuid
         Looks through a list of all the teams and
@@ -96,14 +98,14 @@ class TeamLL():
         
         model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
-            if team.handle == team_handle:
+            if team.handle == team_name:
                 return team
 
         raise ValidationError("Team not found")
 
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
-    def get_team_history(self, team_uuid) -> list:
+    def get_team_history(self, team_name) -> list:
         """
         Takes in team uuid,
         looks through a list of all the tournaments
@@ -111,6 +113,7 @@ class TeamLL():
         returns a list of those tournaments
         """
         teams_history: list = []
+        team_uuid: str = get_team_uuid(team_name)
 
         model_tournaments: list = DataLayerAPI.load_tournaments()
         for tournament in model_tournaments:
