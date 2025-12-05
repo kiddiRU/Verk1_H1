@@ -5,10 +5,12 @@ Date: 2025-12-03
 File that holds the UtilityUI class
 which holds functions used in multiple places
 """
+
 from UILayer.MenuOptions import MenuOptions
 
+
 class UtilityUI:
-    """ Utility Class for multi use function for ui layer """
+    """Utility Class for multi use function for ui layer"""
 
     def _prompt_choice(self, valid_choices: list[str]) -> str:
         """
@@ -46,15 +48,15 @@ class UtilityUI:
             print("Not a valid length")
 
     def screen_not_exist_error(self) -> MenuOptions:
-        """ When a screen doesn't exist """
+        """When a screen doesn't exist"""
         print("Screen doesn't exist")
         anything: str = input("Input anything to go back to start: ")
         return MenuOptions.main_menu
-    
-    def search_for_player(self) :
+
+    def search_for_player(self):
         # TODO: Get logic from LL
         pass
-    
+
     def show_tournaments(self):
         pass
 

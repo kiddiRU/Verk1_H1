@@ -12,14 +12,14 @@ from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 
 
-
 class SpectateUI:
     """Every spectate menu option"""
 
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
-# TODO: self.list_players = LogicLayerAPI.list_players()
+
+    # TODO: self.list_players = LogicLayerAPI.list_players()
 
     def spectate_screen(self) -> MenuOptions:
         """Spectate screen, choices: 1,2,3 and b
@@ -77,8 +77,6 @@ class SpectateUI:
         }
         message: str = ""
 
-
-
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
@@ -98,6 +96,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         print("This is the view player stats page")
+        stopper = input("This is the spectate clubs page")
         return MenuOptions.spectate_screen
 
     def spectate_clubs(self) -> MenuOptions:
@@ -116,7 +115,7 @@ class SpectateUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
-        
+
         # TODO: GET A LIST IF ALL CLUBS
         stopper = input("This is the spectate clubs page")
 
