@@ -22,14 +22,14 @@ class PlayerUI:
         """Start screen with choices: 1, 2, 3 and q
         1: go to login screen
         2: go to register screen
-        3: go to spectating page
+        3: go to spectating screen
         1: quit program
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        menu: str = "Start Page"
-        user_path: list[str]= ["StartPage"]
+        menu: str = "Start Screen"
+        user_path: list[str]= [MenuOptions.start_screen]
         info: list[str]= []
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
         message: str = ""
@@ -49,7 +49,7 @@ class PlayerUI:
             case "q":
                 return MenuOptions.quit
 
-        return MenuOptions.main_menu
+        return MenuOptions.start_screen
 
     def login_screen(self) -> MenuOptions:
         """Login screen, choices: fill info with input
@@ -59,7 +59,7 @@ class PlayerUI:
         """
 
         menu: str = "Login"
-        user_path: list[str]= ["StartPage", "Login"]
+        user_path: list[str]= ["StartScreen", "Login"]
         info: list[str]= []
         options: dict[str, str]= {}
         message: str = ""
@@ -70,11 +70,11 @@ class PlayerUI:
         choice: str = self.utility._input_info("Input Your Handle: ")
 
         if choice == "admin":
-            return MenuOptions.admin_page
+            return MenuOptions.admin_screen
 
         # TODO: check if handle exists from LL API
         # if choice in Player_list:
-        #     return MenuOption.player_page
+        #     return MenuOption.player_screen
 
         return MenuOptions.quit
 
@@ -87,7 +87,7 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list[str]= ["StartPage", "Login", "Register"]
+        user_path: list[str]= ["StartScreen", "Login", "Register"]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue"}
         message: str = "You Have Created A Player!"
@@ -131,11 +131,11 @@ class PlayerUI:
 
         
         #if register
-        return MenuOptions.player_page
-        #if cancel: return MenuOptions.main_menu
+        return MenuOptions.player_screen
+        #if cancel: return MenuOptions.start_screen
 
-    def player_page(self) -> MenuOptions:
-        """Player page, choices: 1,2,3 and b
+    def player_screen(self) -> MenuOptions:
+        """Player screen, choices: 1,2,3 and b
         1: Edit info
         2: See team
         3: Create a team
@@ -146,8 +146,8 @@ class PlayerUI:
         """
         
 
-        menu: str = "Player Page"
-        user_path: list[str]= ["StartPage", "PlayerPage"]
+        menu: str = "Player Screen"
+        user_path: list[str]= ["StartScreen", "PlayerScreen"]
 
         #Temporary info for testing, needs to get info from the actual info files
         info: list[str]= [f"""Name: {self.choice_name}
@@ -177,13 +177,13 @@ Rank: Player"""]
             case "3":
                 # if ...:  # TODO: check if player is already in a team
                 #     print("You are already in a team")
-                #     return MenuOptions.player_page
+                #     return MenuOptions.player_screen
                 return MenuOptions.create_team
             case "q":
                 return MenuOptions.quit
 
 
-        return MenuOptions.main_menu
+        return MenuOptions.start_screen
     
     def create_team(self) -> MenuOptions:
         """Create team screen, choices: fill info with input
@@ -193,7 +193,7 @@ Rank: Player"""]
         """
         
         menu: str = "Create Team"
-        user_path: list[str]= ["PlayerPage -> CreateTeam"]
+        user_path: list[str]= ["PlayerScreen -> CreateTeam"]
 
         #temporary info
         info: list[str]= ["""- - - -List Of Clubs- - - -
@@ -228,7 +228,7 @@ Club4"""]
 
         
 
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
 
     def edit_player_info(self) -> MenuOptions:
         """Edit player info screen, choices: fill info with input
@@ -241,7 +241,7 @@ Club4"""]
 
 
         menu: str = "Edit Player Info"
-        user_path: list[str]= ["PlayerPage", "EditPlayerInfo"]
+        user_path: list[str]= ["PlayerScreen", "EditPlayerInfo"]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Changed Your Info!"
@@ -284,7 +284,7 @@ Club4"""]
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
     
     def my_team_empty(self) -> MenuOptions:
         """My team screen when team is empty, choices: b to go back
@@ -294,7 +294,7 @@ Club4"""]
         """
 
         menu: str = "My Team"
-        user_path: list[str]= ["PlayerPage", "MyTeam"]
+        user_path: list[str]= ["PlayerScreen", "MyTeam"]
         info: list[str]= []
         options: dict[str, str]= {"b": "Back"}
         message: str = "You Are Not In A Team!"
@@ -306,19 +306,19 @@ Club4"""]
         choice: str = self.utility._prompt_choice(["b"])
         match choice:
             case "b":
-                return MenuOptions.player_page
-        return MenuOptions.player_page
+                return MenuOptions.player_screen
+        return MenuOptions.player_screen
     
     def my_team_not_empty(self) -> MenuOptions:
         """My team screen when team is not empty, choices: 1,2 and b
         1: edit team
         2: leave team
-        b: back to player page
+        b: back to player screen
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is your team page")
+        print("This is your team screen")
         choice: str = self.utility._prompt_choice(["1", "2", "b"])
         match choice:
             case "1":
@@ -328,7 +328,7 @@ Club4"""]
                     return MenuOptions.leave_team
             case "b":
                 return MenuOptions.my_team_not_empty
-        return MenuOptions.player_page
+        return MenuOptions.player_screen
     
     def edit_team(self) -> MenuOptions:
         """Edit team screen, choices: 1,2 and b
@@ -339,7 +339,7 @@ Club4"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the edit team page")
+        print("This is the edit team screen")
         return MenuOptions.my_team_not_empty
     
     def add_player(self) -> MenuOptions:
@@ -348,7 +348,7 @@ Club4"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the add player to team page")
+        print("This is the add player to team screen")
         return MenuOptions.edit_team
     
     def remove_player(self) -> MenuOptions:
@@ -357,7 +357,7 @@ Club4"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the remove player from team page")
+        print("This is the remove player from team screen")
         return MenuOptions.edit_team
     
     def leave_team(self) -> MenuOptions:
@@ -366,8 +366,8 @@ Club4"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the leave team page")
+        print("This is the leave team screen")
         if ...:  # TODO: check if player is captain
             print("You are the captain, please choose a new captain before leaving")
 
-        return MenuOptions.player_page
+        return MenuOptions.player_screen

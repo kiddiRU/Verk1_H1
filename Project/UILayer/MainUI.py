@@ -22,7 +22,7 @@ class MainUI:
         self._admin_ui: AdminUI = AdminUI()
         self._player_ui: PlayerUI = PlayerUI()
         self._spectate_ui: SpectateUI = SpectateUI()
-        self.current_screen: MenuOptions = MenuOptions.main_menu
+        self.current_screen: MenuOptions = MenuOptions.start_screen
 
     def __clear(self):
         """Helper function that clears the screen"""
@@ -35,7 +35,7 @@ class MainUI:
         while True:
 
             # main menu
-            if self.current_screen == MenuOptions.main_menu:
+            if self.current_screen == MenuOptions.start_screen:
                 self.current_screen = self._player_ui.start_screen()
 
             # login
@@ -52,7 +52,7 @@ class MainUI:
 
             # ------------------ Admin Paths ------------------
             # admin page
-            elif self.current_screen == MenuOptions.admin_page:
+            elif self.current_screen == MenuOptions.admin_screen:
                 self.current_screen = self._admin_ui.admin_screen()
 
             # create tournament
@@ -120,8 +120,8 @@ class MainUI:
             # ------------------ Player Paths ------------------
 
             # player page
-            elif self.current_screen == MenuOptions.player_page:
-                self.current_screen = self._player_ui.player_page()
+            elif self.current_screen == MenuOptions.player_screen:
+                self.current_screen = self._player_ui.player_screen()
 
             # edit player information
             elif self.current_screen == MenuOptions.edit_player_info:
@@ -213,7 +213,7 @@ class MainUI:
 
             # go to main menu if logout
             elif self.current_screen == MenuOptions.logout:
-                self.current_screen = MenuOptions.main_menu
+                self.current_screen = MenuOptions.start_screen
 
             # stop when quit
             elif self.current_screen == MenuOptions.quit:

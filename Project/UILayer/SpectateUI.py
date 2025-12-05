@@ -27,14 +27,14 @@ class SpectateUI:
         2: Check clubs
         3: Check teams
         4: Check tournaments
-        b: Back to start page
+        b: Back to start screen
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
 
-        menu: str = "Spectator Page"
-        user_path: list[str] = ["StartPage", "SpectatorPage"]
+        menu: str = "Spectator Screen"
+        user_path: list[str] = ["StartScreen", "SpectatorScreen"]
         info: list[str] = []
         options: dict[str, str] = {
             "1": "Player",
@@ -59,9 +59,9 @@ class SpectateUI:
             case "4":
                 return MenuOptions.spectate_tournaments
             case "b":
-                return MenuOptions.main_menu
+                return MenuOptions.start_screen
 
-        return MenuOptions.main_menu
+        return MenuOptions.start_screen
 
     def spectate_players(self) -> MenuOptions:
         """Spectate players screen, choices: input a player to view stats
@@ -70,7 +70,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Players"
-        user_path: list[str] = ["SpectatorPage", menu]
+        user_path: list[str] = ["SpectatorScreen", menu]
         info: list[str] = []
         options: dict[str, str] = {
             "Enter A Players Name Or The First Letter(s) To Search:": ""
@@ -95,8 +95,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the view player stats page")
-        stopper = input("This is the spectate clubs page")
+        stopper = input("This is the view player stats screen")
         return MenuOptions.spectate_screen
 
     def spectate_clubs(self) -> MenuOptions:
@@ -106,7 +105,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Clubs"
-        user_path: list[str] = ["SpectatorPage", menu]
+        user_path: list[str] = ["SpectatorScreen", menu]
         info: list[str] = []
         options: dict[str, str] = {
             "Enter A Clubs Name Or The First Letter(s) To Search:": ""
@@ -117,7 +116,7 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info, options, message))
 
         # TODO: GET A LIST IF ALL CLUBS
-        stopper = input("This is the spectate clubs page")
+        stopper = input("This is the spectate clubs screen")
 
         return MenuOptions.view_club_stats
 
@@ -129,14 +128,14 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "View Club Stats"
-        user_path: list[str] = ["SpectatorPage", "Clubs", "ClubStats"]
+        user_path: list[str] = ["SpectatorScreen", "Clubs", "ClubStats"]
         info: list[str] = []
         options: dict[str, str] = {}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
-        stopper = input("This is the view club stats page")
+        stopper = input("This is the view club stats screen")
         match stopper:
             case "b":
                 return MenuOptions.spectate_clubs
@@ -149,7 +148,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Teams"
-        user_path: list[str] = ["SpectatorPage", menu]
+        user_path: list[str] = ["SpectatorScreen", menu]
         info: list[str] = []
         options: dict[str, str] = {
             "Enter A Teams Name Or The First Letter(s) To Search:": ""
@@ -158,7 +157,7 @@ class SpectateUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
-        stopper = input("This is the spectate teams page")
+        stopper = input("This is the spectate teams screen")
 
         return MenuOptions.spectate_screen
 
@@ -169,7 +168,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the view team stats page")
+        stopper = input("This is the view team stats screen")
         return MenuOptions.spectate_screen
 
     def spectate_tournaments(self) -> MenuOptions:
@@ -180,7 +179,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Tournaments"
-        user_path: list[str] = ["SpectatorPage", menu]
+        user_path: list[str] = ["SpectatorScreen", menu]
         info: list = []
         options: dict[str, str] = {
             "Enter A Tournaments Name Or The First Letter(s) To Search:": ""
@@ -190,7 +189,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        stopper = input("This is the spectate tournaments page")
+        stopper = input("This is the spectate tournaments screen")
 
         if ...:  # If the tournament is active
             return MenuOptions.active_tournament
@@ -212,7 +211,7 @@ class SpectateUI:
         """
         menu: str = "Active Tournament"
         user_path: list[str] = [
-            "SpectatorPage",
+            "SpectatorScreen",
             "Tournaments",
             menu.replace(" ", ""),
         ]
@@ -227,8 +226,7 @@ class SpectateUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
-
-        print("This is the active tournament page")
+        
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
         match choice:
             case "1":
@@ -249,6 +247,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         # TODO: implement archived tournament screen
+        stopper = input("This is the archived tournaments screen")
         return MenuOptions.spectate_tournaments
 
     def game_schedule(self) -> MenuOptions:
@@ -258,7 +257,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the game schedule page")
+        stopper = input("This is the game schedule screen")
         return MenuOptions.active_tournament
 
     def view_bracket(self) -> MenuOptions:
@@ -268,7 +267,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the view bracket page")
+        stopper = input("This is the view bracket screen")
         return MenuOptions.active_tournament
 
     def teams_in_tournament(self) -> MenuOptions:
@@ -277,8 +276,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the teams in tournament page")
-        print("<list of teams in tournament>")
+        stopper = input("This is the teams in tournament screen")
 
         return MenuOptions.active_tournament
 
@@ -289,5 +287,5 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the team tournament stats page")
+        stopper = input("This is the team tournament stats screen")
         return MenuOptions.teams_in_tournament

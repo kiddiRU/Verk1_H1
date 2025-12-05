@@ -51,7 +51,7 @@ class UtilityUI:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")
         anything: str = input("Input anything to go back to start: ")
-        return MenuOptions.main_menu
+        return MenuOptions.start_screen
 
     def search_for_player(self):
         # TODO: Get logic from LL
