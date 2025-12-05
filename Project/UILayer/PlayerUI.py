@@ -90,7 +90,7 @@ class PlayerUI:
         user_path: list[str]= ["StartPage", "Login", "Register"]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue"}
-        message: str = "You Have Created A User"
+        message: str = "You Have Created A Player!"
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))  
@@ -171,10 +171,9 @@ Rank: Player"""]
             case "1":
                 return MenuOptions.edit_player_info
             case "2":
-                if ...:  # TODO: check if team is empty aka if player not in a team
-                    return MenuOptions.my_team_not_empty
-                else:
-                    return MenuOptions.my_team_empty
+                # if ...:  # TODO: check if team is empty aka if player not in a team
+                #     return MenuOptions.my_team_not_empty
+                return MenuOptions.my_team_empty
             case "3":
                 # if ...:  # TODO: check if player is already in a team
                 #     print("You are already in a team")
@@ -285,9 +284,6 @@ Club4"""]
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-
-
-
         return MenuOptions.player_page
     
     def my_team_empty(self) -> MenuOptions:
@@ -296,7 +292,17 @@ Club4"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("You are not in a team")
+
+        menu: str = "My Team"
+        user_path: list[str]= ["PlayerPage", "MyTeam"]
+        info: list[str]= []
+        options: dict[str, str]= {"b": "Back"}
+        message: str = "You Are Not In A Team!"
+        
+        self.tui.clear_saved_data()
+
+        print(self.tui.table(menu, user_path, info, options, message))
+
         choice: str = self.utility._prompt_choice(["b"])
         match choice:
             case "b":

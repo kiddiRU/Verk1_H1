@@ -34,11 +34,11 @@ class Drawer():
         #Colours
         red: str = "\033[31m"
         red_high: str = "\033[41m"
-        # green: str = "\033[32m"
+        #green: str = "\033[32m"
         # yellow: str = "\033[33m"        
-        # blue: str = "\033[34m"
+        #blue: str = "\033[34m"
         # pink: str = "\033[35m"
-        # cyan: str = "\033[36m"
+        cyan: str = "\033[36m"
 
 
         #Text change
@@ -47,7 +47,10 @@ class Drawer():
 
         self.banner_border: str = red_high
         self.path_color: str = red
-        self.table_color: str = self.bold 
+        self.table_color: str = self.bold
+        self.options_color: str = self.bold + cyan
+        self.message_color: str = self.bold + red
+
 
     
         self.line: str = 80 * "—" + "\n"
@@ -124,16 +127,16 @@ class Drawer():
 
 
         if message:
-            table += message + "\n"
+            table += self.message_color + message + self.reset + "\n"
             table += self.line
 
 
         if table_options:
             for opt, option in table_options.items():
-                table += opt + " " + option + "\n"
+                table += self.options_color + opt + " " + option + "\n"
 
-            table += self.line
-            table += "Choose Action:"
+            table += self.reset + self.line
+            table += self.options_color + "Choose Action:" + self.reset
 
 
 
