@@ -47,7 +47,6 @@ class Drawer():
 
         self.banner_border: str = red_high
         self.path_color: str = red
-
         self.table_color: str = self.bold
         self.options_color: str = self.bold + green
         self.message_color: str = self.bold + yellow
@@ -89,7 +88,6 @@ class Drawer():
 {self.reset}
 {self.banner_border}{self.line}{self.reset} \n\n"""
     
-
 
 
     def table(self, table_name: str, table_path: list[str], table_info: list[str] = [], 

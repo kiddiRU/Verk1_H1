@@ -356,6 +356,7 @@ Club4"""]
                 if ...:  # TODO: check if player is captain
                     return MenuOptions.leave_team
             case "b":
+
                 return MenuOptions.player_screen
         return MenuOptions.player_screen
 
@@ -392,6 +393,7 @@ Club4"""]
                     return MenuOptions.remove_player
             case "b":
                 return MenuOptions.my_team_not_empty
+
         return MenuOptions.player_screen
 
     
