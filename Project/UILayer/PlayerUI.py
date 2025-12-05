@@ -1,7 +1,7 @@
 """
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
-Co-author: Andri Már Kristjánsson <andrik25@ru.is>
+Co-author: Andri Már Kristjá.nsson <andrik25@ru.is>
 
 File that holds all the menus that the player can access
 """
@@ -16,6 +16,7 @@ class PlayerUI:
 
     def __init__(self) -> None:
         self.utility = UtilityUI()
+        self.tui = Drawer()
 
     def start_screen(self) -> MenuOptions:
         """Start screen with choices: 1, 2, 3 and q
@@ -28,13 +29,13 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Start Page"
-        user_path: list = ["StartPage"]
-        info: list = []
-        options: dict = {1: "Log in", 2: "Register", 3: "Spectate", "q": "Quit program"}
+        user_path: list[str]= ["StartPage"]
+        info: list[str]= []
+        options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
         message: str = ""
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))  
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))  
 
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
@@ -58,13 +59,13 @@ class PlayerUI:
         """
 
         menu: str = "Login"
-        user_path: list = ["StartPage", "Login"]
-        info: list = []
-        options: dict = {}
+        user_path: list[str]= ["StartPage", "Login"]
+        info: list[str]= []
+        options: dict[str, str]= {}
         message: str = ""
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))        
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))        
 
         choice: str = self.utility._input_info("Input Your Handle: ")
 
@@ -86,46 +87,46 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list = ["StartPage", "Login", "Register"]
-        info: list = []
-        options: dict = {"c": "Continue"}
-        message: str = "You Have Created A User"
+        user_path: list[str]= ["StartPage", "Login", "Register"]
+        info: list[str]= []
+        options: dict[str, str]= {"c": "Continue"}
+        message: str = "You Have Created A Player!"
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info))  
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))  
         self.choice_name: str = input("Enter Name: \n")
-        tui.save_input("Name: " + self.choice_name)
-        print(tui.table(menu, user_path, info, options))  
+        self.tui.save_input("Name: " + self.choice_name)
+        print(self.tui.table(menu, user_path, info, options))  
         con = input()
 
-        print(tui.table(menu, user_path, info)) 
+        print(self.tui.table(menu, user_path, info)) 
         self.choice_dob: str = input("Enter Date Of Birth: \n")
-        tui.save_input("Date Of Birth: " + self.choice_dob)
-        print(tui.table(menu, user_path, info, options))
+        self.tui.save_input("Date Of Birth: " + self.choice_dob)
+        print(self.tui.table(menu, user_path, info, options))
         con = input()
 
-        print(tui.table(menu, user_path, info)) 
+        print(self.tui.table(menu, user_path, info)) 
         self.choice_addr: str = input("Enter Home Adderess: \n")
-        tui.save_input("Home Address: " + self.choice_addr)
-        print(tui.table(menu, user_path, info, options))
+        self.tui.save_input("Home Address: " + self.choice_addr)
+        print(self.tui.table(menu, user_path, info, options))
         con = input()  
 
-        print(tui.table(menu, user_path, info))
+        print(self.tui.table(menu, user_path, info))
         self.choice_email: str = input("Enter Email: \n")
-        tui.save_input("Email: " + self.choice_email)
-        print(tui.table(menu, user_path, info, options))
+        self.tui.save_input("Email: " + self.choice_email)
+        print(self.tui.table(menu, user_path, info, options))
         con = input()  
 
-        print(tui.table(menu, user_path, info))   
+        print(self.tui.table(menu, user_path, info))   
         self.choice_pnum: str = input("Enter Phone Number: \n")
-        tui.save_input("Phone Number: " + self.choice_pnum)
-        print(tui.table(menu, user_path, info, options))
+        self.tui.save_input("Phone Number: " + self.choice_pnum)
+        print(self.tui.table(menu, user_path, info, options))
         con = input()  
 
-        print(tui.table(menu, user_path, info))   
+        print(self.tui.table(menu, user_path, info))   
         self.choice_handle: str = input("Enter Handle: \n")
-        tui.save_input("Handle: " + self.choice_handle)
-        print(tui.table(menu, user_path, info, options, message))
+        self.tui.save_input("Handle: " + self.choice_handle)
+        print(self.tui.table(menu, user_path, info, options, message))
         con = input()  
 
         
@@ -146,10 +147,10 @@ class PlayerUI:
         
 
         menu: str = "Player Page"
-        user_path: list = ["StartPage", "PlayerPage"]
+        user_path: list[str]= ["StartPage", "PlayerPage"]
 
         #Temporary info for testing, needs to get info from the actual info files
-        info: list = [f"""Name: {self.choice_name}
+        info: list[str]= [f"""Name: {self.choice_name}
 Date of Birth: {self.choice_dob}
 Home Address: {self.choice_addr}
 Phone Number: {self.choice_pnum}
@@ -159,21 +160,20 @@ Team: NONE
 Club: NONE
 Rank: Player"""]
         
-        options: dict = {1: "Edit Info", 2: "My Team", 3: "Create a Team", "q": "Log Out"}
+        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "q": "Log Out"}
         message: str = ""
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
         match choice:
             case "1":
                 return MenuOptions.edit_player_info
             case "2":
-                if ...:  # TODO: check if team is empty aka if player not in a team
-                    return MenuOptions.my_team_not_empty
-                else:
-                    return MenuOptions.my_team_empty
+                # if ...:  # TODO: check if team is empty aka if player not in a team
+                #     return MenuOptions.my_team_not_empty
+                return MenuOptions.my_team_empty
             case "3":
                 # if ...:  # TODO: check if player is already in a team
                 #     print("You are already in a team")
@@ -193,29 +193,37 @@ Rank: Player"""]
         """
         
         menu: str = "Create Team"
-        user_path: list = ["PlayerPage -> CreateTeam"]
+        user_path: list[str]= ["PlayerPage -> CreateTeam"]
+
         #temporary info
-        info: list = ["""- - - -List Of Clubs- - - -
-                      Club1
-                      Club2
-                      Club3
-                      Club4"""]
+        info: list[str]= ["""- - - -List Of Clubs- - - -
+Club1
+Club2
+Club3
+Club4"""]
         
-        options: dict = {}
+        options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path))
         choice_tname: str = input("Enter Team Name: \n")
-        tui.save_input("Team Name: " + choice_tname)
+        self.tui.save_input("Team Name: " + choice_tname)
 
-        print(tui.table(menu, user_path, info, options, message))
-        choice_tname: str = input("Enter Team Name: \n")
-        tui.save_input("Team Name: " + choice_tname)
+        print(self.tui.table(menu, user_path))
+        choice_url: str = input("Enter Team URL (Optional): \n")
+        self.tui.save_input("Team Name: " + choice_url)
 
-        print(tui.table(menu, user_path, info, options, message))
-        choice_tname: str = input("Enter Team Name: \n")
-        tui.save_input("Team Name: " + choice_tname)
+        print(self.tui.table(menu, user_path))
+        choice_ascii: str = input("Enter Team ASCII Art (Optional): \n")
+        self.tui.save_input("Team ASCII Art: " + choice_ascii)
+
+        print(self.tui.table(menu, user_path, info))
+        choice_club = input("Choose A Club To Join: \n")
+        self.tui.save_input("Club: " + choice_club)
+
+        print(self.tui.table(menu, user_path, info, options, message))
+        con = input()
 
 
         
@@ -228,7 +236,54 @@ Rank: Player"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the edit player info page")
+
+        # This Uses A temporary way to print out and change info
+
+
+        menu: str = "Edit Player Info"
+        user_path: list[str]= ["PlayerPage", "EditPlayerInfo"]
+        info: list[str]= []
+        options: dict[str, str]= {"c": "Continue", "b": "Back"}
+        message: str = "You Have Changed Your Info!"
+
+        self.tui.clear_saved_data()
+        self.tui.save_input(f"- - - -{self.choice_name}- - - -")
+        unchanged_message = "(Leave Field Empty If You Want To Leave Them Unchanged)"    
+
+        print(self.tui.table(menu, user_path, info))
+        self.choice_newname = input(unchanged_message + "\n Enter New Name: \n")
+        if self.choice_newname:
+            self.choice_name = self.choice_newname
+        self.tui.save_input("Name: " + self.choice_name)
+
+        print(self.tui.table(menu, user_path, info))
+        self.choice_newdob = input(unchanged_message + "\n Enter New Date Of Birth: \n")
+        if self.choice_newdob:
+            self.choice_dob = self.choice_newdob
+        self.tui.save_input("Date Of Birth: " + self.choice_dob)
+
+        print(self.tui.table(menu, user_path, info))        
+        self.choice_newaddr = input(unchanged_message + "\n Enter New Home Address: \n")
+        if self.choice_newaddr:
+            self.choice_addr = self.choice_newaddr
+        self.tui.save_input("Home Address: " + self.choice_addr)
+
+        print(self.tui.table(menu, user_path, info))
+        self.choice_newpnum = input(unchanged_message + "\n Enter New Phone Number: \n")
+        if self.choice_newpnum:
+            self.choice_pnum = self.choice_newpnum
+        self.tui.save_input("Phone Number: " + self.choice_pnum)
+
+        print(self.tui.table(menu, user_path, info))
+        self.choice_newemail = input(unchanged_message + "\n Enter New Email: \n")
+        if self.choice_newemail:
+            self.choice_email = self.choice_newemail
+        self.tui.save_input("Email: " + self.choice_email)
+
+        
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        
         return MenuOptions.player_page
     
     def my_team_empty(self) -> MenuOptions:
@@ -237,7 +292,17 @@ Rank: Player"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("You are not in a team")
+
+        menu: str = "My Team"
+        user_path: list[str]= ["PlayerPage", "MyTeam"]
+        info: list[str]= []
+        options: dict[str, str]= {"b": "Back"}
+        message: str = "You Are Not In A Team!"
+        
+        self.tui.clear_saved_data()
+
+        print(self.tui.table(menu, user_path, info, options, message))
+
         choice: str = self.utility._prompt_choice(["b"])
         match choice:
             case "b":

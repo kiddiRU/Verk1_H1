@@ -15,7 +15,17 @@ class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
         self._data_api: DataLayerAPI = data_api
 
+<<<<<<< HEAD
     # TODO Alter validation functionality?
+=======
+    """
+    Takes in player info.
+
+    Validates the given info, creates a player object if valid. Sends the 
+    object to the data layer to be stored and returns the new player
+    """
+    # B-requirement allow player to input attribute one at a time which allows the user to know errors
+>>>>>>> ffdaaf470264cebd72b926a96f386cebc4c6e1c6
     def create_player(self,
                 name: str,
                 date_of_birth: str,

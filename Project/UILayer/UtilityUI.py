@@ -51,6 +51,10 @@ class UtilityUI:
         anything: str = input("Input anything to go back to start: ")
         return MenuOptions.main_menu
     
+    def search_for_player(self) :
+        # TODO: Get logic from LL
+        pass
+    
     def show_tournaments(self):
         pass
 

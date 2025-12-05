@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO, TeamIO
+from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO
 
 """ Player API """
 
@@ -86,29 +86,76 @@ def store_team(team: Team) -> None:
 
 """ Club API """
 
-# TODO implement store_club and call it
+"""
+Takes in model class Club
+
+Inserts information about the Club class into a json file
+for storage
+
+Have to call withing try except
+"""
 def store_club(club: Club) -> None:
-    pass
+    ClubIO.store_club(club)
 
-# def update_club(uuid: str, key: str, value: str) -> None:
+"""
+No parameters
 
-# TODO implement load_clubs and call it
+Reads json file containing clubs and creates a list of
+Club model objects of each entry in the json file.
+
+Returns the created list.
+"""
+def update_club(uuid: str, updated_club: Club) -> None:
+    ClubIO.update_club(uuid, updated_club)
+
+"""
+Takes in uuid and the updated Club model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find a blub with given uuid and update that
+club with the new updated club object.
+"""
 def load_clubs() -> list[Club]:
-    pass
+    return ClubIO.load_club()
 
 """ Tournament API """
 
-# TODO implement store_tournament and call it
+"""
+Takes in model class Tournament.
+
+Inserts information about the class into a json file for.
+
+Have to call within try except.
+"""
 def store_tournament(tournament: Tournament) -> None:
-    pass
+    TournamentIO.store_tournament(tournament)
 
-# TODO implement update_tournament and call it
-def update_tournament(uuid: str, key: str, value: str) -> None:
-    pass
+"""
+No parameters
 
-# TODO implement load_tournaments and call it
+Reads the json file containing tournaments and creates a list of
+Tournament model objects of each entry in the json file.
+
+Returns the created list.
+
+Have to call within try except.
+"""
+def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
+    TournamentIO.update_tournament(uuid, updated_tournament)
+
+"""
+Takes in uuid and the updated Tournament model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find tournament with given uuid and update
+that team with the new updated tournament object.
+
+Have to call within try except.
+"""
 def load_tournaments() -> list[Tournament]:
-    pass
+    return TournamentIO.load_tournaments()
 
 """ Match API """
 
