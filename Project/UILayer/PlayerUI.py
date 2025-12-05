@@ -22,6 +22,8 @@ class PlayerUI:
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
 
+
+
     def start_screen(self) -> MenuOptions:
         """Start screen with choices: 1, 2, 3 and q
         1: go to login screen
@@ -57,6 +59,8 @@ class PlayerUI:
 
         return MenuOptions.start_screen
 
+
+
     def login_screen(self) -> MenuOptions:
         """Login screen, choices: fill info with input
 
@@ -86,6 +90,8 @@ class PlayerUI:
 
         return MenuOptions.quit
 
+
+
     def register_screen(self) -> MenuOptions:
         """Register screen, choices: fill info with input
 
@@ -104,36 +110,36 @@ class PlayerUI:
         print(self.tui.table(menu, user_path, info))  
         user_name: str = self.utility._input_info(self.message_color + "Enter Name: \n" + self.reset)
         self.tui.save_input("Name: " + user_name)
-        print(self.tui.table(menu, user_path, info, options))  
-        con: str = self.utility._prompt_choice(["c"])
+
 
         print(self.tui.table(menu, user_path, info)) 
         user_dob: str = self.utility._input_info(self.message_color + "Enter Date Of Birth: \n" + self.reset)
         self.tui.save_input("Date Of Birth: " + user_dob)
-        print(self.tui.table(menu, user_path, info, options))
-        con: str = self.utility._prompt_choice(["c"])
+
 
         print(self.tui.table(menu, user_path, info)) 
-        user_addr: str = self.utility._input_info(self.message_color + "Enter Home Address: \n") + self.reset
+        user_addr: str = self.utility._input_info(self.message_color + "Enter Home Address: \n" + self.reset)
         self.tui.save_input("Home Address: " + user_addr)
-        print(self.tui.table(menu, user_path, info, options))
-        con: str = self.utility._prompt_choice(["c"])
+
 
         print(self.tui.table(menu, user_path, info))
         user_email: str = self.utility._input_info(self.message_color + "Enter Email: \n" + self.reset)
         self.tui.save_input("Email: " + user_email)
-        print(self.tui.table(menu, user_path, info, options))
-        con: str = self.utility._prompt_choice(["c"]) 
+
 
         print(self.tui.table(menu, user_path, info))   
         user_phnum: str = self.utility._input_info(self.message_color + "Enter Phone Number: \n" + self.reset)
         self.tui.save_input("Phone Number: " + user_phnum)
-        print(self.tui.table(menu, user_path, info, options))
-        con: str = self.utility._prompt_choice(["c"]) 
+
 
         print(self.tui.table(menu, user_path, info))   
         user_handle: str = self.utility._input_info(self.message_color + "Enter Handle: \n" + self.reset)
         self.tui.save_input("Handle: " + user_handle)
+
+
+        print(self.tui.table(menu, user_path, info))   
+        user_url: str = self.utility._input_info(self.message_color + "Enter URL: \n" + self.reset)
+        self.tui.save_input("URL: " + user_url)
         print(self.tui.table(menu, user_path, info, options, message))
         con: str = self.utility._prompt_choice(["c"])
 
@@ -141,6 +147,8 @@ class PlayerUI:
         #if register
         return MenuOptions.player_screen
         #if cancel: return MenuOptions.main_menu
+
+
 
     def player_screen(self) -> MenuOptions:
         """Player page, choices: 1,2,3 and b
@@ -155,7 +163,7 @@ class PlayerUI:
         
 
         menu: str = "Player Page"
-        user_path: list[str]= ["StartPage", "PlayerPage"]
+        user_path: list[str]= ["PlayerPage"]
 
         #Temporary info for testing, needs to get info from the actual info files
         info: list[str]= [f"""Name: {"PLAYERNAME"}
@@ -196,6 +204,8 @@ Rank: {"PLAYERRANK"}"""]
 
         return MenuOptions.start_screen
     
+
+
     def create_team(self) -> MenuOptions:
         """Create team screen, choices: fill info with input
 
@@ -245,6 +255,8 @@ Club4"""]
 
         return MenuOptions.player_screen
 
+
+
     def edit_player_info(self) -> MenuOptions:
         """Edit player info screen, choices: fill info with input
 
@@ -253,6 +265,14 @@ Club4"""]
         """
 
         # This Uses A temporary way to print out and change info
+
+        user_name = "LOGIC"
+        dob = "LOGIC"
+        addr = "LOGIC"
+        phnum = "LOGIC"
+        email = "LOGIC"
+        url = "LOGIC"
+
 
 
         menu: str = "Edit Player Info"
@@ -266,34 +286,40 @@ Club4"""]
         unchanged_message = "(Leave Field Empty If You Want To Leave Them Unchanged)"    
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newname = input(unchanged_message + "\n Enter New Name: \n")
-        if self.choice_newname:
-            self.choice_name = self.choice_newname
-        self.tui.save_input("Name: " + self.choice_name)
+        new_name = input(unchanged_message + "\n Enter New Name: \n")
+        if new_name:
+            user_name = new_name
+        self.tui.save_input("Name: " + user_name)
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newdob = input(unchanged_message + "\n Enter New Date Of Birth: \n")
-        if self.choice_newdob:
-            self.choice_dob = self.choice_newdob
-        self.tui.save_input("Date Of Birth: " + self.choice_dob)
+        new_dob = input(unchanged_message + "\n Enter New Date Of Birth: \n")
+        if new_dob:
+            dob = new_dob
+        self.tui.save_input("Date Of Birth: " + dob)
 
         print(self.tui.table(menu, user_path, info))        
-        self.choice_newaddr = input(unchanged_message + "\n Enter New Home Address: \n")
-        if self.choice_newaddr:
-            self.choice_addr = self.choice_newaddr
-        self.tui.save_input("Home Address: " + self.choice_addr)
+        new_addr = input(unchanged_message + "\n Enter New Home Address: \n")
+        if new_addr:
+            addr = new_addr
+        self.tui.save_input("Home Address: " + addr)
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newpnum = input(unchanged_message + "\n Enter New Phone Number: \n")
-        if self.choice_newpnum:
-            self.choice_pnum = self.choice_newpnum
-        self.tui.save_input("Phone Number: " + self.choice_pnum)
+        new_phnum = input(unchanged_message + "\n Enter New Phone Number: \n")
+        if new_phnum:
+            phnum = new_phnum
+        self.tui.save_input("Phone Number: " + phnum)
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newemail = input(unchanged_message + "\n Enter New Email: \n")
-        if self.choice_newemail:
-            self.choice_email = self.choice_newemail
-        self.tui.save_input("Email: " + self.choice_email)
+        new_email = input(unchanged_message + "\n Enter New Email: \n")
+        if new_email:
+            email = new_email
+        self.tui.save_input("Email: " + email)
+
+        print(self.tui.table(menu, user_path, info))
+        new_url = input(unchanged_message + "\n Enter New Email: \n")
+        if new_url:
+            url = new_url
+        self.tui.save_input("URL: " + url)
 
         
         print(self.tui.table(menu, user_path, info, options, message))
@@ -301,6 +327,8 @@ Club4"""]
         
         return MenuOptions.player_screen
     
+
+
     def my_team_empty(self) -> MenuOptions:
         """My team screen when team is empty, choices: b to go back
 
@@ -324,6 +352,8 @@ Club4"""]
                 return MenuOptions.player_screen
         return MenuOptions.player_screen
     
+
+
     def my_team_not_empty(self) -> MenuOptions:
         """My team screen when team is not empty, choices: 1,2 and b
         1: edit team
@@ -360,7 +390,8 @@ Club4"""]
                 return MenuOptions.player_screen
         return MenuOptions.player_screen
 
-    
+
+
     def edit_team(self) -> MenuOptions:
         """Edit team screen, choices: 1,2 and b
         1: Add player to team
@@ -396,8 +427,8 @@ Club4"""]
 
         return MenuOptions.player_screen
 
-    
-    
+
+
     def add_player(self) -> MenuOptions:
         """Add player to team screen, choices: input player handle to add
 
@@ -449,24 +480,80 @@ Club4"""]
         return MenuOptions.add_player
 
 
-        
-    
+
     def remove_player(self) -> MenuOptions:
         """Remove player from team screen, choices: input player handle to remove
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the remove player from team page")
-        return MenuOptions.edit_team
-    
+
+        menu: str = "Remove Player"
+        user_path: list = ["PlayerPage", "MyTeam", "EditTeam", ]
+        info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
+{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
+{self.reset + "Captain"}{"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}"""]
+        options: dict = {"c": "Continue"}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, ))
+        remove_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Remove Them: \n")
+
+        if...: #TODO: check if player is found and is not in a team
+            message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? y/n:"
+            print(self.tui.table(menu, user_path, info, {}, message))
+
+            choice: str = self.utility._prompt_choice(["y", "n"])
+
+            if choice == "n":
+                message: str = "Operation Cancelled"
+                print(self.tui.table(menu, user_path, info, options, message))
+                choice: str = self.utility._prompt_choice(["c"])
+                return MenuOptions.edit_team
+
+            #TODO: save the player to the team
+
+            message: str = f"{remove_handle} Has Been Removed From Your Team!"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["c"])
+            return MenuOptions.edit_team
+        
+
+        message: str = f"The Player {remove_handle} Was Not Found, Do You Want To Try Again? y/n:"
+        print(self.tui.table(menu, user_path, info, {}, message))
+
+        choice: str = self.utility._prompt_choice(["y", "n"])
+
+        if choice == "n":
+            return MenuOptions.edit_team
+        
+        return MenuOptions.remove_player
+
+
+
     def leave_team(self) -> MenuOptions:
         """Leave team screen, choices: confirm leaving team with y or n and if captain then choose new captain
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the leave team page")
+
+        menu: str = "Leave Team"
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
+        info: list[str] = []
+        options: dict[str, str] = {}
+        message: str = f"Are You Sure You Want To Leave {"TEAMNAME"}"
+        
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path))
+
+        
+
+
         if ...:  # TODO: check if player is captain
             print("You are the captain, please choose a new captain before leaving")
 

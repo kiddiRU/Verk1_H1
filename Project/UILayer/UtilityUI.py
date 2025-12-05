@@ -2,6 +2,8 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
 
+Co-Author: Andri Már Kristjánsson <andrik25@ru.is>
+
 File that holds the UtilityUI class
 which holds functions used in multiple places
 """
@@ -11,6 +13,11 @@ from UILayer.MenuOptions import MenuOptions
 
 class UtilityUI:
     """Utility Class for multi use function for ui layer"""
+
+
+    def __init__(self) -> None:
+        self.error_color: str = "\033[31m"
+        self.reset: str = "\033[0m"
 
     def _prompt_choice(self, valid_choices: list[str]) -> str:
         """
@@ -29,7 +36,7 @@ class UtilityUI:
             if choice in valid_choices_lower:
                 return choice
 
-            print("Not a valid option try again")
+            print(self.error_color + "Not a valid option try again" + self.reset)
 
     def _input_info(self, message: str) -> str:
         """
@@ -43,9 +50,10 @@ class UtilityUI:
         """
         while True:
             choice: str = input(message)
+            self.reset
             if len(choice) >= 3 and len(choice) <= 40:
                 return choice.strip()
-            print("Not a valid length")
+            print(self.error_color + "Not a valid length" + self.reset)
 
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
