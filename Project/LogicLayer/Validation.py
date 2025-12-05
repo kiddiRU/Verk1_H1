@@ -32,7 +32,7 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
 
         for player in model_player:
             if player.handle == unique_name:
-                raise ValidationError("Name is already taken")
+                raise ValidationError("Handle is already taken")
         
         return unique_name
 
@@ -112,14 +112,14 @@ def validate_email(email) -> str | ValidationError: # Players and tournament con
         after_at_symbol: str = email_list[1]
 
         if before_at_symbol == "" or after_at_symbol == "":
-            raise ValidationError
+            raise ValidationError('Invalid email!')
 
         else:
             return email
 
 
     else:
-        raise ValidationError
+        raise ValidationError('Invalid email!')
 
 
 def validate_date(date_input) -> str | ValidationError: # Date of Birth, Date of Tournament

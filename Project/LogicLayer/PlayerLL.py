@@ -10,43 +10,18 @@ from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models.Player import Player
 from Models.Team import Team
-from LogicLayer.Validation import validate, validate_name, validate_home_address, validate_phone_number, validate_date, validate_unique_name, validate_email
+from LogicLayer.Validation import validate
 
 class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
         self._data_api: DataLayerAPI = data_api
 
+    """
+    Takes in player info.
 
-    """info from player to validate"""
-
-    #TODO call a file that checks validations for name
-    def validate_name(self):
-        pass
-
-    #TODO call a file that checks validations for date of birth
-    def validate_date_of_birth(self):
-        pass
-
-    #TODO call a file that checks validations for name
-    def validate_home_address(self):
-        pass
-    
-    #TODO call a file that checks validations for email
-    def validate_email(self):
-        pass
-    
-    #TODO call a file that checks validations for phone number
-    def validate_phone_number(self):
-        pass
-    
-    #TODO call a file that checks validations for unique handle
-    def validate_handle(self):
-        pass
-
-    
-    """functions for player"""
-
-    #TODO implement creating a player
+    Validates the given info, creates a player object if valid. Sends the 
+    object to the data layer to be stored and returns the new player
+    """
     def create_player(self,
                 name: str,
                 date_of_birth: str,
@@ -57,34 +32,39 @@ class PlayerLL():
                 url: str
                 ) -> Player:
         
-        """
-        Validates player info, sends info to Player file in Module folder
-        to create a player
-        """
         uuid = str(uuid4())
 
-        params = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
             try:
                 validate(attr, value.strip(), name_type = 'PLAYER')
-                
             except Exception as error:
                 raise error
 
-        player = Player(uuid, params['name'], params['date_of_birth'], params['home_address'], params['email'], params['phone_number'], params['handle'], params['url'])
+        new_player = Player(
+            uuid,
+            params["name"],
+            params["date_of_birth"],
+            params["home_address"],
+            params["email"],
+            params["phone_number"],
+            params["handle"],
+            params["url"],
+        )
 
         try:
-            DataLayerAPI.store_player(player)
+            DataLayerAPI.store_player(new_player)
         except Exception as error:
             raise error
+        
+        return new_player
 
     '''
     Takes in a Player object and potential attribute updates.
 
     Sends updated values to the data layer, and returns and updated Player object.
     '''
-    # TODO implement validation
-    def change_player_info(
+    def update_player_info(
             self,
             player: Player,
             name: str,
@@ -107,18 +87,19 @@ class PlayerLL():
             except Exception as error:
                 raise error
         
-        player_attr: dict[str, str] = player.__dict__.items()
-        for k, v in player_attr:
-            self._data_api.update_player(player.uuid, k, v)
+        try:
+            self._data_api.update_player(player.uuid, player)
+        except Exception as error:
+            raise error
 
-        updated_player: Player = player
-        return updated_player
-    
+        return player
     
     '''
-    Docstring
+    Takes in the teams name, its captain, club, url and ascii art.
+
+    Creates a new Team object and sends it the data layer to be stored.
     '''
-    #TODO implement creating a team
+    # TODO Fetch club uuid once ClubIO has been implemented. Return new Team? 
     def create_team(self, name: str, team_captain: Player, club: str, url: str, ascii_art: str) -> Team:
         uuid = str(uuid4())
 

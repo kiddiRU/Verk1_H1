@@ -89,7 +89,7 @@ Choose Action:
             # case "2":
             #     return MenuOptions.cancel_tournament  #TODO: Optional C requirement
             case "b":
-                return MenuOptions.back
+                return MenuOptions.manage_tournament
         return MenuOptions.manage_tournament
 
     def matches(self) -> MenuOptions:
@@ -237,3 +237,13 @@ Choose Action:
 
         print("THIS IS EDIT TOURNAMENT INFO WINDOW")
         return MenuOptions.edit_tournament
+
+    def create_club(self) -> MenuOptions:
+        """Create club screen, choices: fill info with input (name and color)
+
+        Returns:
+            MenuOptions: The next menu to navigate to
+        """
+
+        print("This is the create club page")
+        return MenuOptions.admin_page

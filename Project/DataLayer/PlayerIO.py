@@ -62,16 +62,15 @@ uuid and key have to exist in the json file.
 Will attempt to find player with given uuid and update the
 value tied to given key of that player
 """
-def update_player(uuid: str, key: str, value: str) -> None:
+def update_player(uuid: str, updated_player: Player) -> None:
     # Reads the json file containing players and stores it as a dictionary.
     with open(FILE_PATH, "r") as player_file:
         file_content = dict(json.load(player_file))
     
-    # Updates the file content, checking if the uuid and key exist in
+    # Updates the file content, checking if the uuid and exists in
     # the dictionary.
     if uuid in file_content:
-        if key in file_content[uuid]:
-            file_content[uuid][key] = value
+        file_content[uuid] = updated_player.__dict__
 
     # Wriets the updated dictionary into the player file.
     with open(FILE_PATH, "w") as player_file:
