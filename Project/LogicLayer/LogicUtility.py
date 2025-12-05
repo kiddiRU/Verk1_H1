@@ -39,3 +39,19 @@ def get_players_team_uuid(player_handle) -> str:
             return team.uuid
         
     raise ValidationError("Player not found in any team")
+
+
+
+def get_team_uuid(team_name):
+    """
+    Takes in team name
+    looks through all teams until it finds the team name
+    and returns the teams uuid
+    if no team is found an error is raised
+    """
+    model_teams: list = DataLayerAPI.load_teams()
+    for team in model_teams:
+        if team_name == team.name:
+            return team.uuid
+    
+    raise ValidationError("Team not found")

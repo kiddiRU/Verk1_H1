@@ -18,24 +18,32 @@ class AdminUI:
         self.tui = Drawer()
 
     def admin_screen(self) -> MenuOptions:
-        """Admin screen, choices: 1,2,3 and b
+        """Admin screen, choices: 1,2,3 and lo
+        1: Go to create tournament screen
+        2: Go to manage tournaments screen
+        3: Go to create club screen
+        lo: Log out of admin and go back to start screen
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        
-        menu = "Admin Screen"
-        user_path = ["StartScreen", "AdminScreen"]
+
+        menu: str = "Admin Screen"
+        user_path: list[str] = [MenuOptions.admin_screen]
         info: list[str] = []
-        options: dict[str, str] = {"1": "Create Tournament", "2": "Manage Tournaments", "3": "Create Club", "b": "Back"}
+        options: dict[str, str] = {
+            "1": "Create Tournament",
+            "2": "Manage Tournaments",
+            "3": "Create Club",
+            "lo": "Log Out",
+        }
         message = ""
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))   
-        
-        print(MenuOptions.admin_screen)
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
+
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "lo"])
         match choice:
             case "1":
                 return MenuOptions.create_tournament
@@ -43,9 +51,9 @@ class AdminUI:
                 return MenuOptions.manage_tournament
             case "3":
                 return MenuOptions.create_club
-            case "b":
-                return MenuOptions.start_screen
-        return MenuOptions.start_screen
+            case "lo":
+                return MenuOptions.logout
+        return MenuOptions.logout
 
     def create_tournament(self) -> MenuOptions:
         """Create tournament screen, choices: fill info with input
@@ -55,21 +63,23 @@ class AdminUI:
         """
 
         menu: str = "Create Tournament"
-        user_path: list = ["StartScreen", "Admin Screen", menu.replace(" ","")]
-        info: list[str]= []
-        options: dict[str, str] = {"1": "Create Tournament", "2": "Manage Tournaments", "3": "Create Club", "b": "Back"}
+        user_path: list = [
+            MenuOptions.admin_screen,
+            MenuOptions.create_tournament,
+        ]
+        info: list[str] = []
+        options: dict[str, str] = {}
         message: str = ""
 
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))   
-        
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
 
         tournament_create = Drawer()
         print(tournament_create.table(menu))
 
-
         # TODO: add fill in options
-        return MenuOptions.admin_screen
+        option = input("THIS IS A STOPPER IN CREATE TOURNAMENT")
+        return MenuOptions.manage_inactive_tournament
 
     def manage_tournaments(self) -> MenuOptions:
         """Manage tournaments screen, choices: choose with input
@@ -77,10 +87,25 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        menu: str = "Manage Tournaments"
+        user_path: list[str] = [
+            MenuOptions.admin_screen,
+            MenuOptions.manage_tournament,
+        ]
+        info: list[str] = []
+        options: dict[str, str] = {"Choose a tournament to manage": ""}
+        message: str = ""
 
-        print("This is the manage tournaments screen")
-        print("HERE a list of all the tournaments shows")
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        
         tournament = self.utility._input_info("Input tournament to manage")
+        if tournament.lower() == "lo":
+            return MenuOptions.logout
+        
+        if tournament.lower() == "active": #TODO: REMOVE THIS IS JUST TEST LINE
+            return MenuOptions.manage_active_tournament
 
         # TODO: add input for tournament to manage
         # TODO: if active the go to active screen else inactive screen
@@ -88,7 +113,7 @@ class AdminUI:
 
     def manage_active_tournament(self) -> MenuOptions:
         """Active tournament screen, choices: 1,2(c requirement) and b
-        1: Select match 
+        1: Select match
         2: (OPTIONAL C Requirement) cancel active tournament
         b: Go back to manage tournaments
 
@@ -98,7 +123,11 @@ class AdminUI:
 
         print("This is the active tournaments screen")
         menu: str = "Tournaments"
-        user_path: list[str] = ["Admin","" ,menu]
+        user_path: list[str] = [
+            MenuOptions.admin_screen,
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_active_tournament,
+        ]
         info: list = []
         options: dict[str, str] = {
             "Enter A Tournaments Name Or The First Letter(s) To Search:": ""
@@ -124,7 +153,24 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("HERE COMES A LIST OF MATCHES")
+
+        menu: str = "Tournaments"
+        user_path: list[str] = [
+            MenuOptions.admin_screen,
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_active_tournament,
+            MenuOptions.input_results
+        ]
+        info: list = []
+        options: dict[str, str] = {
+            "Choose a match": ""
+        }
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        input("HERE COMES A LIST OF MATCHES")
         # TODO: function for user to input to select match to manage
         return MenuOptions.manage_tournament
 
@@ -211,7 +257,8 @@ class AdminUI:
         return MenuOptions.manage_active_tournament
 
     def edit_tournament(self) -> MenuOptions:
-        """Edit inactive tournament screen, choices: input a tournament to edit, then choose to edit time or info
+        """Edit inactive tournament screen,
+        choices: input a tournament to edit, then choose to edit time or info
 
         Returns:
             MenuOptions: The next menu to navigate to
@@ -255,7 +302,8 @@ class AdminUI:
         return MenuOptions.edit_tournament
 
     def edit_tournament_info(self) -> MenuOptions:
-        """Edit tournament info screen, choices: input new name, venue, email and/or phone number
+        """Edit tournament info screen, choices: input new name, venue,
+        email and/or phone number
 
         Returns:
             MenuOptions: The next menu to navigate to

@@ -1,7 +1,8 @@
 """
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
-Co-author: Andri Már Kristjá.nsson <andrik25@ru.is>
+
+Co-Author: Andri Már Kristjánsson <andrik25@ru.is>
 
 File that holds all the menus that the player can access
 """
@@ -17,23 +18,31 @@ class PlayerUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
+        self.message_color: str = "\033[36m"
+        self.reset: str = "\033[0m"
+        self.underscore = "\033[4m"
+
+
 
     def start_screen(self) -> MenuOptions:
         """Start screen with choices: 1, 2, 3 and q
         1: go to login screen
         2: go to register screen
-        3: go to spectating screen
+        3: go to spectating page
         1: quit program
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        menu: str = "Start Screen"
-        user_path: list[str]= [MenuOptions.start_screen]
+        
+        menu: str = "Start Page"
+        user_path: list[str] = [MenuOptions.start_screen]
         info: list[str]= []
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
         message: str = ""
 
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))  
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))  
 
@@ -51,6 +60,8 @@ class PlayerUI:
 
         return MenuOptions.start_screen
 
+
+
     def login_screen(self) -> MenuOptions:
         """Login screen, choices: fill info with input
 
@@ -59,24 +70,33 @@ class PlayerUI:
         """
 
         menu: str = "Login"
-        user_path: list[str]= ["StartScreen", "Login"]
+        user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login]
         info: list[str]= []
         options: dict[str, str]= {}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))        
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))        
 
-        choice: str = self.utility._input_info("Input Your Handle: ")
+        choice: str = self.utility._input_info(self.message_color + "Input Your Handle: " + self.reset)
 
         if choice == "admin":
             return MenuOptions.admin_screen
+        
+        elif choice == "Shrek":
+            return MenuOptions.onion
+        
+        return MenuOptions.start_screen
 
         # TODO: check if handle exists from LL API
         # if choice in Player_list:
-        #     return MenuOption.player_screen
+        #     return MenuOption.player_page
 
         return MenuOptions.quit
+
+
 
     def register_screen(self) -> MenuOptions:
         """Register screen, choices: fill info with input
@@ -87,55 +107,57 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list[str]= ["StartScreen", "Login", "Register"]
+        user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue"}
         message: str = "You Have Created A Player!"
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))  
-        self.choice_name: str = input("Enter Name: \n")
-        self.tui.save_input("Name: " + self.choice_name)
-        print(self.tui.table(menu, user_path, info, options))  
-        con = input()
+        user_name: str = self.utility._input_info(self.message_color + "Enter Name: \n" + self.reset)
+        self.tui.save_input("Name: " + user_name)
+
 
         print(self.tui.table(menu, user_path, info)) 
-        self.choice_dob: str = input("Enter Date Of Birth: \n")
-        self.tui.save_input("Date Of Birth: " + self.choice_dob)
-        print(self.tui.table(menu, user_path, info, options))
-        con = input()
+        user_dob: str = self.utility._input_info(self.message_color + "Enter Date Of Birth: \n" + self.reset)
+        self.tui.save_input("Date Of Birth: " + user_dob)
+
 
         print(self.tui.table(menu, user_path, info)) 
-        self.choice_addr: str = input("Enter Home Adderess: \n")
-        self.tui.save_input("Home Address: " + self.choice_addr)
-        print(self.tui.table(menu, user_path, info, options))
-        con = input()  
+        user_addr: str = self.utility._input_info(self.message_color + "Enter Home Address: \n" + self.reset)
+        self.tui.save_input("Home Address: " + user_addr)
+
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_email: str = input("Enter Email: \n")
-        self.tui.save_input("Email: " + self.choice_email)
-        print(self.tui.table(menu, user_path, info, options))
-        con = input()  
+        user_email: str = self.utility._input_info(self.message_color + "Enter Email: \n" + self.reset)
+        self.tui.save_input("Email: " + user_email)
+
 
         print(self.tui.table(menu, user_path, info))   
-        self.choice_pnum: str = input("Enter Phone Number: \n")
-        self.tui.save_input("Phone Number: " + self.choice_pnum)
-        print(self.tui.table(menu, user_path, info, options))
-        con = input()  
+        user_phnum: str = self.utility._input_info(self.message_color + "Enter Phone Number: \n" + self.reset)
+        self.tui.save_input("Phone Number: " + user_phnum)
+
 
         print(self.tui.table(menu, user_path, info))   
-        self.choice_handle: str = input("Enter Handle: \n")
-        self.tui.save_input("Handle: " + self.choice_handle)
+        user_handle: str = self.utility._input_info(self.message_color + "Enter Handle: \n" + self.reset)
+        self.tui.save_input("Handle: " + user_handle)
+
+
+        print(self.tui.table(menu, user_path, info))   
+        user_url: str = self.utility._input_info(self.message_color + "Enter URL: \n" + self.reset)
+        self.tui.save_input("URL: " + user_url)
         print(self.tui.table(menu, user_path, info, options, message))
-        con = input()  
+        con: str = self.utility._prompt_choice(["c"])
 
         
         #if register
         return MenuOptions.player_screen
-        #if cancel: return MenuOptions.start_screen
+        #if cancel: return MenuOptions.main_menu
+
+
 
     def player_screen(self) -> MenuOptions:
-        """Player screen, choices: 1,2,3 and b
+        """Player page, choices: 1,2,3 and b
         1: Edit info
         2: See team
         3: Create a team
@@ -146,45 +168,47 @@ class PlayerUI:
         """
         
 
-        menu: str = "Player Screen"
-        user_path: list[str]= ["StartScreen", "PlayerScreen"]
+        menu: str = "Player Page"
+        user_path: list[str] = [MenuOptions.player_screen]
 
         #Temporary info for testing, needs to get info from the actual info files
-        info: list[str]= [f"""Name: {self.choice_name}
-Date of Birth: {self.choice_dob}
-Home Address: {self.choice_addr}
-Phone Number: {self.choice_pnum}
-Email: {self.choice_email}
-Handle: {self.choice_handle}
-Team: NONE
-Club: NONE
-Rank: Player"""]
+        info: list[str]= [f"""Name: {"PLAYERNAME"}
+Date of Birth: {"DOB"}
+Home Address: {"ADDRESS"}
+Phone Number: {"PHONENUMBER"}
+Email: {"EMAIL"}
+Handle: {"PLAYERHANDLE"}
+Team: {"NONE"}
+Club: {"NONE"}
+Rank: {"PLAYERRANK"}"""]
         
-        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "q": "Log Out"}
+        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "lo": "Log Out"}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "lo"])
         match choice:
             case "1":
                 return MenuOptions.edit_player_info
             case "2":
-                # if ...:  # TODO: check if team is empty aka if player not in a team
-                #     return MenuOptions.my_team_not_empty
+                if ...:  # TODO: check if team is empty aka if player not in a team
+                    return MenuOptions.my_team_not_empty
                 return MenuOptions.my_team_empty
             case "3":
                 # if ...:  # TODO: check if player is already in a team
                 #     print("You are already in a team")
-                #     return MenuOptions.player_screen
+                #     return MenuOptions.player_page
                 return MenuOptions.create_team
-            case "q":
-                return MenuOptions.quit
+            case "lo":
+                return MenuOptions.logout
 
 
         return MenuOptions.start_screen
     
+
+
     def create_team(self) -> MenuOptions:
         """Create team screen, choices: fill info with input
 
@@ -193,7 +217,7 @@ Rank: Player"""]
         """
         
         menu: str = "Create Team"
-        user_path: list[str]= ["PlayerScreen -> CreateTeam"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.create_team]
 
         #temporary info
         info: list[str]= ["""- - - -List Of Clubs- - - -
@@ -206,29 +230,32 @@ Club4"""]
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path))
-        choice_tname: str = input("Enter Team Name: \n")
-        self.tui.save_input("Team Name: " + choice_tname)
+        print(self.tui.table(menu, user_path, [], {}, message))
+        team_name: str =input(self.message_color + "Enter Team Name: \n" + self.reset)
+        self.tui.save_input("Team Name: " + team_name)
 
         print(self.tui.table(menu, user_path))
-        choice_url: str = input("Enter Team URL (Optional): \n")
-        self.tui.save_input("Team Name: " + choice_url)
+        team_url: str = self.utility._input_info(self.message_color + "Enter Team URL (Optional): \n" + self.reset)
+        self.tui.save_input("Team Name: " + team_url)
 
         print(self.tui.table(menu, user_path))
-        choice_ascii: str = input("Enter Team ASCII Art (Optional): \n")
-        self.tui.save_input("Team ASCII Art: " + choice_ascii)
+        team_ascii: str = self.utility._input_info(self.message_color + "Enter Team ASCII Art (Optional): \n" + self.reset)
+        self.tui.save_input("Team ASCII Art: " + team_ascii)
 
         print(self.tui.table(menu, user_path, info))
-        choice_club = input("Choose A Club To Join: \n")
-        self.tui.save_input("Club: " + choice_club)
+        team_club: str = self.utility._input_info(self.message_color + "Choose A Club To Join: \n" + self.reset)
+        self.tui.save_input("Club: " + team_club)
 
-        print(self.tui.table(menu, user_path, info, options, message))
-        con = input()
-
-
+        print(self.tui.table(menu, user_path, info, options))
+        choice: str = self.utility._prompt_choice(["c", "b"])
         
-
+        if choice == "c":
+            return MenuOptions.my_team_not_empty
+        
+ 
         return MenuOptions.player_screen
+
+
 
     def edit_player_info(self) -> MenuOptions:
         """Edit player info screen, choices: fill info with input
@@ -238,47 +265,62 @@ Club4"""]
         """
 
         # This Uses A temporary way to print out and change info
+        # TODO: 
+
+        user_name = "LOGIC"
+        dob = "LOGIC"
+        addr = "LOGIC"
+        phnum = "LOGIC"
+        email = "LOGIC"
+        url = "LOGIC"
+
 
 
         menu: str = "Edit Player Info"
-        user_path: list[str]= ["PlayerScreen", "EditPlayerInfo"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.edit_player_info]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Changed Your Info!"
 
         self.tui.clear_saved_data()
-        self.tui.save_input(f"- - - -{self.choice_name}- - - -")
+        self.tui.save_input(f"- - - -{"PLAYERNAME"}- - - -")
         unchanged_message = "(Leave Field Empty If You Want To Leave Them Unchanged)"    
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newname = input(unchanged_message + "\n Enter New Name: \n")
-        if self.choice_newname:
-            self.choice_name = self.choice_newname
-        self.tui.save_input("Name: " + self.choice_name)
+        new_name = input(unchanged_message + "\n Enter New Name: \n")
+        if new_name:
+            user_name = new_name
+        self.tui.save_input("Name: " + user_name)
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newdob = input(unchanged_message + "\n Enter New Date Of Birth: \n")
-        if self.choice_newdob:
-            self.choice_dob = self.choice_newdob
-        self.tui.save_input("Date Of Birth: " + self.choice_dob)
+        new_dob = input(unchanged_message + "\n Enter New Date Of Birth: \n")
+        if new_dob:
+            dob = new_dob
+        self.tui.save_input("Date Of Birth: " + dob)
 
         print(self.tui.table(menu, user_path, info))        
-        self.choice_newaddr = input(unchanged_message + "\n Enter New Home Address: \n")
-        if self.choice_newaddr:
-            self.choice_addr = self.choice_newaddr
-        self.tui.save_input("Home Address: " + self.choice_addr)
+        new_addr = input(unchanged_message + "\n Enter New Home Address: \n")
+        if new_addr:
+            addr = new_addr
+        self.tui.save_input("Home Address: " + addr)
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newpnum = input(unchanged_message + "\n Enter New Phone Number: \n")
-        if self.choice_newpnum:
-            self.choice_pnum = self.choice_newpnum
-        self.tui.save_input("Phone Number: " + self.choice_pnum)
+        new_phnum = input(unchanged_message + "\n Enter New Phone Number: \n")
+        if new_phnum:
+            phnum = new_phnum
+        self.tui.save_input("Phone Number: " + phnum)
 
         print(self.tui.table(menu, user_path, info))
-        self.choice_newemail = input(unchanged_message + "\n Enter New Email: \n")
-        if self.choice_newemail:
-            self.choice_email = self.choice_newemail
-        self.tui.save_input("Email: " + self.choice_email)
+        new_email = input(unchanged_message + "\n Enter New Email: \n")
+        if new_email:
+            email = new_email
+        self.tui.save_input("Email: " + email)
+
+        print(self.tui.table(menu, user_path, info))
+        new_url = input(unchanged_message + "\n Enter New Email: \n")
+        if new_url:
+            url = new_url
+        self.tui.save_input("URL: " + url)
 
         
         print(self.tui.table(menu, user_path, info, options, message))
@@ -286,6 +328,8 @@ Club4"""]
         
         return MenuOptions.player_screen
     
+
+
     def my_team_empty(self) -> MenuOptions:
         """My team screen when team is empty, choices: b to go back
 
@@ -294,7 +338,7 @@ Club4"""]
         """
 
         menu: str = "My Team"
-        user_path: list[str]= ["PlayerScreen", "MyTeam"]
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_empty]
         info: list[str]= []
         options: dict[str, str]= {"b": "Back"}
         message: str = "You Are Not In A Team!"
@@ -309,27 +353,46 @@ Club4"""]
                 return MenuOptions.player_screen
         return MenuOptions.player_screen
     
+
+
     def my_team_not_empty(self) -> MenuOptions:
         """My team screen when team is not empty, choices: 1,2 and b
         1: edit team
         2: leave team
-        b: back to player screen
+        b: back to player page
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is your team screen")
+       
+        menu: str = "My Team"
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty]
+        info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
+{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
+{self.reset + "Captain"}{"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}"""]
+        options: dict[str, str]= {"1": "Edit Team", "2": "Leave Team", "b": "Back"}
+        message: str = ""
+        
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options))
+
+
         choice: str = self.utility._prompt_choice(["1", "2", "b"])
         match choice:
-            case "1":
+            case "1": #TODO: check if player is captain and CAN edit the team
                 return MenuOptions.edit_team
             case "2":
                 if ...:  # TODO: check if player is captain
                     return MenuOptions.leave_team
             case "b":
-                return MenuOptions.my_team_not_empty
+
+                return MenuOptions.player_screen
         return MenuOptions.player_screen
-    
+
+
+
     def edit_team(self) -> MenuOptions:
         """Edit team screen, choices: 1,2 and b
         1: Add player to team
@@ -339,35 +402,266 @@ Club4"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the edit team screen")
-        return MenuOptions.my_team_not_empty
-    
+
+        menu: str = "Edit Team"
+        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team]
+        info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
+{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
+{self.reset + "Captain"}{"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}"""]
+        options: dict[str, str]= {"1": "Add Player To Team", "2": "Remove Player From Team", "b": "Back"}
+        message: str = ""
+        
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options))
+
+        choice: str = self.utility._prompt_choice(["1", "2", "b"])
+        match choice:
+            case "1": #TODO: check if player is captain and CAN edit the team
+                return MenuOptions.add_player
+            case "2":
+                if ...:  # TODO: check if player is captain
+                    return MenuOptions.remove_player
+            case "b":
+                return MenuOptions.my_team_not_empty
+
+        return MenuOptions.player_screen
+
+
+
     def add_player(self) -> MenuOptions:
         """Add player to team screen, choices: input player handle to add
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the add player to team screen")
-        return MenuOptions.edit_team
-    
+        
+        menu: str = "Add Player"
+        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, MenuOptions.add_player]
+        info: list = []
+        options: dict = {"c": "Continue"}
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path))
+
+        # Might add to the message if the search will be implemented
+        add_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Add Them: \n")
+
+        self.tui.save_input("Player To Add: " + add_handle)
+
+        if...: #TODO: check if player is found and is not in a team
+            message: str = f"The Player {add_handle} Was Found, Do You Want To Add Them To Your Team? Y/N:"
+            print(self.tui.table(menu, user_path, info, {}, message))
+
+            choice: str = self.utility._prompt_choice(["y", "n"])
+
+            if choice == "n":
+                message: str = "Operation Cancelled"
+                print(self.tui.table(menu, user_path, info, options, message))
+                choice: str = self.utility._prompt_choice(["c"])
+                return MenuOptions.edit_team
+
+            #TODO: save the player to the team
+
+            message: str = f"{add_handle} Has Been Added To Your Team!"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["c"])
+            return MenuOptions.edit_team
+        
+
+        message: str = f"The Player {add_handle} Was Not Found, Do You Want To Try Again? Y/N:"
+        print(self.tui.table(menu, user_path, info, {}, message))
+
+        choice: str = self.utility._prompt_choice(["y", "n"])
+
+        if choice == "n":
+            return MenuOptions.edit_team
+        
+        return MenuOptions.add_player
+
+
+
     def remove_player(self) -> MenuOptions:
         """Remove player from team screen, choices: input player handle to remove
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the remove player from team screen")
-        return MenuOptions.edit_team
-    
+
+        menu: str = "Remove Player"
+        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, 
+                           MenuOptions.remove_player]
+        info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
+{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
+{self.reset + "Captain"}{"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}
+{"Player"} {"PLAYERHANDLE": >20}"""]
+        options: dict = {"c": "Continue"}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, ))
+        remove_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Remove Them: \n")
+
+        if...: #TODO: check if player is found and is not in a team
+            message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
+            print(self.tui.table(menu, user_path, info, {}, message))
+
+            choice: str = self.utility._prompt_choice(["y", "n"])
+
+            if choice == "n":
+                message: str = "Operation Cancelled"
+                print(self.tui.table(menu, user_path, info, options, message))
+                choice: str = self.utility._prompt_choice(["c"])
+                return MenuOptions.edit_team
+
+            #TODO: save the player to the team
+
+            message: str = f"{remove_handle} Has Been Removed From Your Team!"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["c"])
+            return MenuOptions.edit_team
+        
+
+        message: str = f"The Player {remove_handle} Was Not Found, Do You Want To Try Again? Y/N:"
+        print(self.tui.table(menu, user_path, info, {}, message))
+
+        choice: str = self.utility._prompt_choice(["y", "n"])
+
+        if choice == "n":
+            return MenuOptions.edit_team
+        
+        return MenuOptions.remove_player
+
+
+
     def leave_team(self) -> MenuOptions:
         """Leave team screen, choices: confirm leaving team with y or n and if captain then choose new captain
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the leave team screen")
-        if ...:  # TODO: check if player is captain
-            print("You are the captain, please choose a new captain before leaving")
 
-        return MenuOptions.player_screen
+        menu: str = "Leave Team"
+        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
+        info: list[str] = []
+        options: dict[str, str] = {"c": "Continue"}
+        message: str = f"Are You Sure You Want To Leave {"TEAMNAME"}? Y/N"
+
+        if ...:  # TODO: check if player is captain
+
+            self.tui.clear_saved_data()
+            print(self.tui.table(menu, user_path, info, {}, message))
+            choice: str = self.utility._prompt_choice(["y", "n"])
+
+            if choice == "n":
+                message: str = "Operation Canceled"
+                print(self.tui.table(menu, user_path, info, options, message))
+                choice: str = self.utility._prompt_choice(["c"])
+                return MenuOptions.my_team_not_empty
+
+            message: str = "You Have Sucessfully Left The Team!"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["c"])
+            return MenuOptions.my_team_empty
+
+        return MenuOptions.my_team_empty
+
+
+
+    def onion(self) -> MenuOptions:
+
+                """This Program Has Layers"""
+
+                print("""
+        ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+        ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆ 
+        ⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿ 
+        ⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀ 
+        ⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+        ⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+                    
+                    
+        Somebody once told me the world is gonna roll me
+        I ain't the sharpest tool in the shed
+        She was looking kind of dumb with her finger and her thumb
+        In the shape of an "L" on her forehead
+        Well, the years start comin' and they don't stop comin'
+        Fed to the rules and I hit the ground runnin'
+        Didn't make sense not to live for fun
+        Your brain gets smart, but your head gets dumb
+        So much to do, so much to see
+        So, what's wrong with taking the backstreets?
+        You'll never know if you don't go (go)
+        You'll never shine if you don't glow
+        Hey now, you're an all-star
+        Get your game on, go play
+        Hey now, you're a rock star
+        Get the show on, get paid
+        (And all that glitters is gold)
+        Only shootin' stars break the mold
+        It's a cool place, and they say it gets colder
+        You're bundled up now, wait 'til you get older
+        But the meteor men beg to differ
+        Judging by the hole in the satellite picture
+        The ice we skate is gettin' pretty thin
+        The water's gettin' warm, so you might as well swim
+        My world's on fire, how 'bout yours?
+        That's the way I like it, and I'll never get bored
+        Hey now, you're an all-star
+        Get your game on, go play
+        Hey now, you're a rock star
+        Get the show on, get paid
+        (All that glitters is gold)
+        Only shootin' stars break the mold
+        Go for the moon
+        (Go, go, go) go for the moon
+        (Go, go, go) go for the moon
+        Go (go), go for the moon
+        Hey now, you're an all-star
+        Get your game on, go play
+        Hey now, you're a rock star
+        Get the show on, get paid
+        (And all that glitters is gold)
+        Only shooting stars
+        Somebody once asked, "Could I spare some change for gas?
+        I need to get myself away from this place"
+        I said, "Yep, what a concept, I could use a little fuel myself
+        And we could all use a little change"
+        Well, the years start comin' and they don't stop comin'
+        Fed to the rules and I hit the ground runnin'
+        Didn't make sense not to live for fun
+        Your brain gets smart, but your head gets dumb
+        So much to do, so much to see
+        So, what's wrong with taking the backstreets?
+        You'll never know if you don't go (go!)
+        You'll never shine if you don't glow
+        Hey now, you're an all-star
+        Get your game on, go play
+        Hey now, you're a rock star
+        Get the show on, get paid
+        (And all that glitters is gold)
+        Only shootin' stars break the mold
+        Only shootin' stars break the mold
+        Go for the moon
+        Go for the moon
+        Go for the moon
+        This is how we do it""")
+                
+
+                a = input()
+                if a == "GET OUTTA MA SWAMP!":
+                    return MenuOptions.start_screen
+                
+                return MenuOptions.onion
+                

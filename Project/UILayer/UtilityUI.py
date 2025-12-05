@@ -2,6 +2,8 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
 
+Co-Author: Andri Már Kristjánsson <andrik25@ru.is>
+
 File that holds the UtilityUI class
 which holds functions used in multiple places
 """
@@ -12,6 +14,11 @@ from Models import ValidationError
 
 class UtilityUI:
     """Utility Class for multi use function for ui layer"""
+
+
+    def __init__(self) -> None:
+        self.error_color: str = "\033[31m"
+        self.reset: str = "\033[0m"
 
     def _prompt_choice(self, valid_choices: list[str]) -> str:
         """
@@ -30,7 +37,7 @@ class UtilityUI:
             if choice in valid_choices_lower:
                 return choice
 
-            print("Not a valid option try again")
+            print(self.error_color + "Not a valid option try again" + self.reset)
 
     # Created by Sindri
     def _input_info(self, message, attribute: str, info_type: str) -> str | None:

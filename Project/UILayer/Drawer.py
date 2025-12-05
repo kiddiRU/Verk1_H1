@@ -34,10 +34,10 @@ class Drawer():
         #Colors
         red: str = "\033[31m"
         red_high: str = "\033[41m"
-        #green: str = "\033[32m"
-        # yellow: str = "\033[33m"        
+        green: str = "\033[32m"
+        yellow: str = "\033[33m"        
         #blue: str = "\033[34m"
-        # pink: str = "\033[35m"
+        #pink: str = "\033[35m"
         cyan: str = "\033[36m"
 
 
@@ -48,8 +48,8 @@ class Drawer():
         self.banner_border: str = red_high
         self.path_color: str = red
         self.table_color: str = self.bold
-        self.options_color: str = self.bold + cyan
-        self.message_color: str = self.bold + red
+        self.options_color: str = self.bold + green
+        self.message_color: str = self.bold + yellow
 
 
     

@@ -23,14 +23,14 @@ def store_match(match: Match) -> None:
     data = match.__dict__
 
     # Reads json file containing match and stores it as a dictionary.
-    with open(FILE_PATH, "r") as match_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as match_file:
         file_content = dict(json.load(match_file))
 
     # Updates the dictionary adding the new match into the file content.
     file_content[match.uuid] = data
     
     # Writes the updated file content int the file containing matches.
-    with open(FILE_PATH, "w") as match_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as match_file:
         json.dump(file_content, match_file, indent=4, default=str)
 
 
@@ -44,7 +44,7 @@ Returns the created match list.
 """
 def load_match() -> list[Match]:
     # Reads the json file containing matches and stores it as a dictionary.
-    with open(FILE_PATH, "r") as match_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as match_file:
         file_content = dict(json.load(match_file))
 
     # Creates a list of all matches in the server file.
@@ -75,7 +75,7 @@ match with the new updated match object.
 """
 def update_match(uuid: str, updated_match: Match) -> None:
     # Reads the json file containing matches and stores it as a dictionary.
-    with open(FILE_PATH, "r") as match_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as match_file:
         file_content = dict(json.load(match_file))
     
     # Updates the file content, checking if the uuid exists
@@ -84,5 +84,5 @@ def update_match(uuid: str, updated_match: Match) -> None:
         file_content[uuid] = updated_match.__dict__
     
     # Writes the updated dictionary into the match file.
-    with open(FILE_PATH, "w") as match_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as match_file:
         json.dump(file_content, match_file, indent=4, default=str)
