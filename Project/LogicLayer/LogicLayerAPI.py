@@ -7,7 +7,7 @@ Logic layer API
 
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
-from LogicLayer import PlayerLL
+from LogicLayer import PlayerLL, TeamLL
 from LogicLayer.Validation import validate_attr
 
 ''' Validation API '''
