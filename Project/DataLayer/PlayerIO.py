@@ -30,7 +30,7 @@ def store_player(player: Player) -> None:
     
     # Writes the updated file content into the file containing players.
     with open(FILE_PATH, "w") as player_file:
-        json.dump(file_content, player_file)
+        json.dump(file_content, player_file, indent=4)
 
 
 """
@@ -74,4 +74,4 @@ def update_player(uuid: str, updated_player: Player) -> None:
 
     # Wriets the updated dictionary into the player file.
     with open(FILE_PATH, "w") as player_file:
-        json.dump(file_content, player_file)
+        json.dump(file_content, player_file, indent=4)

@@ -16,7 +16,7 @@ class Tournament:
         active = "ACTIVE"
         inactive = "INACTIVE"
         archived = "ARCHIVED"
-
+    # Sindri: Need to add tournament results to store point calculations
     def __init__(
         self,
         uuid: str,

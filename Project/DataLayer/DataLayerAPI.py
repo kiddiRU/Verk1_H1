@@ -6,7 +6,7 @@ Data layer API
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import PlayerIO, TeamIO
+from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 
 """ Player API """
 
@@ -86,40 +86,142 @@ def store_team(team: Team) -> None:
 
 """ Club API """
 
-# TODO implement store_club and call it
+"""
+Takes in model class Club
+
+Inserts information about the Club class into a json file
+for storage
+
+Have to call withing try except
+"""
 def store_club(club: Club) -> None:
-    pass
+    ClubIO.store_club(club)
 
-# def update_club(uuid: str, key: str, value: str) -> None:
+"""
+No parameters
 
-# TODO implement load_clubs and call it
+Reads json file containing clubs and creates a list of
+Club model objects of each entry in the json file.
+
+Returns the created list.
+"""
 def load_clubs() -> list[Club]:
-    pass
+    return ClubIO.load_club()
+
+"""
+Takes in uuid and the updated Club model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find a blub with given uuid and update that
+club with the new updated club object.
+"""
+def update_club(uuid: str, updated_club: Club) -> None:
+    ClubIO.update_club(uuid, updated_club)
 
 """ Tournament API """
 
-# TODO implement store_tournament and call it
+"""
+Takes in model class Tournament.
+
+Inserts information about the class into a json file for.
+
+Have to call within try except.
+"""
 def store_tournament(tournament: Tournament) -> None:
-    pass
+    TournamentIO.store_tournament(tournament)
 
-# TODO implement update_tournament and call it
-def update_tournament(uuid: str, key: str, value: str) -> None:
-    pass
+"""
+No parameters
 
-# TODO implement load_tournaments and call it
+Reads the json file containing tournaments and creates a list of
+Tournament model objects of each entry in the json file.
+
+Returns the created list.
+
+Have to call within try except.
+"""
+def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
+    TournamentIO.update_tournament(uuid, updated_tournament)
+
+"""
+Takes in uuid and the updated Tournament model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find tournament with given uuid and update
+that team with the new updated tournament object.
+
+Have to call within try except.
+"""
 def load_tournaments() -> list[Tournament]:
-    pass
+    return TournamentIO.load_tournaments()
 
 """ Match API """
 
-# TODO implement store_match and call it
+"""
+Takes in model class match
+
+Inserts information about the Match class into a json file
+for storage.
+"""
 def store_match(match: Match) -> None:
-    pass
+    MatchIO.store_match(match)
 
-# TODO implement update_match and call it
-def update_match(uuid: str, key: str, value: str) -> None:
-    pass
+"""
+Takes in uuid and the updated Match model object.
 
-# TODO implement load_matches and call it
+uuid has to exist in the json file.
+
+Will attempt to find a match with given uuid and update that
+match with the new updated match object.
+"""
+def update_match(uuid: str, updated_match: Match) -> None:
+    MatchIO.update_match(uuid, updated_match)
+
+"""
+No parameters
+
+Reads json file containing matches and creates a list of
+Match model objects of each entry in the json file.
+
+Returns the created match list.
+"""
 def load_matches() -> list[Match]:
-    pass
+    return MatchIO.load_match()
+
+
+""" Server API """
+
+"""
+Takes in model class Server
+
+Inserts information about the Server class into a json file
+for storage
+
+Have to call within try except
+"""
+def store_server(server: Server) -> None:
+    ServerIO.store_server(server)
+
+"""
+No parameters
+
+Reads json file containing server and creates a list of
+Server model objects of each entry in the json file.
+
+Returns the created list.
+"""
+def load_servers() -> list[Server]:
+    return ServerIO.load_server()
+
+"""
+Takes in uuid and the updated Server model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find a server with given uuid and update that
+server with the new updated server object.
+"""
+def update_server(uuid: str, updated_server: Server) -> None:
+    ServerIO.update_server(uuid, updated_server)

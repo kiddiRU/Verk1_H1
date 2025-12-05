@@ -22,7 +22,7 @@ class MainUI:
         self._admin_ui: AdminUI = AdminUI()
         self._player_ui: PlayerUI = PlayerUI()
         self._spectate_ui: SpectateUI = SpectateUI()
-        self.current_screen: MenuOptions = MenuOptions.main_menu
+        self.current_screen: MenuOptions = MenuOptions.start_screen
 
     def __clear(self):
         """Helper function that clears the screen"""
@@ -33,10 +33,10 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
-            
+
             # main menu
-            if self.current_screen == MenuOptions.main_menu:
-                self.current_screen = self._player_ui.add_player()
+            if self.current_screen == MenuOptions.start_screen:
+                self.current_screen = self._player_ui.start_screen()
 
             # login
             elif self.current_screen == MenuOptions.login:
@@ -52,7 +52,7 @@ class MainUI:
 
             # ------------------ Admin Paths ------------------
             # admin page
-            elif self.current_screen == MenuOptions.admin_page:
+            elif self.current_screen == MenuOptions.admin_screen:
                 self.current_screen = self._admin_ui.admin_screen()
 
             # create tournament
@@ -120,8 +120,8 @@ class MainUI:
             # ------------------ Player Paths ------------------
 
             # player page
-            elif self.current_screen == MenuOptions.player_page:
-                self.current_screen = self._player_ui.player_page()
+            elif self.current_screen == MenuOptions.player_screen:
+                self.current_screen = self._player_ui.player_screen()
 
             # edit player information
             elif self.current_screen == MenuOptions.edit_player_info:
@@ -130,7 +130,7 @@ class MainUI:
             # check team if empty
             elif self.current_screen == MenuOptions.my_team_empty:
                 self.current_screen = self._player_ui.my_team_empty()
-            
+
             # check team if not empty
             elif self.current_screen == MenuOptions.my_team_not_empty:
                 self.current_screen = self._player_ui.my_team_not_empty()
@@ -160,11 +160,11 @@ class MainUI:
             # spectate players
             elif self.current_screen == MenuOptions.spectate_players:
                 self.current_screen = self._spectate_ui.spectate_players()
-            
+
             # view specific player stats
             elif self.current_screen == MenuOptions.view_player_stats:
                 self.current_screen = self._spectate_ui.view_player_stats()
-            
+
             # spectate clubs
             elif self.current_screen == MenuOptions.spectate_clubs:
                 self.current_screen = self._spectate_ui.spectate_clubs()
@@ -172,11 +172,11 @@ class MainUI:
             # view specific clubs stats
             elif self.current_screen == MenuOptions.view_club_stats:
                 self.current_screen = self._spectate_ui.view_club_stats()
-            
+
             # spectate teams
             elif self.current_screen == MenuOptions.spectate_teams:
                 self.current_screen = self._spectate_ui.spectate_teams()
-            
+
             # view specific player stats
             elif self.current_screen == MenuOptions.view_team_stats:
                 self.current_screen = self._spectate_ui.view_team_stats()
@@ -188,8 +188,8 @@ class MainUI:
             # options for active tournament
             elif self.current_screen == MenuOptions.active_tournament:
                 self.current_screen = self._spectate_ui.active_tournament()
-            
-            # options for archived tournaments 
+
+            # options for archived tournaments
             elif self.current_screen == MenuOptions.archived_tournament:
                 self.current_screen = self._spectate_ui.archived_tournament()
 
@@ -200,7 +200,7 @@ class MainUI:
             # view specific tournaments brackets
             elif self.current_screen == MenuOptions.view_bracket:
                 self.current_screen = self._spectate_ui.view_bracket()
-            
+
             # see all teams in a tournament
             elif self.current_screen == MenuOptions.teams_in_tournament:
                 self.current_screen = self._spectate_ui.teams_in_tournament()
@@ -213,7 +213,7 @@ class MainUI:
 
             # go to main menu if logout
             elif self.current_screen == MenuOptions.logout:
-                self.current_screen = MenuOptions.main_menu
+                self.current_screen = MenuOptions.start_screen
 
             # stop when quit
             elif self.current_screen == MenuOptions.quit:

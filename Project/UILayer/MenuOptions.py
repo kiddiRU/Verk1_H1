@@ -4,80 +4,79 @@ from enum import StrEnum
 class MenuOptions(StrEnum):
     """Enum representing the available menu options in the UI layer."""
 
-    main_menu = "MAIN_MENU"
-    quit = "QUIT"
-    logout = "LOGOUT"
+    start_screen = "StartScreen"
+    quit = "Quit"
+    logout = "LogOut"
 
-    # StartPage
-    login = "LOGIN"
-    register = "REGISTER"
-    spectate_screen = "SPECTATE_SCREEN"
+    # StartScreen
+    login = "LogIn"
+    register = "Register"
+    spectate_screen = "SpectateScreen"
 
     # Login
-    admin_page = "ADMIN_PAGE"
+    admin_screen = "AdminScreen"
 
     # Login + Register
-    player_page = "PLAYER_PAGE"
+    player_screen = "PlayerScreen"
 
-    # AdminPage
-    create_tournament = "CREATE_TOURNAMENT"
-    manage_tournament = "MANAGE_TOURNAMENT"
-    create_club = "CREATE_CLUB"
+    # AdminScreen
+    create_tournament = "CreateTournament"
+    manage_tournament = "ManageTournament"
+    create_club = "CreateClub"
 
     # Manage Tournament
-    manage_active_tournament = "MANAGE_ACTIVE_TOURNAMENT"
-    manage_inactive_tournament = "MANAGE_INACTIVE_TOURNAMENT"
+    manage_active_tournament = "ManageActiveTournament"
+    manage_inactive_tournament = "ManageInactiveTournament"
 
     # ManageActiveTournament
-    input_results = "INPUT_RESULTS"
-    select_match = "SELECT_MATCH"
+    input_results = "InputResults"
+    select_match = "SelectMatch"
 
     # ManageInactiveTournament
-    manage_teams = "MANAGE_TEAMS"
-    publish = "PUBLISH"
-    edit_tournament = "EDIT_TOURNAMENT"
+    manage_teams = "ManageTeams"
+    publish = "Publish"
+    edit_tournament = "EditTournament"
 
     # ManageTeam
-    add_team = "ADD_TEAM"
-    remove_team = "REMOVE_TEAM"
+    add_team = "AddTeam"
+    remove_team = "RemoveTeam"
 
     # EditTournament
-    edit_tournament_time = "EDIT_TOURNAMENT_TIME"
-    edit_tournament_info = "EDIT_TOURNAMENT_INFO"
+    edit_tournament_time = "EditTournamentTime"
+    edit_tournament_info = "EditTournamentInfo"
 
-    # PlayerPage
-    edit_player_info = "EDIT_PLAYER_INFO"
-    my_team_empty = "MY_TEAM_EMPTY"
-    my_team_not_empty = "My_TEAM_NOT_EMPTY"
-    create_team = "CREATE_TEAM"
+    # PlayerScreen
+    edit_player_info = "EditPlayerInfo"
+    my_team_empty = "MyTeamEmpty"
+    my_team_not_empty = "MyTeamNotEmpty"
+    create_team = "CreateTeam"
 
-    # MyTEAM
-    edit_team = "EDIT_TEAM"
-    leave_team = "LEAVE_TEAM"
+    # MyTeam
+    edit_team = "EditTeam"
+    leave_team = "LeaveTeam"
 
     # EditTeam
-    add_player = "ADD_PLAYER"
-    remove_player = "REMOVE_PLAYER"
+    add_player = "AddPlayer"
+    remove_player = "RemovePlayer"
 
-    # SpectatePage
+    # SpectateScreen
+    spectate_players = "SpectatePlayers"
+    view_player_stats = "ViewPlayerStats"
 
-    spectate_players = "SPECTATE_PLAYERS"
-    view_player_stats = "VIEW_PLAYER_STATS"
+    spectate_clubs = "SpectateClubs"
+    view_club_stats = "ViewClubStats"
 
-    spectate_clubs = "SPECTATE_CLUBS"
-    view_club_stats = "VIEW_CLUB_STATS"
+    spectate_teams = "SpectateTeams"
+    view_team_stats = "ViewTeamStats"
 
-    spectate_teams = "SPECTATE_TEAMS"
-    view_team_stats = "VIEW_TEAM_STATS"
+    spectate_tournaments = "SpectateTournaments"
 
-    spectate_tournaments = "SPECTATE_TOURNAMENTS"
+    # TournamentScreen
+    active_tournament = "ActiveTournament"
+    archived_tournament = "ArchivedTournament"
 
-    # TournamentPage
-    active_tournament = "ACTIVE_TOURNAMENT"
-    archived_tournament = "ARCHIVED_TOURNAMENT"
-
-    # ActiveTournamentPage
-    game_schedule = "GAME_SCHEDULE"
-    teams_in_tournament = "TEAMS_IN_TOURNAMENT"
-    team_tournament_stats = "TEAM_TOURNAMENT_STATS"
-    view_bracket = "VIEW_BRACKET"
+    # ActiveTournamentScreen
+    game_schedule = "GameSchedule"
+    teams_in_tournament = "TeamsInTournament"
+    team_tournament_stats = "TeamTournamentStats"
+    view_bracket = "ViewBracket"

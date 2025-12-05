@@ -40,6 +40,8 @@ class PlayerUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))  
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))  
 
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
@@ -68,6 +70,8 @@ class PlayerUI:
         options: dict[str, str]= {}
         message: str = ""
 
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))        
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))        
 
@@ -165,8 +169,11 @@ Club: {"NONE"}
 Rank: {"PLAYERRANK"}"""]
         
         options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "q": "Log Out"}
+        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "q": "Log Out"}
         message: str = ""
 
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
@@ -205,7 +212,13 @@ Club1
 Club2
 Club3
 Club4"""]
+        info: list[str]= ["""- - - -List Of Clubs- - - -
+Club1
+Club2
+Club3
+Club4"""]
         
+        options: dict[str, str]= {"c": "Continue", "b": "Back"}
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
