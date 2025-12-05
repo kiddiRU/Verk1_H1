@@ -3,7 +3,7 @@ Author: Andri Már Kristjánsson <andrik25@ru.is>
 Date: 2025-12-04
 
 File that takes in table info, creates the table and can clear the terminal, 
-also can save previous user inputsthat need to be displayed on the table
+also can save previous user inputs that need to be displayed on the table
 
 takes 5 arguments:
      table name, user path, table info, table options, message to be displayed
@@ -12,9 +12,9 @@ takes 5 arguments:
 arguments and calling:
 
     menu: str = ""
-    user_path: list = []
-    info: list = []
-    options: dict = {}
+    user_path: list[str] = []
+    info: list[str] = []
+    options: dict[str, str] = {}
     message: str = ""
 
     tui = Drawer()
@@ -31,7 +31,7 @@ class Drawer():
         
         self.previous_inputs: list[str] = []
 
-        #Colours
+        #Colors
         red: str = "\033[31m"
         red_high: str = "\033[41m"
         #green: str = "\033[32m"

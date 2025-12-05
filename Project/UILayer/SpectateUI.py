@@ -9,6 +9,9 @@ from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
 
+from LogicLayer import LogicLayerAPI
+
+
 
 class SpectateUI:
     """Every spectate menu option"""
@@ -16,6 +19,7 @@ class SpectateUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
+# TODO: self.list_players = LogicLayerAPI.list_players()
 
     def spectate_screen(self) -> MenuOptions:
         """Spectate screen, choices: 1,2,3 and b
@@ -30,13 +34,13 @@ class SpectateUI:
         """
 
         menu: str = "Spectator Page"
-        user_path: list = ["StartPage", "SpectatorPage"]
-        info: list = []
-        options: dict = {
-            1: "Player",
-            2: "Clubs",
-            3: "Teams",
-            4: "Tournaments",
+        user_path: list[str] = ["StartPage", "SpectatorPage"]
+        info: list[str] = []
+        options: dict[str, str] = {
+            "1": "Player",
+            "2": "Clubs",
+            "3": "Teams",
+            "4": "Tournaments",
             "b": "Back",
         }
         message: str = ""
@@ -66,18 +70,22 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Players"
-        user_path: list = ["SpectatorPage", menu]
-        info: list = []
-        options: dict = {
+        user_path: list[str] = ["SpectatorPage", menu]
+        info: list[str] = []
+        options: dict[str, str] = {
             "Enter A Players Name Or The First Letter(s) To Search:": ""
         }
         message: str = ""
+
+
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
         choice: str = self.utility._input_info("")
         match choice:
+            # case "":
+            #     self.list_players()
             case "b":
                 return MenuOptions.spectate_screen
         return MenuOptions.view_player_stats
@@ -99,9 +107,9 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Clubs"
-        user_path: list = ["SpectatorPage", menu]
-        info: list = []
-        options: dict = {
+        user_path: list[str] = ["SpectatorPage", menu]
+        info: list[str] = []
+        options: dict[str, str] = {
             "Enter A Clubs Name Or The First Letter(s) To Search:": ""
         }
         message: str = ""
@@ -121,7 +129,18 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the view club stats page")
+        menu: str = "View Club Stats"
+        user_path: list[str] = ["SpectatorPage", "Clubs", "ClubStats"]
+        info: list[str] = []
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        stopper = input("This is the view club stats page")
+        match stopper:
+            case "b":
+                return MenuOptions.spectate_clubs
         return MenuOptions.spectate_screen
 
     def spectate_teams(self) -> MenuOptions:
@@ -131,9 +150,9 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Teams"
-        user_path: list = ["SpectatorPage", menu]
-        info: list = []
-        options: dict = {
+        user_path: list[str] = ["SpectatorPage", menu]
+        info: list[str] = []
+        options: dict[str, str] = {
             "Enter A Teams Name Or The First Letter(s) To Search:": ""
         }
         message: str = ""
@@ -162,9 +181,9 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Tournaments"
-        user_path: list = ["SpectatorPage", menu]
+        user_path: list[str] = ["SpectatorPage", menu]
         info: list = []
-        options: dict = {
+        options: dict[str, str] = {
             "Enter A Tournaments Name Or The First Letter(s) To Search:": ""
         }
         message: str = ""
