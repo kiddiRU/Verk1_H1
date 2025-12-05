@@ -5,7 +5,7 @@ Date: 2025-12-03
 Created the TeamLL class and added the functions
 """
 
-from Models.Exception import ValidationError
+from Models import Team, Player, ValidationError
 from DataLayer import DataLayerAPI
 from Models.Team import Team
 from Models.Player import Player

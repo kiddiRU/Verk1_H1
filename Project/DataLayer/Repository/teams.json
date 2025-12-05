@@ -1,1 +1,50 @@
-{"Team1": {"uuid": "Team1", "name": "Prufli", "list_player_uuid": ["Player1", "bdea6f3a-f418-4883-b074-b2f4f1af56b9"], "team_captain_uuid": "Player1", "club_uuid": "Club1", "in_tournament": "Tournament1", "url_homepage": "Homepage", "ascii_art": ""}}
+{
+    "b3cc0d7e-7f6a-4a19-bb34-bc138b45876b": {
+        "uuid": "b3cc0d7e-7f6a-4a19-bb34-bc138b45876b",
+        "name": "superteam",
+        "list_player_uuid": [
+            "bdea6f3a-f418-4883-b074-b2f4f1af56b9"
+        ],
+        "team_captain_uuid": "bdea6f3a-f418-4883-b074-b2f4f1af56b9",
+        "club_uuid": "superclub",
+        "in_tournament": null,
+        "url_homepage": "superclub.com",
+        "ascii_art": "SUPER"
+    },
+    "61ca8023-af30-4e27-98c6-07884794bec5": {
+        "uuid": "61ca8023-af30-4e27-98c6-07884794bec5",
+        "name": "superteam",
+        "list_player_uuid": [
+            "bdea6f3a-f418-4883-b074-b2f4f1af56b9"
+        ],
+        "team_captain_uuid": "bdea6f3a-f418-4883-b074-b2f4f1af56b9",
+        "club_uuid": "superclub",
+        "in_tournament": null,
+        "url_homepage": "superclub.com",
+        "ascii_art": "SUPER"
+    },
+    "204ad7f7-6cc7-4f75-9694-cac807149676": {
+        "uuid": "204ad7f7-6cc7-4f75-9694-cac807149676",
+        "name": "superteam",
+        "list_player_uuid": [
+            "bdea6f3a-f418-4883-b074-b2f4f1af56b9"
+        ],
+        "team_captain_uuid": "bdea6f3a-f418-4883-b074-b2f4f1af56b9",
+        "club_uuid": "superclub",
+        "in_tournament": null,
+        "url_homepage": "superclub.com",
+        "ascii_art": "SUPER"
+    },
+    "e110e06f-cbb9-408b-b4c0-05c4bbcc6264": {
+        "uuid": "e110e06f-cbb9-408b-b4c0-05c4bbcc6264",
+        "name": "superteam",
+        "list_player_uuid": [
+            "bdea6f3a-f418-4883-b074-b2f4f1af56b9"
+        ],
+        "team_captain_uuid": "bdea6f3a-f418-4883-b074-b2f4f1af56b9",
+        "club_uuid": "superclub",
+        "in_tournament": null,
+        "url_homepage": "superclub.com",
+        "ascii_art": "SUPER"
+    }
+}

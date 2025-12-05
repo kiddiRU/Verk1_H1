@@ -17,8 +17,8 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
+### Time: 10:30
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:30
@@ -26,21 +26,30 @@
 
 # Morning meeting (Briefing)
 ## State of project: 
-
+Progress is steady but slower then desired. The goal of the UI/Team
 ## State of group: 
-
+We need to work longer than normal because of the state of the project. 
 ## Divisions: 
-- UI / UX:
-- System engineer:
-- QC:
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristinn, Kristján
+- QC: Sindri
 
 ## ToDo-list:
-
+- Finish tournament CRU
+- Conduct user test
+- Get Player UI, Logic and Data to work together
+- QC:
+    - Add class diagrams to latex doc
+    - Add user group analysis to latex doc
+    - Add tasks to latex doc
+    - Add happy paths
+    - Add TUI graphics to latex doc
+    - Add and consolidate Extra notes to latex doc
 # Evening meeting (Diary)
 ## State of project:
 
 ## State of group: 
-
+Sindri recommended Elmar to create a Utility class for player handle to uuid.
 ## Divisions:
 - UI / UX:
 - System engineer: 
