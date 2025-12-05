@@ -34,7 +34,10 @@ class SpectateUI:
         """
 
         menu: str = "Spectator Screen"
-        user_path: list[str] = ["StartScreen", "SpectatorScreen"]
+        user_path: list[str] = [
+            MenuOptions.start_screen,
+            MenuOptions.spectate_screen,
+        ]
         info: list[str] = []
         options: dict[str, str] = {
             "1": "Player",
@@ -70,7 +73,10 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Players"
-        user_path: list[str] = ["SpectatorScreen", menu]
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_players,
+        ]
         info: list[str] = []
         options: dict[str, str] = {
             "Enter A Players Name Or The First Letter(s) To Search:": ""
@@ -105,7 +111,10 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Clubs"
-        user_path: list[str] = ["SpectatorScreen", menu]
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_clubs,
+        ]
         info: list[str] = []
         options: dict[str, str] = {
             "Enter A Clubs Name Or The First Letter(s) To Search:": ""
@@ -128,7 +137,11 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "View Club Stats"
-        user_path: list[str] = ["SpectatorScreen", "Clubs", "ClubStats"]
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_clubs,
+            MenuOptions.view_club_stats,
+        ]
         info: list[str] = []
         options: dict[str, str] = {}
         message: str = ""
@@ -148,7 +161,10 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Teams"
-        user_path: list[str] = ["SpectatorScreen", menu]
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_teams,
+        ]
         info: list[str] = []
         options: dict[str, str] = {
             "Enter A Teams Name Or The First Letter(s) To Search:": ""
@@ -179,7 +195,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Tournaments"
-        user_path: list[str] = ["SpectatorScreen", menu]
+        user_path: list[str] = [MenuOptions.spectate_screen, MenuOptions.spectate_tournaments]
         info: list = []
         options: dict[str, str] = {
             "Enter A Tournaments Name Or The First Letter(s) To Search:": ""
@@ -211,9 +227,9 @@ class SpectateUI:
         """
         menu: str = "Active Tournament"
         user_path: list[str] = [
-            "SpectatorScreen",
-            "Tournaments",
-            menu.replace(" ", ""),
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+            MenuOptions.active_tournament,
         ]
         info: list = []
         options: dict[str, str] = {
@@ -226,7 +242,7 @@ class SpectateUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
-        
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
         match choice:
             case "1":
