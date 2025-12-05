@@ -17,13 +17,13 @@ class PlayerLL():
 
     # TODO Alter validation functionality?
     def create_player(self,
-                name: str,
-                date_of_birth: str,
-                home_address: str,
-                email: str,
-                phone_number: str,
-                handle: str,
-                url: str
+        name: str,
+        date_of_birth: str,
+        home_address: str,
+        email: str,
+        phone_number: str,
+        handle: str,
+        url: str
     ) -> Player:
 
         """
@@ -40,14 +40,14 @@ class PlayerLL():
             validate_attr(attr, value.strip(), name_type = 'PLAYER')
 
         new_player = Player(
-                uuid,
-                params["name"],
-                params["date_of_birth"],
-                params["home_address"],
-                params["email"],
-                params["phone_number"],
-                params["handle"],
-                params["url"],
+            uuid,
+            params["name"],
+            params["date_of_birth"],
+            params["home_address"],
+            params["email"],
+            params["phone_number"],
+            params["handle"],
+            params["url"],
         )
 
         DataLayerAPI.store_player(new_player)
@@ -55,15 +55,15 @@ class PlayerLL():
 
     # TODO Alter validation functionality?
     def update_player_info(
-            self,
-            player: Player,
-            name: str,
-            date_of_birth: str,
-            home_address: str,
-            email: str,
-            phone_number: str,
-            handle: str,
-            url: str
+        self,
+        player: Player,
+        name: str,
+        date_of_birth: str,
+        home_address: str,
+        email: str,
+        phone_number: str,
+        handle: str,
+        url: str
     ) -> Player:
 
         '''

@@ -2,7 +2,7 @@
 Author: Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
-Logic layer API
+Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
@@ -18,45 +18,45 @@ def validate(attr, value, name_type):
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
 
 def create_player(
-            name: str,
-            date_of_birth: str, 
-            home_address: str,
-            email: str,
-            phone_number: str, 
-            handle: str, 
-            url: str = ''
+    name: str,
+    date_of_birth: str, 
+    home_address: str,
+    email: str,
+    phone_number: str, 
+    handle: str, 
+    url: str = ''
 ) -> Player:
 
     return player_logic.create_player(
-            name,
-            date_of_birth,
-            home_address,
-            email,
-            phone_number,
-            handle,
-            url
+        name,
+        date_of_birth,
+        home_address,
+        email,
+        phone_number,
+        handle,
+        url
     )
 
 def update_player_info(
-            player: Player,
-            name: str = '',
-            date_of_birth: str = '', 
-            home_address: str = '',
-            email: str = '',
-            phone_number: str = '', 
-            handle: str = '', 
-            url: str = ''
+    player: Player,
+    name: str = '',
+    date_of_birth: str = '', 
+    home_address: str = '',
+    email: str = '',
+    phone_number: str = '', 
+    handle: str = '', 
+    url: str = ''
 ) -> None:
     
     return player_logic.update_player_info(
-            player,
-            name,
-            date_of_birth,
-            home_address,
-            email,
-            phone_number,
-            handle,
-            url
+        player,
+        name,
+        date_of_birth,
+        home_address,
+        email,
+        phone_number,
+        handle,
+        url
     )
 
 def create_team(name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str) -> Team:
@@ -102,18 +102,28 @@ def validate_unique_name(name: str) -> bool:
 
 # TODO implement create_tournament and call it
 def create_tournament(
-            name: str,
-            start_date: str,
-            end_date: str,
-            time_frame_start,
-            time_frame_end, 
-            venue: str,
-            email: str,
-            phone_number: str,
-            amount_of_servers: int = 1
+    name: str,
+    start_date: str,
+    end_date: str,
+    time_frame_start,
+    time_frame_end, 
+    venue: str,
+    email: str,
+    phone_number: str,
+    amount_of_servers: int = 1
 ) -> None:
 
-    return tournament_logic.create_tournament(name)
+    return tournament_logic.create_tournament(
+        name,
+        start_date,
+        end_date,
+        time_frame_start,
+        time_frame_end, 
+        venue,
+        email,
+        phone_number,
+        amount_of_servers
+    )
 
 # TODO implement publish and call it
 def publish(tournament: Tournament) -> None:

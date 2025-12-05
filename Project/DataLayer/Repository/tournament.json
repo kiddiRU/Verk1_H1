@@ -17,5 +17,22 @@
             "NoServer"
         ],
         "teams_playing": []
+    },
+    "6914327b-9a98-4a6a-99bf-4a76942297f1": {
+        "uuid": "6914327b-9a98-4a6a-99bf-4a76942297f1",
+        "name": "test",
+        "start_date": "test",
+        "end_date": "test",
+        "time_frame_start": "test",
+        "time_frame_end": "test",
+        "venue": "test",
+        "email": "test",
+        "phone_number": "test",
+        "status": "INACTIVE",
+        "list_servers": [
+            "NoServer",
+            "NoServer"
+        ],
+        "teams_playing": []
     }
 }
