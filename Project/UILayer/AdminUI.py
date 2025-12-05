@@ -7,7 +7,7 @@ File that holds all the menus that the admin can access
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
-from UILayer.drawer import Drawer
+from UILayer.Drawer import Drawer
 
 
 class AdminUI:
