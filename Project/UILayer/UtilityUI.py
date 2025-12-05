@@ -8,6 +8,7 @@ which holds functions used in multiple places
 
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
+from Models import ValidationError
 
 class UtilityUI:
     """Utility Class for multi use function for ui layer"""
@@ -31,21 +32,29 @@ class UtilityUI:
 
             print("Not a valid option try again")
 
-    def _input_info(self, message: str, attribute: str =) -> str:
+    # Created by Sindri
+    def _input_info(self, message, attribute: str, info_type: str) -> str | None:
         """
-        A helper function for inputted string that checks for too long strings
-
-        Args:
-            message (str): The input message to the user
-
-        Returns:
-            str: The input from the user
+        Helper function that repeats input until it is valid or navigation word is entered
+        :param message: message to display - "Enter Your name"
+        :param attribute: attribute of a model class - "name"
+        :param info_type: information type - "PLAYER"
+        :return: Repeats until the input is valid or navigation word is entered
         """
         while True:
-            choice: str = input(message)
-            if len(choice) >= 3 and len(choice) <= 40:
-                return choice.strip()
-            print("Not a valid length")
+            try:
+                print(message)
+                choice: str = input()
+                if choice.strip().lower() in ["c", "b"]:
+                    return choice
+                valid = validate(attribute, choice, info_type)
+                return valid
+            except ValidationError as e:
+                print(e)
+                continue
+
+
+
 
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
