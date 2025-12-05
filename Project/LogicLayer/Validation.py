@@ -41,7 +41,7 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
         team_names: list[str] = [team.name for team in DataLayerAPI.load_teams()]
 
         if unique_name in team_names:
-            raise ValidationError('Team name is aldready taken!')
+            raise ValidationError('Team name is already taken!')
     
         return unique_name
 
