@@ -36,7 +36,7 @@ class MainUI:
             
             # main menu
             if self.current_screen == MenuOptions.main_menu:
-                self.current_screen = self._player_ui.start_screen()
+                self.current_screen = self._player_ui.add_player()
 
             # login
             elif self.current_screen == MenuOptions.login:

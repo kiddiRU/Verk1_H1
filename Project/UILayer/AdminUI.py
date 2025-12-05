@@ -22,15 +22,7 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        
-        menu = "Admin Page"
-        user_path = ["StartPage", "Admin Page"]
-        info = []
-        options = ["1 Create Tournament", "2 Manage Tournaments", "3 Create Club", "b Back"]
-        message = ""
-
-        tui = Drawer()
-        print(tui.table(menu, user_path, info, options, message))   
+ 
         
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
@@ -63,7 +55,7 @@ class AdminUI:
         
 
         tournament_create = Drawer()
-        print(tournament_create.table(menu))
+        print(tournament_create.table(menu, user_path))
 
 
         # TODO: add fill in options
