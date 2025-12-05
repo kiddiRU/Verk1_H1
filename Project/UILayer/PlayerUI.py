@@ -176,16 +176,13 @@ Team: {"NONE"}
 Club: {"NONE"}
 Rank: {"PLAYERRANK"}"""]
         
-        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "q": "Log Out"}
-        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "q": "Log Out"}
+        options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "lo": "Log Out"}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "lo"])
         match choice:
             case "1":
                 return MenuOptions.edit_player_info
@@ -198,8 +195,8 @@ Rank: {"PLAYERRANK"}"""]
                 #     print("You are already in a team")
                 #     return MenuOptions.player_page
                 return MenuOptions.create_team
-            case "q":
-                return MenuOptions.quit
+            case "lo":
+                return MenuOptions.logout
 
 
         return MenuOptions.start_screen
@@ -222,19 +219,13 @@ Club1
 Club2
 Club3
 Club4"""]
-        info: list[str]= ["""- - - -List Of Clubs- - - -
-Club1
-Club2
-Club3
-Club4"""]
         
-        options: dict[str, str]= {"c": "Continue", "b": "Back"}
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path))
-        team_name: str =input("Enter Team Name: \n")
+        print(self.tui.table(menu, user_path, [], {}, message))
+        team_name: str =input(self.message_color + "Enter Team Name: \n" + self.reset)
         self.tui.save_input("Team Name: " + team_name)
 
         print(self.tui.table(menu, user_path))
@@ -249,10 +240,13 @@ Club4"""]
         team_club: str = self.utility._input_info(self.message_color + "Choose A Club To Join: \n" + self.reset)
         self.tui.save_input("Club: " + team_club)
 
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path, info, options))
         choice: str = self.utility._prompt_choice(["c", "b"])
         
-
+        if choice == "c":
+            return MenuOptions.my_team_not_empty
+        
+ 
         return MenuOptions.player_screen
 
 
@@ -265,6 +259,7 @@ Club4"""]
         """
 
         # This Uses A temporary way to print out and change info
+        # TODO: 
 
         user_name = "LOGIC"
         dob = "LOGIC"
@@ -450,7 +445,7 @@ Club4"""]
         self.tui.save_input("Player To Add: " + add_handle)
 
         if...: #TODO: check if player is found and is not in a team
-            message: str = f"The Player {add_handle} Was Found, Do You Want To Add Them To Your Team? y/n:"
+            message: str = f"The Player {add_handle} Was Found, Do You Want To Add Them To Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility._prompt_choice(["y", "n"])
@@ -469,7 +464,7 @@ Club4"""]
             return MenuOptions.edit_team
         
 
-        message: str = f"The Player {add_handle} Was Not Found, Do You Want To Try Again? y/n:"
+        message: str = f"The Player {add_handle} Was Not Found, Do You Want To Try Again? Y/N:"
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility._prompt_choice(["y", "n"])
@@ -503,7 +498,7 @@ Club4"""]
         remove_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Remove Them: \n")
 
         if...: #TODO: check if player is found and is not in a team
-            message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? y/n:"
+            message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility._prompt_choice(["y", "n"])
@@ -522,7 +517,7 @@ Club4"""]
             return MenuOptions.edit_team
         
 
-        message: str = f"The Player {remove_handle} Was Not Found, Do You Want To Try Again? y/n:"
+        message: str = f"The Player {remove_handle} Was Not Found, Do You Want To Try Again? Y/N:"
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility._prompt_choice(["y", "n"])
@@ -544,17 +539,24 @@ Club4"""]
         menu: str = "Leave Team"
         user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
         info: list[str] = []
-        options: dict[str, str] = {}
-        message: str = f"Are You Sure You Want To Leave {"TEAMNAME"}"
-        
-
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path))
-
-        
-
+        options: dict[str, str] = {"c": "Continue"}
+        message: str = f"Are You Sure You Want To Leave {"TEAMNAME"}? Y/N"
 
         if ...:  # TODO: check if player is captain
-            print("You are the captain, please choose a new captain before leaving")
 
-        return MenuOptions.player_screen
+            self.tui.clear_saved_data()
+            print(self.tui.table(menu, user_path, info, {}, message))
+            choice: str = self.utility._prompt_choice(["y", "n"])
+
+            if choice == "n":
+                message: str = "Operation Canceled"
+                print(self.tui.table(menu, user_path, info, options, message))
+                choice: str = self.utility._prompt_choice(["c"])
+                return MenuOptions.my_team_not_empty
+
+            message: str = "You Have Sucessfully Left The Team!"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["c"])
+            return MenuOptions.my_team_empty
+
+        return MenuOptions.my_team_empty
