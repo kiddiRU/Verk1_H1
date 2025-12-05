@@ -15,7 +15,7 @@ class SpectateUI:
 
     def __init__(self) -> None:
         self.utility = UtilityUI()
-        self.tui.clear_saved_data()
+        self.tui = Drawer()
 
     def spectate_screen(self) -> MenuOptions:
         """Spectate screen, choices: 1,2,3 and b
