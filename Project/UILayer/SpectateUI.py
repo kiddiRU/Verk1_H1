@@ -26,7 +26,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("YOU ARE NOW AT THE SPECTATING PAGE, 1,2,3,4,b")
+        print("")
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "b"])
         match choice:
@@ -50,7 +50,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         # TODO: implement search player functionality
-        print("This is the spectate players page")
+        print("")
         return MenuOptions.spectate_screen
 
     def view_player_stats(self) -> MenuOptions:
