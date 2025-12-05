@@ -53,15 +53,13 @@ class MenuOptions(StrEnum):
 
     # MyTEAM
     edit_team = "EDIT_TEAM"
-    leave_team_if_captain = "LEAVE_TEAM_IF_CAPTAIN"
-    leave_team_if_not_captain = "LEAVE_TEAM_IF_NOT_CAPTAIN"
+    leave_team = "LEAVE_TEAM"
 
     # EditTeam
     add_player = "ADD_PLAYER"
     remove_player = "REMOVE_PLAYER"
 
     # SpectatePage
-
 
     spectate_players = "SPECTATE_PLAYERS"
     view_player_stats = "VIEW_PLAYER_STATS"
