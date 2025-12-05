@@ -2,7 +2,8 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
 
-Co-Author: Andri Már Kristjánsson <andrik25@ru.is>
+Co-Author: Andri Már Kristjánsson <andrik25@ru.is>,
+Sindri Freysson
 
 File that holds the UtilityUI class
 which holds functions used in multiple places
@@ -57,7 +58,7 @@ class UtilityUI:
                 valid = validate(attribute, choice, info_type)
                 return valid
             except ValidationError as e:
-                print(e)
+                print(self.error_color + e + self.reset)
                 continue
 
 
