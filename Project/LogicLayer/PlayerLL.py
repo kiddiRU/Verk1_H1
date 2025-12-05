@@ -1,14 +1,14 @@
 """
-Author: Elmar Sigmarsson <elmars25@ru.is>
+Authors: Elmar Sigmarsson <elmars25@ru.is> / Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
-Created the PlayerLL class and added the functions
+Functions for player logic.
 """
 
 # TODO add nessecery imports
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Player, Team, ValidationError
+from Models import Player, Team, Club, ValidationError
 from LogicLayer.Validation import validate_attr
 
 class PlayerLL():
@@ -25,11 +25,11 @@ class PlayerLL():
                 handle: str,
                 url: str
                 ) -> Player:
-        
+
         """
         Takes in player info.
 
-        Validates the given info and creates a player object. Sends the 
+        Validates the given info and creates a player object. Sends the
         object to the data layer to be stored and returns the new player.
         """
 
@@ -65,26 +65,25 @@ class PlayerLL():
             handle: str,
             url: str
             ) -> Player:
-        
+
         '''
         Takes in a Player object and potential attribute updates.
 
         Sends updated values to the data layer, and returns and updated Player object.
         '''
-        
+
         params: dict[str, str] = {k: v for k, v in locals().items() if k not in ('self', 'player')}
         for attr, value in params.items():
             if value == '':
                 continue
-            
+
             validate_attr(attr, value, name_type='PLAYER')
             setattr(player, attr, value)
-        
+
         self._data_api.update_player(player.uuid, player)
         return player
-    
-    # TODO Fetch club uuid once ClubIO has been implemented. Return new Team? 
-    def create_team(self, name: str, team_captain: Player, club: str, url: str, ascii_art: str) -> Team:
+
+    def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
 
@@ -94,12 +93,13 @@ class PlayerLL():
         validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
 
-        # At the moment the clubs name is registerd, not its uuid
-        new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club, None, url, ascii_art)
+        clubs: list[Club] = self._data_api.load_clubs()
+        club_uuid = next((c.uuid for c in clubs if c.name == club_name), None) # Swap out 'None', when 'no_club' has been made.
+        
+        new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club_uuid, None, url, ascii_art)
 
         self._data_api.store_team(new_team)
         return new_team
-        
 
     def leave_team(self, team_uuid: str, player: Player) -> None:
         '''
@@ -108,35 +108,33 @@ class PlayerLL():
         Removes the player from the team, raises an exception if the player
         is the captain of said team.
         '''
-            
+
         teams: list[Team] = self._data_api.load_teams()
         team = next((t for t in teams if t.uuid == team_uuid), None)
 
         if team is None:
             raise Exception('Team not found!')
-        
+
         if team.team_captain_uuid == player.uuid:
             raise Exception('You must promote a new captain before leaving your team!')
-    
+
         team.list_player_uuid.remove(player.uuid)
         self._data_api.update_team(team.uuid, team)
 
-    # TODO implement 
     def list_players(self) -> list[Player]:
         """ Returns a list of stored players. """
 
         players: list = DataLayerAPI.load_players()
         return players
-    
-    
+
     def get_player_object(self, player_uuid) -> Player:
         ''' Takes in a players UUID and returns the players object. '''
-        
-        players: list = DataLayerAPI.load_players()
+
+        players: list[Player] = DataLayerAPI.load_players()
         player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
             raise Exception(f"No player found with UUID: {player_uuid}")
-        
+
         return player
 
