@@ -12,7 +12,7 @@ from LogicLayer.Validation import validate_attr
 
 ''' Validation API '''
 def validate(attr, value, name_type):
-    validate_attr(attr, value, name_type)
+    return validate_attr(attr, value, name_type)
 
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?

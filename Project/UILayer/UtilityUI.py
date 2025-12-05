@@ -2,14 +2,16 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
 
-Co-Author: Andri Már Kristjánsson <andrik25@ru.is>
+Co-Author: Andri Már Kristjánsson <andrik25@ru.is>,
+Sindri Freysson
 
 File that holds the UtilityUI class
 which holds functions used in multiple places
 """
 
 from UILayer.MenuOptions import MenuOptions
-
+from LogicLayer.LogicLayerAPI import validate
+from Models import ValidationError
 
 class UtilityUI:
     """Utility Class for multi use function for ui layer"""
@@ -38,22 +40,29 @@ class UtilityUI:
 
             print(self.error_color + "Not a valid option try again" + self.reset)
 
-    def _input_info(self, message: str) -> str:
+    # Created by Sindri
+    def _input_info(self, message, attribute: str, info_type: str) -> str | None:
         """
-        A helper function for inputted string that checks for too long strings
-
-        Args:
-            message (str): The input message to the user
-
-        Returns:
-            str: The input from the user
+        Helper function that repeats input until it is valid or navigation word is entered
+        :param message: message to display - "Enter Your name"
+        :param attribute: attribute of a model class - "name"
+        :param info_type: information type - "PLAYER"
+        :return: Repeats until the input is valid or navigation word is entered
         """
         while True:
-            choice: str = input(message)
-            self.reset
-            if len(choice) >= 3 and len(choice) <= 40:
-                return choice.strip()
-            print(self.error_color + "Not a valid length" + self.reset)
+            try:
+                print(message)
+                choice: str = input()
+                if choice.strip().lower() in ["c", "b"]:
+                    return choice
+                valid = validate(attribute, choice, info_type)
+                return valid
+            except ValidationError as e:
+                print(self.error_color + e + self.reset)
+                continue
+
+
+
 
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""

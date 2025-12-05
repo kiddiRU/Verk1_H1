@@ -54,7 +54,7 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
         if unique_name in club_names:
             raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
-def validate_name(name) -> str | ValidationError: # Players full name
+def validate_name(name: str) -> str | ValidationError: # Players full name
     """Checks if the name is in between 3-40 char in length and has only letters"""
     
     if len(name) < 3 or len(name) > 40:
