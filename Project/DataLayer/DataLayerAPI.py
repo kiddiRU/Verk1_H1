@@ -86,14 +86,36 @@ def store_team(team: Team) -> None:
 
 """ Club API """
 
-# TODO implement store_club and call it
+"""
+Takes in model class Club
+
+Inserts information about the Club class into a json file
+for storage
+
+Have to call withing try except
+"""
 def store_club(club: Club) -> None:
     ClubIO.store_club(club)
 
+"""
+No parameters
+
+Reads json file containing clubs and creates a list of
+Club model objects of each entry in the json file.
+
+Returns the created list.
+"""
 def update_club(uuid: str, updated_club: Club) -> None:
     ClubIO.update_club(uuid, updated_club)
 
-# TODO implement load_clubs and call it
+"""
+Takes in uuid and the updated Club model object.
+
+uuid has to exist in the json file.
+
+Will attempt to find a blub with given uuid and update that
+club with the new updated club object.
+"""
 def load_clubs() -> list[Club]:
     return ClubIO.load_club()
 
