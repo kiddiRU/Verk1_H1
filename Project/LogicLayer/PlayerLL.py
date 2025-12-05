@@ -24,7 +24,7 @@ class PlayerLL():
                 phone_number: str,
                 handle: str,
                 url: str
-                ) -> Player:
+    ) -> Player:
 
         """
         Takes in player info.
@@ -40,14 +40,14 @@ class PlayerLL():
             validate_attr(attr, value.strip(), name_type = 'PLAYER')
 
         new_player = Player(
-            uuid,
-            params["name"],
-            params["date_of_birth"],
-            params["home_address"],
-            params["email"],
-            params["phone_number"],
-            params["handle"],
-            params["url"],
+                uuid,
+                params["name"],
+                params["date_of_birth"],
+                params["home_address"],
+                params["email"],
+                params["phone_number"],
+                params["handle"],
+                params["url"],
         )
 
         DataLayerAPI.store_player(new_player)
@@ -64,7 +64,7 @@ class PlayerLL():
             phone_number: str,
             handle: str,
             url: str
-            ) -> Player:
+    ) -> Player:
 
         '''
         Takes in a Player object and potential attribute updates.

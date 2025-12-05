@@ -7,7 +7,7 @@ Logic layer API
 
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
-from LogicLayer import PlayerLL
+from LogicLayer import PlayerLL, TeamLL, TournamentLL
 from LogicLayer.Validation import validate_attr
 
 ''' Validation API '''
@@ -18,45 +18,45 @@ def validate(attr, value, name_type):
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
 
 def create_player(
-        name: str,
-        date_of_birth: str, 
-        home_address: str,
-        email: str,
-        phone_number: str, 
-        handle: str, 
-        url: str = ''
-        ) -> Player:
+            name: str,
+            date_of_birth: str, 
+            home_address: str,
+            email: str,
+            phone_number: str, 
+            handle: str, 
+            url: str = ''
+) -> Player:
 
     return player_logic.create_player(
-        name,
-        date_of_birth,
-        home_address,
-        email,
-        phone_number,
-        handle,
-        url
+            name,
+            date_of_birth,
+            home_address,
+            email,
+            phone_number,
+            handle,
+            url
     )
 
 def update_player_info(
-        player: Player,
-        name: str = '',
-        date_of_birth: str = '', 
-        home_address: str = '',
-        email: str = '',
-        phone_number: str = '', 
-        handle: str = '', 
-        url: str = ''
-        ) -> None:
+            player: Player,
+            name: str = '',
+            date_of_birth: str = '', 
+            home_address: str = '',
+            email: str = '',
+            phone_number: str = '', 
+            handle: str = '', 
+            url: str = ''
+) -> None:
     
     return player_logic.update_player_info(
-        player,
-        name,
-        date_of_birth,
-        home_address,
-        email,
-        phone_number,
-        handle,
-        url
+            player,
+            name,
+            date_of_birth,
+            home_address,
+            email,
+            phone_number,
+            handle,
+            url
     )
 
 def create_team(name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str) -> Team:
@@ -72,27 +72,29 @@ def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
 ''' Team API '''
+team_logic: TeamLL = TeamLL(DataLayerAPI)
 
 # TODO implement add_player and call it
 def add_player(player_handle: str, current_player_handle: str) -> Team:
-    return TeamLL.add_player(player_handle, current_player_handle)
+    return team_logic.add_player(player_handle, current_player_handle)
 
 # TODO implement remove_player and call it
 def remove_player(player_handle: str, current_player_handle: str) -> Team:
-    return TeamLL.remove_player(player_handle, current_player_handle)
+    return team_logic.remove_player(player_handle, current_player_handle)
 
 # TODO implement get_team_members and call it
 def get_team_members(team_name: str) -> list[str]:
-    return TeamLL.get_team_members(team_name)
+    return team_logic.get_team_members(team_name)
 
 def get_team_object(team_name: str) -> Team:
-    return TeamLL.get_team_object(team_name)
+    return team_logic.get_team_object(team_name)
 
 # TODO implement get_team_history and call it
 def get_team_history(team_name: str) -> list[str]:       
-    return get_team_history(team_name)
+    return team_logic.get_team_history(team_name)
 
 ''' Tournament API '''
+tournament_logic: TournamentLL = TournamentLL(DataLayerAPI)
 
 # TODO implement validate_unique_name and call it
 def validate_unique_name(name: str) -> bool:
@@ -100,19 +102,18 @@ def validate_unique_name(name: str) -> bool:
 
 # TODO implement create_tournament and call it
 def create_tournament(
-        name: str,
-        start_date: str,
-        end_date: str,
-        venue: str,
-        teams: dict[Team, list[Player]],
-        teams_playing: list[Team],
-        email: str,
-        phone_number: str,
-        status: Tournament.StatusType = Tournament.StatusType.inactive
-        # list_of_servers: list[uuid: str] ?
-        ) -> Tournament:
+            name: str,
+            start_date: str,
+            end_date: str,
+            time_frame_start,
+            time_frame_end, 
+            venue: str,
+            email: str,
+            phone_number: str,
+            amount_of_servers: int = 1
+) -> None:
 
-    pass
+    return tournament_logic.create_tournament(name)
 
 # TODO implement publish and call it
 def publish(tournament: Tournament) -> None:
