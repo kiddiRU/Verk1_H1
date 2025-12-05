@@ -45,7 +45,7 @@ class UtilityUI:
                 return choice.strip()
             print("Not a valid length")
 
-    def screen_exist_error(self) -> MenuOptions:
+    def screen_not_exist_error(self) -> MenuOptions:
         """ When a screen doesn't exist """
         print("Screen doesn't exist")
         anything: str = input("Input anything to go back to start: ")

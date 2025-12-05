@@ -59,19 +59,18 @@ Takes in uuid, key and value as parameters.
 
 uuid and key have to exist in the json file.
 
-Will attempt to find team with given uuid and update the
-value tied to given key of that team.
+Will attempt to find team with given uuid and update that
+team with the new updated team object.
 """
-def update_team(uuid: str, key: str, value: str | list[str] | None) -> None:
+def update_team(uuid: str, updated_team: Team) -> None:
     # Reads the json file containing players and stores it as a dictionary.
     with open(FILE_PATH, "r") as team_file:
         file_content = dict(json.load(team_file))
    
-    # Updates the file content, checking if the uuid and key exist
+    # Updates the file content, checking if the uuid exists
     # in the dictionary.
     if uuid in file_content:
-        if key in file_content[uuid]:
-            file_content[uuid][key] = value
+        file_content[uuid] = updated_team.__dict__
     
     # Writes the updated dictionary into the player file.
     with open(FILE_PATH, "w") as team_file:
