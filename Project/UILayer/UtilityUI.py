@@ -7,7 +7,7 @@ which holds functions used in multiple places
 """
 
 from UILayer.MenuOptions import MenuOptions
-
+from LogicLayer.LogicLayerAPI import validate
 
 class UtilityUI:
     """Utility Class for multi use function for ui layer"""
@@ -31,7 +31,7 @@ class UtilityUI:
 
             print("Not a valid option try again")
 
-    def _input_info(self, message: str) -> str:
+    def _input_info(self, message: str, attribute: str =) -> str:
         """
         A helper function for inputted string that checks for too long strings
 
