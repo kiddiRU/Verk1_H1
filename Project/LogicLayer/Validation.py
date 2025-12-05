@@ -5,7 +5,7 @@ Date: 2025-12-03
 A validation file that takes inn all info that would need to be validated
 """
 
-from Models.Exception import ValidationError
+from Models import ValidationError
 from DataLayer import DataLayerAPI
 from datetime import date
 
