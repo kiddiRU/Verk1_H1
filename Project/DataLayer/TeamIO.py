@@ -30,7 +30,7 @@ def store_team(team: Team) -> None:
     
     # Writes the updated file content into the file containing teams.
     with open(FILE_PATH, "w") as team_file:
-        json.dump(file_content, team_file)
+        json.dump(file_content, team_file, indent=4)
 
 """
 No parameters
@@ -74,4 +74,4 @@ def update_team(uuid: str, updated_team: Team) -> None:
     
     # Writes the updated dictionary into the player file.
     with open(FILE_PATH, "w") as team_file:
-        json.dump(file_content, team_file)
+        json.dump(file_content, team_file, indent=4)
