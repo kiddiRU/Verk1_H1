@@ -137,7 +137,16 @@ class PlayerUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("YOU are now in the player page")
+        
+
+        menu: list = "Player Page"
+        user_path: list = ["StartPage", "PlayerPage"]
+        info: list = []
+        options: dict = {"c": "Continue"}
+        message: str = "You Have Created A User"
+
+
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
         match choice:
             case "1":
