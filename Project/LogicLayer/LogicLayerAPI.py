@@ -16,6 +16,7 @@ def validate(attr, value, name_type):
 
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
+team_logic: TeamLL = TeamLL(DataLayerAPI)
 
 def create_player(
         name: str,
@@ -75,11 +76,11 @@ def get_player_object(player_uuid: str) -> Player:
 
 # TODO implement add_player and call it
 def add_player(player_handle: str, current_player_handle: str) -> Team:
-    return TeamLL.add_player(player_handle, current_player_handle)
+    return team_logic.add_player(player_handle, current_player_handle)
 
 # TODO implement remove_player and call it
 def remove_player(player_handle: str, current_player_handle: str) -> Team:
-    return TeamLL.remove_player(player_handle, current_player_handle)
+    return team_logic.remove_player(player_handle, current_player_handle)
 
 # TODO implement get_team_members and call it
 def get_team_members(team_name: str) -> list[str]:
