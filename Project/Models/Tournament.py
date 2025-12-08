@@ -3,6 +3,9 @@ Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-02
 
 Tournament Model Class
+
+Contributer:
+    Kristinn Hrafn <kristinnd25@ru.is>
 """
 
 from enum import StrEnum
@@ -51,8 +54,11 @@ class Tournament:
                         Defaults to time(hour=16,minute=0).
             status (StatusType, optional): Tournament status.
                         Defaults to StatusType.inactive.
+            number_of_servers: (list[str]):
+                        Defaults to 1. Don't pass if passing list_servers.
             list_servers (list[str], optional): 
                         List containing uuid's of servers. Defaults to [].
+                        Don't pass if passing number_of_servers.
             teams_playing (list[str], optional): 
                         List containing uuid's of teams. Defaults to [].
         """
