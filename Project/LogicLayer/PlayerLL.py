@@ -92,6 +92,11 @@ class PlayerLL():
 
         Creates a new Team object, sends it the data layer to be stored and returns it.
         '''
+        teams: list[Team] = self._data_api.load_teams()
+        players_in_teams: list[str] = [uuid for t in teams for uuid in t.list_player_uuid]
+
+        if team_captain.uuid in players_in_teams:
+            raise Exception('You can\'t create a team when you\'re already in one!')
 
         validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
