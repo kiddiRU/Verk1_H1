@@ -87,17 +87,23 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
-        choice: str = input(
-            "Enter A Players Handle Or The First Letter(s) To Search: \n"
-        )
-        # self.utility.show_all_player_handles()
+        while True:
+            choice: str = input(
+                "Enter A Players Handle Or The First Letter(s) To Search: \n"
+            )
 
-        match choice:
-            case "b":
-                return MenuOptions.spectate_screen
-            case "q":
-                return MenuOptions.quit
-        return MenuOptions.view_player_stats
+            match choice:
+                case "b":
+                    return MenuOptions.spectate_screen
+                case "q":
+                    return MenuOptions.quit
+
+            handle: Player | None = self.utility.show_specific_player(choice)
+            if handle == None:
+                print("Not a valid handle")
+            else:
+                # TODO: Save player 
+                return MenuOptions.view_player_stats
 
     def view_player_stats(self) -> MenuOptions:
         """View player stats screen, choices: b
@@ -106,6 +112,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # self.utility.show_specific_player()
         stopper = input("This is the view player stats screen")
         return MenuOptions.spectate_screen
 

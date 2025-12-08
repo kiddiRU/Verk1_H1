@@ -94,6 +94,9 @@ class UtilityUI:
     def show_clubs(self):
         pass
 
+    def show_specific_club(self):
+        pass
+
     def show_all_player_handles(self) -> list[str]:
         """Returns a list of all player handles formatted neatly to be printed
 
@@ -116,8 +119,24 @@ class UtilityUI:
 
         return output_list
 
-    def show_specific_player(self):
-        pass
+# TODO: MOVE THIS SHIT INTO THE LL
+    def show_specific_player(self, player_handle: str) -> Player | None:
+        """
+        Get specific player object based on player handle
+
+        Args:
+            player_handle (str): handle of a player
+
+        Returns:
+            Player | None: _description_
+        """
+        player_list: list[Player] = LogicLayerAPI.list_players()
+
+        for p in player_list:
+            if p.handle == player_handle:
+                return p
+        
+        return None
 
     def show_schedule(self):
         pass
