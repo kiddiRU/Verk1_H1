@@ -85,17 +85,27 @@ class UtilityUI:
         pass
 
     def show_all_team_names(self):
-        # team_list: list[Team] = LogicLayerAPI.
+        teams: list[Team] = LogicLayerAPI.
         pass
 
     def show_specific_team(self, team_name):
         print("My team: players in team:")
 
-    def show_clubs(self):
+    def show_all_clubs(self):
         pass
 
     def show_specific_club(self):
         pass
+
+    def handle_list(self) -> list[str]:
+        """
+        Converts list of Player objects to a list of Player handles
+
+        Returns:
+            list[str]: PLayer handles
+        """
+        player_list: list[Player] = LogicLayerAPI.list_players()
+        return [p.handle for p in player_list]
 
     def show_all_player_handles(self) -> list[str]:
         """Returns a list of all player handles formatted neatly to be printed
@@ -103,22 +113,21 @@ class UtilityUI:
         Returns:
             list[str]: A list of f-strings for printing
         """
-        player_list: list[Player] = LogicLayerAPI.list_players()
 
-        handle_list: list[str] = [p.handle for p in player_list]
+        handles: list[str] = self.handle_list()
 
         output_list: list[str] = []  # list that holds each line as a f-string
 
-        length = len(handle_list)
+        length = len(handles)
 
-        for value in range(0, len(handle_list), 2):
-            left = handle_list[value]
+        for value in range(0, len(handles), 2):
+            left = handles[value]
             if value + 1 < length:
 
-                right = handle_list[value + 1]
+                right = handles[value + 1]
                 output_list.append(f"{left:<39}||{right:>39}")
 
-            else: # odd number, last item has no pair
+            else:  # odd number, last item has no pair
                 output_list.append(f"{left:<39}||")
 
         return output_list
@@ -138,7 +147,6 @@ class UtilityUI:
         for p in player_list:
             if p.handle == player_handle:
                 return p
-
         return None
 
     def show_schedule(self):
