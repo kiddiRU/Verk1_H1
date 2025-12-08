@@ -4,6 +4,8 @@ Date: 2025-12-04
 
 File that holds all the menus that the spectator can access
 """
+from Models.Player import Player
+
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -74,7 +76,7 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        player_list = LogicLayerAPI.list_players() #TODO remove this comment when/if work
+        player_list: list[Player] = LogicLayerAPI.list_players() #TODO remove this comment when/if work
         menu: str = "Players"
         user_path: list[str] = [
             MenuOptions.spectate_screen,
@@ -87,7 +89,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
-        choice: str = input("Enter A Players Name Or The First Letter(s) To Search: \n")
+        choice: str = input("Enter A Players Handle Or The First Letter(s) To Search: \n")
         match choice:
             # case "":
             #     self.list_players()

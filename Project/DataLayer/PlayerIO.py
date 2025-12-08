@@ -9,10 +9,16 @@ stored in the ./DataLayer/Repository/players.json
 import json
 from Models import Player
 
-FILE_PATH = "./DataLayer/Repository/players.json"
+FILE_PATH = "Project/DataLayer/Repository/players.json"
 
 
 def store_player(player: Player) -> None:
+    """
+    Takes in model class Player.
+
+    Inserts information about the Player class into a json file
+    for storage.
+    """
     # Changes object player into a dictionary mapping attributes to keys.
     data = player.__dict__
     
