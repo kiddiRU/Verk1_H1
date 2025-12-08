@@ -144,6 +144,9 @@ class PlayerLL():
             raise Exception(f"No player found with UUID: {player_uuid}")
 
         return player
+    
+    def promote_captain(self, current_captain: Player, handle_to_promote: str) -> None:
+        pass
 
 
     def save_player(self, player_handle: str | None = None):
