@@ -174,7 +174,7 @@ def update_tournament_datetime(
 def next_round() -> None:
     pass
 
-# TODO implement cancel_tournament and call it
+# TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
     pass
 
@@ -187,7 +187,7 @@ def create_club(name: str, club_color: str, country: str, home_town: str) -> Clu
 def list_clubs() -> list[Club]:
     return list_clubs()
 
-def get_teams_in_club(club_name) -> list[Team]:
+def get_teams_in_club(club_name: str) -> list[Team]:
     return get_teams_in_club(club_name)
 
 # TODO implement change_club_info and call it

@@ -129,11 +129,12 @@ class PlayerUI:
 
         print(self.tui.table(menu, user_path, info)) 
         user_dob: str = self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER")
-        self.tui.save_input("Date Of Birth: " + user_dob)
+        self.tui.save_input("Date Of Birth: " + str(user_dob))
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", "home_address", "PLAYER")
+        user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", 
+                                                  "home_address", "PLAYER")
         self.tui.save_input("Home Address: " + user_addr)
 
 
