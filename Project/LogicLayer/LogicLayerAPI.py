@@ -18,8 +18,7 @@ def validate(attr: str, value: str, name_type: str):
     return validate_attr(attr, value, name_type)
 
 ''' Player API '''
-player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
-team_logic: TeamLL = TeamLL(DataLayerAPI)
+player_logic: PlayerLL = PlayerLL() # Make the API pass validate() to PlayerLL?
 
 def create_player(
     name: str,
@@ -76,7 +75,7 @@ def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
 ''' Team API '''
-team_logic: TeamLL = TeamLL(DataLayerAPI)
+team_logic: TeamLL = TeamLL()
 
 # TODO implement add_player and call it
 def add_player(player_handle: str, current_player_handle: str) -> Team:
@@ -98,7 +97,7 @@ def get_team_history(team_name: str) -> list[str]:
     return team_logic.get_team_history(team_name)
 
 ''' Tournament API '''
-tournament_logic: TournamentLL = TournamentLL(DataLayerAPI)
+tournament_logic: TournamentLL = TournamentLL()
 
 # TODO implement create_tournament and call it
 def create_tournament(
@@ -153,6 +152,7 @@ def update_tournament_info(
     )
 
 def update_tournament_datetime(
+    tournament_name: str,
     start_date: date,
     end_date: date,
     time_frame_start: time,
@@ -160,6 +160,7 @@ def update_tournament_datetime(
 ) -> None:
     
     tournament_logic.update_tournament_datetime(
+        tournament_name,
         start_date,
         end_date,
         time_frame_start,
@@ -191,5 +192,5 @@ def input_match_results(match: Match) -> None:
     pass
 
 
-def save_login(login_handle: str | None = None) -> str | None:
-    return player_logic.save_login(login_handle)
+def save_player(player_handle: str | None = None) -> str | None:
+    return player_logic.save_player(player_handle)

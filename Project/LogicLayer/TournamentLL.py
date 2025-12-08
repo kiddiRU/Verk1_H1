@@ -11,8 +11,8 @@ from uuid import uuid4
 from datetime import date, time
 
 class TournamentLL:
-    def __init__(self, data_api: DataLayerAPI):
-        self._data_api: DataLayerAPI = data_api
+    def __init__(self):
+        self._data_api = DataLayerAPI
 
     def create_tournament(self,
         name: str,
@@ -114,10 +114,25 @@ class TournamentLL:
     # TODO: Implement.
     def update_tournament_datetime(
         self,
+        name: str,
         start_date: date,
         end_date: date,
         time_frame_start: time,
         time_frame_end: time
     ) -> None:
         
-        pass
+        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+
+        if tournament is None:
+            raise Exception(f'No tournament found named: {name}')
+
+        if tournament.status == Tournament.StatusType.active:
+            raise Exception('You can\'t change the time of an active tournament!')
+
+        for attr, value in params.items():
+            setattr(tournament, attr, value)
+
+        self._data_api.update_tournament(tournament.uuid, tournament)
