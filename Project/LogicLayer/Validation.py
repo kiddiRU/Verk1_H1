@@ -2,6 +2,9 @@
 Author: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
 
+Minor changes: Andri Már Kristjánsson <andrik25@ru.is>
+(just type hinting changes)
+
 A validation file that takes inn all info that would need to be validated
 """
 
@@ -9,7 +12,7 @@ from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
 from datetime import date
 
-def validate_attr(attribute: str, value: str, name_type: str = ''):
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
     if attribute == 'name': return validate_name(value)
     elif attribute == 'date_of_birth': return validate_date(value)
     elif attribute == 'home_address': return validate_home_address(value)
@@ -18,7 +21,7 @@ def validate_attr(attribute: str, value: str, name_type: str = ''):
     elif attribute == 'handle': return validate_unique_name(value, name_type)
     else: return
     
-def validate_unique_name(unique_name: str, type_of_name: str) -> str | ValidationError:
+def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     """
     Checks if the name is unique and is between 3-40 char in length
     Used for unique player handle, team tournament and club names
@@ -54,7 +57,7 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
         if unique_name in club_names:
             raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
-def validate_name(name: str) -> str | ValidationError: # Players full name
+def validate_name(name: str) -> str | None: # Players full name
     """Checks if the name is in between 3-40 char in length and has only letters"""
     
     if len(name) < 3 or len(name) > 40:
@@ -64,7 +67,7 @@ def validate_name(name: str) -> str | ValidationError: # Players full name
         return name
     
 
-def validate_home_address(home_address) -> str | ValidationError: # Players home address
+def validate_home_address(home_address) -> str | None: # Players home address
     """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
     
     try:
@@ -87,7 +90,7 @@ def validate_home_address(home_address) -> str | ValidationError: # Players home
         raise ValidationError
 
 
-def validate_phone_number(phone_number) -> str | ValidationError: # Players and tournament contact phone number
+def validate_phone_number(phone_number) -> str | None: # Players and tournament contact phone number
     """Checks if phone number is eight in length 7 nums and a dash (123-4567)"""
     
     if "-" in phone_number:
@@ -110,7 +113,7 @@ def validate_phone_number(phone_number) -> str | ValidationError: # Players and 
         raise ValidationError("Phone number inputted incorrectly")
 
 
-def validate_email(email) -> str | ValidationError: # Players and tournament contact email
+def validate_email(email) -> str | None: # Players and tournament contact email
     """Checks if email has @, and that there is something before and after the @"""
 
     if "@" in email:
@@ -129,7 +132,7 @@ def validate_email(email) -> str | ValidationError: # Players and tournament con
         raise ValidationError('Invalid email!')
 
 
-def validate_date(date_input) -> str | ValidationError: # Date of Birth, Date of Tournament
+def validate_date(date_input) -> str | None: # Date of Birth, Date of Tournament
     """Checks if date format is correct YYYY-MM-DD"""
 
     try:

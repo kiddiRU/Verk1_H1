@@ -17,6 +17,8 @@ class AdminUI:
         self.utility = UtilityUI()
         self.tui = Drawer()
 
+
+
     def admin_screen(self) -> MenuOptions:
         """Admin screen, choices: 1,2,3 and lo
         1: Go to create tournament screen
@@ -55,6 +57,8 @@ class AdminUI:
                 return MenuOptions.logout
         return MenuOptions.logout
 
+
+
     def create_tournament(self) -> MenuOptions:
         """Create tournament screen, choices: fill info with input
 
@@ -81,6 +85,8 @@ class AdminUI:
         option = input("THIS IS A STOPPER IN CREATE TOURNAMENT")
         return MenuOptions.manage_inactive_tournament
 
+
+
     def manage_tournaments(self) -> MenuOptions:
         """Manage tournaments screen, choices: choose with input
 
@@ -100,7 +106,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-        tournament = self.utility._input_info("Input tournament to manage")
+        tournament = input("Input tournament to manage")
         if tournament.lower() == "lo":
             return MenuOptions.logout
         
@@ -110,6 +116,8 @@ class AdminUI:
         # TODO: add input for tournament to manage
         # TODO: if active the go to active screen else inactive screen
         return MenuOptions.admin_screen
+
+
 
     def manage_active_tournament(self) -> MenuOptions:
         """Active tournament screen, choices: 1,2(c requirement) and b
@@ -147,6 +155,8 @@ class AdminUI:
                 return MenuOptions.manage_tournament
         return MenuOptions.manage_tournament
 
+
+
     def matches(self) -> MenuOptions:
         """Matches screen, choices: input to select match
 
@@ -174,6 +184,8 @@ class AdminUI:
         # TODO: function for user to input to select match to manage
         return MenuOptions.manage_tournament
 
+
+
     def match_results(self) -> MenuOptions:
         """Match results screen, choices: input a match that won
 
@@ -184,6 +196,8 @@ class AdminUI:
         print("This is where you choose match results")
         # TODO: function to choose a team that won update the team and match
         return MenuOptions.manage_active_tournament
+
+
 
     def manage_inactive_tournament(self) -> MenuOptions:
         """Inactive tournament screen, choices: 1,2,3 and b
@@ -204,6 +218,8 @@ class AdminUI:
                 return MenuOptions.manage_tournament
         return MenuOptions.manage_tournament
 
+
+
     def manage_teams(self) -> MenuOptions:
         """Manage teams screen, choices: 1,2 and b
 
@@ -220,6 +236,8 @@ class AdminUI:
                 return MenuOptions.manage_inactive_tournament
         return MenuOptions.manage_inactive_tournament
 
+
+
     def add_team(self) -> MenuOptions:
         """Add team screen, choices: input a team to add or l to list all team
 
@@ -232,6 +250,8 @@ class AdminUI:
 
         return MenuOptions.manage_teams
 
+
+
     def remove_team(self) -> MenuOptions:
         """Remove team screen, choices: input a team to add or l to list all team
 
@@ -242,6 +262,8 @@ class AdminUI:
         # TODO: same as add team but not remove
         return MenuOptions.manage_teams
 
+
+
     def publish(self) -> MenuOptions:
         """Publish tournament screen, choices: input a tournament to publish
 
@@ -251,10 +273,12 @@ class AdminUI:
 
         print("PUBLISH TOURNAMENT")
         print("<list of tournaments>")
-        choice: str = self.utility._input_info("Input tournament to publish: ")
+        choice: str = input("Input tournament to publish: ")
         # TODO: Check for tournament then publish it
 
         return MenuOptions.manage_active_tournament
+
+
 
     def edit_tournament(self) -> MenuOptions:
         """Edit inactive tournament screen,
@@ -264,7 +288,7 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
         print("list of inactive tournaments")
-        tournament_name: str = self.utility._input_info(
+        tournament_name: str = input(
             "Choose tournament to edit"
         )
 
@@ -283,6 +307,8 @@ class AdminUI:
                 return MenuOptions.manage_inactive_tournament
         return MenuOptions.manage_inactive_tournament
 
+
+
     def edit_tournament_time(self) -> MenuOptions:
         """Edit tournament time screen, choices: input a start and end date
 
@@ -291,15 +317,21 @@ class AdminUI:
         """
         print("THIS is edit tournament time")
 
-        choice: str = self.utility._input_info("DO YOU WANT TO CONTINUE? Y/N")
-        match choice:
-            case "Y":
-                print("YOU CHANGED IT")
-                return MenuOptions.edit_tournament
-            case "N":
-                print("CANCELING")
-                return MenuOptions.edit_tournament
+        choice = "a"
+        while choice.lower() != "y" or choice.lower() != "n":
+            choice: str = input("DO YOU WANT TO CONTINUE? Y/N")
+            match choice:
+                case "Y":
+                    print("YOU CHANGED IT")
+                    return MenuOptions.edit_tournament
+                case "N":
+                    print("CANCELING")
+                    return MenuOptions.edit_tournament
+        
         return MenuOptions.edit_tournament
+        
+
+
 
     def edit_tournament_info(self) -> MenuOptions:
         """Edit tournament info screen, choices: input new name, venue,
@@ -312,6 +344,8 @@ class AdminUI:
         print("THIS IS EDIT TOURNAMENT INFO WINDOW")
         return MenuOptions.edit_tournament
 
+
+
     def create_club(self) -> MenuOptions:
         """Create club screen, choices: fill info with input (name and color)
 
@@ -321,3 +355,5 @@ class AdminUI:
 
         print("This is the create club screen")
         return MenuOptions.admin_screen
+
+
