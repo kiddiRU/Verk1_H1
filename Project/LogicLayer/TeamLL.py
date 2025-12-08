@@ -44,7 +44,7 @@ class TeamLL():
                     
 
 
-    def remove_player(self, player_handle: str, current_player_handle) -> Team:
+    def remove_player(self, player_handle: str, current_player_handle: str) -> Team:
         """
         Takes in team uuid and a player uuid,
         Looks through a list of all the teams and 
@@ -103,7 +103,7 @@ class TeamLL():
 
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
-    def get_team_history(self, team_name) -> list:
+    def get_team_history(self, team_name: str) -> list:
         """
         Takes in team uuid,
         looks through a list of all the tournaments

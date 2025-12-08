@@ -9,9 +9,10 @@ from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
 from LogicLayer import PlayerLL, TeamLL, TournamentLL
 from LogicLayer.Validation import validate_attr
+from datetime import date, time
 
 ''' Validation API '''
-def validate(attr, value, name_type):
+def validate(attr: str, value: str, name_type: str):
     return validate_attr(attr, value, name_type)
 
 ''' Player API '''
@@ -48,7 +49,7 @@ def update_player_info(
     url: str = ''
 ) -> None:
     
-    return player_logic.update_player_info(
+    player_logic.update_player_info(
         player,
         name,
         date_of_birth,
@@ -59,7 +60,7 @@ def update_player_info(
         url
     )
 
-def create_team(name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str) -> Team:
+def create_team(name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
     return player_logic.create_team(name, team_captain, club_name, url, ascii_art)
 
 def leave_team(team_name: str, player: Player) -> None:
@@ -96,17 +97,13 @@ def get_team_history(team_name: str) -> list[str]:
 ''' Tournament API '''
 tournament_logic: TournamentLL = TournamentLL(DataLayerAPI)
 
-# TODO implement validate_unique_name and call it
-def validate_unique_name(name: str) -> bool:
-    pass
-
 # TODO implement create_tournament and call it
 def create_tournament(
     name: str,
-    start_date: str,
-    end_date: str,
-    time_frame_start,
-    time_frame_end, 
+    start_date: date,
+    end_date: date,
+    time_frame_start: time,
+    time_frame_end: time, 
     venue: str,
     email: str,
     phone_number: str,
@@ -126,8 +123,8 @@ def create_tournament(
     )
 
 # TODO implement publish and call it
-def publish(tournament: Tournament) -> None:
-    pass
+def publish(tournament_name: str) -> None:
+    tournament_logic.publish(tournament_name)
 
 # TODO implement add_team and call it
 def add_team(tournament: Tournament, team: Team) -> None:
@@ -150,10 +147,6 @@ def cancel_tournament(tournament: Tournament) -> None:
     pass
 
 ''' Club API '''
-
-# TODO implement validate_unique_name and call it
-def validate_unique_name(name: str) -> None:
-    pass
 
 # TODO implement create_club and call it
 def create_club() -> Club:

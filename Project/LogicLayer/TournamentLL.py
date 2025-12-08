@@ -8,21 +8,22 @@ Functions for tournament logic.
 from Models import Player, Team, Tournament
 from DataLayer import DataLayerAPI
 from uuid import uuid4
+from datetime import date, time
 
 class TournamentLL:
     def __init__(self, data_api: DataLayerAPI):
         self._data_api: DataLayerAPI = data_api
 
     def create_tournament(self,
-        name,
-        start_date: str,
-        end_date: str,
-        time_frame_start,
-        time_frame_end, 
+        name: str,
+        start_date: date,
+        end_date: date,
+        time_frame_start: time,
+        time_frame_end: time, 
         venue: str,
         email: str,
         phone_number: str,
-        amount_of_servers: int
+        server_amount: int
     ) -> None:
         
         uuid = str(uuid4())
@@ -36,7 +37,26 @@ class TournamentLL:
             phone_number,
             time_frame_start,
             time_frame_end,
-            number_of_servers = amount_of_servers
+            number_of_servers = server_amount
         )
 
         self._data_api.store_tournament(new_tournament)
+
+    def publish(self, tournament_name: str) -> None:
+        tournaments: list[Tournament] = [t for t in self._data_api.load_tournaments()]
+        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
+        
+        if tournament is None:
+            raise Exception(f'No tournanent found named: {tournament_name}')
+
+        tournament.status = Tournament.StatusType.active
+        self._data_api.store_tournament(tournament)
+
+    def add_team(self, team_name: str, tournament_name: str) -> None:
+        teams: list[Team] = [t for t in self._data_api.load_teams()]
+        team: Team | None = next((t for t in teams if t.name == team_name), None)
+
+        tournaments: list[Tournament] = [t for t in self._data_api.load_tournaments()]
+        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
+
+        
