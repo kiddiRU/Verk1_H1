@@ -69,8 +69,7 @@ class MainUI:
             MenuOptions.teams_in_tournament: self._spectate_ui.teams_in_tournament,
             MenuOptions.team_tournament_stats: self._spectate_ui.team_tournament_stats,
             # ------------------ Misc Paths ------------------
-            MenuOptions.logout: MenuOptions.start_screen,
-            MenuOptions.onion: self._player_ui.onion
+            MenuOptions.logout: MenuOptions.start_screen
         }
 
     def __clear(self):
