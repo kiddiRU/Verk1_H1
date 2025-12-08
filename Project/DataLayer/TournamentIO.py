@@ -24,7 +24,7 @@ def store_tournament(tournament: Tournament) -> None:
     data = tournament.__dict__
 
     # Reads json file containing tournaments and stores it as a dictionary
-    with open(FILE_PATH, "r") as tournament_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
         file_content = dict(json.load(tournament_file))
 
     # Updates the dictionary adding the new tournament into the file content
@@ -32,7 +32,7 @@ def store_tournament(tournament: Tournament) -> None:
 
     # Writes the updated file content into the file containing tournaments.
     # Changes all non json storable data types into strings with default=str
-    with open(FILE_PATH, "w") as tournament_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as tournament_file:
         json.dump(file_content, tournament_file, indent=4, default=str)
 
 
@@ -49,7 +49,7 @@ Returns the created tournament list.
 """
 def load_tournaments() -> list[Tournament]:
     # Reads the json file containing tournaments and stores it as a dictionary
-    with open(FILE_PATH, "r") as tournament_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
         file_content = dict(json.load(tournament_file))
 
     # Creates a list of all teams in the tournament file.
@@ -86,7 +86,7 @@ that team with the new updated tournament object.
 """
 def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     # Reads the json file containing tournaments adn stores it as a dictionary
-    with open(FILE_PATH, "r") as tournament_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
         file_content = dict(json.load(tournament_file))
 
     # Updates the file content, checking if the uuid exists
@@ -95,5 +95,5 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
         file_content[uuid] = updated_tournament.__dict__
     
     # Writes the updated dictionary into the player file.
-    with open(FILE_PATH, "w") as tournament_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as tournament_file:
         json.dump(file_content, tournament_file, indent=4, default=str)

@@ -220,5 +220,6 @@ class MainUI:
                 print("Quitting program")
                 exit()
 
+
             else:
                 self.current_screen = self._utility_ui.screen_not_exist_error()

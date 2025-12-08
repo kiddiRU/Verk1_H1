@@ -2,6 +2,9 @@
 Author: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
 
+Minor changes: Andri Már Kristjánsson <andrik25@ru.is>
+(just type hinting changes)
+
 A validation file that takes inn all info that would need to be validated
 """
 
@@ -9,7 +12,7 @@ from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
 from datetime import date
 
-def validate_attr(attribute: str, value: str, name_type: str = ''):
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
     if attribute == 'name': return validate_name(value)
     elif attribute == 'date_of_birth': return validate_date(value)
     elif attribute == 'home_address': return validate_home_address(value)
@@ -18,7 +21,7 @@ def validate_attr(attribute: str, value: str, name_type: str = ''):
     elif attribute == 'handle': return validate_unique_name(value, name_type)
     else: return
     
-def validate_unique_name(unique_name: str, type_of_name: str) -> str | ValidationError:
+def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     """
     Checks if the name is unique and is between 3-40 char in length
     Used for unique player handle, team tournament and club names
@@ -28,31 +31,33 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | Validatio
         raise ValidationError("Name needs to be between 3 to 40 characters in length")
         
     if type_of_name == "PLAYER":
-        model_player: list = DataLayerAPI.load_players()
+        player_names: list[str] = [player.name for player in DataLayerAPI.load_teams()]
+        if unique_name in player_names:
+            raise ValidationError(f'The handle \'{unique_name}\' is already taken!')
 
-        for player in model_player:
-            if player.handle == unique_name:
-                raise ValidationError("Handle is already taken")
-        
         return unique_name
-
-    #TODO implement check for unique names in team, tournament and club
+    
     elif type_of_name == "TEAM":
         team_names: list[str] = [team.name for team in DataLayerAPI.load_teams()]
 
         if unique_name in team_names:
-            raise ValidationError('Team name is already taken!')
+            raise ValidationError(f'The name \'{unique_name}\' is already taken!')
     
         return unique_name
 
     elif type_of_name == "TOURNAMENT":
-        pass
+        tournament_names: list[str] = [t.name for t in DataLayerAPI.load_tournaments()]
+
+        if unique_name in tournament_names:
+            raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
     elif type_of_name == "CLUB":
-        pass
+        club_names: list[str] = [c.name for c in DataLayerAPI.load_clubs()]
 
+        if unique_name in club_names:
+            raise ValidationError(f'The name \'{unique_name}\' is already taken!')
 
-def validate_name(name) -> str | ValidationError: # Players full name
+def validate_name(name: str) -> str | None: # Players full name
     """Checks if the name is in between 3-40 char in length and has only letters"""
     
     if len(name) < 3 or len(name) > 40:
@@ -62,7 +67,7 @@ def validate_name(name) -> str | ValidationError: # Players full name
         return name
     
 
-def validate_home_address(home_address) -> str | ValidationError: # Players home address
+def validate_home_address(home_address) -> str | None: # Players home address
     """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
     
     try:
@@ -85,7 +90,7 @@ def validate_home_address(home_address) -> str | ValidationError: # Players home
         raise ValidationError
 
 
-def validate_phone_number(phone_number) -> str | ValidationError: # Players and tournament contact phone number
+def validate_phone_number(phone_number) -> str | None: # Players and tournament contact phone number
     """Checks if phone number is eight in length 7 nums and a dash (123-4567)"""
     
     if "-" in phone_number:
@@ -108,7 +113,7 @@ def validate_phone_number(phone_number) -> str | ValidationError: # Players and 
         raise ValidationError("Phone number inputted incorrectly")
 
 
-def validate_email(email) -> str | ValidationError: # Players and tournament contact email
+def validate_email(email) -> str | None: # Players and tournament contact email
     """Checks if email has @, and that there is something before and after the @"""
 
     if "@" in email:
