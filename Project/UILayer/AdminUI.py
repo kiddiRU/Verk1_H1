@@ -124,15 +124,16 @@ class AdminUI:
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
         ]
-        info: list[str] = []
+        info: list[str] = ["- - - -List Of Tournaments- - - -"]
         options: dict[str, str] = {}
         message: str = ""
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path, info))
 
         
         tournament = input("Input tournament to manage: \n")
+
         if tournament.lower() == "lo":
             return MenuOptions.logout
         
@@ -155,30 +156,32 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        print("This is the active tournaments screen")
-        menu: str = "Tournaments"
+        menu: str = "Active Tournament"
         user_path: list[str] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
         ]
-        info: list = []
-        options: dict[str, str] = {
-            "Enter A Tournaments Name Or The First Letter(s) To Search:": ""
-        }
+        info: list = ["TOURNAMENTNAME"]
+        options: dict[str, str] = {"1": "Input Results Of A Match", "b": "Back", "lo": "Log Out"}
         message: str = ""
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path, info, options))
 
-        choice: str = self.utility._prompt_choice(["1", "b"])
+        choice: str = self.utility._prompt_choice(["1", "b", "lo"])
+
         match choice:
             case "1":
                 return MenuOptions.select_match
-            # case "2":
+            #case "2":
             #     return MenuOptions.cancel_tournament  #TODO: Optional C requirement
             case "b":
                 return MenuOptions.manage_tournament
+            
+            case "lo":
+                MenuOptions.start_screen
+
         return MenuOptions.manage_tournament
 
 
@@ -190,26 +193,40 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        menu: str = "Tournaments"
+        menu: str = "Matches"
         user_path: list[str] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
-            MenuOptions.input_results
+            MenuOptions.select_match
         ]
-        info: list = []
-        options: dict[str, str] = {
-            "Choose a match": ""
-        }
+        info: list = ["- - - -List Of Matches- - - -"]
+        self.options: dict[str, str] = {}
+        choice_list = []
         message: str = ""
 
+        matches_list = ["Team 1 vs Team 3", "Team 2 vs Team 4", "Team 5 vs Team 7", "Team 6 vs Team 8"]
+
+        x = 0
+        for match in matches_list:
+            x += 1
+            choice_list.append(str(x))
+            self.options[str(x)] = f"Input Results for {match}"
+            info.append(match)
+        choice_list.append("b")
+        self.options["b"] = "Back"
+
+        
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path, info, self.options, message))
+        self.choice: str = self.utility._prompt_choice(choice_list)
 
-        input("HERE COMES A LIST OF MATCHES")
-        # TODO: function for user to input to select match to manage
-        return MenuOptions.manage_tournament
-
+        match self.choice:
+            case "b":
+                return MenuOptions.manage_active_tournament
+            
+        return MenuOptions.input_results
 
 
     def match_results(self) -> MenuOptions:
@@ -219,7 +236,39 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        print("This is where you choose match results")
+        menu: str = "Matches"
+        user_path: list[str] = [
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_active_tournament,
+            MenuOptions.select_match,
+            MenuOptions.input_results
+        ]
+        teamname1, teamname2 = self.options[self.choice].split(" vs ")
+        teamname1 = teamname1[18:]
+        info: list = ["- - - -List Of Matches- - - -"]
+        options: dict[str, str] = {"1": f"Select {teamname1} for victory", "2": f"Select {teamname2} for victory",
+                                    "b": "Back"}
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options))
+        choice: str = self.utility._prompt_choice(["1", "2", "b"])
+
+        winner = None
+
+        match choice:
+            case "b": 
+                return MenuOptions.select_match
+            case "1":
+                winner = teamname1
+            case "2":
+                winner = teamname2
+
+        options = {"b": "Back"}
+        message = f"{winner} Has Won The Round!"
+
+        print(self.tui.table(menu, user_path, info, options, message))
+        choice: str = self.utility._prompt_choice(["b"])
+
         # TODO: function to choose a team that won update the team and match
         return MenuOptions.manage_active_tournament
 
