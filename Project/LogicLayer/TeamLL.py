@@ -13,8 +13,8 @@ from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_
 
 class TeamLL():
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, data_api: DataLayerAPI) -> None:
+        self._data_api: DataLayerAPI = data_api
 
 
     def add_player(self, player_handle: str, current_player_handle: str) -> Team:
