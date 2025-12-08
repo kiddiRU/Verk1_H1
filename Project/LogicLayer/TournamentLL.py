@@ -9,10 +9,12 @@ from Models import Player, Team, Tournament, Server, Match
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
+from MatchLL import MatchLL
 
 class TournamentLL:
     def __init__(self):
-        self._data_api = DataLayerAPI
+        # self._data_api = DataLayerAPI
+        pass
 
     def create_tournament(self,
         name: str,
@@ -204,6 +206,7 @@ class TournamentLL:
                 if current_datetime.time() >= tournament.time_frame_end:
                     if tournament.time_frame_start < tournament.time_frame_end:
                         current_datetime += one_day
+                    
                     current_datetime = datetime.combine(
                             date = current_datetime.date(),
                             time = tournament.time_frame_start
@@ -213,5 +216,4 @@ class TournamentLL:
         if times_used[-1] >= datetime.combine(date = tournament.end_date, time = tournament.time_frame_end):
             assert(False)
 
-        for x in times_used:
-            print(x)
+        

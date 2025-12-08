@@ -4,17 +4,35 @@
         "name": "Tournament name 1",
         "start_date": "2004-01-21",
         "end_date": "2004-12-12",
-        "time_frame_start": "00:12:23",
-        "time_frame_end": "00:12:23",
+        "time_frame_start": "12:23:00",
+        "time_frame_end": "17:23:00",
         "venue": "test",
         "email": "test",
         "phone_number": "test",
         "status": "ACTIVE",
         "list_servers": [
             "NoServer",
+            "NoServer",
             "NoServer"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name",
+            "name"
+        ]
     },
     "7bc31912-c8b7-477e-88c8-762bac0c575a": {
         "uuid": "7bc31912-c8b7-477e-88c8-762bac0c575a",
