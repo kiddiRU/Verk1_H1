@@ -18,7 +18,6 @@ class PlayerUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
-        self.message_color: str = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
 
@@ -41,8 +40,6 @@ class PlayerUI:
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
         message: str = ""
 
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))  
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))  
 
@@ -74,19 +71,14 @@ class PlayerUI:
         info: list[str]= []
         options: dict[str, str]= {}
         message: str = ""
-
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))        
+     
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))        
 
-        choice: str = self.utility._input_info(self.message_color + "Input Your Handle: " + self.reset)
+        choice: str = input("Input Your Handle: ")
 
         if choice == "admin":
             return MenuOptions.admin_screen
-        
-        elif choice == "Shrek":
-            return MenuOptions.onion
         
         return MenuOptions.start_screen
 
@@ -114,37 +106,43 @@ class PlayerUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))  
-        user_name: str = self.utility._input_info(self.message_color + "Enter Name: \n" + self.reset)
-        self.tui.save_input("Name: " + user_name)
+        user_name: str | None = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
+        if user_name != None:
+            self.tui.save_input("Name: " + user_name)
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_dob: str = self.utility._input_info(self.message_color + "Enter Date Of Birth: \n" + self.reset)
-        self.tui.save_input("Date Of Birth: " + user_dob)
+        user_dob: str | None = self.utility._input_info("Enter Date Of Birth: \n", "date_of_birth", "PLAYER")
+        if user_dob != None:
+            self.tui.save_input("Date Of Birth: (yyyy-mm-dd)" + user_dob)
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_addr: str = self.utility._input_info(self.message_color + "Enter Home Address: \n" + self.reset)
-        self.tui.save_input("Home Address: " + user_addr)
+        user_addr: str | None = self.utility._input_info("Enter Home Address: \n", "home_address", "PLAYER")
+        if user_addr != None:
+            self.tui.save_input("Home Address: " + user_addr)
 
 
         print(self.tui.table(menu, user_path, info))
-        user_email: str = self.utility._input_info(self.message_color + "Enter Email: \n" + self.reset)
-        self.tui.save_input("Email: " + user_email)
+        user_email: str | None = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
+        if user_email != None:
+            self.tui.save_input("Email: " + user_email)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_phnum: str = self.utility._input_info(self.message_color + "Enter Phone Number: \n" + self.reset)
-        self.tui.save_input("Phone Number: " + user_phnum)
+        user_phnum: str | None = self.utility._input_info("Enter Phone Number: \n", "phone_number", "PLAYER")
+        if user_phnum != None:
+            self.tui.save_input("Phone Number: " + user_phnum)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_handle: str = self.utility._input_info(self.message_color + "Enter Handle: \n" + self.reset)
-        self.tui.save_input("Handle: " + user_handle)
+        user_handle: str | None = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
+        if user_handle != None:
+            self.tui.save_input("Handle: " + user_handle)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_url: str = self.utility._input_info(self.message_color + "Enter URL: \n" + self.reset)
+        user_url: str = input("Enter URL: \n") #TODO: This is just a basic input
         self.tui.save_input("URL: " + user_url)
         print(self.tui.table(menu, user_path, info, options, message))
         con: str = self.utility._prompt_choice(["c"])
@@ -231,19 +229,20 @@ Club4"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, [], {}, message))
-        team_name: str =input(self.message_color + "Enter Team Name: \n" + self.reset)
-        self.tui.save_input("Team Name: " + team_name)
+        team_name: str | None = self.utility._input_info("Enter Team Name: \n", "name", "TEAM")
+        if team_name != None:
+            self.tui.save_input("Team Name: " + team_name)
 
         print(self.tui.table(menu, user_path))
-        team_url: str = self.utility._input_info(self.message_color + "Enter Team URL (Optional): \n" + self.reset)
+        team_url: str = input("Enter Team URL (Optional): \n")
         self.tui.save_input("Team Name: " + team_url)
 
         print(self.tui.table(menu, user_path))
-        team_ascii: str = self.utility._input_info(self.message_color + "Enter Team ASCII Art (Optional): \n" + self.reset)
+        team_ascii: str = input("Enter Team ASCII Art (Optional): \n")
         self.tui.save_input("Team ASCII Art: " + team_ascii)
 
         print(self.tui.table(menu, user_path, info))
-        team_club: str = self.utility._input_info(self.message_color + "Choose A Club To Join: \n" + self.reset)
+        team_club: str = input("Choose A Club To Join: \n") 
         self.tui.save_input("Club: " + team_club)
 
         print(self.tui.table(menu, user_path, info, options))
@@ -446,7 +445,7 @@ Club4"""]
         print(self.tui.table(menu, user_path))
 
         # Might add to the message if the search will be implemented
-        add_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Add Them: \n")
+        add_handle: str = input("Enter A Players Handle To Add Them: \n")
 
         self.tui.save_input("Player To Add: " + add_handle)
 
@@ -502,7 +501,7 @@ Club4"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, ))
-        remove_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Remove Them: \n")
+        remove_handle: str = input("Enter A Players Handle To Remove Them: \n")
 
         if...: #TODO: check if player is found and is not in a team
             message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
@@ -567,101 +566,3 @@ Club4"""]
             return MenuOptions.my_team_empty
 
         return MenuOptions.my_team_empty
-
-
-
-    def onion(self) -> MenuOptions:
-
-                """This Program Has Layers"""
-
-                print("""
-        ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
-        ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆ 
-        ⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿ 
-        ⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀ 
-        ⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
-        ⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
-        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
-                    
-                    
-        Somebody once told me the world is gonna roll me
-        I ain't the sharpest tool in the shed
-        She was looking kind of dumb with her finger and her thumb
-        In the shape of an "L" on her forehead
-        Well, the years start comin' and they don't stop comin'
-        Fed to the rules and I hit the ground runnin'
-        Didn't make sense not to live for fun
-        Your brain gets smart, but your head gets dumb
-        So much to do, so much to see
-        So, what's wrong with taking the backstreets?
-        You'll never know if you don't go (go)
-        You'll never shine if you don't glow
-        Hey now, you're an all-star
-        Get your game on, go play
-        Hey now, you're a rock star
-        Get the show on, get paid
-        (And all that glitters is gold)
-        Only shootin' stars break the mold
-        It's a cool place, and they say it gets colder
-        You're bundled up now, wait 'til you get older
-        But the meteor men beg to differ
-        Judging by the hole in the satellite picture
-        The ice we skate is gettin' pretty thin
-        The water's gettin' warm, so you might as well swim
-        My world's on fire, how 'bout yours?
-        That's the way I like it, and I'll never get bored
-        Hey now, you're an all-star
-        Get your game on, go play
-        Hey now, you're a rock star
-        Get the show on, get paid
-        (All that glitters is gold)
-        Only shootin' stars break the mold
-        Go for the moon
-        (Go, go, go) go for the moon
-        (Go, go, go) go for the moon
-        Go (go), go for the moon
-        Hey now, you're an all-star
-        Get your game on, go play
-        Hey now, you're a rock star
-        Get the show on, get paid
-        (And all that glitters is gold)
-        Only shooting stars
-        Somebody once asked, "Could I spare some change for gas?
-        I need to get myself away from this place"
-        I said, "Yep, what a concept, I could use a little fuel myself
-        And we could all use a little change"
-        Well, the years start comin' and they don't stop comin'
-        Fed to the rules and I hit the ground runnin'
-        Didn't make sense not to live for fun
-        Your brain gets smart, but your head gets dumb
-        So much to do, so much to see
-        So, what's wrong with taking the backstreets?
-        You'll never know if you don't go (go!)
-        You'll never shine if you don't glow
-        Hey now, you're an all-star
-        Get your game on, go play
-        Hey now, you're a rock star
-        Get the show on, get paid
-        (And all that glitters is gold)
-        Only shootin' stars break the mold
-        Only shootin' stars break the mold
-        Go for the moon
-        Go for the moon
-        Go for the moon
-        This is how we do it""")
-                
-
-                a = input()
-                if a == "GET OUTTA MA SWAMP!":
-                    return MenuOptions.start_screen
-                
-                return MenuOptions.onion
-                
