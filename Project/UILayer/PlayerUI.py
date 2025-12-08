@@ -42,8 +42,6 @@ class PlayerUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))  
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))  
 
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
@@ -73,9 +71,7 @@ class PlayerUI:
         info: list[str]= []
         options: dict[str, str]= {}
         message: str = ""
-
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))        
+     
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))        
 
@@ -118,7 +114,7 @@ class PlayerUI:
         print(self.tui.table(menu, user_path, info)) 
         user_dob: str | None = self.utility._input_info("Enter Date Of Birth: \n", "date_of_birth", "PLAYER")
         if user_dob != None:
-            self.tui.save_input("Date Of Birth: " + user_dob)
+            self.tui.save_input("Date Of Birth: (yyyy-mm-dd)" + user_dob)
 
 
         print(self.tui.table(menu, user_path, info)) 
