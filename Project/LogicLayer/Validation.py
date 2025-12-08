@@ -3,6 +3,7 @@ Author: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
 
 Minor changes: Andri Már Kristjánsson <andrik25@ru.is>
+(just type hinting changes)
 
 A validation file that takes inn all info that would need to be validated
 """
