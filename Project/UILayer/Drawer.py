@@ -95,8 +95,6 @@ class Drawer():
               table_options: dict[str, str] = {}, message: str = "") -> str:
         """Creates and returns the UI tables"""
 
-        self.clear()
-        print(self.banner())
 
         table: str = """"""
         path: str = ""

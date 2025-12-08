@@ -8,8 +8,7 @@ File that holds all the menus that the admin can access
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
-from LogicLayer.TournamentLL import TournamentLL
-import DataLayer.DataLayerAPI
+from LogicLayer import LogicLayerAPI
 
 
 class AdminUI:
@@ -356,6 +355,46 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
         print("This is the add team screen")
+
+        menu: str = "Inactive Tournament"
+        user_path: list[str] = [
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament,
+            MenuOptions.manage_teams,
+            MenuOptions.add_team
+        ]
+        info: list = []
+        options_1: dict[str, str] = {"a": "Add Another Team", "b": "Back"}
+        options_2: dict[str, str] = {"t": "Try Again", "b": "Back"}
+        
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))
+
+        team_to_add: str = input("Enter Team Name or 'l' to list all: \n")
+
+
+        # if ...: # If Team Found
+        #     message = f"You Have Added {team_to_add} To The Tournament"
+        #     print(self.tui.table(menu, user_path, info, options_1, message))
+        #     choice: str = self.utility._prompt_choice(["a", "b"])
+
+        #     match choice:
+        #         case "a": 
+        #             return MenuOptions.add_team
+                
+        #     return MenuOptions.manage_teams
+        
+        if...: # Team not found
+            message = f"{team_to_add} Was Not Found"
+            print(self.tui.table(menu, user_path, info, options_2, message))
+            choice: str = self.utility._prompt_choice(["t", "b"])
+
+            match choice:
+                case "t": 
+                    return MenuOptions.add_team
+                
+            return MenuOptions.manage_teams
 
         # TODO: Add function to list teams and to choose a team by the name
 

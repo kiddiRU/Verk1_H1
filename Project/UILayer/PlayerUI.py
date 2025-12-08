@@ -12,7 +12,7 @@ from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 from Models.Player import Player
-from Models.Club import Club
+
 
 
 class PlayerUI:
@@ -45,6 +45,7 @@ class PlayerUI:
         message: str = ""
 
         self.tui.clear_saved_data()
+        print(self.tui.banner())
         print(self.tui.table(menu, user_path, info, options, message))  
 
 
