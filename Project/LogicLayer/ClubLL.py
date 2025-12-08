@@ -7,7 +7,7 @@ Functions for Club logic
 
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Club
+from Models import Club, Team
 from LogicLayer.Validation import validate_attr
 from LogicLayer.LogicUtility import get_club_uuid
 
@@ -48,7 +48,7 @@ class ClubLL():
         return clubs
 
         
-    def get_teams_in_club(self, club_name) -> list[str]:
+    def get_teams_in_club(self, club_name) -> list[Team]:
         """
         Takes in club name
 
@@ -61,6 +61,6 @@ class ClubLL():
 
         for team in model_teams:
             if team.club_uuid == club_uuid:
-                teams_in_club.append(team.name)
+                teams_in_club.append(team)
 
         return teams_in_club

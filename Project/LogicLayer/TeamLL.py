@@ -123,6 +123,6 @@ class TeamLL():
         model_tournaments: list = self._data_api.load_tournaments()
         for tournament in model_tournaments:
             if team_uuid in tournament.teams_playing: 
-                teams_history.append(tournament.name)
+                teams_history.append(tournament)
 
         return teams_history
