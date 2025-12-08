@@ -150,6 +150,20 @@ def update_tournament_info(
         phone_number
     )
 
+def update_tournament_datetime(
+    start_date: date,
+    end_date: date,
+    time_frame_start: time,
+    time_frame_end: time,
+) -> None:
+    
+    tournament_logic.update_tournament_datetime(
+        start_date,
+        end_date,
+        time_frame_start,
+        time_frame_end
+    )
+
 # TODO implement next_round and call it
 def next_round() -> None:
     pass

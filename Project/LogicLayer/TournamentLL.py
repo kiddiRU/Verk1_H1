@@ -86,11 +86,10 @@ class TournamentLL:
 
         self._data_api.store_tournament(tournament)
 
-
     def update_info(
         self,
         name: str,
-        venue: str,
+        venue: str, # ma breyta venue ef published?
         email: str,
         phone_number: str
     ) -> None:
@@ -110,5 +109,14 @@ class TournamentLL:
             setattr(tournament, attr, value)
 
         self._data_api.update_tournament(tournament.uuid, tournament)
+    
+    # TODO: Implement.
+    def update_tournament_datetime(
+        self,
+        start_date: date,
+        end_date: date,
+        time_frame_start: time,
+        time_frame_end: time
+    ) -> None:
         
-            
+        pass
