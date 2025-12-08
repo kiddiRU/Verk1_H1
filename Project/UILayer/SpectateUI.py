@@ -4,6 +4,8 @@ Date: 2025-12-04
 
 File that holds all the menus that the spectator can access
 """
+from Models.Player import Player
+
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -44,14 +46,14 @@ class SpectateUI:
             "2": "Clubs",
             "3": "Teams",
             "4": "Tournaments",
-            "b": "Back",
+            "h": "Home",
         }
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "b"])
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "h"])
         match choice:
             case "1":
                 return MenuOptions.spectate_players
@@ -61,7 +63,7 @@ class SpectateUI:
                 return MenuOptions.spectate_teams
             case "4":
                 return MenuOptions.spectate_tournaments
-            case "b":
+            case "h":
                 return MenuOptions.start_screen
 
         return MenuOptions.start_screen
@@ -74,19 +76,20 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        player_list: list[Player] = LogicLayerAPI.list_players() #TODO remove this comment when/if work
         menu: str = "Players"
         user_path: list[str] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_players,
         ]
-        info: list[str] = []
+        info: list[str] = [x.handle for x in player_list] #TODO: does not work rn
         options: dict[str, str] = {}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
-        choice: str = input("Enter A Players Name Or The First Letter(s) To Search: \n")
+        choice: str = input("Enter A Players Handle Or The First Letter(s) To Search: \n")
         match choice:
             # case "":
             #     self.list_players()

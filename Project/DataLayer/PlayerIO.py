@@ -9,7 +9,7 @@ stored in the ./DataLayer/Repository/players.json
 import json
 from Models import Player
 
-FILE_PATH = "./DataLayer/Repository/players.json"
+FILE_PATH = "Project/DataLayer/Repository/players.json"
 
 
 def store_player(player: Player) -> None:
