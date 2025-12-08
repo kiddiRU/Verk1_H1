@@ -127,6 +127,8 @@ class AdminUI:
         info: list[str] = ["- - - -List Of Tournaments- - - -"]
         options: dict[str, str] = {}
         message: str = ""
+        info.append("active")
+        info.append("inactive")
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
@@ -139,6 +141,9 @@ class AdminUI:
         
         if tournament.lower() == "active": #TODO: REMOVE THIS IS JUST TEST LINE
             return MenuOptions.manage_active_tournament
+        
+        if tournament.lower() == "inactive": #TODO: REMOVE THIS IS JUST TEST LINE
+            return MenuOptions.manage_inactive_tournament
 
         # TODO: add input for tournament to manage
         # TODO: if active the go to active screen else inactive screen
@@ -162,7 +167,7 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
         ]
-        info: list = ["TOURNAMENTNAME"]
+        info: list = ["- - - -TOURNAMENTNAME- - - -"]
         options: dict[str, str] = {"1": "Input Results Of A Match", "b": "Back", "lo": "Log Out"}
         message: str = ""
 
@@ -229,6 +234,7 @@ class AdminUI:
         return MenuOptions.input_results
 
 
+
     def match_results(self) -> MenuOptions:
         """Match results screen, choices: input a match that won
 
@@ -280,8 +286,22 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is an inactive tournament")
+
+        menu: str = "Inactive Tournament"
+        user_path: list[str] = [
+            MenuOptions.admin_screen,
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament
+        ]
+        info: list = ["- - - -TOURNAMNETNAME- - - -"]
+        options: dict[str, str] = {"1": "Manage Teams", "2": "Publish", "3": "Edit Tournament", "b": "Back"}
+        message = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options))
+
         choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
+
         match choice:
             case "1":
                 return MenuOptions.manage_teams
@@ -301,7 +321,23 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+
+        menu: str = "Inactive Tournament"
+        user_path: list[str] = [
+            MenuOptions.admin_screen,
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament,
+            MenuOptions.manage_teams
+        ]
+        info: list = ["- - - -List Of Teams In Tournament- - - -"]
+        options: dict[str, str] = {"1": "Add Team", "2": "Remove Team", "b": "Back"}
+        message = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options))
+
         choice: str = self.utility._prompt_choice(["1", "2", "b"])
+
         match choice:
             case "1":
                 return MenuOptions.add_team
@@ -347,11 +383,10 @@ class AdminUI:
         """
 
         print("PUBLISH TOURNAMENT")
-        print("<list of tournaments>")
         choice: str = input("Input tournament to publish: ")
         # TODO: Check for tournament then publish it
 
-        return MenuOptions.manage_active_tournament
+        return MenuOptions.manage_inactive_tournament
 
 
 
