@@ -2,7 +2,7 @@
 
 ## Andri Már
 ### Time: 8:23
-### On site: 
+### On site: Yes
 
 ## Elmar
 ### Time: 9:10
