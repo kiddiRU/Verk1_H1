@@ -191,6 +191,6 @@ class UtilityUI:
         output_list: list[str] = []  # list that holds each line as a f-string
 
         for t in tournaments:
-            output_list.append(f"{t.name:<39}>{t.status:<39}|")
-        
+            if t.status == "INACTIVE": continue
+            output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list
