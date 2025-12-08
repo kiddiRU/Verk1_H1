@@ -1,8 +1,8 @@
 """
-Authors: Elmar Sigmarsson <elmars25@ru.is> / Kristjan Hagalin <kristjanhj24@ru.is>
+Authors: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
 
-Minor change: Andri Már Kristjánsson <andrik25@ru.is>
+Co: Kristjan Hagalin <kristjanhj24@ru.is>
 
 Functions for player logic.
 """
@@ -16,7 +16,6 @@ from LogicLayer.Validation import validate_attr
 class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
         self._data_api = data_api
-        self.login = None
 
     # TODO Alter validation functionality?
     def create_player(self,
@@ -86,7 +85,7 @@ class PlayerLL():
         self._data_api.update_player(player.uuid, player)
         return player
 
-    # TODO Remove Player object? Check if player is in a team.
+    # TODO Remove Player object, check if player is in team
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
@@ -105,7 +104,7 @@ class PlayerLL():
         self._data_api.store_team(new_team)
         return new_team
 
-    # TODO Remove Player object?
+    # TODO Remove Player objec
     def leave_team(self, team_uuid: str, player: Player) -> None:
         '''
         Takes in a teams UUID and a Player object.
@@ -143,8 +142,3 @@ class PlayerLL():
 
         return player
 
-
-    def save_login(self, login_handle=None):
-        if login_handle is not None:
-            self.login = login_handle
-        return self.login
