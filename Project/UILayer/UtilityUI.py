@@ -195,7 +195,7 @@ class UtilityUI:
         Returns:
             list[str]: Tournament names
         """
-        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments]
 
     def team_names(self) -> list[str]:
