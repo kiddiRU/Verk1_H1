@@ -87,6 +87,9 @@ def remove_player(player_handle: str, current_player_handle: str) -> Team:
 def get_team_members(team_name: str) -> list[str]:
     return team_logic.get_team_members(team_name)
 
+def list_teams() -> list[Team]:
+    return team_logic.list_teams()
+
 def get_team_object(team_name: str) -> Team:
     return team_logic.get_team_object(team_name)
 
@@ -152,13 +155,15 @@ def cancel_tournament(tournament: Tournament) -> None:
 
 ''' Club API '''
 
-# TODO implement validate_unique_name and call it
-def validate_unique_name(name: str) -> None:
-    pass
-
 # TODO implement create_club and call it
-def create_club() -> Club:
-    pass
+def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
+    return create_club(name,club_color, country, home_town)
+
+def list_clubs() -> list[Club]:
+    return list_clubs()
+
+def get_teams_in_club(club_name) -> list[Team]:
+    return get_teams_in_club(club_name)
 
 # TODO implement change_club_info and call it
 def change_club_info(club: Club) -> None:
