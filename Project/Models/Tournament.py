@@ -54,7 +54,7 @@ class Tournament:
                         Defaults to time(hour=16,minute=0).
             status (StatusType, optional): Tournament status.
                         Defaults to StatusType.inactive.
-            number_of_servers: (list[str]):
+            number_of_servers: (int):
                         Defaults to 1. Don't pass if passing list_servers.
             list_servers (list[str], optional): 
                         List containing uuid's of servers. Defaults to [].
