@@ -42,6 +42,7 @@ class TournamentLL:
 
         self._data_api.store_tournament(new_tournament)
 
+    # TODO: Only changes the tournaments status at the moment.
     def publish(self, tournament_name: str) -> None:
         tournaments: list[Tournament] = self._data_api.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
@@ -81,6 +82,42 @@ class TournamentLL:
         if team is None:
             raise Exception(f'No team found named: {team_name}')
         
-        tournament.teams_playing.remove(team.uuid)
+        if team.uuid in tournament.teams_playing:
+            tournament.teams_playing.remove(team.uuid)
+
         self._data_api.store_tournament(tournament)
+
+    def update_info(
+        self,
+        name: str,
+        venue: str, # ma breyta venue ef published?
+        email: str,
+        phone_number: str
+    ) -> None:
         
+        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+
+        if tournament is None:
+            raise Exception(f'No tournament found named: {name}')
+
+        for attr, value in params.items():
+            if value == '':
+                continue
+        
+            setattr(tournament, attr, value)
+
+        self._data_api.update_tournament(tournament.uuid, tournament)
+    
+    # TODO: Implement.
+    def update_tournament_datetime(
+        self,
+        start_date: date,
+        end_date: date,
+        time_frame_start: time,
+        time_frame_end: time
+    ) -> None:
+        
+        pass

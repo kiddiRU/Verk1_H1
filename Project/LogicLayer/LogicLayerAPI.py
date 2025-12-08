@@ -2,6 +2,8 @@
 Author: Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
+Minor change: Andri Már Kristjánsson <andrik25@ru.is>
+
 Logic layer API.
 """
 
@@ -17,6 +19,7 @@ def validate(attr: str, value: str, name_type: str):
 
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
+team_logic: TeamLL = TeamLL(DataLayerAPI)
 
 def create_player(
     name: str,
@@ -131,12 +134,37 @@ def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
 
 # TODO implement remove_team and call it
-def remove_team(tournament: Tournament, team: Team) -> None:
-    pass
+def remove_team(tournament_name: str, team_name: str) -> None:
+    tournament_logic.remove_team(tournament_name, team_name)
 
 # TODO implement change_info and call it
-def change_info(tournament: Tournament) -> None:
-    pass
+def update_tournament_info(
+    tournament_name: str = '',
+    venue: str = '',
+    email: str = '',
+    phone_number: str = ''
+) -> None:
+    
+    tournament_logic.update_info(
+        tournament_name,
+        venue,
+        email,
+        phone_number
+    )
+
+def update_tournament_datetime(
+    start_date: date,
+    end_date: date,
+    time_frame_start: time,
+    time_frame_end: time,
+) -> None:
+    
+    tournament_logic.update_tournament_datetime(
+        start_date,
+        end_date,
+        time_frame_start,
+        time_frame_end
+    )
 
 # TODO implement next_round and call it
 def next_round() -> None:
@@ -161,3 +189,7 @@ def change_club_info(club: Club) -> None:
 # TODO implement input_match_results and call it
 def input_match_results(match: Match) -> None:
     pass
+
+
+def save_login(login_handle: str | None = None) -> str | None:
+    return player_logic.save_login(login_handle)

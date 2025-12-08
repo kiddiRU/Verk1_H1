@@ -10,7 +10,7 @@ A validation file that takes inn all info that would need to be validated
 
 from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
-from datetime import date
+from datetime import date, time
 
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
     if attribute == 'name': return validate_name(value)
@@ -21,6 +21,8 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
     elif attribute == 'handle': return validate_unique_name(value, name_type)
     else: return
     
+
+
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     """
     Checks if the name is unique and is between 3-40 char in length
@@ -71,6 +73,7 @@ def validate_name(name: str) -> str | None: # Players full name
         return name
     
 
+
 def validate_home_address(home_address) -> str | None: # Players home address
     """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
     
@@ -92,6 +95,7 @@ def validate_home_address(home_address) -> str | None: # Players home address
 
     except:
         raise ValidationError
+
 
 
 def validate_phone_number(phone_number) -> str | None: # Players and tournament contact phone number
@@ -117,6 +121,7 @@ def validate_phone_number(phone_number) -> str | None: # Players and tournament 
         raise ValidationError("Phone number inputted incorrectly")
 
 
+
 def validate_email(email) -> str | None: # Players and tournament contact email
     """Checks if email has @, and that there is something before and after the @"""
 
@@ -136,42 +141,69 @@ def validate_email(email) -> str | None: # Players and tournament contact email
         raise ValidationError('Invalid email!')
 
 
-def validate_date(date_input) -> str | None: # Date of Birth, Date of Tournament
-    """Checks if date format is correct YYYY-MM-DD"""
+
+def validate_date(date_input) -> date | ValidationError: # Date of Birth, Date of Tournament
+    """Splits the string and tries to change the numbers in to int and Checks if date format is correct YYYY-MM-DD"""
 
     try:
-        date_list = date_input.split("-")
-        year: int = int(date_list[0])
-        month: int =  int(date_list[1])
-        day: int = int(date_list[2])
+        date_list: list = list(map(int, date_input.split("-")))
+
+        try:
+            valid_date = date(date_list[0], date_list[1], date_list[2])
+            return valid_date
+        
+        except:
+            raise ValidationError("Not valid date")
+        
 
     except:
-        raise ValidationError("Date inputted incorrectly")
+        raise ValidationError("Letters are not allowed in a date")
 
-    try:
-        validate_date = date(year, month, day)
-        return str(validate_date)
-    
-    except:
-        raise ValidationError("Date inputted incorrectly")
 
 
 #TODO add functionality to all function bellow
-def validate_date_frame(date_1, date_2) -> bool: # Date frame of tournament
+def validate_date_frame(start_date, end_date) -> date | ValidationError: # Date frame of tournament
     """Checks if date frame is correct, date_1 is before date_2 (2025-12-01 -> 2025-12-06)"""
-    pass
 
-def validate_time() -> bool: # Time of Match and Tournament time frame
+    valid_date_start = validate_time(start_date)
+    valid_date_end = validate_time(end_date)
+
+    if valid_date_start <= valid_date_end:
+        return valid_date_start, valid_date_end
+
+    else: 
+        raise ValidationError("Not a valid Date frame")
+
+
+
+def validate_time(time_input) -> time: # Time of Match and Tournament time frame
     """Checks if time is format is correct HH:MM (12:00)"""
-    pass
 
-def validate_time_frame(time_1, time_2) -> bool: # Time frame of tournament
+    try:
+        time_list = list(map(int, time_input.split(":")))
+
+        try:
+            valid_time = time(time_list[0], time_list[1])
+            return valid_time
+        
+        except:
+            raise ValidationError("Not a valid time")
+    
+    except:
+        raise ValidationError("Letters are not allowed in time")
+
+
+
+def validate_time_frame(start_time, end_time) -> time: # Time frame of tournament
     """Checks if time frame is correct, time_1 is before time_2 (08:00 -> 16:00) """
-    pass
+    
+    valid_time_start = validate_time(start_time)
+    valid_time_end = validate_time(end_time)
 
+    if valid_time_start <= valid_time_end:
+        return valid_time_start, valid_time_end
 
-def club_color() -> bool: # Club
-    """Checks if color is on of the colors implemented (RED, BLUE, YELLOW, GREEN)"""
-    pass
+    else: 
+        raise ValidationError("Not a valid Time frame")
 
 

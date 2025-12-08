@@ -57,9 +57,9 @@
         "end_date": "2004-12-12",
         "time_frame_start": "00:12:23",
         "time_frame_end": "00:12:23",
-        "venue": "test",
+        "venue": "gerplan",
         "email": "test",
-        "phone_number": "test",
+        "phone_number": "1234567",
         "status": "ACTIVE",
         "list_servers": [
             "NoServer",

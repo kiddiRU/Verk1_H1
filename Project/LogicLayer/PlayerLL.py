@@ -1,6 +1,8 @@
 """
-Authors: Elmar Sigmarsson <elmars25@ru.is> / Kristjan Hagalin <kristjanhj24@ru.is>
+Authors: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
+
+Co: Kristjan Hagalin <kristjanhj24@ru.is>
 
 Functions for player logic.
 """
