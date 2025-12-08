@@ -14,8 +14,8 @@ from Models import Player, Team, Club, ValidationError
 from LogicLayer.Validation import validate_attr
 
 class PlayerLL():
-    def __init__(self, data_api: DataLayerAPI) -> None:
-        self._data_api = data_api
+    def __init__(self) -> None:
+        self._data_api = DataLayerAPI
 
     # TODO Alter validation functionality?
     def create_player(self,

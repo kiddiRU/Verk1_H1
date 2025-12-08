@@ -12,8 +12,8 @@ from Models.Player import Player
 from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
-    def __init__(self, data_api: DataLayerAPI) -> None:
-        self._data_api: DataLayerAPI = data_api
+    def __init__(self) -> None:
+        self._data_api = DataLayerAPI
 
     def add_player(self, player_handle: str, current_player_handle: str) -> Team:
         """

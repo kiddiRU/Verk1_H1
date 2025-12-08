@@ -11,8 +11,8 @@ from uuid import uuid4
 from datetime import date, time
 
 class TournamentLL:
-    def __init__(self, data_api: DataLayerAPI):
-        self._data_api: DataLayerAPI = data_api
+    def __init__(self):
+        self._data_api = DataLayerAPI
 
     def create_tournament(self,
         name: str,
