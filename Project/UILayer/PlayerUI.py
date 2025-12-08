@@ -69,6 +69,9 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
 
+        player_list: list[Player] = LogicLayerAPI.list_players()
+        player_handles: list[str] = [x.handle for x in player_list]
+
         menu: str = "Login"
         user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login]
         info: list[str]= []
@@ -76,23 +79,25 @@ class PlayerUI:
         message: str = "Handle Not Found!"
      
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info))        
+        print(self.tui.table(menu, user_path, info))
 
         login_handle: str = input(self.message_color + "Input Your Handle: " + self.reset)
 
         if login_handle == "admin":
             return MenuOptions.admin_screen
         
-        player_list: list[Player] = LogicLayerAPI.list_players()
-        player_handles: list[str] = [x.handle for x in player_list]
-        
         if login_handle in player_handles:
             LogicLayerAPI.save_login(login_handle)
 
 
             return MenuOptions.player_screen
-
+        
         print(self.tui.table(menu, user_path, info, options, message))
+
+        if login_handle == "list of handles":
+            for x in player_handles:
+                print(x)
+
         choice: str = self.utility._prompt_choice(["t", "b"])
 
         if choice == "t":
