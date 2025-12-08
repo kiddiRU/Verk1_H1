@@ -8,6 +8,8 @@ File that holds all the menus that the admin can access
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
+from LogicLayer.TournamentLL import TournamentLL
+import DataLayer.DataLayerAPI
 
 
 class AdminUI:
@@ -16,6 +18,7 @@ class AdminUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
+        # self.tournament = TournamentLL(DataLayer.DataLayerAPI)
 
 
 
@@ -72,8 +75,8 @@ class AdminUI:
             MenuOptions.create_tournament,
         ]
         info: list[str] = []
-        options: dict[str, str] = {}
-        message: str = ""
+        options: dict[str, str] = {"c": "Continue"}
+        message: str = "You have Created A Tournament!"
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
@@ -99,14 +102,14 @@ class AdminUI:
             MenuOptions.manage_tournament,
         ]
         info: list[str] = []
-        options: dict[str, str] = {"Choose a tournament to manage": ""}
+        options: dict[str, str] = {}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-        tournament = input("Input tournament to manage")
+        tournament = input("Input tournament to manage: \n")
         if tournament.lower() == "lo":
             return MenuOptions.logout
         

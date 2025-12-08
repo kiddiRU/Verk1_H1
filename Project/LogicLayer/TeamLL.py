@@ -11,10 +11,8 @@ from Models.Team import Team
 from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
-
     def __init__(self) -> None:
-        pass
-
+        self._data_api = DataLayerAPI
 
     def add_player(self, player_handle: str, current_player_handle: str) -> Team:
         """
@@ -45,7 +43,7 @@ class TeamLL():
                     
 
 
-    def remove_player(self, player_handle: str, current_player_handle) -> Team:
+    def remove_player(self, player_handle: str, current_player_handle: str) -> Team:
         """
         Takes in team uuid and a player uuid,
         Looks through a list of all the teams and 

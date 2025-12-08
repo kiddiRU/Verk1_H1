@@ -1,6 +1,8 @@
 """
-Authors: Elmar Sigmarsson <elmars25@ru.is> / Kristjan Hagalin <kristjanhj24@ru.is>
+Authors: Elmar Sigmarsson <elmars25@ru.is>
 Date: 2025-12-03
+
+Co: Kristjan Hagalin <kristjanhj24@ru.is>
 
 Functions for player logic.
 """
@@ -12,8 +14,8 @@ from Models import Player, Team, Club, ValidationError
 from LogicLayer.Validation import validate_attr
 
 class PlayerLL():
-    def __init__(self, data_api: DataLayerAPI) -> None:
-        self._data_api: DataLayerAPI = data_api
+    def __init__(self) -> None:
+        self._data_api = DataLayerAPI
 
     # TODO Alter validation functionality?
     def create_player(self,
@@ -53,7 +55,7 @@ class PlayerLL():
         DataLayerAPI.store_player(new_player)
         return new_player
 
-    # TODO Alter validation functionality?
+    # TODO Remove Player objec, alter validation functionality?
     def update_player_info(
         self,
         player: Player,
@@ -83,6 +85,7 @@ class PlayerLL():
         self._data_api.update_player(player.uuid, player)
         return player
 
+    # TODO Remove Player object, check if player is in team
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
@@ -94,13 +97,14 @@ class PlayerLL():
         uuid = str(uuid4())
 
         clubs: list[Club] = self._data_api.load_clubs()
-        club_uuid = next((c.uuid for c in clubs if c.name == club_name), None) # Swap out 'None', when 'no_club' has been made.
+        club_uuid = next((c.uuid for c in clubs if c.name == club_name), 'NO_CLUB_UUID') # UUID for no club is ..?
         
         new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club_uuid, None, url, ascii_art)
 
         self._data_api.store_team(new_team)
         return new_team
 
+    # TODO Remove Player objec
     def leave_team(self, team_uuid: str, player: Player) -> None:
         '''
         Takes in a teams UUID and a Player object.
@@ -124,10 +128,10 @@ class PlayerLL():
     def list_players(self) -> list[Player]:
         """ Returns a list of stored players. """
 
-        players: list = DataLayerAPI.load_players()
+        players: list[Player] = DataLayerAPI.load_players()
         return players
 
-    def get_player_object(self, player_uuid) -> Player:
+    def get_player_object(self, player_uuid: str) -> Player:
         ''' Takes in a players UUID and returns the players object. '''
 
         players: list[Player] = DataLayerAPI.load_players()
@@ -138,3 +142,8 @@ class PlayerLL():
 
         return player
 
+
+    def save_player(self, player_handle=None):
+        if player_handle is not None:
+            self.player = player_handle
+        return self.player

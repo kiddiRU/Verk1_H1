@@ -1,34 +1,66 @@
 {
-    "b789402c-9d4f-4e62-9c82-30b6b560637f": {
-        "uuid": "b789402c-9d4f-4e62-9c82-30b6b560637f",
-        "name": "RU's Glorious e-Sport Extravaganza 2025",
-        "start_date": "2025-12-06",
-        "end_date": "2025-12-07",
-        "time_frame_start": "08:00:00",
-        "time_frame_end": "16:00:00",
-        "venue": "Sun Reykjavik University",
-        "email": "prof.esport@ru.is",
-        "phone_number": "+3541234567",
-        "status": "INACTIVE",
+    "12ba73ac-8375-4489-9a21-baad9b507a70": {
+        "uuid": "12ba73ac-8375-4489-9a21-baad9b507a70",
+        "name": "1",
+        "start_date": "2004-01-21",
+        "end_date": "2004-12-12",
+        "time_frame_start": "00:12:23",
+        "time_frame_end": "00:12:23",
+        "venue": "test",
+        "email": "test",
+        "phone_number": "test",
+        "status": "ACTIVE",
         "list_servers": [
-            "NoServer",
-            "NoServer",
             "NoServer",
             "NoServer"
         ],
         "teams_playing": []
     },
-    "6914327b-9a98-4a6a-99bf-4a76942297f1": {
-        "uuid": "6914327b-9a98-4a6a-99bf-4a76942297f1",
-        "name": "test",
-        "start_date": "test",
-        "end_date": "test",
-        "time_frame_start": "test",
-        "time_frame_end": "test",
+    "7bc31912-c8b7-477e-88c8-762bac0c575a": {
+        "uuid": "7bc31912-c8b7-477e-88c8-762bac0c575a",
+        "name": "1",
+        "start_date": "2004-01-21",
+        "end_date": "2004-12-12",
+        "time_frame_start": "00:12:23",
+        "time_frame_end": "00:12:23",
         "venue": "test",
         "email": "test",
         "phone_number": "test",
         "status": "INACTIVE",
+        "list_servers": [
+            "NoServer",
+            "NoServer"
+        ],
+        "teams_playing": []
+    },
+    "269675a5-b277-43a0-8449-cda8803190b7": {
+        "uuid": "269675a5-b277-43a0-8449-cda8803190b7",
+        "name": "2",
+        "start_date": "2004-01-21",
+        "end_date": "2004-12-12",
+        "time_frame_start": "00:12:23",
+        "time_frame_end": "00:12:23",
+        "venue": "test",
+        "email": "test",
+        "phone_number": "test",
+        "status": "INACTIVE",
+        "list_servers": [
+            "NoServer",
+            "NoServer"
+        ],
+        "teams_playing": []
+    },
+    "9f88c82f-7361-4680-9499-098c01ebfeca": {
+        "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "name": "3",
+        "start_date": "2004-01-21",
+        "end_date": "2004-12-12",
+        "time_frame_start": "00:12:23",
+        "time_frame_end": "00:12:23",
+        "venue": "gerplan",
+        "email": "test",
+        "phone_number": "1234567",
+        "status": "ACTIVE",
         "list_servers": [
             "NoServer",
             "NoServer"

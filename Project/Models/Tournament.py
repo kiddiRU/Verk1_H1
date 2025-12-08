@@ -3,6 +3,9 @@ Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-02
 
 Tournament Model Class
+
+Contributer:
+    Kristinn Hrafn <kristinnd25@ru.is>
 """
 
 from enum import StrEnum
@@ -30,6 +33,7 @@ class Tournament:
         time_frame_end: time = time(hour=16,minute=0),
         status: StatusType = StatusType.inactive,
         number_of_servers: int = 1,
+        list_servers: list[str] = [],
         teams_playing: list[str] = [],
     ) -> None:
         """
@@ -50,8 +54,11 @@ class Tournament:
                         Defaults to time(hour=16,minute=0).
             status (StatusType, optional): Tournament status.
                         Defaults to StatusType.inactive.
+            number_of_servers: (int):
+                        Defaults to 1. Don't pass if passing list_servers.
             list_servers (list[str], optional): 
                         List containing uuid's of servers. Defaults to [].
+                        Don't pass if passing number_of_servers.
             teams_playing (list[str], optional): 
                         List containing uuid's of teams. Defaults to [].
         """
@@ -66,9 +73,13 @@ class Tournament:
         self.email = email
         self.phone_number = phone_number
         self.status = status
-        self.list_servers: list[str] = [
+
+        if list_servers == []:
+            self.list_servers: list[str] = [
                 "NoServer" for _ in range(number_of_servers)
-        ]
+            ]
+        else: self.list_servers = list_servers
+        
         self.teams_playing = teams_playing
 
     def __str__(self) -> str:

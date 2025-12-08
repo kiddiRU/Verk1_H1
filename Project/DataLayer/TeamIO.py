@@ -11,42 +11,30 @@ from Models import Team
 
 FILE_PATH = "DataLayer/Repository/teams.json"
 
-"""
-Takes in model class Team
-
-Inserts information about the Team class into a json file
-for storage
-"""
 def store_team(team: Team) -> None:
-    # Changes object team int a dictionary mapping attributes to keys.
+    # Changes object team into a dictionary mapping attributes to keys.
     data = team.__dict__
    
-    # Reads json file containing teams and stores it as a dictionary.
+    # Reads json file containing teams and stores the contents as a
+    # dictionary.
     with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
-    
-    # Updates the dictionary adding the new team int the file content.
+   
+    # Adds the new team into the dictionary mapping it's uuid to the
+    # object for easy lookup.
     file_content[team.uuid] = data
     
     # Writes the updated file content into the file containing teams.
     with open(FILE_PATH, "w", encoding='utf-8') as team_file:
         json.dump(file_content, team_file, indent=4)
 
-"""
-No parameters
-
-Reads json file containing teams and creates a list of
-Team model objects of each entry in the json file.
-
-Returns the created team list.
-"""
 def load_teams() -> list[Team]:
     # Reads the json file containing teams and stores it as a dictionary.
     with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
 
     # Creates a list of all teams in the team file.
-    # each team stored as a Team model object.
+    # each team stored as a Team model object in the list.
     team_list: list[Team] = []
     for value in file_content.values():
         # Uses **value to unpack the dictionary into a Team model object.
@@ -54,21 +42,13 @@ def load_teams() -> list[Team]:
 
     return team_list
 
-"""
-Takes in uuid and the updated Team model object.
-
-uuid has to exist in the json file
-
-Will attempt to find team with given uuid and update that
-team with the new updated team object.
-"""
 def update_team(uuid: str, updated_team: Team) -> None:
     # Reads the json file containing teams and stores it as a dictionary.
     with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
-   
-    # Updates the file content, checking if the uuid exists
-    # in the dictionary.
+
+    # Overwrites the object tied to the given uuid to the object
+    # given after checking if it exists to prevent key error.
     if uuid in file_content:
         file_content[uuid] = updated_team.__dict__
     

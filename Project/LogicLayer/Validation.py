@@ -52,12 +52,16 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
 
         if unique_name in tournament_names:
             raise ValidationError(f'The name \'{unique_name}\' is already taken!')
+        
+        return unique_name
 
     elif type_of_name == "CLUB":
         club_names: list[str] = [c.name for c in DataLayerAPI.load_clubs()]
 
         if unique_name in club_names:
             raise ValidationError(f'The name \'{unique_name}\' is already taken!')
+        
+        return unique_name
 
 def validate_name(name: str) -> str | None: # Players full name
     """Checks if the name is in between 3-40 char in length and has only letters"""

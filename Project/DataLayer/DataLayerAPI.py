@@ -10,218 +10,168 @@ from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 
 """ Player API """
 
-"""
-Takes in model class Player.
-
-Inserts information about the Player class into a json file
-for storage.
-
-Have to call it within try except.
-"""
 def store_player(player: Player) -> None:
+    """
+    Args: Model class Player
+    
+    Store new players in a json file to be fetched later.
+    """
     PlayerIO.store_player(player)
 
-"""
-No parameters
-
-Reads json file containing players and creates a list of
-Player model objects of each entry in the json file.
-
-Returns the created player list.
-
-Have to call it within try except.
-"""
 def load_players() -> list[Player]:
+    """
+    Args: None
+
+    Returns a list of all players stored with the store_player function
+    as a model class Player object.
+    """
     return PlayerIO.load_players()
 
-"""
-Takes in uuid and update team model object.
-
-uuid has to exist in the json file.
-
-Will attempt to find player with given uuid and update that
-player with the new updated player object.
-
-Have to call withing try except.
-"""
 def update_player(uuid: str, updated_player: Player) -> None:
+    """
+    Args: uuid and model class Player
+
+    Looks up the player with given uuid and updates them to the given
+    Player object.
+    """
     PlayerIO.update_player(uuid, updated_player)
 
 """ Team API """
 
-"""
-No parameters
+def store_team(team: Team) -> None:
+    """
+    Args: Model class Team
 
-Reads json file containing teams and creates a list of
-Team model objects of each entry in the json file.
+    Store new teams in a json file to be fetched later.
+    """
+    TeamIO.store_team(team)
 
-Returns the created team list.
-
-Have to call within try except.
-"""
 def load_teams() -> list[Team]:
+    """
+    Args: None
+
+    Returns a list of all teams stored with the store_team function
+    as a model class Team object.
+    """
     return TeamIO.load_teams()
 
-"""
-Takes in uuid, key and value as parameters.
-
-uuid and key have to exist in the json file.
-
-Will attempt to find team with given uuid and update that
-team with the new updated team object.
-
-Have to call within try except.
-"""
 def update_team(uuid: str, updated_team: Team) -> None:
+    """
+    Args: uuid and model class Team
+
+    Looks up the team with given uuid and updates them to the given
+    Team object.
+    """
     TeamIO.update_team(uuid, updated_team)
-
-"""
-Takes in model class Team
-
-Inserts information about the Team class into a json file
-for storage.
-"""
-def store_team(team: Team) -> None:
-    TeamIO.store_team(team)
 
 """ Club API """
 
-"""
-Takes in model class Club
-
-Inserts information about the Club class into a json file
-for storage
-
-Have to call withing try except
-"""
 def store_club(club: Club) -> None:
+    """
+    Args: Model class Club
+
+    Store new clubs in a json file to be fetched later.
+    """
     ClubIO.store_club(club)
 
-"""
-No parameters
-
-Reads json file containing clubs and creates a list of
-Club model objects of each entry in the json file.
-
-Returns the created list.
-"""
 def load_clubs() -> list[Club]:
+    """
+    Args: None
+
+    Returns a list of all clubs stored with the store_club function
+    as a model class Club object.
+    """
     return ClubIO.load_club()
 
-"""
-Takes in uuid and the updated Club model object.
-
-uuid has to exist in the json file.
-
-Will attempt to find a blub with given uuid and update that
-club with the new updated club object.
-"""
 def update_club(uuid: str, updated_club: Club) -> None:
+    """
+    Args: uuid and Model class Club
+
+    Looks up the club with given uuid and updates them to the given
+    Club object.
+    """
     ClubIO.update_club(uuid, updated_club)
 
 """ Tournament API """
 
-"""
-Takes in model class Tournament.
-
-Inserts information about the class into a json file for.
-
-Have to call within try except.
-"""
 def store_tournament(tournament: Tournament) -> None:
+    """
+    Args: Model class Tournament
+
+    Store new tournaments in a json file to be fetched later.
+    """
     TournamentIO.store_tournament(tournament)
 
-"""
-No parameters
-
-Reads the json file containing tournaments and creates a list of
-Tournament model objects of each entry in the json file.
-
-Returns the created list.
-
-Have to call within try except.
-"""
-def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
-    TournamentIO.update_tournament(uuid, updated_tournament)
-
-"""
-Takes in uuid and the updated Tournament model object.
-
-uuid has to exist in the json file.
-
-Will attempt to find tournament with given uuid and update
-that team with the new updated tournament object.
-
-Have to call within try except.
-"""
 def load_tournaments() -> list[Tournament]:
+    """
+    Args: None
+
+    Returns a list of all tournaments stored with the store_tournament function
+    as a Model class Tournament object.
+    """
     return TournamentIO.load_tournaments()
+
+def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
+    """
+    Args: uuid and model class Tournament
+
+    Looks up the Tournament with given uuid and updates them to the given
+    Tournament object.
+    """
+    TournamentIO.update_tournament(uuid, updated_tournament)
 
 """ Match API """
 
-"""
-Takes in model class match
-
-Inserts information about the Match class into a json file
-for storage.
-"""
 def store_match(match: Match) -> None:
+    """
+    Args: Model class Match
+
+    Store new matches in a json file to be fetched later.
+    """
     MatchIO.store_match(match)
 
-"""
-Takes in uuid and the updated Match model object.
-
-uuid has to exist in the json file.
-
-Will attempt to find a match with given uuid and update that
-match with the new updated match object.
-"""
-def update_match(uuid: str, updated_match: Match) -> None:
-    MatchIO.update_match(uuid, updated_match)
-
-"""
-No parameters
-
-Reads json file containing matches and creates a list of
-Match model objects of each entry in the json file.
-
-Returns the created match list.
-"""
 def load_matches() -> list[Match]:
+    """
+    Args: None
+
+    Returns a list of all matches stored with the store_match function
+    as a model class Match object.
+    """
     return MatchIO.load_match()
 
+def update_match(uuid: str, updated_match: Match) -> None:
+    """
+    Args: uuid and model class Match
+
+    Looks up the Match with given uuid and updates them to the given
+    Match object.
+    """
+    MatchIO.update_match(uuid, updated_match)
 
 """ Server API """
 
-"""
-Takes in model class Server
-
-Inserts information about the Server class into a json file
-for storage
-
-Have to call within try except
-"""
 def store_server(server: Server) -> None:
+    """
+    Args: Model class Server
+
+    Store new servers in a json file to be fetched later.
+    """
     ServerIO.store_server(server)
 
-"""
-No parameters
-
-Reads json file containing server and creates a list of
-Server model objects of each entry in the json file.
-
-Returns the created list.
-"""
 def load_servers() -> list[Server]:
+    """
+    Args: None
+
+    Returns a list of all servers stored with the store_server function
+    as a model class Server object.
+    """
     return ServerIO.load_server()
 
-"""
-Takes in uuid and the updated Server model object.
-
-uuid has to exist in the json file.
-
-Will attempt to find a server with given uuid and update that
-server with the new updated server object.
-"""
 def update_server(uuid: str, updated_server: Server) -> None:
+    """
+    Args: uuid and model class Server
+
+    Looks up the server with given uuid and updates them to the given
+    Match object.
+    """
     ServerIO.update_server(uuid, updated_server)

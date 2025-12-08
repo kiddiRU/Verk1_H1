@@ -2,6 +2,8 @@
 Author: Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
+Minor change: Andri Már Kristjánsson <andrik25@ru.is>
+
 Logic layer API.
 """
 
@@ -9,14 +11,14 @@ from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
 from LogicLayer import PlayerLL, TeamLL, TournamentLL
 from LogicLayer.Validation import validate_attr
+from datetime import date, time
 
 ''' Validation API '''
-def validate(attr, value, name_type):
+def validate(attr: str, value: str, name_type: str):
     return validate_attr(attr, value, name_type)
 
 ''' Player API '''
-player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
-team_logic: TeamLL = TeamLL(DataLayerAPI)
+player_logic: PlayerLL = PlayerLL() # Make the API pass validate() to PlayerLL?
 
 def create_player(
     name: str,
@@ -49,7 +51,7 @@ def update_player_info(
     url: str = ''
 ) -> None:
     
-    return player_logic.update_player_info(
+    player_logic.update_player_info(
         player,
         name,
         date_of_birth,
@@ -60,7 +62,7 @@ def update_player_info(
         url
     )
 
-def create_team(name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str) -> Team:
+def create_team(name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
     return player_logic.create_team(name, team_captain, club_name, url, ascii_art)
 
 def leave_team(team_name: str, player: Player) -> None:
@@ -73,7 +75,7 @@ def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
 ''' Team API '''
-team_logic: TeamLL = TeamLL(DataLayerAPI)
+team_logic: TeamLL = TeamLL()
 
 # TODO implement add_player and call it
 def add_player(player_handle: str, current_player_handle: str) -> Team:
@@ -98,19 +100,15 @@ def get_team_history(team_name: str) -> list[str]:
     return team_logic.get_team_history(team_name)
 
 ''' Tournament API '''
-tournament_logic: TournamentLL = TournamentLL(DataLayerAPI)
-
-# TODO implement validate_unique_name and call it
-def validate_unique_name(name: str) -> bool:
-    pass
+tournament_logic: TournamentLL = TournamentLL()
 
 # TODO implement create_tournament and call it
 def create_tournament(
     name: str,
-    start_date: str,
-    end_date: str,
-    time_frame_start,
-    time_frame_end, 
+    start_date: date,
+    end_date: date,
+    time_frame_start: time,
+    time_frame_end: time, 
     venue: str,
     email: str,
     phone_number: str,
@@ -130,20 +128,47 @@ def create_tournament(
     )
 
 # TODO implement publish and call it
-def publish(tournament: Tournament) -> None:
-    pass
+def publish(tournament_name: str) -> None:
+    tournament_logic.publish(tournament_name)
 
 # TODO implement add_team and call it
-def add_team(tournament: Tournament, team: Team) -> None:
-    pass
+def add_team(tournament_name: str, team_name: str) -> None:
+    tournament_logic.add_team(tournament_name, team_name)
 
 # TODO implement remove_team and call it
-def remove_team(tournament: Tournament, team: Team) -> None:
-    pass
+def remove_team(tournament_name: str, team_name: str) -> None:
+    tournament_logic.remove_team(tournament_name, team_name)
 
 # TODO implement change_info and call it
-def change_info(tournament: Tournament) -> None:
-    pass
+def update_tournament_info(
+    tournament_name: str = '',
+    venue: str = '',
+    email: str = '',
+    phone_number: str = ''
+) -> None:
+    
+    tournament_logic.update_info(
+        tournament_name,
+        venue,
+        email,
+        phone_number
+    )
+
+def update_tournament_datetime(
+    tournament_name: str,
+    start_date: date,
+    end_date: date,
+    time_frame_start: time,
+    time_frame_end: time,
+) -> None:
+    
+    tournament_logic.update_tournament_datetime(
+        tournament_name,
+        start_date,
+        end_date,
+        time_frame_start,
+        time_frame_end
+    )
 
 # TODO implement next_round and call it
 def next_round() -> None:
@@ -174,3 +199,7 @@ def change_club_info(club: Club) -> None:
 # TODO implement input_match_results and call it
 def input_match_results(match: Match) -> None:
     pass
+
+
+def save_player(player_handle: str | None = None) -> str | None:
+    return player_logic.save_player(player_handle)

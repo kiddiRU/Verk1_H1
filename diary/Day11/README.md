@@ -5,20 +5,20 @@
 ### On site: 
 
 ## Elmar
-### Time:
-### On site:
+### Time: 9:10
+### On site: Yes
 
 ## Ísak Elí
-### Time:
-### On site:
+### Time: 9:10
+### On site: Yes
 
 ## Kristinn Hrafn
-### Time:
-### On site:
+### Time: 10:00
+### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
+### Time: 9:12
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:20
@@ -30,11 +30,12 @@
 ## State of group: 
 
 ## Divisions: 
-- UI / UX:
-- System engineer:
-- QC:
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristinn, Kristján
+- QC: Sindri
 
 ## ToDo-list:
+- Tournament Logic
 
 # Evening meeting (Diary)
 ## State of project:
