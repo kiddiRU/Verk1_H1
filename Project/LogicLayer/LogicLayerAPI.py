@@ -78,12 +78,12 @@ def get_player_object(player_uuid: str) -> Player:
 team_logic: TeamLL = TeamLL()
 
 # TODO implement add_player and call it
-def add_player(player_handle: str, current_player_handle: str) -> Team:
-    return team_logic.add_player(player_handle, current_player_handle)
+def add_player(player_handle: str, current_player: Player) -> Team:
+    return team_logic.add_player(player_handle, current_player)
 
 # TODO implement remove_player and call it
-def remove_player(player_handle: str, current_player_handle: str) -> Team:
-    return team_logic.remove_player(player_handle, current_player_handle)
+def remove_player(player_handle: str, current_player: Player) -> Team:
+    return team_logic.remove_player(player_handle, current_player)
 
 # TODO implement get_team_members and call it
 def get_team_members(team_name: str) -> list[str]:
