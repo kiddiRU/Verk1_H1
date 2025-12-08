@@ -84,28 +84,60 @@ class UtilityUI:
     def show_specific_tournament(self, tournament_name):
         pass
 
-    def show_all_team_names(self):
-        teams: list[Team] = LogicLayerAPI.
-        pass
+
+    def show_all_team_names(self) -> list[str]:
+        team_names: list[str] = self.team_names()
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length = len(team_names)
+
+        for value in range(0, len(team_names), 2):
+            left = team_names[value]
+            if value + 1 < length:
+
+                right = team_names[value + 1]
+                output_list.append(f"{left:<39}||{right:>39}")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}||")
+
+        return output_list
 
     def show_specific_team(self, team_name):
         print("My team: players in team:")
 
-    def show_all_clubs(self):
-        pass
+
+
+    def show_all_clubs(self) -> list[str]:
+        """
+        Returns a list of all club names formatted to be printed
+
+        Returns:
+            list[str]: A list of f-strings for printing
+        """
+        names = self.club_names()
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length = len(names)
+
+        for value in range(0, len(names), 2):
+            left = names[value]
+            if value + 1 < length:
+
+                right = names[value + 1]
+                output_list.append(f"{left:<39}||{right:>39}")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}||")
+
+        return output_list
 
     def show_specific_club(self):
         pass
 
-    def handle_list(self) -> list[str]:
-        """
-        Converts list of Player objects to a list of Player handles
 
-        Returns:
-            list[str]: PLayer handles
-        """
-        player_list: list[Player] = LogicLayerAPI.list_players()
-        return [p.handle for p in player_list]
 
     def show_all_player_handles(self) -> list[str]:
         """Returns a list of all player handles formatted neatly to be printed
@@ -151,3 +183,67 @@ class UtilityUI:
 
     def show_schedule(self):
         pass
+
+# _____________________________ MODULAR DESIGN ___________________________
+
+    def tournaments_name(self) -> list[str]:
+        pass
+
+    def team_names(self) -> list[str]:
+        """
+        Converts list of Team objects to a list of Team names
+
+        Returns:
+            list[str]: Team names
+        """
+        team_list: list[Team] = LogicLayerAPI.list_teams()
+        return [x.name for x in team_list]
+
+
+    def club_names(self):
+        clubs = LogicLayerAPI.list_clubs()
+        return [x.name for x in clubs]
+
+    def handle_list(self) -> list[str]:
+        """
+        Converts list of Player objects to a list of Player handles
+
+        Returns:
+            list[str]: PLayer handles
+        """
+        player_list: list[Player] = LogicLayerAPI.list_players()
+        return [p.handle for p in player_list]
+
+    def show_main(self, flag: str) -> list[str]:
+        """
+        Modular design to make a list of players, clubs, teams and tournaments. 
+
+        Args:
+            flag (str): "players", "clubs", "teams", "tournaments"
+
+        Returns:
+            list[str]: A list of f-strings for printing
+        """
+        flag_dict = {"players" : self.handle_list(),
+                     "clubs" : self.club_names(),
+                     "teams" : self.team_names(),
+                     "tournaments" : self.tournaments_name()
+                     }
+
+        unique_names: list[str] = flag_dict[flag]
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length = len(unique_names)
+
+        for value in range(0, len(unique_names), 2):
+            left = unique_names[value]
+            if value + 1 < length:
+
+                right = unique_names[value + 1]
+                output_list.append(f"{left:<39}||{right:>39}")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}||")
+
+        return output_list

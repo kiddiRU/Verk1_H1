@@ -5,9 +5,6 @@ Date: 2025-12-04
 File that holds all the menus that the spectator can access
 """
 
-from Models.Player import Player
-
-
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
@@ -24,8 +21,6 @@ class SpectateUI:
         self.message_color = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
-
-    # TODO: self.list_players = LogicLayerAPI.list_players()
 
     def spectate_screen(self) -> MenuOptions:
         """Spectate screen, choices: 1,2,3 and b
@@ -150,7 +145,7 @@ class SpectateUI:
             MenuOptions.spectate_screen,
             MenuOptions.spectate_clubs,
         ]
-        info: list[str] = []
+        info: list[str] = self.utility.show_all_clubs()
         options: dict[str, str] = {
             "Enter A Clubs Name Or The First Letter(s) To Search:": ""
         }
@@ -163,6 +158,35 @@ class SpectateUI:
         stopper = input("This is the spectate clubs screen")
 
         return MenuOptions.view_club_stats
+    
+        menu: str = "Spectate Players"
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_players,
+        ]
+        info: list[str] = self.utility.show_all_player_handles()
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
+        message: str = "Player Not Found!"
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))
+
+        find_handle: str = input(
+            self.message_color + "Input Handle: " + self.reset
+        )
+
+        if find_handle in self.utility.handle_list():
+            LogicLayerAPI.save_player(find_handle)
+            return MenuOptions.view_player_stats
+
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        choice: str = self.utility._prompt_choice(["t", "b"])
+        match choice:
+            case "t":
+                return MenuOptions.spectate_players
+
+        return MenuOptions.spectate_screen
 
     def view_club_stats(self) -> MenuOptions:
         """View club stats screen, choices: b
@@ -200,15 +224,27 @@ class SpectateUI:
             MenuOptions.spectate_screen,
             MenuOptions.spectate_teams,
         ]
-        info: list[str] = []
-        options: dict[str, str] = {
-            "Enter A Teams Name Or The First Letter(s) To Search:": ""
-        }
-        message: str = ""
+        info: list[str] = self.utility.show_all_team_names()
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
+        message: str = "Team Not Found!"
 
         self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))
+
+        find_handle: str = input(
+            self.message_color + "Input Team Name: " + self.reset
+        )
+
+        if find_handle in self.utility.team_names():
+            LogicLayerAPI.save_player(find_handle)
+            return MenuOptions.view_team_stats
+
         print(self.tui.table(menu, user_path, info, options, message))
-        stopper = input("This is the spectate teams screen")
+
+        choice: str = self.utility._prompt_choice(["t", "b"])
+        match choice:
+            case "t":
+                return MenuOptions.spectate_teams
 
         return MenuOptions.spectate_screen
 
@@ -219,8 +255,30 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        stopper = input("This is the view team stats screen")
-        return MenuOptions.spectate_screen
+        # Remembers what player chosen in spectate_players
+        team_name: str | None = LogicLayerAPI.save_player()
+
+        menu: str = str(team_name) + " Stats"
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_teams,
+            MenuOptions.view_team_stats,
+        ]
+        # TODO: FIX WITH REAL INFORMATION
+        info: list[str] = [
+            "Club: CLUBNAME",
+            "Wins: XX",
+            "Points: XX",
+            "Previous Teams: TEAMNAME ...",
+            "Previous Clubs: CLUBNAME ...",
+        ]
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
+        return MenuOptions.spectate_teams
 
     def spectate_tournaments(self) -> MenuOptions:
         """Spectate tournaments screen, choices: input a tournament to view
