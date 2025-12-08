@@ -168,6 +168,9 @@ def update_tournament_datetime(
         time_frame_end
     )
 
+def list_tournaments() -> list[Tournament]:
+    return tournament_logic.list_tournaments()
+
 # TODO implement next_round and call it
 def next_round() -> None:
     pass
