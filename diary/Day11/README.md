@@ -39,6 +39,14 @@ Kristinn is now working on tournament logic with Elmar and kristján
 
 # Evening meeting (Diary)
 ## State of project:
+When Kristjan was running load tournaments it crashed, it was caused by passing int in a list of str. Kristinn resolved the issue by making the model class initialize server list which made creation easier for data layer.
+
+- Decided to allow tournaments to publish with 2 or more teams
+- Kristinn - Working on tournament publish logic
+- Andri - Working on Admin UI
+- Ísak - Working on spectator UI
+- Kristján and Elmar - Working on General Logic
+- Kristinn - tournament logic 
 
 ## State of group: 
 
