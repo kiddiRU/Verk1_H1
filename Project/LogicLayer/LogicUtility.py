@@ -55,3 +55,20 @@ def get_team_uuid(team_name):
             return team.uuid
     
     raise ValidationError("Team not found")
+
+
+
+def get_club_uuid(club_name):
+    """
+    Takes in club name
+    looks through all clubs until it finds the right club name
+    and returns the teams uuid
+    if no team is found an error is raised
+    """
+
+    model_clubs: list = DataLayerAPI.load_clubs()
+    for club in model_clubs:
+        if club_name == club.name:
+            return club.uuid
+        
+    raise ValidationError("Club not found")

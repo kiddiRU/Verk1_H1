@@ -17,6 +17,7 @@ def validate(attr: str, value: str, name_type: str):
 
 ''' Player API '''
 player_logic: PlayerLL = PlayerLL(DataLayerAPI) # Make the API pass validate() to PlayerLL?
+team_logic: TeamLL = TeamLL(DataLayerAPI)
 
 def create_player(
     name: str,
