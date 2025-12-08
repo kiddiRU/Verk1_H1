@@ -148,7 +148,6 @@ class PlayerLL():
     def promote_captain(self, current_captain: Player, handle_to_promote: str) -> None:
         pass
 
-
     def save_player(self, player_handle: str | None = None):
         if player_handle is not None:
             self.player = player_handle
