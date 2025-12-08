@@ -81,11 +81,7 @@ class TeamLL():
         finds the right team uuid and
         returns a list of the team members uuid
         """        
-<<<<<<< HEAD
-        model_teams: list[Team] = self._data_api.load_teams()
-=======
         model_teams: list = DataLayerAPI.load_teams()
->>>>>>> f9f08a4755e6db29d6aeb164a80ad7ffce90b3c9
         for team in model_teams:
             if team.name == team_name:
                 return team.list_player_uuid 

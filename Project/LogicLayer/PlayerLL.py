@@ -158,7 +158,7 @@ class PlayerLL():
             raise Exception(f'No player found with the handle: {handle_to_promote}')
         
         team_to_edit.team_captain_uuid = player_to_promote.uuid
-        self._data_api.store_team(team_to_edit)
+        self._data_api.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
         if player_handle is not None:
