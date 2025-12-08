@@ -25,7 +25,7 @@ def get_player_uuid(player_handle) -> str:
 
 
 
-def get_players_team_uuid(player_handle) -> str:
+def get_players_team_uuid(player_uuid) -> str:
     """
     Takes in player handle
     looks through all teams until it finds the player in a team
@@ -33,7 +33,6 @@ def get_players_team_uuid(player_handle) -> str:
     If no player is found an error is raised
     """
     model_teams: list = DataLayerAPI.load_teams()
-    player_uuid = get_player_uuid(player_handle)
     for team in model_teams:
         if player_uuid in team.list_player_uuid:
             return team.uuid
