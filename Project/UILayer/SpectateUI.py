@@ -89,7 +89,7 @@ class SpectateUI:
             self.message_color + "Input Handle: " + self.reset
         )
 
-        if find_handle in self.utility.handle_list():
+        if find_handle in self.utility.player_handles():
             LogicLayerAPI.save_player(find_handle)
             return MenuOptions.view_player_stats
 
@@ -146,47 +146,29 @@ class SpectateUI:
             MenuOptions.spectate_clubs,
         ]
         info: list[str] = self.utility.show_main("clubs")
-        options: dict[str, str] = {
-            "Enter A Clubs Name Or The First Letter(s) To Search:": ""
-        }
-        message: str = ""
-
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
-
-        # TODO: GET A LIST IF ALL CLUBS
-        stopper = input("This is the spectate clubs screen")
-
-        return MenuOptions.view_club_stats
-    
-        menu: str = "Spectate Players"
-        user_path: list[str] = [
-            MenuOptions.spectate_screen,
-            MenuOptions.spectate_players,
-        ]
-        info: list[str] = self.utility.show_all_player_handles()
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
-        message: str = "Player Not Found!"
+        message: str = "Club Not Found!"
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        find_handle: str = input(
-            self.message_color + "Input Handle: " + self.reset
+
+        find_club: str = input(
+            self.message_color + "Input Club Name: " + self.reset
         )
 
-        if find_handle in self.utility.handle_list():
-            LogicLayerAPI.save_player(find_handle)
-            return MenuOptions.view_player_stats
+        if find_club in self.utility.club_names():
+            LogicLayerAPI.save_player(find_club)
+            return MenuOptions.view_club_stats
 
         print(self.tui.table(menu, user_path, info, options, message))
 
         choice: str = self.utility._prompt_choice(["t", "b"])
         match choice:
             case "t":
-                return MenuOptions.spectate_players
+                return MenuOptions.spectate_clubs
 
-        return MenuOptions.spectate_screen
+        return MenuOptions.view_club_stats
 
     def view_club_stats(self) -> MenuOptions:
         """View club stats screen, choices: b

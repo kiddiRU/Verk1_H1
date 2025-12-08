@@ -64,8 +64,8 @@ class UtilityUI:
                 choice: str = input()
                 if choice.strip().lower() in ["c", "b"]:
                     return choice
-                valid = validate(attribute, choice, info_type)
-                return valid
+                valid: str | None = validate(attribute, choice, info_type)
+                return str(valid)
             except ValidationError as e:
                 print(self.error_color + str(e) + self.reset)
                 continue
@@ -75,6 +75,9 @@ class UtilityUI:
         print("Screen doesn't exist")
         input("Input anything to go back to start: ")
         return MenuOptions.start_screen
+
+    def show_schedule(self):
+        pass
 
     def search_for_player(self):
         # TODO: Get logic from LL
@@ -86,92 +89,18 @@ class UtilityUI:
     def show_specific_tournament(self, tournament_name):
         pass
 
-
-    # def show_all_team_names(self) -> list[str]:
-    #     team_names: list[str] = self.team_names()
-
-    #     output_list: list[str] = []  # list that holds each line as a f-string
-
-    #     length = len(team_names)
-
-    #     for value in range(0, len(team_names), 2):
-    #         left = team_names[value]
-    #         if value + 1 < length:
-
-    #             right = team_names[value + 1]
-    #             output_list.append(f"{left:<39}||{right:>39}")
-
-    #         else:  # odd number, last item has no pair
-    #             output_list.append(f"{left:<39}||")
-
-    #     return output_list
-
     def show_specific_team(self, team_name):
         print("My team: players in team:")
 
-
-
-    # def show_all_clubs(self) -> list[str]:
-    #     """
-    #     Returns a list of all club names formatted to be printed
-
-    #     Returns:
-    #         list[str]: A list of f-strings for printing
-    #     """
-    #     names = self.club_names()
-
-    #     output_list: list[str] = []  # list that holds each line as a f-string
-
-    #     length = len(names)
-
-    #     for value in range(0, len(names), 2):
-    #         left = names[value]
-    #         if value + 1 < length:
-
-    #             right = names[value + 1]
-    #             output_list.append(f"{left:<39}||{right:>39}")
-
-    #         else:  # odd number, last item has no pair
-    #             output_list.append(f"{left:<39}||")
-
-    #     return output_list
-
     def show_specific_club(self):
         pass
-
-
-
-    # def show_all_player_handles(self) -> list[str]:
-    #     """Returns a list of all player handles formatted neatly to be printed
-
-    #     Returns:
-    #         list[str]: A list of f-strings for printing
-    #     """
-
-    #     handles: list[str] = self.handle_list()
-
-    #     output_list: list[str] = []  # list that holds each line as a f-string
-
-    #     length = len(handles)
-
-    #     for value in range(0, len(handles), 2):
-    #         left = handles[value]
-    #         if value + 1 < length:
-
-    #             right = handles[value + 1]
-    #             output_list.append(f"{left:<39}||{right:>39}")
-
-    #         else:  # odd number, last item has no pair
-    #             output_list.append(f"{left:<39}||")
-
-    #     return output_list
 
     def show_specific_player(self, player_handle: str) -> Player | None:
         """
         Get specific player object based on player handle
 
         Args:
-            player_handle (str): handle of a player
+            player_handle (str): Handle of a player
 
         Returns:
             Player | None: Player object if player is found else returns None
@@ -183,10 +112,7 @@ class UtilityUI:
                 return p
         return None
 
-    def show_schedule(self):
-        pass
-
-# _____________________________ MODULAR DESIGN ___________________________
+    # _____________________________ MODULAR DESIGN ___________________________
 
     def tournaments_name(self) -> list[str]:
         """
@@ -208,7 +134,6 @@ class UtilityUI:
         team_list: list[Team] = LogicLayerAPI.list_teams()
         return [x.name for x in team_list]
 
-
     def club_names(self):
         """
         Converts list of Club objects to a list of Club names
@@ -219,7 +144,7 @@ class UtilityUI:
         clubs: list[Club] = LogicLayerAPI.list_clubs()
         return [x.name for x in clubs]
 
-    def handle_list(self) -> list[str]:
+    def player_handles(self) -> list[str]:
         """
         Converts list of Player objects to a list of Player handles
 
@@ -231,7 +156,7 @@ class UtilityUI:
 
     def show_main(self, flag: str) -> list[str]:
         """
-        Modular design to make a list of players, clubs, teams and tournaments. 
+        Modular design to make a list of players, clubs, teams and tournaments.
 
         Args:
             flag (str): "players", "clubs", "teams", "tournaments"
@@ -239,11 +164,12 @@ class UtilityUI:
         Returns:
             list[str]: A list of f-strings for printing
         """
-        flag_dict = {"players" : self.handle_list(),
-                     "clubs" : self.club_names(),
-                     "teams" : self.team_names(),
-                     "tournaments" : self.tournaments_name()
-                     }
+        flag_dict = {
+            "players": self.player_handles(),
+            "clubs": self.club_names(),
+            "teams": self.team_names(),
+            "tournaments": self.tournaments_name(),
+        }
 
         unique_names: list[str] = flag_dict[flag]
 
@@ -256,9 +182,9 @@ class UtilityUI:
             if value + 1 < length:
 
                 right = unique_names[value + 1]
-                output_list.append(f"{left:<39}||{right:>39}")
+                output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}||")
+                output_list.append(f"{left:<39}|{" ":<39}|")
 
         return output_list
