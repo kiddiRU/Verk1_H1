@@ -83,9 +83,6 @@ class UtilityUI:
         # TODO: Get logic from LL
         pass
 
-    def show_tournaments(self):
-        pass
-
     def show_specific_tournament(self, tournament_name):
         pass
 
@@ -168,14 +165,13 @@ class UtilityUI:
             "players": self.player_handles(),
             "clubs": self.club_names(),
             "teams": self.team_names(),
-            "tournaments": self.tournaments_name(),
         }
 
         unique_names: list[str] = flag_dict[flag]
 
         output_list: list[str] = []  # list that holds each line as a f-string
 
-        length = len(unique_names)
+        length: int = len(unique_names)
 
         for value in range(0, len(unique_names), 2):
             left = unique_names[value]
@@ -187,4 +183,14 @@ class UtilityUI:
             else:  # odd number, last item has no pair
                 output_list.append(f"{left:<39}|{" ":<39}|")
 
+        return output_list
+
+    def show_tournaments(self) -> list[str]:
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        for t in tournaments:
+            output_list.append(f"{t.name:<39}>{t.status:<39}|")
+        
         return output_list
