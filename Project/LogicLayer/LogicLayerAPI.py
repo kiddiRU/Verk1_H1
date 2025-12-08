@@ -153,6 +153,7 @@ def update_tournament_info(
     )
 
 def update_tournament_datetime(
+    tournament_name: str,
     start_date: date,
     end_date: date,
     time_frame_start: time,
@@ -160,6 +161,7 @@ def update_tournament_datetime(
 ) -> None:
     
     tournament_logic.update_tournament_datetime(
+        tournament_name,
         start_date,
         end_date,
         time_frame_start,
