@@ -161,27 +161,14 @@ def validate_date(date_input) -> date | ValidationError: # Date of Birth, Date o
 def validate_date_frame(start_date, end_date) -> date | ValidationError: # Date frame of tournament
     """Checks if date frame is correct, date_1 is before date_2 (2025-12-01 -> 2025-12-06)"""
 
-    try:
-        start_date_list: list = list(map(int, start_date.split("-")))
-        end_date_list: list = list(map(int, end_date.split("-")))
+    valid_date_start = validate_time(start_date)
+    valid_date_end = validate_time(end_date)
 
-        try:
-            valid_start_date = date(start_date_list[0], start_date_list[1], start_date_list[2])
-            valid_end_date = date(end_date_list[0], end_date_list[1], end_date_list[2])
+    if valid_date_start <= valid_date_end:
+        return valid_date_start, valid_date_end
 
-            if valid_start_date <= valid_end_date:
-                return valid_start_date, valid_end_date
-
-            else:
-                raise ValidationError("Not a valid date frame")
-
-        
-        except:
-            raise ValidationError("Not a valid date")
-
-
-    except ValueError:
-        raise ValidationError("Letters are not allowed in a date")
+    else: 
+        raise ValidationError("Not a valid Date frame")
 
 
 
@@ -206,27 +193,13 @@ def validate_time(time_input) -> time: # Time of Match and Tournament time frame
 def validate_time_frame(start_time, end_time) -> time: # Time frame of tournament
     """Checks if time frame is correct, time_1 is before time_2 (08:00 -> 16:00) """
     
-    try:
-        start_time_list: list = list(map(int, start_time.split("-")))
-        end_time_list: list = list(map(int, end_time.split("-")))
+    valid_time_start = validate_time(start_time)
+    valid_time_end = validate_time(end_time)
 
-        try:
-            valid_start_time = date(start_time_list[0], start_time_list[1], start_time_list[2])
-            valid_end_time = date(end_time_list[0], end_time_list[1], end_time_list[2])
+    if valid_time_start <= valid_time_end:
+        return valid_time_start, valid_time_end
 
-            if valid_start_time <= valid_end_time:
-                return valid_start_time, valid_end_time
-
-            else:
-                raise ValidationError("Not a valid time frame")
-
-        
-        except:
-            raise ValidationError("Not a valid time")
-
-
-    except ValueError:
-        raise ValidationError("Letters are not allowed in a time")
-
+    else: 
+        raise ValidationError("Not a valid Time frame")
 
 
