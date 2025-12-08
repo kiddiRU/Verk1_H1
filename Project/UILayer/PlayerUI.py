@@ -18,7 +18,6 @@ class PlayerUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
-        self.message_color: str = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
 
@@ -80,7 +79,7 @@ class PlayerUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))        
 
-        choice: str = self.utility._input_info(self.message_color + "Input Your Handle: " + self.reset)
+        choice: str = input("Input Your Handle: ")
 
         if choice == "admin":
             return MenuOptions.admin_screen
@@ -111,37 +110,43 @@ class PlayerUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))  
-        user_name: str = self.utility._input_info(self.message_color + "Enter Name: \n" + self.reset)
-        self.tui.save_input("Name: " + user_name)
+        user_name: str | None = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
+        if user_name != None:
+            self.tui.save_input("Name: " + user_name)
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_dob: str = self.utility._input_info(self.message_color + "Enter Date Of Birth: \n" + self.reset)
-        self.tui.save_input("Date Of Birth: " + user_dob)
+        user_dob: str | None = self.utility._input_info("Enter Date Of Birth: \n", "date_of_birth", "PLAYER")
+        if user_dob != None:
+            self.tui.save_input("Date Of Birth: " + user_dob)
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_addr: str = self.utility._input_info(self.message_color + "Enter Home Address: \n" + self.reset)
-        self.tui.save_input("Home Address: " + user_addr)
+        user_addr: str | None = self.utility._input_info("Enter Home Address: \n", "home_address", "PLAYER")
+        if user_addr != None:
+            self.tui.save_input("Home Address: " + user_addr)
 
 
         print(self.tui.table(menu, user_path, info))
-        user_email: str = self.utility._input_info(self.message_color + "Enter Email: \n" + self.reset)
-        self.tui.save_input("Email: " + user_email)
+        user_email: str | None = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
+        if user_email != None:
+            self.tui.save_input("Email: " + user_email)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_phnum: str = self.utility._input_info(self.message_color + "Enter Phone Number: \n" + self.reset)
-        self.tui.save_input("Phone Number: " + user_phnum)
+        user_phnum: str | None = self.utility._input_info("Enter Phone Number: \n", "phone_number", "PLAYER")
+        if user_phnum != None:
+            self.tui.save_input("Phone Number: " + user_phnum)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_handle: str = self.utility._input_info(self.message_color + "Enter Handle: \n" + self.reset)
-        self.tui.save_input("Handle: " + user_handle)
+        user_handle: str | None = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
+        if user_handle != None:
+            self.tui.save_input("Handle: " + user_handle)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_url: str = self.utility._input_info(self.message_color + "Enter URL: \n" + self.reset)
+        user_url: str = input("Enter URL: \n") #TODO: This is just a basic input
         self.tui.save_input("URL: " + user_url)
         print(self.tui.table(menu, user_path, info, options, message))
         con: str = self.utility._prompt_choice(["c"])
@@ -228,19 +233,20 @@ Club4"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, [], {}, message))
-        team_name: str =input(self.message_color + "Enter Team Name: \n" + self.reset)
-        self.tui.save_input("Team Name: " + team_name)
+        team_name: str | None = self.utility._input_info("Enter Team Name: \n", "name", "TEAM")
+        if team_name != None:
+            self.tui.save_input("Team Name: " + team_name)
 
         print(self.tui.table(menu, user_path))
-        team_url: str = self.utility._input_info(self.message_color + "Enter Team URL (Optional): \n" + self.reset)
+        team_url: str = input("Enter Team URL (Optional): \n")
         self.tui.save_input("Team Name: " + team_url)
 
         print(self.tui.table(menu, user_path))
-        team_ascii: str = self.utility._input_info(self.message_color + "Enter Team ASCII Art (Optional): \n" + self.reset)
+        team_ascii: str = input("Enter Team ASCII Art (Optional): \n")
         self.tui.save_input("Team ASCII Art: " + team_ascii)
 
         print(self.tui.table(menu, user_path, info))
-        team_club: str = self.utility._input_info(self.message_color + "Choose A Club To Join: \n" + self.reset)
+        team_club: str = input("Choose A Club To Join: \n") 
         self.tui.save_input("Club: " + team_club)
 
         print(self.tui.table(menu, user_path, info, options))
@@ -443,7 +449,7 @@ Club4"""]
         print(self.tui.table(menu, user_path))
 
         # Might add to the message if the search will be implemented
-        add_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Add Them: \n")
+        add_handle: str = input("Enter A Players Handle To Add Them: \n")
 
         self.tui.save_input("Player To Add: " + add_handle)
 
@@ -499,7 +505,7 @@ Club4"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, ))
-        remove_handle: str = self.utility._input_info(self.message_color + "Enter A Players Handle To Remove Them: \n")
+        remove_handle: str = input("Enter A Players Handle To Remove Them: \n")
 
         if...: #TODO: check if player is found and is not in a team
             message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"

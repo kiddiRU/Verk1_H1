@@ -106,7 +106,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-        tournament = self.utility._input_info("Input tournament to manage")
+        tournament = input("Input tournament to manage")
         if tournament.lower() == "lo":
             return MenuOptions.logout
         
@@ -273,7 +273,7 @@ class AdminUI:
 
         print("PUBLISH TOURNAMENT")
         print("<list of tournaments>")
-        choice: str = self.utility._input_info("Input tournament to publish: ")
+        choice: str = input("Input tournament to publish: ")
         # TODO: Check for tournament then publish it
 
         return MenuOptions.manage_active_tournament
@@ -288,7 +288,7 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
         print("list of inactive tournaments")
-        tournament_name: str = self.utility._input_info(
+        tournament_name: str = input(
             "Choose tournament to edit"
         )
 
@@ -317,15 +317,19 @@ class AdminUI:
         """
         print("THIS is edit tournament time")
 
-        choice: str = self.utility._input_info("DO YOU WANT TO CONTINUE? Y/N")
-        match choice:
-            case "Y":
-                print("YOU CHANGED IT")
-                return MenuOptions.edit_tournament
-            case "N":
-                print("CANCELING")
-                return MenuOptions.edit_tournament
+        choice = "a"
+        while choice.lower() != "y" or choice.lower() != "n":
+            choice: str = input("DO YOU WANT TO CONTINUE? Y/N")
+            match choice:
+                case "Y":
+                    print("YOU CHANGED IT")
+                    return MenuOptions.edit_tournament
+                case "N":
+                    print("CANCELING")
+                    return MenuOptions.edit_tournament
+        
         return MenuOptions.edit_tournament
+        
 
 
 

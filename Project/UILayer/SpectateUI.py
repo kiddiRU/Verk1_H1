@@ -80,15 +80,13 @@ class SpectateUI:
             MenuOptions.spectate_players,
         ]
         info: list[str] = []
-        options: dict[str, str] = {
-            "Enter A Players Name Or The First Letter(s) To Search:": ""
-        }
+        options: dict[str, str] = {}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
-        choice: str = self.utility._input_info("")
+        choice: str = input("Enter A Players Name Or The First Letter(s) To Search: \n")
         match choice:
             # case "":
             #     self.list_players()
