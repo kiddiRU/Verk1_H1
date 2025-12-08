@@ -110,7 +110,7 @@ class TeamLL():
 
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
-    def get_team_history(self, team_name) -> list[str]:
+    def get_team_history(self, team_name: str) -> list[str]:
         """
         Takes in team uuid,
         looks through a list of all the tournaments
