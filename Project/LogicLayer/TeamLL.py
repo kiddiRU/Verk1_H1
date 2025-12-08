@@ -25,7 +25,7 @@ class TeamLL():
         """
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player.uuid)
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
         
         for team in model_teams:
             if player_uuid in team.list_player_uuid:
@@ -55,7 +55,7 @@ class TeamLL():
         """
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player.uuid)
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
         
         for team in model_teams:
             if team.uuid == team_uuid:
@@ -81,9 +81,9 @@ class TeamLL():
         finds the right team uuid and
         returns a list of the team members uuid
         """        
-        model_teams: list = self._data_api.load_teams()
+        model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
-            if team.handle == team_name:
+            if team.name == team_name:
                 return team.list_player_uuid 
             
         raise ValidationError("Team not found")
@@ -104,9 +104,9 @@ class TeamLL():
         returns the model class of the team
         """
         
-        model_teams: list = self._data_api.load_teams()
+        model_teams: list = DataLayerAPI.load_teams()
         for team in model_teams:
-            if team.handle == team_name:
+            if team.name == team_name:
                 return team
 
         raise ValidationError("Team not found")
@@ -123,7 +123,7 @@ class TeamLL():
         teams_history: list = []
         team_uuid: str = get_team_uuid(team_name)
 
-        model_tournaments: list = self._data_api.load_tournaments()
+        model_tournaments: list = DataLayerAPI.load_tournaments()
         for tournament in model_tournaments:
             if team_uuid in tournament.teams_playing: 
                 teams_history.append(tournament.name)

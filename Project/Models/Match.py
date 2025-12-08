@@ -14,12 +14,12 @@ class Match:
     def __init__(
         self,
         uuid: str,
-        server_id: str,
+        tournament_id: str,
         match_date: date,
         match_time: time,
         team_1: str,
         team_2: str,
-        winner: None | str,
+        winner: None | str = None,
     ) -> None:
         """
         Initializer for Match model class
@@ -35,7 +35,7 @@ class Match:
         """
 
         self.uuid = uuid
-        self.server_id = server_id
+        self.tournament_id = tournament_id
         self.match_date = match_date
         self.match_time = match_time
         self.team_1 = team_1

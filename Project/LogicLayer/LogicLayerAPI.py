@@ -74,6 +74,9 @@ def list_players() -> list[Player]:
 def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
+def promote_captain(current_player: Player, handle_to_promote: str) -> None:
+    player_logic.promote_captain(current_player, handle_to_promote)
+
 ''' Team API '''
 team_logic: TeamLL = TeamLL()
 
@@ -102,7 +105,6 @@ def get_team_history(team_name: str) -> list[str]:
 ''' Tournament API '''
 tournament_logic: TournamentLL = TournamentLL()
 
-# TODO implement create_tournament and call it
 def create_tournament(
     name: str,
     start_date: date,
@@ -127,19 +129,15 @@ def create_tournament(
         amount_of_servers
     )
 
-# TODO implement publish and call it
 def publish(tournament_name: str) -> None:
     tournament_logic.publish(tournament_name)
 
-# TODO implement add_team and call it
 def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
 
-# TODO implement remove_team and call it
 def remove_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.remove_team(tournament_name, team_name)
 
-# TODO implement change_info and call it
 def update_tournament_info(
     tournament_name: str = '',
     venue: str = '',

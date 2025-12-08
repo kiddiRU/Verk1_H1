@@ -5,7 +5,7 @@ Date: 2025-12-05
 Functions for tournament logic.
 '''
 
-from Models import Player, Team, Tournament
+from Models import Team, Tournament
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time
@@ -56,7 +56,7 @@ class TournamentLL:
             raise Exception(f'No tournament found named: {tournament_name}')
 
         tournament.status = Tournament.StatusType.active
-        self._data_api.store_tournament(tournament)
+        self._data_api.update_tournament(tournament.uuid, tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
         '''
@@ -77,7 +77,7 @@ class TournamentLL:
             raise Exception(f'No team found named: {team_name}')
         
         tournament.teams_playing.append(team.uuid)
-        self._data_api.store_tournament(tournament)
+        self._data_api.update_tournament(tournament.uuid, tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
         '''
@@ -100,12 +100,12 @@ class TournamentLL:
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
 
-        self._data_api.store_tournament(tournament)
+        self._data_api.update_tournament(tournament.uuid, tournament)
 
     def update_info(
         self,
         name: str,
-        venue: str, # ma breyta venue ef published?
+        venue: str,
         email: str,
         phone_number: str
     ) -> None:
@@ -162,3 +162,7 @@ class TournamentLL:
             setattr(tournament, attr, value)
 
         self._data_api.update_tournament(tournament.uuid, tournament)
+
+    def list_tournaments(self) -> list[Tournament]:
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        return tournaments
