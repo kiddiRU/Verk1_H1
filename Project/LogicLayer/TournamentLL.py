@@ -66,8 +66,21 @@ class TournamentLL:
             raise Exception(f'No team found named: {team_name}')
         
         tournament.teams_playing.append(team.uuid)
+        self._data_api.store_tournament(tournament)
 
-    def remove_team(self, tournament_name: str, team_name: str):
-        pass
+    def remove_team(self, tournament_name: str, team_name: str) -> None:
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
+        
+        teams: list[Team] = self._data_api.load_teams()
+        team: Team | None = next((t for t in teams if t.name == team_name), None)
 
+        if tournament is None:
+            raise Exception(f'No tournament found named: {tournament_name}')
+
+        if team is None:
+            raise Exception(f'No team found named: {team_name}')
+        
+        tournament.teams_playing.remove(team.uuid)
+        self._data_api.store_tournament(tournament)
         
