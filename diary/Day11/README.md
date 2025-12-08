@@ -36,6 +36,7 @@
 
 ## ToDo-list:
 - Tournament Logic
+- Add error message to home address
 
 # Evening meeting (Diary)
 ## State of project:

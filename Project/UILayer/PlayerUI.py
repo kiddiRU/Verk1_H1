@@ -128,7 +128,7 @@ class PlayerUI:
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_dob: str = self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER")
+        user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
         self.tui.save_input("Date Of Birth: " + str(user_dob))
 
 
@@ -160,6 +160,8 @@ class PlayerUI:
         con: str = self.utility._prompt_choice(["c"])
 
         LogicLayerAPI.create_player(user_name, user_dob, user_addr, user_email, user_phnum, user_handle, user_url)
+
+        LogicLayerAPI.save_player(user_handle)
         
         #if register
         return MenuOptions.player_screen
