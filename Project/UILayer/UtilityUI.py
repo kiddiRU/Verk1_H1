@@ -3,7 +3,7 @@ Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
 
 Co-Author: Andri Már Kristjánsson <andrik25@ru.is>,
-Sindri Freysson
+Sindri Freysson <Sindrif25@ru.is>
 
 File that holds the UtilityUI class
 which holds functions used in multiple places
