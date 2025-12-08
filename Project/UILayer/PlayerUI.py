@@ -10,6 +10,7 @@ File that holds all the menus that the player can access
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
+from LogicLayer.PlayerLL import PlayerLL
 
 
 class PlayerUI:
@@ -20,7 +21,7 @@ class PlayerUI:
         self.tui = Drawer()
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
-
+        self.player = PlayerLL()
 
 
     def start_screen(self) -> MenuOptions:
@@ -106,47 +107,42 @@ class PlayerUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))  
-        user_name: str | None = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
-        if user_name != None:
-            self.tui.save_input("Name: " + user_name)
+        user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
+        self.tui.save_input("Name: " + user_name)
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_dob: str | None = self.utility._input_info("Enter Date Of Birth: \n", "date_of_birth", "PLAYER")
-        if user_dob != None:
-            self.tui.save_input("Date Of Birth: (yyyy-mm-dd)" + user_dob)
+        user_dob: str = self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER")
+        self.tui.save_input("Date Of Birth:" + user_dob)
 
 
         print(self.tui.table(menu, user_path, info)) 
-        user_addr: str | None = self.utility._input_info("Enter Home Address: \n", "home_address", "PLAYER")
-        if user_addr != None:
-            self.tui.save_input("Home Address: " + user_addr)
+        user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", "home_address", "PLAYER")
+        self.tui.save_input("Home Address: " + user_addr)
 
 
         print(self.tui.table(menu, user_path, info))
-        user_email: str | None = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
-        if user_email != None:
-            self.tui.save_input("Email: " + user_email)
+        user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
+        self.tui.save_input("Email: " + user_email)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_phnum: str | None = self.utility._input_info("Enter Phone Number: \n", "phone_number", "PLAYER")
-        if user_phnum != None:
-            self.tui.save_input("Phone Number: " + user_phnum)
+        user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
+        self.tui.save_input("Phone Number: " + user_phnum)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_handle: str | None = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
-        if user_handle != None:
-            self.tui.save_input("Handle: " + user_handle)
+        user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
+        self.tui.save_input("Handle: " + user_handle)
 
 
         print(self.tui.table(menu, user_path, info))   
-        user_url: str = input("Enter URL: \n") #TODO: This is just a basic input
+        user_url: str = input("Enter URL: (ooptional) \n") #TODO: This is just a basic input
         self.tui.save_input("URL: " + user_url)
         print(self.tui.table(menu, user_path, info, options, message))
         con: str = self.utility._prompt_choice(["c"])
 
+        self.player.create_player(user_name, user_dob, user_addr, user_email, user_phnum, user_handle, user_url)
         
         #if register
         return MenuOptions.player_screen

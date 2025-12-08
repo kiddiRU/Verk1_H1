@@ -42,7 +42,7 @@ class UtilityUI:
             print(self.error_color + "Not a valid option try again" + self.reset)
 
     # Created by Sindri
-    def _input_info(self, message: str, attribute: str, info_type: str) -> str | None:
+    def _input_info(self, message: str, attribute: str, info_type: str) -> str:
         """
         Helper function that repeats input until it is valid or navigation word is entered
         :param message: message to display - "Enter Your name"
