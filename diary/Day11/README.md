@@ -26,9 +26,9 @@
 
 # Morning meeting (Briefing)
 ## State of project: 
-
+The project is starting to take shape. The datalayer is done, and only the logic and UI layers are left. The main is set up, which allows us to test functionality of the program. MainUI now uses dict instead of if else, to improve readability.
 ## State of group: 
-
+Kristinn is now working on tournament logic with Elmar and kristján
 ## Divisions: 
 - UI / UX: Andri, Ísak
 - System engineer: Elmar, Kristinn, Kristján
