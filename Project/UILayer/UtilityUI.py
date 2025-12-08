@@ -10,6 +10,9 @@ which holds functions used in multiple places
 """
 
 from Models.Player import Player
+from Models.Club import Club
+from Models.Team import Team
+from Models.Tournament import Tournament
 
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
@@ -70,7 +73,7 @@ class UtilityUI:
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")
-        anything: str = input("Input anything to go back to start: ")
+        input("Input anything to go back to start: ")
         return MenuOptions.start_screen
 
     def search_for_player(self):
@@ -83,34 +86,179 @@ class UtilityUI:
     def show_specific_tournament(self, tournament_name):
         pass
 
-    def show_teams(self):
-        pass
+
+    # def show_all_team_names(self) -> list[str]:
+    #     team_names: list[str] = self.team_names()
+
+    #     output_list: list[str] = []  # list that holds each line as a f-string
+
+    #     length = len(team_names)
+
+    #     for value in range(0, len(team_names), 2):
+    #         left = team_names[value]
+    #         if value + 1 < length:
+
+    #             right = team_names[value + 1]
+    #             output_list.append(f"{left:<39}||{right:>39}")
+
+    #         else:  # odd number, last item has no pair
+    #             output_list.append(f"{left:<39}||")
+
+    #     return output_list
 
     def show_specific_team(self, team_name):
         print("My team: players in team:")
 
-    def show_clubs(self):
+
+
+    # def show_all_clubs(self) -> list[str]:
+    #     """
+    #     Returns a list of all club names formatted to be printed
+
+    #     Returns:
+    #         list[str]: A list of f-strings for printing
+    #     """
+    #     names = self.club_names()
+
+    #     output_list: list[str] = []  # list that holds each line as a f-string
+
+    #     length = len(names)
+
+    #     for value in range(0, len(names), 2):
+    #         left = names[value]
+    #         if value + 1 < length:
+
+    #             right = names[value + 1]
+    #             output_list.append(f"{left:<39}||{right:>39}")
+
+    #         else:  # odd number, last item has no pair
+    #             output_list.append(f"{left:<39}||")
+
+    #     return output_list
+
+    def show_specific_club(self):
         pass
 
-    def show_all_player_handles(self) -> list[str]:
+
+
+    # def show_all_player_handles(self) -> list[str]:
+    #     """Returns a list of all player handles formatted neatly to be printed
+
+    #     Returns:
+    #         list[str]: A list of f-strings for printing
+    #     """
+
+    #     handles: list[str] = self.handle_list()
+
+    #     output_list: list[str] = []  # list that holds each line as a f-string
+
+    #     length = len(handles)
+
+    #     for value in range(0, len(handles), 2):
+    #         left = handles[value]
+    #         if value + 1 < length:
+
+    #             right = handles[value + 1]
+    #             output_list.append(f"{left:<39}||{right:>39}")
+
+    #         else:  # odd number, last item has no pair
+    #             output_list.append(f"{left:<39}||")
+
+    #     return output_list
+
+    def show_specific_player(self, player_handle: str) -> Player | None:
+        """
+        Get specific player object based on player handle
+
+        Args:
+            player_handle (str): handle of a player
+
+        Returns:
+            Player | None: Player object if player is found else returns None
+        """
         player_list: list[Player] = LogicLayerAPI.list_players()
 
-        handle_list: list[str] = [p.handle for p in player_list]
-
-        print_list: list[str] = [] # list that holds each line as a f-string
-
-        for value in range(0, len(handle_list), 2):
-            try:
-                print_list.append(
-                    f"{handle_list[value]:<{39}}||{handle_list[value + 1]:>{39}}"
-                )
-            except IndexError:  # IF there is an odd amount of players
-                print_list.append(f"{handle_list[-1]:<{39}}||")
-
-        return print_list
-
-    def show_specific_player(self):
-        pass
+        for p in player_list:
+            if p.handle == player_handle:
+                return p
+        return None
 
     def show_schedule(self):
         pass
+
+# _____________________________ MODULAR DESIGN ___________________________
+
+    def tournaments_name(self) -> list[str]:
+        """
+        Converts list of Tournament objects to a list of Tournament names
+
+        Returns:
+            list[str]: Tournament names
+        """
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
+        return [x.name for x in tournaments]
+
+    def team_names(self) -> list[str]:
+        """
+        Converts list of Team objects to a list of Team names
+
+        Returns:
+            list[str]: Team names
+        """
+        team_list: list[Team] = LogicLayerAPI.list_teams()
+        return [x.name for x in team_list]
+
+
+    def club_names(self):
+        """
+        Converts list of Club objects to a list of Club names
+
+        Returns:
+            list[str]: Club names
+        """
+        clubs: list[Club] = LogicLayerAPI.list_clubs()
+        return [x.name for x in clubs]
+
+    def handle_list(self) -> list[str]:
+        """
+        Converts list of Player objects to a list of Player handles
+
+        Returns:
+            list[str]: PLayer handles
+        """
+        player_list: list[Player] = LogicLayerAPI.list_players()
+        return [p.handle for p in player_list]
+
+    def show_main(self, flag: str) -> list[str]:
+        """
+        Modular design to make a list of players, clubs, teams and tournaments. 
+
+        Args:
+            flag (str): "players", "clubs", "teams", "tournaments"
+
+        Returns:
+            list[str]: A list of f-strings for printing
+        """
+        flag_dict = {"players" : self.handle_list(),
+                     "clubs" : self.club_names(),
+                     "teams" : self.team_names(),
+                     "tournaments" : self.tournaments_name()
+                     }
+
+        unique_names: list[str] = flag_dict[flag]
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length = len(unique_names)
+
+        for value in range(0, len(unique_names), 2):
+            left = unique_names[value]
+            if value + 1 < length:
+
+                right = unique_names[value + 1]
+                output_list.append(f"{left:<39}||{right:>39}")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}||")
+
+        return output_list

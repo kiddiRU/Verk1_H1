@@ -9,7 +9,7 @@ Logic layer API.
 
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
-from LogicLayer import PlayerLL, TeamLL, TournamentLL
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -180,16 +180,17 @@ def cancel_tournament(tournament: Tournament) -> None:
     pass
 
 ''' Club API '''
+club_logic: ClubLL =  ClubLL()
 
 # TODO implement create_club and call it
 def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
-    return create_club(name,club_color, country, home_town)
+    return club_logic.create_club(name,club_color, country, home_town)
 
 def list_clubs() -> list[Club]:
-    return list_clubs()
+    return club_logic.list_clubs()
 
 def get_teams_in_club(club_name: str) -> list[Team]:
-    return get_teams_in_club(club_name)
+    return club_logic.get_teams_in_club(club_name)
 
 # TODO implement change_club_info and call it
 def change_club_info(club: Club) -> None:
