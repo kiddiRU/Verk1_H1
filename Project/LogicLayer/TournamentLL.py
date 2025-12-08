@@ -76,6 +76,9 @@ class TournamentLL:
         if team is None:
             raise Exception(f'No team found named: {team_name}')
         
+        if team.uuid in tournament.teams_playing:
+            raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
+        
         tournament.teams_playing.append(team.uuid)
         self._data_api.update_tournament(tournament.uuid, tournament)
 
@@ -112,8 +115,8 @@ class TournamentLL:
         '''
         Takes in a tournaments name, venue, email and phone number.
 
-        Takes the given info and applies it a tournament. Performs no validation
-        on the given info.
+        Takes the given info and applies it a tournament. Performs
+        no validation on the given info.
         '''
         
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
