@@ -40,8 +40,8 @@ def load_match() -> list[Match]:
     # Each match is stored as a Match model object in the list.
     match_list: list[Match] = []
     for value in file_content.values():
-        # Changing non json storable data types
-        # from string back into their original type
+        # Changes non json storable data types
+        # from string back into their original type.
         value["match_date"] = date.fromisoformat(value["match_date"])
         value["match_time"] = datetime.strptime(
             value["match_time"],
