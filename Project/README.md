@@ -1,5 +1,5 @@
 # Project folder
-
+The project expects to run from Project folder
 ## Coding standard
 
 ### Python standard
