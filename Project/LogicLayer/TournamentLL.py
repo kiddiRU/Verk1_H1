@@ -25,7 +25,12 @@ class TournamentLL:
         phone_number: str,
         server_amount: int
     ) -> None:
-        
+        '''
+        Takes in tournament info.
+
+        Creates a new Tournaments object and sends it to the data
+        layer to be stored. Performs no validation on the given info.
+        '''
         uuid = str(uuid4())
         new_tournament = Tournament(
             uuid,
@@ -54,6 +59,11 @@ class TournamentLL:
         self._data_api.store_tournament(tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
+        '''
+        Takes in a tournament and team name.
+
+        Adds the teams UUID to the teams_playing list in the tournament.
+        '''
         tournaments: list[Tournament] = self._data_api.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
         
@@ -70,6 +80,11 @@ class TournamentLL:
         self._data_api.store_tournament(tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
+        '''
+        Takes in a tournament and team name.
+
+        Removes the teams UUID from the teams_playing list in the tournament.
+        '''
         tournaments: list[Tournament] = self._data_api.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
         
@@ -94,6 +109,12 @@ class TournamentLL:
         email: str,
         phone_number: str
     ) -> None:
+        '''
+        Takes in a tournaments name, venue, email and phone number.
+
+        Takes the given info and applies it a tournament. Performs no validation
+        on the given info.
+        '''
         
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         
@@ -111,7 +132,6 @@ class TournamentLL:
 
         self._data_api.update_tournament(tournament.uuid, tournament)
     
-    # TODO: Implement.
     def update_tournament_datetime(
         self,
         name: str,
@@ -120,6 +140,12 @@ class TournamentLL:
         time_frame_start: time,
         time_frame_end: time
     ) -> None:
+        '''
+        Takes in a start date, end date, time frame start, and a time frame end.
+
+        Takes the given info and applies it a tournament. Performs no validation
+        on the given info.
+        '''
         
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         

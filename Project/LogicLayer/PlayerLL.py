@@ -52,10 +52,9 @@ class PlayerLL():
             params["url"],
         )
 
-        DataLayerAPI.store_player(new_player)
+        self._data_api.store_player(new_player)
         return new_player
 
-    # TODO Remove Player objec, alter validation functionality?
     def update_player_info(
         self,
         player: Player,
@@ -85,7 +84,6 @@ class PlayerLL():
         self._data_api.update_player(player.uuid, player)
         return player
 
-    # TODO Remove Player object, check if player is in team
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
