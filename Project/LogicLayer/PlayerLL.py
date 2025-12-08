@@ -52,10 +52,9 @@ class PlayerLL():
             params["url"],
         )
 
-        DataLayerAPI.store_player(new_player)
+        self._data_api.store_player(new_player)
         return new_player
 
-    # TODO Remove Player objec, alter validation functionality?
     def update_player_info(
         self,
         player: Player,
@@ -85,13 +84,17 @@ class PlayerLL():
         self._data_api.update_player(player.uuid, player)
         return player
 
-    # TODO Remove Player object, check if player is in team
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
 
         Creates a new Team object, sends it the data layer to be stored and returns it.
         '''
+        teams: list[Team] = self._data_api.load_teams()
+        players_in_teams: list[str] = [uuid for t in teams for uuid in t.list_player_uuid]
+
+        if team_captain.uuid in players_in_teams:
+            raise Exception('You can\'t create a team when you\'re already in one!')
 
         validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
