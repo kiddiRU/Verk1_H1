@@ -102,14 +102,14 @@ class AdminUI:
             MenuOptions.manage_tournament,
         ]
         info: list[str] = []
-        options: dict[str, str] = {"Choose a tournament to manage": ""}
+        options: dict[str, str] = {}
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
         
-        tournament = input("Input tournament to manage")
+        tournament = input("Input tournament to manage: \n")
         if tournament.lower() == "lo":
             return MenuOptions.logout
         

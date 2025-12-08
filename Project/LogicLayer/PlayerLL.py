@@ -143,7 +143,7 @@ class PlayerLL():
         return player
 
 
-    def save_login(self, login_handle=None):
-        if login_handle is not None:
-            self.login = login_handle
-        return self.login
+    def save_player(self, player_handle=None):
+        if player_handle is not None:
+            self.player = player_handle
+        return self.player
