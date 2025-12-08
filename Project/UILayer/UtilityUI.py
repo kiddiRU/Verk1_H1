@@ -10,7 +10,9 @@ which holds functions used in multiple places
 """
 
 from Models.Player import Player
+from Models.Club import Club
 from Models.Team import Team
+from Models.Tournament import Tournament
 
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
@@ -85,84 +87,84 @@ class UtilityUI:
         pass
 
 
-    def show_all_team_names(self) -> list[str]:
-        team_names: list[str] = self.team_names()
+    # def show_all_team_names(self) -> list[str]:
+    #     team_names: list[str] = self.team_names()
 
-        output_list: list[str] = []  # list that holds each line as a f-string
+    #     output_list: list[str] = []  # list that holds each line as a f-string
 
-        length = len(team_names)
+    #     length = len(team_names)
 
-        for value in range(0, len(team_names), 2):
-            left = team_names[value]
-            if value + 1 < length:
+    #     for value in range(0, len(team_names), 2):
+    #         left = team_names[value]
+    #         if value + 1 < length:
 
-                right = team_names[value + 1]
-                output_list.append(f"{left:<39}||{right:>39}")
+    #             right = team_names[value + 1]
+    #             output_list.append(f"{left:<39}||{right:>39}")
 
-            else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}||")
+    #         else:  # odd number, last item has no pair
+    #             output_list.append(f"{left:<39}||")
 
-        return output_list
+    #     return output_list
 
     def show_specific_team(self, team_name):
         print("My team: players in team:")
 
 
 
-    def show_all_clubs(self) -> list[str]:
-        """
-        Returns a list of all club names formatted to be printed
+    # def show_all_clubs(self) -> list[str]:
+    #     """
+    #     Returns a list of all club names formatted to be printed
 
-        Returns:
-            list[str]: A list of f-strings for printing
-        """
-        names = self.club_names()
+    #     Returns:
+    #         list[str]: A list of f-strings for printing
+    #     """
+    #     names = self.club_names()
 
-        output_list: list[str] = []  # list that holds each line as a f-string
+    #     output_list: list[str] = []  # list that holds each line as a f-string
 
-        length = len(names)
+    #     length = len(names)
 
-        for value in range(0, len(names), 2):
-            left = names[value]
-            if value + 1 < length:
+    #     for value in range(0, len(names), 2):
+    #         left = names[value]
+    #         if value + 1 < length:
 
-                right = names[value + 1]
-                output_list.append(f"{left:<39}||{right:>39}")
+    #             right = names[value + 1]
+    #             output_list.append(f"{left:<39}||{right:>39}")
 
-            else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}||")
+    #         else:  # odd number, last item has no pair
+    #             output_list.append(f"{left:<39}||")
 
-        return output_list
+    #     return output_list
 
     def show_specific_club(self):
         pass
 
 
 
-    def show_all_player_handles(self) -> list[str]:
-        """Returns a list of all player handles formatted neatly to be printed
+    # def show_all_player_handles(self) -> list[str]:
+    #     """Returns a list of all player handles formatted neatly to be printed
 
-        Returns:
-            list[str]: A list of f-strings for printing
-        """
+    #     Returns:
+    #         list[str]: A list of f-strings for printing
+    #     """
 
-        handles: list[str] = self.handle_list()
+    #     handles: list[str] = self.handle_list()
 
-        output_list: list[str] = []  # list that holds each line as a f-string
+    #     output_list: list[str] = []  # list that holds each line as a f-string
 
-        length = len(handles)
+    #     length = len(handles)
 
-        for value in range(0, len(handles), 2):
-            left = handles[value]
-            if value + 1 < length:
+    #     for value in range(0, len(handles), 2):
+    #         left = handles[value]
+    #         if value + 1 < length:
 
-                right = handles[value + 1]
-                output_list.append(f"{left:<39}||{right:>39}")
+    #             right = handles[value + 1]
+    #             output_list.append(f"{left:<39}||{right:>39}")
 
-            else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}||")
+    #         else:  # odd number, last item has no pair
+    #             output_list.append(f"{left:<39}||")
 
-        return output_list
+    #     return output_list
 
     def show_specific_player(self, player_handle: str) -> Player | None:
         """
@@ -187,7 +189,14 @@ class UtilityUI:
 # _____________________________ MODULAR DESIGN ___________________________
 
     def tournaments_name(self) -> list[str]:
-        pass
+        """
+        Converts list of Tournament objects to a list of Tournament names
+
+        Returns:
+            list[str]: Tournament names
+        """
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments
+        return [x.name for x in tournaments]
 
     def team_names(self) -> list[str]:
         """
@@ -201,7 +210,13 @@ class UtilityUI:
 
 
     def club_names(self):
-        clubs = LogicLayerAPI.list_clubs()
+        """
+        Converts list of Club objects to a list of Club names
+
+        Returns:
+            list[str]: Club names
+        """
+        clubs: list[Club] = LogicLayerAPI.list_clubs()
         return [x.name for x in clubs]
 
     def handle_list(self) -> list[str]:

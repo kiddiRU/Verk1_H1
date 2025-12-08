@@ -78,7 +78,7 @@ class SpectateUI:
             MenuOptions.spectate_screen,
             MenuOptions.spectate_players,
         ]
-        info: list[str] = self.utility.show_all_player_handles()
+        info: list[str] = self.utility.show_main("players")
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Player Not Found!"
 
@@ -145,7 +145,7 @@ class SpectateUI:
             MenuOptions.spectate_screen,
             MenuOptions.spectate_clubs,
         ]
-        info: list[str] = self.utility.show_all_clubs()
+        info: list[str] = self.utility.show_main("clubs")
         options: dict[str, str] = {
             "Enter A Clubs Name Or The First Letter(s) To Search:": ""
         }
@@ -224,7 +224,7 @@ class SpectateUI:
             MenuOptions.spectate_screen,
             MenuOptions.spectate_teams,
         ]
-        info: list[str] = self.utility.show_all_team_names()
+        info: list[str] = self.utility.show_main("teams")
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Team Not Found!"
 
