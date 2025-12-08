@@ -85,18 +85,14 @@ class AdminUI:
 
 
         print(self.tui.table(menu, user_path, info)) 
-        tournament_dob: str = self.utility._input_info("Enter Start Date: (yyyy-mm-dd) \n", "start_date", "TOURNAMENT")
-        self.tui.save_input("Start Date: " + str(tournament_dob))
-
-
-        print(self.tui.table(menu, user_path, info)) 
-        tournament_dob: str = self.utility._input_info("Enter End Date: (yyyy-mm-dd) \n", "end_date", "TOURNAMENT")
-        self.tui.save_input("End Date: " + str(tournament_dob))
+        tournament_date: str = self.utility._input_info("Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n", 
+                                                       "date", "TOURNAMENT")
+        self.tui.save_input("Start And End Dates: " + str(tournament_date))
 
 
         print(self.tui.table(menu, user_path, info)) 
         tournament_addr: str = self.utility._input_info("Enter Venue Address: (Streetname 00 Cityname)\n", 
-                                                  "venue_address", "Tournament")
+                                                  "address", "Tournament")
         self.tui.save_input("Venue Address: " + tournament_addr)
 
 
@@ -109,9 +105,6 @@ class AdminUI:
         tournament_phnum: str = self.utility._input_info("Enter Contact Phone Number: 123-4567 \n", 
                                                          "phone_number", "PLAYER")
         self.tui.save_input("Phone Number: " + tournament_phnum)
-
-
-        
 
 
         # TODO: add fill in options
