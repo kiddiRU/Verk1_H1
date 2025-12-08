@@ -81,6 +81,34 @@ class TournamentLL:
         if team is None:
             raise Exception(f'No team found named: {team_name}')
         
-        tournament.teams_playing.remove(team.uuid)
+        if team.uuid in tournament.teams_playing:
+            tournament.teams_playing.remove(team.uuid)
+
         self._data_api.store_tournament(tournament)
+
+
+    def update_info(
+        self,
+        name: str,
+        venue: str,
+        email: str,
+        phone_number: str
+    ) -> None:
         
+        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+
+        if tournament is None:
+            raise Exception(f'No tournament found named: {name}')
+
+        for attr, value in params.items():
+            if value == '':
+                continue
+        
+            setattr(tournament, attr, value)
+
+        self._data_api.update_tournament(tournament.uuid, tournament)
+        
+            

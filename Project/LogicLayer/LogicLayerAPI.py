@@ -131,12 +131,23 @@ def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
 
 # TODO implement remove_team and call it
-def remove_team(tournament: Tournament, team: Team) -> None:
-    pass
+def remove_team(tournament_name: str, team_name: str) -> None:
+    tournament_logic.remove_team(tournament_name, team_name)
 
 # TODO implement change_info and call it
-def change_info(tournament: Tournament) -> None:
-    pass
+def update_tournament_info(
+    tournament_name: str = '',
+    venue: str = '',
+    email: str = '',
+    phone_number: str = ''
+) -> None:
+    
+    tournament_logic.update_info(
+        tournament_name,
+        venue,
+        email,
+        phone_number
+    )
 
 # TODO implement next_round and call it
 def next_round() -> None:
