@@ -33,6 +33,8 @@ class MainUI:
             MenuOptions.login: self._player_ui.login_screen,
             MenuOptions.register: self._player_ui.register_screen,
             MenuOptions.spectate_screen: self._spectate_ui.spectate_screen,
+            MenuOptions.onion: self._player_ui.onion,
+            MenuOptions.masterpiece: self._player_ui.masterpiece,
             # ------------------ Admin Paths ------------------
             MenuOptions.admin_screen: self._admin_ui.admin_screen,
             MenuOptions.create_tournament: self._admin_ui.create_tournament,
