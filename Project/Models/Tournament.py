@@ -30,6 +30,7 @@ class Tournament:
         time_frame_end: time = time(hour=16,minute=0),
         status: StatusType = StatusType.inactive,
         number_of_servers: int = 1,
+        list_servers: list[str] = [],
         teams_playing: list[str] = [],
     ) -> None:
         """
@@ -66,9 +67,13 @@ class Tournament:
         self.email = email
         self.phone_number = phone_number
         self.status = status
-        self.list_servers: list[str] = [
+
+        if list_servers == []:
+            self.list_servers: list[str] = [
                 "NoServer" for _ in range(number_of_servers)
-        ]
+            ]
+        else: self.list_servers = list_servers
+        
         self.teams_playing = teams_playing
 
     def __str__(self) -> str:
