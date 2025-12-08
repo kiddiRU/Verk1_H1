@@ -42,6 +42,7 @@ class TournamentLL:
 
         self._data_api.store_tournament(new_tournament)
 
+    # TODO: Only changes the tournaments status at the moment.
     def publish(self, tournament_name: str) -> None:
         tournaments: list[Tournament] = self._data_api.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
