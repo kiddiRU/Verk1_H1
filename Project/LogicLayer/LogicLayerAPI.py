@@ -78,16 +78,19 @@ def get_player_object(player_uuid: str) -> Player:
 team_logic: TeamLL = TeamLL()
 
 # TODO implement add_player and call it
-def add_player(player_handle: str, current_player_handle: str) -> Team:
-    return team_logic.add_player(player_handle, current_player_handle)
+def add_player(player_handle: str, current_player: Player) -> Team:
+    return team_logic.add_player(player_handle, current_player)
 
 # TODO implement remove_player and call it
-def remove_player(player_handle: str, current_player_handle: str) -> Team:
-    return team_logic.remove_player(player_handle, current_player_handle)
+def remove_player(player_handle: str, current_player: Player) -> Team:
+    return team_logic.remove_player(player_handle, current_player)
 
 # TODO implement get_team_members and call it
 def get_team_members(team_name: str) -> list[str]:
     return team_logic.get_team_members(team_name)
+
+def list_teams() -> list[Team]:
+    return team_logic.list_teams()
 
 def get_team_object(team_name: str) -> Team:
     return team_logic.get_team_object(team_name)
@@ -171,15 +174,21 @@ def update_tournament_datetime(
 def next_round() -> None:
     pass
 
-# TODO implement cancel_tournament and call it
+# TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
     pass
 
 ''' Club API '''
 
 # TODO implement create_club and call it
-def create_club() -> Club:
-    pass
+def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
+    return create_club(name,club_color, country, home_town)
+
+def list_clubs() -> list[Club]:
+    return list_clubs()
+
+def get_teams_in_club(club_name: str) -> list[Team]:
+    return get_teams_in_club(club_name)
 
 # TODO implement change_club_info and call it
 def change_club_info(club: Club) -> None:

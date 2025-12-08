@@ -79,13 +79,36 @@ class AdminUI:
         message: str = "You have Created A Tournament!"
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path))
+        tournament_name: str = self.utility._input_info("Enter Tournament Name: \n", "name", "TOURNAMENT")
+        self.tui.save_input("Tournament Name: " + tournament_name)
 
-        tournament_create = Drawer()
-        print(tournament_create.table(menu))
+
+        print(self.tui.table(menu, user_path, info)) 
+        tournament_date: str = self.utility._input_info("Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n", 
+                                                       "date", "TOURNAMENT")
+        self.tui.save_input("Start And End Dates: " + str(tournament_date))
+
+
+        print(self.tui.table(menu, user_path, info)) 
+        tournament_addr: str = self.utility._input_info("Enter Venue Address: (Streetname 00 Cityname)\n", 
+                                                  "address", "Tournament")
+        self.tui.save_input("Venue Address: " + tournament_addr)
+
+
+        print(self.tui.table(menu, user_path, info))
+        tournament_email: str = self.utility._input_info("Enter Contact Email: \n", "email", "PLAYER")
+        self.tui.save_input("Email: " + tournament_email)
+
+
+        print(self.tui.table(menu, user_path, info))   
+        tournament_phnum: str = self.utility._input_info("Enter Contact Phone Number: 123-4567 \n", 
+                                                         "phone_number", "PLAYER")
+        self.tui.save_input("Phone Number: " + tournament_phnum)
+
 
         # TODO: add fill in options
-        option = input("THIS IS A STOPPER IN CREATE TOURNAMENT")
+        
         return MenuOptions.manage_inactive_tournament
 
 
