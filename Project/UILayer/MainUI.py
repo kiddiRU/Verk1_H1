@@ -2,6 +2,8 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-03
 
+Collaborator: Sindri Freysson <Sindrif25@ru.is>
+
 File that holds the main state machine.
 """
 
@@ -81,7 +83,6 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
-            print("RUNNING")
             if self.screens.get(self.current_screen) is not None:
                 self.current_screen = self.screens[self.current_screen]()
             
