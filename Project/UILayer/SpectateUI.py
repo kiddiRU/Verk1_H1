@@ -4,6 +4,7 @@ Date: 2025-12-04
 
 File that holds all the menus that the spectator can access
 """
+
 from Models.Player import Player
 
 
@@ -68,8 +69,6 @@ class SpectateUI:
 
         return MenuOptions.start_screen
 
-
-
     def spectate_players(self) -> MenuOptions:
         """Spectate players screen, choices: input a player to view stats
 
@@ -88,8 +87,10 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
-        choice: str = input("Enter A Players Handle Or The First Letter(s) To Search: \n")
-        #self.utility.show_all_player_handles()
+        choice: str = input(
+            "Enter A Players Handle Or The First Letter(s) To Search: \n"
+        )
+        # self.utility.show_all_player_handles()
 
         match choice:
             case "b":
@@ -97,8 +98,6 @@ class SpectateUI:
             case "q":
                 return MenuOptions.quit
         return MenuOptions.view_player_stats
-
-
 
     def view_player_stats(self) -> MenuOptions:
         """View player stats screen, choices: b
@@ -109,8 +108,6 @@ class SpectateUI:
         """
         stopper = input("This is the view player stats screen")
         return MenuOptions.spectate_screen
-
-
 
     def spectate_clubs(self) -> MenuOptions:
         """Spectate clubs screen, choices: input a club to view stats
@@ -137,8 +134,6 @@ class SpectateUI:
 
         return MenuOptions.view_club_stats
 
-
-
     def view_club_stats(self) -> MenuOptions:
         """View club stats screen, choices: b
         b: back to spectate players screen
@@ -164,8 +159,6 @@ class SpectateUI:
                 return MenuOptions.spectate_clubs
         return MenuOptions.spectate_screen
 
-
-
     def spectate_teams(self) -> MenuOptions:
         """Spectate teams screen, choices: input a team to view stats
 
@@ -189,8 +182,6 @@ class SpectateUI:
 
         return MenuOptions.spectate_screen
 
-
-
     def view_team_stats(self) -> MenuOptions:
         """View team stats screen, choices: b
         b: back to spectate players screen
@@ -201,8 +192,6 @@ class SpectateUI:
         stopper = input("This is the view team stats screen")
         return MenuOptions.spectate_screen
 
-
-
     def spectate_tournaments(self) -> MenuOptions:
         """Spectate tournaments screen, choices: input a tournament to view
 
@@ -211,7 +200,10 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Tournaments"
-        user_path: list[str] = [MenuOptions.spectate_screen, MenuOptions.spectate_tournaments]
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+        ]
         info: list = []
         options: dict[str, str] = {
             "Enter A Tournaments Name Or The First Letter(s) To Search:": ""
@@ -224,14 +216,12 @@ class SpectateUI:
         stopper = input("This is the spectate tournaments screen")
 
         return MenuOptions.spectate_screen
-    
+
         if ...:  # If the tournament is active
             return MenuOptions.active_tournament
 
         elif ...:  # If the tournament is archived
             return MenuOptions.archived_tournament
-
-
 
     def active_tournament(self) -> MenuOptions:
         """Active tournament screen, choices: 1, 2, 3 and b
@@ -274,8 +264,6 @@ class SpectateUI:
 
         return MenuOptions.spectate_tournaments
 
-
-
     def archived_tournament(self) -> MenuOptions:
         """Archived tournaments
 
@@ -285,8 +273,6 @@ class SpectateUI:
         # TODO: implement archived tournament screen
         stopper = input("This is the archived tournaments screen")
         return MenuOptions.spectate_tournaments
-
-
 
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
@@ -298,8 +284,6 @@ class SpectateUI:
         stopper = input("This is the game schedule screen")
         return MenuOptions.active_tournament
 
-
-
     def view_bracket(self) -> MenuOptions:
         """View bracket screen, choices: b
         b: back to active tournament screen
@@ -309,8 +293,6 @@ class SpectateUI:
         """
         stopper = input("This is the view bracket screen")
         return MenuOptions.active_tournament
-
-
 
     def teams_in_tournament(self) -> MenuOptions:
         """Teams in tournament screen, choices: input a team to view stats
@@ -322,8 +304,6 @@ class SpectateUI:
 
         return MenuOptions.active_tournament
 
-
-
     def team_tournament_stats(self) -> MenuOptions:
         """Team tournament stats screen, choices: b
         b: back to teams in tournament screen
@@ -333,5 +313,3 @@ class SpectateUI:
         """
         stopper = input("This is the team tournament stats screen")
         return MenuOptions.teams_in_tournament
-
-

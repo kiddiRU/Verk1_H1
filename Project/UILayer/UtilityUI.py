@@ -10,6 +10,7 @@ which holds functions used in multiple places
 """
 
 from Models.Player import Player
+from Models.Team import Team
 
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
@@ -70,7 +71,7 @@ class UtilityUI:
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")
-        anything: str = input("Input anything to go back to start: ")
+        input("Input anything to go back to start: ")
         return MenuOptions.start_screen
 
     def search_for_player(self):
@@ -83,7 +84,8 @@ class UtilityUI:
     def show_specific_tournament(self, tournament_name):
         pass
 
-    def show_teams(self):
+    def show_all_team_names(self):
+        # team_list: list[Team] = LogicLayerAPI.
         pass
 
     def show_specific_team(self, team_name):
@@ -93,21 +95,26 @@ class UtilityUI:
         pass
 
     def show_all_player_handles(self) -> list[str]:
+        """Returns a list of all player handles formatted neatly to be printed
+
+        Returns:
+            list[str]: A list of f-strings for printing
+        """
         player_list: list[Player] = LogicLayerAPI.list_players()
 
         handle_list: list[str] = [p.handle for p in player_list]
 
-        print_list: list[str] = [] # list that holds each line as a f-string
+        output_list: list[str] = []  # list that holds each line as a f-string
 
         for value in range(0, len(handle_list), 2):
             try:
-                print_list.append(
+                output_list.append(
                     f"{handle_list[value]:<{39}}||{handle_list[value + 1]:>{39}}"
                 )
             except IndexError:  # IF there is an odd amount of players
-                print_list.append(f"{handle_list[-1]:<{39}}||")
+                output_list.append(f"{handle_list[-1]:<{39}}||")
 
-        return print_list
+        return output_list
 
     def show_specific_player(self):
         pass
