@@ -68,7 +68,7 @@ def validate_name(name: str) -> str | None: # Players full name
     if (len(name) < 3 or len(name) > 40):
         raise ValidationError("Name needs to be between 3 to 40 characters in length and")
     
-    if not name.isalpha():
+    if not name.replace(" ","").isalpha():
         raise ValidationError("Name can not have digits")
     
     else:
