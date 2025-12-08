@@ -2,6 +2,8 @@
 Authors: Elmar Sigmarsson <elmars25@ru.is> / Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
+Minor change: Andri Már Kristjánsson <andrik25@ru.is>
+
 Functions for player logic.
 """
 
