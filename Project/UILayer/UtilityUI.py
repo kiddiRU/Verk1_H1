@@ -9,13 +9,16 @@ File that holds the UtilityUI class
 which holds functions used in multiple places
 """
 
+from Models.Player import Player
+
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
 from Models import ValidationError
+from LogicLayer import LogicLayerAPI
+
 
 class UtilityUI:
     """Utility Class for multi use function for ui layer"""
-
 
     def __init__(self) -> None:
         self.error_color: str = "\033[31m"
@@ -39,7 +42,9 @@ class UtilityUI:
             if choice in valid_choices_lower:
                 return choice
 
-            print(self.error_color + "Not a valid option try again" + self.reset)
+            print(
+                self.error_color + "Not a valid option try again" + self.reset
+            )
 
     # Created by Sindri
     def _input_info(self, message: str, attribute: str, info_type: str) -> str:
@@ -61,9 +66,6 @@ class UtilityUI:
             except ValidationError as e:
                 print(self.error_color + str(e) + self.reset)
                 continue
-
-
-
 
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
@@ -90,8 +92,22 @@ class UtilityUI:
     def show_clubs(self):
         pass
 
-    def show_players(self):
-        pass
+    def show_all_player_handles(self) -> list[str]:
+        player_list: list[Player] = LogicLayerAPI.list_players()
+
+        handle_list: list[str] = [p.handle for p in player_list]
+
+        print_list: list[str] = [] # list that holds each line as a f-string
+
+        for value in range(0, len(handle_list), 2):
+            try:
+                print_list.append(
+                    f"{handle_list[value]:<{39}}||{handle_list[value + 1]:>{39}}"
+                )
+            except IndexError:  # IF there is an odd amount of players
+                print_list.append(f"{handle_list[-1]:<{39}}||")
+
+        return print_list
 
     def show_specific_player(self):
         pass
