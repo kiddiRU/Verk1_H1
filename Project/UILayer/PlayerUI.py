@@ -26,6 +26,7 @@ class PlayerUI:
         self.underscore = "\033[4m"
 
 
+
     def start_screen(self) -> MenuOptions:
         """Start screen with choices: 1, 2, 3 and q
         1: go to login screen
@@ -714,6 +715,7 @@ Rank: {current_login_rank}"""]
             
             return MenuOptions.onion
             
+
 
     def masterpiece(self) -> MenuOptions:
         """I think Gylfi will like this one"""
