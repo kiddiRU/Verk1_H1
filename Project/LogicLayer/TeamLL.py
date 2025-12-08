@@ -5,15 +5,21 @@ Date: 2025-12-03
 Created the TeamLL class and added the functions
 """
 
-from Models import Team, Player, ValidationError
+from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
 from Models.Team import Team
-from Models.Player import Player
 from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
+<<<<<<< HEAD
     def __init__(self) -> None:
         self._data_api = DataLayerAPI
+=======
+
+    def __init__(self) -> None:
+        pass
+
+>>>>>>> cd8a4d18cbd424e56cee4ac79fe0971b334740d1
 
     def add_player(self, player_handle: str, current_player_handle: str) -> Team:
         """
@@ -25,7 +31,7 @@ class TeamLL():
         """
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player_handle)
-        model_teams: list = self._data_api.load_teams()
+        model_teams: list = DataLayerAPI.load_teams()
         
         for team in model_teams:
             if player_uuid in team.list_player_uuid:
@@ -39,7 +45,7 @@ class TeamLL():
 
                         else:
                             team.list_player_uuid.append(player_uuid)
-                            self._data_api.update_team(team_uuid, team)
+                            DataLayerAPI.update_team(team_uuid, team)
                             return team
                     
 
@@ -55,7 +61,7 @@ class TeamLL():
         """
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player_handle)
-        model_teams: list = self._data_api.load_teams()
+        model_teams: list = DataLayerAPI.load_teams()
         
         for team in model_teams:
             if team.uuid == team_uuid:
@@ -65,7 +71,7 @@ class TeamLL():
                 else:
                     try:
                         team.list_player_uuid.remove(player_uuid)
-                        self._data_api.update_team(team_uuid, team)
+                        DataLayerAPI.update_team(team_uuid, team)
                         return team
 
                     except ValueError:
@@ -85,6 +91,14 @@ class TeamLL():
                 return team.list_player_uuid 
             
         raise ValidationError("Team not found")
+    
+
+    def list_teams(self): 
+        """Returns a list of stored clubs"""
+
+        teams: list[Team] = DataLayerAPI.load_teams()
+        return teams
+
 
     def get_team_object(self, team_name: str) -> Team:
         """
@@ -103,7 +117,11 @@ class TeamLL():
 
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
+<<<<<<< HEAD
     def get_team_history(self, team_name: str) -> list:
+=======
+    def get_team_history(self, team_name) -> list[str]:
+>>>>>>> cd8a4d18cbd424e56cee4ac79fe0971b334740d1
         """
         Takes in team uuid,
         looks through a list of all the tournaments

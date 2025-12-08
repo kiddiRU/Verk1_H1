@@ -13,7 +13,7 @@ from LogicLayer.LogicUtility import get_club_uuid
 
 class ClubLL():
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
 
@@ -39,10 +39,16 @@ class ClubLL():
 
         DataLayerAPI.store_club(new_club)
         return new_club
-        
+
+
+    def list_clubs(self): 
+        """Returns a list of stored clubs"""
+
+        clubs: list[Club] = DataLayerAPI.load_clubs()
+        return clubs
 
         
-    def get_teams_in_club(self, club_name) -> list:
+    def get_teams_in_club(self, club_name) -> list[str]:
         """
         Takes in club name
 
