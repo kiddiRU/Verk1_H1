@@ -30,11 +30,12 @@
 ## State of group: 
 
 ## Divisions: 
-- UI / UX:
-- System engineer:
-- QC:
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristinn, Kristján
+- QC: Sindri
 
 ## ToDo-list:
+- Tournament Logic
 
 # Evening meeting (Diary)
 ## State of project:
