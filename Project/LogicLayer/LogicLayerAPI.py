@@ -74,6 +74,9 @@ def list_players() -> list[Player]:
 def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
+def promote_captain(current_player: Player, handle_to_promote: str) -> None:
+    player_logic.promote_captain(current_player, handle_to_promote)
+
 ''' Team API '''
 team_logic: TeamLL = TeamLL()
 

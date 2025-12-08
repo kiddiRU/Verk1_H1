@@ -145,8 +145,20 @@ class PlayerLL():
 
         return player
     
-    def promote_captain(self, current_captain: Player, handle_to_promote: str) -> None:
-        pass
+    def promote_captain(self, current_player: Player, handle_to_promote: str) -> None:
+        team_to_edit = next((t for t in self._data_api.load_teams() if current_player.uuid == t.team_captain_uuid), None)
+        
+        if team_to_edit is None:
+            raise Exception('You are not a captain!')
+
+        players: list[Player] = self._data_api.load_players()
+        player_to_promote: Player | None = next((p for p in players if p.handle == handle_to_promote), None)
+
+        if player_to_promote is None:
+            raise Exception(f'No player found with the handle: {handle_to_promote}')
+        
+        team_to_edit.team_captain_uuid = player_to_promote.uuid
+        self._data_api.store_team(team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
         if player_handle is not None:
