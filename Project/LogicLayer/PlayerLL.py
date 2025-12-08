@@ -17,14 +17,14 @@ class PlayerLL():
 
     # TODO Alter validation functionality?
     def create_player(self,
-                name: str,
-                date_of_birth: str,
-                home_address: str,
-                email: str,
-                phone_number: str,
-                handle: str,
-                url: str
-                ) -> Player:
+        name: str,
+        date_of_birth: str,
+        home_address: str,
+        email: str,
+        phone_number: str,
+        handle: str,
+        url: str
+    ) -> Player:
 
         """
         Takes in player info.
@@ -55,16 +55,16 @@ class PlayerLL():
 
     # TODO Alter validation functionality?
     def update_player_info(
-            self,
-            player: Player,
-            name: str,
-            date_of_birth: str,
-            home_address: str,
-            email: str,
-            phone_number: str,
-            handle: str,
-            url: str
-            ) -> Player:
+        self,
+        player: Player,
+        name: str,
+        date_of_birth: str,
+        home_address: str,
+        email: str,
+        phone_number: str,
+        handle: str,
+        url: str
+    ) -> Player:
 
         '''
         Takes in a Player object and potential attribute updates.

@@ -22,14 +22,14 @@ def store_team(team: Team) -> None:
     data = team.__dict__
    
     # Reads json file containing teams and stores it as a dictionary.
-    with open(FILE_PATH, "r") as team_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
     
     # Updates the dictionary adding the new team int the file content.
     file_content[team.uuid] = data
     
     # Writes the updated file content into the file containing teams.
-    with open(FILE_PATH, "w") as team_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as team_file:
         json.dump(file_content, team_file, indent=4)
 
 """
@@ -42,7 +42,7 @@ Returns the created team list.
 """
 def load_teams() -> list[Team]:
     # Reads the json file containing teams and stores it as a dictionary.
-    with open(FILE_PATH, "r") as team_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
 
     # Creates a list of all teams in the team file.
@@ -64,7 +64,7 @@ team with the new updated team object.
 """
 def update_team(uuid: str, updated_team: Team) -> None:
     # Reads the json file containing teams and stores it as a dictionary.
-    with open(FILE_PATH, "r") as team_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
    
     # Updates the file content, checking if the uuid exists
@@ -73,5 +73,5 @@ def update_team(uuid: str, updated_team: Team) -> None:
         file_content[uuid] = updated_team.__dict__
     
     # Writes the updated dictionary into the team file.
-    with open(FILE_PATH, "w") as team_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as team_file:
         json.dump(file_content, team_file, indent=4)

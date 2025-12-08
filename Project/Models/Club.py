@@ -13,7 +13,6 @@ class Club:
         self,
         uuid: str,
         name: str,
-        list_teams_uuid: list[str],
         club_color: str,
         country: str,
         home_town: str,
@@ -32,7 +31,6 @@ class Club:
 
         self.uuid = uuid
         self.name = name
-        self.list_teams_uuid = list_teams_uuid
         self.club_color = club_color
         self.country = country
         self.home_town = home_town

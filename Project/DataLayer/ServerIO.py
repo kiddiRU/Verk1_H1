@@ -22,14 +22,14 @@ def store_server(server: Server) -> None:
     data = server.__dict__
 
     # Reads json file containing server and stores it as a dictionary.
-    with open(FILE_PATH, "r") as server_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as server_file:
         file_content = dict(json.load(server_file))
 
     # Updates the dictionary adding the new server into the file content.
     file_content[server.uuid] = data
     
     # Writes the updated file content int the file containing servers.
-    with open(FILE_PATH, "w") as server_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as server_file:
         json.dump(file_content, server_file, indent=4)
 
 
@@ -43,7 +43,7 @@ Returns the created server list.
 """
 def load_server() -> list[Server]:
     # Reads the json file containing Server and stores it as a dictionary.
-    with open(FILE_PATH, "r") as server_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as server_file:
         file_content = dict(json.load(server_file))
 
     # Creates a list of all server in the server file.
@@ -66,7 +66,7 @@ server with the new updated server object.
 """
 def update_server(uuid: str, updated_server: Server) -> None:
     # Reads the json file containing server and stores it as a dictionary.
-    with open(FILE_PATH, "r") as server_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as server_file:
         file_content = dict(json.load(server_file))
     
     # Updates the file content, checking if the uuid exists
@@ -75,5 +75,5 @@ def update_server(uuid: str, updated_server: Server) -> None:
         file_content[uuid] = updated_server.__dict__
     
     # Writes the updated dictionary into the server file.
-    with open(FILE_PATH, "w") as server_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as server_file:
         json.dump(file_content, server_file, indent=4)

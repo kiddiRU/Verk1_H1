@@ -22,14 +22,14 @@ def store_player(player: Player) -> None:
     data = player.__dict__
     
     # Reads json file containing players and stores it as a dictionary.
-    with open(FILE_PATH, "r") as player_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as player_file:
         file_content = dict(json.load(player_file))
     
     # Updates the dictionary adding the new player model into the file content.
     file_content[player.uuid] = data
     
     # Writes the updated file content into the file containing players.
-    with open(FILE_PATH, "w") as player_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as player_file:
         json.dump(file_content, player_file, indent=4)
 
 
@@ -43,7 +43,7 @@ Returns the created player list.
 """
 def load_players() -> list[Player]:
     # Reads the json file containing players and stores it as a dictionary.
-    with open(FILE_PATH, "r") as player_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as player_file:
         file_content = dict(json.load(player_file))
     
     # Creates a list of all players in the player_file as a Player model object.
@@ -64,7 +64,7 @@ value tied to given key of that player
 """
 def update_player(uuid: str, updated_player: Player) -> None:
     # Reads the json file containing players and stores it as a dictionary.
-    with open(FILE_PATH, "r") as player_file:
+    with open(FILE_PATH, "r", encoding='utf-8') as player_file:
         file_content = dict(json.load(player_file))
     
     # Updates the file content, checking if the uuid and exists in
@@ -73,5 +73,5 @@ def update_player(uuid: str, updated_player: Player) -> None:
         file_content[uuid] = updated_player.__dict__
 
     # Wriets the updated dictionary into the player file.
-    with open(FILE_PATH, "w") as player_file:
+    with open(FILE_PATH, "w", encoding='utf-8') as player_file:
         json.dump(file_content, player_file, indent=4)

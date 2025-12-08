@@ -16,7 +16,7 @@ class Tournament:
         active = "ACTIVE"
         inactive = "INACTIVE"
         archived = "ARCHIVED"
-    # Sindri: Need to add tournament results to store point calculations
+
     def __init__(
         self,
         uuid: str,
@@ -29,7 +29,7 @@ class Tournament:
         time_frame_start: time = time(hour=8,minute=0),
         time_frame_end: time = time(hour=16,minute=0),
         status: StatusType = StatusType.inactive,
-        list_servers: list[str] = [],
+        number_of_servers: int = 1,
         teams_playing: list[str] = [],
     ) -> None:
         """
@@ -66,7 +66,9 @@ class Tournament:
         self.email = email
         self.phone_number = phone_number
         self.status = status
-        self.list_servers = list_servers
+        self.list_servers: list[str] = [
+                "NoServer" for _ in range(number_of_servers)
+        ]
         self.teams_playing = teams_playing
 
     def __str__(self) -> str:

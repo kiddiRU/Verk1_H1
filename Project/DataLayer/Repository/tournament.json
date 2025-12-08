@@ -1,16 +1,38 @@
 {
-    "3ff31637-6d55-4322-be0c-d7a1a1b0a28a": {
-        "uuid": "3ff31637-6d55-4322-be0c-d7a1a1b0a28a",
-        "name": "RUnning Man",
-        "start_date": "2025-12-05",
-        "end_date": "2026-01-01",
+    "b789402c-9d4f-4e62-9c82-30b6b560637f": {
+        "uuid": "b789402c-9d4f-4e62-9c82-30b6b560637f",
+        "name": "RU's Glorious e-Sport Extravaganza 2025",
+        "start_date": "2025-12-06",
+        "end_date": "2025-12-07",
         "time_frame_start": "08:00:00",
         "time_frame_end": "16:00:00",
-        "venue": "Solin",
-        "email": "ru@ru.is",
-        "phone_number": "123-4567",
+        "venue": "Sun Reykjavik University",
+        "email": "prof.esport@ru.is",
+        "phone_number": "+3541234567",
         "status": "INACTIVE",
-        "list_servers": [],
+        "list_servers": [
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer"
+        ],
+        "teams_playing": []
+    },
+    "6914327b-9a98-4a6a-99bf-4a76942297f1": {
+        "uuid": "6914327b-9a98-4a6a-99bf-4a76942297f1",
+        "name": "test",
+        "start_date": "test",
+        "end_date": "test",
+        "time_frame_start": "test",
+        "time_frame_end": "test",
+        "venue": "test",
+        "email": "test",
+        "phone_number": "test",
+        "status": "INACTIVE",
+        "list_servers": [
+            "NoServer",
+            "NoServer"
+        ],
         "teams_playing": []
     }
 }
