@@ -17,7 +17,7 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time: 9:12
+### Time: 9:12 - 17:03
 ### On site: Yes
 
 ## Sindri Freysson
@@ -52,7 +52,7 @@ Issue was found by Elmar when creating player after registering using main.py, c
 - Kristinn - tournament logic 
 
 ## State of group: 
-
+Ísak - This is is endless
 ## Divisions:
 - UI / UX:
 - System engineer: 
