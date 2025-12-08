@@ -2,6 +2,8 @@
 Authors: Elmar Sigmarsson <elmars25@ru.is> / Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
+Minor change: Andri Már Kristjánsson <andrik25@ru.is>
+
 Functions for player logic.
 """
 
@@ -14,6 +16,7 @@ from LogicLayer.Validation import validate_attr
 class PlayerLL():
     def __init__(self, data_api: DataLayerAPI) -> None:
         self._data_api = data_api
+        self.login = None
 
     # TODO Alter validation functionality?
     def create_player(self,
@@ -140,3 +143,8 @@ class PlayerLL():
 
         return player
 
+
+    def save_login(self, login_handle=None):
+        if login_handle is not None:
+            self.login = login_handle
+        return self.login

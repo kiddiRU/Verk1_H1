@@ -87,6 +87,8 @@ class PlayerUI:
         player_handles: list[str] = [x.handle for x in player_list]
         
         if login_handle in player_handles:
+            LogicLayerAPI.save_login(login_handle)
+
 
             return MenuOptions.player_screen
 
@@ -170,18 +172,30 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
         
+        current_login_handle = LogicLayerAPI.save_login()
+
+        player_list: list[Player] = LogicLayerAPI.list_players()
+        
+        for player in player_list:
+            if player.handle == current_login_handle:
+                current_login_name = player.name
+                current_login_dob = player.date_of_birth
+                current_login_addr = player.home_address
+                current_login_phnum = player.phone_number
+                current_login_email = player.email
+
 
 
         menu: str = "Player Page"
         user_path: list[str] = [MenuOptions.player_screen]
 
         #Temporary info for testing, needs to get info from the actual info files
-        info: list[str]= [f"""Name: {"PLAYERNAME"}
-Date of Birth: {"DOB"}
-Home Address: {"ADDRESS"}
-Phone Number: {"PHONENUMBER"}
-Email: {"EMAIL"}
-Handle: {"PLAYERHANDLE"}
+        info: list[str]= [f"""Name: {current_login_name}
+Date of Birth: {current_login_dob}
+Home Address: {current_login_addr}
+Phone Number: {current_login_phnum}
+Email: {current_login_email}
+Handle: {current_login_handle}
 Team: {"NONE"}
 Club: {"NONE"}
 Rank: {"PLAYERRANK"}"""]
@@ -230,9 +244,9 @@ Rank: {"PLAYERRANK"}"""]
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
 
-        clubs = LogicLayerAPI.list_clubs()
-        for club in clubs:
-            info.append(club)
+        #clubs = LogicLayerAPI.list_clubs()
+        #for club in clubs:
+            #info.append(club)
             
 
         self.tui.clear_saved_data()
@@ -256,7 +270,7 @@ Rank: {"PLAYERRANK"}"""]
         print(self.tui.table(menu, user_path, info, options))
         choice: str = self.utility._prompt_choice(["c", "b"])
 
-        LogicLayerAPI.create_team(team_name, "", team_club, team_url, team_ascii)
+        #LogicLayerAPI.create_team(team_name, "", team_club, team_url, team_ascii)
 
         #name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str
         

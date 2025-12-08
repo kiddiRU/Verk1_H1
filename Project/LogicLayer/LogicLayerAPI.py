@@ -2,6 +2,8 @@
 Author: Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-03
 
+Minor change: Andri Már Kristjánsson <andrik25@ru.is>
+
 Logic layer API.
 """
 
@@ -187,3 +189,7 @@ def change_club_info(club: Club) -> None:
 # TODO implement input_match_results and call it
 def input_match_results(match: Match) -> None:
     pass
+
+
+def save_login(login_handle: str | None = None) -> str | None:
+    return player_logic.save_login(login_handle)
