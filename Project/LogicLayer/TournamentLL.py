@@ -5,10 +5,10 @@ Date: 2025-12-05
 Functions for tournament logic.
 '''
 
-from Models import Team, Tournament
+from Models import Player, Team, Tournament, Server, Match
 from DataLayer import DataLayerAPI
 from uuid import uuid4
-from datetime import date, time
+from datetime import date, time, timedelta, datetime
 
 class TournamentLL:
     def __init__(self):
@@ -46,17 +46,6 @@ class TournamentLL:
         )
 
         self._data_api.store_tournament(new_tournament)
-
-    # TODO: Only changes the tournaments status at the moment.
-    def publish(self, tournament_name: str) -> None:
-        tournaments: list[Tournament] = self._data_api.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
-        
-        if tournament is None:
-            raise Exception(f'No tournament found named: {tournament_name}')
-
-        tournament.status = Tournament.StatusType.active
-        self._data_api.update_tournament(tournament.uuid, tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
         '''
@@ -169,3 +158,60 @@ class TournamentLL:
     def list_tournaments(self) -> list[Tournament]:
         tournaments: list[Tournament] = self._data_api.load_tournaments()
         return tournaments
+
+    def publish(self, uuid: str) -> None:
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+
+        for item in tournaments:
+            if item.uuid == uuid:
+                tournament: Tournament = item
+                break
+        else:
+            # TODO Add a real assert
+            assert(False)
+
+        tournament.status = Tournament.StatusType.active
+
+        for idx, _ in enumerate(tournament.list_servers):
+            # TODO Maybe move to ServerLL
+            new_server = Server(str(uuid4()), "NoMatch")
+            tournament.list_servers[idx] = new_server.uuid
+
+        number_of_players: int = len(tournament.teams_playing)
+        matches_per_round: list[int] = []
+
+        while 1 < number_of_players:
+            matches_per_round.append(number_of_players // 2)
+            number_of_players -= matches_per_round[-1]
+
+        times_used: list[datetime] = []
+        one_day: timedelta = timedelta(days=1)
+        one_hour: timedelta = timedelta(hours=1)
+        current_datetime: datetime = datetime.combine(
+                date = tournament.start_date,
+                time = tournament.time_frame_start
+        )
+
+        for rounds in matches_per_round:
+            while 0 < rounds:
+                to_use: int = min(rounds, len(tournament.list_servers))
+                for _ in range(to_use):
+                    times_used.append(current_datetime)
+
+                rounds -= to_use
+
+                current_datetime += one_hour
+                if current_datetime.time() >= tournament.time_frame_end:
+                    if tournament.time_frame_start < tournament.time_frame_end:
+                        current_datetime += one_day
+                    current_datetime = datetime.combine(
+                            date = current_datetime.date(),
+                            time = tournament.time_frame_start
+                    )
+
+        # TODO add real assert
+        if times_used[-1] >= datetime.combine(date = tournament.end_date, time = tournament.time_frame_end):
+            assert(False)
+
+        for x in times_used:
+            print(x)
