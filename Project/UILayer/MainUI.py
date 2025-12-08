@@ -19,6 +19,8 @@ class MainUI:
 
     def __init__(self) -> None:
         """Initializes the class"""
+        self.player_username: str|None = None
+        self.team_name: str|None = None
         self._utility_ui: UtilityUI = UtilityUI()
         self._admin_ui: AdminUI = AdminUI()
         self._player_ui: PlayerUI = PlayerUI()

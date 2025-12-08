@@ -43,20 +43,44 @@ class TournamentLL:
         self._data_api.store_tournament(new_tournament)
 
     def publish(self, tournament_name: str) -> None:
-        tournaments: list[Tournament] = [t for t in self._data_api.load_tournaments()]
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
         
         if tournament is None:
-            raise Exception(f'No tournanent found named: {tournament_name}')
+            raise Exception(f'No tournament found named: {tournament_name}')
 
         tournament.status = Tournament.StatusType.active
         self._data_api.store_tournament(tournament)
 
-    def add_team(self, team_name: str, tournament_name: str) -> None:
-        teams: list[Team] = [t for t in self._data_api.load_teams()]
+    def add_team(self, tournament_name: str, team_name: str) -> None:
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
+        
+        teams: list[Team] = self._data_api.load_teams()
         team: Team | None = next((t for t in teams if t.name == team_name), None)
 
-        tournaments: list[Tournament] = [t for t in self._data_api.load_tournaments()]
-        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
+        if tournament is None:
+            raise Exception(f'No tournament found named: {tournament_name}')
 
+        if team is None:
+            raise Exception(f'No team found named: {team_name}')
+        
+        tournament.teams_playing.append(team.uuid)
+        self._data_api.store_tournament(tournament)
+
+    def remove_team(self, tournament_name: str, team_name: str) -> None:
+        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
+        
+        teams: list[Team] = self._data_api.load_teams()
+        team: Team | None = next((t for t in teams if t.name == team_name), None)
+
+        if tournament is None:
+            raise Exception(f'No tournament found named: {tournament_name}')
+
+        if team is None:
+            raise Exception(f'No team found named: {team_name}')
+        
+        tournament.teams_playing.remove(team.uuid)
+        self._data_api.store_tournament(tournament)
         

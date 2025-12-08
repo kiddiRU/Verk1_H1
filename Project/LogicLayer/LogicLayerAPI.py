@@ -127,8 +127,8 @@ def publish(tournament_name: str) -> None:
     tournament_logic.publish(tournament_name)
 
 # TODO implement add_team and call it
-def add_team(tournament: Tournament, team: Team) -> None:
-    pass
+def add_team(tournament_name: str, team_name: str) -> None:
+    tournament_logic.add_team(tournament_name, team_name)
 
 # TODO implement remove_team and call it
 def remove_team(tournament: Tournament, team: Team) -> None:
