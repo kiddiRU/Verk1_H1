@@ -87,7 +87,7 @@ class PlayerUI:
             return MenuOptions.admin_screen
         
         if login_handle in player_handles:
-            LogicLayerAPI.save_login(login_handle)
+            LogicLayerAPI.save_player(login_handle)
 
 
             return MenuOptions.player_screen
@@ -177,7 +177,7 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
         
-        current_login_handle = LogicLayerAPI.save_login()
+        current_login_handle = LogicLayerAPI.save_player()
 
         player_list: list[Player] = LogicLayerAPI.list_players()
         

@@ -192,5 +192,5 @@ def input_match_results(match: Match) -> None:
     pass
 
 
-def save_login(login_handle: str | None = None) -> str | None:
-    return player_logic.save_login(login_handle)
+def save_player(player_handle: str | None = None) -> str | None:
+    return player_logic.save_player(player_handle)
