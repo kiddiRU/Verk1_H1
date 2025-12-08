@@ -10,7 +10,7 @@ Functions for player logic.
 # TODO add nessecery imports
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Player, Team, Club, ValidationError
+from Models import Player, Team, Club#, ValidationError
 from LogicLayer.Validation import validate_attr
 
 class PlayerLL():
@@ -146,7 +146,8 @@ class PlayerLL():
         return player
 
 
-    def save_player(self, player_handle=None):
+    def save_player(self, player_handle: str | None = None):
         if player_handle is not None:
             self.player = player_handle
+
         return self.player

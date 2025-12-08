@@ -5,7 +5,7 @@ Date: 2025-12-05
 Functions for tournament logic.
 '''
 
-from Models import Player, Team, Tournament
+from Models import Team, Tournament
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time
