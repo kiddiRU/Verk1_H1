@@ -11,21 +11,16 @@ from Models import Team
 
 FILE_PATH = "DataLayer/Repository/teams.json"
 
-"""
-Takes in model class Team
-
-Inserts information about the Team class into a json file
-for storage
-"""
 def store_team(team: Team) -> None:
-    # Changes object team int a dictionary mapping attributes to keys.
+    # Changes object team into a dictionary mapping attributes to keys.
     data = team.__dict__
    
-    # Reads json file containing teams and stores it as a dictionary.
+    # Reads json file containing teams and stores the contents as a
+    # dictionary.
     with open(FILE_PATH, "r", encoding='utf-8') as team_file:
         file_content = dict(json.load(team_file))
-    
-    # Updates the dictionary adding the new team int the file content.
+   
+    # Adds the new plaeyr
     file_content[team.uuid] = data
     
     # Writes the updated file content into the file containing teams.

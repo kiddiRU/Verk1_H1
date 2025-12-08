@@ -11,36 +11,25 @@ from Models import Club
 
 FILE_PATH = "DataLayer/Repository/clubs.json"
 
-"""
-Takes in model class Club
 
-Inserts information about the Club class into a json file
-for storage
-"""
 def store_club(club: Club) -> None:
-    # Chnages object blub into a dictionary mapping attributes to keys.
+    # Changes object club into a dictionary mapping attributes to keys.
     data = club.__dict__
 
-    # Reads json file containing clubs and stores it as a dictionary.
+    # Reads json file containing clubs and stores the contents as a
+    # dictionary.
     with open(FILE_PATH, "r") as club_file:
         file_content = dict(json.load(club_file))
-
-    # Updates the dictionary addint the new club into the file content.
+ 
+    # Adds the new club into the dictionary mapping it's uuid to the
+    # object for easy lookup.
     file_content[club.uuid] = data
     
-    # Writes the updated file content int the file containing clubs.
+    # Writes the updated file content back into the json file.
     with open(FILE_PATH, "w") as club_file:
         json.dump(file_content, club_file, indent=4)
 
 
-"""
-No parameters
-
-Reads json file containing clubs and creates a list of
-Club model objects of each entry in the json file.
-
-Returns the created club list.
-"""
 def load_club() -> list[Club]:
     # Reads the json file containing clubs and stores it as a dictionary.
     with open(FILE_PATH, "r") as club_file:
@@ -56,21 +45,13 @@ def load_club() -> list[Club]:
     return club_list
 
 
-"""
-Takes in uuid and the updated Club model object.
-
-uuid has to exist in the json file.
-
-Will attempt to find a club with given uuid and update that
-club with the new updated club object.
-"""
 def update_club(uuid: str, updated_club: Club) -> None:
     # Reads the json file containing clubs and stores it as a dictionary.
     with open(FILE_PATH, "r") as club_file:
         file_content = dict(json.load(club_file))
-    
-    # Updates the file content, checking if the uuid exists
-    # in the dictionary.
+   
+    # Overwrites the object tied to the given uuid to the object
+    # given after checking if it exists to prevent key error.
     if uuid in file_content:
         file_content[uuid] = updated_club.__dict__
     
