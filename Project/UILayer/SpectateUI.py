@@ -102,7 +102,7 @@ class SpectateUI:
             if handle == None:
                 print("Not a valid handle")
             else:
-                # TODO: Save player 
+                LogicLayerAPI.save_player(choice)
                 return MenuOptions.view_player_stats
 
     def view_player_stats(self) -> MenuOptions:
@@ -112,9 +112,25 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        # self.utility.show_specific_player()
-        stopper = input("This is the view player stats screen")
-        return MenuOptions.spectate_screen
+        # Remembers what player chosen in spectate_players
+        player_handle: str | None = LogicLayerAPI.save_player() 
+
+        menu: str = str(player_handle)
+        user_path: list[str] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_players,
+            MenuOptions.view_player_stats,
+        ]
+        info: list[str] = [
+            
+        ]
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
+        return MenuOptions.spectate_players
 
     def spectate_clubs(self) -> MenuOptions:
         """Spectate clubs screen, choices: input a club to view stats

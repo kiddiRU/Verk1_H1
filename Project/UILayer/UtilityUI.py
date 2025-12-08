@@ -109,17 +109,20 @@ class UtilityUI:
 
         output_list: list[str] = []  # list that holds each line as a f-string
 
+        length = len(handle_list)
+
         for value in range(0, len(handle_list), 2):
-            try:
-                output_list.append(
-                    f"{handle_list[value]:<{39}}||{handle_list[value + 1]:>{39}}"
-                )
-            except IndexError:  # IF there is an odd amount of players
-                output_list.append(f"{handle_list[-1]:<{39}}||")
+            left = handle_list[value]
+            if value + 1 < length:
+
+                right = handle_list[value + 1]
+                output_list.append(f"{left:<39}||{right:>39}")
+
+            else: # odd number, last item has no pair
+                output_list.append(f"{left:<39}||")
 
         return output_list
 
-# TODO: MOVE THIS SHIT INTO THE LL
     def show_specific_player(self, player_handle: str) -> Player | None:
         """
         Get specific player object based on player handle
@@ -128,14 +131,14 @@ class UtilityUI:
             player_handle (str): handle of a player
 
         Returns:
-            Player | None: _description_
+            Player | None: Player object if player is found else returns None
         """
         player_list: list[Player] = LogicLayerAPI.list_players()
 
         for p in player_list:
             if p.handle == player_handle:
                 return p
-        
+
         return None
 
     def show_schedule(self):
