@@ -76,13 +76,12 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        player_list: list[Player] = LogicLayerAPI.list_players() #TODO remove this comment when/if work
         menu: str = "Players"
         user_path: list[str] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_players,
         ]
-        info: list[str] = [x.handle for x in player_list] #TODO: does not work rn
+        info: list[str] = self.utility.show_all_player_handles()
         options: dict[str, str] = {}
         message: str = ""
 
@@ -90,11 +89,13 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info, options, message))
         # TODO: implement search player functionality from LL into utility class
         choice: str = input("Enter A Players Handle Or The First Letter(s) To Search: \n")
+        #self.utility.show_all_player_handles()
+
         match choice:
-            # case "":
-            #     self.list_players()
             case "b":
                 return MenuOptions.spectate_screen
+            case "q":
+                return MenuOptions.quit
         return MenuOptions.view_player_stats
 
 
