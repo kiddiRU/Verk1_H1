@@ -87,7 +87,9 @@ class PlayerUI:
             case "masterpiece":
                 return MenuOptions.masterpiece
         
-        if LogicLayerAPI.get_player_object(login_handle):
+
+        if LogicLayerAPI.get_player_uuid(login_handle):
+            LogicLayerAPI.get_player_object(login_handle)
             LogicLayerAPI.save_player(login_handle)
 
 
@@ -239,7 +241,7 @@ class PlayerUI:
         
         # Change into string so that Vs Wont complain about type hinting
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_login_uuid = LogicLayerAPI.get
+        current_login_uuid = LogicLayerAPI.get_player_uuid(current_login_handle)
         player: Player | None = LogicLayerAPI.get_player_object(current_login_uuid)
         team, rank = LogicLayerAPI.get_player_team(current_login_handle)
     
@@ -614,7 +616,7 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            info.append({rank} {player_handle: >20})
+            info.append(f"{rank} {current_login_handle: >20}")
         
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))

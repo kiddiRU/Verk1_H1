@@ -8,7 +8,7 @@ Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -76,6 +76,15 @@ def get_player_object(player_uuid: str) -> Player | None:
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     player_logic.promote_captain(current_player, handle_to_promote)
 
+def save_player(player_handle: str | None = None) -> str | None:
+    return player_logic.save_player(player_handle)
+
+
+def get_player_team(player_handle: str) -> tuple:
+    return player_logic.get_player_team(player_handle)
+
+
+
 ''' Team API '''
 team_logic = TeamLL()
 
@@ -106,6 +115,9 @@ def get_team_wins(team_name: str) -> str:
 
 def get_team_points(team_name: str) -> str:
     return team_logic.get_team_points(team_name)
+
+def get_team_club(team_name: str) -> str:
+    return team_logic.get_team_club(team_name)
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
@@ -208,12 +220,8 @@ def input_match_results(match: Match) -> None:
     pass
 
 
-def save_player(player_handle: str | None = None) -> str | None:
-    return player_logic.save_player(player_handle)
 
+""" Utility API """
 
-def get_player_team(player_handle: str) -> tuple:
-    return player_logic.get_player_team(player_handle)
-
-def get_team_club(team_name: str) -> str:
-    return team_logic.get_team_club(team_name)
+def get_player_uuid(player_handle: str) -> str:
+    return LogicUtility.get_player_uuid(player_handle)
