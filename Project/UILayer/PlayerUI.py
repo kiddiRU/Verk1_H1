@@ -245,7 +245,6 @@ class PlayerUI:
         """
         
         current_login_handle = LogicLayerAPI.save_player()
-
         player_list: list[Player] = LogicLayerAPI.list_players()
 
         current_login_name = None
@@ -253,6 +252,7 @@ class PlayerUI:
         current_login_addr = None
         current_login_phnum = None
         current_login_email = None
+        current_login_url = None
         current_login_team = None
         current_login_club = None
         current_login_rank = "Player"
@@ -264,6 +264,7 @@ class PlayerUI:
                 current_login_addr = player.home_address
                 current_login_phnum = player.phone_number
                 current_login_email = player.email
+                current_login_url = player.url
 
 
 
@@ -271,12 +272,13 @@ class PlayerUI:
         user_path: list[str] = [MenuOptions.player_screen]
 
         #Temporary info for testing, needs to get info from the actual info files
-        info: list[str]= [f"""Name: {current_login_name}
+        info: list[str]= [f"""Handle: {current_login_handle}
+Name: {current_login_name}
 Date of Birth: {current_login_dob}
 Home Address: {current_login_addr}
 Phone Number: {current_login_phnum}
 Email: {current_login_email}
-Handle: {current_login_handle}
+UR: {current_login_url}
 Team: {current_login_team}
 Club: {current_login_club}
 Rank: {current_login_rank}"""]
@@ -315,47 +317,100 @@ Rank: {current_login_rank}"""]
             MenuOptions: The next menu to navigate to
         """
 
+        current_login_handle: str | None = LogicLayerAPI.save_player()
+        player_list: list[Player] = LogicLayerAPI.list_players()
+
+
+        # VS Code complains if i dont do this
+        team_name: str | None = ""
+        team_captain: Player = player_list[0]
+        team_club: str = ""
+        team_url: str = ""
+        team_ascii: str = ""
+
+
+        for player in player_list:
+            if player.handle == current_login_handle:
+                team_captain: Player = player
+
+
         menu: str = "Create Team"
         user_path: list[str] = [MenuOptions.player_screen, MenuOptions.create_team]
 
         #temporary info
         info: list[str]= ["- - - -List Of Clubs- - - -"]
         
-        options: dict[str, str]= {"c": "Continue", "b": "Back"}
+        options: dict[str, str] = {"c": "Continue", "b": "Back"}
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
 
-        #clubs = LogicLayerAPI.list_clubs()
-        #for club in clubs:
-            #info.append(club)
+        clubs = LogicLayerAPI.list_clubs()
+        club_names = [x.name for x in clubs]
+        for club in club_names:
+            info.append(club)
             
 
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, [], {}, message))
-        team_name: str | None = self.utility._input_info("Enter Team Name: \n", "name", "TEAM")
-        if team_name != None:
+        con = "b"
+        while con.lower() == "b":
+            self.tui.clear_saved_data()
+            print(self.tui.table(menu, user_path, [], {}, message))
+            team_name: str | None = self.utility._input_info("Enter Team Name: \n", "name", "TEAM")
             self.tui.save_input("Team Name: " + team_name)
 
-        print(self.tui.table(menu, user_path))
-        team_url: str = input("Enter Team URL (Optional): \n") #TODO: This is just a basic input
-        self.tui.save_input("Team Name: " + team_url)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path))
-        team_ascii: str = input("Enter Team ASCII Art (Optional): \n") #TODO: This is just a basic input
-        self.tui.save_input("Team ASCII Art: " + team_ascii)
 
-        print(self.tui.table(menu, user_path, info))
-        team_club: str = input("Choose A Club To Join: \n") #TODO: This is just a basic input
-        self.tui.save_input("Club: " + team_club)
 
-        print(self.tui.table(menu, user_path, info, options))
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path))
+            team_url: str = input("Enter Team URL (Optional): \n") #TODO: This is just a basic input
+            self.tui.save_input("Team Name: " + team_url)
+
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path))
+            team_ascii: str = input("Enter Team ASCII Art (Optional): \n") #TODO: This is just a basic input
+            self.tui.save_input("Team ASCII Art: " + team_ascii)
+
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+            message = ""
+            while team_club not in club_names:
+                print(self.tui.table(menu, user_path, info, {}, message))
+                team_club: str = input("Choose A Club To Join: \n") #TODO: This is just a basic input
+                if team_club not in club_names:
+                    print(self.tui.table(menu, user_path, info, options, message))
+                    message = f"{team_club} Does Not Exist Or Is Not Available"
+                
+                else:
+                    self.tui.save_input("Club: " + team_club)
+
+                    print(self.tui.table(menu, user_path, [], options)) 
+                    con: str = self.utility._prompt_choice(["c", "b"])
+                    if con.lower() == "b":
+                        self.tui.discard_last_input()
+
+        options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
+        message = f"You Have Created A Team!"
+        print(self.tui.table(menu, user_path, [], options, message))
         choice: str = self.utility._prompt_choice(["c", "b"])
-
-        #LogicLayerAPI.create_team(team_name, "", team_club, team_url, team_ascii)
-
-        #name: str, team_captain: Player, club_name: Club, url: str, ascii_art: str
         
         if choice == "c":
+            LogicLayerAPI.create_team(team_name, team_captain, team_club, team_url, team_ascii)
+
             return MenuOptions.my_team_not_empty
         
  
@@ -370,67 +425,140 @@ Rank: {current_login_rank}"""]
             MenuOptions: The next menu to navigate to
         """
 
-        # This Uses A temporary way to print out and change info
-        # TODO: 
+        current_login_handle: str | None = LogicLayerAPI.save_player()
+        player_list: list[Player] = LogicLayerAPI.list_players()
 
-        user_name = "LOGIC"
-        dob = "LOGIC"
-        addr = "LOGIC"
-        phnum = "LOGIC"
-        email = "LOGIC"
-        url = "LOGIC"
+        current_player: Player = player_list[0]
+        name: str = ""
+        dob: str = ""
+        addr: str = ""
+        email: str = ""
+        phnum: str = ""
+        handle: str = ""
+        url: str = ""
+
+        for player in player_list:
+            if player.handle == current_login_handle:
+                current_player: Player = player
+                name: str = player.name
+                dob: str = player.date_of_birth
+                addr: str = player.home_address
+                email: str = player.email
+                phnum: str = player.phone_number
+                handle: str = player.handle
+                url: str = player.url
 
 
 
         menu: str = "Edit Player Info"
-        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.edit_player_info]
-        info: list[str]= []
+        user_path: list[str] = [MenuOptions.player_screen, 
+                                MenuOptions.edit_player_info]
+        info: list[str]= [f"- - - -{current_login_handle}- - - -"]
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Changed Your Info!"
 
         self.tui.clear_saved_data()
-        self.tui.save_input(f"- - - -{"PLAYERNAME"}- - - -")
         unchanged_message = "(Leave Field Empty If You Want To Leave Them Unchanged)"    
 
-        print(self.tui.table(menu, user_path, info))
-        new_name = input(unchanged_message + "\n Enter New Name: \n") #TODO: This is just a basic input
-        if new_name:
-            user_name = new_name
-        self.tui.save_input("Name: " + user_name)
 
-        print(self.tui.table(menu, user_path, info))
-        new_dob = input(unchanged_message + "\n Enter New Date Of Birth: \n") #TODO: This is just a basic input
-        if new_dob:
-            dob = new_dob
-        self.tui.save_input("Date Of Birth: " + dob)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name: \n", "name", "PLAYER")
 
-        print(self.tui.table(menu, user_path, info))        
-        new_addr = input(unchanged_message + "\n Enter New Home Address: \n") #TODO: This is just a basic input
-        if new_addr:
-            addr = new_addr
-        self.tui.save_input("Home Address: " + addr)
+            if new_name:
+                name = new_name
+            self.tui.save_input("Name: " + name)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info))
-        new_phnum = input(unchanged_message + "\n Enter New Phone Number: \n") #TODO: This is just a basic input
-        if new_phnum:
-            phnum = new_phnum
-        self.tui.save_input("Phone Number: " + phnum)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle: \n", 
+                                                  "handle", "PLAYER")
+            if new_handle:
+                handle = new_handle
+            self.tui.save_input("Handle: " + handle)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info))
-        new_email = input(unchanged_message + "\n Enter New Email: \n") #TODO: This is just a basic input
-        if new_email:
-            email = new_email
-        self.tui.save_input("Email: " + email)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth: \n", 
+                                               "date_of_birt", "PLAYER")
+            if new_dob:
+                dob = new_dob
+            self.tui.save_input("Date Of Birth: " + dob)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info))
-        new_url = input(unchanged_message + "\n Enter New Email: \n") #TODO: This is just a basic input
-        if new_url:
-            url = new_url
-        self.tui.save_input("URL: " + url)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))        
+            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address: \n", 
+                                                "home_address", "PLAYER")
+            if new_addr:
+                addr = new_addr
+            self.tui.save_input("Home Address: " + addr)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number: \n", 
+                                                 "phone_number", "PLAYER")
+            if new_phnum:
+                phnum = new_phnum
+            self.tui.save_input("Phone Number: " + phnum)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email: \n", 
+                                                 "email", "PLAYER")
+            if new_email:
+                email = new_email
+            self.tui.save_input("Email: " + email)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            new_url = input(unchanged_message + "\n Enter New URL: \n")
+            if new_url:
+                url = new_url
+            self.tui.save_input("URL: " + url)
+            print(self.tui.table(menu, user_path, [], options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
         
-        print(self.tui.table(menu, user_path, info, options, message))
 
+        options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
+        print(self.tui.table(menu, user_path, [], options, message))
+        choice: str = self.utility._prompt_choice(["c", "b"])
+        
+        if choice == "c":
+            LogicLayerAPI.update_player_info(current_player, name, dob, addr, email, phnum, handle, url)
+            LogicLayerAPI.save_player(handle)
         
         return MenuOptions.player_screen
     

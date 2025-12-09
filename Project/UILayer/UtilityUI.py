@@ -70,6 +70,55 @@ class UtilityUI:
                 print(self.error_color + str(e) + self.reset)
                 continue
 
+    # Created by Sindri Freysson
+    def prompt_builder(options: list[str]) -> dict[int, str]:
+        """
+        Helper function that takes in list of MenuOptions and returns an enumerated dictionary of options
+        Use dict.update after building if you want to add extra options to the menu
+        :param options: List of strings representing the options that the user can use
+        :return: Dictionary of options -> string
+        """
+        prompt_dict: dict[int|str, str] = {}
+        for i, choice in enumerate(options, start=1):
+            prompt_dict[i] = choice
+        return prompt_dict
+    # Created by Sindri Freysson
+    def prompt_choice(self, valid_choices: dict[int|str, str]) -> str:
+        """
+        Takes in a list of valid choices and returns a string representing the choice
+        :param self:
+        :param valid_choices: Dictionary of valid choices that the user can input
+        :return: Returns a string of the allowed choice
+        """
+        while True:
+            choice: str = input("> ").strip().lower()
+            if choice in valid_choices:
+                return valid_choices[choice]
+            print(
+                self.error_color + "Not a valid option try again" + self.reset
+            )
+
+    def _input_change(self, message: str, attribute: str, info_type: str) -> str:
+        """
+        Helper function that repeats input until it is valid or navigation word is entered
+        :param message: message to display - "Enter Your name"
+        :param attribute: attribute of a model class - "name"
+        :param info_type: information type - "PLAYER"
+        :return: Repeats until the input is valid or navigation word is entered
+        """
+        while True:
+            try:
+                print(self.message_color + message + self.reset)
+                choice: str = input()
+                if not choice:
+                    return choice
+                valid: str | None = validate(attribute, choice, info_type)
+                return str(valid)
+            except ValidationError as e:
+                print(self.error_color + str(e) + self.reset)
+                continue
+
+
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")
@@ -82,9 +131,23 @@ class UtilityUI:
     def search_for_player(self):
         # TODO: Get logic from LL
         pass
-# -----------------------------------------------
 
-# -----------------------------------------------
+    def get_tournament_object (self, tournament_name: str) -> Tournament | None:
+        """
+        Returns a Tournament object from name
+
+        Args:
+            tournament_name (str): a tournament name
+
+        Returns:
+            Tournament | None: a Tournament object if successful else None
+        """
+        tournaments = LogicLayerAPI.list_tournaments()
+        for i in tournaments:
+            if i.name == tournament_name:
+                return i
+
+    # -----------------------------------------------
 
     def show_specific_tournament(self, tournament_name):
         pass
@@ -93,11 +156,10 @@ class UtilityUI:
         team_list: list[Team] = LogicLayerAPI.list_teams()
         team_names = [x.name for x in team_list]
         team_uuids = [x.uuid for x in team_list]
-        
+
         for index, name in enumerate(team_names):
             if name == team_name:
                 return LogicLayerAPI.get_team_object(team_uuids[index])
-
 
     def show_specific_club(self, club_name: str) -> Club | None:
         """
@@ -114,7 +176,6 @@ class UtilityUI:
         for club in club_list:
             if club.name == club_name:
                 return club
-        
 
     def show_specific_player(self, player_handle: str) -> Player | None:
         """
@@ -144,10 +205,21 @@ class UtilityUI:
         """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments]
-    
-    def not_inactive_tournaments(self) -> list[str]:
+
+    def except_status_tournaments(
+        self, tournament_status: Tournament.StatusType
+    ) -> list[str]:
+        """
+        Returns a list of tournaments that do not have the inputted status
+
+        Args:
+            tournament_status (Tournament.StatusType): Status that is not supposed to be in the tournament list
+
+        Returns:
+            list[str]: list of tournaments without the inputted status
+        """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
-        return [x.name for x in tournaments if x.status != "INACTIVE"]
+        return [x.name for x in tournaments if x.status != tournament_status]
 
     def team_names(self) -> list[str]:
         """
@@ -213,12 +285,24 @@ class UtilityUI:
 
         return output_list
 
-    def show_tournaments(self) -> list[str]:
+    def show_tournaments_except_status(
+        self, tournament_status: Tournament.StatusType
+    ) -> list[str]:
+        """
+        An f-string to show tournaments that do not have the status
+
+        Args:
+            tournament_status (Tournament.StatusType): active, inactive, archived
+
+        Returns:
+            list[str]: a list of f-strings to show tournaments without specific status
+        """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
 
         output_list: list[str] = []  # list that holds each line as a f-string
 
         for t in tournaments:
-            if t.status == "INACTIVE": continue
+            if t.status == tournament_status:
+                continue
             output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list

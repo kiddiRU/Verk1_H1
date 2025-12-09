@@ -44,14 +44,14 @@ class SpectateUI:
             "2": "Clubs",
             "3": "Teams",
             "4": "Tournaments",
-            "h": "Home",
+            "b": "Back To Start",
         }
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "h"])
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "b"])
         match choice:
             case "1":
                 return MenuOptions.spectate_players
@@ -61,7 +61,7 @@ class SpectateUI:
                 return MenuOptions.spectate_teams
             case "4":
                 return MenuOptions.spectate_tournaments
-            case "h":
+            case "b":
                 return MenuOptions.start_screen
 
         return MenuOptions.start_screen
@@ -275,7 +275,7 @@ class SpectateUI:
             MenuOptions.spectate_tournaments,
         ]
 
-        info: list[str] = self.utility.show_tournaments()
+        info: list[str] = self.utility.show_tournaments_except_status(Tournament.StatusType.inactive)
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Tournament Not Found!"
 
@@ -289,7 +289,7 @@ class SpectateUI:
         )
 
         tournament_list: list[Tournament] = LogicLayerAPI.list_tournaments()
-        not_inactive: list[str] = self.utility.not_inactive_tournaments()
+        not_inactive: list[str] = self.utility.except_status_tournaments(Tournament.StatusType.inactive)
 
         # Validate tournament name
         if tournament_name in not_inactive:

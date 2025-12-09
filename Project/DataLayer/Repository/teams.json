@@ -222,5 +222,17 @@
         "in_tournament": null,
         "url_homepage": "https://example.com/pepsimax_overflow",
         "ascii_art": null
+    },
+    "1d338c54-7b68-4fda-a0c3-79118c0cca8b": {
+        "uuid": "1d338c54-7b68-4fda-a0c3-79118c0cca8b",
+        "name": "DaDoggos",
+        "list_player_uuid": [
+            "67bbafe9-4add-4c84-a5e0-8b7060e6f353"
+        ],
+        "team_captain_uuid": "67bbafe9-4add-4c84-a5e0-8b7060e6f353",
+        "club_uuid": "269fcfc5-f629-4921-af37-0c592373717c",
+        "in_tournament": null,
+        "url_homepage": "www.gimmeatreat.com",
+        "ascii_art": "^._.^"
     }
 }

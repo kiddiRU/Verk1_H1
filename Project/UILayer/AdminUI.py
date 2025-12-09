@@ -5,6 +5,8 @@ Date: 2025-12-04
 File that holds all the menus that the admin can access
 """
 
+from Models.Tournament import Tournament
+
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
@@ -17,9 +19,9 @@ class AdminUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
-        # self.tournament = TournamentLL(DataLayer.DataLayerAPI)
-
-
+        self.message_color = "\033[36m"
+        self.reset: str = "\033[0m"
+        self.underscore = "\033[4m"
 
     def admin_screen(self) -> MenuOptions:
         """Admin screen, choices: 1,2,3 and lo
@@ -46,7 +48,6 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-
         choice: str = self.utility._prompt_choice(["1", "2", "3", "lo"])
         match choice:
             case "1":
@@ -58,8 +59,6 @@ class AdminUI:
             case "lo":
                 return MenuOptions.logout
         return MenuOptions.logout
-
-
 
     def create_tournament(self) -> MenuOptions:
         """Create tournament screen, choices: fill info with input
@@ -79,38 +78,41 @@ class AdminUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path))
-        tournament_name: str = self.utility._input_info("Enter Tournament Name: \n", "name", "TOURNAMENT")
+        tournament_name: str = self.utility._input_info(
+            "Enter Tournament Name: \n", "handle", "TOURNAMENT"
+        )
         self.tui.save_input("Tournament Name: " + tournament_name)
 
-
-        print(self.tui.table(menu, user_path, info)) 
-        tournament_date: str = self.utility._input_info("Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n", 
-                                                       "date", "TOURNAMENT")
+        print(self.tui.table(menu, user_path, info))
+        tournament_date: str = self.utility._input_info(
+            "Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n",
+            "date",
+            "TOURNAMENT",
+        )
         self.tui.save_input("Start And End Dates: " + str(tournament_date))
 
-
-        print(self.tui.table(menu, user_path, info)) 
-        tournament_addr: str = self.utility._input_info("Enter Venue Address: (Streetname 00 Cityname)\n", 
-                                                  "address", "Tournament")
+        print(self.tui.table(menu, user_path, info))
+        tournament_addr: str = self.utility._input_info(
+            "Enter Venue Address: (Streetname 00 Cityname)\n",
+            "address",
+            "Tournament",
+        )
         self.tui.save_input("Venue Address: " + tournament_addr)
 
-
         print(self.tui.table(menu, user_path, info))
-        tournament_email: str = self.utility._input_info("Enter Contact Email: \n", "email", "PLAYER")
+        tournament_email: str = self.utility._input_info(
+            "Enter Contact Email: \n", "email", "PLAYER"
+        )
         self.tui.save_input("Email: " + tournament_email)
 
-
-        print(self.tui.table(menu, user_path, info))   
-        tournament_phnum: str = self.utility._input_info("Enter Contact Phone Number: 123-4567 \n", 
-                                                         "phone_number", "PLAYER")
+        print(self.tui.table(menu, user_path, info))
+        tournament_phnum: str = self.utility._input_info(
+            "Enter Contact Phone Number: 123-4567 \n", "phone_number", "PLAYER"
+        )
         self.tui.save_input("Phone Number: " + tournament_phnum)
 
-
-        # TODO: add fill in options
-        
+        LogicLayerAPI.save_player(tournament_name)
         return MenuOptions.manage_inactive_tournament
-
-
 
     def manage_tournaments(self) -> MenuOptions:
         """Manage tournaments screen, choices: choose with input
@@ -118,37 +120,51 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+
         menu: str = "Manage Tournaments"
         user_path: list[str] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
         ]
-        info: list[str] = ["- - - -List Of Tournaments- - - -"]
-        options: dict[str, str] = {}
-        message: str = ""
-        info.append("active")
-        info.append("inactive")
+        info: list[str] = self.utility.show_tournaments_except_status(
+            Tournament.StatusType.archived
+        )
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
+        message: str = "Tournament Not Found!"
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        
-        tournament = input("Input tournament to manage: \n")
-
-        if tournament.lower() == "lo":
+        find_name: str = input(
+            self.message_color + "Input Team Name: " + self.reset
+        )
+        if find_name.lower() == "lo":
             return MenuOptions.logout
-        
-        if tournament.lower() == "active": #TODO: REMOVE THIS IS JUST TEST LINE
-            return MenuOptions.manage_active_tournament
-        
-        if tournament.lower() == "inactive": #TODO: REMOVE THIS IS JUST TEST LINE
-            return MenuOptions.manage_inactive_tournament
 
-        # TODO: add input for tournament to manage
-        # TODO: if active the go to active screen else inactive screen
+        # Check tournaments that are not archived
+        if find_name in self.utility.except_status_tournaments(
+            Tournament.StatusType.archived
+        ):
+
+            LogicLayerAPI.save_player(find_name)
+
+            # check status to redirect correctly
+            tournament = self.utility.get_tournament_object(find_name)
+            if tournament == None:
+                return MenuOptions.manage_tournament
+            if tournament.status == Tournament.StatusType.active:
+                return MenuOptions.manage_active_tournament
+            if tournament.status == Tournament.StatusType.inactive:
+                return MenuOptions.manage_inactive_tournament
+
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        choice: str = self.utility._prompt_choice(["t", "b"])
+        match choice:
+            case "t":
+                return MenuOptions.manage_tournament
+
         return MenuOptions.admin_screen
-
-
 
     def manage_active_tournament(self) -> MenuOptions:
         """Active tournament screen, choices: 1,2(c requirement) and b
@@ -159,6 +175,8 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Get tournament name
+        tournament_name: str | None = LogicLayerAPI.save_player()
 
         menu: str = "Active Tournament"
         user_path: list[str] = [
@@ -166,8 +184,12 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
         ]
-        info: list = ["- - - -TOURNAMENTNAME- - - -"]
-        options: dict[str, str] = {"1": "Input Results Of A Match", "b": "Back", "lo": "Log Out"}
+        info: list = [f"- - - - {str(tournament_name)} - - - -"]
+        options: dict[str, str] = {
+            "1": "Input Results Of A Match",
+            "b": "Back",
+            "lo": "Log Out",
+        }
         message: str = ""
 
         self.tui.clear_saved_data()
@@ -175,20 +197,10 @@ class AdminUI:
 
         choice: str = self.utility._prompt_choice(["1", "b", "lo"])
 
-        match choice:
-            case "1":
-                return MenuOptions.select_match
-            #case "2":
-            #     return MenuOptions.cancel_tournament  #TODO: Optional C requirement
-            case "b":
-                return MenuOptions.manage_tournament
-            
-            case "lo":
-                MenuOptions.start_screen
-
+        if choice == "1": return MenuOptions.select_match
+        if choice == "lo": return MenuOptions.start_screen
+    
         return MenuOptions.manage_tournament
-
-
 
     def matches(self) -> MenuOptions:
         """Matches screen, choices: input to select match
@@ -202,14 +214,19 @@ class AdminUI:
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
-            MenuOptions.select_match
+            MenuOptions.select_match,
         ]
-        info: list = ["- - - -List Of Matches- - - -"]
+        info: list = ["- - - - List Of Matches - - - -"]
         self.options: dict[str, str] = {}
         choice_list = []
         message: str = ""
 
-        matches_list = ["Team 1 vs Team 3", "Team 2 vs Team 4", "Team 5 vs Team 7", "Team 6 vs Team 8"]
+        matches_list = [
+            "Team 1 vs Team 3",
+            "Team 2 vs Team 4",
+            "Team 5 vs Team 7",
+            "Team 6 vs Team 8",
+        ]
 
         x = 0
         for match in matches_list:
@@ -220,7 +237,8 @@ class AdminUI:
         choice_list.append("b")
         self.options["b"] = "Back"
 
-        
+        ## GET NEXT TIME-SLOT
+        ## UPDATE MATCH
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, self.options, message))
@@ -229,10 +247,8 @@ class AdminUI:
         match self.choice:
             case "b":
                 return MenuOptions.manage_active_tournament
-            
+
         return MenuOptions.input_results
-
-
 
     def match_results(self) -> MenuOptions:
         """Match results screen, choices: input a match that won
@@ -246,13 +262,16 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
             MenuOptions.select_match,
-            MenuOptions.input_results
+            MenuOptions.input_results,
         ]
         teamname1, teamname2 = self.options[self.choice].split(" vs ")
         teamname1 = teamname1[18:]
-        info: list = ["- - - -List Of Matches- - - -"]
-        options: dict[str, str] = {"1": f"Select {teamname1} for victory", "2": f"Select {teamname2} for victory",
-                                    "b": "Back"}
+        info: list = ["- - - - List Of Matches - - - -"]
+        options: dict[str, str] = {
+            "1": f"Select {teamname1} for victory",
+            "2": f"Select {teamname2} for victory",
+            "b": "Back",
+        }
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -261,7 +280,7 @@ class AdminUI:
         winner = None
 
         match choice:
-            case "b": 
+            case "b":
                 return MenuOptions.select_match
             case "1":
                 winner = teamname1
@@ -277,23 +296,27 @@ class AdminUI:
         # TODO: function to choose a team that won update the team and match
         return MenuOptions.manage_active_tournament
 
-
-
     def manage_inactive_tournament(self) -> MenuOptions:
         """Inactive tournament screen, choices: 1,2,3 and b
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        tournament_name: str | None = LogicLayerAPI.save_player()
 
         menu: str = "Inactive Tournament"
         user_path: list[str] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
-            MenuOptions.manage_inactive_tournament
+            MenuOptions.manage_inactive_tournament,
         ]
-        info: list = ["- - - -TOURNAMNETNAME- - - -"]
-        options: dict[str, str] = {"1": "Manage Teams", "2": "Publish", "3": "Edit Tournament", "b": "Back"}
+        info: list = [f"- - - - {str(tournament_name)} - - - -"]
+        options: dict[str, str] = {
+            "1": "Manage Teams",
+            "2": "Publish",
+            "3": "Edit Tournament",
+            "b": "Back",
+        }
         message = ""
 
         self.tui.clear_saved_data()
@@ -312,24 +335,31 @@ class AdminUI:
                 return MenuOptions.manage_tournament
         return MenuOptions.manage_tournament
 
-
-
     def manage_teams(self) -> MenuOptions:
         """Manage teams screen, choices: 1,2 and b
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Check if None goes through
+        tournament_name = LogicLayerAPI.save_player() or "None"
+        t_object = self.utility.get_tournament_object(tournament_name)
+        if t_object is None:
+            return MenuOptions.start_screen
 
         menu: str = "Inactive Tournament"
         user_path: list[str] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
-            MenuOptions.manage_teams
+            MenuOptions.manage_teams,
         ]
-        info: list = ["- - - -List Of Teams In Tournament- - - -"]
-        options: dict[str, str] = {"1": "Add Team", "2": "Remove Team", "b": "Back"}
+        info: list = t_object.teams_playing
+        options: dict[str, str] = {
+            "1": "Add Team",
+            "2": "Remove Team",
+            "b": "Back",
+        }
         message = ""
 
         self.tui.clear_saved_data()
@@ -346,8 +376,6 @@ class AdminUI:
                 return MenuOptions.manage_inactive_tournament
         return MenuOptions.manage_inactive_tournament
 
-
-
     def add_team(self) -> MenuOptions:
         """Add team screen, choices: input a team to add or l to list all team
 
@@ -361,18 +389,16 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
-            MenuOptions.add_team
+            MenuOptions.add_team,
         ]
         info: list = []
         options_1: dict[str, str] = {"a": "Add Another Team", "b": "Back"}
         options_2: dict[str, str] = {"t": "Try Again", "b": "Back"}
-        
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input("Enter Team Name or 'l' to list all: \n")
-
 
         # if ...: # If Team Found
         #     message = f"You Have Added {team_to_add} To The Tournament"
@@ -380,27 +406,25 @@ class AdminUI:
         #     choice: str = self.utility._prompt_choice(["a", "b"])
 
         #     match choice:
-        #         case "a": 
+        #         case "a":
         #             return MenuOptions.add_team
-                
+
         #     return MenuOptions.manage_teams
-        
-        if...: # Team not found
+
+        if ...:  # Team not found
             message = f"{team_to_add} Was Not Found"
             print(self.tui.table(menu, user_path, info, options_2, message))
             choice: str = self.utility._prompt_choice(["t", "b"])
 
             match choice:
-                case "t": 
+                case "t":
                     return MenuOptions.add_team
-                
+
             return MenuOptions.manage_teams
 
         # TODO: Add function to list teams and to choose a team by the name
 
         return MenuOptions.manage_teams
-
-
 
     def remove_team(self) -> MenuOptions:
         """Remove team screen, choices: input a team to add or l to list all team
@@ -412,22 +436,42 @@ class AdminUI:
         # TODO: same as add team but not remove
         return MenuOptions.manage_teams
 
-
-
     def publish(self) -> MenuOptions:
         """Publish tournament screen, choices: input a tournament to publish
 
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Check if None goes through
+        tournament_name = LogicLayerAPI.save_player() or "None"
+        t_object = self.utility.get_tournament_object(tournament_name)
+        if t_object is None:
+            return MenuOptions.start_screen
 
-        print("PUBLISH TOURNAMENT")
-        choice: str = input("Input tournament to publish: ")
-        # TODO: Check for tournament then publish it
+        menu: str = "Publish"
+        user_path: list[str] = [
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament,
+            MenuOptions.publish,
+        ]
+        info: list = [f"Do you want to publish {self.message_color}{t_object.name}{self.reset}? Y/N"]
+
+        options: dict[str, str] = {
+            "Y:": "Yes",
+            "N:": "No",
+        }
+        message = "Publishing cannot be reverted!"
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        choice: str = self.utility._prompt_choice(["Y","y","N","n"])
+
+        if choice.lower() == "y":
+            LogicLayerAPI.publish(tournament_name)
+            return MenuOptions.manage_tournament
 
         return MenuOptions.manage_inactive_tournament
-
-
 
     def edit_tournament(self) -> MenuOptions:
         """Edit inactive tournament screen,
@@ -437,9 +481,7 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
         print("list of inactive tournaments")
-        tournament_name: str = input(
-            "Choose tournament to edit"
-        )
+        tournament_name: str = input("Choose tournament to edit")
 
         # TODO: Check for tournament
 
@@ -455,8 +497,6 @@ class AdminUI:
             case "b":
                 return MenuOptions.manage_inactive_tournament
         return MenuOptions.manage_inactive_tournament
-
-
 
     def edit_tournament_time(self) -> MenuOptions:
         """Edit tournament time screen, choices: input a start and end date
@@ -476,11 +516,8 @@ class AdminUI:
                 case "N":
                     print("CANCELING")
                     return MenuOptions.edit_tournament
-        
+
         return MenuOptions.edit_tournament
-        
-
-
 
     def edit_tournament_info(self) -> MenuOptions:
         """Edit tournament info screen, choices: input new name, venue,
@@ -493,8 +530,6 @@ class AdminUI:
         print("THIS IS EDIT TOURNAMENT INFO WINDOW")
         return MenuOptions.edit_tournament
 
-
-
     def create_club(self) -> MenuOptions:
         """Create club screen, choices: fill info with input (name and color)
 
@@ -504,5 +539,3 @@ class AdminUI:
 
         print("This is the create club screen")
         return MenuOptions.admin_screen
-
-
