@@ -84,7 +84,6 @@ def get_tournament_by_name(name: str) -> Tournament:
 
 def tournament_name_to_uuid(name: str) -> str:
         tournament = get_tournament_by_name(name)
-        
         return tournament.uuid
     
 def get_team_by_name(name: str) -> Team:
