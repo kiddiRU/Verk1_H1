@@ -20,6 +20,9 @@ class Match:
         team_1: str,
         team_2: str,
         winner: None | str = None,
+        winning_players: None | list[str] = None,
+        losing_team: None | str = None,
+        losing_players: None | list[str] = None
     ) -> None:
         """
         Initializer for Match model class
@@ -41,3 +44,6 @@ class Match:
         self.team_1 = team_1
         self.team_2 = team_2
         self.winner = winner
+        self.winning_players = winning_players
+        self.losing_team = losing_team
+        self.losing_players = losing_players

@@ -70,8 +70,8 @@ def leave_team(team_name: str, player: Player) -> None:
 def list_players() -> list[Player]:
     return player_logic.list_players()
 
-def get_player_object(player_handle: str) -> Player | None:
-    return player_logic.get_player_object(player_handle)
+def get_player_object(player_uuid: str) -> Player | None:
+    return player_logic.get_player_object(player_uuid)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     player_logic.promote_captain(current_player, handle_to_promote)
@@ -100,6 +100,12 @@ def get_team_object(team_name: str) -> Team:
 # TODO implement get_team_history and call it
 def get_team_history(team_name: str) -> list[str]:       
     return team_logic.get_team_history(team_name)
+
+def get_team_wins(team_name: str) -> str:
+    return team_logic.get_team_wins(team_name)
+
+def get_team_points(team_name: str) -> str:
+    return team_logic.get_team_points(team_name)
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
@@ -204,3 +210,10 @@ def input_match_results(match: Match) -> None:
 
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
+
+
+def get_player_team(player_handle: str) -> tuple:
+    return player_logic.get_player_team(player_handle)
+
+def get_team_club(team_name: str) -> str:
+    return team_logic.get_team_club(team_name)

@@ -22,7 +22,7 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
     else: return
     
 
-
+# Player handle, team name, tour name and club name
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     """
     Checks if the name is unique and is between 3-40 char in length
@@ -62,11 +62,16 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
         
         return unique_name
 
-def validate_name(name: str) -> str | None: # Players full name
-    """Checks if the name is in between 3-40 char in length and has only letters"""
+# Players full name
+def validate_name(name: str) -> str | None:
+    """
+    Checks if the name is in between 3-40 char in length and has only letters
+    """
     
     if (len(name) < 3 or len(name) > 40):
-        raise ValidationError("Name needs to be between 3 to 40 characters in length and")
+        raise ValidationError(
+            "Name needs to be between 3 to 40 characters in length and"
+            )
     
     if not name.replace(" ","").isalpha():
         raise ValidationError("Name can not have digits")
@@ -75,9 +80,12 @@ def validate_name(name: str) -> str | None: # Players full name
         return name
     
 
-
-def validate_home_address(home_address) -> str | None: # Players home address
-    """Checks if home address has street name, street number and area (Frostafold 3 Reykjavík)"""
+# Players home address
+def validate_home_address(home_address: str) -> str | None:
+    """
+    Checks if home address has street name, street number and area
+    (Frostafold 3 Reykjavík)
+    """
     
     try:
         address_list: str = home_address.split()
@@ -89,7 +97,10 @@ def validate_home_address(home_address) -> str | None: # Players home address
         is_digit_street_number: bool = street_number.isdigit()
         is_string_area_name: bool = area_name.isalpha()
 
-        if is_string_street_name and is_digit_street_number and is_string_area_name:
+        if (is_string_street_name
+            and is_digit_street_number
+            and is_string_area_name):
+
             return home_address
 
         else:
@@ -99,8 +110,8 @@ def validate_home_address(home_address) -> str | None: # Players home address
         raise ValidationError("Invalid address")
 
 
-
-def validate_phone_number(phone_number) -> str | None: # Players and tournament contact phone number
+# Players and tournament contact phone number
+def validate_phone_number(phone_number: str) -> str | None: 
     """Checks if phone number is eight in length 7 nums and a dash (123-4567)"""
     
     if "-" in phone_number:
@@ -113,7 +124,11 @@ def validate_phone_number(phone_number) -> str | None: # Players and tournament 
         length_first_half: bool = len(first_half_phone_nr) == 3
         length_second_half: bool = len(second_half_phone_nr) == 4
 
-        if is_digit_first_half and is_digit_second_half and length_first_half and length_second_half:
+        if (is_digit_first_half 
+            and is_digit_second_half 
+            and length_first_half 
+            and length_second_half):
+
             return phone_number
 
         else:
@@ -123,9 +138,11 @@ def validate_phone_number(phone_number) -> str | None: # Players and tournament 
         raise ValidationError("Phone number inputted incorrectly")
 
 
-
-def validate_email(email) -> str | None: # Players and tournament contact email
-    """Checks if email has @, and that there is something before and after the @"""
+#Players and tournament contact email
+def validate_email(email: str) -> str | None:
+    """
+    Checks if email has @, and that there is something before and after the @
+    """
 
     if "@" in email:
         email_list: list = email.split("@")
@@ -143,9 +160,12 @@ def validate_email(email) -> str | None: # Players and tournament contact email
         raise ValidationError('Invalid email!')
 
 
-
-def validate_date(date_input) -> date | ValidationError: # Date of Birth, Date of Tournament
-    """Splits the string and tries to change the numbers in to int and Checks if date format is correct YYYY-MM-DD"""
+# For date of birth and date of a match
+def validate_date(date_input: str) -> date | ValidationError: 
+    """
+    Splits the string and tries to change the numbers in to int and 
+    Checks if date format is correct YYYY-MM-DD
+    """
 
     try:
         date_list: list = list(map(int, date_input.split("-")))
@@ -163,9 +183,15 @@ def validate_date(date_input) -> date | ValidationError: # Date of Birth, Date o
 
 
 
-#TODO add functionality to all function bellow
-def validate_date_frame(start_date, end_date) -> date | ValidationError: # Date frame of tournament
-    """Checks if date frame is correct, date_1 is before date_2 (2025-12-01 -> 2025-12-06)"""
+# Date frame for tournament
+def validate_date_frame(
+        start_date: str,
+        end_date: str
+        ) -> date | ValidationError:
+    """
+    Checks if date frame is correct, date_1 is before date_2
+    (2025-12-01 -> 2025-12-06)
+    """
 
     valid_date_start = validate_time(start_date)
     valid_date_end = validate_time(end_date)
@@ -177,8 +203,8 @@ def validate_date_frame(start_date, end_date) -> date | ValidationError: # Date 
         raise ValidationError("Not a valid Date frame")
 
 
-
-def validate_time(time_input) -> time: # Time of Match and Tournament time frame
+# Time of Match and Tournament time frame
+def validate_time(time_input: str) -> time:
     """Checks if time is format is correct HH:MM (12:00)"""
 
     try:
@@ -195,9 +221,11 @@ def validate_time(time_input) -> time: # Time of Match and Tournament time frame
         raise ValidationError("Letters are not allowed in time")
 
 
-
-def validate_time_frame(start_time, end_time) -> time: # Time frame of tournament
-    """Checks if time frame is correct, time_1 is before time_2 (08:00 -> 16:00) """
+# Time frame of tournament
+def validate_time_frame(start_time: str, end_time: str) -> time:
+    """
+    Checks if time frame is correct, time_1 is before time_2 (08:00 -> 16:00)
+    """
     
     valid_time_start = validate_time(start_time)
     valid_time_end = validate_time(end_time)
