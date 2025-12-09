@@ -124,10 +124,20 @@ class PlayerUI:
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Created A Player!"
-        con = "b"
+
+
+        # Python complained if i did not do this
+        user_name = ""
+        user_dob = ""
+        user_addr = ""
+        user_email = ""
+        user_phnum = ""
+        user_handle = ""
+        user_url = ""
 
         self.tui.clear_saved_data()
 
+        con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))  
             user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
@@ -138,55 +148,80 @@ class PlayerUI:
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info)) 
+            user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
+            self.tui.save_input("Date Of Birth: " + str(user_dob))
 
-        print(self.tui.table(menu, user_path, info)) 
-        user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
-        self.tui.save_input("Date Of Birth: " + str(user_dob))
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info, options))  
-        con: str = self.utility._prompt_choice(["c", "b"])
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info)) 
+            user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", 
+                                                    "home_address", "PLAYER")
+            self.tui.save_input("Home Address: " + user_addr)
 
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info)) 
-        user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", 
-                                                  "home_address", "PLAYER")
-        self.tui.save_input("Home Address: " + user_addr)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
+            self.tui.save_input("Email: " + user_email)
 
-        print(self.tui.table(menu, user_path, info, options))  
-        con: str = self.utility._prompt_choice(["c", "b"])
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))   
+            user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
+            self.tui.save_input("Phone Number: " + user_phnum)
 
-        print(self.tui.table(menu, user_path, info))
-        user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
-        self.tui.save_input("Email: " + user_email)
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info, options))
-        con: str = self.utility._prompt_choice(["c", "b"])
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))   
+            user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
+            self.tui.save_input("Handle: " + user_handle)
 
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info))   
-        user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
-        self.tui.save_input("Phone Number: " + user_phnum)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))   
+            user_url: str = input("Enter URL: (ooptional) \n") #TODO: This is just a basic input
+            self.tui.save_input("URL: " + user_url)
+            print(self.tui.table(menu, user_path, info, options))
 
-        print(self.tui.table(menu, user_path, info, options))  
-        con: str = self.utility._prompt_choice(["c", "b"])
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-
-        print(self.tui.table(menu, user_path, info))   
-        user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
-        self.tui.save_input("Handle: " + user_handle)
-
-        print(self.tui.table(menu, user_path, info, options))  
-        con: str = self.utility._prompt_choice(["c", "b"])
-
-
-        print(self.tui.table(menu, user_path, info))   
-        user_url: str = input("Enter URL: (ooptional) \n") #TODO: This is just a basic input
-        self.tui.save_input("URL: " + user_url)
+        options: dict[str, str]= {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
         print(self.tui.table(menu, user_path, info, options, message))
-
-        print(self.tui.table(menu, user_path, info, options))  
         con: str = self.utility._prompt_choice(["c", "b"])
+
+        if con.lower() == "b":
+            return MenuOptions.start_screen
 
         LogicLayerAPI.create_player(user_name, user_dob, user_addr, user_email, user_phnum, user_handle, user_url)
 

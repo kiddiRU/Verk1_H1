@@ -5,16 +5,16 @@
 ### On site: Yes
 
 ## Elmar
-### Time:
-### On site:
+### Time: 9:45
+### On site: Yes
 
 ## Ísak Elí
-### Time:
-### On site:
+### Time: 9:15
+### On site: Yes
 
 ## Kristinn Hrafn
-### Time:
-### On site:
+### Time: 9:30
+### On site: Yes
 
 ## Kristján Hagalín
 ### Time:
