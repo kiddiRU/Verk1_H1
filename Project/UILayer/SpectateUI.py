@@ -181,12 +181,13 @@ class SpectateUI:
             MenuOptions.view_club_stats,
         ]
 
-        # TODO: FIX WITH REAL INFORMATION
+        # TODO: Need fix teams format
         info: list[str] = [
-            f"Teams: TEAMNAME",
+            f"Teams: ",
+            str(UtilityUI.team_names(LogicLayerAPI.get_teams_in_club(club_name))),
             f"Color: club_object.club_color",
-            f"Wins: XX",
-            f"Points: XX",
+            f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
+            f"Points: " + LogicLayerAPI.get_club_points(club_name),
         ]
         options: dict[str, str] = {}
         message: str = ""

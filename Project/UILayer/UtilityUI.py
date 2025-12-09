@@ -292,3 +292,4 @@ class UtilityUI:
                 continue
             output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list
+    
