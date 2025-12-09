@@ -9,7 +9,7 @@ from DataLayer import DataLayerAPI
 from Models import Team, Tournament, ValidationError
 
 
-def get_player_uuid(player_handle) -> str:
+def get_player_uuid(player_handle: str) -> str:
     """
     Takes in player handle
     looks through all players until it finds the right player
