@@ -1,15 +1,15 @@
 # Diary, 2025-12-08
 
 ## Andri Már
-### Time: 8:23
+### Time: 8:23 - 18:35
 ### On site: Yes
 
 ## Elmar
-### Time: 9:10
+### Time: 9:10 - 18:15
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 9:10
+### Time: 9:10 - 18:35
 ### On site: Yes
 
 ## Kristinn Hrafn

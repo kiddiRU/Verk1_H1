@@ -1,7 +1,7 @@
 {
     "12ba73ac-8375-4489-9a21-baad9b507a70": {
         "uuid": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "name": "1",
+        "name": "Tournament name 1",
         "start_date": "2004-01-21",
         "end_date": "2004-12-12",
         "time_frame_start": "00:12:23",
@@ -18,7 +18,7 @@
     },
     "7bc31912-c8b7-477e-88c8-762bac0c575a": {
         "uuid": "7bc31912-c8b7-477e-88c8-762bac0c575a",
-        "name": "1",
+        "name": "tournament name 2",
         "start_date": "2004-01-21",
         "end_date": "2004-12-12",
         "time_frame_start": "00:12:23",
@@ -35,7 +35,7 @@
     },
     "269675a5-b277-43a0-8449-cda8803190b7": {
         "uuid": "269675a5-b277-43a0-8449-cda8803190b7",
-        "name": "2",
+        "name": "Tournament name 3",
         "start_date": "2004-01-21",
         "end_date": "2004-12-12",
         "time_frame_start": "00:12:23",
@@ -52,7 +52,7 @@
     },
     "9f88c82f-7361-4680-9499-098c01ebfeca": {
         "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",
-        "name": "3",
+        "name": "Tournament name 4",
         "start_date": "2025-01-01",
         "end_date": "2025-01-02",
         "time_frame_start": "14:00:00",

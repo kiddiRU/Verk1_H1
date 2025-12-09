@@ -12,7 +12,7 @@ from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 from Models.Player import Player
-from Models.Club import Club
+
 
 
 class PlayerUI:
@@ -24,6 +24,7 @@ class PlayerUI:
         self.message_color = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
+
 
 
     def start_screen(self) -> MenuOptions:
@@ -44,6 +45,7 @@ class PlayerUI:
         message: str = ""
 
         self.tui.clear_saved_data()
+        print(self.tui.banner())
         print(self.tui.table(menu, user_path, info, options, message))  
 
 
@@ -714,6 +716,7 @@ Rank: {current_login_rank}"""]
             
             return MenuOptions.onion
             
+
 
     def masterpiece(self) -> MenuOptions:
         """I think Gylfi will like this one"""
