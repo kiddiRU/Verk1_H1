@@ -399,3 +399,21 @@ class TournamentLL:
                 break
         else:
             raise ValidationError("Tournament server error.")
+
+
+    def get_teams_from_tournament_name(self, tournament_name) -> list[Team]:
+        """
+        Takes in a tournament name
+
+        Returns a list of Team objects
+        """
+        model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        teams_list: list[Team] = []
+
+        for tournament in model_tournaments:
+            if tournament_name == tournament.name:
+                teams = tournament.teams_playing
+                for team_uuid in teams:
+                    teams_list.append(LogicUtility.get_team_by_uuid(team_uuid))
+
+        return teams_list

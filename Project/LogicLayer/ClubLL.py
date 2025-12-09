@@ -95,6 +95,17 @@ class ClubLL():
 
 
     def get_club_points(self, club_name):
+        """
+        Takes in club name and gets the club uuid
+        loads and looks through all teams and lists
+        all teams that are in the club
+        Loads through all tournaments and checks the last match
+        and if the winning team uuid is in the list of teams
+        three points are added
+        and if the losing team uuid is in the list of teams
+        one point is added
+        returns points
+        """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         model_teams: list[Team] = DataLayerAPI.load_teams()
         club_uuid: str = (get_club_by_name(club_name)).uuid

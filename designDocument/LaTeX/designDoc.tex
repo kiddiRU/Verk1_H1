@@ -17,16 +17,18 @@
 \usepackage{tabularray}
 \usepackage{parskip}
 \usepackage{blindtext}
-\geometry{legalpaper, portrait, margin=0.5cm}
-
+% \geometry{legalpaper, portrait, margin=0.5cm}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
 \usepackage{multicol}
 
-\title{Design Document}
-\author{Group 1}
-\date{\today}
 
 \begin{document}
-
+\setlength\emergencystretch{\hsize}\hbadness=10000
 \input{frontPage.tex}
 
 \input{requirements.tex}
