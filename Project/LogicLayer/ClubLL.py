@@ -9,7 +9,7 @@ from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models import Club, Team, Match, Tournament
 from LogicLayer.Validation import validate_attr
-from LogicLayer.LogicUtility import get_club_object
+from LogicLayer.LogicUtility import get_club_by_name
 from LogicLayer.MatchLL import MatchLL
 
 class ClubLL():
@@ -57,7 +57,7 @@ class ClubLL():
         """
 
         teams_in_club: list = []
-        club_uuid: str = (get_club_object(club_name)).uuid
+        club_uuid: str = (get_club_by_name(club_name)).uuid
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
         for team in model_teams:
@@ -78,7 +78,7 @@ class ClubLL():
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
         model_teams: list[Team] = DataLayerAPI.load_teams()
-        club_uuid: str = (get_club_object(club_name)).uuid
+        club_uuid: str = (get_club_by_name(club_name)).uuid
         win_count = 0
 
         teams_in_club: list[str] = [
@@ -97,7 +97,7 @@ class ClubLL():
     def get_club_points(self, club_name):
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         model_teams: list[Team] = DataLayerAPI.load_teams()
-        club_uuid: str = (get_club_object(club_name)).uuid
+        club_uuid: str = (get_club_by_name(club_name)).uuid
         match = MatchLL()
         points = 0
         count = 0
@@ -107,11 +107,7 @@ class ClubLL():
             if team.club_uuid == club_uuid
             ]
         
-        print(teams_in_club)
-        
-        for tournament in model_tournaments:
-            print(tournament.uuid)
-            
+        for tournament in model_tournaments:           
             try:
                 matches_list: list[Match] = match.get_matches(tournament.uuid)
                 tour_final_match: Match = matches_list[-1]

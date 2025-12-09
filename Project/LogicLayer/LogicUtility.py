@@ -6,7 +6,7 @@ Takes in handles and names of teams, and gets the uuid of them
 """
 
 from DataLayer import DataLayerAPI
-from Models import Team, Tournament, ValidationError
+from Models import Team, Tournament, Club, ValidationError
 
 
 def get_player_uuid(player_handle: str) -> str:
