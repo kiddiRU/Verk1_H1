@@ -54,5 +54,29 @@
         "winning_players": null,
         "losing_team": null,
         "losing_players": null
+    },
+    "a2c20787-7a4d-46dd-bef9-7e05081609c5": {
+        "uuid": "a2c20787-7a4d-46dd-bef9-7e05081609c5",
+        "tournament_id": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "match_date": "2025-01-01",
+        "match_time": "14:00:00",
+        "team_1": "7ffed5fa-83c5-423e-a975-0f67b5782539",
+        "team_2": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "ead9bb2c-af25-4641-8165-e0ddb5fae06e": {
+        "uuid": "ead9bb2c-af25-4641-8165-e0ddb5fae06e",
+        "tournament_id": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "match_date": "2025-01-02",
+        "match_time": "14:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
     }
 }

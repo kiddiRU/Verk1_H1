@@ -48,7 +48,9 @@
             "NoServer",
             "NoServer"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "7ffe196a-495e-4e77-b94d-ea6799c2e572"
+        ]
     },
     "269675a5-b277-43a0-8449-cda8803190b7": {
         "uuid": "269675a5-b277-43a0-8449-cda8803190b7",
@@ -65,9 +67,7 @@
             "NoServer",
             "NoServer"
         ],
-        "teams_playing": [
-            "0e86df13-949f-497d-916d-6aee0e329516"
-        ]
+        "teams_playing": []
     },
     "9f88c82f-7361-4680-9499-098c01ebfeca": {
         "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",
@@ -79,11 +79,15 @@
         "venue": "gerplan",
         "email": "test",
         "phone_number": "1234567",
-        "status": "INACTIVE",
+        "status": "ACTIVE",
         "list_servers": [
-            "NoServer",
-            "NoServer"
+            "d19c0959-1b49-48d1-9ca5-c24ab5aa53bd",
+            "a58e86c4-a872-47a0-8a59-4eb42d1fa29b"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+            "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+            "7ffed5fa-83c5-423e-a975-0f67b5782539"
+        ]
     }
 }
