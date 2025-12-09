@@ -5,7 +5,9 @@ Date: 2025-12-04
 File that holds all the menus that the admin can access
 """
 
+from Models.Exceptions import ValidationError
 from Models.Tournament import Tournament
+from Models.Team import Team
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -149,7 +151,7 @@ class AdminUI:
             LogicLayerAPI.save_player(find_name)
 
             tournament_object: Tournament | None = (
-                LogicLayerAPI.get_tournament_object(find_name)
+                LogicLayerAPI.get_tournament_by_name(find_name)
             )
 
             # check status to redirect correctly
@@ -307,7 +309,11 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        tournament_name: str | None = LogicLayerAPI.save_player()
+        tournament_name: str | None = LogicLayerAPI.save_player() or "None"
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+        amount_teams = len(tournament_object.teams_playing)
 
         menu: str = "Inactive Tournament"
         user_path: list[str] = [
@@ -316,13 +322,13 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
         ]
         info: list = [f"- - - - {str(tournament_name)} - - - -"]
+
         options: dict[str, str] = {
             "1": "Manage Teams",
             "2": "Publish",
             "3": "Edit Tournament",
             "b": "Back",
         }
-        message = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -333,7 +339,16 @@ class AdminUI:
             case "1":
                 return MenuOptions.manage_teams
             case "2":
-                return MenuOptions.publish
+                if (
+                    amount_teams > 1
+                ):  # To stop from going to publish if tournament is too small
+                    return MenuOptions.publish
+                else:
+                    print(
+                        "There Need To 2 Or More Teams In A Tournament To Publish."
+                    )
+                    input("Input Anything To Continue")
+                    return MenuOptions.manage_inactive_tournament
             case "3":
                 return MenuOptions.edit_tournament
             case "b":
@@ -350,7 +365,7 @@ class AdminUI:
         tournament_name = LogicLayerAPI.save_player() or "None"
 
         tournament_object: Tournament | None = (
-            LogicLayerAPI.get_tournament_object(tournament_name)
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
         )
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
@@ -368,7 +383,6 @@ class AdminUI:
             "2": "Remove Team",
             "b": "Back",
         }
-        message = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -392,15 +406,22 @@ class AdminUI:
         """
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         tournament_object: Tournament | None = (
-            LogicLayerAPI.get_tournament_object(tournament_name)
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
         )
-
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
-        tournament_teams: list[str] = (
+        tournament_teams_uuid: list[str] = (
             tournament_object.teams_playing
         )  # a list of uuid's
+
+        tournament_teams: list[Team] = [
+            LogicLayerAPI.get_team_by_uuid(uuid)
+            for uuid in tournament_teams_uuid
+        ]
+
+        # Teams in tournament
+        team_names: list[str] = [team.name for team in tournament_teams]
 
         menu: str = f"Add Team To {tournament_name}"
         user_path: list[str] = [
@@ -420,18 +441,18 @@ class AdminUI:
             self.message_color + "Input Team Name: " + self.reset
         )
 
-        if (
-            (team_to_add in self.utility.team_names())
-            and (team_to_add not in tournament_teams)
-            and (len(team_to_add) >= 3 and len(team_to_add) <= 5)
-        ):  # TODO: team_to_add is still comparing to a list of UUID's  AND NEED to make sure that the team has 3 - 5 players
+        if team_to_add in team_names:
+            message = f"{team_to_add} Is Already In {tournament_name}"
+
+        if (team_to_add in self.utility.team_names()) and (
+            len(team_to_add) >= 3 and len(team_to_add) <= 5
+        ):  # TODO:
             LogicLayerAPI.add_team(tournament_name, team_to_add)
 
         message = f"{team_to_add} Was Not Found"
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["t", "b"])
 
-        
         match choice:
             case "t":
                 return MenuOptions.add_team
@@ -456,7 +477,7 @@ class AdminUI:
         # Check if None goes through
         tournament_name = LogicLayerAPI.save_player() or "None"
         tournament_object: Tournament | None = (
-            LogicLayerAPI.get_tournament_object(tournament_name)
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
         )
 
         if tournament_object is None:
@@ -484,8 +505,11 @@ class AdminUI:
         choice: str = self.utility._prompt_choice(["Y", "y", "N", "n"])
 
         if choice.lower() == "y":
-            LogicLayerAPI.publish(tournament_name)
-            return MenuOptions.manage_tournament
+            try:
+                LogicLayerAPI.publish(tournament_name)
+                return MenuOptions.manage_tournament
+            except ValidationError as ex:
+                input(f"Error: {ex} \nInput anything to go back")
 
         return MenuOptions.manage_inactive_tournament
 
