@@ -275,7 +275,7 @@ class SpectateUI:
             MenuOptions.spectate_tournaments,
         ]
 
-        info: list[str] = self.utility.show_tournaments()
+        info: list[str] = self.utility.show_tournaments_except_status(Tournament.StatusType.inactive)
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Tournament Not Found!"
 
@@ -289,7 +289,7 @@ class SpectateUI:
         )
 
         tournament_list: list[Tournament] = LogicLayerAPI.list_tournaments()
-        not_inactive: list[str] = self.utility.not_inactive_tournaments()
+        not_inactive: list[str] = self.utility.except_status_tournaments(Tournament.StatusType.inactive)
 
         # Validate tournament name
         if tournament_name in not_inactive:

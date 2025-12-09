@@ -83,6 +83,21 @@ class UtilityUI:
         # TODO: Get logic from LL
         pass
 
+    def get_tournament_object (self, tournament_name: str) -> Tournament | None:
+        """
+        Returns a Tournament object from name
+
+        Args:
+            tournament_name (str): a tournament name
+
+        Returns:
+            Tournament | None: a Tournament object if successful else None
+        """
+        tournaments = LogicLayerAPI.list_tournaments()
+        for i in tournaments:
+            if i.name == tournament_name:
+                return i
+
     # -----------------------------------------------
 
     def show_specific_tournament(self, tournament_name):
@@ -142,9 +157,20 @@ class UtilityUI:
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments]
 
-    def not_inactive_tournaments(self) -> list[str]:
+    def except_status_tournaments(
+        self, tournament_status: Tournament.StatusType
+    ) -> list[str]:
+        """
+        Returns a list of tournaments that do not have the inputted status
+
+        Args:
+            tournament_status (Tournament.StatusType): Status that is not supposed to be in the tournament list
+
+        Returns:
+            list[str]: list of tournaments without the inputted status
+        """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
-        return [x.name for x in tournaments if x.status != "INACTIVE"]
+        return [x.name for x in tournaments if x.status != tournament_status]
 
     def team_names(self) -> list[str]:
         """
@@ -210,13 +236,24 @@ class UtilityUI:
 
         return output_list
 
-    def show_tournaments(self) -> list[str]:
+    def show_tournaments_except_status(
+        self, tournament_status: Tournament.StatusType
+    ) -> list[str]:
+        """
+        An f-string to show tournaments that do not have the status
+
+        Args:
+            tournament_status (Tournament.StatusType): active, inactive, archived
+
+        Returns:
+            list[str]: a list of f-strings to show tournaments without specific status
+        """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
 
         output_list: list[str] = []  # list that holds each line as a f-string
 
         for t in tournaments:
-            if t.status == "INACTIVE":
+            if t.status == tournament_status:
                 continue
             output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list
