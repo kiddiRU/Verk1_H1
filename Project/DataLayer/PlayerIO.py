@@ -41,28 +41,39 @@ def load_players() -> list[Player]:
         with open(FILE_PATH, "r", encoding='utf-8') as player_file:
             file_content = dict(json.load(player_file))
     except:
-        raise ValidationError("Could")
+        raise ValidationError("Could not read player file")
 
     # Creates a list of all players in the server file.
     # Each player is stored as a Player model object.
     player_list: list[Player] = []
     for value in file_content.values():
         # Uses **value to unpack the dictionary into a Player model object.
-        player_list.append(Player(**value))
+        try:
+            player_list.append(Player(**value))
+        except:
+            raise ValidationError("Could nto change file content into player objects.")
         
     return player_list
 
 
 def update_player(uuid: str, updated_player: Player) -> None:
     # Reads the json file containing players and stores it as a dictionary.
-    with open(FILE_PATH, "r", encoding='utf-8') as player_file:
-        file_content = dict(json.load(player_file))
-   
+    try:
+        with open(FILE_PATH, "r", encoding='utf-8') as player_file:
+            file_content = dict(json.load(player_file))
+    except:
+        raise ValidationError("Could not read player file")
+    
     # Overwrites the object tied to the given uuid to the object
     # given after checking if it exists to prevent key error.
     if uuid in file_content:
         file_content[uuid] = updated_player.__dict__
+    else:
+        raise ValidationError("Could not find player with given uuid.")
 
     # Writes the updated dictionary back into the player file.
-    with open(FILE_PATH, "w", encoding='utf-8') as player_file:
-        json.dump(file_content, player_file, indent=4)
+    try:
+        with open(FILE_PATH, "w", encoding='utf-8') as player_file:
+            json.dump(file_content, player_file, indent=4)
+    except:
+        raise ValidationError("Could not write into player file.")
