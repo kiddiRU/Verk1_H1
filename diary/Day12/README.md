@@ -17,8 +17,8 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
+### Time: 12:00
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:30
@@ -28,13 +28,18 @@
 ## State of project: 
 
 ## State of group: 
-
+Andri - working on create team logic with UI
+Ísak - Working on spectate tournaments
+Elmar - point system
+Kristinn - publish touranments
+Sindri - prompt system
 ## Divisions: 
 - UI / UX: Andri
 - System engineer:
 - QC: Sindri
 
 ## ToDo-list:
+- Match Time slot UI 
 - Terminal navigation
 - Allow changing of Username for players
 - Dynmic promt system 
@@ -44,7 +49,7 @@
 - QC:
     - Add TUI graphics to latex doc
     - Add and consolidate Extra notes to latex doc
-- 
+    - Review tournament publish logic
 # Evening meeting (Diary)
 ## State of project:
 

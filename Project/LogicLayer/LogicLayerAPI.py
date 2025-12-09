@@ -101,6 +101,12 @@ def get_team_object(team_name: str) -> Team:
 def get_team_history(team_name: str) -> list[str]:       
     return team_logic.get_team_history(team_name)
 
+def get_team_wins(team_name: str) -> str:
+    return team_logic.get_team_wins(team_name)
+
+def get_team_points(team_name: str) -> str:
+    return team_logic.get_team_points(team_name)
+
 ''' Tournament API '''
 tournament_logic = TournamentLL()
 
