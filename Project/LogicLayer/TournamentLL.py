@@ -9,7 +9,8 @@ from Models import Team, Tournament, Server, Match
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
-from LogicLayer import MatchLL, LogicUtility
+from LogicLayer.MatchLL import MatchLL
+from LogicLayer import LogicUtility
 import random
 
 class TournamentLL:
@@ -56,8 +57,8 @@ class TournamentLL:
 
         Adds the teams UUID to the teams_playing list in the tournament.
         '''
-        tournament: Tournament = self._get_tournament_by_name(tournament_name)
-        team: Team = self._get_team_by_name(team_name)
+        tournament: Tournament = LogicUtility.get_tournament_by_name(tournament_name)
+        team: Team = LogicUtility.get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
@@ -71,8 +72,8 @@ class TournamentLL:
 
         Removes the teams UUID from the teams_playing list in the tournament.
         '''
-        tournament: Tournament = self._get_tournament_by_name(tournament_name)
-        team: Team = self._get_team_by_name(team_name)
+        tournament: Tournament = LogicUtility.get_tournament_by_name(tournament_name)
+        team: Team = LogicUtility.get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
@@ -93,7 +94,7 @@ class TournamentLL:
         no validation on the given info.
         '''
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        tournament: Tournament = self._get_tournament_by_name(name)
+        tournament: Tournament = LogicUtility.get_tournament_by_name(name)
 
         for attr, value in params.items():
             if value == '':
@@ -118,7 +119,7 @@ class TournamentLL:
         on the given info.
         '''
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        tournament: Tournament = self._get_tournament_by_name(name)
+        tournament: Tournament = LogicUtility.get_tournament_by_name(name)
 
         if tournament.status == Tournament.StatusType.active:
             raise Exception('You can\'t change the time of an active tournament!')
@@ -328,7 +329,7 @@ class TournamentLL:
 
         return matches
 
-    def _get_tournament_by_name(self, name: str) -> Tournament:
+    def get_tournament_by_name(self, name: str) -> Tournament:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
 
@@ -337,7 +338,7 @@ class TournamentLL:
         
         return tournament
     
-    def _get_team_by_name(self, name: str) -> Team:
+    def get_team_by_name(self, name: str) -> Team:
         teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.name == name), None)
 

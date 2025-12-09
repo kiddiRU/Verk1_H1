@@ -496,7 +496,17 @@
         "home_address": "Gar\u00f0urinn 53 Hafnarfj\u00f6r\u00f0ur",
         "email": "borker@dyralif.is",
         "phone_number": "567-7477",
-        "handle": "DaBorker",
+        "handle": "MsDawg",
         "url": "www.dyralif.is"
+    },
+    "150e7677-fd69-4695-84c7-71a1b07fa31b": {
+        "uuid": "150e7677-fd69-4695-84c7-71a1b07fa31b",
+        "name": "Perla",
+        "date_of_birth": "2014-03-14",
+        "home_address": "Gar\u00f0urinn 53 Hafnarfj\u00f6r\u00f0ur",
+        "email": "dog@dog.is",
+        "phone_number": "123-4567",
+        "handle": "Hunter",
+        "url": ""
     }
 }
