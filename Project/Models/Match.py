@@ -26,7 +26,7 @@ class Match:
 
         Args:
             uuid (str): uuid of a match
-            server_id (str): uuid of the server the match is held in
+            tournament_id (str): uuid of the tournament the match is held in
             date (str): date of the match (YYYY-MM-DD)
             time_of_match (str): time of the match (12:34)
             team_1 (str): uuid of the team in the match

@@ -17,7 +17,6 @@ class MatchLL():
 
     
     def create_match(self, tournament_id: str, date: date, time: time, team_1: str, team_2: str) -> Match:
-
         uuid = str(uuid4())
         new_match = Match(uuid, tournament_id, date, time, team_1, team_2)
         DataLayerAPI.store_match(new_match)
