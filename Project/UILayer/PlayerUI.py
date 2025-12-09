@@ -611,12 +611,12 @@ Rank: {current_login_rank}"""]
         menu: str = "My Team"
         user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty]
         info: list[str]= [f"- - - -{"TEAMNAME"}- - - -", 
-                    f"{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}{self.reset}"]
+                    f"{self.underscore + "Rank:"}{"Handle:": >21}{self.reset}"]
         options: dict[str, str]= {"1": "Edit Team", "2": "Leave Team", "b": "Back"}
         message: str = ""
 
         for member in team_members: 
-            info.append(f"{rank} {current_login_handle: >20}")
+            info.append(f"{rank} {current_login_handle: >17}")
         
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))

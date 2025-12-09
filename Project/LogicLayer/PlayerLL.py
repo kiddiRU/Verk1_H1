@@ -186,7 +186,7 @@ class PlayerLL():
                     return team.name, "Captain"
                 return team.name, "Player"
             
-        return (1,1) # This will never be returned (it is just to appease the type hinting gods)
+        return ("","") # This will never be returned (it is just to appease the type hinting gods)
 
 
     # TODO find a way to get a players wins and points
