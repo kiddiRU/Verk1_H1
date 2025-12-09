@@ -62,12 +62,16 @@
         "venue": "gerplan",
         "email": "test",
         "phone_number": "1234567",
-        "status": "INACTIVE",
+        "status": "ACTIVE",
         "list_servers": [
-            "NoServer",
-            "NoServer"
+            "47535cb4-7ce2-404d-a363-847c003fe495",
+            "fc0f9265-1563-4fb4-a1ca-a67e2c04912a"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+            "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+            "382f652f-efdf-4298-9d15-922877e5e1b5"
+        ]
     },
     "9f88c82f-7361-4680-9499-098c01ebfeca": {
         "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",
