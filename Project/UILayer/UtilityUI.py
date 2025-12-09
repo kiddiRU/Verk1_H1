@@ -144,6 +144,10 @@ class UtilityUI:
         """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments]
+    
+    def not_inactive_tournaments(self) -> list[str]:
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
+        return [x.name for x in tournaments if x.status != "INACTIVE"]
 
     def team_names(self) -> list[str]:
         """

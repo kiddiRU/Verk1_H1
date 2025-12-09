@@ -5,6 +5,8 @@ Date: 2025-12-04
 File that holds all the menus that the spectator can access
 """
 
+from Models.Tournament import Tournament
+
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
@@ -184,7 +186,7 @@ class SpectateUI:
 
         # TODO: FIX WITH REAL INFORMATION
         info: list[str] = [
-            f"Teams: team_names",
+            f"Teams: TEAMNAME",
             f"Color: club_object.club_color",
             f"Wins: XX",
             f"Points: XX",
@@ -265,42 +267,56 @@ class SpectateUI:
         return MenuOptions.spectate_teams
 
     def spectate_tournaments(self) -> MenuOptions:
-        """Spectate tournaments screen, choices: input a tournament to view
+        """Spectate tournaments screen, choose a tournament to view."""
 
-
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
         menu: str = "Tournaments"
         user_path: list[str] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_tournaments,
         ]
+
         info: list[str] = self.utility.show_tournaments()
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Tournament Not Found!"
 
+        # Show initial table
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        tournament_name: str = input(
+        # User input
+        tournament_name = input(
             self.message_color + "Input Tournament Name: " + self.reset
         )
 
-        if tournament_name in self.utility.team_names():
-            LogicLayerAPI.save_player(tournament_name)
-            return MenuOptions.view_bracket
+        tournament_list: list[Tournament] = LogicLayerAPI.list_tournaments()
+        not_inactive: list[str] = self.utility.not_inactive_tournaments()
 
+        # Validate tournament name
+        if tournament_name in not_inactive:
+            LogicLayerAPI.save_player(tournament_name)
+
+            # Find the tournament object directly
+            tournament = None
+            for t in tournament_list:
+                if t.name == tournament_name:
+                    tournament = t
+                    break
+
+            if tournament:
+                return (
+                    MenuOptions.active_tournament
+                    if tournament.status == Tournament.StatusType.active
+                    else MenuOptions.archived_tournament
+                )
+
+        # Invalid name — show error screen
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        return MenuOptions.active_tournament
-
-        if ...:  # If the tournament is active
-            return MenuOptions.active_tournament
-
-        elif ...:  # If the tournament is archived
-            return MenuOptions.archived_tournament
+        match self.utility._prompt_choice(["t", "b"]):
+            case "t":
+                return MenuOptions.spectate_tournaments
+        return MenuOptions.spectate_screen
 
     def active_tournament(self) -> MenuOptions:
         """Active tournament screen, choices: 1, 2, 3 and b
@@ -312,7 +328,9 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        menu: str = "Active Tournament"
+        tournament_name: str | None = LogicLayerAPI.save_player()
+
+        menu: str = str(tournament_name) + " Stats"
         user_path: list[str] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_tournaments,
@@ -349,6 +367,10 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        tournament_name: str | None = LogicLayerAPI.save_player()
+
+        menu: str = str(tournament_name) + " Stats"
+        print(menu)
         # TODO: implement archived tournament screen
         stopper = input("This is the archived tournaments screen")
         return MenuOptions.spectate_tournaments
