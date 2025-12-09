@@ -203,6 +203,9 @@ def change_match_winner(
 def cancel_tournament(tournament: Tournament) -> None:
     pass
 
+def get_teams_from_tournament_name(tournament_name) -> list[Team]:
+    return tournament_logic.get_teams_from_tournament_name(tournament_name)
+
 ''' Club API '''
 club_logic: ClubLL =  ClubLL()
 
