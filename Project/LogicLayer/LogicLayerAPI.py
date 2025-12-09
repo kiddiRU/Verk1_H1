@@ -84,9 +84,12 @@ def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
 
 # "Created" by Sindri Freysson
-def get_player_wins(player_handle) -> int:
+def get_player_wins(player_handle) -> str:
     return player_logic.get_player_wins(player_handle)
 
+# "Created" by Sindri Freysson
+def get_player_points(player_handle) -> str:
+    return player_logic.get_player_points(player_handle)
 ''' Team API '''
 team_logic = TeamLL()
 
