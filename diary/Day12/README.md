@@ -21,7 +21,7 @@
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 8:30
+### Time: 8:30 - 22:15
 ### On site: Yes
 
 # Morning meeting (Briefing)
@@ -62,6 +62,7 @@ Kristján - Adding tournament logic
 - Server functionality done
 - Match functionality done
 - Formated latex doc
+- Program can publish
 ## State of group: 
 - Ísak asked TA about how much logic is allowed in UILayer
 Simple for loops to get attributes is allowed to be in UILAYER
