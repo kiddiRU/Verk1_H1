@@ -37,7 +37,7 @@ def get_players_team_uuid(player_uuid) -> str:
         if player_uuid in team.list_player_uuid:
             return team.uuid
         
-    raise ValidationError("Player not found in any team")
+    return ""
 
 
 

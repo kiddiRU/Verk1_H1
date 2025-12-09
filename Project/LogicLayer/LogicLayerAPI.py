@@ -70,7 +70,7 @@ def leave_team(team_name: str, player: Player) -> None:
 def list_players() -> list[Player]:
     return player_logic.list_players()
 
-def get_player_object(player_uuid: str) -> Player | None:
+def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
@@ -118,6 +118,7 @@ def get_team_points(team_name: str) -> str:
 
 def get_team_club(team_name: str) -> str:
     return team_logic.get_team_club(team_name)
+
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
@@ -235,3 +236,6 @@ def input_match_results(match: Match) -> None:
 
 def get_player_uuid(player_handle: str) -> str:
     return LogicUtility.get_player_uuid(player_handle)
+
+def get_players_team_uuid(team_name: str) -> str:
+    return LogicUtility.get_players_team_uuid(team_name)
