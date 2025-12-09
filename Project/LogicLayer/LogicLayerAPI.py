@@ -234,6 +234,13 @@ def change_club_info(club: Club) -> None:
 def input_match_results(match: Match) -> None:
     pass
 
+# Created by Sindri
+def get_club_wins(club_name) -> str:
+    return club_logic.get_club_wins(club_name)
+
+# Created by Sindri
+def get_club_points(club_name) -> str:
+    return club_logic.get_club_points(club_name)
 
 
 """ Utility API """
