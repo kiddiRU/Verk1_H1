@@ -48,7 +48,7 @@ class ClubLL():
         return clubs
 
         
-    def get_teams_in_club(self, club_name) -> list[Team]:
+    def get_teams_in_club(self, club_name: str) -> list[Team]:
         """
         Takes in club name
 
