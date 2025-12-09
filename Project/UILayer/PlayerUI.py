@@ -244,10 +244,12 @@ class PlayerUI:
         current_login_uuid = LogicLayerAPI.get_player_uuid(current_login_handle)
         player: Player | None = LogicLayerAPI.get_player_object(current_login_uuid)
         team, rank = LogicLayerAPI.get_player_team(current_login_handle)
-    
-  
-
         club = LogicLayerAPI.get_team_club(team)
+
+        if not team:
+            team = None
+            rank = "Player"
+            club = None
 
         # Need to make sure that no variable can be unbound so that VS code wont complain
         if player is None:
