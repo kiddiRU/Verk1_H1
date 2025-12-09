@@ -82,15 +82,39 @@ class UtilityUI:
     def search_for_player(self):
         # TODO: Get logic from LL
         pass
+# -----------------------------------------------
+
+# -----------------------------------------------
 
     def show_specific_tournament(self, tournament_name):
         pass
 
-    def show_specific_team(self, team_name):
-        print("My team: players in team:")
+    def show_specific_team(self, team_name: str) -> Team | None:
+        team_list: list[Team] = LogicLayerAPI.list_teams()
+        team_names = [x.name for x in team_list]
+        team_uuids = [x.uuid for x in team_list]
+        
+        for index, name in enumerate(team_names):
+            if name == team_name:
+                return LogicLayerAPI.get_team_object(team_uuids[index])
 
-    def show_specific_club(self):
-        pass
+
+    def show_specific_club(self, club_name: str) -> Club | None:
+        """
+        Get Club object from club name
+
+        Args:
+            club_name (str): unique name of a club
+
+        Returns:
+            Club | None: Club object of club is found else return None
+        """
+        club_list: list[Club] = LogicLayerAPI.list_clubs()
+
+        for club in club_list:
+            if club.name == club_name:
+                return club
+        
 
     def show_specific_player(self, player_handle: str) -> Player | None:
         """

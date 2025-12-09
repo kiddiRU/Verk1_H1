@@ -184,10 +184,10 @@ class SpectateUI:
 
         # TODO: FIX WITH REAL INFORMATION
         info: list[str] = [
-            "Teams: TEAMNAMES",
-            "Color: COLOR",
-            "Wins: XX",
-            "Points: XX",
+            f"Teams: team_names",
+            f"Color: club_object.club_color",
+            f"Wins: XX",
+            f"Points: XX",
         ]
         options: dict[str, str] = {}
         message: str = ""
