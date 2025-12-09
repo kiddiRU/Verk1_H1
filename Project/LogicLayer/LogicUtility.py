@@ -57,7 +57,7 @@ def get_team_uuid(team_name):
 
 
 
-def get_club_object(club_name):
+def get_club_by_name(club_name) -> Club:
     """
     Takes in club name
     looks through all clubs until it finds the right club name
