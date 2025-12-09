@@ -84,6 +84,8 @@ def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
 
 
+def get_player_wins(self, player_handle) -> tuple:
+    return player_logic.get_player_wins(player_handle)
 
 ''' Team API '''
 team_logic = TeamLL()
