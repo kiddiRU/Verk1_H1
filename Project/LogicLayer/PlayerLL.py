@@ -165,3 +165,12 @@ class PlayerLL():
             self.player = player_handle
 
         return self.player
+    
+    # TODO find a way to get a players wins and points
+    # Problem if a player swaps team
+    def get_player_wins(self):
+        pass
+
+    
+    def get_player_points(self):
+        pass
