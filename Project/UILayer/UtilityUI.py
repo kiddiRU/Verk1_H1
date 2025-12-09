@@ -10,6 +10,9 @@ which holds functions used in multiple places
 """
 
 from Models.Player import Player
+from Models.Club import Club
+from Models.Team import Team
+from Models.Tournament import Tournament
 
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
@@ -61,8 +64,8 @@ class UtilityUI:
                 choice: str = input()
                 if choice.strip().lower() in ["c", "b"]:
                     return choice
-                valid = validate(attribute, choice, info_type)
-                return valid
+                valid: str | None = validate(attribute, choice, info_type)
+                return str(valid)
             except ValidationError as e:
                 print(self.error_color + str(e) + self.reset)
                 continue
@@ -70,47 +73,152 @@ class UtilityUI:
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")
-        anything: str = input("Input anything to go back to start: ")
+        input("Input anything to go back to start: ")
         return MenuOptions.start_screen
+
+    def show_schedule(self):
+        pass
 
     def search_for_player(self):
         # TODO: Get logic from LL
         pass
+# -----------------------------------------------
 
-    def show_tournaments(self):
-        pass
+# -----------------------------------------------
 
     def show_specific_tournament(self, tournament_name):
         pass
 
-    def show_teams(self):
-        pass
+    def show_specific_team(self, team_name: str) -> Team | None:
+        team_list: list[Team] = LogicLayerAPI.list_teams()
+        team_names = [x.name for x in team_list]
+        team_uuids = [x.uuid for x in team_list]
+        
+        for index, name in enumerate(team_names):
+            if name == team_name:
+                return LogicLayerAPI.get_team_object(team_uuids[index])
 
-    def show_specific_team(self, team_name):
-        print("My team: players in team:")
 
-    def show_clubs(self):
-        pass
+    def show_specific_club(self, club_name: str) -> Club | None:
+        """
+        Get Club object from club name
 
-    def show_all_player_handles(self) -> list[str]:
+        Args:
+            club_name (str): unique name of a club
+
+        Returns:
+            Club | None: Club object of club is found else return None
+        """
+        club_list: list[Club] = LogicLayerAPI.list_clubs()
+
+        for club in club_list:
+            if club.name == club_name:
+                return club
+        
+
+    def show_specific_player(self, player_handle: str) -> Player | None:
+        """
+        Get specific player object based on player handle
+
+        Args:
+            player_handle (str): Handle of a player
+
+        Returns:
+            Player | None: Player object if player is found else returns None
+        """
         player_list: list[Player] = LogicLayerAPI.list_players()
 
-        handle_list: list[str] = [p.handle for p in player_list]
+        for p in player_list:
+            if p.handle == player_handle:
+                return p
+        return None
 
-        print_list: list[str] = [] # list that holds each line as a f-string
+    # _____________________________ MODULAR DESIGN ___________________________
 
-        for value in range(0, len(handle_list), 2):
-            try:
-                print_list.append(
-                    f"{handle_list[value]:<{39}}||{handle_list[value + 1]:>{39}}"
-                )
-            except IndexError:  # IF there is an odd amount of players
-                print_list.append(f"{handle_list[-1]:<{39}}||")
+    def tournaments_name(self) -> list[str]:
+        """
+        Converts list of Tournament objects to a list of Tournament names
 
-        return print_list
+        Returns:
+            list[str]: Tournament names
+        """
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
+        return [x.name for x in tournaments]
+    
+    def not_inactive_tournaments(self) -> list[str]:
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
+        return [x.name for x in tournaments if x.status != "INACTIVE"]
 
-    def show_specific_player(self):
-        pass
+    def team_names(self) -> list[str]:
+        """
+        Converts list of Team objects to a list of Team names
 
-    def show_schedule(self):
-        pass
+        Returns:
+            list[str]: Team names
+        """
+        team_list: list[Team] = LogicLayerAPI.list_teams()
+        return [x.name for x in team_list]
+
+    def club_names(self):
+        """
+        Converts list of Club objects to a list of Club names
+
+        Returns:
+            list[str]: Club names
+        """
+        clubs: list[Club] = LogicLayerAPI.list_clubs()
+        return [x.name for x in clubs]
+
+    def player_handles(self) -> list[str]:
+        """
+        Converts list of Player objects to a list of Player handles
+
+        Returns:
+            list[str]: PLayer handles
+        """
+        player_list: list[Player] = LogicLayerAPI.list_players()
+        return [p.handle for p in player_list]
+
+    def show_main(self, flag: str) -> list[str]:
+        """
+        Modular design to make a list of players, clubs, teams and tournaments.
+
+        Args:
+            flag (str): "players", "clubs", "teams", "tournaments"
+
+        Returns:
+            list[str]: A list of f-strings for printing
+        """
+        flag_dict = {
+            "players": self.player_handles(),
+            "clubs": self.club_names(),
+            "teams": self.team_names(),
+        }
+
+        unique_names: list[str] = flag_dict[flag]
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length: int = len(unique_names)
+
+        for value in range(0, len(unique_names), 2):
+            left = unique_names[value]
+            if value + 1 < length:
+
+                right = unique_names[value + 1]
+                output_list.append(f"{left:<39}|{right:<39}|")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}|{" ":<39}|")
+
+        return output_list
+
+    def show_tournaments(self) -> list[str]:
+        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        for t in tournaments:
+            if t.status == "INACTIVE": continue
+            output_list.append(f"{t.name:<68}>{t.status:^10}|")
+        return output_list

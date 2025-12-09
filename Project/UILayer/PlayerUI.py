@@ -12,7 +12,7 @@ from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 from Models.Player import Player
-from Models.Club import Club
+
 
 
 class PlayerUI:
@@ -24,6 +24,7 @@ class PlayerUI:
         self.message_color = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
+
 
 
     def start_screen(self) -> MenuOptions:
@@ -39,12 +40,10 @@ class PlayerUI:
         
         menu: str = "Start Page"
         user_path: list[str] = [MenuOptions.start_screen]
-        info: list[str]= []
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
-        message: str = ""
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))  
+        print(self.tui.start_table(menu, user_path, options))  
 
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
@@ -83,8 +82,13 @@ class PlayerUI:
 
         login_handle: str = input(self.message_color + "Input Your Handle: " + self.reset)
 
-        if login_handle == "admin":
-            return MenuOptions.admin_screen
+        match login_handle:
+            case "admin":
+                return MenuOptions.admin_screen
+            case "Shrek":
+                return MenuOptions.onion
+            case "masterpiece":
+                return MenuOptions.masterpiece
         
         if login_handle in player_handles:
             LogicLayerAPI.save_player(login_handle)
@@ -118,46 +122,106 @@ class PlayerUI:
         menu: str = "Register"
         user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
         info: list[str]= []
-        options: dict[str, str]= {"c": "Continue"}
+        options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Created A Player!"
 
+
+        # Python complained if i did not do this
+        user_name = ""
+        user_dob = ""
+        user_addr = ""
+        user_email = ""
+        user_phnum = ""
+        user_handle = ""
+        user_url = ""
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info))  
-        user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
-        self.tui.save_input("Name: " + user_name)
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))  
+            user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
+            self.tui.save_input("Name: " + user_name)
 
-        print(self.tui.table(menu, user_path, info)) 
-        user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
-        self.tui.save_input("Date Of Birth: " + str(user_dob))
+            print(self.tui.table(menu, user_path, info, options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info)) 
+            user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
+            self.tui.save_input("Date Of Birth: " + str(user_dob))
 
-        print(self.tui.table(menu, user_path, info)) 
-        user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", 
-                                                  "home_address", "PLAYER")
-        self.tui.save_input("Home Address: " + user_addr)
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info)) 
+            user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", 
+                                                    "home_address", "PLAYER")
+            self.tui.save_input("Home Address: " + user_addr)
 
-        print(self.tui.table(menu, user_path, info))
-        user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
-        self.tui.save_input("Email: " + user_email)
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
+            self.tui.save_input("Email: " + user_email)
 
-        print(self.tui.table(menu, user_path, info))   
-        user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
-        self.tui.save_input("Phone Number: " + user_phnum)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))   
+            user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
+            self.tui.save_input("Phone Number: " + user_phnum)
 
-        print(self.tui.table(menu, user_path, info))   
-        user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
-        self.tui.save_input("Handle: " + user_handle)
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))   
+            user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
+            self.tui.save_input("Handle: " + user_handle)
 
-        print(self.tui.table(menu, user_path, info))   
-        user_url: str = input("Enter URL: (ooptional) \n") #TODO: This is just a basic input
-        self.tui.save_input("URL: " + user_url)
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))   
+            user_url: str = input("Enter URL: (ooptional) \n") #TODO: This is just a basic input
+            self.tui.save_input("URL: " + user_url)
+            print(self.tui.table(menu, user_path, info, options))
+
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        options: dict[str, str]= {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
         print(self.tui.table(menu, user_path, info, options, message))
-        con: str = self.utility._prompt_choice(["c"])
+        con: str = self.utility._prompt_choice(["c", "b"])
+
+        if con.lower() == "b":
+            return MenuOptions.start_screen
 
         LogicLayerAPI.create_player(user_name, user_dob, user_addr, user_email, user_phnum, user_handle, user_url)
 
@@ -183,6 +247,15 @@ class PlayerUI:
         current_login_handle = LogicLayerAPI.save_player()
 
         player_list: list[Player] = LogicLayerAPI.list_players()
+
+        current_login_name = None
+        current_login_dob = None
+        current_login_addr = None
+        current_login_phnum = None
+        current_login_email = None
+        current_login_team = None
+        current_login_club = None
+        current_login_rank = "Player"
         
         for player in player_list:
             if player.handle == current_login_handle:
@@ -204,9 +277,9 @@ Home Address: {current_login_addr}
 Phone Number: {current_login_phnum}
 Email: {current_login_email}
 Handle: {current_login_handle}
-Team: {"NONE"}
-Club: {"NONE"}
-Rank: {"PLAYERRANK"}"""]
+Team: {current_login_team}
+Club: {current_login_club}
+Rank: {current_login_rank}"""]
         
         options: dict[str, str]= {"1": "Edit Info", "2": "My Team", "3": "Create a Team", "lo": "Log Out"}
         message: str = ""
@@ -600,3 +673,192 @@ Rank: {"PLAYERRANK"}"""]
             return MenuOptions.my_team_empty
 
         return MenuOptions.my_team_empty
+    
+
+
+    def onion(self) -> MenuOptions:
+
+            """This Program Has Layers"""
+
+            print("""
+    ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+    ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆ 
+    ⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿ 
+    ⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀ 
+    ⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+    ⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+                
+                
+    Somebody once told me the world is gonna roll me
+    I ain't the sharpest tool in the shed
+    She was looking kind of dumb with her finger and her thumb
+    In the shape of an "L" on her forehead
+    Well, the years start comin' and they don't stop comin'
+    Fed to the rules and I hit the ground runnin'
+    Didn't make sense not to live for fun
+    Your brain gets smart, but your head gets dumb
+    So much to do, so much to see
+    So, what's wrong with taking the backstreets?
+    You'll never know if you don't go (go)
+    You'll never shine if you don't glow
+    Hey now, you're an all-star
+    Get your game on, go play
+    Hey now, you're a rock star
+    Get the show on, get paid
+    (And all that glitters is gold)
+    Only shootin' stars break the mold
+    It's a cool place, and they say it gets colder
+    You're bundled up now, wait 'til you get older
+    But the meteor men beg to differ
+    Judging by the hole in the satellite picture
+    The ice we skate is gettin' pretty thin
+    The water's gettin' warm, so you might as well swim
+    My world's on fire, how 'bout yours?
+    That's the way I like it, and I'll never get bored
+    Hey now, you're an all-star
+    Get your game on, go play
+    Hey now, you're a rock star
+    Get the show on, get paid
+    (All that glitters is gold)
+    Only shootin' stars break the mold
+    Go for the moon
+    (Go, go, go) go for the moon
+    (Go, go, go) go for the moon
+    Go (go), go for the moon
+    Hey now, you're an all-star
+    Get your game on, go play
+    Hey now, you're a rock star
+    Get the show on, get paid
+    (And all that glitters is gold)
+    Only shooting stars
+    Somebody once asked, "Could I spare some change for gas?
+    I need to get myself away from this place"
+    I said, "Yep, what a concept, I could use a little fuel myself
+    And we could all use a little change"
+    Well, the years start comin' and they don't stop comin'
+    Fed to the rules and I hit the ground runnin'
+    Didn't make sense not to live for fun
+    Your brain gets smart, but your head gets dumb
+    So much to do, so much to see
+    So, what's wrong with taking the backstreets?
+    You'll never know if you don't go (go!)
+    You'll never shine if you don't glow
+    Hey now, you're an all-star
+    Get your game on, go play
+    Hey now, you're a rock star
+    Get the show on, get paid
+    (And all that glitters is gold)
+    Only shootin' stars break the mold
+    Only shootin' stars break the mold
+    Go for the moon
+    Go for the moon
+    Go for the moon
+    This is how we do it
+                    
+                    """)
+            
+
+            a = input()
+            if a == "GET OUTTA MA SWAMP!":
+                return MenuOptions.start_screen
+            
+            return MenuOptions.onion
+            
+
+
+    def masterpiece(self) -> MenuOptions:
+        """I think Gylfi will like this one"""
+
+
+        print("""
+                                   MMMMMMMMMMM                                         
+                                 MMMMMMMMMMMMMMMMM                                      
+                             NMMMMMMMMMMMMMMMMMMMMMMMM                                  
+                          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                              
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN                          
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                         
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                        
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD                       
+                       DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                       
+                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                       
+                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                       
+                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                      
+                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                      
+                     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN                     
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN         
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN     
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN   
+NM                  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMM              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM 
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+    MMMMMMMMMMMMMMMMMMMMMMM ..N. .....MMMM...............:MMMMNMMMMMMMMMMMMMMMMMMMMMMM
+    NMMMMMMMMMMMMMMMMMMMMM.....:..DMMMMMNZ Z.... .......M$MMMMMMMMMMMMMMMMMMMMMMMMMMM
+        MMMMMMMMMMNMMMMMMM....... 7=MMMMMMO....Z .......MM7MMMMMMMMMMMMMMMMMMMMMMMMM 
+            MMMMMMMMMMMMMMMMM  Z...MMMZ .. .,M..,........MMMMMMMMMMMMMMMMMMMMMMMMMMMM 
+                MMMMMM.......DOM ....N7..................MMMMMMMMMMMMMMMMMMMMMMMMMMM
+                    MMM....... M. ... .  ... ..............M...$MMMMMMMMMMMMMMMMMMMM
+                    ........... ......... ..............M..=....+MMMMMMMMMMMMMM
+                    ......+.NMI........ . ..............M.,.I...MMMMMMMMMMMMMMN
+                    ......$... ...... O..................,.....$MMMMMMMMMMMMN
+                    .....M.......... M M.. .............. 8  .OMMMMMMMMMMMN
+                    ..=7I,,.,,IMI...M.................. ..MMMMMMMMMMM
+                    ....DMMMMMMMMMMMMMMMO..............D...MMMMMMMMM
+                        .MMMMMMMMMMMMMMDDMM:,N..............DMMMMMMMMMMM
+                        NMMMMMNMM8 . .... ...,............  MMMMMMMMM
+                        MMMMM,:......::..M8M8MM...............MMMMMM
+                        MMMM ... . .........,MM..............MMMMMO$
+                        MMMMM... =.=. .. . . MM ....... . ...MMMMMMM
+                        NMMMMMMMMMM?  ..O.?NM7 ....... ......MMMMMM
+                        NMMMMMMMMMMMMMMMMM........  $ . ...MMMNMMM
+                        MMMMMMMMMMMMMMM.........,, ......MMMMMMMM
+                            OMMMMMMMM8 , .. .. .,N.... ...:MMMMMMMMMMN
+                            MMMMMMMM?N. ...MD.:MNI8MMMMMMMMMMMMMMMMMN
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                    NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+            NMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+
+            
+            """)
+        print("""
+            ⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀
+            ⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠟
+            ⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⡆⠀⠀⠀⠀⢠⣶⡿⠟⠻⢿⣦⡀⠀⠀⣠⣾⠿⠛⠿⣷⣄⠀⠀⢠⣶⡿⠟⠻⢿⣦⡀⠀⢠⣾⠟⠛⠻⠷⠀⠀⢸⡇
+            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⣸⣿⠀⠀⠀⠀⣿⠏⠀⠀⠀⠀⢹⣿⠀⢸⣿⣁⣀⣀⣀⣈⣿⡆⠀⣿⠏⠀⠀⠀⠀⢹⣿⠀⠸⣿⣤⣀⣀⡀⠀⠀⢸⡇
+            ⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⢀⣴⣿⣿⠀⠀⠀⢠⣿⡄⠀⠀⠀⠀⣸⣿⠀⢸⣿⡋⠉⠛⠛⢛⠉⠁⢀⣿⡆⠀⠀⠀⠀⣸⣿⠀⠀⠀⠉⠉⠛⣿⡆⠀⢸⡇
+            ⠸⣿⣿⣿⣿⡿⠟⠉⠀⠀⢀⣀⣤⣶⣿⣿⣿⠇⠀⠀⠀⢸⣿⠿⣶⣤⣤⣾⠟⠁⠀⠀⠙⢿⣶⣤⣶⡿⠗⠀⢈⣿⠻⣶⣤⣤⣾⠟⠁⠀⠺⢷⣦⣤⣶⡿⠃⠀⢸⡇
+            ⠀⠙⢛⣋⣥⣤⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠈⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠈⠉⠛⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+""")
+
+
+
+
+        like = input("Do you like my art? Y/N 	⤜(ⱺ ʖ̯ⱺ)⤏ \n")
+
+    
+        if like.lower() == "y":
+            print("YAY")
+            a = input("BYE BYE ⊂(◉‿◉)つ")
+            return MenuOptions.start_screen
+    
+        elif like.lower() != "n":
+            MenuOptions.start_screen
+    
+        return MenuOptions.quit
+

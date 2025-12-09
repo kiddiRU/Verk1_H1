@@ -81,8 +81,3 @@ class Tournament:
         else: self.list_servers = list_servers
         
         self.teams_playing = teams_playing
-
-    def __str__(self) -> str:
-        # TODO: NOT IMPLEMENTED
-        return f""
-    

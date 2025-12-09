@@ -28,7 +28,7 @@ class TeamLL():
         """
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player.uuid)
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
         
         for team in model_teams:
             if player_uuid in team.list_player_uuid:
@@ -58,7 +58,7 @@ class TeamLL():
         """
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player.uuid)
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
         
         for team in model_teams:
             if team.uuid == team_uuid:

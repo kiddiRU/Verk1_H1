@@ -80,3 +80,8 @@ class MenuOptions(StrEnum):
     teams_in_tournament = "TeamsInTournament"
     team_tournament_stats = "TeamTournamentStats"
     view_bracket = "ViewBracket"
+
+
+    # Secret
+    onion = "Onion"
+    masterpiece = "Masterpiece"

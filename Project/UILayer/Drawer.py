@@ -46,13 +46,11 @@ class Drawer():
         self.bold: str = "\033[1m"
 
         self.banner_border: str = red_high
-        self.path_color: str = red
+        self.logo_color: str = red
         self.table_color: str = self.bold
         self.options_color: str = self.bold + green
         self.message_color: str = self.bold + yellow
 
-
-    
         self.line: str = 80 * "—" + "\n"
 
 
@@ -95,10 +93,11 @@ class Drawer():
               table_options: dict[str, str] = {}, message: str = "") -> str:
         """Creates and returns the UI tables"""
 
-        self.clear()
-        print(self.banner())
 
-        table: str = """"""
+        self.clear()
+
+
+        table: str = """\n \n \n"""
         path: str = ""
 
         if table_path:
@@ -144,11 +143,52 @@ class Drawer():
 
 
 
+    def start_table(self, table_name: str, table_path: list[str] = [], table_options: dict[str, str] = {}) -> str:
+        """Creates and returns the UI tables"""
+
+
+        self.clear()
+        print(self.banner())
+
+
+        table: str = """"""
+        path: str = ""
+
+        if table_path:
+            path += table_path[0]
+            for step in table_path[1:]:
+                path += " -> " + step
+
+
+            table += path + "\n"
+            table += self.line
+            
+        table += f"{table_name: ^80}" + "\n"
+        table += self.line
+
+
+        if table_options:
+            for opt, option in table_options.items():
+                table += self.options_color + opt + " " + option + "\n"
+
+            table += self.reset + self.line
+            table += self.options_color + "Choose Action:" + self.reset
+
+
+
+        return self.table_color + table + self.reset
+
+
 
     def save_input(self, user_input: str) -> None:
         """Saves data so that it will be printed at the top of the table"""
 
         self.previous_inputs.append(user_input)
+
+    def discard_last_input(self):
+        """Discards the previous input from the user"""
+
+        self.previous_inputs.pop()
     
 
     def clear_saved_data(self) -> None:
@@ -156,8 +196,6 @@ class Drawer():
         self.previous_inputs.clear()
 
     
-
-
 
 
 

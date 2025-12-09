@@ -478,25 +478,5 @@
         "phone_number": "+3546110048",
         "handle": "StackCanarySif",
         "url": "https://twitter.com/StackCanarySif"
-    },
-    "0e919c54-ee63-49bf-ad76-bc41bbd2ffdd": {
-        "uuid": "0e919c54-ee63-49bf-ad76-bc41bbd2ffdd",
-        "name": "Andri M\u00e1r Kristj\u00e1nsson",
-        "date_of_birth": "2006-06-27",
-        "home_address": "Kvistavellir 53 Hafnarfj\u00f6r\u00f0ur",
-        "email": "andrimar2706@gmail.com",
-        "phone_number": "698-0946",
-        "handle": "Andrizx",
-        "url": "www.mcdonalds.com"
-    },
-    "58e4f8c1-8266-4d18-b7b0-6c2ea211320f": {
-        "uuid": "58e4f8c1-8266-4d18-b7b0-6c2ea211320f",
-        "name": "Katla",
-        "date_of_birth": "2016-01-14",
-        "home_address": "Kvistavellir 53 Hafnarfj\u00f6r\u00f0ur",
-        "email": "katla@gmail.com",
-        "phone_number": "123-4567",
-        "handle": "KatlaDawg",
-        "url": ""
     }
 }

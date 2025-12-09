@@ -14,13 +14,14 @@ from UILayer.PlayerUI import PlayerUI
 from UILayer.SpectateUI import SpectateUI
 from UILayer.MenuOptions import MenuOptions
 
+
 class MainUI:
     """Main UI State Machine"""
 
     def __init__(self) -> None:
         """Initializes the class"""
-        self.player_username: str|None = None
-        self.team_name: str|None = None
+        self.player_username: str | None = None
+        self.team_name: str | None = None
         self._utility_ui: UtilityUI = UtilityUI()
         self._admin_ui: AdminUI = AdminUI()
         self._player_ui: PlayerUI = PlayerUI()
@@ -32,6 +33,8 @@ class MainUI:
             MenuOptions.login: self._player_ui.login_screen,
             MenuOptions.register: self._player_ui.register_screen,
             MenuOptions.spectate_screen: self._spectate_ui.spectate_screen,
+            MenuOptions.onion: self._player_ui.onion,
+            MenuOptions.masterpiece: self._player_ui.masterpiece,
             # ------------------ Admin Paths ------------------
             MenuOptions.admin_screen: self._admin_ui.admin_screen,
             MenuOptions.create_tournament: self._admin_ui.create_tournament,
@@ -52,7 +55,7 @@ class MainUI:
             MenuOptions.player_screen: self._player_ui.player_screen,
             MenuOptions.edit_player_info: self._player_ui.edit_player_info,
             MenuOptions.my_team_empty: self._player_ui.my_team_empty,
-            MenuOptions.my_team_not_empty:  self._player_ui.my_team_not_empty,
+            MenuOptions.my_team_not_empty: self._player_ui.my_team_not_empty,
             MenuOptions.create_team: self._player_ui.create_team,
             MenuOptions.edit_team: self._player_ui.edit_team,
             MenuOptions.add_player: self._player_ui.add_player,
@@ -67,13 +70,13 @@ class MainUI:
             MenuOptions.view_team_stats: self._spectate_ui.view_team_stats,
             MenuOptions.spectate_tournaments: self._spectate_ui.spectate_tournaments,
             MenuOptions.active_tournament: self._spectate_ui.active_tournament,
-            MenuOptions.archived_tournament:  self._spectate_ui.archived_tournament,
+            MenuOptions.archived_tournament: self._spectate_ui.archived_tournament,
             MenuOptions.game_schedule: self._spectate_ui.game_schedule,
             MenuOptions.view_bracket: self._spectate_ui.view_bracket,
             MenuOptions.teams_in_tournament: self._spectate_ui.teams_in_tournament,
             MenuOptions.team_tournament_stats: self._spectate_ui.team_tournament_stats,
             # ------------------ Misc Paths ------------------
-            MenuOptions.logout: self._player_ui.start_screen
+            MenuOptions.logout: self._player_ui.start_screen,
         }
 
     def __clear(self):
@@ -85,11 +88,12 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
+
             if self.screens.get(self.current_screen) is not None:
                 self.current_screen = self.screens[self.current_screen]()
-            
-             # ------------------ Misc Paths ------------------
-             # stop when quit
+
+            # ------------------ Misc Paths ------------------
+            # stop when quit
             elif self.current_screen == MenuOptions.quit:
                 print("Quitting program")
                 exit()

@@ -9,7 +9,7 @@ Logic layer API.
 
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import DataLayerAPI
-from LogicLayer import PlayerLL, TeamLL, TournamentLL
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -74,6 +74,9 @@ def list_players() -> list[Player]:
 def get_player_object(player_uuid: str) -> Player:
     return player_logic.get_player_object(player_uuid)
 
+def promote_captain(current_player: Player, handle_to_promote: str) -> None:
+    player_logic.promote_captain(current_player, handle_to_promote)
+
 ''' Team API '''
 team_logic: TeamLL = TeamLL()
 
@@ -102,7 +105,6 @@ def get_team_history(team_name: str) -> list[str]:
 ''' Tournament API '''
 tournament_logic: TournamentLL = TournamentLL()
 
-# TODO implement create_tournament and call it
 def create_tournament(
     name: str,
     start_date: date,
@@ -127,19 +129,15 @@ def create_tournament(
         amount_of_servers
     )
 
-# TODO implement publish and call it
 def publish(tournament_name: str) -> None:
     tournament_logic.publish(tournament_name)
 
-# TODO implement add_team and call it
 def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
 
-# TODO implement remove_team and call it
 def remove_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.remove_team(tournament_name, team_name)
 
-# TODO implement change_info and call it
 def update_tournament_info(
     tournament_name: str = '',
     venue: str = '',
@@ -170,6 +168,9 @@ def update_tournament_datetime(
         time_frame_end
     )
 
+def list_tournaments() -> list[Tournament]:
+    return tournament_logic.list_tournaments()
+
 # TODO implement next_round and call it
 def next_round() -> None:
     pass
@@ -179,16 +180,17 @@ def cancel_tournament(tournament: Tournament) -> None:
     pass
 
 ''' Club API '''
+club_logic: ClubLL =  ClubLL()
 
 # TODO implement create_club and call it
 def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
-    return create_club(name,club_color, country, home_town)
+    return club_logic.create_club(name,club_color, country, home_town)
 
 def list_clubs() -> list[Club]:
-    return list_clubs()
+    return club_logic.list_clubs()
 
 def get_teams_in_club(club_name: str) -> list[Team]:
-    return get_teams_in_club(club_name)
+    return club_logic.get_teams_in_club(club_name)
 
 # TODO implement change_club_info and call it
 def change_club_info(club: Club) -> None:
