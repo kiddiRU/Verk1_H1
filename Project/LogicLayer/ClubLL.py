@@ -67,7 +67,7 @@ class ClubLL():
         return teams_in_club
     
 
-    def get_club_wins(self, club_name):
+    def get_club_wins(self, club_name) -> str:
         """
         Takes in club name and gets the club uuid
         loads and looks through all teams and lists
@@ -94,7 +94,7 @@ class ClubLL():
         
 
 
-    def get_club_points(self, club_name):
+    def get_club_points(self, club_name) -> str:
         """
         Takes in club name and gets the club uuid
         loads and looks through all teams and lists

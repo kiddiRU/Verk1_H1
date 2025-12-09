@@ -194,7 +194,7 @@ class PlayerLL():
 
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
-    def get_player_wins(self, player_handle):
+    def get_player_wins(self, player_handle) -> str:
         """
         takes in a player handle and finds the player uuid
         loads and looks through all matches 
@@ -204,7 +204,7 @@ class PlayerLL():
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
         player_uuid: str = get_player_uuid(player_handle)
-        win_count = 0
+        win_count: int = 0
 
         for match in model_matches:
             if match.winning_players is None:
@@ -213,10 +213,10 @@ class PlayerLL():
             elif player_uuid in match.winning_players:
                 win_count += 1
 
-        return win_count
+        return str(win_count)
     
 
-    def get_player_points(self, player_handle):
+    def get_player_points(self, player_handle) -> str:
         """
         takes in a player handle and finds the player uuid from handle
         loads and looks through all tournament and takes there uuid

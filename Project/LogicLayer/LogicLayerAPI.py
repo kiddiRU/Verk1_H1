@@ -83,8 +83,13 @@ def save_player(player_handle: str | None = None) -> str | None:
 def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
 
+# "Created" by Sindri Freysson
+def get_player_wins(player_handle) -> str:
+    return player_logic.get_player_wins(player_handle)
 
-
+# "Created" by Sindri Freysson
+def get_player_points(player_handle) -> str:
+    return player_logic.get_player_points(player_handle)
 ''' Team API '''
 team_logic = TeamLL()
 
@@ -236,6 +241,13 @@ def change_club_info(club: Club) -> None:
 def input_match_results(match: Match) -> None:
     pass
 
+# Created by Sindri
+def get_club_wins(club_name) -> str:
+    return club_logic.get_club_wins(club_name)
+
+# Created by Sindri
+def get_club_points(club_name) -> str:
+    return club_logic.get_club_points(club_name)
 
 
 """ Utility API """
