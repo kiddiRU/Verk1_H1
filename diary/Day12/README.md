@@ -5,7 +5,7 @@
 ### On site: Yes
 
 ## Elmar
-### Time: 9:45
+### Time: 9:45 - 18:10
 ### On site: Yes
 
 ## Ísak Elí
@@ -17,7 +17,7 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time: 12:00
+### Time: 12:00 - 17:28
 ### On site: Yes
 
 ## Sindri Freysson
@@ -35,8 +35,8 @@ Kristinn - publish touranments -> Server and Match logic
 Sindri - prompt system
 Kristján - Adding tournament logic 
 ## Divisions: 
-- UI / UX: Andri
-- System engineer:
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristin, Kristján
 - QC: Sindri
 
 ## ToDo-list:
@@ -53,11 +53,36 @@ Kristján - Adding tournament logic
     - Review tournament publish logic
 # Evening meeting (Diary)
 ## State of project:
-
+- Create team not allowing player to make team, thinking the player is already in team. Noted by Andri. Resolved.
+- Servers are useless after tournament is archived. Could cause memory leak, not our problem
+- Tournament publish is "done" but has not been tested. 
+- Ísak had an issue with publish logic. 
+- All point working for players, clubs and teams
+- Added improved error 
+- Server functionality done
+- Match functionality done
+- Formated latex doc
 ## State of group: 
-
+- Ísak asked TA about how much logic is allowed in UILayer
+Simple for loops to get attributes is allowed to be in UILAYER
+Filters or editing objects not allowed to be in UILayer.
+- UI division requested to have model class get functions return objects instead of UUID or name.
+- Admin is almost done and at the same time, it still needs a lot of work
 ## Divisions:
-- UI / UX:
-- System engineer: 
-- QC: 
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristin, Kristján
+- QC: Sindri
 ## ToDo-list:
+- edit tournamt 
+- Create club
+- Create tournament needs logic
+- Accuarte stats for all viable model classes
+- Spectator can view all model class stats, when applicable 
+- 
+- Terminal navigation
+- Allow changing of Username for players
+- Temp file system - optional
+- Conduct user test
+- QC:
+    - Add and consolidate Extra notes to latex doc
+    - Review tournament publish logic
