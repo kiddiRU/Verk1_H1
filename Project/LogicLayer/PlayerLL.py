@@ -12,10 +12,12 @@ from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models import Player, Team, Club#, ValidationError
 from LogicLayer.Validation import validate_attr
+from LogicLayer.TeamLL import TeamLL
+from LogicLayer import LogicUtility
 
 class PlayerLL():
     def __init__(self) -> None:
-        pass
+        self.team_logic = TeamLL()
     
     # TODO Alter validation functionality?
     def create_player(self,
@@ -34,12 +36,12 @@ class PlayerLL():
         Validates the given info and creates a player object. Sends the
         object to the data layer to be stored and returns the new player.
         """
-
-        uuid = str(uuid4())
-
+        
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
             validate_attr(attr, value.strip(), name_type = 'PLAYER')
+
+        uuid = str(uuid4())
 
         new_player = Player(
             uuid,
@@ -108,7 +110,7 @@ class PlayerLL():
         return new_team
 
     # TODO Remove Player objec
-    def leave_team(self, team_uuid: str, player: Player) -> None:
+    def leave_team(self, team_name: str, player: Player) -> None:
         '''
         Takes in a teams UUID and a Player object.
 
@@ -117,7 +119,7 @@ class PlayerLL():
         '''
 
         teams: list[Team] = DataLayerAPI.load_teams()
-        team = next((t for t in teams if t.uuid == team_uuid), None)
+        team = next((t for t in teams if t.name == team_name), None)
 
         if team is None:
             raise Exception('Team not found!')
@@ -134,14 +136,14 @@ class PlayerLL():
         players: list[Player] = DataLayerAPI.load_players()
         return players
 
-    def get_player_object(self, player_uuid: str) -> Player:
+    def get_player_object(self, player_uuid: str) -> Player | None:
         ''' Takes in a players UUID and returns the players object. '''
 
         players: list[Player] = DataLayerAPI.load_players()
         player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
-            raise Exception(f"No player found with UUID: {player_uuid}")
+            return 
 
         return player
     
@@ -157,11 +159,42 @@ class PlayerLL():
         if player_to_promote is None:
             raise Exception(f'No player found with the handle: {handle_to_promote}')
         
+        if player_to_promote.uuid not in team_to_edit.list_player_uuid:
+            raise Exception(f'The player \'{handle_to_promote}\' exists, but is not in your team!')
+        
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
+        """Takes in a player handle and saves them as the current active user"""
         if player_handle is not None:
             self.player = player_handle
 
         return self.player
+    
+
+    def get_player_team(self, player_handle) -> tuple:
+        """Takes in a player handle and returns the name of their team and their rank"""
+        player_uuid = LogicUtility.get_player_uuid(player_handle)
+        teams = self.team_logic.list_teams()
+        
+        for team in teams:
+            players = self.team_logic.get_team_members(team.name)
+
+            if player_uuid in players:
+                if team.team_captain_uuid == player_uuid:
+                    return team.name, "Captain"
+                return team.name, "Player"
+            
+        return (1,1) # This will never be returned (it is just to appease the type hinting gods)
+
+
+    # TODO find a way to get a players wins and points
+    # Problem if a player swaps team
+    def get_player_wins(self):
+        pass
+
+    
+    def get_player_points(self):
+        pass
+

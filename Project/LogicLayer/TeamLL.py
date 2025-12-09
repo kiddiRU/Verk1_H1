@@ -12,11 +12,12 @@ from Models import Player
 from Models import Tournament
 from Models import Match
 from LogicLayer.MatchLL import MatchLL
+from LogicLayer.ClubLL import ClubLL
 from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
     def __init__(self) -> None:
-        pass
+        self.club_logic = ClubLL()
 
     def add_player(self, player_handle: str, current_player: Player) -> Team:
         """
@@ -84,7 +85,7 @@ class TeamLL():
         finds the right team uuid and
         returns a list of the team members uuid
         """        
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
         for team in model_teams:
             if team.name == team_name:
                 return team.list_player_uuid 
@@ -134,11 +135,39 @@ class TeamLL():
         return teams_history
     
 
+    def get_team_wins(self, team_name: str) -> str:
+        """
+        takes in a team name and finds the team uuid from name
+        loads and looks through all matches 
+        and adds one to counter for ever match won
+        returns the count
+        """
+        model_matches: list[Match] = DataLayerAPI.load_matches()
+        team_uuid: str = get_team_uuid(team_name)
+        win_count = 0
+
+        for match in model_matches:
+            if match.winner == team_uuid:
+                win_count += 1
+        
+        return str(win_count)
+            
+    
+
     # TODO Implement so a team gets a point for every match it wins 
     # and the points increase. Match 1 win: +1, Match 2 win: +2,
     # Match 3 loss: total 3 points for tournament 
-    def get_team_points(self, team_uuid: str) -> str:
+    def get_team_points(self, team_name: str) -> str:
+        """
+        takes in a team name and finds the team uuid from name
+        loads and looks through all tournament and takes there uuid
+        looks through every match in tournament and checks the last match
+        if the winning team uuid is the same as the team uuid
+        three points are added
+        returns points
+        """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        team_uuid: str = get_team_uuid(team_name)
         match = MatchLL()
         points = 0
 
@@ -149,11 +178,28 @@ class TeamLL():
                 matches_list: list[Match] = match.get_matches(tour_id)
                 tour_final_match: Match = matches_list[-1]
                 winner = tour_final_match.winner
+                loser = tour_final_match.losing_team
 
                 if winner == team_uuid:
                     points += 3
-            
+
+                if loser == team_uuid:
+                    points += 1
+
             except:
                 pass
 
         return str(points)
+    
+
+    def get_team_club(self, team_name: str) -> str:
+        
+        clubs = self.club_logic.list_clubs()
+
+        for club in clubs:
+            teams = self.club_logic.get_teams_in_club(club.name)
+
+            if team_name in teams:
+                return club.name
+        
+        return ""
