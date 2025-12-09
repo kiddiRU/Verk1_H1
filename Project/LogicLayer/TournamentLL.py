@@ -9,11 +9,13 @@ from Models import Player, Team, Tournament, Server, Match
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
-from MatchLL import MatchLL
+from LogicLayer.MatchLL import MatchLL
+import random
 
 class TournamentLL:
     def __init__(self):
         # self._data_api = DataLayerAPI
+        self.MatchAPI = MatchLL()
         pass
 
     def create_tournament(self,
@@ -161,6 +163,51 @@ class TournamentLL:
         tournaments: list[Tournament] = self._data_api.load_tournaments()
         return tournaments
 
+    def next_round(self, uuid: str) -> None:
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+
+        for item in tournaments:
+            if item.uuid == uuid:
+                tournament: Tournament = item
+                break
+        else:
+            # TODO Add real assert
+            assert(False)
+
+        matches: list[Match] = self.MatchAPI.get_matches(tournament.uuid)
+
+        if len(matches) == 0:
+            # TODO add real assert
+            assert False
+        
+        competing_teams: list[str] = []
+        for team in tournament.teams_playing:
+            for match in matches:
+                if match.winner == None: continue
+                if team == match.team_1 or team == match.team_2:
+                    if team != match.winner:
+                        break
+            else:
+                competing_teams.append(team)
+
+        # TODO add real assert
+        if len(competing_teams) == 0:
+            assert False
+
+        # TODO add end of tournament
+        if len(competing_teams) == 1:
+            assert False
+
+        random.shuffle(competing_teams)
+        
+        matches = [match for match in matches if match.winner == None]
+
+        for i in range(1, len(competing_teams), 2):
+            matches[i//2].team_1 = competing_teams[i-1]
+            matches[i//2].team_2 = competing_teams[i]
+            DataLayerAPI.update_match(matches[i//2].uuid, matches[i//2])
+
+
     def publish(self, uuid: str) -> None:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
 
@@ -171,8 +218,13 @@ class TournamentLL:
         else:
             # TODO Add a real assert
             assert(False)
+       
+        # TODO add real assert
+        if tournament.status != Tournament.StatusType.inactive:
+            assert False
 
         tournament.status = Tournament.StatusType.active
+
 
         for idx, _ in enumerate(tournament.list_servers):
             # TODO Maybe move to ServerLL
@@ -213,7 +265,48 @@ class TournamentLL:
                     )
 
         # TODO add real assert
-        if times_used[-1] >= datetime.combine(date = tournament.end_date, time = tournament.time_frame_end):
+        if times_used[-1] >= datetime.combine(
+                date = tournament.end_date,
+                time = tournament.time_frame_end
+            ):
             assert(False)
 
-        
+        for match_datetime in times_used:
+            self.MatchAPI.create_match(
+                    tournament_id = uuid,
+                    date = match_datetime.date(),
+                    time = match_datetime.time(),
+                    team_1 = "To be revealed",
+                    team_2 = "To be revealed"
+            )
+
+        self.next_round(uuid)
+
+        DataLayerAPI.update_tournament(tournament.uuid, tournament)
+
+    def next_games(self, uuid: str) -> list[Match]:
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+
+        for item in tournaments:
+            if item.uuid == uuid:
+                tournament: Tournament = item
+                break
+        else:
+            # TODO Add a real assert
+            assert(False)
+       
+        # TODO add real assert
+        if tournament.status != Tournament.StatusType.active:
+            assert False
+
+        matches = self.MatchAPI.get_matches(uuid)
+
+        matches = [match for match in matches if match.winner == None]
+        matches = [
+                match for match in matches
+                if match.match_date == matches[0].match_date and
+                   match.match_time == matches[0].match_time
+        ]
+
+        return matches
+
