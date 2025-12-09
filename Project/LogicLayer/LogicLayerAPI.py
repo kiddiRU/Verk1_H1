@@ -204,3 +204,7 @@ def input_match_results(match: Match) -> None:
 
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
+
+
+def get_player_team(player_handle: str) -> tuple | None:
+    return player_logic.get_player_team(player_handle)

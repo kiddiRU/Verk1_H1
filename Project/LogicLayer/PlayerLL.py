@@ -12,10 +12,12 @@ from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models import Player, Team, Club#, ValidationError
 from LogicLayer.Validation import validate_attr
+from LogicLayer.TeamLL import TeamLL
+from LogicLayer import LogicUtility
 
 class PlayerLL():
     def __init__(self) -> None:
-        pass
+        self.team_logic = TeamLL()
     
     # TODO Alter validation functionality?
     def create_player(self,
@@ -164,7 +166,25 @@ class PlayerLL():
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
+        """Takes in a player handle and saves them as the current active user"""
         if player_handle is not None:
             self.player = player_handle
 
         return self.player
+    
+
+    def get_player_team(self, player_handle) -> tuple | None:
+        """Takes in a player handle and returns the name of their team and their rank"""
+        player_uuid = LogicUtility.get_player_uuid(player_handle)
+        teams = self.team_logic.list_teams()
+        
+        for team in teams:
+            players = self.team_logic.get_team_members(team.name)
+
+            if player_uuid in players:
+                if team.team_captain_uuid == player_uuid:
+                    return team.name, "Captain"
+                return team.name, "Player"
+            
+        return
+
