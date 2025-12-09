@@ -210,7 +210,7 @@ class TournamentLL:
             DataLayerAPI.update_match(matches[i//2].uuid, matches[i//2])
 
 
-    def publish(self, uuid: str) -> None:
+    def publish(self, name: str) -> None:
         """
         Parameters: uuid of tournament to publish
 
@@ -218,6 +218,7 @@ class TournamentLL:
         create a schedule, create the matches for in the schedule
         and assign the teams to compete in the first round.
         """
+        uuid = LogicUtility.tournament_name_to_uuid(name)
 
         # Gets the tournament with the given uuid.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()

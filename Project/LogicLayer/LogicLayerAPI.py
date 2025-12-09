@@ -147,8 +147,7 @@ def create_tournament(
     )
 
 def publish(tournament_name: str) -> None:
-    uuid = ""
-    tournament_logic.publish(uuid)
+    tournament_logic.publish(tournament_name)
 
 def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
@@ -236,6 +235,9 @@ def get_player_uuid(player_handle: str) -> str:
 
 def get_tournament_by_name(tournamnet_name: str) -> Tournament:
     return LogicUtility.get_tournament_by_name(tournamnet_name)
+
+def tournament_name_to_uuid(uuid: str) -> str:
+    return LogicUtility.tournament_name_to_uuid(uuid)
 
 def get_team_by_name(team_name: str) -> Team:
     return LogicUtility.get_team_by_name(team_name)
