@@ -87,9 +87,8 @@ class PlayerUI:
             case "masterpiece":
                 return MenuOptions.masterpiece
         
-
-        if LogicLayerAPI.get_player_uuid(login_handle):
-            LogicLayerAPI.get_player_object(login_handle)
+        user_uuid = LogicLayerAPI.get_player_uuid(login_handle)
+        if user_uuid:
             LogicLayerAPI.save_player(login_handle)
 
 
@@ -605,7 +604,6 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
         team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
@@ -619,7 +617,9 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            info.append(f"{rank} {current_login_handle: >17}")
+            player: Player | None = LogicLayerAPI.get_player_object(member)
+            team, rank = LogicLayerAPI.get_player_team(player.handle)
+            info.append(f"{rank} {player.handle: >17}")
         
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -659,11 +659,8 @@ Rank: {current_login_rank}"""]
         user_path: list[str] = [MenuOptions.player_screen, 
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team]
-        info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
-{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
-{self.reset + "Captain"}{"PLAYERHANDLE": >20}
-{"Player"} {"PLAYERHANDLE": >20}
-{"Player"} {"PLAYERHANDLE": >20}"""]
+        info: list[str]= [f"- - - -{team}- - - -", 
+                    f"{self.underscore + "Rank:"}{"Handle:": >21}{self.reset}"]
         options: dict[str, str]= {"1": "Add Player To Team", "2": "Remove Player From Team", "b": "Back"}
         message: str = ""
 
@@ -708,7 +705,8 @@ Rank: {current_login_rank}"""]
         self.tui.save_input("Player To Add: " + add_handle)
 
         add_uuid = LogicLayerAPI.get_player_uuid(add_handle)
-        add_in_team =LogicLayerAPI.get_players_team_uuid(add_uuid)
+        add_in_team = LogicLayerAPI.get_players_team_uuid(add_uuid)
+        print(add_uuid, add_in_team)
 
         if add_uuid and not add_in_team: 
             message: str = f"The Player {add_handle} Was Found, Do You Want To Add Them To Your Team? Y/N:"
@@ -724,12 +722,13 @@ Rank: {current_login_rank}"""]
 
 
             current_login_handle: str = str(LogicLayerAPI.save_player())
-            current_player: Player = LogicLayerAPI.get_player_object(current_login_handle)
-            add_player: Player = LogicLayerAPI.get_player_object(add_handle)
+            current_login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
+            current_player: Player | str = LogicLayerAPI.get_player_object(current_login_uuid)
+            add_player: Player | str = LogicLayerAPI.get_player_object(add_handle)
             team, rank = LogicLayerAPI.get_player_team(current_login_handle)
             team_uuid = LogicLayerAPI.get_players_team_uuid(current_login_handle)
 
-            LogicLayerAPI.add_player(add_uuid, current_player)
+            LogicLayerAPI.add_player(add_handle, current_player)
 
 
             message: str = f"{add_handle} Has Been Added To Your Team!"
@@ -738,7 +737,7 @@ Rank: {current_login_rank}"""]
             return MenuOptions.edit_team
         
 
-        message: str = f"The Player {add_handle} Was Not Found, Do You Want To Try Again? Y/N:"
+        message: str = f"The Player {add_handle} Was Not Found Or Is Not Available, Do You Want To Try Again? Y/N:"
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility._prompt_choice(["y", "n"])
@@ -1023,4 +1022,3 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMM
             MenuOptions.start_screen
     
         return MenuOptions.quit
-

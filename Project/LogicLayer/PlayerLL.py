@@ -75,14 +75,6 @@ class PlayerLL():
         Sends updated values to the data layer, and returns and updated Player object.
         '''
 
-        params: dict[str, str] = {k: v for k, v in locals().items() if k not in ('self', 'player')}
-        for attr, value in params.items():
-            if value == '':
-                continue
-
-            validate_attr(attr, value, name_type='PLAYER')
-            setattr(player, attr, value)
-
         DataLayerAPI.update_player(player.uuid, player)
         return player
 
@@ -143,7 +135,7 @@ class PlayerLL():
         player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
-            player = players[0]
+            return ""
 
         return player
     

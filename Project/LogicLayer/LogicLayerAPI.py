@@ -89,7 +89,7 @@ def get_player_team(player_handle: str) -> tuple:
 team_logic = TeamLL()
 
 # TODO implement add_player and call it
-def add_player(player_handle: str, current_player: Player) -> Team:
+def add_player(player_handle: str, current_player: Player) -> Team | str:
     return team_logic.add_player(player_handle, current_player)
 
 # TODO implement remove_player and call it

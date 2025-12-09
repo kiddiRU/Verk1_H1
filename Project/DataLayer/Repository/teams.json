@@ -5,8 +5,7 @@
         "list_player_uuid": [
             "2cc090bc-2351-4c43-bb08-2f578d26154a",
             "35e63bfc-3349-4131-b197-c569d71d6b90",
-            "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3",
-            ""
+            "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3"
         ],
         "team_captain_uuid": "2cc090bc-2351-4c43-bb08-2f578d26154a",
         "club_uuid": "269fcfc5-f629-4921-af37-0c592373717c",
@@ -240,7 +239,8 @@
         "uuid": "0e86df13-949f-497d-916d-6aee0e329516",
         "name": "Hello",
         "list_player_uuid": [
-            "bc18ed47-6abd-4868-b0ad-b8343b820bac"
+            "bc18ed47-6abd-4868-b0ad-b8343b820bac",
+            "150e7677-fd69-4695-84c7-71a1b07fa31b"
         ],
         "team_captain_uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
         "club_uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
