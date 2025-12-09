@@ -21,7 +21,7 @@ def get_player_uuid(player_handle) -> str:
         if player_handle == player.handle:
             return player.uuid
         
-    raise ValidationError("Player not found")
+    return ""
 
 
 

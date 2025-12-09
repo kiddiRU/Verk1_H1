@@ -133,6 +133,30 @@ class TournamentLL:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
 
+    def end_tournament(self, uuid: str) -> None:
+        """
+        Parameters: uuid of tournament
+
+        Archives the tournament tied to the given uuid and releases
+        it's servers.
+        """
+        # Looks for the tournament with the given uuid.
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        for item in tournaments:
+            if item.uuid == uuid:
+                tournament: Tournament = item
+                break
+        else:
+            # TODO Add real assert
+            assert(False)
+        
+        tournament.status = Tournament.StatusType.archived
+
+        for idx, server in enumerate(tournament.list_servers):
+            # TODO think about what to do with servers
+            tournament.list_servers[idx] = "NoServer"
+
+
     def next_round(self, uuid: str) -> None:
         """
         Parameters: uuid of tournament which will proceed to next round
@@ -176,7 +200,8 @@ class TournamentLL:
 
         # TODO add end of tournament
         if len(competing_teams) == 1:
-            assert False
+            self.end_tournament(uuid)
+            return None
 
         # Shuffles the teams randomly for matchmaking.
         random.shuffle(competing_teams)
@@ -328,21 +353,3 @@ class TournamentLL:
         ]
 
         return matches
-
-    def get_tournament_by_name(self, name: str) -> Tournament:
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {name}')
-        
-        return tournament
-    
-    def get_team_by_name(self, name: str) -> Team:
-        teams: list[Team] = DataLayerAPI.load_teams()
-        team: Team | None = next((t for t in teams if t.name == name), None)
-
-        if team is None:
-            raise Exception(f'No team found named: {name}')
-        
-        return team
