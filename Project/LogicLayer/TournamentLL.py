@@ -9,7 +9,7 @@ from Models import Team, Tournament, Server, Match
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
-from LogicLayer.MatchLL import MatchLL
+from LogicLayer import MatchLL, LogicUtility
 import random
 
 class TournamentLL:
@@ -56,17 +56,8 @@ class TournamentLL:
 
         Adds the teams UUID to the teams_playing list in the tournament.
         '''
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
-        
-        teams: list[Team] = DataLayerAPI.load_teams()
-        team: Team | None = next((t for t in teams if t.name == team_name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {tournament_name}')
-
-        if team is None:
-            raise Exception(f'No team found named: {team_name}')
+        tournament: Tournament = self._get_tournament_by_name(tournament_name)
+        team: Team = self._get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
@@ -80,17 +71,8 @@ class TournamentLL:
 
         Removes the teams UUID from the teams_playing list in the tournament.
         '''
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
-        
-        teams: list[Team] = DataLayerAPI.load_teams()
-        team: Team | None = next((t for t in teams if t.name == team_name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {tournament_name}')
-
-        if team is None:
-            raise Exception(f'No team found named: {team_name}')
+        tournament: Tournament = self._get_tournament_by_name(tournament_name)
+        team: Team = self._get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
@@ -110,14 +92,8 @@ class TournamentLL:
         Takes the given info and applies it a tournament. Performs
         no validation on the given info.
         '''
-        
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {name}')
+        tournament: Tournament = self._get_tournament_by_name(name)
 
         for attr, value in params.items():
             if value == '':
@@ -141,14 +117,8 @@ class TournamentLL:
         Takes the given info and applies it a tournament. Performs no validation
         on the given info.
         '''
-        
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {name}')
+        tournament: Tournament = self._get_tournament_by_name(name)
 
         if tournament.status == Tournament.StatusType.active:
             raise Exception('You can\'t change the time of an active tournament!')
@@ -358,3 +328,20 @@ class TournamentLL:
 
         return matches
 
+    def _get_tournament_by_name(self, name: str) -> Tournament:
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+
+        if tournament is None:
+            raise Exception(f'No tournament found named: {name}')
+        
+        return tournament
+    
+    def _get_team_by_name(self, name: str) -> Team:
+        teams: list[Team] = DataLayerAPI.load_teams()
+        team: Team | None = next((t for t in teams if t.name == name), None)
+
+        if team is None:
+            raise Exception(f'No team found named: {name}')
+        
+        return team
