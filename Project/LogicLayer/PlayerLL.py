@@ -136,11 +136,11 @@ class PlayerLL():
         players: list[Player] = DataLayerAPI.load_players()
         return players
 
-    def get_player_object(self, player_handle: str) -> Player | None:
+    def get_player_object(self, player_uuid: str) -> Player | None:
         ''' Takes in a players UUID and returns the players object. '''
 
         players: list[Player] = DataLayerAPI.load_players()
-        player = next((p for p in players if p.handle == player_handle), None)
+        player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
             return 

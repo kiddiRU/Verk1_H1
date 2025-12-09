@@ -239,7 +239,8 @@ class PlayerUI:
         
         # Change into string so that Vs Wont complain about type hinting
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
+        current_login_uuid = LogicLayerAPI.get
+        player: Player | None = LogicLayerAPI.get_player_object(current_login_uuid)
         team, rank = LogicLayerAPI.get_player_team(current_login_handle)
     
   
@@ -598,16 +599,22 @@ Rank: {current_login_rank}"""]
         Returns:
             MenuOptions: The next menu to navigate to
         """
+
+        current_login_handle: str = str(LogicLayerAPI.save_player())
+        player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+
+        team_members = LogicLayerAPI.get_team_members(team)
        
         menu: str = "My Team"
         user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty]
-        info: list[str]= [f"""- - - -{"TEAMNAME"}- - - -
-{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}
-{self.reset + "Captain"}{"PLAYERHANDLE": >20}
-{"Player"} {"PLAYERHANDLE": >20}
-{"Player"} {"PLAYERHANDLE": >20}"""]
+        info: list[str]= [f"- - - -{"TEAMNAME"}- - - -", 
+                    f"{self.underscore + "Rank:" + self.reset}{self.underscore + "Handle:": >21}{self.reset}"]
         options: dict[str, str]= {"1": "Edit Team", "2": "Leave Team", "b": "Back"}
         message: str = ""
+
+        for member in team_members: 
+            info.append({rank} {player_handle: >20})
         
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))

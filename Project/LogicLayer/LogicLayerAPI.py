@@ -70,8 +70,8 @@ def leave_team(team_name: str, player: Player) -> None:
 def list_players() -> list[Player]:
     return player_logic.list_players()
 
-def get_player_object(player_handle: str) -> Player | None:
-    return player_logic.get_player_object(player_handle)
+def get_player_object(player_uuid: str) -> Player | None:
+    return player_logic.get_player_object(player_uuid)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     player_logic.promote_captain(current_player, handle_to_promote)
