@@ -496,8 +496,7 @@ class AdminUI:
                 LogicLayerAPI.publish(tournament_name)
                 return MenuOptions.manage_tournament
             except ValidationError as ex:
-                print(ex)
-                input("The Tournament needs at least 2 teams. Input anything to go back")
+                input(f"Error: {ex} \nInput anything to go back")
 
 
         return MenuOptions.manage_inactive_tournament
