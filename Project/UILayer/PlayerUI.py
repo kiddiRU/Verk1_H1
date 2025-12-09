@@ -68,9 +68,6 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
 
-        player_list: list[Player] = LogicLayerAPI.list_players()
-        player_handles: list[str] = [x.handle for x in player_list]
-
         menu: str = "Login"
         user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login]
         info: list[str]= []
@@ -90,17 +87,13 @@ class PlayerUI:
             case "masterpiece":
                 return MenuOptions.masterpiece
         
-        if login_handle in player_handles:
+        if LogicLayerAPI.get_player_object(login_handle):
             LogicLayerAPI.save_player(login_handle)
 
 
             return MenuOptions.player_screen
         
         print(self.tui.table(menu, user_path, info, options, message))
-
-        if login_handle == "list of handles":
-            for x in player_handles:
-                print(x)
 
         choice: str = self.utility._prompt_choice(["t", "b"])
 
@@ -244,29 +237,33 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
         
-        current_login_handle = LogicLayerAPI.save_player()
-        player_list: list[Player] = LogicLayerAPI.list_players()
-
-        current_login_name = None
-        current_login_dob = None
-        current_login_addr = None
-        current_login_phnum = None
-        current_login_email = None
-        current_login_url = None
-        current_login_team = None
-        current_login_club = None
-        current_login_rank = "Player"
-        
-        for player in player_list:
-            if player.handle == current_login_handle:
-                current_login_name = player.name
-                current_login_dob = player.date_of_birth
-                current_login_addr = player.home_address
-                current_login_phnum = player.phone_number
-                current_login_email = player.email
-                current_login_url = player.url
+        # Change into string so that Vs Wont complain about type hinting
+        current_login_handle: str = str(LogicLayerAPI.save_player())
+        player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
 
 
+        # Need to make sure that no variable can be unbound so that VS code wont complain
+        if player is None:
+            current_login_name = None
+            current_login_dob = None
+            current_login_addr = None
+            current_login_phnum = None
+            current_login_email = None
+            current_login_url = None
+            current_login_team = None
+            current_login_club = None
+            current_login_rank = "Player"
+
+        else:
+            current_login_name = player.name
+            current_login_dob = player.date_of_birth
+            current_login_addr = player.home_address
+            current_login_phnum = player.phone_number
+            current_login_email = player.email
+            current_login_url = player.url
+            current_login_team = None
+            current_login_club = None
+            current_login_rank = "Player"
 
         menu: str = "Player Page"
         user_path: list[str] = [MenuOptions.player_screen]
@@ -361,7 +358,6 @@ Rank: {current_login_rank}"""]
             con: str = self.utility._prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
-
 
 
         con = "b"
