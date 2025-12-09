@@ -212,5 +212,8 @@ def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
 
-def get_player_team(player_handle: str) -> tuple | None:
+def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
+
+def get_team_club(team_name: str) -> str:
+    return team_logic.get_team_club(team_name)

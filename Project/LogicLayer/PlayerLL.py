@@ -173,7 +173,7 @@ class PlayerLL():
         return self.player
     
 
-    def get_player_team(self, player_handle) -> tuple | None:
+    def get_player_team(self, player_handle) -> tuple:
         """Takes in a player handle and returns the name of their team and their rank"""
         player_uuid = LogicUtility.get_player_uuid(player_handle)
         teams = self.team_logic.list_teams()
@@ -186,7 +186,7 @@ class PlayerLL():
                     return team.name, "Captain"
                 return team.name, "Player"
             
-        return
+        return (1,1) # This will never be returned (it is just to appease the type hinting gods)
 
 
     # TODO find a way to get a players wins and points

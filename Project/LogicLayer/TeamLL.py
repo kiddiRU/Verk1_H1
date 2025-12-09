@@ -198,9 +198,10 @@ class TeamLL():
 
         for club in clubs:
             teams = self.club_logic.get_teams_in_club(club.name)
+            print(teams)
+            input()
 
             if team_name in teams:
                 return club.name
-
         
         return ""

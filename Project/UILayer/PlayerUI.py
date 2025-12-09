@@ -240,15 +240,11 @@ class PlayerUI:
         # Change into string so that Vs Wont complain about type hinting
         current_login_handle: str = str(LogicLayerAPI.save_player())
         player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
-        team_rank = LogicLayerAPI.get_player_team(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+    
+  
 
-        if team_rank is not None:
-            team, rank = team_rank
-        
-        else:
-            team = None
-            rank = None
-
+        club = LogicLayerAPI.get_team_club(team)
 
         # Need to make sure that no variable can be unbound so that VS code wont complain
         if player is None:
@@ -270,7 +266,7 @@ class PlayerUI:
             current_login_email = player.email
             current_login_url = player.url
             current_login_team = team
-            current_login_club = None
+            current_login_club = club
             current_login_rank = rank
 
         menu: str = "Player Page"
