@@ -148,7 +148,9 @@ class AdminUI:
 
             LogicLayerAPI.save_player(find_name)
 
-            tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(find_name)
+            tournament_object: Tournament | None = (
+                LogicLayerAPI.get_tournament_object(find_name)
+            )
 
             # check status to redirect correctly
             tournament = tournament_object
@@ -347,7 +349,9 @@ class AdminUI:
 
         tournament_name = LogicLayerAPI.save_player() or "None"
 
-        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_object(tournament_name)
+        )
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
@@ -387,8 +391,9 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str = LogicLayerAPI.save_player() or "None"
-
-        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_object(tournament_name)
+        )
 
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
@@ -397,7 +402,7 @@ class AdminUI:
             tournament_object.teams_playing
         )  # a list of uuid's
 
-        menu: str = "Inactive Tournament"
+        menu: str = f"Add Team To {tournament_name}"
         user_path: list[str] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
@@ -415,9 +420,11 @@ class AdminUI:
             self.message_color + "Input Team Name: " + self.reset
         )
 
-        if (team_to_add in self.utility.team_names()) and (
-            team_to_add not in tournament_teams
-        ):
+        if (
+            (team_to_add in self.utility.team_names())
+            and (team_to_add not in tournament_teams)
+            and (len(team_to_add) >= 3 and len(team_to_add) <= 5)
+        ):  # TODO: team_to_add is still comparing to a list of UUID's  AND NEED to make sure that the team has 3 - 5 players
             LogicLayerAPI.add_team(tournament_name, team_to_add)
 
         message = f"{team_to_add} Was Not Found"
@@ -436,8 +443,7 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the remove team screen")
-        # TODO: same as add team but not remove
+
         return MenuOptions.manage_teams
 
     def publish(self) -> MenuOptions:
@@ -448,7 +454,9 @@ class AdminUI:
         """
         # Check if None goes through
         tournament_name = LogicLayerAPI.save_player() or "None"
-        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_object(tournament_name)
+        )
 
         if tournament_object is None:
             return MenuOptions.start_screen
