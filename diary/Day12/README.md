@@ -13,7 +13,7 @@
 ### On site: Yes
 
 ## Kristinn Hrafn
-### Time: 9:30
+### Time: 9:30 - 19:00
 ### On site: Yes
 
 ## Kristján Hagalín
