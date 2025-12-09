@@ -8,7 +8,6 @@ Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from DataLayer import DataLayerAPI
 from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
@@ -18,7 +17,7 @@ def validate(attr: str, value: str, name_type: str):
     return validate_attr(attr, value, name_type)
 
 ''' Player API '''
-player_logic: PlayerLL = PlayerLL() # Make the API pass validate() to PlayerLL?
+player_logic = PlayerLL()
 
 def create_player(
     name: str,
@@ -71,14 +70,14 @@ def leave_team(team_name: str, player: Player) -> None:
 def list_players() -> list[Player]:
     return player_logic.list_players()
 
-def get_player_object(player_uuid: str) -> Player:
-    return player_logic.get_player_object(player_uuid)
+def get_player_object(player_handle: str) -> Player | None:
+    return player_logic.get_player_object(player_handle)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     player_logic.promote_captain(current_player, handle_to_promote)
 
 ''' Team API '''
-team_logic: TeamLL = TeamLL()
+team_logic = TeamLL()
 
 # TODO implement add_player and call it
 def add_player(player_handle: str, current_player: Player) -> Team:
@@ -103,7 +102,7 @@ def get_team_history(team_name: str) -> list[str]:
     return team_logic.get_team_history(team_name)
 
 ''' Tournament API '''
-tournament_logic: TournamentLL = TournamentLL()
+tournament_logic = TournamentLL()
 
 def create_tournament(
     name: str,

@@ -48,7 +48,7 @@ class ClubLL():
         return clubs
 
         
-    def get_teams_in_club(self, club_name) -> list[Team]:
+    def get_teams_in_club(self, club_name: str) -> list[Team]:
         """
         Takes in club name
 
@@ -57,7 +57,7 @@ class ClubLL():
 
         teams_in_club: list = []
         club_uuid: str = get_club_uuid(club_name)
-        model_teams: list = DataLayerAPI.load_teams
+        model_teams: list = DataLayerAPI.load_teams()
 
         for team in model_teams:
             if team.club_uuid == club_uuid:
