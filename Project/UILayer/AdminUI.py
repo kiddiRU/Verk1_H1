@@ -148,8 +148,10 @@ class AdminUI:
 
             LogicLayerAPI.save_player(find_name)
 
+            tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(find_name)
+
             # check status to redirect correctly
-            tournament = self.utility.get_tournament_object(find_name)
+            tournament = tournament_object
             if tournament == None:
                 return MenuOptions.manage_tournament
             if tournament.status == Tournament.StatusType.active:
@@ -190,16 +192,17 @@ class AdminUI:
             "b": "Back",
             "lo": "Log Out",
         }
-        message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
         choice: str = self.utility._prompt_choice(["1", "b", "lo"])
 
-        if choice == "1": return MenuOptions.select_match
-        if choice == "lo": return MenuOptions.start_screen
-    
+        if choice == "1":
+            return MenuOptions.select_match
+        if choice == "lo":
+            return MenuOptions.start_screen
+
         return MenuOptions.manage_tournament
 
     def matches(self) -> MenuOptions:
@@ -341,10 +344,11 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        # Check if None goes through
+
         tournament_name = LogicLayerAPI.save_player() or "None"
-        t_object = self.utility.get_tournament_object(tournament_name)
-        if t_object is None:
+
+        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+        if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
         menu: str = "Inactive Tournament"
@@ -354,7 +358,7 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
         ]
-        info: list = t_object.teams_playing
+        info: list = tournament_object.teams_playing
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
@@ -382,7 +386,16 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the add team screen")
+        tournament_name: str = LogicLayerAPI.save_player() or "None"
+
+        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+
+        if tournament_object is None:  # Check if None goes through
+            return MenuOptions.start_screen
+
+        tournament_teams: list[str] = (
+            tournament_object.teams_playing
+        )  # a list of uuid's
 
         menu: str = "Inactive Tournament"
         user_path: list[str] = [
@@ -391,38 +404,29 @@ class AdminUI:
             MenuOptions.manage_teams,
             MenuOptions.add_team,
         ]
-        info: list = []
-        options_1: dict[str, str] = {"a": "Add Another Team", "b": "Back"}
-        options_2: dict[str, str] = {"t": "Try Again", "b": "Back"}
+        info: list = self.utility.show_main("teams")
+        # options_1: dict[str, str] = {"a": "Add Another Team", "b": "Back"}
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        team_to_add: str = input("Enter Team Name or 'l' to list all: \n")
+        team_to_add: str = input(
+            self.message_color + "Input Team Name: " + self.reset
+        )
 
-        # if ...: # If Team Found
-        #     message = f"You Have Added {team_to_add} To The Tournament"
-        #     print(self.tui.table(menu, user_path, info, options_1, message))
-        #     choice: str = self.utility._prompt_choice(["a", "b"])
+        if (team_to_add in self.utility.team_names()) and (
+            team_to_add not in tournament_teams
+        ):
+            LogicLayerAPI.add_team(tournament_name, team_to_add)
 
-        #     match choice:
-        #         case "a":
-        #             return MenuOptions.add_team
+        message = f"{team_to_add} Was Not Found"
+        print(self.tui.table(menu, user_path, info, options, message))
+        choice: str = self.utility._prompt_choice(["t", "b"])
 
-        #     return MenuOptions.manage_teams
-
-        if ...:  # Team not found
-            message = f"{team_to_add} Was Not Found"
-            print(self.tui.table(menu, user_path, info, options_2, message))
-            choice: str = self.utility._prompt_choice(["t", "b"])
-
-            match choice:
-                case "t":
-                    return MenuOptions.add_team
-
-            return MenuOptions.manage_teams
-
-        # TODO: Add function to list teams and to choose a team by the name
+        match choice:
+            case "t":
+                return MenuOptions.add_team
 
         return MenuOptions.manage_teams
 
@@ -444,8 +448,9 @@ class AdminUI:
         """
         # Check if None goes through
         tournament_name = LogicLayerAPI.save_player() or "None"
-        t_object = self.utility.get_tournament_object(tournament_name)
-        if t_object is None:
+        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+
+        if tournament_object is None:
             return MenuOptions.start_screen
 
         menu: str = "Publish"
@@ -454,7 +459,9 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
             MenuOptions.publish,
         ]
-        info: list = [f"Do you want to publish {self.message_color}{t_object.name}{self.reset}? Y/N"]
+        info: list = [
+            f"Do you want to publish {self.message_color}{tournament_object.name}{self.reset}? Y/N"
+        ]
 
         options: dict[str, str] = {
             "Y:": "Yes",
@@ -465,7 +472,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["Y","y","N","n"])
+        choice: str = self.utility._prompt_choice(["Y", "y", "N", "n"])
 
         if choice.lower() == "y":
             LogicLayerAPI.publish(tournament_name)

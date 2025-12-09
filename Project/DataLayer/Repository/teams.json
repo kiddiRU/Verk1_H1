@@ -234,5 +234,17 @@
         "in_tournament": null,
         "url_homepage": "www.gimmeatreat.com",
         "ascii_art": "^._.^"
+    },
+    "0e86df13-949f-497d-916d-6aee0e329516": {
+        "uuid": "0e86df13-949f-497d-916d-6aee0e329516",
+        "name": "Hello",
+        "list_player_uuid": [
+            "bc18ed47-6abd-4868-b0ad-b8343b820bac"
+        ],
+        "team_captain_uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
+        "club_uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
     }
 }

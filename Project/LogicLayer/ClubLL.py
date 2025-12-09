@@ -57,10 +57,10 @@ class ClubLL():
 
         teams_in_club: list = []
         club_uuid: str = get_club_uuid(club_name)
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
 
         for team in model_teams:
             if team.club_uuid == club_uuid:
-                teams_in_club.append(team)
+                teams_in_club.append(team.name)
 
         return teams_in_club

@@ -12,6 +12,7 @@ from Models import Player
 from Models import Tournament
 from Models import Match
 from LogicLayer.MatchLL import MatchLL
+from LogicLayer.ClubLL import ClubLL
 from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
@@ -84,7 +85,7 @@ class TeamLL():
         finds the right team uuid and
         returns a list of the team members uuid
         """        
-        model_teams: list = DataLayerAPI.load_teams()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
         for team in model_teams:
             if team.name == team_name:
                 return team.list_player_uuid 
@@ -187,3 +188,16 @@ class TeamLL():
                 pass
 
         return str(points)
+    
+
+    def get_team_club(self, team_name: str) -> str:
+        
+        clubs = self.club_logic.list_clubs()
+
+        for club in clubs:
+            teams = self.club_logic.get_teams_in_club(club.name)
+
+            if team_name in teams:
+                return club.name
+        
+        return ""

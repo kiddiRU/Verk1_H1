@@ -136,14 +136,14 @@ class PlayerLL():
         players: list[Player] = DataLayerAPI.load_players()
         return players
 
-    def get_player_object(self, player_handle: str) -> Player | None:
+    def get_player_object(self, player_uuid: str) -> Player | None:
         ''' Takes in a players UUID and returns the players object. '''
 
         players: list[Player] = DataLayerAPI.load_players()
-        player = next((p for p in players if p.handle == player_handle), None)
+        player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
-            raise Exception(f"No player found with the handle: {player_handle}")
+            return 
 
         return player
     
@@ -166,11 +166,29 @@ class PlayerLL():
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
+        """Takes in a player handle and saves them as the current active user"""
         if player_handle is not None:
             self.player = player_handle
 
         return self.player
     
+
+    def get_player_team(self, player_handle) -> tuple:
+        """Takes in a player handle and returns the name of their team and their rank"""
+        player_uuid = get_player_uuid(player_handle)
+        teams = self.team_logic.list_teams()
+        
+        for team in teams:
+            players = self.team_logic.get_team_members(team.name)
+
+            if player_uuid in players:
+                if team.team_captain_uuid == player_uuid:
+                    return team.name, "Captain"
+                return team.name, "Player"
+            
+        return ("","") # This will never be returned (it is just to appease the type hinting gods)
+
+
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
     def get_player_wins(self, player_handle):
