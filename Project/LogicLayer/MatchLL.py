@@ -38,4 +38,13 @@ class MatchLL():
         return sorted_matches
 
 
+    def change_match_winner(self, match_uuid: str, team_uuid: str) -> Match:
+        model_matches: list[Match] = DataLayerAPI.load_matches()
+
+        for match in model_matches:
+            if match.uuid == match_uuid and match.winner is None:
+                match.winner = team_uuid
+                DataLayerAPI.store_match(match)
+
+                return match
 
