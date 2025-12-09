@@ -362,8 +362,7 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            # TODO Add a real assert
-            assert(False)
+            raise ValidationError("Tournament with given uuid not found.")
 
         # Updates match itself
         self.MatchAPI.change_match_winner(match_uuid, team_uuid)
@@ -377,8 +376,7 @@ class TournamentLL:
                 break
             i+=1
         else:
-            # TODO add real assert
-            assert False
+            raise ValidationError("Match with given uuid not found.")
 
         # Checks if the finished match results in a new round
         if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
@@ -396,5 +394,4 @@ class TournamentLL:
                 DataLayerAPI.update_server(server.uuid, server)
                 break
         else:
-            # TODO add real assert
-            assert False
+            raise ValidationError("Tournament server error.")
