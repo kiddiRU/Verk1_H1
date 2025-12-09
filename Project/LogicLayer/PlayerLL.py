@@ -15,8 +15,8 @@ from LogicLayer.Validation import validate_attr
 
 class PlayerLL():
     def __init__(self) -> None:
-        self._data_api = DataLayerAPI
-
+        pass
+    
     # TODO Alter validation functionality?
     def create_player(self,
         name: str,
@@ -52,7 +52,7 @@ class PlayerLL():
             params["url"],
         )
 
-        self._data_api.store_player(new_player)
+        DataLayerAPI.store_player(new_player)
         return new_player
 
     def update_player_info(
@@ -81,7 +81,7 @@ class PlayerLL():
             validate_attr(attr, value, name_type='PLAYER')
             setattr(player, attr, value)
 
-        self._data_api.update_player(player.uuid, player)
+        DataLayerAPI.update_player(player.uuid, player)
         return player
 
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
@@ -90,7 +90,7 @@ class PlayerLL():
 
         Creates a new Team object, sends it the data layer to be stored and returns it.
         '''
-        teams: list[Team] = self._data_api.load_teams()
+        teams: list[Team] = DataLayerAPI.load_teams()
         players_in_teams: list[str] = [uuid for t in teams for uuid in t.list_player_uuid]
 
         if team_captain.uuid in players_in_teams:
@@ -99,12 +99,12 @@ class PlayerLL():
         validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
 
-        clubs: list[Club] = self._data_api.load_clubs()
+        clubs: list[Club] = DataLayerAPI.load_clubs()
         club_uuid = next((c.uuid for c in clubs if c.name == club_name), 'NO_CLUB_UUID') # UUID for no club is ..?
         
         new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club_uuid, None, url, ascii_art)
 
-        self._data_api.store_team(new_team)
+        DataLayerAPI.store_team(new_team)
         return new_team
 
     # TODO Remove Player objec
@@ -116,7 +116,7 @@ class PlayerLL():
         is the captain of said team.
         '''
 
-        teams: list[Team] = self._data_api.load_teams()
+        teams: list[Team] = DataLayerAPI.load_teams()
         team = next((t for t in teams if t.uuid == team_uuid), None)
 
         if team is None:
@@ -126,7 +126,7 @@ class PlayerLL():
             raise Exception('You must promote a new captain before leaving your team!')
 
         team.list_player_uuid.remove(player.uuid)
-        self._data_api.update_team(team.uuid, team)
+        DataLayerAPI.update_team(team.uuid, team)
 
     def list_players(self) -> list[Player]:
         """ Returns a list of stored players. """
@@ -146,19 +146,19 @@ class PlayerLL():
         return player
     
     def promote_captain(self, current_player: Player, handle_to_promote: str) -> None:
-        team_to_edit = next((t for t in self._data_api.load_teams() if current_player.uuid == t.team_captain_uuid), None)
+        team_to_edit = next((t for t in DataLayerAPI.load_teams() if current_player.uuid == t.team_captain_uuid), None)
         
         if team_to_edit is None:
             raise Exception('You are not a captain!')
 
-        players: list[Player] = self._data_api.load_players()
+        players: list[Player] = DataLayerAPI.load_players()
         player_to_promote: Player | None = next((p for p in players if p.handle == handle_to_promote), None)
 
         if player_to_promote is None:
             raise Exception(f'No player found with the handle: {handle_to_promote}')
         
         team_to_edit.team_captain_uuid = player_to_promote.uuid
-        self._data_api.update_team(team_to_edit.uuid, team_to_edit)
+        DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
         if player_handle is not None:

@@ -5,7 +5,7 @@ Date: 2025-12-05
 Functions for tournament logic.
 '''
 
-from Models import Player, Team, Tournament, Server, Match
+from Models import Team, Tournament, Server, Match
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
@@ -14,7 +14,6 @@ import random
 
 class TournamentLL:
     def __init__(self):
-        # self._data_api = DataLayerAPI
         self.MatchAPI = MatchLL()
         pass
 
@@ -49,7 +48,7 @@ class TournamentLL:
             number_of_servers = server_amount
         )
 
-        self._data_api.store_tournament(new_tournament)
+        DataLayerAPI.store_tournament(new_tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
         '''
@@ -57,10 +56,10 @@ class TournamentLL:
 
         Adds the teams UUID to the teams_playing list in the tournament.
         '''
-        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
         
-        teams: list[Team] = self._data_api.load_teams()
+        teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.name == team_name), None)
 
         if tournament is None:
@@ -73,7 +72,7 @@ class TournamentLL:
             raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
         
         tournament.teams_playing.append(team.uuid)
-        self._data_api.update_tournament(tournament.uuid, tournament)
+        DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
         '''
@@ -81,10 +80,10 @@ class TournamentLL:
 
         Removes the teams UUID from the teams_playing list in the tournament.
         '''
-        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
         
-        teams: list[Team] = self._data_api.load_teams()
+        teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.name == team_name), None)
 
         if tournament is None:
@@ -96,7 +95,7 @@ class TournamentLL:
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
 
-        self._data_api.update_tournament(tournament.uuid, tournament)
+        DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def update_info(
         self,
@@ -114,7 +113,7 @@ class TournamentLL:
         
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         
-        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
 
         if tournament is None:
@@ -126,7 +125,7 @@ class TournamentLL:
         
             setattr(tournament, attr, value)
 
-        self._data_api.update_tournament(tournament.uuid, tournament)
+        DataLayerAPI.update_tournament(tournament.uuid, tournament)
     
     def update_tournament_datetime(
         self,
@@ -145,7 +144,7 @@ class TournamentLL:
         
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         
-        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
 
         if tournament is None:
@@ -157,10 +156,10 @@ class TournamentLL:
         for attr, value in params.items():
             setattr(tournament, attr, value)
 
-        self._data_api.update_tournament(tournament.uuid, tournament)
+        DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
-        tournaments: list[Tournament] = self._data_api.load_tournaments()
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
 
     def next_round(self, uuid: str) -> None:
