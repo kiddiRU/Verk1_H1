@@ -196,6 +196,9 @@ def next_round() -> None:
 def cancel_tournament(tournament: Tournament) -> None:
     pass
 
+def get_tournament_object (tournament_name: str) -> Tournament | None:
+    return tournament_logic.get_tournament_object(tournament_name)
+
 ''' Club API '''
 club_logic: ClubLL =  ClubLL()
 

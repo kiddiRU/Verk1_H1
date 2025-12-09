@@ -358,3 +358,18 @@ class TournamentLL:
 
         return matches
 
+
+    def get_tournament_object (self, tournament_name: str) -> Tournament | None:
+        """
+        Returns a Tournament object from name
+
+        Args:
+            tournament_name (str): a tournament name
+
+        Returns:
+            Tournament | None: a Tournament object if successful else None
+        """
+        tournaments = self.list_tournaments()
+        for tournament in tournaments:
+            if tournament.name == tournament_name:
+                return tournament
