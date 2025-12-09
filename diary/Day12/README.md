@@ -1,7 +1,7 @@
 # Diary, 2025-12-09
 
 ## Andri Már
-### Time: 8:30
+### Time: 8:30 - 16:20
 ### On site: Yes
 
 ## Elmar

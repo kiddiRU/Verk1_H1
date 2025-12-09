@@ -4,6 +4,7 @@ Date: 2025-12-04
 
 File that holds all the menus that the admin can access
 """
+
 from Models.Exceptions import ValidationError
 from Models.Tournament import Tournament
 from Models.Team import Team
@@ -308,7 +309,11 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        tournament_name: str | None = LogicLayerAPI.save_player()
+        tournament_name: str | None = LogicLayerAPI.save_player() or "None"
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+        amount_teams = len(tournament_object.teams_playing)
 
         menu: str = "Inactive Tournament"
         user_path: list[str] = [
@@ -317,13 +322,13 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
         ]
         info: list = [f"- - - - {str(tournament_name)} - - - -"]
+
         options: dict[str, str] = {
             "1": "Manage Teams",
             "2": "Publish",
             "3": "Edit Tournament",
             "b": "Back",
         }
-        message = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -334,7 +339,16 @@ class AdminUI:
             case "1":
                 return MenuOptions.manage_teams
             case "2":
-                return MenuOptions.publish
+                if (
+                    amount_teams > 1
+                ):  # To stop from going to publish if tournament is too small
+                    return MenuOptions.publish
+                else:
+                    print(
+                        "There Need To 2 Or More Teams In A Tournament To Publish."
+                    )
+                    input("Input Anything To Continue")
+                    return MenuOptions.manage_inactive_tournament
             case "3":
                 return MenuOptions.edit_tournament
             case "b":
@@ -369,7 +383,6 @@ class AdminUI:
             "2": "Remove Team",
             "b": "Back",
         }
-        message = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -496,9 +509,7 @@ class AdminUI:
                 LogicLayerAPI.publish(tournament_name)
                 return MenuOptions.manage_tournament
             except ValidationError as ex:
-                print(ex)
-                input("The Tournament needs at least 2 teams. Input anything to go back")
-
+                input(f"Error: {ex} \nInput anything to go back")
 
         return MenuOptions.manage_inactive_tournament
 

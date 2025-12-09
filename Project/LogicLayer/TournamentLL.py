@@ -280,6 +280,9 @@ class TournamentLL:
                             time = tournament.time_frame_start
                     )
 
+        if len(times_used) == 0:
+            raise ValidationError("No available time slots to use.")
+
         if times_used[-1] >= datetime.combine(
                 date = tournament.end_date,
                 time = tournament.time_frame_end
