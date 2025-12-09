@@ -478,5 +478,25 @@
         "phone_number": "+3546110048",
         "handle": "StackCanarySif",
         "url": "https://twitter.com/StackCanarySif"
+    },
+    "bc18ed47-6abd-4868-b0ad-b8343b820bac": {
+        "uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
+        "name": "Andri M\u00e1r Kristj\u00e1nsson",
+        "date_of_birth": "2006-06-27",
+        "home_address": "Menntask\u00f3lavegur 2 Reykjav\u00edk",
+        "email": "andrik25@ru.is",
+        "phone_number": "581-2345",
+        "handle": "Glob",
+        "url": "www.mcdonalds.com"
+    },
+    "67bbafe9-4add-4c84-a5e0-8b7060e6f353": {
+        "uuid": "67bbafe9-4add-4c84-a5e0-8b7060e6f353",
+        "name": "Katla ",
+        "date_of_birth": "2016-01-14",
+        "home_address": "Gar\u00f0urinn 53 Hafnarfj\u00f6r\u00f0ur",
+        "email": "borker@dyralif.is",
+        "phone_number": "567-7477",
+        "handle": "DaBorker",
+        "url": "www.dyralif.is"
     }
 }

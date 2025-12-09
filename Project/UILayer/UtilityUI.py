@@ -70,6 +70,27 @@ class UtilityUI:
                 print(self.error_color + str(e) + self.reset)
                 continue
 
+    def _input_change(self, message: str, attribute: str, info_type: str) -> str:
+        """
+        Helper function that repeats input until it is valid or navigation word is entered
+        :param message: message to display - "Enter Your name"
+        :param attribute: attribute of a model class - "name"
+        :param info_type: information type - "PLAYER"
+        :return: Repeats until the input is valid or navigation word is entered
+        """
+        while True:
+            try:
+                print(self.message_color + message + self.reset)
+                choice: str = input()
+                if not choice:
+                    return choice
+                valid: str | None = validate(attribute, choice, info_type)
+                return str(valid)
+            except ValidationError as e:
+                print(self.error_color + str(e) + self.reset)
+                continue
+
+
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")

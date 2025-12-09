@@ -112,15 +112,16 @@ class Drawer():
         table += f"{table_name: ^80}" + "\n"
         table += self.line
 
-        if self.previous_inputs:
-            for info in self.previous_inputs:
-                table += info + "\n"
-
-            table += self.line
-
         if table_info:
             for i in table_info:
                 table += i + "\n"
+
+            table += self.line
+
+
+        if self.previous_inputs:
+            for info in self.previous_inputs:
+                table += info + "\n"
 
             table += self.line
 
