@@ -424,6 +424,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["t", "b"])
 
+        
         match choice:
             case "t":
                 return MenuOptions.add_team
