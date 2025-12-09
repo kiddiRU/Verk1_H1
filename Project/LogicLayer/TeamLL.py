@@ -171,10 +171,8 @@ class TeamLL():
         points = 0
 
         for tournament in model_tournaments:
-            tour_id = tournament.uuid
-
             try:
-                matches_list: list[Match] = match.get_matches(tour_id)
+                matches_list: list[Match] = match.get_matches(tournament.uuid)
                 tour_final_match: Match = matches_list[-1]
                 winner = tour_final_match.winner
                 loser = tour_final_match.losing_team

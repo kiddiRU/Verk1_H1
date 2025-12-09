@@ -10,8 +10,10 @@ Functions for player logic.
 # TODO add nessecery imports
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Player, Team, Club#, ValidationError
+from Models import Player, Team, Club, Match, Tournament#, ValidationError
 from LogicLayer.Validation import validate_attr
+from LogicLayer.LogicUtility import get_player_uuid
+from LogicLayer.MatchLL import MatchLL
 
 class PlayerLL():
     def __init__(self) -> None:
@@ -171,9 +173,44 @@ class PlayerLL():
     
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
-    def get_player_wins(self):
-        pass
+    def get_player_wins(self, player_handle):
+        model_matches: list[Match] = DataLayerAPI.load_matches()
+        player_uuid: str = get_player_uuid(player_handle)
+        win_count = 0
 
+        for match in model_matches:
+            if match.winning_players is None:
+                pass
+            
+            elif player_uuid in match.winning_players:
+                win_count += 1
+
+        return win_count
     
-    def get_player_points(self):
-        pass
+
+    def get_player_points(self, player_handle):
+        model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        player_uuid = get_player_uuid(player_handle)
+        match = MatchLL()
+        points = 0
+
+        for tournament in model_tournaments:
+            try:
+                matches_list: list[Match] = match.get_matches(tournament.uuid)
+                tour_final_match: Match = matches_list[-1]
+                winning_players = tour_final_match.winning_players
+                losing_player = tour_final_match.losing_players
+
+                if winning_players is None:
+                    pass
+
+                elif player_uuid in winning_players:
+                    points += 3
+
+                elif player_uuid in losing_player:
+                    points += 1
+                
+            except:
+                pass
+
+        return str(points)
