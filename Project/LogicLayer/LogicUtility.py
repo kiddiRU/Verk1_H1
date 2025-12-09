@@ -82,14 +82,14 @@ def get_tournament_by_name(name: str) -> Tournament:
         return tournament
 
 
-def tournament_name_to_uuid(uuid: str) -> str:
+def tournament_name_to_uuid(name: str) -> str:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.uuid == uuid), None)
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
 
         if tournament is None:
-            raise Exception(f'No tournament found named: {uuid}')
+            raise Exception(f'No tournament found named: {name}')
         
-        return tournament.name
+        return tournament.uuid
     
 def get_team_by_name(name: str) -> Team:
     teams: list[Team] = DataLayerAPI.load_teams()
