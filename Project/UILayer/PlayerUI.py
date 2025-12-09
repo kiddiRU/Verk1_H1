@@ -240,7 +240,7 @@ class PlayerUI:
         # Change into string so that Vs Wont complain about type hinting
         current_login_handle: str = str(LogicLayerAPI.save_player())
         player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
-        team_rank = LogicLayerAPI.player_in_team(current_login_handle)
+        team_rank = LogicLayerAPI.get_player_team(current_login_handle)
 
         if team_rank is not None:
             team, rank = team_rank
