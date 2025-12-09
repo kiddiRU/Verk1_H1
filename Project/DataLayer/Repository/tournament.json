@@ -36,13 +36,13 @@
     "7bc31912-c8b7-477e-88c8-762bac0c575a": {
         "uuid": "7bc31912-c8b7-477e-88c8-762bac0c575a",
         "name": "tournament name 2",
-        "start_date": "2004-01-21",
-        "end_date": "2004-12-12",
-        "time_frame_start": "00:12:23",
-        "time_frame_end": "00:12:23",
-        "venue": "test",
+        "start_date": "2025-01-01",
+        "end_date": "2025-01-02",
+        "time_frame_start": "14:00:00",
+        "time_frame_end": "15:30:00",
+        "venue": "gerplan",
         "email": "test",
-        "phone_number": "test",
+        "phone_number": "1234567",
         "status": "INACTIVE",
         "list_servers": [
             "NoServer",
@@ -65,7 +65,9 @@
             "NoServer",
             "NoServer"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "0e86df13-949f-497d-916d-6aee0e329516"
+        ]
     },
     "9f88c82f-7361-4680-9499-098c01ebfeca": {
         "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",

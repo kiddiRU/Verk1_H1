@@ -4,8 +4,9 @@ Date: 2025-12-04
 
 File that holds all the menus that the admin can access
 """
-
+from Models.Exceptions import ValidationError
 from Models.Tournament import Tournament
+from Models.Team import Team
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -148,7 +149,9 @@ class AdminUI:
 
             LogicLayerAPI.save_player(find_name)
 
-            tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(find_name)
+            tournament_object: Tournament | None = (
+                LogicLayerAPI.get_tournament_by_name(find_name)
+            )
 
             # check status to redirect correctly
             tournament = tournament_object
@@ -347,7 +350,9 @@ class AdminUI:
 
         tournament_name = LogicLayerAPI.save_player() or "None"
 
-        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
@@ -387,17 +392,25 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str = LogicLayerAPI.save_player() or "None"
-
-        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
-
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
-        tournament_teams: list[str] = (
+        tournament_teams_uuid: list[str] = (
             tournament_object.teams_playing
         )  # a list of uuid's
 
-        menu: str = "Inactive Tournament"
+        tournament_teams: list[Team] = [
+            LogicLayerAPI.get_team_by_uuid(uuid)
+            for uuid in tournament_teams_uuid
+        ]
+
+        # Teams in tournament
+        team_names: list[str] = [team.name for team in tournament_teams]
+
+        menu: str = f"Add Team To {tournament_name}"
         user_path: list[str] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
@@ -415,9 +428,12 @@ class AdminUI:
             self.message_color + "Input Team Name: " + self.reset
         )
 
+        if team_to_add in team_names:
+            message = f"{team_to_add} Is Already In {tournament_name}"
+
         if (team_to_add in self.utility.team_names()) and (
-            team_to_add not in tournament_teams
-        ):
+            len(team_to_add) >= 3 and len(team_to_add) <= 5
+        ):  # TODO:
             LogicLayerAPI.add_team(tournament_name, team_to_add)
 
         message = f"{team_to_add} Was Not Found"
@@ -436,8 +452,7 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        print("This is the remove team screen")
-        # TODO: same as add team but not remove
+
         return MenuOptions.manage_teams
 
     def publish(self) -> MenuOptions:
@@ -448,7 +463,9 @@ class AdminUI:
         """
         # Check if None goes through
         tournament_name = LogicLayerAPI.save_player() or "None"
-        tournament_object: Tournament | None = LogicLayerAPI.get_tournament_object(tournament_name)
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
 
         if tournament_object is None:
             return MenuOptions.start_screen
@@ -475,8 +492,13 @@ class AdminUI:
         choice: str = self.utility._prompt_choice(["Y", "y", "N", "n"])
 
         if choice.lower() == "y":
-            LogicLayerAPI.publish(tournament_name)
-            return MenuOptions.manage_tournament
+            try:
+                LogicLayerAPI.publish(tournament_name)
+                return MenuOptions.manage_tournament
+            except ValidationError as ex:
+                print(ex)
+                input("The Tournament needs at least 2 teams. Input anything to go back")
+
 
         return MenuOptions.manage_inactive_tournament
 

@@ -28,11 +28,12 @@
 ## State of project: 
 
 ## State of group: 
-Andri - working on create team logic with UI
-Ísak - Working on spectate tournaments
-Elmar - point system
-Kristinn - publish touranments
+Andri - working on create team logic with UI -> Finishing Player info
+Ísak - Working on spectate tournaments -> Add teams to tournament
+Elmar - point system - Starting player get statistic logic
+Kristinn - publish touranments -> Server and Match logic
 Sindri - prompt system
+Kristján - Adding tournament logic 
 ## Divisions: 
 - UI / UX: Andri
 - System engineer:

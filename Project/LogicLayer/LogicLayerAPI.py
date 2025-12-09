@@ -203,9 +203,6 @@ def change_match_winner(
 def cancel_tournament(tournament: Tournament) -> None:
     pass
 
-def get_tournament_object (tournament_name: str) -> Tournament | None:
-    return tournament_logic.get_tournament_object(tournament_name)
-
 ''' Club API '''
 club_logic: ClubLL =  ClubLL()
 
@@ -235,3 +232,15 @@ def input_match_results(match: Match) -> None:
 
 def get_player_uuid(player_handle: str) -> str:
     return LogicUtility.get_player_uuid(player_handle)
+
+def get_tournament_by_name(tournamnet_name: str) -> Tournament:
+    return LogicUtility.get_tournament_by_name(tournamnet_name)
+
+def tournament_name_to_uuid(uuid: str) -> str:
+    return LogicUtility.tournament_name_to_uuid(uuid)
+
+def get_team_by_name(team_name: str) -> Team:
+    return LogicUtility.get_team_by_name(team_name)
+
+def get_team_by_uuid(team_uuid: str) -> Team:
+    return LogicUtility.get_team_by_name(team_uuid)
