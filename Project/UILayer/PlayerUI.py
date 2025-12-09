@@ -40,13 +40,10 @@ class PlayerUI:
         
         menu: str = "Start Page"
         user_path: list[str] = [MenuOptions.start_screen]
-        info: list[str]= []
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
-        message: str = ""
 
         self.tui.clear_saved_data()
-        print(self.tui.banner())
-        print(self.tui.table(menu, user_path, info, options, message))  
+        print(self.tui.start_table(menu, user_path, options))  
 
 
         choice: str = self.utility._prompt_choice(["1", "2", "3", "q"])
@@ -125,18 +122,29 @@ class PlayerUI:
         menu: str = "Register"
         user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
         info: list[str]= []
-        options: dict[str, str]= {"c": "Continue"}
+        options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Created A Player!"
+        con = "b"
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info))  
-        user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
-        self.tui.save_input("Name: " + user_name)
+
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))  
+            user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
+            self.tui.save_input("Name: " + user_name)
+
+            print(self.tui.table(menu, user_path, info, options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
 
         print(self.tui.table(menu, user_path, info)) 
         user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
         self.tui.save_input("Date Of Birth: " + str(user_dob))
+
+        print(self.tui.table(menu, user_path, info, options))  
+        con: str = self.utility._prompt_choice(["c", "b"])
 
 
         print(self.tui.table(menu, user_path, info)) 
@@ -144,27 +152,41 @@ class PlayerUI:
                                                   "home_address", "PLAYER")
         self.tui.save_input("Home Address: " + user_addr)
 
+        print(self.tui.table(menu, user_path, info, options))  
+        con: str = self.utility._prompt_choice(["c", "b"])
+
 
         print(self.tui.table(menu, user_path, info))
         user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
         self.tui.save_input("Email: " + user_email)
+
+        print(self.tui.table(menu, user_path, info, options))
+        con: str = self.utility._prompt_choice(["c", "b"])
 
 
         print(self.tui.table(menu, user_path, info))   
         user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
         self.tui.save_input("Phone Number: " + user_phnum)
 
+        print(self.tui.table(menu, user_path, info, options))  
+        con: str = self.utility._prompt_choice(["c", "b"])
+
 
         print(self.tui.table(menu, user_path, info))   
         user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
         self.tui.save_input("Handle: " + user_handle)
+
+        print(self.tui.table(menu, user_path, info, options))  
+        con: str = self.utility._prompt_choice(["c", "b"])
 
 
         print(self.tui.table(menu, user_path, info))   
         user_url: str = input("Enter URL: (ooptional) \n") #TODO: This is just a basic input
         self.tui.save_input("URL: " + user_url)
         print(self.tui.table(menu, user_path, info, options, message))
-        con: str = self.utility._prompt_choice(["c"])
+
+        print(self.tui.table(menu, user_path, info, options))  
+        con: str = self.utility._prompt_choice(["c", "b"])
 
         LogicLayerAPI.create_player(user_name, user_dob, user_addr, user_email, user_phnum, user_handle, user_url)
 
