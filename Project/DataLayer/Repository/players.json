@@ -498,5 +498,15 @@
         "phone_number": "123-4567",
         "handle": "KatlaDawg",
         "url": ""
+    },
+    "1035c1bf-cb2f-4cea-909c-4499edfa98e7": {
+        "uuid": "1035c1bf-cb2f-4cea-909c-4499edfa98e7",
+        "name": "disa",
+        "date_of_birth": "2001-11-04",
+        "home_address": "disa 69 k\u00f3pboi",
+        "email": "test@test.is",
+        "phone_number": "123-4567",
+        "handle": "kfgn,dg",
+        "url": "disa.is"
     }
 }
