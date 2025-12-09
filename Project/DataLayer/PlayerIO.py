@@ -7,7 +7,7 @@ stored in the ./DataLayer/Repository/players.json
 """
 
 import json
-from Models import Player
+from Models import Player, ValidationError
 
 FILE_PATH = "DataLayer/Repository/players.json"
 
@@ -18,23 +18,31 @@ def store_player(player: Player) -> None:
     
     # Reads json file containing players and stores the contents as a
     # dictionary.
-    with open(FILE_PATH, "r", encoding='utf-8') as player_file:
-        file_content = dict(json.load(player_file))
-    
+    try:
+        with open(FILE_PATH, "r", encoding='utf-8') as player_file:
+            file_content = dict(json.load(player_file))
+    except:
+        raise ValidationError("Could not read player file.")
+
     # Adds the new player into the dictionary mapping it's uuid to the
     # object for easy lookup.  
     file_content[player.uuid] = data
     
     # Writes the updated file content back into the json file.
-    with open(FILE_PATH, "w", encoding='utf-8') as player_file:
-        json.dump(file_content, player_file, indent=4)
-
+    try:
+        with open(FILE_PATH, "w", encoding='utf-8') as player_file:
+            json.dump(file_content, player_file, indent=4)
+    except:
+        raise ValidationError("Could not write into player file")
 
 def load_players() -> list[Player]:
     # Reads the json file containing players and stores it as a dictionary.
-    with open(FILE_PATH, "r", encoding='utf-8') as player_file:
-        file_content = dict(json.load(player_file))
-    
+    try:
+        with open(FILE_PATH, "r", encoding='utf-8') as player_file:
+            file_content = dict(json.load(player_file))
+    except:
+        raise ValidationError("Could")
+
     # Creates a list of all players in the server file.
     # Each player is stored as a Player model object.
     player_list: list[Player] = []
