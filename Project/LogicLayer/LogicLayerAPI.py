@@ -188,9 +188,16 @@ def update_tournament_datetime(
 def list_tournaments() -> list[Tournament]:
     return tournament_logic.list_tournaments()
 
-# TODO implement next_round and call it
-def next_round() -> None:
-    pass
+def change_match_winner(
+        tournament_uuid: str,
+        match_uuid: str,
+        team_uuid: str
+    ) -> None:
+    tournament_logic.change_match_winner(
+            tournament_uuid,
+            match_uuid,
+            team_uuid
+        )
 
 # TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
