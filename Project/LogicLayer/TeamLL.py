@@ -7,8 +7,11 @@ Created the TeamLL class and added the functions
 
 from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
-from Models.Team import Team
-from Models.Player import Player
+from Models import Team
+from Models import Player
+from Models import Tournament
+from Models import Match
+from LogicLayer.MatchLL import MatchLL
 from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_team_uuid
 
 class TeamLL():
@@ -129,3 +132,28 @@ class TeamLL():
                 teams_history.append(tournament.name)
 
         return teams_history
+    
+
+    # TODO Implement so a team gets a point for every match it wins 
+    # and the points increase. Match 1 win: +1, Match 2 win: +2,
+    # Match 3 loss: total 3 points for tournament 
+    def get_team_points(self, team_uuid: str) -> str:
+        model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        match = MatchLL()
+        points = 0
+
+        for tournament in model_tournaments:
+            tour_id = tournament.uuid
+
+            try:
+                matches_list: list[Match] = match.get_matches(tour_id)
+                tour_final_match: Match = matches_list[-1]
+                winner = tour_final_match.winner
+
+                if winner == team_uuid:
+                    points += 3
+            
+            except:
+                pass
+
+        return str(points)
