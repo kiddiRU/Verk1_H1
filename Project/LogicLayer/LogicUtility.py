@@ -21,7 +21,7 @@ def get_player_uuid(player_handle) -> str:
         if player_handle == player.handle:
             return player.uuid
         
-    return ""
+    return ValidationError("Player not found")
 
 
 
@@ -57,7 +57,7 @@ def get_team_uuid(team_name):
 
 
 
-def get_club_uuid(club_name):
+def get_club_object(club_name):
     """
     Takes in club name
     looks through all clubs until it finds the right club name
@@ -68,6 +68,6 @@ def get_club_uuid(club_name):
     model_clubs: list = DataLayerAPI.load_clubs()
     for club in model_clubs:
         if club_name == club.name:
-            return club.uuid
+            return club
         
     raise ValidationError("Club not found")
