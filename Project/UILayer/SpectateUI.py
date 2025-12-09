@@ -44,14 +44,14 @@ class SpectateUI:
             "2": "Clubs",
             "3": "Teams",
             "4": "Tournaments",
-            "h": "Home",
+            "b": "Back To Start",
         }
         message: str = ""
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "h"])
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "b"])
         match choice:
             case "1":
                 return MenuOptions.spectate_players
@@ -61,7 +61,7 @@ class SpectateUI:
                 return MenuOptions.spectate_teams
             case "4":
                 return MenuOptions.spectate_tournaments
-            case "h":
+            case "b":
                 return MenuOptions.start_screen
 
         return MenuOptions.start_screen

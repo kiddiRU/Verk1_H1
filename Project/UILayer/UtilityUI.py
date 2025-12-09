@@ -82,9 +82,8 @@ class UtilityUI:
     def search_for_player(self):
         # TODO: Get logic from LL
         pass
-# -----------------------------------------------
 
-# -----------------------------------------------
+    # -----------------------------------------------
 
     def show_specific_tournament(self, tournament_name):
         pass
@@ -93,11 +92,10 @@ class UtilityUI:
         team_list: list[Team] = LogicLayerAPI.list_teams()
         team_names = [x.name for x in team_list]
         team_uuids = [x.uuid for x in team_list]
-        
+
         for index, name in enumerate(team_names):
             if name == team_name:
                 return LogicLayerAPI.get_team_object(team_uuids[index])
-
 
     def show_specific_club(self, club_name: str) -> Club | None:
         """
@@ -114,7 +112,6 @@ class UtilityUI:
         for club in club_list:
             if club.name == club_name:
                 return club
-        
 
     def show_specific_player(self, player_handle: str) -> Player | None:
         """
@@ -144,7 +141,7 @@ class UtilityUI:
         """
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments]
-    
+
     def not_inactive_tournaments(self) -> list[str]:
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments if x.status != "INACTIVE"]
@@ -219,6 +216,7 @@ class UtilityUI:
         output_list: list[str] = []  # list that holds each line as a f-string
 
         for t in tournaments:
-            if t.status == "INACTIVE": continue
+            if t.status == "INACTIVE":
+                continue
             output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list
