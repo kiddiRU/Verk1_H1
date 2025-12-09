@@ -377,7 +377,9 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
         ]
-        info: list = tournament_object.teams_playing
+        all_teams = self.utility.show_main("teams")
+
+        info: list = [x for x in all_teams if x in teams_in_tournament] #TODO not correct
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
@@ -404,17 +406,21 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+
+# TODO GETTING FUNCTION FROM LL -----------------------------------------------------
+        # Keep the tournament name from previous screen
         tournament_name: str = LogicLayerAPI.save_player() or "None"
+        # Get tournament Object from name
         tournament_object: Tournament | None = (
             LogicLayerAPI.get_tournament_by_name(tournament_name)
         )
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
-        tournament_teams_uuid: list[str] = (
-            tournament_object.teams_playing
-        )  # a list of uuid's
+        # Get a list of teams in tournament (as uuid's)
+        tournament_teams_uuid: list[str] = tournament_object.teams_playing
 
+        # Make a new list of teams with names instead of uuid's
         tournament_teams: list[Team] = [
             LogicLayerAPI.get_team_by_uuid(uuid)
             for uuid in tournament_teams_uuid
@@ -431,7 +437,7 @@ class AdminUI:
             MenuOptions.add_team,
         ]
         info: list = self.utility.show_main("teams")
-        # options_1: dict[str, str] = {"a": "Add Another Team", "b": "Back"}
+
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
@@ -441,15 +447,19 @@ class AdminUI:
             self.message_color + "Input Team Name: " + self.reset
         )
 
+        the_team: Team = LogicLayerAPI.get_team_by_name(team_to_add)
+        amount_in_team: int = len(the_team.list_player_uuid)
+
+        message = f"{team_to_add} Is Not Valid"
+        # Check if team is already in tournament
         if team_to_add in team_names:
             message = f"{team_to_add} Is Already In {tournament_name}"
 
-        if (team_to_add in self.utility.team_names()) and (
-            len(team_to_add) >= 3 and len(team_to_add) <= 5
-        ):  # TODO:
+        elif (team_to_add in self.utility.team_names()) and (
+            amount_in_team >= 3 and amount_in_team <= 5):
             LogicLayerAPI.add_team(tournament_name, team_to_add)
+            message = f"{team_to_add} Was Added To {tournament_name}"
 
-        message = f"{team_to_add} Was Not Found"
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["t", "b"])
 
@@ -465,6 +475,38 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Keep the tournament name from previous screen
+        tournament_name: str = LogicLayerAPI.save_player() or "None"
+        # Get tournament Object from name
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+
+        menu: str = f"Remove Team From {tournament_name}"
+        user_path: list[str] = [
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament,
+            MenuOptions.manage_teams,
+            MenuOptions.remove_team,
+        ]
+        info: list = self.utility.show_main("teams") # TODO SHOW TEAMS FROM TOURNAMENT
+
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))
+
+        #TODO FUNCTIONALITY HERE...
+        team_to_remove: str = input(
+            self.message_color + "Input Team Name: " + self.reset
+        )
+
+        if team_to_remove in #TODO tournament_teams:
+            LogicLayerAPI.remove_team(tournament_name, team_to_remove)
+
+
+
+        
 
         return MenuOptions.manage_teams
 

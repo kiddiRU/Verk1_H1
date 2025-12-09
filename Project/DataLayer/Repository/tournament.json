@@ -48,7 +48,9 @@
             "NoServer",
             "NoServer"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "7ffe196a-495e-4e77-b94d-ea6799c2e572"
+        ]
     },
     "269675a5-b277-43a0-8449-cda8803190b7": {
         "uuid": "269675a5-b277-43a0-8449-cda8803190b7",
