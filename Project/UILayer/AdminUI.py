@@ -362,10 +362,13 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        tournament_name = LogicLayerAPI.save_player() or "None"
+        # Keep the tournament name from previous screen
+        tournament_name: str = LogicLayerAPI.save_player() or "None"
 
-        teams = LogicLayerAPI.get_teams_from_tournament_name(tournament_name)
-        teams_names = [x.name for x in teams]
+        # Get tournament Object from name
+        teams_in_tournament: list[str] = [
+            t.name for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name)
+        ]
 
         tournament_object: Tournament | None = (
             LogicLayerAPI.get_tournament_by_name(tournament_name)
@@ -380,9 +383,8 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
         ]
-        all_teams = self.utility.team_names()
 
-        info: list = [x for x in all_teams if x in teams_names]
+        info: list = teams_in_tournament
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
@@ -409,14 +411,12 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-
-        # Remember name from last screen
+        # Tournament data
         tournament_name: str = LogicLayerAPI.save_player() or "None"
-
-        teams_tournament: list[Team] = LogicLayerAPI.get_teams_from_tournament_name(tournament_name)
-        team_name_tournament: list[str] = [x.name for x in teams_tournament]
+        teams_in_tournament: list[str] = [
+            t.name for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name)
+        ]
         all_teams: list[str] = self.utility.team_names()
-        teams_in_tournament: list[str] = [x for x in all_teams if x in team_name_tournament]
 
         menu: str = f"Add Team To {tournament_name}"
         user_path: list[str] = [
@@ -425,9 +425,8 @@ class AdminUI:
             MenuOptions.manage_teams,
             MenuOptions.add_team,
         ]
-        
-        info: list = self.utility.show_main("teams")
 
+        info: list = self.utility.show_main("teams")
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
@@ -437,18 +436,37 @@ class AdminUI:
             self.message_color + "Input Team Name: " + self.reset
         )
 
-        the_team: Team = LogicLayerAPI.get_team_by_name(team_to_add)
-        amount_in_team: int = len(the_team.list_player_uuid)
 
-        message = f"{team_to_add} Is Not Valid"
-        # Check if team is already in tournament
+        # Validate team exists
+        try:
+            team_object: Team | None = LogicLayerAPI.get_team_by_name(team_to_add)
+        except Exception:
+            team_object = None
+
+        if team_object is None:
+            message = "Team Not Found"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["t", "b"])
+
+            match choice:
+                case "t":
+                    return MenuOptions.add_team
+
+            return MenuOptions.manage_teams
+
         if team_to_add in teams_in_tournament:
             message = f"{team_to_add} Is Already In {tournament_name}"
 
-        elif (team_to_add in self.utility.team_names()) and (
-            amount_in_team >= 3 and amount_in_team <= 5):
+        elif not (3 <= len(team_object.list_player_uuid) <= 5):
+            message = f"{team_to_add} Must Have Between 3 And 5 Players"
+
+        elif team_to_add not in all_teams:
+            message = f"{team_to_add} Is Not A Valid Team"
+
+        else:
             LogicLayerAPI.add_team(tournament_name, team_to_add)
-            message = f"{team_to_add} Was Added To {tournament_name}"
+            message: str = f"{team_to_add} Was Added To {tournament_name}"
+            options: dict[str, str] = {"t": "Add Another", "b": "Back"}
 
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["t", "b"])
@@ -457,52 +475,70 @@ class AdminUI:
             case "t":
                 return MenuOptions.add_team
 
-        return MenuOptions.manage_teams
+        return MenuOptions.manage_teams 
+
 
     def remove_team(self) -> MenuOptions:
-        """Remove team screen, choices: input a team to add or l to list all team
-
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-        # Keep the tournament name from previous screen
+        # Tournament data
         tournament_name: str = LogicLayerAPI.save_player() or "None"
+
         # Get tournament Object from name
+        teams_in_tournament: list[str] = [
+            t.name for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name)
+        ]
 
-        teams_tournament: list[Team] = LogicLayerAPI.get_teams_from_tournament_name(tournament_name)
-        team_name_tournament: list[str] = [x.name for x in teams_tournament]
-        all_teams: list[str] = self.utility.team_names()
-        teams_in_tournament: list[str] = [x for x in all_teams if x in team_name_tournament]
-
-        
-
-        menu: str = f"Remove Team From {tournament_name}"
+        menu: str = f"Add Team To {tournament_name}"
         user_path: list[str] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
             MenuOptions.remove_team,
         ]
-        info: list = teams_in_tournament
 
+        info: list = teams_in_tournament
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        #TODO FUNCTIONALITY HERE...
-        team_to_remove: str = input(
+        team_to_add: str = input(
             self.message_color + "Input Team Name: " + self.reset
         )
 
-        if team_to_remove in teams_in_tournament:
-            LogicLayerAPI.remove_team(tournament_name, team_to_remove)
+
+        # Validate team exists
+        try:
+            team_object: Team | None = LogicLayerAPI.get_team_by_name(team_to_add)
+        except Exception:
+            team_object = None
+
+        if team_object is None:
+            message = "Team Not Found"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["t", "b"])
+
+            match choice:
+                case "t":
+                    return MenuOptions.remove_team
+
+            return MenuOptions.manage_teams
 
 
+        if team_to_add in teams_in_tournament:
+            LogicLayerAPI.remove_team(tournament_name, team_to_add)
+            message: str = f"{team_to_add} Was Removed From {tournament_name}"
+            options: dict[str, str] = {"t": "Remove Another", "b": "Back"}
+        else: message = f"{team_to_add} Is Not A Valid Team"
 
-        
 
-        return MenuOptions.manage_teams
+        print(self.tui.table(menu, user_path, info, options, message))
+        choice: str = self.utility._prompt_choice(["t", "b"])
+
+        match choice:
+            case "t":
+                return MenuOptions.remove_team
+
+        return MenuOptions.manage_teams 
 
     def publish(self) -> MenuOptions:
         """Publish tournament screen, choices: input a tournament to publish
