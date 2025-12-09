@@ -211,6 +211,13 @@ def cancel_tournament(tournament: Tournament) -> None:
 def get_teams_from_tournament_name(tournament_name) -> list[Team]:
     return tournament_logic.get_teams_from_tournament_name(tournament_name)
 
+# TO help create a Tournament
+def to_time(value: str) -> time:
+    return tournament_logic.to_time(value)
+
+def to_date(value: str) -> date:
+    return tournament_logic.to_date(value)
+
 ''' Club API '''
 club_logic: ClubLL =  ClubLL()
 
