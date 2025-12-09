@@ -147,8 +147,7 @@ def create_tournament(
     )
 
 def publish(tournament_name: str) -> None:
-    tournament_uuid = LogicUtility.tournament_name_to_uuid(tournament_name)
-    tournament_logic.publish(tournament_uuid)
+    tournament_logic.publish(tournament_name)
 
 def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
