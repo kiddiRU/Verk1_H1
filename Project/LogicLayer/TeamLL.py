@@ -134,10 +134,21 @@ class TeamLL():
         return teams_history
     
 
+    def get_team_wins(self, team_uuid: str) -> str:
+        pass
+    
+
     # TODO Implement so a team gets a point for every match it wins 
     # and the points increase. Match 1 win: +1, Match 2 win: +2,
     # Match 3 loss: total 3 points for tournament 
     def get_team_points(self, team_uuid: str) -> str:
+        """
+        takes in a team uuid
+        loads and looks through all tournament and takes there uuid
+        looks through every match in tournament and checks the last match
+        if the winning team uuid is the same as the team uuid
+        three points are added
+        """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         match = MatchLL()
         points = 0
@@ -149,10 +160,14 @@ class TeamLL():
                 matches_list: list[Match] = match.get_matches(tour_id)
                 tour_final_match: Match = matches_list[-1]
                 winner = tour_final_match.winner
+                loser = tour_final_match.losing_team
 
                 if winner == team_uuid:
                     points += 3
-            
+
+                if loser == team_uuid:
+                    points += 1
+
             except:
                 pass
 
