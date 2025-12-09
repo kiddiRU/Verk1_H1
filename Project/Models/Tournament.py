@@ -4,7 +4,7 @@ Date: 2025-12-02
 
 Tournament Model Class
 
-Contributer:
+Contributor:
     Kristinn Hrafn <kristinnd25@ru.is>
 """
 
