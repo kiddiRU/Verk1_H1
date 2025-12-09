@@ -162,6 +162,30 @@ class TournamentLL:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
 
+    def end_tournament(self, uuid: str) -> None:
+        """
+        Parameters: uuid of tournament
+
+        Archives the tournament tied to the given uuid and releases
+        it's servers.
+        """
+        # Looks for the tournament with the given uuid.
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        for item in tournaments:
+            if item.uuid == uuid:
+                tournament: Tournament = item
+                break
+        else:
+            # TODO Add real assert
+            assert(False)
+        
+        tournament.status = Tournament.StatusType.archived
+
+        for idx, server in enumerate(tournament.list_servers):
+            # TODO think about what to do with servers
+            tournament.list_servers[idx] = "NoServer"
+
+
     def next_round(self, uuid: str) -> None:
         """
         Parameters: uuid of tournament which will proceed to next round
@@ -205,7 +229,8 @@ class TournamentLL:
 
         # TODO add end of tournament
         if len(competing_teams) == 1:
-            assert False
+            self.end_tournament(uuid)
+            return None
 
         # Shuffles the teams randomly for matchmaking.
         random.shuffle(competing_teams)
@@ -358,7 +383,6 @@ class TournamentLL:
 
         return matches
 
-
     def get_tournament_object (self, tournament_name: str) -> Tournament | None:
         """
         Returns a Tournament object from name
@@ -373,3 +397,64 @@ class TournamentLL:
         for tournament in tournaments:
             if tournament.name == tournament_name:
                 return tournament
+
+
+    def change_match_winner(
+            self,
+            tournament_uuid: str,
+            match_uuid: str,
+            team_uuid: str
+        ) -> None:
+        """
+        Parameters:
+            tournament_uuid, uuid of tournament the match belongs to.
+            match_uuid, uuid of match you want to update.
+            team_uuid, uuid of the team which won.
+
+        Updates the match to set a winner, will continue to next round
+        and update servers in use of the tournament if needed.
+        """
+        # Finds the tournament with a given uuid.
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+
+        for item in tournaments:
+            if item.uuid == tournament_uuid:
+                tournament: Tournament = item
+                break
+        else:
+            # TODO Add a real assert
+            assert(False)
+
+        # Updates match itself
+        self.MatchAPI.change_match_winner(match_uuid, team_uuid)
+        
+        matches: list[Match] = self.MatchAPI.get_matches(tournament_uuid)
+
+        # Finds the updated match in matches list
+        i: int = 0
+        while i < len(matches):
+            if matches[i].uuid == match_uuid:
+                break
+            i+=1
+        else:
+            # TODO add real assert
+            assert False
+
+        # Checks if the finished match results in a new round
+        if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
+            self.next_round(tournament_uuid)
+
+        # Assign a new match to the server that was in use if needed.
+        j: int = i + len(tournament.list_servers)
+        servers: list[Server] = DataLayerAPI.load_servers()
+        for server in servers:
+            if server.match_in_server == match_uuid:
+                if j < len(matches):
+                    server.match_in_server = matches[j].uuid
+                else:
+                    server.match_in_server = "NoMatch"
+                DataLayerAPI.update_server(server.uuid, server)
+                break
+        else:
+            # TODO add real assert
+            assert False
