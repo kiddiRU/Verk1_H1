@@ -8,7 +8,7 @@ Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -70,11 +70,20 @@ def leave_team(team_name: str, player: Player) -> None:
 def list_players() -> list[Player]:
     return player_logic.list_players()
 
-def get_player_object(player_handle: str) -> Player | None:
-    return player_logic.get_player_object(player_handle)
+def get_player_object(player_uuid: str) -> Player | None:
+    return player_logic.get_player_object(player_uuid)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     player_logic.promote_captain(current_player, handle_to_promote)
+
+def save_player(player_handle: str | None = None) -> str | None:
+    return player_logic.save_player(player_handle)
+
+
+def get_player_team(player_handle: str) -> tuple:
+    return player_logic.get_player_team(player_handle)
+
+
 
 ''' Team API '''
 team_logic = TeamLL()
@@ -100,6 +109,15 @@ def get_team_object(team_name: str) -> Team:
 # TODO implement get_team_history and call it
 def get_team_history(team_name: str) -> list[str]:       
     return team_logic.get_team_history(team_name)
+
+def get_team_wins(team_name: str) -> str:
+    return team_logic.get_team_wins(team_name)
+
+def get_team_points(team_name: str) -> str:
+    return team_logic.get_team_points(team_name)
+
+def get_team_club(team_name: str) -> str:
+    return team_logic.get_team_club(team_name)
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
@@ -170,9 +188,16 @@ def update_tournament_datetime(
 def list_tournaments() -> list[Tournament]:
     return tournament_logic.list_tournaments()
 
-# TODO implement next_round and call it
-def next_round() -> None:
-    pass
+def change_match_winner(
+        tournament_uuid: str,
+        match_uuid: str,
+        team_uuid: str
+    ) -> None:
+    tournament_logic.change_match_winner(
+            tournament_uuid,
+            match_uuid,
+            team_uuid
+        )
 
 # TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
@@ -202,5 +227,17 @@ def input_match_results(match: Match) -> None:
     pass
 
 
-def save_player(player_handle: str | None = None) -> str | None:
-    return player_logic.save_player(player_handle)
+
+""" Utility API """
+
+def get_player_uuid(player_handle: str) -> str:
+    return LogicUtility.get_player_uuid(player_handle)
+
+def get_tournament_by_name(tournamnet_name: str) -> Tournament:
+    return LogicUtility.get_tournament_by_name(tournamnet_name)
+
+def get_team_by_name(team_name: str) -> Team:
+    return LogicUtility.get_team_by_name(team_name)
+
+def get_team_by_uuid(team_uuid: str) -> Team:
+    return LogicUtility.get_team_by_name(team_uuid)
