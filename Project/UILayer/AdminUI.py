@@ -150,7 +150,7 @@ class AdminUI:
 
             # check status to redirect correctly
             tournament = self.utility.get_tournament_object(find_name)
-            if tournament == None: 
+            if tournament == None:
                 return MenuOptions.manage_tournament
             if tournament.status == Tournament.StatusType.active:
                 return MenuOptions.manage_active_tournament
@@ -197,17 +197,9 @@ class AdminUI:
 
         choice: str = self.utility._prompt_choice(["1", "b", "lo"])
 
-        match choice:
-            case "1":
-                return MenuOptions.select_match
-            # case "2":
-            #     return MenuOptions.cancel_tournament  #TODO: Optional C requirement
-            case "b":
-                return MenuOptions.manage_tournament
-
-            case "lo":
-                MenuOptions.start_screen
-
+        if choice == "1": return MenuOptions.select_match
+        if choice == "lo": return MenuOptions.start_screen
+    
         return MenuOptions.manage_tournament
 
     def matches(self) -> MenuOptions:
@@ -349,6 +341,11 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Check if None goes through
+        tournament_name = LogicLayerAPI.save_player() or "None"
+        t_object = self.utility.get_tournament_object(tournament_name)
+        if t_object is None:
+            return MenuOptions.start_screen
 
         menu: str = "Inactive Tournament"
         user_path: list[str] = [
@@ -357,7 +354,7 @@ class AdminUI:
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
         ]
-        info: list = ["- - - - List Of Teams In Tournament - - - -"]
+        info: list = t_object.teams_playing
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
@@ -445,10 +442,34 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Check if None goes through
+        tournament_name = LogicLayerAPI.save_player() or "None"
+        t_object = self.utility.get_tournament_object(tournament_name)
+        if t_object is None:
+            return MenuOptions.start_screen
 
-        print("PUBLISH TOURNAMENT")
-        choice: str = input("Input tournament to publish: ")
-        # TODO: Check for tournament then publish it
+        menu: str = "Publish"
+        user_path: list[str] = [
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament,
+            MenuOptions.publish,
+        ]
+        info: list = [f"Do you want to publish {self.message_color}{t_object.name}{self.reset}? Y/N"]
+
+        options: dict[str, str] = {
+            "Y:": "Yes",
+            "N:": "No",
+        }
+        message = "Publishing cannot be reverted!"
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        choice: str = self.utility._prompt_choice(["Y","y","N","n"])
+
+        if choice.lower() == "y":
+            LogicLayerAPI.publish(tournament_name)
+            return MenuOptions.manage_tournament
 
         return MenuOptions.manage_inactive_tournament
 

@@ -34,12 +34,12 @@ class PlayerLL():
         Validates the given info and creates a player object. Sends the
         object to the data layer to be stored and returns the new player.
         """
-
-        uuid = str(uuid4())
-
+        
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
             validate_attr(attr, value.strip(), name_type = 'PLAYER')
+
+        uuid = str(uuid4())
 
         new_player = Player(
             uuid,
@@ -108,7 +108,7 @@ class PlayerLL():
         return new_team
 
     # TODO Remove Player objec
-    def leave_team(self, team_uuid: str, player: Player) -> None:
+    def leave_team(self, team_name: str, player: Player) -> None:
         '''
         Takes in a teams UUID and a Player object.
 
@@ -117,7 +117,7 @@ class PlayerLL():
         '''
 
         teams: list[Team] = DataLayerAPI.load_teams()
-        team = next((t for t in teams if t.uuid == team_uuid), None)
+        team = next((t for t in teams if t.name == team_name), None)
 
         if team is None:
             raise Exception('Team not found!')
@@ -156,6 +156,9 @@ class PlayerLL():
 
         if player_to_promote is None:
             raise Exception(f'No player found with the handle: {handle_to_promote}')
+        
+        if player_to_promote.uuid not in team_to_edit.list_player_uuid:
+            raise Exception(f'The player \'{handle_to_promote}\' exists, but is not in your team!')
         
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
