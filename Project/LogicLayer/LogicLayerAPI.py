@@ -235,3 +235,12 @@ def input_match_results(match: Match) -> None:
 
 def get_player_uuid(player_handle: str) -> str:
     return LogicUtility.get_player_uuid(player_handle)
+
+def get_tournament_by_name(tournamnet_name: str) -> Tournament:
+    return LogicUtility.get_tournament_by_name(tournamnet_name)
+
+def get_team_by_name(team_name: str) -> Team:
+    return LogicUtility.get_team_by_name(team_name)
+
+def get_team_by_uuid(team_uuid: str) -> Team:
+    return LogicUtility.get_team_by_name(team_uuid)

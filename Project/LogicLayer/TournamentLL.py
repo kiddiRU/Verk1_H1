@@ -5,11 +5,12 @@ Date: 2025-12-05
 Functions for tournament logic.
 '''
 
-from Models import Team, Tournament, Server, Match
+from Models import Team, Tournament, Server, Match, ValidationError
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
 from LogicLayer.MatchLL import MatchLL
+from LogicLayer import LogicUtility
 import random
 
 class TournamentLL:
@@ -56,17 +57,8 @@ class TournamentLL:
 
         Adds the teams UUID to the teams_playing list in the tournament.
         '''
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
-        
-        teams: list[Team] = DataLayerAPI.load_teams()
-        team: Team | None = next((t for t in teams if t.name == team_name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {tournament_name}')
-
-        if team is None:
-            raise Exception(f'No team found named: {team_name}')
+        tournament: Tournament = LogicUtility.get_tournament_by_name(tournament_name)
+        team: Team = LogicUtility.get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
@@ -80,17 +72,8 @@ class TournamentLL:
 
         Removes the teams UUID from the teams_playing list in the tournament.
         '''
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == tournament_name), None)
-        
-        teams: list[Team] = DataLayerAPI.load_teams()
-        team: Team | None = next((t for t in teams if t.name == team_name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {tournament_name}')
-
-        if team is None:
-            raise Exception(f'No team found named: {team_name}')
+        tournament: Tournament = LogicUtility.get_tournament_by_name(tournament_name)
+        team: Team = LogicUtility.get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
@@ -110,14 +93,8 @@ class TournamentLL:
         Takes the given info and applies it a tournament. Performs
         no validation on the given info.
         '''
-        
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {name}')
+        tournament: Tournament = LogicUtility.get_tournament_by_name(name)
 
         for attr, value in params.items():
             if value == '':
@@ -141,14 +118,8 @@ class TournamentLL:
         Takes the given info and applies it a tournament. Performs no validation
         on the given info.
         '''
-        
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
-
-        if tournament is None:
-            raise Exception(f'No tournament found named: {name}')
+        tournament: Tournament = LogicUtility.get_tournament_by_name(name)
 
         if tournament.status == Tournament.StatusType.active:
             raise Exception('You can\'t change the time of an active tournament!')
@@ -176,14 +147,9 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            # TODO Add real assert
-            assert(False)
+            raise ValidationError("Tournament with given uuid not found.")
         
         tournament.status = Tournament.StatusType.archived
-
-        for idx, server in enumerate(tournament.list_servers):
-            # TODO think about what to do with servers
-            tournament.list_servers[idx] = "NoServer"
 
 
     def next_round(self, uuid: str) -> None:
@@ -201,15 +167,13 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            # TODO Add real assert
-            assert(False)
+            raise ValidationError("Tournament with given uuid not found.")
 
         # Gets all matches tied to the tournament.
         matches: list[Match] = self.MatchAPI.get_matches(tournament.uuid)
 
         if len(matches) == 0:
-            # TODO add real assert
-            assert False
+            raise ValidationError("No matches tied to tournament.")
         
         # Finds all teams competing in the tournament which havent lost already.
         # These are the teams which will be competing in the next round.
@@ -223,11 +187,9 @@ class TournamentLL:
             else:
                 competing_teams.append(team)
 
-        # TODO add real assert
         if len(competing_teams) == 0:
-            assert False
+            raise ValidationError("No teams found to compete.")
 
-        # TODO add end of tournament
         if len(competing_teams) == 1:
             self.end_tournament(uuid)
             return None
@@ -265,19 +227,16 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            # TODO Add a real assert
-            assert(False)
-       
-        # TODO add real assert
+            raise ValidationError("Tournament tied to uuid not found.") 
+
         if tournament.status != Tournament.StatusType.inactive:
-            assert False
+            raise ValidationError("Tournament isn't inactive.")
 
         # Changes status from inactive to active
         tournament.status = Tournament.StatusType.active
 
         # Creates servers for the tournament.
         for idx, _ in enumerate(tournament.list_servers):
-            # TODO Make server logic, move matches.
             new_server = Server(str(uuid4()), "NoMatch")
             tournament.list_servers[idx] = new_server.uuid
             DataLayerAPI.store_server(new_server)
@@ -320,12 +279,11 @@ class TournamentLL:
                             time = tournament.time_frame_start
                     )
 
-        # TODO add real assert
         if times_used[-1] >= datetime.combine(
                 date = tournament.end_date,
                 time = tournament.time_frame_end
             ):
-            assert(False)
+            raise ValidationError("Too little time for tournament")
 
         # Creates the matches needed.
         for match_datetime in times_used:
@@ -361,12 +319,10 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            # TODO Add a real assert
-            assert(False)
+            raise ValidationError("Tournament with given uuid not found.")
        
-        # TODO add real assert
         if tournament.status != Tournament.StatusType.active:
-            assert False
+            raise ValidationError("Tournament isn't active.")
     
         # Get's all matches tied to the tournament.
         matches = self.MatchAPI.get_matches(uuid)
@@ -422,8 +378,7 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            # TODO Add a real assert
-            assert(False)
+            raise ValidationError("Tournament with given uuid not found.")
 
         # Updates match itself
         self.MatchAPI.change_match_winner(match_uuid, team_uuid)
@@ -437,8 +392,7 @@ class TournamentLL:
                 break
             i+=1
         else:
-            # TODO add real assert
-            assert False
+            raise ValidationError("Match with given uuid not found.")
 
         # Checks if the finished match results in a new round
         if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
@@ -456,5 +410,4 @@ class TournamentLL:
                 DataLayerAPI.update_server(server.uuid, server)
                 break
         else:
-            # TODO add real assert
-            assert False
+            raise ValidationError("Tournament server error.")
