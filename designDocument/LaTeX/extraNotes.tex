@@ -1,0 +1,89 @@
+\section{Extra Notes}
+\subsection{Archives}
+
+\subsubsection{Tournament}
+\begin{itemize}
+    \item When the tournament is over then it is archived
+\end{itemize}
+
+\subsubsection{Team}
+\begin{itemize}
+    \item The place that a team goes to when a team captain is alone in a team and leaves the team (AKA: IF a team becomes empty)
+    \item Stores empty teams and their scores (Should be able to view it)
+\end{itemize}
+
+\subsection{Publish Tournament}
+When managing the tournaments the Organizer has the option of publishing a tournament and by
+pressing that option, he will get a list of available tournaments (AKA: Tournaments that have 16 or
+more teams and tournaments that aren't already published). Then he will input what tournament he
+wants to publish and that tournament
+
+\subsection{Search Bar}
+\begin{itemize}
+    \item Can input the name of a player directly
+    \item IF unsure about the player options, then should be able to list every name
+    \item The ability to search for the first letters to narrow down the list
+\end{itemize}
+
+
+\subsubsection{Example: Searching for available players for teams}
+
+Add a Teams
+\begin{itemize}
+    \item  Enter Team name or l for the list of all team or q to quit: abcd
+    \begin{itemize}
+        \item  abcd was found are you sure you want to continue
+    \end{itemize}
+    \item Y Yes
+    \item N No
+\end{itemize}
+Remove a Team
+\begin{itemize}
+    \item  Enter Team name or l for the list of all teams in the tournament or q to quit:
+    \begin{itemize}
+        \item  abcd is not a part of the tournament, do you want to continue
+    \end{itemize}
+    \item Y Yes
+    \item N No
+\end{itemize}
+\subsection{Logic to use for multiple instances}
+\subsection{States (For diagrams)}
+A team needs to have at least 3 players to join a tournament \\
+A team can have a maximum of 5 players? If it has 5 players, the captain cannot add more. \\
+A player can have 3 states (Captain, In Team, Not In Team) \\
+• Captain: Can view team and add or remove players \\
+• Player in team: Can view his team, and can leave his team \\
+• Player NOT in team: Can create a team \\
+If captain leaves his team there can be two outcomes \\
+• Captain leaves and selects a new captain from the team \\
+• If the team is empty the captain leaves but the team still exists and has all statistics \\ 
+A player can NOT leave his team if the team is in a tournament \\
+\subsection{Player/Team Notes}
+Color: simple length check \\
+- Venue: simple length check \\
+- Email: needs to go through a check \\
+- Phone number: 7 Numbers \\
+- Address: (strings)(space)(number) \\
+- When taking input we will have a validator in the logic layer that returns whether it is valid
+or not \\
+- Valid player handle: Just about the length (3-12) NEED TO HAVE **ADMIN** in the
+handle file \\
+- Date stored YYYY-MM-DD \\
+o Validation \\
+    All need to be numbers that are not the "-" \\
+    Year: \\
+    Month: 01 <= month <= 12 \\
+- If the C color requirement will be used then there should only be options for the user (Can \\
+only choose color out of few chosen colors) \\
+- Randomize team list for tournaments \\
+- At least 16 teams in a tournament \\
+- Teams cannot Play in multiple matches at the same time \\
+- The main interactions from the user is with shown steps like: 1) Login, 2) Sign Up, b) back \\
+... something like that (can also have some commands) \\
+- Everyone should be able to see all active Teams (in an active tournament) \\
+\subsection{Json Formatting}
+
+\subsection{User Terminal navigation}
+
+Need navigation to override action input
+nav -> action
