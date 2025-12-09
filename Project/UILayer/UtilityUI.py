@@ -70,6 +70,34 @@ class UtilityUI:
                 print(self.error_color + str(e) + self.reset)
                 continue
 
+    # Created by Sindri Freysson
+    def prompt_builder(options: list[str]) -> dict[int, str]:
+        """
+        Helper function that takes in list of MenuOptions and returns an enumerated dictionary of options
+        Use dict.update after building if you want to add extra options to the menu
+        :param options: List of strings representing the options that the user can use
+        :return: Dictionary of options -> string
+        """
+        prompt_dict: dict[int|str, str] = {}
+        for i, choice in enumerate(options, start=1):
+            prompt_dict[i] = choice
+        return prompt_dict
+    # Created by Sindri Freysson
+    def prompt_choice(self, valid_choices: dict[int|str, str]) -> str:
+        """
+        Takes in a list of valid choices and returns a string representing the choice
+        :param self:
+        :param valid_choices: Dictionary of valid choices that the user can input
+        :return: Returns a string of the allowed choice
+        """
+        while True:
+            choice: str = input("> ").strip().lower()
+            if choice in valid_choices:
+                return valid_choices[choice]
+            print(
+                self.error_color + "Not a valid option try again" + self.reset
+            )
+
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
         print("Screen doesn't exist")
