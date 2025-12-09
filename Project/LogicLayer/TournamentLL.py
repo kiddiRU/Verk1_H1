@@ -338,23 +338,7 @@ class TournamentLL:
         ]
 
         return matches
-
-    def get_tournament_object (self, tournament_name: str) -> Tournament | None:
-        """
-        Returns a Tournament object from name
-
-        Args:
-            tournament_name (str): a tournament name
-
-        Returns:
-            Tournament | None: a Tournament object if successful else None
-        """
-        tournaments = self.list_tournaments()
-        for tournament in tournaments:
-            if tournament.name == tournament_name:
-                return tournament
-
-
+    
     def change_match_winner(
             self,
             tournament_uuid: str,
@@ -378,7 +362,8 @@ class TournamentLL:
                 tournament: Tournament = item
                 break
         else:
-            raise ValidationError("Tournament with given uuid not found.")
+            # TODO Add a real assert
+            assert(False)
 
         # Updates match itself
         self.MatchAPI.change_match_winner(match_uuid, team_uuid)
@@ -392,7 +377,8 @@ class TournamentLL:
                 break
             i+=1
         else:
-            raise ValidationError("Match with given uuid not found.")
+            # TODO add real assert
+            assert False
 
         # Checks if the finished match results in a new round
         if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
@@ -410,4 +396,5 @@ class TournamentLL:
                 DataLayerAPI.update_server(server.uuid, server)
                 break
         else:
-            raise ValidationError("Tournament server error.")
+            # TODO add real assert
+            assert False
