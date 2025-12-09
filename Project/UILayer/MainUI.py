@@ -88,7 +88,6 @@ class MainUI:
         """Main navigation loop"""
 
         while True:
-            self.__clear()
 
             if self.screens.get(self.current_screen) is not None:
                 self.current_screen = self.screens[self.current_screen]()
