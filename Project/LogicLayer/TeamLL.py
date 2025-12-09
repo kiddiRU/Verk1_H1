@@ -191,11 +191,12 @@ class TeamLL():
     
 
     def get_team_club(self, team_name: str) -> str:
-        
-        clubs = self.club_logic.list_clubs()
+        clubll = ClubLL()
+
+        clubs = clubll.list_clubs()
 
         for club in clubs:
-            teams = self.club_logic.get_teams_in_club(club.name)
+            teams = clubll.get_teams_in_club(club.name)
 
             if team_name in teams:
                 return club.name

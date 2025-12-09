@@ -14,6 +14,7 @@ from Models import Player, Team, Club, Match, Tournament#, ValidationError
 from LogicLayer.Validation import validate_attr
 from LogicLayer.LogicUtility import get_player_uuid
 from LogicLayer.MatchLL import MatchLL
+from LogicLayer.TeamLL import TeamLL
 
 class PlayerLL():
     def __init__(self) -> None:
@@ -175,11 +176,13 @@ class PlayerLL():
 
     def get_player_team(self, player_handle) -> tuple:
         """Takes in a player handle and returns the name of their team and their rank"""
+        teamll = TeamLL()
+
         player_uuid = get_player_uuid(player_handle)
-        teams = self.team_logic.list_teams()
+        teams = teamll.list_teams()
         
         for team in teams:
-            players = self.team_logic.get_team_members(team.name)
+            players = teamll.get_team_members(team.name)
 
             if player_uuid in players:
                 if team.team_captain_uuid == player_uuid:
