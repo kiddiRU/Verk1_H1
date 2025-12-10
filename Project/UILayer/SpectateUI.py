@@ -182,13 +182,13 @@ class SpectateUI:
         ]
 
         # TODO: Need fix teams format
-        info: list[str] = [
-            f"Teams: ",
-            str(UtilityUI.team_names(LogicLayerAPI.get_teams_in_club(club_name))),
+        infoA: list[str] = [f"Teams: "] + self.utility.show_filtered(LogicLayerAPI.get_teams_in_club(club_name))
+        infoB: list[str] = [
             f"Color: club_object.club_color",
             f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
             f"Points: " + LogicLayerAPI.get_club_points(club_name),
         ]
+        info = infoA + infoB
         options: dict[str, str] = {}
         message: str = ""
 
