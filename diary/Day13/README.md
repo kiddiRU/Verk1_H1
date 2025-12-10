@@ -41,10 +41,13 @@
 - Add tournament validation
 - Create tournament 
 - Create club
+- Edit club
 - edit tournament
 # Evening meeting (Diary)
 ## State of project:
-
+- Finished view stats for Player
+- Finished view stats for Team
+- Finished view stats for Club
 ## State of group: 
 
 ## Divisions:
