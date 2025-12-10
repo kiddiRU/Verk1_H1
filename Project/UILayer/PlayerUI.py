@@ -69,7 +69,7 @@ class PlayerUI:
         """
 
         """ THIS IS TEMPORARY REMOVE LATER"""
-        player_list = LogicLayerAPI.list_players()
+        player_list = LogicLayerAPI.list_all_players()
         abc: str = 1
 
         menu: str = "Log In"
@@ -83,7 +83,7 @@ class PlayerUI:
 
         login_handle: str = input(self.input_color + "Input Your Handle: " + self.reset)
 
-        user_uuid = LogicLayerAPI.get_player_uuid(login_handle)
+        user_uuid = LogicLayerAPI.player_handle_to_uuid(login_handle)
         if user_uuid:
             LogicLayerAPI.save_player(login_handle)
             return MenuOptions.player_screen  
@@ -146,7 +146,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))  
-            user_name: str = self.utility._input_info("Enter Name or 'q' to cancel: \n", "name", "PLAYER")
+            user_name: str = self.utility._input_info("Enter Name or 'q' to go back: \n", "name", "PLAYER")
             if not user_name: 
                 return user_path[-2]
             self.tui.save_input("Name: " + user_name)
@@ -159,7 +159,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info)) 
-            user_dob: str = str(self.utility._input_info("Enter Date Of Birth or 'q' to cancel: \n (yyyy-mm-dd) \n", 
+            user_dob: str = str(self.utility._input_info("Enter Date Of Birth or 'q' to go back: \n (yyyy-mm-dd) \n", 
                                                          "date_of_birth", "PLAYER"))
             if not user_dob: 
                 return user_path[-2]
@@ -173,7 +173,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info)) 
-            user_addr: str = self.utility._input_info("Enter Home Address or 'q' to cancel: \n (Streetname 00 Cityname) \n", 
+            user_addr: str = self.utility._input_info("Enter Home Address or 'q' to go back: \n (Streetname 00 Cityname) \n", 
                                                     "home_address", "PLAYER")
             if not user_addr: 
                 return user_path[-2]
@@ -187,7 +187,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            user_email: str = self.utility._input_info("Enter Email or 'q' to cancel: \n", "email", "PLAYER")
+            user_email: str = self.utility._input_info("Enter Email or 'q' to go back: \n", "email", "PLAYER")
             if not user_email: 
                 return user_path[-2]
             self.tui.save_input("Email: " + user_email)
@@ -200,7 +200,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_phnum: str = self.utility._input_info("Enter Phone Number or 'q' to cancel: \n (123-4567) \n", 
+            user_phnum: str = self.utility._input_info("Enter Phone Number or 'q' to go back: \n (123-4567) \n", 
                                                        "phone_number", "PLAYER")
             if not user_phnum: 
                 return user_path[-2]
@@ -214,7 +214,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_handle: str = self.utility._input_info("Enter Handle or 'q' to cancel:  \n", "handle", "PLAYER")
+            user_handle: str = self.utility._input_info("Enter Handle or 'q' to go back:  \n", "handle", "PLAYER")
             if not user_handle: 
                 return user_path[-2]
             self.tui.save_input("Handle: " + user_handle)
@@ -228,7 +228,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
             user_url: str = input(self.input_color + 
-                                  "Enter URL or 'q' to cancel: \n(Optional, Press Enter To Leave Blank) \n" 
+                                  "Enter URL or 'q' to go back: \n(Optional, Press Enter To Leave Blank) \n" 
                                   + self.reset)
             if user_url.lower() == "q": 
                 return user_path[-2]
@@ -270,9 +270,9 @@ class PlayerUI:
         
         # Change into string so that Vs Wont complain about type hinting
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_login_uuid = LogicLayerAPI.get_player_uuid(current_login_handle)
-        player: Player | str = LogicLayerAPI.get_player_object(current_login_uuid)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_login_uuid = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+        player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
         club = LogicLayerAPI.get_team_club(team)
 
         if not team:
@@ -354,7 +354,7 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str | None = LogicLayerAPI.save_player()
-        player_list: list[Player] = LogicLayerAPI.list_players()
+        player_list: list[Player] = LogicLayerAPI.list_all_players()
 
 
         # VS Code complains if i dont do this
@@ -381,7 +381,7 @@ Rank: {current_login_rank}"""]
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
 
-        clubs = LogicLayerAPI.list_clubs()
+        clubs = LogicLayerAPI.list_all_clubs()
         club_names = [x.name for x in clubs]
         for club in club_names:
             info.append(club)
@@ -391,7 +391,7 @@ Rank: {current_login_rank}"""]
         while con == "b":
             self.tui.clear_saved_data()
             print(self.tui.table(menu, user_path, [], {}, message))
-            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "name", "TEAM")
+            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to go back: : \n", "handle", "TEAM")
             if not team_name:
                 return user_path[-2]
             self.tui.save_input("Team Name: " + team_name)
@@ -491,11 +491,11 @@ Rank: {current_login_rank}"""]
 
         current_login_handle: str | None = LogicLayerAPI.save_player()
         if type(current_login_handle) is str:
-            login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
+            login_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
         else: 
             login_uuid: str  = "" # This should never run, this is just to apease the type hinting gods
 
-        current_player: Player | str = LogicLayerAPI.get_player_object(login_uuid)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(login_uuid)
 
         if type(current_player) is Player:
             name: str = current_player.name
@@ -505,6 +505,15 @@ Rank: {current_login_rank}"""]
             phnum: str  = current_player.phone_number
             handle: str  = current_player.handle
             url: str  = current_player.url
+
+            # Is useless but is to apease the type hinting gods
+            new_name = name
+            new_dob = dob
+            new_addr = addr
+            new_email = email
+            new_phnum = phnum
+            new_handle = handle
+            new_url = url
 
         # This should never run, this is just to apease the type hinting gods
         else:
@@ -525,7 +534,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name or 'q' to cancel: \n",
+            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name or 'q' to go back: \n",
                                                    "name", "PLAYER")
             if new_name == "q":
                 return user_path[-2]
@@ -542,7 +551,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle or 'q' to cancel: \n", 
+            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle or 'q' to go back: \n", 
                                                   "handle", "PLAYER")
             if new_handle == "q":
                 return user_path[-2]
@@ -559,7 +568,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to cancel: \n", 
+            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to go back: \n", 
                                                "date_of_birth", "PLAYER")
             if new_dob == "q":
                 return user_path[-2]
@@ -576,7 +585,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))        
-            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address or 'q' to cancel: \n", 
+            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address or 'q' to go back: \n", 
                                                 "home_address", "PLAYER")
             if new_addr == "q":
                 return user_path[-2]
@@ -593,7 +602,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number or 'q' to cancel: \n", 
+            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number or 'q' to go back: \n", 
                                                  "phone_number", "PLAYER")
             if new_phnum == "q":
                 return user_path[-2]
@@ -610,7 +619,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email or 'q' to cancel: \n", 
+            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email or 'q' to go back: \n", 
                                                  "email", "PLAYER")
             if new_email == "q":
                 return user_path[-2]
@@ -627,7 +636,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_url = input(unchanged_message + self.input_color + "\n Enter New URL or 'q' to cancel: \n" + self.reset)
+            new_url = input(unchanged_message + self.input_color + "\n Enter New URL or 'q' to go back: \n" + self.reset)
 
             if new_url == "q":
                 return user_path[-2]
@@ -645,10 +654,13 @@ Rank: {current_login_rank}"""]
         options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
         print(self.tui.table(menu, user_path, [], options, message))
         choice: str = self.utility._prompt_choice(["c", "b"])
+
+
         
         if choice == "c":
-            LogicLayerAPI.update_player_info(current_player, name, dob, addr, email, phnum, handle, url)
-            LogicLayerAPI.save_player(handle)
+            LogicLayerAPI.update_player_info(current_player, new_name, new_dob, 
+                                             new_addr, new_email, new_phnum, new_handle, new_url)
+            LogicLayerAPI.save_player(new_handle)
         
         return MenuOptions.player_screen
     
@@ -691,7 +703,7 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
        
@@ -704,10 +716,10 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            player: Player | str = LogicLayerAPI.get_player_object(member)
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
 
             if type(player) is Player: # Only there for the type hinting gods
-                team, member_rank = LogicLayerAPI.get_player_team(player.handle)
+                team, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
 
                 if member_rank == "Captain":
                     info.append(f"{member_rank} \t {player.handle}")
@@ -754,8 +766,8 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        player: Player | str = LogicLayerAPI.get_player_object(current_login_handle)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        player: Player | str = LogicLayerAPI.get_player_by_handle(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
 
@@ -769,10 +781,10 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            player: Player | str = LogicLayerAPI.get_player_object(member)
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
             
             if type(player) is Player: # Only there for the type hinting gods
-                team, member_rank = LogicLayerAPI.get_player_team(player.handle)
+                team, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
 
                 if member_rank == "Captain":
                     info.append(f"{member_rank} \t {player.handle}")
@@ -819,7 +831,7 @@ Rank: {current_login_rank}"""]
 
         self.tui.save_input("Player To Add: " + add_handle)
 
-        add_uuid = LogicLayerAPI.get_player_uuid(add_handle)
+        add_uuid = LogicLayerAPI.player_handle_to_uuid(add_handle)
         add_in_team = LogicLayerAPI.get_players_team_uuid(add_uuid)
         print(add_uuid, add_in_team)
 
@@ -837,8 +849,8 @@ Rank: {current_login_rank}"""]
 
 
             current_login_handle: str = str(LogicLayerAPI.save_player())
-            current_login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
-            current_player: Player | str = LogicLayerAPI.get_player_object(current_login_uuid)
+            current_login_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+            current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
 
             if type(current_player) is Player: # Is Only there for the type hinting gods
                 LogicLayerAPI.add_player(add_handle, current_player)
@@ -870,8 +882,8 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
-        current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
+        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
 
         menu: str = "Remove Player"
         user_path: list = [MenuOptions.player_screen, 
@@ -887,12 +899,12 @@ Rank: {current_login_rank}"""]
         remove_handle: str = input(self.input_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
 
 
-        remove_uuid = LogicLayerAPI.get_player_uuid(remove_handle)
+        remove_uuid = LogicLayerAPI.player_handle_to_uuid(remove_handle)
         remove_in_team = LogicLayerAPI.get_players_team_uuid(remove_uuid)
         print(remove_uuid, remove_in_team)
 
-        current_team, rank = LogicLayerAPI.get_player_team(remove_handle)
-        remove_player_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_team, rank = LogicLayerAPI.get_player_team_and_rank(remove_handle)
+        remove_player_team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         if current_team == remove_player_team and remove_handle != current_login_handle:
             message: str = f"The Player {remove_handle} Was Found \nDo You Want To Remove Them From Your Team? Y/N:"
@@ -934,9 +946,9 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
-        current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         menu: str = "Leave Team"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
@@ -948,10 +960,10 @@ Rank: {current_login_rank}"""]
             message: str = f"Select A New Captain Before Leaving {team}"
             print(self.tui.table(menu, user_path, info, {}, message))
             new_captain = input(self.input_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
-            current_team, rank = LogicLayerAPI.get_player_team(new_captain)
-            new_captain_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+            current_team, rank = LogicLayerAPI.get_player_team_and_rank(new_captain)
+            new_captain_team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
-            if current_team == new_captain_team:
+            if current_team == new_captain_team and new_captain != current_login_handle:
                 message: str = f"The Player {new_captain} Was Found \nDo You Want To Promote Them To Captain? Y/N:"
                 print(self.tui.table(menu, user_path, info, {}, message))
 
@@ -977,20 +989,23 @@ Rank: {current_login_rank}"""]
 
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, {}, message))
+        print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["y", "n"])
 
+        options: dict[str, str] = {"c": "Continue"}
         if choice == "n":
             message: str = "Operation Canceled"
             print(self.tui.table(menu, user_path, info, options, message))
             choice: str = self.utility._prompt_choice(["c"])
             return MenuOptions.my_team_not_empty
 
+        if type(current_player) is Player:
+            LogicLayerAPI.remove_player(current_login_handle, current_player)
         message: str = "You Have Sucessfully Left The Team!"
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["c"])
 
-        return MenuOptions.my_team_empty
+        return MenuOptions.player_screen
     
 
 

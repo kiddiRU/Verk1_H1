@@ -13,6 +13,11 @@ FILE_PATH = "DataLayer/Repository/clubs.json"
 
 
 def store_club(club: Club) -> None:
+    """Stores new clubs in a json file to be fetched later.
+
+    :param club:
+        The club object to store.
+    """
     # Changes object club into a dictionary mapping attributes to keys.
     data = club.__dict__
 
@@ -36,6 +41,11 @@ def store_club(club: Club) -> None:
         raise ValidationError("Could not write into club file")
 
 def load_club() -> list[Club]:
+    """Gets a list of all clubs stored with the store_club function.
+
+    :returns:
+        The list of clubs.
+    """
     # Reads the json file containing clubs and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r") as club_file:
@@ -57,6 +67,17 @@ def load_club() -> list[Club]:
 
 
 def update_club(uuid: str, updated_club: Club) -> None:
+    """Updates a club stored with the store_club function.
+
+    Looks for a club stored with the store_club function which
+    has the same uuid as the given uuid, then updates that tournament.
+
+    :param uuid:
+        uuid to look up the club to update.
+
+    :param updated_club:
+        The club object to update the team to.
+    """
     # Reads the json file containing clubs and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r") as club_file:

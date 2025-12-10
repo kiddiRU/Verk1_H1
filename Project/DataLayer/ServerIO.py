@@ -12,6 +12,11 @@ from Models import Server, ValidationError
 FILE_PATH = "DataLayer/Repository/server.json"
 
 def store_server(server: Server) -> None:
+    """Stores new servers in a json file to be fetched later.
+
+    :param server:
+        The server object to store.
+    """
     # Changes object Server into a dictionary mapping attributes to keys.
     data = server.__dict__
 
@@ -36,6 +41,11 @@ def store_server(server: Server) -> None:
 
 
 def load_server() -> list[Server]:
+    """Gets a list of all servers stored with the store_server function.
+    
+    :returns:
+        The list of servers.
+    """
     # Reads the json file containing servers and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as server_file:
@@ -57,6 +67,17 @@ def load_server() -> list[Server]:
 
 
 def update_server(uuid: str, updated_server: Server) -> None:
+    """Updates the server stored with the store_server function.
+
+    Looks for a servers stored with the store_server function which
+    has the same uuid as the given uuid, then updates that server.
+
+    :param uuid:
+        uuid to look up the server to update.
+
+    :param updated_server:
+        The server object to update the server to.
+    """
     # Reads the json file containing server and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as server_file:

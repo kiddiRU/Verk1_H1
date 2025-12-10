@@ -4,7 +4,6 @@
         "name": "SegFault Spartans",
         "list_player_uuid": [
             "2cc090bc-2351-4c43-bb08-2f578d26154a",
-            "35e63bfc-3349-4131-b197-c569d71d6b90",
             "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3"
         ],
         "team_captain_uuid": "2cc090bc-2351-4c43-bb08-2f578d26154a",
@@ -187,7 +186,9 @@
         "list_player_uuid": [
             "b855860c-dd67-4f5f-af94-4730fef94e8a",
             "5dbe517b-4715-4f08-aa75-d91bb0d6eae6",
-            "398550f8-bb2b-46da-8527-974e6b5bd0d2"
+            "398550f8-bb2b-46da-8527-974e6b5bd0d2",
+            "150e7677-fd69-4695-84c7-71a1b07fa31b",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
         ],
         "team_captain_uuid": "b855860c-dd67-4f5f-af94-4730fef94e8a",
         "club_uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
@@ -240,7 +241,6 @@
         "name": "Hello",
         "list_player_uuid": [
             "bc18ed47-6abd-4868-b0ad-b8343b820bac",
-            "592bd9bc-99c8-473e-af2e-d7ec53fc9897",
             "01af76e7-6baa-496c-90c4-0dfb3a208a95"
         ],
         "team_captain_uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
@@ -248,5 +248,17 @@
         "in_tournament": null,
         "url_homepage": "",
         "ascii_art": ""
+    },
+    "e8ccb2e2-c0bc-4d9b-b1ce-80af3a2ec01e": {
+        "uuid": "e8ccb2e2-c0bc-4d9b-b1ce-80af3a2ec01e",
+        "name": "team",
+        "list_player_uuid": [
+            "35e63bfc-3349-4131-b197-c569d71d6b90"
+        ],
+        "team_captain_uuid": "35e63bfc-3349-4131-b197-c569d71d6b90",
+        "club_uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
+        "in_tournament": null,
+        "url_homepage": "url",
+        "ascii_art": "a"
     }
 }

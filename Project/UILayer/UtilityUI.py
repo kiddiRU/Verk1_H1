@@ -63,42 +63,13 @@ class UtilityUI:
             try:
                 print(self.message_color + message + self.reset)
                 choice: str = input()
-                if choice == "q":
+                if choice.lower() == "q":
                     return ""
                 valid: str | None = validate(attribute, choice, info_type)
                 return str(valid)
             except ValidationError as e:
                 print(self.error_color + str(e) + self.reset)
                 continue
-
-    # Created by Sindri Freysson
-    def prompt_builder(options: list[str]) -> dict[int, str]:
-        """
-        Helper function that takes in list of MenuOptions and returns an enumerated dictionary of options
-        Use dict.update after building if you want to add extra options to the menu
-        :param options: List of strings representing the options that the user can use
-        :return: Dictionary of options -> string
-        """
-        prompt_dict: dict[int | str, str] = {}
-        for i, choice in enumerate(options, start=1):
-            prompt_dict[i] = choice
-        return prompt_dict
-
-    # Created by Sindri Freysson
-    def prompt_choice(self, valid_choices: dict[int | str, str]) -> str:
-        """
-        Takes in a list of valid choices and returns a string representing the choice
-        :param self:
-        :param valid_choices: Dictionary of valid choices that the user can input
-        :return: Returns a string of the allowed choice
-        """
-        while True:
-            choice: str = input("> ").strip().lower()
-            if choice in valid_choices:
-                return valid_choices[choice]
-            print(
-                self.error_color + "Not a valid option try again" + self.reset
-            )
 
     def _input_change(
         self, message: str, attribute: str, info_type: str
@@ -114,7 +85,7 @@ class UtilityUI:
             try:
                 print(self.message_color + message + self.reset)
                 choice: str = input()
-                if choice == "q":
+                if choice.lower() == "q":
                     return choice
                 if not choice:
                     return choice
@@ -167,7 +138,7 @@ class UtilityUI:
         Returns:
             list[str]: Team names
         """
-        team_list: list[Team] = LogicLayerAPI.list_teams()
+        team_list: list[Team] = LogicLayerAPI.list_all_teams()
         return [x.name for x in team_list]
 
     def club_names(self):
@@ -177,7 +148,7 @@ class UtilityUI:
         Returns:
             list[str]: Club names
         """
-        clubs: list[Club] = LogicLayerAPI.list_clubs()
+        clubs: list[Club] = LogicLayerAPI.list_all_clubs()
         return [x.name for x in clubs]
 
     def player_handles(self) -> list[str]:
@@ -187,7 +158,7 @@ class UtilityUI:
         Returns:
             list[str]: PLayer handles
         """
-        player_list: list[Player] = LogicLayerAPI.list_players()
+        player_list: list[Player] = LogicLayerAPI.list_all_players()
         return [p.handle for p in player_list]
 
     def show_main(self, flag: str) -> list[str]:
@@ -248,26 +219,80 @@ class UtilityUI:
             )
         return output_list
 
-    def list_matches(self, tournament_uuid: str) -> list[str]:
-        match_list: list[Match] = LogicLayerAPI.get_next_matches(tournament_uuid)
+    def list_matches(self, tournament_uuid: str, show_all: bool) -> list[str]:
+        """
+        Function to show either all matches in a tournament or the next matches
+        
+        :param self: Description
+        :param tournament_uuid: The uuid of a tournament
+        :type tournament_uuid: str
+        :param show_all: Description
+        :type show_all: Choose if you want to show all matches in the tournament
+        :return: A formatted f-string to be printed out
+        :rtype: list[str]
+        """
+
+        if show_all:
+            match_list: list[Match] = LogicLayerAPI.get_all_matches(
+                tournament_uuid
+            )
+        else:
+            match_list: list[Match] = LogicLayerAPI.get_next_matches(
+                tournament_uuid
+            )
+        # Top info
+
+        line = lambda x: x * 80
         output_list: list[str] = []
 
         for match in match_list:
+            if show_all:
+                revealed: str = "To be revealed"
+                if (match.team_1 or match.team_2) == revealed:
+                    continue
 
-            match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
-            match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
+                match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
+                match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
 
-            match_name_1: str = match1.name
-            match_name_2: str = match2.name
+                match_name_1: str = match1.name
+                match_name_2: str = match2.name
 
-            output_list.append(f"{match_name_1} vs {match_name_2} {str(match.match_time)} {str(match.winner)}")
+                output_list.append(
+                    f"{line('—')}\n"
+                    f"{f"Team 1: {match_name_1}":<79}|\n"
+                    f"{'vs':<79}|\n"
+                    f"{f"Team 2: {match_name_2}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
+                    f"{f"Match Winner: {str(match.winner)}":<79}|"
+                )
+
+
+            else:
+                match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
+                match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
+
+                match_name_1: str = match1.name
+                match_name_2: str = match2.name
+
+                output_list.append(
+                    f"{line('—')}\n"
+                    f"{f"Team 1: {match_name_1}":<79}|\n"
+                    f"{'vs':<79}|\n"
+                    f"{f"Team 2: {match_name_2}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
+                    f"{f"Match Winner: {str(match.winner)}":<79}|"
+                )
 
         return output_list
-    
+
+    #TODO Make function to get saved tournament name and convert to uuid (MANLY FOR MATCHES IN ADMIN UI)
+
     # "Created" by Sindri Freysson
     # TODO need write doc string
-    def show_filtered(self, object_list: list[Player]|list[Team]|list[Club]) -> list[str]:
-        
+    def show_filtered(
+        self, object_list: list[Player] | list[Team] | list[Club]
+    ) -> list[str]:
+
         str_list: list[str] = [x.name for x in object_list]
         output_list: list[str] = []  # list that holds each line as a f-string
         length: int = len(str_list)
