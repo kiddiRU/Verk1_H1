@@ -263,9 +263,9 @@ def validate_number(number: str) -> str:
     
     try:
         if int(number) <= 0:
-            raise ValidationError("Amount of servers can needs to be 1 or more")
+            raise ValidationError("Amount of servers needs to be 1 or more")
     
     except:
-        pass
+        raise ValidationError("Amount of servers needs to be 1 or more")
 
     return number

@@ -1,11 +1,11 @@
 # Diary, 2025-12-10
 
 ## Andri Már
-### Time: 8:15
+### Time: 8:15 - 22:15
 ### On site: Yes
 
 ## Elmar
-### Time: 9:20
+### Time: 9:20 - 22:25
 ### On site: Yes
 
 ## Ísak Elí

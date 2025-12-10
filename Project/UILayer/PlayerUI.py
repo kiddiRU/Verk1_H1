@@ -713,7 +713,6 @@ Rank: {current_login_rank}"""]
         info: list[str]= [f"- - - -{team}- - - -", 
                     f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict[str, str]= {"1": "Edit Team", "2": "Leave Team", "b": "Back"}
-        message: str = ""
 
         for member in team_members: 
             player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
@@ -820,11 +819,23 @@ Rank: {current_login_rank}"""]
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team, 
                            MenuOptions.add_player]
-        info: list = []
         options: dict = {"c": "Continue"}
 
+        # Gets all players that are not in any team
+        not_in_team: list[Player] = LogicLayerAPI.get_all_players_not_in_team()
+
+        # Gets a list of handles from Player objects
+        handles_not_team: list[str] = [p.handle for p in not_in_team]
+        
+        info: list[str] = handles_not_team
+        if len(handles_not_team) == 0:
+                    info.append("No Players To Add To Team")
+
+        #TODO: Make sure that program dosent crash when trying to add "No Players To Add To Team"
+        #TODO: FORMAT SO IT IS NOT SHIT
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path))
+        print(self.tui.table(menu, user_path, info))
 
         # Might add to the message if the search will be implemented
         add_handle: str = input(self.input_color + "Enter A Players Handle To Add Them: \n" + self.reset)
@@ -884,18 +895,33 @@ Rank: {current_login_rank}"""]
         current_login_handle: str = str(LogicLayerAPI.save_player())
         current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
         current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+
+        team_members = LogicLayerAPI.get_team_members(team)
 
         menu: str = "Remove Player"
         user_path: list = [MenuOptions.player_screen, 
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team, 
                            MenuOptions.remove_player]
-        info: list[str]= []
+        info: list[str]= [f"- - - -{team}- - - -", 
+                    f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict = {"c": "Continue"}
         message: str = ""
 
+        for member in team_members: 
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
+
+            if type(player) is Player: # Only there for the type hinting gods
+                team, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
+
+                if member_rank == "Captain":
+                    info.append(f"{member_rank} \t {player.handle}")
+                else:
+                    info.append(f"{member_rank} \t \t {player.handle}")
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, ))
+        print(self.tui.table(menu, user_path, info))
         remove_handle: str = input(self.input_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
 
 
@@ -950,6 +976,9 @@ Rank: {current_login_rank}"""]
         current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
         team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
+        team_members = LogicLayerAPI.get_team_members(team)
+        ammount_of_player = len(team_members)
+
         menu: str = "Leave Team"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
         info: list[str] = []
@@ -957,35 +986,39 @@ Rank: {current_login_rank}"""]
         message: str = f"Are You Sure You Want To Leave {team}"
 
         if rank == "Captain":
-            message: str = f"Select A New Captain Before Leaving {team}"
-            print(self.tui.table(menu, user_path, info, {}, message))
-            new_captain = input(self.input_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
-            current_team, rank = LogicLayerAPI.get_player_team_and_rank(new_captain)
-            new_captain_team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
-            if current_team == new_captain_team and new_captain != current_login_handle:
-                message: str = f"The Player {new_captain} Was Found \nDo You Want To Promote Them To Captain? Y/N:"
+            if ammount_of_player > 1:
+                message: str = f"Select A New Captain Before Leaving {team}"
                 print(self.tui.table(menu, user_path, info, {}, message))
+                new_captain = input(self.input_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
+                current_team, rank = LogicLayerAPI.get_player_team_and_rank(new_captain)
+                new_captain_team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
+                if current_team == new_captain_team and new_captain != current_login_handle:
+                    message: str = f"The Player {new_captain} Was Found \nDo You Want To Promote Them To Captain? Y/N:"
+                    print(self.tui.table(menu, user_path, info, {}, message))
+
+                    choice: str = self.utility._prompt_choice(["y", "n"])
+
+                    if type(current_player) is Player:
+                        if choice == "y":
+                            LogicLayerAPI.promote_captain(current_player, new_captain)
+
+                            LogicLayerAPI.remove_player(current_login_handle, current_player)
+
+                            return MenuOptions.player_screen
+                        return MenuOptions.edit_team
+
+                message: str = "Player Was Not Found Or Not Available \nDo You Want To Try Again? Y/N:"
+                print(self.tui.table(menu, user_path, info, {}, message))
                 choice: str = self.utility._prompt_choice(["y", "n"])
 
-                if type(current_player) is Player:
-                    if choice == "y":
-                        LogicLayerAPI.promote_captain(current_player, new_captain)
-
-                        LogicLayerAPI.remove_player(current_login_handle, current_player)
-
-                        return MenuOptions.player_screen
+                if choice == "n":
                     return MenuOptions.edit_team
 
-            message: str = "Player Was Not Found Or Not Available \nDo You Want To Try Again? Y/N:"
-            print(self.tui.table(menu, user_path, info, {}, message))
-            choice: str = self.utility._prompt_choice(["y", "n"])
-
-            if choice == "n":
-                return MenuOptions.edit_team
-
-            return MenuOptions.leave_team
+                return MenuOptions.leave_team
+            
+            #TODO he gets a warnign but can still leave
 
 
         self.tui.clear_saved_data()
