@@ -27,12 +27,12 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
 # Player handle, team name, tour name and club name
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     """
-    Checks if the name is unique and is between 3-40 char in length
+    Checks if the name is unique and is between 3-39 char in length
     Used for unique player handle, team tournament and club names
     """
 
-    if len(unique_name) < 3 or len(unique_name) > 40:
-        raise ValidationError("Name needs to be between 3 to 40 characters in length")
+    if len(unique_name) < 3 or len(unique_name) > 39:
+        raise ValidationError("Name needs to be between 3 to 39 characters in length")
         
     if type_of_name == "PLAYER":
         player_names: list[str] = [player.handle for player in DataLayerAPI.load_players()]
@@ -67,12 +67,12 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
 # Players full name
 def validate_name(name: str) -> str | None:
     """
-    Checks if the name is in between 3-40 char in length and has only letters
+    Checks if the name is in between 3-39 char in length and has only letters
     """
     
-    if (len(name) < 3 or len(name) > 40):
+    if (len(name) < 3 or len(name) > 39):
         raise ValidationError(
-            "Name needs to be between 3 to 40 characters in length and"
+            "Name needs to be between 3 to 39 characters in length and"
             )
     
     if not name.replace(" ","").isalpha():
