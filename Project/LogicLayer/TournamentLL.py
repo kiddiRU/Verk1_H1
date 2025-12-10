@@ -10,11 +10,12 @@ from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
 from LogicLayer.MatchLL import MatchLL
-from LogicLayer import LogicUtility
+from LogicLayer import TeamLL
 import random
 
 class TournamentLL:
-    def __init__(self):
+    def __init__(self, team_logic: TeamLL):
+        self._team_logic = team_logic
         self.MatchAPI = MatchLL()
         pass
 
@@ -57,8 +58,8 @@ class TournamentLL:
 
         Adds the teams UUID to the teams_playing list in the tournament.
         '''
-        tournament: Tournament = LogicUtility.get_tournament_by_name(tournament_name)
-        team: Team = LogicUtility.get_team_by_name(team_name)
+        tournament: Tournament = self.get_tournament_by_name(tournament_name)
+        team: Team = self._team_logic.get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
@@ -72,8 +73,8 @@ class TournamentLL:
 
         Removes the teams UUID from the teams_playing list in the tournament.
         '''
-        tournament: Tournament = LogicUtility.get_tournament_by_name(tournament_name)
-        team: Team = LogicUtility.get_team_by_name(team_name)
+        tournament: Tournament = self.get_tournament_by_name(tournament_name)
+        team: Team = self._team_logic.get_team_by_name(team_name)
         
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
@@ -94,7 +95,7 @@ class TournamentLL:
         no validation on the given info.
         '''
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        tournament: Tournament = LogicUtility.get_tournament_by_name(name)
+        tournament: Tournament = self.get_tournament_by_name(name)
 
         for attr, value in params.items():
             if value == '':
@@ -119,7 +120,7 @@ class TournamentLL:
         on the given info.
         '''
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        tournament: Tournament = LogicUtility.get_tournament_by_name(name)
+        tournament: Tournament = self.get_tournament_by_name(name)
 
         if tournament.status == Tournament.StatusType.active:
             raise Exception('You can\'t change the time of an active tournament!')
@@ -218,7 +219,7 @@ class TournamentLL:
         create a schedule, create the matches for in the schedule
         and assign the teams to compete in the first round.
         """
-        uuid = LogicUtility.tournament_name_to_uuid(name)
+        uuid = self.tournament_name_to_uuid(name)
 
         # Gets the tournament with the given uuid.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
@@ -401,7 +402,7 @@ class TournamentLL:
             raise ValidationError("Tournament server error.")
 
 
-    def get_teams_from_tournament_name(self, tournament_name) -> list[Team]:
+    def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:
         """
         Takes in a tournament name
 
@@ -414,7 +415,7 @@ class TournamentLL:
             if tournament_name == tournament.name:
                 teams = tournament.teams_playing
                 for team_uuid in teams:
-                    teams_list.append(LogicUtility.get_team_by_uuid(team_uuid))
+                    teams_list.append(self._team_logic.get_team_by_uuid(team_uuid))
 
         return teams_list
     
@@ -437,3 +438,19 @@ class TournamentLL:
 
     def to_date(self, value: str) -> date:
         return datetime.strptime(value, "%Y-%m-%d").date()
+
+# Fra utility
+
+    def get_tournament_by_name(self, name: str) -> Tournament:
+            tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+            tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+
+            if tournament is None:
+                raise Exception(f'No tournament found named: {name}')
+            
+            return tournament
+
+
+    def tournament_name_to_uuid(self, name: str) -> str:
+            tournament = self.get_tournament_by_name(name)
+            return tournament.uuid

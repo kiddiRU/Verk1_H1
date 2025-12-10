@@ -17,7 +17,7 @@ player_logic = PlayerLL(team_logic)
 team_logic.set_player_logic(player_logic)
 
 
-tournament_logic = TournamentLL()
+tournament_logic = TournamentLL(team_logic)
 club_logic =  ClubLL()
 
 ''' Validation API '''
