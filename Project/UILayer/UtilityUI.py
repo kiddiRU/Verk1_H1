@@ -101,9 +101,6 @@ class UtilityUI:
         input("Input anything to go back to start: ")
         return MenuOptions.start_screen
 
-    def show_schedule(self):
-        pass
-
     # _____________________________ MODULAR DESIGN ___________________________
 
     def tournaments_name(self) -> list[str]:
