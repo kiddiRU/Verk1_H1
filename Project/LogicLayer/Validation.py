@@ -106,10 +106,10 @@ def validate_home_address(home_address: str) -> str | None:
             return home_address
 
         else:
-            raise ValidationError("Invalid address")
+            raise ValidationError("Invalid address:", home_address)
 
     except:
-        raise ValidationError("Invalid address")
+        raise ValidationError("Invalid address:", home_address)
 
 
 # Players and tournament contact phone number

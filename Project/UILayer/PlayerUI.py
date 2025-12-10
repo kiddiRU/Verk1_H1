@@ -69,7 +69,7 @@ class PlayerUI:
         """
 
         """ THIS IS TEMPORARY REMOVE LATER"""
-        player_list = LogicLayerAPI.list_players()
+        player_list = LogicLayerAPI.list_all_players()
         abc: str = 1
 
         menu: str = "Log In"
@@ -83,7 +83,7 @@ class PlayerUI:
 
         login_handle: str = input(self.input_color + "Input Your Handle: " + self.reset)
 
-        user_uuid = LogicLayerAPI.get_player_uuid(login_handle)
+        user_uuid = LogicLayerAPI.player_handle_to_uuid(login_handle)
         if user_uuid:
             LogicLayerAPI.save_player(login_handle)
             return MenuOptions.player_screen  
@@ -270,9 +270,9 @@ class PlayerUI:
         
         # Change into string so that Vs Wont complain about type hinting
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_login_uuid = LogicLayerAPI.get_player_uuid(current_login_handle)
-        player: Player | str = LogicLayerAPI.get_player_object(current_login_uuid)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_login_uuid = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+        player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
         club = LogicLayerAPI.get_team_club(team)
 
         if not team:
@@ -354,7 +354,7 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str | None = LogicLayerAPI.save_player()
-        player_list: list[Player] = LogicLayerAPI.list_players()
+        player_list: list[Player] = LogicLayerAPI.list_all_players()
 
 
         # VS Code complains if i dont do this
@@ -381,7 +381,7 @@ Rank: {current_login_rank}"""]
         message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
 
 
-        clubs = LogicLayerAPI.list_clubs()
+        clubs = LogicLayerAPI.list_all_clubs()
         club_names = [x.name for x in clubs]
         for club in club_names:
             info.append(club)
@@ -491,11 +491,11 @@ Rank: {current_login_rank}"""]
 
         current_login_handle: str | None = LogicLayerAPI.save_player()
         if type(current_login_handle) is str:
-            login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
+            login_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
         else: 
             login_uuid: str  = "" # This should never run, this is just to apease the type hinting gods
 
-        current_player: Player | str = LogicLayerAPI.get_player_object(login_uuid)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(login_uuid)
 
         if type(current_player) is Player:
             name: str = current_player.name
@@ -505,6 +505,15 @@ Rank: {current_login_rank}"""]
             phnum: str  = current_player.phone_number
             handle: str  = current_player.handle
             url: str  = current_player.url
+
+            # Is useless but is to apease the type hinting gods
+            new_name = name
+            new_dob = dob
+            new_addr = addr
+            new_email = email
+            new_phnum = phnum
+            new_handle = handle
+            new_url = url
 
         # This should never run, this is just to apease the type hinting gods
         else:
@@ -645,10 +654,13 @@ Rank: {current_login_rank}"""]
         options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
         print(self.tui.table(menu, user_path, [], options, message))
         choice: str = self.utility._prompt_choice(["c", "b"])
+
+
         
         if choice == "c":
-            LogicLayerAPI.update_player_info(current_player, name, dob, addr, email, phnum, handle, url)
-            LogicLayerAPI.save_player(handle)
+            LogicLayerAPI.update_player_info(current_player, new_name, new_dob, 
+                                             new_addr, new_email, new_phnum, new_handle, new_url)
+            LogicLayerAPI.save_player(new_handle)
         
         return MenuOptions.player_screen
     
@@ -691,7 +703,7 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
        
@@ -704,10 +716,10 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            player: Player | str = LogicLayerAPI.get_player_object(member)
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
 
             if type(player) is Player: # Only there for the type hinting gods
-                team, member_rank = LogicLayerAPI.get_player_team(player.handle)
+                team, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
 
                 if member_rank == "Captain":
                     info.append(f"{member_rank} \t {player.handle}")
@@ -754,8 +766,8 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        player: Player | str = LogicLayerAPI.get_player_object(current_login_handle)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        player: Player | str = LogicLayerAPI.get_player_by_handle(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
 
@@ -769,10 +781,10 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            player: Player | str = LogicLayerAPI.get_player_object(member)
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
             
             if type(player) is Player: # Only there for the type hinting gods
-                team, member_rank = LogicLayerAPI.get_player_team(player.handle)
+                team, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
 
                 if member_rank == "Captain":
                     info.append(f"{member_rank} \t {player.handle}")
@@ -819,7 +831,7 @@ Rank: {current_login_rank}"""]
 
         self.tui.save_input("Player To Add: " + add_handle)
 
-        add_uuid = LogicLayerAPI.get_player_uuid(add_handle)
+        add_uuid = LogicLayerAPI.player_handle_to_uuid(add_handle)
         add_in_team = LogicLayerAPI.get_players_team_uuid(add_uuid)
         print(add_uuid, add_in_team)
 
@@ -837,8 +849,8 @@ Rank: {current_login_rank}"""]
 
 
             current_login_handle: str = str(LogicLayerAPI.save_player())
-            current_login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
-            current_player: Player | str = LogicLayerAPI.get_player_object(current_login_uuid)
+            current_login_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+            current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
 
             if type(current_player) is Player: # Is Only there for the type hinting gods
                 LogicLayerAPI.add_player(add_handle, current_player)
@@ -870,8 +882,8 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
-        current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
+        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
 
         menu: str = "Remove Player"
         user_path: list = [MenuOptions.player_screen, 
@@ -887,12 +899,12 @@ Rank: {current_login_rank}"""]
         remove_handle: str = input(self.input_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
 
 
-        remove_uuid = LogicLayerAPI.get_player_uuid(remove_handle)
+        remove_uuid = LogicLayerAPI.player_handle_to_uuid(remove_handle)
         remove_in_team = LogicLayerAPI.get_players_team_uuid(remove_uuid)
         print(remove_uuid, remove_in_team)
 
-        current_team, rank = LogicLayerAPI.get_player_team(remove_handle)
-        remove_player_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_team, rank = LogicLayerAPI.get_player_team_and_rank(remove_handle)
+        remove_player_team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         if current_team == remove_player_team and remove_handle != current_login_handle:
             message: str = f"The Player {remove_handle} Was Found \nDo You Want To Remove Them From Your Team? Y/N:"
@@ -934,9 +946,9 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
-        current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
         menu: str = "Leave Team"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
@@ -948,8 +960,8 @@ Rank: {current_login_rank}"""]
             message: str = f"Select A New Captain Before Leaving {team}"
             print(self.tui.table(menu, user_path, info, {}, message))
             new_captain = input(self.input_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
-            current_team, rank = LogicLayerAPI.get_player_team(new_captain)
-            new_captain_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+            current_team, rank = LogicLayerAPI.get_player_team_and_rank(new_captain)
+            new_captain_team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
 
             if current_team == new_captain_team and new_captain != current_login_handle:
                 message: str = f"The Player {new_captain} Was Found \nDo You Want To Promote Them To Captain? Y/N:"

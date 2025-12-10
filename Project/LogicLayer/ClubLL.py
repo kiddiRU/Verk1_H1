@@ -7,9 +7,8 @@ Functions for Club logic
 
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Club, Team, Match, Tournament
+from Models import Club, Team, Match, Tournament, ValidationError
 from LogicLayer.Validation import validate_attr
-from LogicLayer.LogicUtility import get_club_by_name
 from LogicLayer.MatchLL import MatchLL
 
 class ClubLL():
@@ -42,8 +41,8 @@ class ClubLL():
         return new_club
 
 
-    def list_clubs(self): 
-        """Returns a list of club objects"""
+    def list_all_clubs(self): 
+        """Returns a list of stored clubs"""
 
         clubs: list[Club] = DataLayerAPI.load_clubs()
         return clubs
@@ -56,8 +55,8 @@ class ClubLL():
         and appends team object to a list of every team that is in the club
         """
 
-        teams_in_club: list = []
-        club_uuid: str = (get_club_by_name(club_name)).uuid
+        teams_in_club: list[Team] = []
+        club_uuid: str = self.get_club_by_name(club_name).uuid
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
         for team in model_teams:
@@ -67,7 +66,7 @@ class ClubLL():
         return teams_in_club
     
 
-    def get_club_wins(self, club_name) -> str:
+    def get_club_wins(self, club_name: str) -> str:
         """
         Takes in club name and gets the club uuid
         loads and looks through all teams and lists
@@ -78,7 +77,7 @@ class ClubLL():
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
         model_teams: list[Team] = DataLayerAPI.load_teams()
-        club_uuid: str = (get_club_by_name(club_name)).uuid
+        club_uuid: str = self.get_club_by_name(club_name).uuid
         win_count = 0
 
         teams_in_club: list[str] = [
@@ -94,7 +93,7 @@ class ClubLL():
         
 
 
-    def get_club_points(self, club_name) -> str:
+    def get_club_points(self, club_name: str) -> str:
         """
         Takes in club name and gets the club uuid
         loads and looks through all teams and lists
@@ -108,10 +107,9 @@ class ClubLL():
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         model_teams: list[Team] = DataLayerAPI.load_teams()
-        club_uuid: str = (get_club_by_name(club_name)).uuid
+        club_uuid: str = self.get_club_by_name(club_name).uuid
         match = MatchLL()
         points = 0
-        count = 0
 
         teams_in_club: list[str] = [
             team.uuid for team in model_teams
@@ -135,3 +133,20 @@ class ClubLL():
                 pass
 
         return str(points)
+
+# Fra utility
+
+    def get_club_by_name(self, club_name: str) -> Club:
+        """
+        Takes in club name
+        looks through all clubs until it finds the right club name
+        and returns the teams uuid
+        if no team is found an error is raised
+        """
+
+        model_clubs: list[Club] = DataLayerAPI.load_clubs()
+        for club in model_clubs:
+            if club_name == club.name:
+                return club
+            
+        raise ValidationError("Club not found")
