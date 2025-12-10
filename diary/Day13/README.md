@@ -30,8 +30,8 @@
 ## State of group: 
 
 ## Divisions: 
-- UI / UX:
-- System engineer:
+- UI / UX: Andri, Ísak, Sindri
+- System engineer: Elmar, Kristinn, Kristján
 - QC:
 
 ## ToDo-list:
