@@ -146,7 +146,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))  
-            user_name: str = self.utility._input_info("Enter Name or 'q' to cancel: \n", "name", "PLAYER")
+            user_name: str = self.utility._input_info("Enter Name or 'q' to go back: \n", "name", "PLAYER")
             if not user_name: 
                 return user_path[-2]
             self.tui.save_input("Name: " + user_name)
@@ -159,7 +159,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info)) 
-            user_dob: str = str(self.utility._input_info("Enter Date Of Birth or 'q' to cancel: \n (yyyy-mm-dd) \n", 
+            user_dob: str = str(self.utility._input_info("Enter Date Of Birth or 'q' to go back: \n (yyyy-mm-dd) \n", 
                                                          "date_of_birth", "PLAYER"))
             if not user_dob: 
                 return user_path[-2]
@@ -173,7 +173,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info)) 
-            user_addr: str = self.utility._input_info("Enter Home Address or 'q' to cancel: \n (Streetname 00 Cityname) \n", 
+            user_addr: str = self.utility._input_info("Enter Home Address or 'q' to go back: \n (Streetname 00 Cityname) \n", 
                                                     "home_address", "PLAYER")
             if not user_addr: 
                 return user_path[-2]
@@ -187,7 +187,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            user_email: str = self.utility._input_info("Enter Email or 'q' to cancel: \n", "email", "PLAYER")
+            user_email: str = self.utility._input_info("Enter Email or 'q' to go back: \n", "email", "PLAYER")
             if not user_email: 
                 return user_path[-2]
             self.tui.save_input("Email: " + user_email)
@@ -200,7 +200,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_phnum: str = self.utility._input_info("Enter Phone Number or 'q' to cancel: \n (123-4567) \n", 
+            user_phnum: str = self.utility._input_info("Enter Phone Number or 'q' to go back: \n (123-4567) \n", 
                                                        "phone_number", "PLAYER")
             if not user_phnum: 
                 return user_path[-2]
@@ -214,7 +214,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_handle: str = self.utility._input_info("Enter Handle or 'q' to cancel:  \n", "handle", "PLAYER")
+            user_handle: str = self.utility._input_info("Enter Handle or 'q' to go back:  \n", "handle", "PLAYER")
             if not user_handle: 
                 return user_path[-2]
             self.tui.save_input("Handle: " + user_handle)
@@ -228,7 +228,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
             user_url: str = input(self.input_color + 
-                                  "Enter URL or 'q' to cancel: \n(Optional, Press Enter To Leave Blank) \n" 
+                                  "Enter URL or 'q' to go back: \n(Optional, Press Enter To Leave Blank) \n" 
                                   + self.reset)
             if user_url.lower() == "q": 
                 return user_path[-2]
@@ -391,7 +391,7 @@ Rank: {current_login_rank}"""]
         while con == "b":
             self.tui.clear_saved_data()
             print(self.tui.table(menu, user_path, [], {}, message))
-            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "handle", "TEAM")
+            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to go back: : \n", "handle", "TEAM")
             if not team_name:
                 return user_path[-2]
             self.tui.save_input("Team Name: " + team_name)
@@ -534,7 +534,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name or 'q' to cancel: \n",
+            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name or 'q' to go back: \n",
                                                    "name", "PLAYER")
             if new_name == "q":
                 return user_path[-2]
@@ -551,7 +551,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle or 'q' to cancel: \n", 
+            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle or 'q' to go back: \n", 
                                                   "handle", "PLAYER")
             if new_handle == "q":
                 return user_path[-2]
@@ -568,7 +568,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to cancel: \n", 
+            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to go back: \n", 
                                                "date_of_birth", "PLAYER")
             if new_dob == "q":
                 return user_path[-2]
@@ -585,7 +585,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))        
-            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address or 'q' to cancel: \n", 
+            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address or 'q' to go back: \n", 
                                                 "home_address", "PLAYER")
             if new_addr == "q":
                 return user_path[-2]
@@ -602,7 +602,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number or 'q' to cancel: \n", 
+            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number or 'q' to go back: \n", 
                                                  "phone_number", "PLAYER")
             if new_phnum == "q":
                 return user_path[-2]
@@ -619,7 +619,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email or 'q' to cancel: \n", 
+            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email or 'q' to go back: \n", 
                                                  "email", "PLAYER")
             if new_email == "q":
                 return user_path[-2]
@@ -636,7 +636,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_url = input(unchanged_message + self.input_color + "\n Enter New URL or 'q' to cancel: \n" + self.reset)
+            new_url = input(unchanged_message + self.input_color + "\n Enter New URL or 'q' to go back: \n" + self.reset)
 
             if new_url == "q":
                 return user_path[-2]

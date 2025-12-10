@@ -85,8 +85,10 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_handle: str = input(
-            self.message_color + "Input Handle: " + self.reset
+            self.message_color + "Input Handle or 'q' to go back: " + self.reset
         )
+        if find_handle == "q":
+            return user_path[-2]
 
         if find_handle in self.utility.player_handles():
             LogicLayerAPI.save_player(find_handle)
@@ -149,8 +151,10 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_club: str = input(
-            self.message_color + "Input Club Name: " + self.reset
+            self.message_color + "Input Club Name or 'q' to go back: " + self.reset
         )
+        if find_club == "q":
+            return user_path[-2]
 
         if find_club in self.utility.club_names():
             LogicLayerAPI.save_player(find_club)
@@ -215,8 +219,10 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_handle: str = input(
-            self.message_color + "Input Team Name: " + self.reset
+            self.message_color + "Input Team Name or 'q' to go back: " + self.reset
         )
+        if find_handle == "q":
+            return user_path[-2]
 
         if find_handle in self.utility.team_names():
             LogicLayerAPI.save_player(find_handle)
@@ -282,8 +288,10 @@ class SpectateUI:
 
         # User input
         tournament_name = input(
-            self.message_color + "Input Tournament Name: " + self.reset
+            self.message_color + "Input Tournament Name or 'q' to go back: " + self.reset
         )
+        if tournament_name == "q":
+            return user_path[-2]
 
         tournament_list: list[Tournament] = LogicLayerAPI.list_tournaments()
         not_inactive: list[str] = self.utility.except_status_tournaments(Tournament.StatusType.inactive)
