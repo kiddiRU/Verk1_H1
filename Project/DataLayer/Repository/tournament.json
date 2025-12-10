@@ -160,5 +160,23 @@
             "382f652f-efdf-4298-9d15-922877e5e1b5",
             "fdedcdfa-4714-4d10-b0db-d5b192b634ec"
         ]
+    },
+    "aae0d40f-eab3-40fc-96ab-d3966cbab1f0": {
+        "uuid": "aae0d40f-eab3-40fc-96ab-d3966cbab1f0",
+        "name": "TES",
+        "start_date": "2024-10-10",
+        "end_date": "2024-12-10",
+        "time_frame_start": "12:00:00",
+        "time_frame_end": "18:00:00",
+        "venue": "sad 90 dsa",
+        "email": "ALSDk@dsalk",
+        "phone_number": "213-2133",
+        "status": "INACTIVE",
+        "list_servers": [
+            "NoServer"
+        ],
+        "teams_playing": [
+            "b26a8d5e-b571-41f8-a657-b5ad616299d2"
+        ]
     }
 }
