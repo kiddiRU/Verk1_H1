@@ -343,9 +343,6 @@ class AdminUI:
         for match in matches:
             info.append(match)
 
-            # for line in range(ammount_of_lines):
-            #     info.append("—" * 80)
-            #     ammount_of_lines -= 1
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -387,19 +384,6 @@ class AdminUI:
             MenuOptions.manage_active_tournament,
             MenuOptions.select_match,
         ]
-        # # Gets the whole team vs team string
-        # match_list: list[str] = self.utility.list_matches(tournament_uuid, False)
-        # match_string: str = "".join(match_list)
-
-        # # Splits the string
-        # lines: list[str] = match_string.splitlines()
-
-        # # Filter out the name of the teams
-        # match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
-        # match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
-
-        # match_name_1 = match_name_1.strip()
-        # match_name_2 = match_name_2.strip()
 
         info: list[str] = ["- - - - List Of Matches - - - -"]
         self.options: dict[str, str] = {}
@@ -646,18 +630,36 @@ class AdminUI:
             MenuOptions.manage_teams,
             MenuOptions.add_team,
         ]
+        teams_not_in_tournament: list[str] = [x for x in all_teams if x not in teams_in_tournament]
 
-        info: list = self.utility.show_main(
-            "teams"
-        )  # TODO Make it so that only teams not already internment show upp
+        unique_names: list[str] = teams_not_in_tournament
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length: int = len(unique_names)
+
+        for value in range(0, len(unique_names), 2):
+            left = unique_names[value]
+            if value + 1 < length:
+
+                right = unique_names[value + 1]
+                output_list.append(f"{left:<39}|{right:<39}|")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}|{" ":<39}|")
+
+        info: list[str] = output_list
+
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name: " + self.reset
+            self.message_color + "Input Team Name or 'q' to go back: " + self.reset
         )
+        if team_to_add.lower() == "q":
+            return MenuOptions.manage_teams
 
         # Validate team exists
         try:
