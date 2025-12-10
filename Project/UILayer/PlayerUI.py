@@ -77,7 +77,6 @@ class PlayerUI:
                                         MenuOptions.login]
         info: list[str]= []
         options: dict[str, str]= {"t": "Try Again", "b": "Back"}
-        message: str = "Handle Not Found!"
      
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
@@ -97,6 +96,7 @@ class PlayerUI:
             case "masterpiece":
                 return MenuOptions.masterpiece
         
+        message: str = f"{login_handle} Not Found!"
         print(self.tui.table(menu, user_path, info, options, message))
 
         """ THIS IS TEMPORARY REMOVE LATER """
@@ -331,13 +331,13 @@ Rank: {current_login_rank}"""]
             case "1":
                 return MenuOptions.edit_player_info
             case "2":
-                if not team:
+                if team is None:
                     return MenuOptions.my_team_empty
                 return MenuOptions.my_team_not_empty
             case "3":
                 if not team:
-                    return MenuOptions.create_team_in_team
-                return MenuOptions.create_team
+                    return MenuOptions.create_team
+                return MenuOptions.create_team_in_team
             case "lo":
                 return MenuOptions.logout
 
@@ -455,6 +455,30 @@ Rank: {current_login_rank}"""]
         return MenuOptions.player_screen
 
 
+    def create_team_in_team(self) -> MenuOptions:
+        """ Screen That Is Shown When Player In A Team Tries To Create A New Team 
+
+        Returns:
+            MenuOptions: The next menu to navigate to
+        """
+    
+        menu: str = "Create A Team"
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
+                                        MenuOptions.create_team_in_team]
+        info: list[str]= []
+        options: dict[str, str]= {"b": "Back"}
+        message: str = "You Are Already In A Team!"
+        
+        self.tui.clear_saved_data()
+
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        choice: str = self.utility._prompt_choice(["b"])
+        match choice:
+            case "b":
+                return MenuOptions.player_screen
+        return MenuOptions.player_screen
+
 
     def edit_player_info(self) -> MenuOptions:
         """Edit player info screen, choices: fill info with input
@@ -532,7 +556,7 @@ Rank: {current_login_rank}"""]
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to cancel: \n", 
-                                               "date_of_birt", "PLAYER")
+                                               "date_of_birth", "PLAYER")
             if new_dob == "q":
                 return user_path[-2]
             if new_dob:
@@ -861,7 +885,7 @@ Rank: {current_login_rank}"""]
         current_team, rank = LogicLayerAPI.get_player_team(remove_handle)
         remove_player_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
-        if current_team == remove_player_team:
+        if current_team == remove_player_team and remove_handle != current_login_handle:
             message: str = f"The Player {remove_handle} Was Found \nDo You Want To Remove Them From Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
@@ -960,29 +984,6 @@ Rank: {current_login_rank}"""]
         return MenuOptions.my_team_empty
     
 
-    def create_team_in_team(self) -> MenuOptions:
-        """ Screen That Is Shown When Player In A Team Tries To Create A New Team 
-
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-    
-        menu: str = "Create A Team"
-        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
-                                        MenuOptions.create_team_in_team]
-        info: list[str]= []
-        options: dict[str, str]= {"b": "Back"}
-        message: str = "You Are Already In A Team!"
-        
-        self.tui.clear_saved_data()
-
-        print(self.tui.table(menu, user_path, info, options, message))
-
-        choice: str = self.utility._prompt_choice(["b"])
-        match choice:
-            case "b":
-                return MenuOptions.player_screen
-        return MenuOptions.player_screen
 
 
 
