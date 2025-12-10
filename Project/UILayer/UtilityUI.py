@@ -296,7 +296,6 @@ class UtilityUI:
 
         return output_list
 
-    #TODO Make function to get saved tournament name and convert to uuid (MANLY FOR MATCHES IN ADMIN UI)
 
     # "Created" by Sindri Freysson
     # TODO need write doc string
