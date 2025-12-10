@@ -615,7 +615,7 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            player: Player | None = LogicLayerAPI.get_player_object(member)
+            player: Player | str = LogicLayerAPI.get_player_object(member)
             team, rank = LogicLayerAPI.get_player_team(player.handle)
             info.append(f"{rank} {player.handle: >17}")
         
@@ -648,7 +648,7 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        player: Player | None = LogicLayerAPI.get_player_object(current_login_handle)
+        player: Player | str = LogicLayerAPI.get_player_object(current_login_handle)
         team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
@@ -663,7 +663,9 @@ Rank: {current_login_rank}"""]
         message: str = ""
 
         for member in team_members: 
-            info.append(f"{rank} {current_login_handle: >17}")
+            player: Player | str = LogicLayerAPI.get_player_object(member)
+            team: str; rank: str = LogicLayerAPI.get_player_team(player.handle)
+            info.append(f"{rank} {player.handle: >17}")
         
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -767,9 +769,14 @@ Rank: {current_login_rank}"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, ))
-        remove_handle: str = input("Enter A Players Handle To Remove Them: \n") #TODO: This is just a basic input
+        remove_handle: str = input("Enter A Players Handle To Remove Them: \n")
 
-        if...: #TODO: check if player is found and is not in a team
+
+        remove_uuid = LogicLayerAPI.get_player_uuid(remove_handle)
+        remove_in_team = LogicLayerAPI.get_players_team_uuid(remove_uuid)
+        print(remove_uuid, remove_in_team)
+
+        if remove_uuid and not remove_in_team:
             message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
@@ -789,7 +796,7 @@ Rank: {current_login_rank}"""]
             return MenuOptions.edit_team
         
 
-        message: str = f"The Player {remove_handle} Was Not Found, Do You Want To Try Again? Y/N:"
+        message: str = f"The Player {remove_handle} Was Not Found Or Is Not Removeable, Do You Want To Try Again? Y/N:"
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility._prompt_choice(["y", "n"])
