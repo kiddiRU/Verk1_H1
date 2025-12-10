@@ -96,7 +96,7 @@ class MainUI:
             # ------------------ Misc Paths ------------------
             # stop when quit
             elif self.current_screen == MenuOptions.quit:
-                print("Quitting program")
+                print("Quitting Program")
                 exit()
 
             else:
