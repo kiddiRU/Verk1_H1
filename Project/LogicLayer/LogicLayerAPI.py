@@ -19,6 +19,7 @@ player_logic = PlayerLL(team_logic, match_logic)
 tournament_logic = TournamentLL(team_logic, match_logic)
 
 team_logic.set_player_logic(player_logic)
+team_logic.set_club_logic(club_logic)
 
 ''' Validation API '''
 def validate(attr: str, value: str, name_type: str):
@@ -118,6 +119,9 @@ def get_team_members(team_name: str) -> list[str]:
 
 def list_all_teams() -> list[Team]:
     return team_logic.list_all_teams()
+
+def get_team_members_object(team_name: str) -> list[Player]:
+    return team_logic.get_team_members_object(team_name)
 
 # TODO implement get_team_history and call it
 def get_team_history(team_name: str) -> list[str]:       

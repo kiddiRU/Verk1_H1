@@ -519,6 +519,7 @@
         "handle": "dfg",
         "url": ""
     },
+<<<<<<< HEAD
     "b521ba7f-8fae-4bea-a55c-f8ecaad7c024": {
         "uuid": "b521ba7f-8fae-4bea-a55c-f8ecaad7c024",
         "name": "",
@@ -528,5 +529,26 @@
         "phone_number": "",
         "handle": "",
         "url": "sillidu.is"
+=======
+    "32d89d9f-b555-4311-a104-d8009eec5b76": {
+        "uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
+        "name": "Isak",
+        "date_of_birth": "2006-10-13",
+        "home_address": "Fuck 99 Reykjav\u00edk",
+        "email": "shit@fuck",
+        "phone_number": "123-4567",
+        "handle": "Fucker",
+        "url": ""
+    },
+    "01af76e7-6baa-496c-90c4-0dfb3a208a95": {
+        "uuid": "01af76e7-6baa-496c-90c4-0dfb3a208a95",
+        "name": "Kiddi",
+        "date_of_birth": "2008-09-09",
+        "home_address": "a 00 a",
+        "email": "k@k",
+        "phone_number": "100-1000",
+        "handle": "\ud83d\udd1d\ud83d\udd1d\ud83d\udd1d\ud83d\udd1d",
+        "url": ""
+>>>>>>> a7732082b40adbdd564ba3085ac3baed29cf1ab5
     }
 }

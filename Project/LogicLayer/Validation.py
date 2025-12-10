@@ -19,8 +19,10 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
     elif attribute == 'email': return validate_email(value)
     elif attribute == 'phone_number': return validate_phone_number(value)
     elif attribute == 'handle': return validate_unique_name(value, name_type)
+    elif attribute == 'tournament_date': return validate_tournament_date(value)
+    elif attribute == 'tournament_time': return validate_tournament_time(value)
+    elif attribute == 'color': return validate_color(value)
     else: return
-    
 
 # Player handle, team name, tour name and club name
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
@@ -74,7 +76,7 @@ def validate_name(name: str) -> str | None:
             )
     
     if not name.replace(" ","").isalpha():
-        raise ValidationError("Name can not have digits")
+        raise ValidationError("Name can only have letters")
     
     else:
         return name
@@ -142,9 +144,10 @@ def validate_phone_number(phone_number: str) -> str | None:
 def validate_email(email: str) -> str | None:
     """
     Checks if email has @, and that there is something before and after the @
+    can only have one @
     """
 
-    if "@" in email:
+    if ("@" in email) and (email.count("@") == 1) :
         email_list: list = email.split("@")
         before_at_symbol: str = email_list[0]
         after_at_symbol: str = email_list[1]
@@ -175,11 +178,11 @@ def validate_date(date_input: str) -> date | ValidationError:
             return valid_date
         
         except:
-            raise ValidationError("Not valid date")
+            raise ValidationError("Invalid date")
         
 
     except:
-        raise ValidationError("Letters are not allowed in a date")
+        raise ValidationError("Invalid date")
 
 
 
@@ -236,4 +239,41 @@ def validate_time_frame(start_time: str, end_time: str) -> time:
     else: 
         raise ValidationError("Not a valid Time frame")
 
+def validate_tournament_date(value: str) -> str:
+    try: begin, end = value.split()
+    except: raise ValidationError("Could not split dates")
 
+    begin_date = validate_date(begin)
+    end_date = validate_date(end)
+
+    if begin_date <= end_date:
+        return value
+    else:
+        raise ValidationError("Beginning date happens after end date")
+
+def validate_tournament_time(value: str) -> str:
+    try: begin, end = value.split()
+    except: raise ValidationError("Could not split time input")
+
+    begin_time = validate_time(begin)
+    end_time = validate_time(end)
+
+    if begin_time.minute != end_time.minute:
+        raise ValidationError("Begin and end minutes do not match")
+
+    """
+    if begin_time <= end_time:
+        return value
+    else:
+        raise ValidationError("Begin time happens after end time")
+    """
+
+    return value
+
+def validate_color(value: str) -> str:
+    available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
+    
+    if value in available_colors:
+        return value
+
+    raise ValidationError("Color not one of the available ones.")

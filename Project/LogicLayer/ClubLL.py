@@ -50,9 +50,9 @@ class ClubLL():
         
     def get_teams_in_club(self, club_name: str) -> list[Team]:
         """
-        Takes in club name
-
-        Goes through all teams and appends to a lis every team that is in the club
+        Takes in a club name and gets the club uuid
+        loads and looks through all teams
+        and appends team object to a list of every team that is in the club
         """
 
         teams_in_club: list[Team] = []

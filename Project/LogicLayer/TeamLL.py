@@ -122,6 +122,26 @@ class TeamLL():
 
         teams: list[Team] = DataLayerAPI.load_teams()
         return teams
+    
+    
+    def get_team_members_object(self, team_name: str) -> list[Player]:
+        """
+        Takes in team name and gets the list of player uuid in the team
+        loads and looks through all the players
+        and lists all player object that have the player uuid
+        return list of player objects in the team
+        """
+        player_list_uuid: list[str] = self.get_team_members(team_name)
+
+        players = DataLayerAPI.load_players()
+
+        players = [
+            player for player in players
+            if player.uuid in player_list_uuid
+        ]
+
+        return players
+        
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
     def get_team_history(self, team_name: str) -> list[str]:
@@ -196,7 +216,7 @@ class TeamLL():
 
         return str(points)
     
-
+    # Changed by Sindri
     def get_team_club(self, team_name: str) -> str:
         clubs = self._club_logic.list_all_clubs()
 
