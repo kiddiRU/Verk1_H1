@@ -70,7 +70,7 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-
+        # Main info of table
         menu: str = "Create Tournament"
         user_path: list = [
             MenuOptions.admin_screen,
@@ -107,9 +107,10 @@ class AdminUI:
             print(self.tui.table(menu, user_path, info))
             tournament_date: str = self.utility._input_info(
                 "Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n",
-                "",
+                "date_of_birth",
                 "TOURNAMENT",
             )
+            tournament_date: str = "2006-05-05 2006-06-05" #TODO Remove when it works
 
             self.tui.save_input("Start And End Dates: " + tournament_date)
             print(self.tui.table(menu, user_path, info, options))
@@ -123,6 +124,7 @@ class AdminUI:
             tournament_time: str = self.utility._input_info(
                 "Enter Start And End Time: (hh:mm hh:mm) \n", "", "TOURNAMENT"
             )
+            tournament_time: str = "14:00 18:00" #TODO Remove when it works
 
             self.tui.save_input("Start And End Time: " + tournament_time)
             print(self.tui.table(menu, user_path, info, options))
