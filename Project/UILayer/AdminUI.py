@@ -407,7 +407,7 @@ class AdminUI:
         message: str = ""
 
         # Show a list of the matches in the round
-        matches: list[str] = self.utility.list_matches(tournament_uuid, True)
+        matches: list[str] = self.utility.list_matches(tournament_uuid, False)
 
         ammount_of_lines = len(matches) -1
 
@@ -421,7 +421,6 @@ class AdminUI:
             self.options[("—" * 80)] = ""
             ammount_of_lines -= 1
 
-        self.options[("—" * 80) + " "] = ""
         choice_list.append("b")
         self.options["b"] = "Back"
 
