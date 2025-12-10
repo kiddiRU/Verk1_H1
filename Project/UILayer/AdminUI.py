@@ -316,6 +316,7 @@ class AdminUI:
             "lo": "Log Out",
         }
 
+        # list the matches from the f-string given by the utility function
         info: list[str] = info + self.utility.list_matches(
             tournament_uuid, True
         )
@@ -338,7 +339,7 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        # Get tournament name from screen before
+        # Get tournament name
         tournament_name: str | None = LogicLayerAPI.save_player()
         if tournament_name is None:  # For type hinting
             return MenuOptions.start_screen
@@ -347,14 +348,12 @@ class AdminUI:
         tournament_object: Tournament | None = (
             LogicLayerAPI.get_tournament_by_name(tournament_name)
         )
-        if tournament_object is None:  # Check if None goes through
-            return MenuOptions.start_screen
 
         # Get tournament uuid
         tournament_uuid: str = tournament_object.uuid
+    
 
-        # TODO: ADD Utility function to list out matches beautifully
-
+        # Menu and path for the table
         menu: str = "Matches"
         user_path: list[MenuOptions] = [
             MenuOptions.admin_screen,
@@ -362,7 +361,21 @@ class AdminUI:
             MenuOptions.manage_active_tournament,
             MenuOptions.select_match,
         ]
-        info: list = ["- - - - List Of Matches - - - -"]
+        # # Gets the whole team vs team string
+        # match_list: list[str] = self.utility.list_matches(tournament_uuid, False)
+        # match_string: str = "".join(match_list)
+
+        # # Splits the string
+        # lines: list[str] = match_string.splitlines()
+
+        # # Filter out the name of the teams
+        # match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
+        # match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
+
+        # match_name_1 = match_name_1.strip()
+        # match_name_2 = match_name_2.strip()
+
+        info: list[str] = ["- - - - List Of Matches - - - -"]
         self.options: dict[str, str] = {}
         choice_list = []
         message: str = ""
@@ -371,6 +384,7 @@ class AdminUI:
         matches_list: list[str] = self.utility.list_matches(
             tournament_uuid, False
         )
+
 
         x = 0
         for match in matches_list:
@@ -407,16 +421,21 @@ class AdminUI:
             MenuOptions.select_match,
             MenuOptions.input_results,
         ]
+
+        # Gets the whole team vs team string
         match_string: str = self.options[self.choice]
 
+        # Splits the string
         lines: list[str] = match_string.splitlines()
 
+        # Filter out the name of the teams
         match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
         match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
 
         match_name_1 = match_name_1.strip()
         match_name_2 = match_name_2.strip()
         
+        # Screen to print
         info: list = ["- - - - List Of Matches - - - -"]
         options: dict[str, str] = {
             "1": f"Select {match_name_1} for victory",
@@ -434,9 +453,9 @@ class AdminUI:
             case "b":
                 return MenuOptions.select_match
             case "1":
-                winner = teamname1
+                winner = match_name_1
             case "2":
-                winner = teamname2
+                winner = match_name_2
 
         options = {"b": "Back"}
         message = f"{winner} Has Won The Round!"
