@@ -407,13 +407,20 @@ class AdminUI:
             MenuOptions.select_match,
             MenuOptions.input_results,
         ]
-        teamname1, teamname2 = self.options[self.choice].split(" vs ")
-        teamname1 = teamname1[18:]
+        match_string: str = self.options[self.choice]
+
+        lines: list[str] = match_string.splitlines()
+
+        match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
+        match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
+
+        match_name_1 = match_name_1.strip()
+        match_name_2 = match_name_2.strip()
         
         info: list = ["- - - - List Of Matches - - - -"]
         options: dict[str, str] = {
-            "1": f"Select {teamname1} for victory",
-            "2": f"Select {teamname2} for victory",
+            "1": f"Select {match_name_1} for victory",
+            "2": f"Select {match_name_2} for victory",
             "b": "Back",
         }
 
