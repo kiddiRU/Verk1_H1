@@ -6,10 +6,10 @@ Takes in handles and names of teams, and gets the uuid of them
 """
 
 from DataLayer import DataLayerAPI
-from Models import ValidationError
+from Models import Team, Tournament, Club, ValidationError
 
 
-def get_player_uuid(player_handle) -> str:
+def get_player_uuid(player_handle: str) -> str:
     """
     Takes in player handle
     looks through all players until it finds the right player
@@ -22,7 +22,6 @@ def get_player_uuid(player_handle) -> str:
             return player.uuid
         
     return ""
-
 
 
 def get_players_team_uuid(player_uuid) -> str:
@@ -57,7 +56,7 @@ def get_team_uuid(team_name):
 
 
 
-def get_club_uuid(club_name):
+def get_club_by_name(club_name) -> Club:
     """
     Takes in club name
     looks through all clubs until it finds the right club name
@@ -68,6 +67,38 @@ def get_club_uuid(club_name):
     model_clubs: list = DataLayerAPI.load_clubs()
     for club in model_clubs:
         if club_name == club.name:
-            return club.uuid
+            return club
         
     raise ValidationError("Club not found")
+
+def get_tournament_by_name(name: str) -> Tournament:
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+
+        if tournament is None:
+            raise Exception(f'No tournament found named: {name}')
+        
+        return tournament
+
+
+def tournament_name_to_uuid(name: str) -> str:
+        tournament = get_tournament_by_name(name)
+        return tournament.uuid
+    
+def get_team_by_name(name: str) -> Team:
+    teams: list[Team] = DataLayerAPI.load_teams()
+    team: Team | None = next((t for t in teams if t.name == name), None)
+
+    if team is None:
+        raise Exception(f'No team found named: {name}')
+    
+    return team
+
+def get_team_by_uuid(uuid: str) -> Team:
+    teams: list[Team] = DataLayerAPI.load_teams()
+    team: Team | None = next((t for t in teams if t.uuid == uuid), None)
+
+    if team is None:
+        raise Exception(f'No team found with the UUID: {uuid}')
+    
+    return team

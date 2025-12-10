@@ -36,40 +36,6 @@
     "7bc31912-c8b7-477e-88c8-762bac0c575a": {
         "uuid": "7bc31912-c8b7-477e-88c8-762bac0c575a",
         "name": "tournament name 2",
-        "start_date": "2004-01-21",
-        "end_date": "2004-12-12",
-        "time_frame_start": "00:12:23",
-        "time_frame_end": "00:12:23",
-        "venue": "test",
-        "email": "test",
-        "phone_number": "test",
-        "status": "INACTIVE",
-        "list_servers": [
-            "NoServer",
-            "NoServer"
-        ],
-        "teams_playing": []
-    },
-    "269675a5-b277-43a0-8449-cda8803190b7": {
-        "uuid": "269675a5-b277-43a0-8449-cda8803190b7",
-        "name": "Tournament name 3",
-        "start_date": "2004-01-21",
-        "end_date": "2004-12-12",
-        "time_frame_start": "00:12:23",
-        "time_frame_end": "00:12:23",
-        "venue": "gerplan",
-        "email": "test",
-        "phone_number": "1234567",
-        "status": "INACTIVE",
-        "list_servers": [
-            "NoServer",
-            "NoServer"
-        ],
-        "teams_playing": []
-    },
-    "9f88c82f-7361-4680-9499-098c01ebfeca": {
-        "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",
-        "name": "Tournament name 4",
         "start_date": "2025-01-01",
         "end_date": "2025-01-02",
         "time_frame_start": "14:00:00",
@@ -82,6 +48,50 @@
             "NoServer",
             "NoServer"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "7ffe196a-495e-4e77-b94d-ea6799c2e572"
+        ]
+    },
+    "269675a5-b277-43a0-8449-cda8803190b7": {
+        "uuid": "269675a5-b277-43a0-8449-cda8803190b7",
+        "name": "Tournament name 3",
+        "start_date": "2004-01-21",
+        "end_date": "2004-12-12",
+        "time_frame_start": "00:12:23",
+        "time_frame_end": "00:12:23",
+        "venue": "gerplan",
+        "email": "test",
+        "phone_number": "1234567",
+        "status": "ACTIVE",
+        "list_servers": [
+            "47535cb4-7ce2-404d-a363-847c003fe495",
+            "fc0f9265-1563-4fb4-a1ca-a67e2c04912a"
+        ],
+        "teams_playing": [
+            "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+            "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+            "382f652f-efdf-4298-9d15-922877e5e1b5"
+        ]
+    },
+    "9f88c82f-7361-4680-9499-098c01ebfeca": {
+        "uuid": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "name": "Tournament name 4",
+        "start_date": "2025-01-01",
+        "end_date": "2025-01-02",
+        "time_frame_start": "14:00:00",
+        "time_frame_end": "15:00:00",
+        "venue": "gerplan",
+        "email": "test",
+        "phone_number": "1234567",
+        "status": "ACTIVE",
+        "list_servers": [
+            "d19c0959-1b49-48d1-9ca5-c24ab5aa53bd",
+            "a58e86c4-a872-47a0-8a59-4eb42d1fa29b"
+        ],
+        "teams_playing": [
+            "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+            "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+            "7ffed5fa-83c5-423e-a975-0f67b5782539"
+        ]
     }
 }

@@ -7,9 +7,10 @@ Functions for Club logic
 
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Club, Team
+from Models import Club, Team, Match, Tournament
 from LogicLayer.Validation import validate_attr
-from LogicLayer.LogicUtility import get_club_uuid
+from LogicLayer.LogicUtility import get_club_by_name
+from LogicLayer.MatchLL import MatchLL
 
 class ClubLL():
 
@@ -56,7 +57,7 @@ class ClubLL():
         """
 
         teams_in_club: list = []
-        club_uuid: str = get_club_uuid(club_name)
+        club_uuid: str = (get_club_by_name(club_name)).uuid
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
         for team in model_teams:
@@ -64,3 +65,73 @@ class ClubLL():
                 teams_in_club.append(team.name)
 
         return teams_in_club
+    
+
+    def get_club_wins(self, club_name) -> str:
+        """
+        Takes in club name and gets the club uuid
+        loads and looks through all teams and lists
+        all teams that are in the club
+        loads and looks though all matches and
+        if a team in the list wins the counter adds one
+        returns the counter 
+        """
+        model_matches: list[Match] = DataLayerAPI.load_matches()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
+        club_uuid: str = (get_club_by_name(club_name)).uuid
+        win_count = 0
+
+        teams_in_club: list[str] = [
+            team.uuid for team in model_teams
+            if team.club_uuid == club_uuid
+            ]
+
+        for match in model_matches:
+            if match.winner in teams_in_club:
+                win_count += 1
+
+        return str(win_count)
+        
+
+
+    def get_club_points(self, club_name) -> str:
+        """
+        Takes in club name and gets the club uuid
+        loads and looks through all teams and lists
+        all teams that are in the club
+        Loads through all tournaments and checks the last match
+        and if the winning team uuid is in the list of teams
+        three points are added
+        and if the losing team uuid is in the list of teams
+        one point is added
+        returns points
+        """
+        model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
+        club_uuid: str = (get_club_by_name(club_name)).uuid
+        match = MatchLL()
+        points = 0
+        count = 0
+
+        teams_in_club: list[str] = [
+            team.uuid for team in model_teams
+            if team.club_uuid == club_uuid
+            ]
+        
+        for tournament in model_tournaments:           
+            try:
+                matches_list: list[Match] = match.get_matches(tournament.uuid)
+                tour_final_match: Match = matches_list[-1]
+                winner = tour_final_match.winner
+                loser = tour_final_match.losing_team
+
+                if winner in teams_in_club:
+                    points += 3
+
+                if loser in teams_in_club:
+                    points += 1
+
+            except:
+                pass
+
+        return str(points)

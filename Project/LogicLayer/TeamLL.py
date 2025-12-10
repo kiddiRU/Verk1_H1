@@ -17,7 +17,7 @@ from LogicLayer.LogicUtility import get_player_uuid, get_players_team_uuid, get_
 
 class TeamLL():
     def __init__(self) -> None:
-        self.club_logic = ClubLL()
+        pass
 
     def add_player(self, player_handle: str, current_player: Player) -> Team | str:
         """
@@ -170,10 +170,8 @@ class TeamLL():
         points = 0
 
         for tournament in model_tournaments:
-            tour_id = tournament.uuid
-
             try:
-                matches_list: list[Match] = match.get_matches(tour_id)
+                matches_list: list[Match] = match.get_matches(tournament.uuid)
                 tour_final_match: Match = matches_list[-1]
                 winner = tour_final_match.winner
                 loser = tour_final_match.losing_team
@@ -191,11 +189,12 @@ class TeamLL():
     
 
     def get_team_club(self, team_name: str) -> str:
-        
-        clubs = self.club_logic.list_clubs()
+        clubll = ClubLL()
+
+        clubs = clubll.list_clubs()
 
         for club in clubs:
-            teams = self.club_logic.get_teams_in_club(club.name)
+            teams = clubll.get_teams_in_club(club.name)
 
             if team_name in teams:
                 return club.name

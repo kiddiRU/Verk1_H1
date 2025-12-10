@@ -100,7 +100,6 @@ class SpectateUI:
                 return MenuOptions.spectate_players
 
         return MenuOptions.spectate_screen
-
     def view_player_stats(self) -> MenuOptions:
         """View player stats screen, choices: b
         b: back to spectate players screen
@@ -117,13 +116,11 @@ class SpectateUI:
             MenuOptions.spectate_players,
             MenuOptions.view_player_stats,
         ]
-        # TODO: FIX WITH REAL INFORMATION
+        # Changed by Sindri Freysson
         info: list[str] = [
-            "Team: TEAMNAME",
-            "Wins: XX",
-            "Points: XX",
-            "Previous Teams: TEAMNAME ...",
-            "Previous Clubs: CLUBNAME ...",
+            "Team: " + LogicLayerAPI.get_player_team(player_handle)[0],
+            "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
+            "Points: " + LogicLayerAPI.get_player_points(player_handle)
         ]
         options: dict[str, str] = {}
         message: str = ""
@@ -184,12 +181,13 @@ class SpectateUI:
             MenuOptions.view_club_stats,
         ]
 
-        # TODO: FIX WITH REAL INFORMATION
+        # TODO: Need fix teams format
         info: list[str] = [
-            f"Teams: TEAMNAME",
+            f"Teams: ",
+            str(UtilityUI.team_names(LogicLayerAPI.get_teams_in_club(club_name))),
             f"Color: club_object.club_color",
-            f"Wins: XX",
-            f"Points: XX",
+            f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
+            f"Points: " + LogicLayerAPI.get_club_points(club_name),
         ]
         options: dict[str, str] = {}
         message: str = ""

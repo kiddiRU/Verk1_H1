@@ -8,7 +8,6 @@ __all__ = [
     'PlayerLL',
     'TeamLL',
     'TournamentLL',
-    'ClubLL'
+    'ClubLL',
     'MatchLL'
-    
 ]

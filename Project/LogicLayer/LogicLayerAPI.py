@@ -83,8 +83,13 @@ def save_player(player_handle: str | None = None) -> str | None:
 def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
 
+# "Created" by Sindri Freysson
+def get_player_wins(player_handle) -> str:
+    return player_logic.get_player_wins(player_handle)
 
-
+# "Created" by Sindri Freysson
+def get_player_points(player_handle) -> str:
+    return player_logic.get_player_points(player_handle)
 ''' Team API '''
 team_logic = TeamLL()
 
@@ -204,8 +209,15 @@ def change_match_winner(
 def cancel_tournament(tournament: Tournament) -> None:
     pass
 
-def get_tournament_object (tournament_name: str) -> Tournament | None:
-    return tournament_logic.get_tournament_object(tournament_name)
+def get_teams_from_tournament_name(tournament_name) -> list[Team]:
+    return tournament_logic.get_teams_from_tournament_name(tournament_name)
+
+# TO help create a Tournament
+def to_time(value: str) -> time:
+    return tournament_logic.to_time(value)
+
+def to_date(value: str) -> date:
+    return tournament_logic.to_date(value)
 
 ''' Club API '''
 club_logic: ClubLL =  ClubLL()
@@ -230,6 +242,13 @@ def change_club_info(club: Club) -> None:
 def input_match_results(match: Match) -> None:
     pass
 
+# Created by Sindri
+def get_club_wins(club_name) -> str:
+    return club_logic.get_club_wins(club_name)
+
+# Created by Sindri
+def get_club_points(club_name) -> str:
+    return club_logic.get_club_points(club_name)
 
 
 """ Utility API """
@@ -239,3 +258,16 @@ def get_player_uuid(player_handle: str) -> str:
 
 def get_players_team_uuid(team_name: str) -> str:
     return LogicUtility.get_players_team_uuid(team_name)
+
+def get_tournament_by_name(tournamnet_name: str) -> Tournament:
+    return LogicUtility.get_tournament_by_name(tournamnet_name)
+
+def tournament_name_to_uuid(uuid: str) -> str:
+    return LogicUtility.tournament_name_to_uuid(uuid)
+
+def get_team_by_name(team_name: str) -> Team:
+    return LogicUtility.get_team_by_name(team_name)
+
+def get_team_by_uuid(team_uuid: str) -> Team:
+    return LogicUtility.get_team_by_name(team_uuid)
+

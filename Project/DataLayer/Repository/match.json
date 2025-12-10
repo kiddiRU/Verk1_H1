@@ -1,137 +1,106 @@
 {
-    "aece9042-ed20-4226-afcc-f68b105542ac": {
-        "uuid": "aece9042-ed20-4226-afcc-f68b105542ac",
+    "f3a33b54-a8a9-4f07-9adc-197db99cb160": {
+        "uuid": "f3a33b54-a8a9-4f07-9adc-197db99cb160",
         "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
+        "match_date": "2025-12-05",
+        "match_time": "12:00:00",
+        "team_1": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "team_2": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winner": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "winning_players": [
+            "2cc090bc-2351-4c43-bb08-2f578d26154a",
+            "35e63bfc-3349-4131-b197-c569d71d6b90",
+            "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3"
+        ],
+        "losing_team": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "losing_players": [
+            "e9ecf404-a192-48c5-9f61-99387bad32f8",
+            "b2ee9a85-bb85-49d8-bb10-1eddf19a6509",
+            "ae4cb519-d61b-486c-9835-c40ab8b2a4ff"
+        ]
+    },
+    "5b413a5b-077e-4edc-850b-987680595cc6": {
+        "uuid": "5b413a5b-077e-4edc-850b-987680595cc6",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
         "match_date": "2004-01-21",
-        "match_time": "13:23:00",
-        "team_1": "name14",
-        "team_2": "name8",
-        "winner": "name8"
+        "match_time": "00:12:23",
+        "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "team_2": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
     },
-    "756d06cf-2ede-46c2-9731-b209a5566b1c": {
-        "uuid": "756d06cf-2ede-46c2-9731-b209a5566b1c",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
+    "1de6c60f-6fed-4e70-b1c5-d24c5ae98ae8": {
+        "uuid": "1de6c60f-6fed-4e70-b1c5-d24c5ae98ae8",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
         "match_date": "2004-01-21",
-        "match_time": "13:23:00",
-        "team_1": "name3",
-        "team_2": "name16",
-        "winner": "name16"
+        "match_time": "00:12:23",
+        "team_1": "0e86df13-949f-497d-916d-6aee0e329516",
+        "team_2": "name2",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
     },
-    "d0ea0c88-6acb-45b7-9172-16f284c9e2c3": {
-        "uuid": "d0ea0c88-6acb-45b7-9172-16f284c9e2c3",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
+    "6d618d2e-842c-4ed4-a588-aa85b577d548": {
+        "uuid": "6d618d2e-842c-4ed4-a588-aa85b577d548",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
         "match_date": "2004-01-21",
-        "match_time": "14:23:00",
-        "team_1": "name2",
-        "team_2": "name6",
-        "winner": "name6"
-    },
-    "c1805d85-81cf-40ef-b0c1-f6c4ec2c8fdf": {
-        "uuid": "c1805d85-81cf-40ef-b0c1-f6c4ec2c8fdf",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-21",
-        "match_time": "14:23:00",
-        "team_1": "name4",
-        "team_2": "name12",
-        "winner": "name12"
-    },
-    "c6545bc4-0c91-4a16-a941-5cde99b1e4a6": {
-        "uuid": "c6545bc4-0c91-4a16-a941-5cde99b1e4a6",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-21",
-        "match_time": "15:23:00",
-        "team_1": "name15",
-        "team_2": "name9",
-        "winner": "name9"
-    },
-    "7b4c4bca-3a52-4829-9ca6-279111baaf4e": {
-        "uuid": "7b4c4bca-3a52-4829-9ca6-279111baaf4e",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-21",
-        "match_time": "15:23:00",
-        "team_1": "name10",
-        "team_2": "name13",
-        "winner": "name10"
-    },
-    "f016b46b-514e-4126-8aa6-c671c51c5b74": {
-        "uuid": "f016b46b-514e-4126-8aa6-c671c51c5b74",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-21",
-        "match_time": "16:23:00",
-        "team_1": "name7",
-        "team_2": "name5",
-        "winner": "name7"
-    },
-    "5ad378b8-d6ad-4d95-9d9b-241c72058e64": {
-        "uuid": "5ad378b8-d6ad-4d95-9d9b-241c72058e64",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-21",
-        "match_time": "16:23:00",
-        "team_1": "name11",
-        "team_2": "name1",
-        "winner": "name1"
-    },
-    "e4ac9323-a999-433d-aa19-298c0c0f219f": {
-        "uuid": "e4ac9323-a999-433d-aa19-298c0c0f219f",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "13:23:00",
-        "team_1": "name10",
-        "team_2": "name8",
-        "winner": null
-    },
-    "2b7a19b8-d34a-4990-a977-a6c714fb2172": {
-        "uuid": "2b7a19b8-d34a-4990-a977-a6c714fb2172",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "13:23:00",
-        "team_1": "name6",
-        "team_2": "name16",
-        "winner": null
-    },
-    "ec532534-7e4c-4c2b-bb40-58eaf0276f75": {
-        "uuid": "ec532534-7e4c-4c2b-bb40-58eaf0276f75",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "14:23:00",
-        "team_1": "name9",
-        "team_2": "name7",
-        "winner": null
-    },
-    "4f2ced4f-0fdf-41f1-a71e-b063e4ee2682": {
-        "uuid": "4f2ced4f-0fdf-41f1-a71e-b063e4ee2682",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "14:23:00",
-        "team_1": "name12",
-        "team_2": "name1",
-        "winner": null
-    },
-    "c815f02d-423b-42e0-a44c-cd05730c50f2": {
-        "uuid": "c815f02d-423b-42e0-a44c-cd05730c50f2",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "15:23:00",
+        "match_time": "00:12:23",
         "team_1": "To be revealed",
         "team_2": "To be revealed",
-        "winner": null
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
     },
-    "d3043535-e7d7-4488-8399-188ab167e847": {
-        "uuid": "d3043535-e7d7-4488-8399-188ab167e847",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "15:23:00",
+    "a2c20787-7a4d-46dd-bef9-7e05081609c5": {
+        "uuid": "a2c20787-7a4d-46dd-bef9-7e05081609c5",
+        "tournament_id": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "match_date": "2025-01-01",
+        "match_time": "14:00:00",
+        "team_1": "7ffed5fa-83c5-423e-a975-0f67b5782539",
+        "team_2": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "ead9bb2c-af25-4641-8165-e0ddb5fae06e": {
+        "uuid": "ead9bb2c-af25-4641-8165-e0ddb5fae06e",
+        "tournament_id": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "match_date": "2025-01-02",
+        "match_time": "14:00:00",
         "team_1": "To be revealed",
         "team_2": "To be revealed",
-        "winner": null
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
     },
-    "224ed794-f60e-45d2-a5c7-dcd54d3367bf": {
-        "uuid": "224ed794-f60e-45d2-a5c7-dcd54d3367bf",
-        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
-        "match_date": "2004-01-22",
-        "match_time": "16:23:00",
+    "56e09b3f-0ce3-4a1e-b2c8-648722b24c90": {
+        "uuid": "56e09b3f-0ce3-4a1e-b2c8-648722b24c90",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
         "team_1": "To be revealed",
         "team_2": "To be revealed",
-        "winner": null
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "579d2740-6141-4409-95b3-a8fb0a195d9c": {
+        "uuid": "579d2740-6141-4409-95b3-a8fb0a195d9c",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
     }
 }
