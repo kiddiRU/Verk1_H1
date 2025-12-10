@@ -37,7 +37,7 @@ class SpectateUI:
         """
 
         menu: str = "Spectator Screen"
-        user_path: list[str] = [MenuOptions.spectate_screen]
+        user_path: list[MenuOptions] = [MenuOptions.spectate_screen]
         info: list[str] = []
         options: dict[str, str] = {
             "1": "Player",
@@ -73,7 +73,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Spectate Players"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_players,
         ]
@@ -111,7 +111,7 @@ class SpectateUI:
         player_handle: str | None = LogicLayerAPI.save_player()
 
         menu: str = str(player_handle) + " Stats"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_players,
             MenuOptions.view_player_stats,
@@ -137,7 +137,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Clubs"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_clubs,
         ]
@@ -175,7 +175,7 @@ class SpectateUI:
         club_name: str | None = LogicLayerAPI.save_player()
 
         menu: str = str(club_name) + " Stats"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_clubs,
             MenuOptions.view_club_stats,
@@ -204,7 +204,7 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         menu: str = "Teams"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_teams,
         ]
@@ -243,7 +243,7 @@ class SpectateUI:
         team_name: str | None = LogicLayerAPI.save_player()
 
         menu: str = str(team_name) + " Stats"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_teams,
             MenuOptions.view_team_stats,
@@ -268,7 +268,7 @@ class SpectateUI:
         """Spectate tournaments screen, choose a tournament to view."""
 
         menu: str = "Tournaments"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_tournaments,
         ]
@@ -329,7 +329,7 @@ class SpectateUI:
         tournament_name: str | None = LogicLayerAPI.save_player()
 
         menu: str = str(tournament_name) + " Stats"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.spectate_screen,
             MenuOptions.spectate_tournaments,
             MenuOptions.active_tournament,
