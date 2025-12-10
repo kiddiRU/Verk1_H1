@@ -336,8 +336,8 @@ Rank: {current_login_rank}"""]
                 return MenuOptions.my_team_not_empty
             case "3":
                 if not team:
-                    return MenuOptions.create_team_in_team
-                return MenuOptions.create_team
+                    return MenuOptions.create_team
+                return MenuOptions.create_team_in_team
             case "lo":
                 return MenuOptions.logout
 
@@ -885,7 +885,7 @@ Rank: {current_login_rank}"""]
         current_team, rank = LogicLayerAPI.get_player_team(remove_handle)
         remove_player_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
-        if current_team == remove_player_team:
+        if current_team == remove_player_team and remove_handle != current_login_handle:
             message: str = f"The Player {remove_handle} Was Found \nDo You Want To Remove Them From Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
