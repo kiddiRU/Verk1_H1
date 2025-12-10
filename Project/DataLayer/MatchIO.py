@@ -14,6 +14,11 @@ FILE_PATH = "DataLayer/Repository/match.json"
 
 
 def store_match(match: Match) -> None:
+    """Stores new matches in a json file to be fetched later.
+
+    :param match:
+        The match object to store.
+    """
     # Changes object Match into a dictionary mapping attributes to keys.
     data = match.__dict__
 
@@ -38,6 +43,11 @@ def store_match(match: Match) -> None:
 
 
 def load_match() -> list[Match]:
+    """Gets a list of all matches stored with the store_match function.
+
+    :returns:
+        The list of matches.
+    """
     # Reads the json file containing matches and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
@@ -70,6 +80,17 @@ def load_match() -> list[Match]:
 
 
 def update_match(uuid: str, updated_match: Match) -> None:
+    """Updates a match stored with the store_match function.
+
+    Looks for a match stored with the store_match function which
+    has the same uuid as the given uuid, then updates that match.
+
+    :param uuid:
+        uuid to look up the match to update.
+
+    :param updated_match:
+        The match object to update the match to.
+    """
     # Reads the json file containing matches and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:

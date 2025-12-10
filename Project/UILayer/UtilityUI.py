@@ -71,35 +71,6 @@ class UtilityUI:
                 print(self.error_color + str(e) + self.reset)
                 continue
 
-    # Created by Sindri Freysson
-    def prompt_builder(options: list[str]) -> dict[int, str]:
-        """
-        Helper function that takes in list of MenuOptions and returns an enumerated dictionary of options
-        Use dict.update after building if you want to add extra options to the menu
-        :param options: List of strings representing the options that the user can use
-        :return: Dictionary of options -> string
-        """
-        prompt_dict: dict[int | str, str] = {}
-        for i, choice in enumerate(options, start=1):
-            prompt_dict[i] = choice
-        return prompt_dict
-
-    # Created by Sindri Freysson
-    def prompt_choice(self, valid_choices: dict[int | str, str]) -> str:
-        """
-        Takes in a list of valid choices and returns a string representing the choice
-        :param self:
-        :param valid_choices: Dictionary of valid choices that the user can input
-        :return: Returns a string of the allowed choice
-        """
-        while True:
-            choice: str = input("> ").strip().lower()
-            if choice in valid_choices:
-                return valid_choices[choice]
-            print(
-                self.error_color + "Not a valid option try again" + self.reset
-            )
-
     def _input_change(
         self, message: str, attribute: str, info_type: str
     ) -> str:
@@ -129,9 +100,6 @@ class UtilityUI:
         print("Screen doesn't exist")
         input("Input anything to go back to start: ")
         return MenuOptions.start_screen
-
-    def show_schedule(self):
-        pass
 
     # _____________________________ MODULAR DESIGN ___________________________
 
@@ -275,6 +243,15 @@ class UtilityUI:
         output_list: list[str] = []
 
         for match in match_list:
+
+            match_winner_uuid: str = str(match.winner)
+            if match_winner_uuid != "None":
+                match_winner_team: Team = LogicLayerAPI.get_team_by_uuid(match_winner_uuid)
+                match_winner_name: str = match_winner_team.name
+            else: match_winner_name: str = match_winner_uuid
+
+            
+
             if show_all:
                 revealed: str = "To be revealed"
                 if (match.team_1 or match.team_2) == revealed:
@@ -288,11 +265,12 @@ class UtilityUI:
 
                 output_list.append(
                     f"{line('—')}\n"
-                    f"Team 1: {match_name_1:<71}|\n"
+                    f"{f"Date: {match.match_date}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
+                    f"{f"Team 1: {match_name_1}":<79}|\n"
                     f"{'vs':<79}|\n"
-                    f"Team 2: {match_name_2:<71}|\n"
-                    f"Match Time: {str(match.match_time):<67}|\n"
-                    f"Match Winner: {str(match.winner):<65}|"
+                    f"{f"Team 2: {match_name_2}":<79}|\n"
+                    f"{f"Match Winner: {str(match_winner_name)}":<79}|"
                 )
 
 
@@ -305,16 +283,16 @@ class UtilityUI:
 
                 output_list.append(
                     f"{line('—')}\n"
-                    f"Team 1: {match_name_1:<71}|\n"
+                    f"{f"Date: {match.match_date}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
+                    f"{f"Team 1: {match_name_1}":<79}|\n"
                     f"{'vs':<79}|\n"
-                    f"Team 2: {match_name_2:<71}|\n"
-                    f"Match Time: {str(match.match_time):<67}|\n"
-                    f"Match Winner: {str(match.winner):<65}|"
+                    f"{f"Team 2: {match_name_2}":<79}|\n"
+                    f"{f"Match Winner: {str(match_winner_name)}":<79}|"
                 )
 
         return output_list
 
-    #TODO Make function to get saved tournament name and convert to uuid (MANLY FOR MATCHES IN ADMIN UI)
 
     # "Created" by Sindri Freysson
     # TODO need write doc string

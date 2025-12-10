@@ -85,7 +85,7 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_handle: str = input(
-            self.message_color + "Input Handle or 'q' to go back: " + self.reset
+            self.message_color + "Input Handle or 'q' to cancel: " + self.reset
         )
         if find_handle == "q":
             return user_path[-2]
@@ -102,6 +102,7 @@ class SpectateUI:
                 return MenuOptions.spectate_players
 
         return MenuOptions.spectate_screen
+
     def view_player_stats(self) -> MenuOptions:
         """View player stats screen, choices: b
         b: back to spectate players screen
@@ -122,7 +123,7 @@ class SpectateUI:
         info: list[str] = [
             "Team: " + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
             "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
-            "Points: " + LogicLayerAPI.get_player_points(player_handle)
+            "Points: " + LogicLayerAPI.get_player_points(player_handle),
         ]
         options: dict[str, str] = {}
         message: str = ""
@@ -151,7 +152,9 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_club: str = input(
-            self.message_color + "Input Club Name or 'q' to go back: " + self.reset
+            self.message_color
+            + "Input Club Name or 'q' to cancel: "
+            + self.reset
         )
         if find_club == "q":
             return user_path[-2]
@@ -185,7 +188,9 @@ class SpectateUI:
             MenuOptions.view_club_stats,
         ]
 
-        infoA: list[str] = [f"Teams: "] + self.utility.show_filtered(LogicLayerAPI.get_teams_in_club(club_name))
+        infoA: list[str] = [f"Teams: "] + self.utility.show_filtered(
+            LogicLayerAPI.get_teams_in_club(club_name)
+        )
         infoB: list[str] = [
             f"Color: " + LogicLayerAPI.get_club_by_name(club_name).club_color,
             f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
@@ -219,7 +224,9 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_handle: str = input(
-            self.message_color + "Input Team Name or 'q' to go back: " + self.reset
+            self.message_color
+            + "Input Team Name or 'q' to cancel: "
+            + self.reset
         )
         if find_handle == "q":
             return user_path[-2]
@@ -253,13 +260,17 @@ class SpectateUI:
             MenuOptions.spectate_teams,
             MenuOptions.view_team_stats,
         ]
-        # TODO: FIX WITH REAL INFORMATION
+
         infoA: list[str] = [
             "Club: " + LogicLayerAPI.get_team_club(team_name),
             "Wins: " + LogicLayerAPI.get_team_wins(team_name),
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
-        infoB: list[str] = [f"Team Members: "] + self.utility.show_filtered(LogicLayerAPI.get_team_members_object(team_name))
+        infoB: list[str] = [
+            f"Team Members:\n{80 * "-"}"
+        ] + self.utility.show_filtered(
+            LogicLayerAPI.get_team_members_object(team_name)
+        )
         info: list[str] = infoA + infoB
         options: dict[str, str] = {}
         message: str = ""
@@ -278,7 +289,9 @@ class SpectateUI:
             MenuOptions.spectate_tournaments,
         ]
 
-        info: list[str] = self.utility.show_tournaments_except_status(Tournament.StatusType.inactive)
+        info: list[str] = self.utility.show_tournaments_except_status(
+            Tournament.StatusType.inactive
+        )
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Tournament Not Found!"
 
@@ -288,29 +301,33 @@ class SpectateUI:
 
         # User input
         tournament_name = input(
-            self.message_color + "Input Tournament Name or 'q' to go back: " + self.reset
+            self.message_color
+            + "Input Tournament Name or 'q' to cancel: "
+            + self.reset
         )
         if tournament_name == "q":
             return user_path[-2]
 
         tournament_list: list[Tournament] = LogicLayerAPI.list_tournaments()
-        not_inactive: list[str] = self.utility.except_status_tournaments(Tournament.StatusType.inactive)
+        not_inactive: list[str] = self.utility.except_status_tournaments(
+            Tournament.StatusType.inactive
+        )
 
         # Validate tournament name
         if tournament_name in not_inactive:
             LogicLayerAPI.save_player(tournament_name)
 
             # Find the tournament object directly
-            tournament = None
-            for t in tournament_list:
-                if t.name == tournament_name:
-                    tournament = t
+            tournament_object = None
+            for tournament in tournament_list:
+                if tournament.name == tournament_name:
+                    tournament_object = tournament
                     break
 
-            if tournament:
+            if tournament_object:
                 return (
                     MenuOptions.active_tournament
-                    if tournament.status == Tournament.StatusType.active
+                    if tournament_object.status == Tournament.StatusType.active
                     else MenuOptions.archived_tournament
                 )
 
@@ -324,10 +341,9 @@ class SpectateUI:
         return MenuOptions.spectate_screen
 
     def active_tournament(self) -> MenuOptions:
-        """Active tournament screen, choices: 1, 2, 3 and b
+        """Active tournament screen, choices: 1, 2 and b
         1: View game schedule
         2: View teams
-        3: View bracket
         b: back to spectate tournaments screen
 
         Returns:
@@ -345,7 +361,6 @@ class SpectateUI:
         options: dict[str, str] = {
             "1": "Game Info And Schedule",
             "2": "Teams",
-            "3": "Brackets",
             "b": "Back",
         }
         message: str = ""
@@ -353,14 +368,12 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
+        choice: str = self.utility._prompt_choice(["1", "2", "b"])
         match choice:
             case "1":
                 return MenuOptions.game_schedule
             case "2":
                 return MenuOptions.teams_in_tournament
-            case "3":
-                return MenuOptions.view_bracket
             case "b":
                 return MenuOptions.spectate_tournaments
 
@@ -373,12 +386,25 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name == None: return MenuOptions.start_screen
+        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        tournament_uuid: str = tournament_object.uuid
 
         menu: str = str(tournament_name) + " Stats"
-        print(menu)
-        # TODO: implement archived tournament screen
-        stopper = input("This is the archived tournaments screen")
+        user_path: list[MenuOptions] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+            MenuOptions.archived_tournament,
+        ]
+        info: list[str] = self.utility.list_matches(tournament_uuid, True)
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
         return MenuOptions.spectate_tournaments
+
 
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
@@ -387,35 +413,122 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        stopper = input("This is the game schedule screen")
-        return MenuOptions.active_tournament
+        tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name == None: return MenuOptions.start_screen
+        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        tournament_uuid: str = tournament_object.uuid
 
-    def view_bracket(self) -> MenuOptions:
-        """View bracket screen, choices: b
-        b: back to active tournament screen
+        menu: str = str(tournament_name) + " Stats"
+        user_path: list[MenuOptions] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+            MenuOptions.active_tournament,
+            MenuOptions.game_schedule,
+        ]
+        info: list[str] = self.utility.list_matches(tournament_uuid, False)
+        options: dict[str, str] = {}
+        message: str = ""
 
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-        stopper = input("This is the view bracket screen")
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
         return MenuOptions.active_tournament
 
     def teams_in_tournament(self) -> MenuOptions:
-        """Teams in tournament screen, choices: input a team to view stats
+        """Teams in tournament screen, user types team name to view stats."""
 
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-        stopper = input("This is the teams in tournament screen")
+        # Tournament chosen previously
+        tournament_name: str = LogicLayerAPI.save_player() or "None"
+
+        # Teams in this tournament
+        teams_in_tournament: list[str] = [
+            t.name
+            for t in LogicLayerAPI.get_teams_from_tournament_name(
+                tournament_name
+            )
+        ]
+
+        menu: str = f"Teams in {tournament_name}"
+        user_path: list[MenuOptions] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+            MenuOptions.active_tournament,
+            MenuOptions.teams_in_tournament,
+        ]
+
+        info: list[str] = teams_in_tournament
+
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
+        message: str = "Team Not Found!"
+
+        # Show initial table
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))
+
+        # User input
+        team_name = input(
+            self.message_color
+            + "Input Team Name or 'q' to cancel: "
+            + self.reset
+        ).strip()
+
+        if team_name.lower() == "q":
+            return user_path[-2]
+
+        # Validate team name
+        if team_name in teams_in_tournament:
+            # Save selected team for the next screen
+            self.temp_team = team_name
+            return MenuOptions.team_tournament_stats
+
+        # ---------- INVALID NAME ----------
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        match self.utility._prompt_choice(["t", "b"]):
+            case "t":
+                return MenuOptions.teams_in_tournament
 
         return MenuOptions.active_tournament
 
     def team_tournament_stats(self) -> MenuOptions:
-        """Team tournament stats screen, choices: b
-        b: back to teams in tournament screen
-
-        Returns:
-            MenuOptions: The next menu to navigate to
         """
-        stopper = input("This is the team tournament stats screen")
+        Docstring for team_tournament_stats
+
+        :param self: Description
+        :return: Description
+        :rtype: MenuOptions
+        """
+
+        team_name = self.temp_team
+
+        menu: str = str(team_name) + " Stats"
+        user_path: list[MenuOptions] = [
+            MenuOptions.spectate_tournaments,
+            MenuOptions.active_tournament,
+            MenuOptions.teams_in_tournament,
+            MenuOptions.team_tournament_stats,
+        ]
+
+        infoA: list[str] = [
+            "Club: " + LogicLayerAPI.get_team_club(team_name),
+            "Wins: " + LogicLayerAPI.get_team_wins(team_name),
+            "Points: " + LogicLayerAPI.get_team_points(team_name),
+        ]
+        infoB: list[str] = [
+            f"Team Members:\n{80 * "-"}"
+        ] + self.utility.show_filtered(
+            LogicLayerAPI.get_team_members_object(team_name)
+        )
+
+        # Table design
+
+        info: list[str] = infoA + infoB
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
         return MenuOptions.teams_in_tournament

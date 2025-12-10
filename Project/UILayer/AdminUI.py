@@ -99,7 +99,7 @@ class AdminUI:
                 "TOURNAMENT",
             )
             if not tournament_name:
-                return user_path[-2]
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Name: " + tournament_name)
             print(self.tui.table(menu, user_path, info, options))
@@ -115,8 +115,8 @@ class AdminUI:
                 "tournament_date",
                 "TOURNAMENT",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_date:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Start And End Dates: " + tournament_date)
             print(self.tui.table(menu, user_path, info, options))
@@ -132,8 +132,8 @@ class AdminUI:
                 "tournament_time",
                 "TOURNAMENT",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_time:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Start And End Time: " + tournament_time)
             print(self.tui.table(menu, user_path, info, options))
@@ -149,8 +149,8 @@ class AdminUI:
                 "home_address",
                 "TOURNAMENT",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_addr:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Venue Address: " + tournament_addr)
             print(self.tui.table(menu, user_path, info, options))
@@ -164,8 +164,8 @@ class AdminUI:
             tournament_email: str = self.utility._input_info(
                 "Enter Contact Email or 'q' to cancel: \n", "email", "PLAYER"
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_email:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Email: " + tournament_email)
             print(self.tui.table(menu, user_path, info, options))
@@ -181,8 +181,8 @@ class AdminUI:
                 "phone_number",
                 "PLAYER",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_phnum:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Phone Number: " + tournament_phnum)
             print(self.tui.table(menu, user_path, info, options))
@@ -245,8 +245,10 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         find_name: str = input(
-            self.message_color + "Input Tournament Name: " + self.reset
+            self.message_color + "Input Tournament Name or 'q' to go back: \n" + self.reset
         )
+        if find_name.lower() == "q":
+            return user_path[-2]
         if find_name.lower() == "lo":
             return MenuOptions.logout
 
@@ -309,17 +311,22 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
         ]
-        info: list[str] = [f"- - - - {str(tournament_name)} - - - -"]
+        info: list[str] = [f"{f"- - - - {str(tournament_name)} - - - -": <79}" + "|"]
         options: dict[str, str] = {
             "1": "Input Results Of A Match",
             "b": "Back",
             "lo": "Log Out",
         }
 
-        # list the matches from the f-string given by the utility function
-        info: list[str] = info + self.utility.list_matches(
-            tournament_uuid, True
-        )
+        matches = self.utility.list_matches(tournament_uuid, True)
+
+        ammount_of_lines = len(matches) - 1
+        for match in matches:
+            info.append(match)
+
+            # for line in range(ammount_of_lines):
+            #     info.append("—" * 80)
+            #     ammount_of_lines -= 1
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -381,17 +388,20 @@ class AdminUI:
         message: str = ""
 
         # Show a list of the matches in the round
-        matches_list: list[str] = self.utility.list_matches(
-            tournament_uuid, False
-        )
+        matches: list[str] = self.utility.list_matches(tournament_uuid, False)
 
+        ammount_of_lines = len(matches) -1
 
         x = 0
-        for match in matches_list:
+        for match in matches:
+            info.append(match)
             x += 1
             choice_list.append(str(x))
-            self.options[str(x)] = f"Input Results for {match}"
-            info.append(match)
+            match = match[243:-81]
+            self.options[str(x)] = f"{"Input Results for:":<77}| \n{match}"
+            self.options[("—" * 80)] = ""
+            ammount_of_lines -= 1
+
         choice_list.append("b")
         self.options["b"] = "Back"
 
@@ -429,17 +439,17 @@ class AdminUI:
         lines: list[str] = match_string.splitlines()
 
         # Filter out the name of the teams
-        match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
-        match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
+        match_team_1: str = lines[1].replace("Team 1: ", "").rstrip("|")
+        match_team_2: str = lines[3].replace("Team 2: ", "").rstrip("|")
 
-        match_name_1 = match_name_1.strip()
-        match_name_2 = match_name_2.strip()
+        match_team_1 = match_team_1.strip()
+        match_team_2 = match_team_2.strip()
         
         # Screen to print
         info: list = ["- - - - List Of Matches - - - -"]
         options: dict[str, str] = {
-            "1": f"Select {match_name_1} for victory",
-            "2": f"Select {match_name_2} for victory",
+            "1": f"Select {match_team_1} for victory",
+            "2": f"Select {match_team_2} for victory",
             "b": "Back",
         }
 
@@ -453,12 +463,31 @@ class AdminUI:
             case "b":
                 return MenuOptions.select_match
             case "1":
-                winner = match_name_1
+                winner = match_team_1
             case "2":
-                winner = match_name_2
+                winner = match_team_2
 
         options = {"b": "Back"}
         message = f"{winner} Has Won The Round!"
+
+        tournament_name: str | None = LogicLayerAPI.save_player()
+        team1 = LogicLayerAPI.get_team_by_name(match_team_1)
+        team2 = LogicLayerAPI.get_team_by_name(match_team_2)
+
+        team1_uuid = team1.uuid
+        team2_uuid = team2.uuid
+
+        if type(tournament_name) is str:
+            current_tournament: Tournament = LogicLayerAPI.get_tournament_by_name(tournament_name)
+            tournament_id: str = current_tournament.uuid
+
+            current_match: Match | str = LogicLayerAPI.get_match(tournament_id, team1_uuid, team2_uuid)
+            if type(current_match) is Match:
+                match_uuid: str = current_match.uuid
+                if winner is not None:
+                    winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
+
+                    LogicLayerAPI.change_match_winner(tournament_id, match_uuid, winner)
 
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["b"])

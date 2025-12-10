@@ -217,12 +217,17 @@ class TournamentLL:
 
 
     def publish(self, name: str) -> None:
-        """
-        Parameters: uuid of tournament to publish
+        """Publish an inactive tournament.
 
-        Can be called to publish an inactive tournament, this will
-        create a schedule, create the matches for in the schedule
-        and assign the teams to compete in the first round.
+        Call to publish an inactive tournament, this will...
+        
+        -   Create a match schedule according to tournament time and date.
+        -   Assign teams to the first round of matches.
+        -   Create servers to host the matches.
+        -   Assign the first matches to servers.
+
+        :param tournament_name:
+            Publishes the tournament with the given name.
         """
         uuid = self.tournament_name_to_uuid(name)
 
@@ -312,13 +317,18 @@ class TournamentLL:
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def next_games(self, uuid: str) -> list[Match]:
-        """
-        Parameters: uuid of tournament
+        """Gets the matches next on the schedule in a certain tournament.
 
-        Returns a list of matches which are next on the schedule,
-        matches next in the schedule are matches which don't have
-        a winner and there doesn't exist a match which happens
-        before it and needs a winner.
+        Gets a list of matches which are next on the schedule in a certain
+        tournament, a match is next on the schedule if it needs a winner and
+        no other match which needs a winner is before it on the schedule.
+
+        :param tournament_uuid:
+            The tournament to get the matches will have the same uuid as
+            tournament_uuid
+
+        :returns:
+            The list of matches next on the schedule.
         """
         
         # Finds the tournament with a given uuid.
@@ -355,14 +365,21 @@ class TournamentLL:
             match_uuid: str,
             team_uuid: str
         ) -> None:
-        """
-        Parameters:
-            tournament_uuid, uuid of tournament the match belongs to.
-            match_uuid, uuid of match you want to update.
-            team_uuid, uuid of the team which won.
+        """Updates match winner of a specific match in a specific tournament.
 
-        Updates the match to set a winner, will continue to next round
-        and update servers in use of the tournament if needed.
+        Given the uuid of a specific tournament and the uuid of a specific match,
+        will update the winner of this match, will set a new match into the server
+        used if needed, will move onto next round of tournament if needed and will
+        archive tournament if needed.
+
+        :param tournament_uuid:
+            The uuid of the tournament which the match belongs to.
+
+        :param match_uuid:
+            The uuid of the match you want to update.
+
+        :param team_uuid:
+            The uuid of the winner.
         """
         # Finds the tournament with a given uuid.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()

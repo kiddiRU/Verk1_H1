@@ -14,6 +14,11 @@ FILE_PATH = "DataLayer/Repository/tournament.json"
 
 
 def store_tournament(tournament: Tournament) -> None:
+    """Stores new tournaments in a json file to be fetched later.
+
+    :param tournament:
+        The tournament object to store.
+    """
     # Changes object tournament into a dictionary, mapping attributes to keys
     data = tournament.__dict__
 
@@ -39,6 +44,12 @@ def store_tournament(tournament: Tournament) -> None:
 
 
 def load_tournaments() -> list[Tournament]:
+    """Gets a list of all tournaments stored with the store_tournament
+    function.
+
+    :returns:
+        The list of tournaments.
+    """
     # Reads the json file containing tournaments and stores it as a dictionary
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
@@ -46,7 +57,7 @@ def load_tournaments() -> list[Tournament]:
     except:
         raise ValidationError("Could not read tournament file.")
 
-# Creates a list of all teams in the tournament file.
+    # Creates a list of all teams in the tournament file.
     # Each tournament is stored as a Tournament model object in the list.
     tournament_list: list[Tournament] = []
     for value in file_content.values():
@@ -77,6 +88,17 @@ def load_tournaments() -> list[Tournament]:
 
 
 def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
+    """Updates a tournament stored with the store_tournament function.
+
+    Looks for a tournament stored with the store_tournament function which
+    has the same uuid as the given uuid, then updates that tournament.
+
+    :param uuid:
+        uuid to look up the tournament to update.
+
+    :param updated_tournament:
+        The tournament object to update the tournament to.
+    """
     # Reads the json file containing tournaments adn stores it as a dictionary
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:

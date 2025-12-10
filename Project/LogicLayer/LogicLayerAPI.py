@@ -124,7 +124,6 @@ def list_all_teams() -> list[Team]:
 def get_team_members_object(team_name: str) -> list[Player]:
     return team_logic.get_team_members_object(team_name)
 
-# TODO implement get_team_history and call it
 def get_team_history(team_name: str) -> list[str]:       
     return team_logic.get_team_history(team_name)
 
@@ -211,21 +210,34 @@ def update_tournament_datetime(
 def list_tournaments() -> list[Tournament]:
     return tournament_logic.list_tournaments()
 
-# def end_tournamnet ? 
-
-# def next_round ?
-
 def publish(tournament_name: str) -> None:
+    """Publish an inactive tournament.
+
+    Call to publish an inactive tournament, this will...
+    
+    -   Create a match schedule according to tournament time and date.
+    -   Assign teams to the first round of matches.
+    -   Create servers to host the matches.
+    -   Assign the first matches to servers.
+
+    :param tournament_name:
+        Publishes the tournament with the given name.
+    """
     tournament_logic.publish(tournament_name)
 
 def get_next_matches(tournament_uuid: str) -> list[Match]:
-    """
-    Parameters: uuid of tournament
+    """Gets the matches next on the schedule in a certain tournament.
 
-    Returns a list of matches which are next on the schedule,
-    matches next in the schedule are matches which don't have
-    a winner and there doesn't exist a match which happens
-    before it and needs a winner.
+    Gets a list of matches which are next on the schedule in a certain
+    tournament, a match is next on the schedule if it needs a winner and
+    no other match which needs a winner is before it on the schedule.
+
+    :param tournament_uuid:
+        The tournament to get the matches will have the same uuid as
+        tournament_uuid
+
+    :returns:
+        The list of matches next on the schedule.
     """
     return tournament_logic.next_games(tournament_uuid)
 
@@ -234,7 +246,22 @@ def change_match_winner(
         match_uuid: str,
         team_uuid: str
     ) -> None:
+    """Updates match winner of a specific match in a specific tournament.
 
+    Given the uuid of a specific tournament and the uuid of a specific match,
+    will update the winner of this match, will set a new match into the server
+    used if needed, will move onto next round of tournament if needed and will
+    archive tournament if needed.
+
+    :param tournament_uuid:
+        The uuid of the tournament which the match belongs to.
+
+    :param match_uuid:
+        The uuid of the match you want to update.
+
+    :param team_uuid:
+        The uuid of the winner.
+    """
     tournament_logic.change_match_winner(
             tournament_uuid,
             match_uuid,
@@ -243,10 +270,6 @@ def change_match_winner(
 
 def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
     return tournament_logic.get_teams_from_tournament_name(tournament_name)
-
-# TODO implement cancel_tournament and call it (C Requirement)
-def cancel_tournament(tournament: Tournament) -> None:
-    pass
 
 # TO help create a Tournament
 def to_time(value: str) -> time:
@@ -272,10 +295,6 @@ def list_all_clubs() -> list[Club]:
 def get_teams_in_club(club_name: str) -> list[Team]:
     return club_logic.get_teams_in_club(club_name)
 
-# TODO implement change_club_info and call it
-def update_club_info(club: Club) -> None:
-    pass
-
 # Created by Sindri
 def get_club_wins(club_name: str) -> str:
     return club_logic.get_club_wins(club_name)
@@ -298,8 +317,12 @@ def get_all_matches(tournament_uuid: str) -> list[Match]:
     """
     return match_logic.get_matches(tournament_uuid)
 
+
 # TODO implement input_match_results and call it
 def input_match_results(match: Match) -> None:
     pass
+
+def get_match(tournament_id: str, match_team1: str, match_team2: str) -> Match | str:
+    return match_logic.get_match(tournament_id, match_team1, match_team2)
 
 
