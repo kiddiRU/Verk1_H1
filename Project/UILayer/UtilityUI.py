@@ -243,3 +243,20 @@ class UtilityUI:
             output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list
     
+    def show_filtered(self, object_list: list[Player]|list[Team]|list[Club]) -> list[str]:
+        print(object_list)
+        str_list = [x.name for x in object_list]
+        output_list: list[str] = []  # list that holds each line as a f-string
+        length: int = len(str_list)
+
+        for value in range(0, len(str_list), 2):
+            left = str_list[value]
+            if value + 1 < length:
+
+                right = str_list[value + 1]
+                output_list.append(f"{left:<39}|{right:<39}|")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}|{" ":<39}|")
+
+        return output_list
