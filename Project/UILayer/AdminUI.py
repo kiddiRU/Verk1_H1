@@ -294,6 +294,18 @@ class AdminUI:
         """
         # Get tournament name
         tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name is None: # For type hinting
+            return MenuOptions.start_screen
+        
+        # Get tournament object
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+        if tournament_object is None:  # Check if None goes through
+            return MenuOptions.start_screen
+        
+        # Get tournament uuid
+        tournament_uuid: str = tournament_object.uuid
 
         menu: str = "Active Tournament"
         user_path: list[MenuOptions] = [
@@ -301,12 +313,14 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
         ]
-        info: list = [f"- - - - {str(tournament_name)} - - - -"]
+        info: list[str] = [f"- - - - {str(tournament_name)} - - - -"]
         options: dict[str, str] = {
             "1": "Input Results Of A Match",
             "b": "Back",
             "lo": "Log Out",
         }
+
+        info: list[str] = info + self.utility.list_matches(tournament_uuid,True)
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -331,6 +345,7 @@ class AdminUI:
         if tournament_name is None: # For type hinting
             return MenuOptions.start_screen
         
+        # Get tournament object
         tournament_object: Tournament | None = (
             LogicLayerAPI.get_tournament_by_name(tournament_name)
         )
@@ -354,7 +369,8 @@ class AdminUI:
         choice_list = []
         message: str = ""
 
-        matches_list: list[str] = self.utility.list_matches(tournament_uuid)
+        # Show a list of the matches in the round
+        matches_list: list[str] = self.utility.list_matches(tournament_uuid, False)
 
         x = 0
         for match in matches_list:
