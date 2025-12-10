@@ -75,7 +75,13 @@ class PlayerLL():
 
         Sends updated values to the data layer, and returns and updated Player object.
         '''
-
+        player.name = name
+        player.date_of_birth = date_of_birth
+        player.home_address = home_address
+        player.email = email
+        player.phone_number = phone_number
+        player.handle = handle
+        player.url = url
         DataLayerAPI.update_player(player.uuid, player)
         return player
 
