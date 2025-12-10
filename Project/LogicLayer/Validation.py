@@ -88,7 +88,7 @@ def validate_home_address(home_address: str) -> str | None:
     """
     
     try:
-        address_list: str = home_address.split()
+        address_list: list[str] = home_address.split()
         street_name: str = address_list[0]
         street_number: str = address_list[1]
         area_name: str = address_list[2]

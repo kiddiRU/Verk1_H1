@@ -70,7 +70,7 @@ def leave_team(team_name: str, player: Player) -> None:
 def list_players() -> list[Player]:
     return player_logic.list_players()
 
-def get_player_object(player_uuid: str) -> Player | None:
+def get_player_object(player_uuid: str) -> Player | str:
     return player_logic.get_player_object(player_uuid)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
@@ -94,7 +94,7 @@ def get_player_points(player_handle) -> str:
 team_logic = TeamLL()
 
 # TODO implement add_player and call it
-def add_player(player_handle: str, current_player: Player) -> Team:
+def add_player(player_handle: str, current_player: Player) -> Team | str:
     return team_logic.add_player(player_handle, current_player)
 
 # TODO implement remove_player and call it
@@ -123,6 +123,7 @@ def get_team_points(team_name: str) -> str:
 
 def get_team_club(team_name: str) -> str:
     return team_logic.get_team_club(team_name)
+
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
@@ -211,6 +212,13 @@ def cancel_tournament(tournament: Tournament) -> None:
 def get_teams_from_tournament_name(tournament_name) -> list[Team]:
     return tournament_logic.get_teams_from_tournament_name(tournament_name)
 
+# TO help create a Tournament
+def to_time(value: str) -> time:
+    return tournament_logic.to_time(value)
+
+def to_date(value: str) -> date:
+    return tournament_logic.to_date(value)
+
 ''' Club API '''
 club_logic: ClubLL =  ClubLL()
 
@@ -248,6 +256,9 @@ def get_club_points(club_name) -> str:
 def get_player_uuid(player_handle: str) -> str:
     return LogicUtility.get_player_uuid(player_handle)
 
+def get_players_team_uuid(team_name: str) -> str:
+    return LogicUtility.get_players_team_uuid(team_name)
+
 def get_tournament_by_name(tournamnet_name: str) -> Tournament:
     return LogicUtility.get_tournament_by_name(tournamnet_name)
 
@@ -259,3 +270,4 @@ def get_team_by_name(team_name: str) -> Team:
 
 def get_team_by_uuid(team_uuid: str) -> Team:
     return LogicUtility.get_team_by_name(team_uuid)
+
