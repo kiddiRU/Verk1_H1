@@ -324,9 +324,9 @@ class AdminUI:
         for match in matches:
             info.append(match)
 
-            for line in range(ammount_of_lines):
-                info.append("—" * 80)
-                ammount_of_lines -= 1
+            # for line in range(ammount_of_lines):
+            #     info.append("—" * 80)
+            #     ammount_of_lines -= 1
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -395,11 +395,9 @@ class AdminUI:
         x = 0
         for match in matches:
             info.append(match)
-            for line in range(ammount_of_lines):
-                info.append("—" * 80)
             x += 1
             choice_list.append(str(x))
-            match = match[:-162]
+            match = match[81:-162]
             self.options[str(x)] = f"{"Input Results for:":<77}| \n{match}"
             self.options[("—" * 80)] = ""
             ammount_of_lines -= 1
@@ -442,17 +440,17 @@ class AdminUI:
         lines: list[str] = match_string.splitlines()
 
         # Filter out the name of the teams
-        match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
-        match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
+        match_team_1 = lines[1].replace("Team 1: ", "").rstrip("|")
+        match_team_2 = lines[3].replace("Team 2: ", "").rstrip("|")
 
-        match_name_1 = match_name_1.strip()
-        match_name_2 = match_name_2.strip()
+        match_team_1 = match_team_1.strip()
+        match_team_2 = match_team_2.strip()
         
         # Screen to print
         info: list = ["- - - - List Of Matches - - - -"]
         options: dict[str, str] = {
-            "1": f"Select {match_name_1} for victory",
-            "2": f"Select {match_name_2} for victory",
+            "1": f"Select {match_team_1} for victory",
+            "2": f"Select {match_team_2} for victory",
             "b": "Back",
         }
 
@@ -466,12 +464,21 @@ class AdminUI:
             case "b":
                 return MenuOptions.select_match
             case "1":
-                winner = match_name_1
+                winner = match_team_1
             case "2":
-                winner = match_name_2
+                winner = match_team_2
 
         options = {"b": "Back"}
         message = f"{winner} Has Won The Round!"
+
+        tournament_name: str | None = LogicLayerAPI.save_player()
+
+        if type(tournament_name) is str:
+            current_tournament: Tournament = LogicLayerAPI.get_tournament_by_name(tournament_name)
+            tournament_id: str = current_tournament.uuid
+        # if type()
+        #     current_match: Match = LogicLayerAPI.get_match(tournament_id, match_team_1, match_team_2)
+        #     winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
 
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["b"])

@@ -289,3 +289,13 @@ def get_all_matches(tournament_uuid: str) -> list[Match]:
     tied to the uuid given.
     """
     return match_logic.get_matches(tournament_uuid)
+
+
+# TODO implement input_match_results and call it
+def input_match_results(match: Match) -> None:
+    pass
+
+def get_match(tournament_id: str, match_team1: str, match_team2: str) -> Match | str:
+    return match_logic.get_match(tournament_id, match_team1, match_team2)
+
+
