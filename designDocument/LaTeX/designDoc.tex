@@ -15,23 +15,25 @@
 \usepackage{lastpage}
 \usepackage{fancyhdr}
 \usepackage{tabularray}
+
 \usepackage{parskip}
 \usepackage{blindtext}
 \usepackage{varwidth}
-% \geometry{legalpaper, portrait, margin=0.5cm}
+\usepackage{multicol}
 \geometry{
  a4paper,
  total={170mm,257mm},
  left=20mm,
  top=20mm,
  }
-\usepackage{multicol}
-
 \newcolumntype{M}{>{\begin{varwidth}{4cm}}l<{\end{varwidth}}}
 \begin{document}
 \setlength\emergencystretch{\hsize}\hbadness=10000
-\input{frontPage.tex}
+\UseTblrLibrary{counter}
 
+\newcounter{mycnta}
+\newcommand{\mycnta}{\stepcounter{mycnta}\arabic{mycnta}}
+\input{frontPage.tex}
 \input{requirements.tex}
 \input{useCases.tex}
 \input{classDiagrams.tex}
