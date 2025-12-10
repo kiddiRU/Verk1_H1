@@ -9,11 +9,11 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 9:43
+### Time: 9:43 - 23:00
 ### On site:
 
 ## Kristinn Hrafn
-### Time: 9:00
+### Time: 9:00 - 23:00
 ### On site: Yes
 
 ## Kristján Hagalín
@@ -64,8 +64,8 @@
 - Fixed Bug - If end-time smaller then start-time it generates weird datetime.
 ## State of group: 
 ## Divisions:
-- UI / UX:
-- System engineer: 
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristinn, Kristján
 - QC: Sindri
 ## ToDo-list:
 - Make Kristinn import regex for email "validation"
