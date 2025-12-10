@@ -774,7 +774,8 @@ class AdminUI:
 
         print("THIS IS EDIT TOURNAMENT INFO WINDOW")
         return MenuOptions.edit_tournament
-
+    
+    # Created by Sindri
     def create_club(self) -> MenuOptions:
         """Create club screen, choices: fill info with input (name and color)
 
