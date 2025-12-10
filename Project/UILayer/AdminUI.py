@@ -99,7 +99,7 @@ class AdminUI:
                 "TOURNAMENT",
             )
             if not tournament_name:
-                return user_path[-2]
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Name: " + tournament_name)
             print(self.tui.table(menu, user_path, info, options))
@@ -115,8 +115,8 @@ class AdminUI:
                 "tournament_date",
                 "TOURNAMENT",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_date:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Start And End Dates: " + tournament_date)
             print(self.tui.table(menu, user_path, info, options))
@@ -132,8 +132,8 @@ class AdminUI:
                 "tournament_time",
                 "TOURNAMENT",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_time:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Start And End Time: " + tournament_time)
             print(self.tui.table(menu, user_path, info, options))
@@ -149,8 +149,8 @@ class AdminUI:
                 "home_address",
                 "TOURNAMENT",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_addr:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Venue Address: " + tournament_addr)
             print(self.tui.table(menu, user_path, info, options))
@@ -164,8 +164,8 @@ class AdminUI:
             tournament_email: str = self.utility._input_info(
                 "Enter Contact Email or 'q' to cancel: \n", "email", "PLAYER"
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_email:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Email: " + tournament_email)
             print(self.tui.table(menu, user_path, info, options))
@@ -181,8 +181,8 @@ class AdminUI:
                 "phone_number",
                 "PLAYER",
             )
-            if not tournament_name:
-                return user_path[-2]
+            if not tournament_phnum:
+                return MenuOptions.admin_screen
 
             self.tui.save_input("Phone Number: " + tournament_phnum)
             print(self.tui.table(menu, user_path, info, options))
