@@ -288,11 +288,11 @@ class UtilityUI:
 
                 output_list.append(
                     #f"{line('—')}\n"
-                    f"Team 1: {match_name_1:<71}|\n"
+                    f"{f"Team 1: {match_name_1}":<79}|\n"
                     f"{'vs':<79}|\n"
-                    f"Team 2: {match_name_2:<71}|\n"
-                    f"Match Time: {str(match.match_time):<67}|\n"
-                    f"Match Winner: {str(match.winner):<65}|"
+                    f"{f"Team 2: {match_name_2}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
+                    f"{f"Match Winner: {str(match.winner)}":<79}|"
                 )
 
 
@@ -305,11 +305,11 @@ class UtilityUI:
 
                 output_list.append(
                     #f"{line('—')}\n"
-                    f"Team 1: {match_name_1:<71}|\n"
+                    f"{f"Team 1: {match_name_1}":<79}|\n"
                     f"{'vs':<79}|\n"
-                    f"Team 2: {match_name_2:<71}|\n"
-                    f"Match Time: {str(match.match_time):<67}|\n"
-                    f"Match Winner: {str(match.winner):<65}|"
+                    f"{f"Team 2: {match_name_2}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
+                    f"{f"Match Winner: {str(match.winner)}":<79}|"
                 )
 
         return output_list

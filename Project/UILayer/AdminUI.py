@@ -245,7 +245,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         find_name: str = input(
-            self.message_color + "Input Tournament Name or 'q' to go back: " + self.reset
+            self.message_color + "Input Tournament Name or 'q' to go back: \n" + self.reset
         )
         if find_name.lower() == "q":
             return user_path[-2]
@@ -388,17 +388,23 @@ class AdminUI:
         message: str = ""
 
         # Show a list of the matches in the round
-        matches_list: list[str] = self.utility.list_matches(
-            tournament_uuid, False
-        )
+        matches: list[str] = self.utility.list_matches(tournament_uuid, True)
 
+        ammount_of_lines = len(matches) -1
 
         x = 0
-        for match in matches_list:
+        for match in matches:
+            info.append(match)
+            for line in range(ammount_of_lines):
+                info.append("—" * 80)
             x += 1
             choice_list.append(str(x))
-            self.options[str(x)] = f"Input Results for {match}"
-            info.append(match)
+            match = match[:-162]
+            self.options[str(x)] = f"{"Input Results for:":<77}| \n{match}"
+            self.options[("—" * 80)] = ""
+            ammount_of_lines -= 1
+
+        self.options[("—" * 80) + " "] = ""
         choice_list.append("b")
         self.options["b"] = "Back"
 
