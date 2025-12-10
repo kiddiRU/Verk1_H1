@@ -207,17 +207,13 @@ class TeamLL():
 
         return str(points)
     
-
+    # Changed by Sindri
     def get_team_club(self, team_name: str) -> str:
         clubll = ClubLL()
-
         clubs = clubll.list_clubs()
-
         for club in clubs:
-            teams = clubll.get_teams_in_club(club.name)
-
-            for team in teams:
-                if team_name == team.name:
-                    return club.name
+            teams = [x.name for x in clubll.get_teams_in_club(club.name)]
+            if team_name in teams:
+                return club.name
         
         return ""
