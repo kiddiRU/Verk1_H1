@@ -506,6 +506,15 @@ Rank: {current_login_rank}"""]
             handle: str  = current_player.handle
             url: str  = current_player.url
 
+            # Is useless but is to apease the type hinting gods
+            new_name = name
+            new_dob = dob
+            new_addr = addr
+            new_email = email
+            new_phnum = phnum
+            new_handle = handle
+            new_url = url
+
         # This should never run, this is just to apease the type hinting gods
         else:
             return MenuOptions.player_screen
@@ -645,10 +654,13 @@ Rank: {current_login_rank}"""]
         options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
         print(self.tui.table(menu, user_path, [], options, message))
         choice: str = self.utility._prompt_choice(["c", "b"])
+
+
         
         if choice == "c":
-            LogicLayerAPI.update_player_info(current_player, name, dob, addr, email, phnum, handle, url)
-            LogicLayerAPI.save_player(handle)
+            LogicLayerAPI.update_player_info(current_player, new_name, new_dob, 
+                                             new_addr, new_email, new_phnum, new_handle, new_url)
+            LogicLayerAPI.save_player(new_handle)
         
         return MenuOptions.player_screen
     
