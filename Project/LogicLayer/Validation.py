@@ -74,7 +74,7 @@ def validate_name(name: str) -> str | None:
             )
     
     if not name.replace(" ","").isalpha():
-        raise ValidationError("Name can not have digits")
+        raise ValidationError("Name can only have letters")
     
     else:
         return name
@@ -142,9 +142,10 @@ def validate_phone_number(phone_number: str) -> str | None:
 def validate_email(email: str) -> str | None:
     """
     Checks if email has @, and that there is something before and after the @
+    can only have one @
     """
 
-    if "@" in email:
+    if ("@" in email) and (email.count("@") == 1) :
         email_list: list = email.split("@")
         before_at_symbol: str = email_list[0]
         after_at_symbol: str = email_list[1]
@@ -175,11 +176,11 @@ def validate_date(date_input: str) -> date | ValidationError:
             return valid_date
         
         except:
-            raise ValidationError("Not valid date")
+            raise ValidationError("Invalid date")
         
 
     except:
-        raise ValidationError("Letters are not allowed in a date")
+        raise ValidationError("Invalid date")
 
 
 

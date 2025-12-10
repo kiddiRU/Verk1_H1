@@ -9,7 +9,7 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time:
+### Time: 9:43
 ### On site:
 
 ## Kristinn Hrafn
@@ -35,7 +35,8 @@
 - QC:
 
 ## ToDo-list:
-
+- Validations date and time frame needs fixing
+- Create tournament needs work -> Allow user to input date and time
 # Evening meeting (Diary)
 ## State of project:
 

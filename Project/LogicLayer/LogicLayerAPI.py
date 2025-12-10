@@ -8,7 +8,7 @@ Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility, MatchLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -107,6 +107,9 @@ def remove_player(player_handle: str, current_player: Player) -> Team:
 def get_team_members(team_name: str) -> list[str]:
     return team_logic.get_team_members(team_name)
 
+def get_team_members_object(team_name: str) -> list[Player]:
+    return team_logic.get_team_members_object(team_name)
+
 def list_teams() -> list[Team]:
     return team_logic.list_teams()
 
@@ -129,6 +132,7 @@ def get_team_club(team_name: str) -> str:
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
+match_logic = MatchLL()
 
 def create_tournament(
     name: str,
@@ -207,6 +211,27 @@ def change_match_winner(
             team_uuid
         )
 
+def get_all_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournaemnt
+
+    Returns a list of all matches in the tournament
+    tied to the uuid given.
+    """
+    return match_logic.get_matches(tournament_uuid)
+
+def get_next_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournament
+
+    Returns a list of matches which are next on the schedule,
+    matches next in the schedule are matches which don't have
+    a winner and there doesn't exist a match which happens
+    before it and needs a winner.
+    """
+    return tournament_logic.next_games(tournament_uuid)
+
+
 # TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
     pass
@@ -244,6 +269,10 @@ def get_club_wins(club_name: str) -> str:
 def get_club_points(club_name: str) -> str:
     return club_logic.get_club_points(club_name)
 
+# Is using depracated UtilityLogic
+def get_club_by_name(club_name) -> Club:
+    return LogicUtility.get_club_by_name(club_name)
+
 ''' Match API '''
 
 # TODO implement input_match_results and call it
@@ -277,5 +306,5 @@ def get_team_by_name(team_name: str) -> Team:
     return LogicUtility.get_team_by_name(team_name)
 
 def get_team_by_uuid(team_uuid: str) -> Team:
-    return LogicUtility.get_team_by_name(team_uuid)
+    return LogicUtility.get_team_by_uuid(team_uuid)
 

@@ -13,6 +13,7 @@ from Models.Player import Player
 from Models.Club import Club
 from Models.Team import Team
 from Models.Tournament import Tournament
+from Models.Match import Match
 
 from UILayer.MenuOptions import MenuOptions
 from LogicLayer.LogicLayerAPI import validate
@@ -78,12 +79,13 @@ class UtilityUI:
         :param options: List of strings representing the options that the user can use
         :return: Dictionary of options -> string
         """
-        prompt_dict: dict[int|str, str] = {}
+        prompt_dict: dict[int | str, str] = {}
         for i, choice in enumerate(options, start=1):
             prompt_dict[i] = choice
         return prompt_dict
+
     # Created by Sindri Freysson
-    def prompt_choice(self, valid_choices: dict[int|str, str]) -> str:
+    def prompt_choice(self, valid_choices: dict[int | str, str]) -> str:
         """
         Takes in a list of valid choices and returns a string representing the choice
         :param self:
@@ -98,7 +100,9 @@ class UtilityUI:
                 self.error_color + "Not a valid option try again" + self.reset
             )
 
-    def _input_change(self, message: str, attribute: str, info_type: str) -> str:
+    def _input_change(
+        self, message: str, attribute: str, info_type: str
+    ) -> str:
         """
         Helper function that repeats input until it is valid or navigation word is entered
         :param message: message to display - "Enter Your name"
@@ -119,7 +123,6 @@ class UtilityUI:
             except ValidationError as e:
                 print(self.error_color + str(e) + self.reset)
                 continue
-
 
     def screen_not_exist_error(self) -> MenuOptions:
         """When a screen doesn't exist"""
@@ -237,9 +240,46 @@ class UtilityUI:
 
         output_list: list[str] = []  # list that holds each line as a f-string
 
-        for t in tournaments:
-            if t.status == tournament_status:
+        for tournament in tournaments:
+            if tournament.status == tournament_status:
                 continue
-            output_list.append(f"{t.name:<68}>{t.status:^10}|")
+            output_list.append(
+                f"{tournament.name:<68}>{tournament.status:^10}|"
+            )
+        return output_list
+
+    def list_matches(self, tournament_uuid: str) -> list[str]:
+        match_list: list[Match] = LogicLayerAPI.get_next_matches(tournament_uuid)
+        output_list: list[str] = []
+
+        for match in match_list:
+
+            match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
+            match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
+
+            match_name_1: str = match1.name
+            match_name_2: str = match2.name
+
+            output_list.append(f"{match_name_1} vs {match_name_2} {str(match.match_time)} {str(match.winner)}")
+
         return output_list
     
+    # "Created" by Sindri Freysson
+    # TODO need write doc string
+    def show_filtered(self, object_list: list[Player]|list[Team]|list[Club]) -> list[str]:
+        
+        str_list: list[str] = [x.name for x in object_list]
+        output_list: list[str] = []  # list that holds each line as a f-string
+        length: int = len(str_list)
+
+        for value in range(0, len(str_list), 2):
+            left = str_list[value]
+            if value + 1 < length:
+
+                right = str_list[value + 1]
+                output_list.append(f"{left:<39}|{right:<39}|")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}|{" ":<39}|")
+
+        return output_list
