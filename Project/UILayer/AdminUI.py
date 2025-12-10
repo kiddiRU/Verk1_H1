@@ -362,7 +362,20 @@ class AdminUI:
             MenuOptions.manage_active_tournament,
             MenuOptions.select_match,
         ]
-        info: list = ["- - - - List Of Matches - - - -"]
+        # Gets the whole team vs team string
+        match_string: str = self.options[self.choice]
+
+        # Splits the string
+        lines: list[str] = match_string.splitlines()
+
+        # Filter out the name of the teams
+        match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
+        match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
+
+        match_name_1 = match_name_1.strip()
+        match_name_2 = match_name_2.strip()
+
+        info: list[str] = ["- - - - List Of Matches - - - -"]
         self.options: dict[str, str] = {}
         choice_list = []
         message: str = ""
@@ -370,6 +383,9 @@ class AdminUI:
         # Show a list of the matches in the round
         matches_list: list[str] = self.utility.list_matches(
             tournament_uuid, False
+        )
+        info: list[str] = info + self.utility.list_matches(
+            tournament_uuid, True
         )
 
         x = 0
@@ -407,16 +423,21 @@ class AdminUI:
             MenuOptions.select_match,
             MenuOptions.input_results,
         ]
+
+        # Gets the whole team vs team string
         match_string: str = self.options[self.choice]
 
+        # Splits the string
         lines: list[str] = match_string.splitlines()
 
+        # Filter out the name of the teams
         match_name_1 = lines[1].replace("Team 1: ", "").rstrip("|")
         match_name_2 = lines[3].replace("Team 2: ", "").rstrip("|")
 
         match_name_1 = match_name_1.strip()
         match_name_2 = match_name_2.strip()
         
+        # Screen to print
         info: list = ["- - - - List Of Matches - - - -"]
         options: dict[str, str] = {
             "1": f"Select {match_name_1} for victory",
@@ -434,9 +455,9 @@ class AdminUI:
             case "b":
                 return MenuOptions.select_match
             case "1":
-                winner = teamname1
+                winner = match_name_1
             case "2":
-                winner = teamname2
+                winner = match_name_2
 
         options = {"b": "Back"}
         message = f"{winner} Has Won The Round!"
