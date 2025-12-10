@@ -505,8 +505,9 @@ class AdminUI:
                 match_uuid: str = current_match.uuid
                 if winner is not None:
                     winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
+                    winner_uuid = winner_team.uuid
 
-                    LogicLayerAPI.change_match_winner(tournament_id, match_uuid, winner)
+                    LogicLayerAPI.change_match_winner(tournament_id, match_uuid, winner_uuid)
 
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["b"])

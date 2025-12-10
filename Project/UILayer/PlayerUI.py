@@ -713,7 +713,6 @@ Rank: {current_login_rank}"""]
         info: list[str]= [f"- - - -{team}- - - -", 
                     f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict[str, str]= {"1": "Edit Team", "2": "Leave Team", "b": "Back"}
-        message: str = ""
 
         for member in team_members: 
             player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
@@ -820,11 +819,13 @@ Rank: {current_login_rank}"""]
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team, 
                            MenuOptions.add_player]
-        info: list = []
         options: dict = {"c": "Continue"}
 
+        list_of_handles: list[str] = self.utility.show_main("players")
+        info: list[str] = list_of_handles
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path))
+        print(self.tui.table(menu, user_path, info))
 
         # Might add to the message if the search will be implemented
         add_handle: str = input(self.input_color + "Enter A Players Handle To Add Them: \n" + self.reset)
@@ -884,18 +885,33 @@ Rank: {current_login_rank}"""]
         current_login_handle: str = str(LogicLayerAPI.save_player())
         current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
         current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+
+        team_members = LogicLayerAPI.get_team_members(team)
 
         menu: str = "Remove Player"
         user_path: list = [MenuOptions.player_screen, 
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team, 
                            MenuOptions.remove_player]
-        info: list[str]= []
+        info: list[str]= [f"- - - -{team}- - - -", 
+                    f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict = {"c": "Continue"}
         message: str = ""
 
+        for member in team_members: 
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(member)
+
+            if type(player) is Player: # Only there for the type hinting gods
+                team, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
+
+                if member_rank == "Captain":
+                    info.append(f"{member_rank} \t {player.handle}")
+                else:
+                    info.append(f"{member_rank} \t \t {player.handle}")
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, ))
+        print(self.tui.table(menu, user_path, info))
         remove_handle: str = input(self.input_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
 
 
