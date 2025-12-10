@@ -21,7 +21,7 @@ class PlayerUI:
     def __init__(self) -> None:
         self.utility = UtilityUI()
         self.tui = Drawer()
-        self.message_color = "\033[36m"
+        self.input_color = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
 
@@ -72,8 +72,9 @@ class PlayerUI:
         player_list = LogicLayerAPI.list_players()
         abc: str = 1
 
-        menu: str = "Login"
-        user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.login]
+        menu: str = "Log In"
+        user_path: list[MenuOptions] = [MenuOptions.start_screen, 
+                                        MenuOptions.login]
         info: list[str]= []
         options: dict[str, str]= {"t": "Try Again", "b": "Back"}
         message: str = "Handle Not Found!"
@@ -81,7 +82,7 @@ class PlayerUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        login_handle: str = input(self.message_color + "Input Your Handle: " + self.reset)
+        login_handle: str = input(self.input_color + "Input Your Handle: " + self.reset)
 
         user_uuid = LogicLayerAPI.get_player_uuid(login_handle)
         if user_uuid:
@@ -124,7 +125,8 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.register]
+        user_path: list[MenuOptions] = [MenuOptions.start_screen, 
+                                        MenuOptions.register]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Created A Player!"
@@ -144,7 +146,7 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))  
-            user_name: str = self.utility._input_info("Enter Name or 'q' to cancel: \n", "unique_name", "PLAYER")
+            user_name: str = self.utility._input_info("Enter Name or 'q' to cancel: \n", "name", "PLAYER")
             if not user_name: 
                 return user_path[-2]
             self.tui.save_input("Name: " + user_name)
@@ -225,8 +227,8 @@ class PlayerUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_url: str = input(self.message_color + 
-                                  "Enter URL or 'q' to cancel: \n (Optional, /Press Enter To Leave Blank) \n" 
+            user_url: str = input(self.input_color + 
+                                  "Enter URL or 'q' to cancel: \n(Optional, Press Enter To Leave Blank) \n" 
                                   + self.reset)
             if user_url.lower() == "q": 
                 return user_path[-2]
@@ -333,9 +335,8 @@ Rank: {current_login_rank}"""]
                     return MenuOptions.my_team_empty
                 return MenuOptions.my_team_not_empty
             case "3":
-                # if ...:  # TODO: check if player is already in a team
-                #     print("You are already in a team")
-                #     return MenuOptions.player_page
+                if not team:
+                    return MenuOptions.create_team_in_team
                 return MenuOptions.create_team
             case "lo":
                 return MenuOptions.logout
@@ -370,7 +371,8 @@ Rank: {current_login_rank}"""]
 
 
         menu: str = "Create Team"
-        user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.create_team]
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
+                                        MenuOptions.create_team]
 
         #temporary info
         info: list[str]= ["- - - -List Of Clubs- - - -"]
@@ -389,7 +391,7 @@ Rank: {current_login_rank}"""]
         while con == "b":
             self.tui.clear_saved_data()
             print(self.tui.table(menu, user_path, [], {}, message))
-            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "unique_name", "TEAM")
+            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "name", "TEAM")
             if not team_name:
                 return user_path[-2]
             self.tui.save_input("Team Name: " + team_name)
@@ -403,7 +405,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path))
-            team_url: str = input("Enter Team URL (Optional): \n") #TODO: This is just a basic input
+            team_url: str = input(self.input_color + "Enter Team URL (Optional): \n" + self.reset)
             self.tui.save_input("Team Url: " + team_url)
 
             print(self.tui.table(menu, user_path, [], options)) 
@@ -415,7 +417,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path))
-            team_ascii: str = input("Enter A Single Line Team ASCII Art (Optional): \n") #TODO: This is just a basic input
+            team_ascii: str = input(self.input_color + "Enter A Single Line Team ASCII Art (Optional): \n" + self.reset)
             self.tui.save_input("Team ASCII Art: " + team_ascii)
 
             print(self.tui.table(menu, user_path, [], options)) 
@@ -426,7 +428,7 @@ Rank: {current_login_rank}"""]
             message = ""
             while team_club not in club_names:
                 print(self.tui.table(menu, user_path, info, {}, message))
-                team_club: str = input("Choose A Club To Join: \n") #TODO: This is just a basic input
+                team_club: str = input(self.input_color + "Choose A Club To Join: \n" + self.reset) #TODO: This is just a basic input
                 if team_club not in club_names:
                     print(self.tui.table(menu, user_path, info, options, message))
                     message = f"{team_club} Does Not Exist Or Is Not Available"
@@ -485,7 +487,7 @@ Rank: {current_login_rank}"""]
 
         menu: str = "Edit Player Info"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, 
-                                MenuOptions.edit_player_info]
+                                        MenuOptions.edit_player_info]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Changed Your Info!"
@@ -575,7 +577,7 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_url = input(unchanged_message + "\n Enter New URL: \n")
+            new_url = input(unchanged_message + self.input_color + "\n Enter New URL: \n" + self.reset)
             if new_url:
                 url = new_url
             self.tui.save_input("URL: " + url)
@@ -605,7 +607,8 @@ Rank: {current_login_rank}"""]
         """
 
         menu: str = "My Team"
-        user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_empty]
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
+                                        MenuOptions.my_team_empty]
         info: list[str]= []
         options: dict[str, str]= {"b": "Back"}
         message: str = "You Are Not In A Team!"
@@ -639,7 +642,7 @@ Rank: {current_login_rank}"""]
        
         menu: str = "My Team"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, 
-                                MenuOptions.my_team_not_empty]
+                                        MenuOptions.my_team_not_empty]
         info: list[str]= [f"- - - -{team}- - - -", 
                     f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict[str, str]= {"1": "Edit Team", "2": "Leave Team", "b": "Back"}
@@ -703,8 +706,8 @@ Rank: {current_login_rank}"""]
 
         menu: str = "Edit Team"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, 
-                           MenuOptions.my_team_not_empty, 
-                           MenuOptions.edit_team]
+                                        MenuOptions.my_team_not_empty, 
+                                        MenuOptions.edit_team]
         info: list[str]= [f"- - - -{team}- - - -", 
                     f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict[str, str]= {"1": "Add Player To Team", "2": "Remove Player From Team", "b": "Back"}
@@ -746,7 +749,10 @@ Rank: {current_login_rank}"""]
         """
         
         menu: str = "Add Player"
-        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, MenuOptions.add_player]
+        user_path: list = [MenuOptions.player_screen, 
+                           MenuOptions.my_team_not_empty, 
+                           MenuOptions.edit_team, 
+                           MenuOptions.add_player]
         info: list = []
         options: dict = {"c": "Continue"}
 
@@ -754,7 +760,7 @@ Rank: {current_login_rank}"""]
         print(self.tui.table(menu, user_path))
 
         # Might add to the message if the search will be implemented
-        add_handle: str = input("Enter A Players Handle To Add Them: \n") #TODO: This is just a basic input
+        add_handle: str = input(self.input_color + "Enter A Players Handle To Add Them: \n" + self.reset)
 
         self.tui.save_input("Player To Add: " + add_handle)
 
@@ -763,7 +769,7 @@ Rank: {current_login_rank}"""]
         print(add_uuid, add_in_team)
 
         if add_uuid and not add_in_team: 
-            message: str = f"The Player {add_handle} Was Found, Do You Want To Add Them To Your Team? Y/N:"
+            message: str = f"The Player {add_handle} Was Found \nDo You Want To Add Them To Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility._prompt_choice(["y", "n"])
@@ -789,7 +795,7 @@ Rank: {current_login_rank}"""]
             return MenuOptions.edit_team
         
 
-        message: str = f"The Player {add_handle} Was Not Found Or Is Not Available, Do You Want To Try Again? Y/N:"
+        message: str = f"The Player {add_handle} Was Not Found Or Is Not Available \nDo You Want To Try Again? Y/N:"
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility._prompt_choice(["y", "n"])
@@ -813,7 +819,9 @@ Rank: {current_login_rank}"""]
         current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
 
         menu: str = "Remove Player"
-        user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, 
+        user_path: list = [MenuOptions.player_screen, 
+                           MenuOptions.my_team_not_empty, 
+                           MenuOptions.edit_team, 
                            MenuOptions.remove_player]
         info: list[str]= []
         options: dict = {"c": "Continue"}
@@ -821,7 +829,7 @@ Rank: {current_login_rank}"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, ))
-        remove_handle: str = input(self.message_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
+        remove_handle: str = input(self.input_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
 
 
         remove_uuid = LogicLayerAPI.get_player_uuid(remove_handle)
@@ -832,7 +840,7 @@ Rank: {current_login_rank}"""]
         remove_player_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
         if current_team == remove_player_team:
-            message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
+            message: str = f"The Player {remove_handle} Was Found \nDo You Want To Remove Them From Your Team? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility._prompt_choice(["y", "n"])
@@ -851,7 +859,7 @@ Rank: {current_login_rank}"""]
             return MenuOptions.edit_team
         
 
-        message: str = f"The Player {remove_handle} Was Not Found Or Is Not Removeable, Do You Want To Try Again? Y/N:"
+        message: str = f"The Player {remove_handle} Was Not Found Or Is Not Removeable \nDo You Want To Try Again? Y/N:"
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility._prompt_choice(["y", "n"])
@@ -884,12 +892,12 @@ Rank: {current_login_rank}"""]
         if rank == "Captain":
             message: str = f"Select A New Captain Before Leaving {team}"
             print(self.tui.table(menu, user_path, info, {}, message))
-            new_captain = input(self.message_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
+            new_captain = input(self.input_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
             current_team, rank = LogicLayerAPI.get_player_team(new_captain)
             new_captain_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
             if current_team == new_captain_team:
-                message: str = f"The Player {new_captain} Was Found, Do You Want To Promote Them To Captain? Y/N:"
+                message: str = f"The Player {new_captain} Was Found \nDo You Want To Promote Them To Captain? Y/N:"
                 print(self.tui.table(menu, user_path, info, {}, message))
 
                 choice: str = self.utility._prompt_choice(["y", "n"])
@@ -903,7 +911,7 @@ Rank: {current_login_rank}"""]
                         return MenuOptions.player_screen
                     return MenuOptions.edit_team
 
-            message: str = "Player Was Not Found Or Not Available, Do You Want To Try Again? Y/N:"
+            message: str = "Player Was Not Found Or Not Available \nDo You Want To Try Again? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
             choice: str = self.utility._prompt_choice(["y", "n"])
 
@@ -929,6 +937,30 @@ Rank: {current_login_rank}"""]
 
         return MenuOptions.my_team_empty
     
+
+    def create_team_in_team(self) -> MenuOptions:
+        """ Screen That Is Shown When Player In A Team Tries To Create A New Team 
+
+        Returns:
+            MenuOptions: The next menu to navigate to
+        """
+    
+        menu: str = "Create A Team"
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
+                                        MenuOptions.create_team_in_team]
+        info: list[str]= []
+        options: dict[str, str]= {"b": "Back"}
+        message: str = "You Are Already In A Team!"
+        
+        self.tui.clear_saved_data()
+
+        print(self.tui.table(menu, user_path, info, options, message))
+
+        choice: str = self.utility._prompt_choice(["b"])
+        match choice:
+            case "b":
+                return MenuOptions.player_screen
+        return MenuOptions.player_screen
 
 
     def onion(self) -> MenuOptions:
@@ -1104,7 +1136,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMM
 
 
 
-        like = input("Do you like my art? Y/N 	⤜(ⱺ ʖ̯ⱺ)⤏ \n")
+        like = input(self.input_color + "Do you like my art? Y/N 	⤜(ⱺ ʖ̯ⱺ)⤏ \n" + self.reset)
 
     
         if like.lower() == "y":
