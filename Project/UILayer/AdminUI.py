@@ -397,7 +397,7 @@ class AdminUI:
             info.append(match)
             x += 1
             choice_list.append(str(x))
-            match = match[81:-162]
+            match = match[243:-81]
             self.options[str(x)] = f"{"Input Results for:":<77}| \n{match}"
             self.options[("—" * 80)] = ""
             ammount_of_lines -= 1
