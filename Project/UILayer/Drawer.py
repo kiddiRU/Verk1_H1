@@ -193,10 +193,7 @@ class Drawer():
     
 
     def clear_saved_data(self) -> None:
+        """Clears all the date that has been saved in the drawer"""
         
         self.previous_inputs.clear()
-
-    
-
-
 
