@@ -266,7 +266,7 @@ class SpectateUI:
             "Wins: " + LogicLayerAPI.get_team_wins(team_name),
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
-        infoB: list[str] = [f"Team Members: "] + self.utility.show_filtered(
+        infoB: list[str] = [f"Team Members:\n{80 * "-"}"] + self.utility.show_filtered(
             LogicLayerAPI.get_team_members_object(team_name)
         )
         info: list[str] = infoA + infoB
