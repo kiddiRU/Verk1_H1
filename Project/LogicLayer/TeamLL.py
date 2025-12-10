@@ -21,6 +21,9 @@ class TeamLL():
     def set_club_logic(self, club_logic: ClubLL) -> None:
         self._club_logic = club_logic
 
+    def set_match_logic(self, match_logic: MatchLL) -> None:
+        self._match_logic = match_logic
+
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
@@ -195,12 +198,11 @@ class TeamLL():
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         team_uuid: str = self.get_team_by_name(team_name).uuid
-        match = MatchLL()
         points = 0
 
         for tournament in model_tournaments:
             try:
-                matches_list: list[Match] = match.get_matches(tournament.uuid)
+                matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
                 tour_final_match: Match = matches_list[-1]
                 winner = tour_final_match.winner
                 loser = tour_final_match.losing_team

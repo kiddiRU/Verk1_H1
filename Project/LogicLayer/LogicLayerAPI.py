@@ -20,6 +20,7 @@ tournament_logic = TournamentLL(team_logic, match_logic)
 
 team_logic.set_player_logic(player_logic)
 team_logic.set_club_logic(club_logic)
+team_logic.set_match_logic(match_logic)
 
 ''' Validation API '''
 def validate(attr: str, value: str, name_type: str):
