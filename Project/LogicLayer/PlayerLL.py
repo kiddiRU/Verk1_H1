@@ -15,8 +15,9 @@ from LogicLayer.Validation import validate_attr
 from LogicLayer import MatchLL, TeamLL
 
 class PlayerLL():
-    def __init__(self, team_logic: TeamLL) -> None:
+    def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
         self._team_logic = team_logic
+        self._match_logic = match_logic
 
     def set_team_logic(self, team_logic: TeamLL) -> None:
         self._team_logic = team_logic
@@ -136,9 +137,9 @@ class PlayerLL():
     def get_player_team(self, player_handle: str) -> tuple[str, str]:
         """Takes in a player handle and returns the name of their team and their rank"""
 
-        player_uuid: Player | str = self.get_player_by_uuid(player_handle)
+        player_uuid: Player | str = self.player_handle_to_uuid(player_handle)
         teams: list[Team] = self._team_logic.list_all_teams()
-        
+
         for team in teams:
             players = self._team_logic.get_team_members(team.name)
 
@@ -187,15 +188,14 @@ class PlayerLL():
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         player_uuid: str = self.player_handle_to_uuid(player_handle)
-        match = MatchLL()
         points = 0
 
         for tournament in model_tournaments:
             try:
-                matches_list: list[Match] = match.get_matches(tournament.uuid)
+                matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
                 tour_final_match: Match = matches_list[-1]
                 winning_players = tour_final_match.winning_players
-                losing_player = tour_final_match.losing_players
+                losing_players = tour_final_match.losing_players
 
                 if winning_players is None:
                     pass
@@ -203,7 +203,7 @@ class PlayerLL():
                 elif player_uuid in winning_players:
                     points += 3
 
-                elif player_uuid in losing_player:
+                elif losing_players and player_uuid in losing_players:
                     points += 1
                 
             except:
@@ -217,31 +217,31 @@ class PlayerLL():
             players: list[Player] = DataLayerAPI.load_players()
             return players
 
-    def get_player_by_handle(self, player_handle: str) -> Player:
+    def get_player_by_handle(self, player_handle: str) -> Player | str:
             ''' Takes in a players UUID and returns the players object. '''
 
             players: list[Player] = self.list_all_players()
             player = next((p for p in players if p.handle == player_handle), None)
 
             if player is None:
-                raise Exception(f'No player found with the handle: {player_handle}')
+                return ""
 
             return player
 
-    def get_player_by_uuid(self, player_uuid: str) -> Player:
+    def get_player_by_uuid(self, player_uuid: str) -> Player | str:
             ''' Takes in a players UUID and returns the players object. '''
 
             players: list[Player] = self.list_all_players()
             player = next((p for p in players if p.uuid == player_uuid), None)
-
+            
             if player is None:
-                raise Exception(f'No player found with the UUID: {player_uuid}')
+                return ""
 
             return player
 
     def player_handle_to_uuid(self, player_handle: str) -> str:
-        player: Player = self.get_player_by_handle(player_handle)
-        return player.uuid
+        player: Player | str = self.get_player_by_handle(player_handle)
+        return player.uuid if type(player) == Player else ''
     
     def get_players_team_uuid(self, player_uuid: str) -> str:
         """

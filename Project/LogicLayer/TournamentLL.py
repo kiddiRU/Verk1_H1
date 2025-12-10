@@ -93,14 +93,20 @@ class TournamentLL:
         Takes the given info and applies it a tournament. Performs
         no validation on the given info.
         '''
-        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        
+        #params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         tournament: Tournament = self.get_tournament_by_name(name)
 
-        for attr, value in params.items():
-            if value == '':
-                continue
+        # for attr, value in params.items():
+        #     if value == '':
+        #         continue
         
-            setattr(tournament, attr, value)
+        #     setattr(tournament, attr, value)
+
+        tournament.name = name
+        tournament.venue = venue
+        tournament.email = email
+        tournament.phone_number = phone_number
 
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
     

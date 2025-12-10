@@ -198,7 +198,7 @@ class TeamLL():
     
 
     def get_team_club(self, team_name: str) -> str:
-        clubs = self._club_logic.list_clubs()
+        clubs = self._club_logic.list_all_clubs()
 
         for club in clubs:
             teams_in_club: list[str] = [t.name for t in self._club_logic.get_teams_in_club(club.name)]

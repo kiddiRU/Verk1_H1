@@ -518,5 +518,15 @@
         "phone_number": "123-3456",
         "handle": "dfg",
         "url": ""
+    },
+    "b521ba7f-8fae-4bea-a55c-f8ecaad7c024": {
+        "uuid": "b521ba7f-8fae-4bea-a55c-f8ecaad7c024",
+        "name": "",
+        "date_of_birth": "",
+        "home_address": "",
+        "email": "",
+        "phone_number": "",
+        "handle": "",
+        "url": "sillidu.is"
     }
 }

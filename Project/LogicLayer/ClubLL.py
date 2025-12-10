@@ -41,7 +41,7 @@ class ClubLL():
         return new_club
 
 
-    def list_clubs(self): 
+    def list_all_clubs(self): 
         """Returns a list of stored clubs"""
 
         clubs: list[Club] = DataLayerAPI.load_clubs()
@@ -110,7 +110,6 @@ class ClubLL():
         club_uuid: str = self.get_club_by_name(club_name).uuid
         match = MatchLL()
         points = 0
-        count = 0
 
         teams_in_club: list[str] = [
             team.uuid for team in model_teams
