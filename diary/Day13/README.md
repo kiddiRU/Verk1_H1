@@ -41,6 +41,7 @@
 - Add tournament validation
 - Create tournament 
 - Create club
+- Edit club
 - edit tournament
 # Evening meeting (Diary)
 ## State of project:
