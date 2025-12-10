@@ -129,7 +129,7 @@ class PlayerLL():
         players: list[Player] = DataLayerAPI.load_players()
         return players
 
-    def get_player_object(self, player_uuid: str) -> Player:
+    def get_player_object(self, player_uuid: str) -> Player | str:
         ''' Takes in a players UUID and returns the players object. '''
 
         players: list[Player] = DataLayerAPI.load_players()
