@@ -951,7 +951,7 @@ Rank: {current_login_rank}"""]
             current_team, rank = LogicLayerAPI.get_player_team(new_captain)
             new_captain_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
-            if current_team == new_captain_team:
+            if current_team == new_captain_team and new_captain != current_login_handle:
                 message: str = f"The Player {new_captain} Was Found \nDo You Want To Promote Them To Captain? Y/N:"
                 print(self.tui.table(menu, user_path, info, {}, message))
 
