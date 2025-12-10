@@ -34,7 +34,260 @@ class TournamentLL:
 
         Creates a new Tournaments object and sends it to the data
         layer to be stored. Performs no validation on the given info.
-        '''
+ {
+    "f3a33b54-a8a9-4f07-9adc-197db99cb160": {
+        "uuid": "f3a33b54-a8a9-4f07-9adc-197db99cb160",
+        "tournament_id": "12ba73ac-8375-4489-9a21-baad9b507a70",
+        "match_date": "2025-12-05",
+        "match_time": "12:00:00",
+        "team_1": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "team_2": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winner": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "winning_players": [
+            "2cc090bc-2351-4c43-bb08-2f578d26154a",
+            "35e63bfc-3349-4131-b197-c569d71d6b90",
+            "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3"
+        ],
+        "losing_team": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "losing_players": [
+            "e9ecf404-a192-48c5-9f61-99387bad32f8",
+            "b2ee9a85-bb85-49d8-bb10-1eddf19a6509",
+            "ae4cb519-d61b-486c-9835-c40ab8b2a4ff"
+        ]
+    },
+    "5b413a5b-077e-4edc-850b-987680595cc6": {
+        "uuid": "5b413a5b-077e-4edc-850b-987680595cc6",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
+        "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "team_2": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "1de6c60f-6fed-4e70-b1c5-d24c5ae98ae8": {
+        "uuid": "1de6c60f-6fed-4e70-b1c5-d24c5ae98ae8",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
+        "team_1": "0e86df13-949f-497d-916d-6aee0e329516",
+        "team_2": "name2",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "6d618d2e-842c-4ed4-a588-aa85b577d548": {
+        "uuid": "6d618d2e-842c-4ed4-a588-aa85b577d548",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "a2c20787-7a4d-46dd-bef9-7e05081609c5": {
+        "uuid": "a2c20787-7a4d-46dd-bef9-7e05081609c5",
+        "tournament_id": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "match_date": "2025-01-01",
+        "match_time": "14:00:00",
+        "team_1": "7ffed5fa-83c5-423e-a975-0f67b5782539",
+        "team_2": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "ead9bb2c-af25-4641-8165-e0ddb5fae06e": {
+        "uuid": "ead9bb2c-af25-4641-8165-e0ddb5fae06e",
+        "tournament_id": "9f88c82f-7361-4680-9499-098c01ebfeca",
+        "match_date": "2025-01-02",
+        "match_time": "14:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "56e09b3f-0ce3-4a1e-b2c8-648722b24c90": {
+        "uuid": "56e09b3f-0ce3-4a1e-b2c8-648722b24c90",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "579d2740-6141-4409-95b3-a8fb0a195d9c": {
+        "uuid": "579d2740-6141-4409-95b3-a8fb0a195d9c",
+        "tournament_id": "269675a5-b277-43a0-8449-cda8803190b7",
+        "match_date": "2004-01-21",
+        "match_time": "00:12:23",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "e179f9b8-c476-41b1-891b-fbd0ff464ba4": {
+        "uuid": "e179f9b8-c476-41b1-891b-fbd0ff464ba4",
+        "tournament_id": "33a78757-110e-4837-89de-065e504968ee",
+        "match_date": "2006-05-05",
+        "match_time": "14:00:00",
+        "team_1": "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
+        "team_2": "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "2ad7c927-67fa-4854-99b4-6c91e78712d9": {
+        "uuid": "2ad7c927-67fa-4854-99b4-6c91e78712d9",
+        "tournament_id": "33a78757-110e-4837-89de-065e504968ee",
+        "match_date": "2006-05-05",
+        "match_time": "15:00:00",
+        "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "team_2": "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "2e2789ea-5b29-4ad5-8973-c7857355d0ce": {
+        "uuid": "2e2789ea-5b29-4ad5-8973-c7857355d0ce",
+        "tournament_id": "33a78757-110e-4837-89de-065e504968ee",
+        "match_date": "2006-05-05",
+        "match_time": "16:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "edff87ca-6e8a-43d9-8275-e5b645ef3c02": {
+        "uuid": "edff87ca-6e8a-43d9-8275-e5b645ef3c02",
+        "tournament_id": "e01fdbe7-315b-4b39-bf43-9c0af03e5880",
+        "match_date": "2006-05-05",
+        "match_time": "14:00:00",
+        "team_1": "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+        "team_2": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "b4620e4f-3ce8-44a2-aedb-2b8981a3687a": {
+        "uuid": "b4620e4f-3ce8-44a2-aedb-2b8981a3687a",
+        "tournament_id": "e01fdbe7-315b-4b39-bf43-9c0af03e5880",
+        "match_date": "2006-05-05",
+        "match_time": "15:00:00",
+        "team_1": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+        "team_2": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "edcb0702-7c42-4d60-8cf1-6f3193e76c8a": {
+        "uuid": "edcb0702-7c42-4d60-8cf1-6f3193e76c8a",
+        "tournament_id": "e01fdbe7-315b-4b39-bf43-9c0af03e5880",
+        "match_date": "2006-05-05",
+        "match_time": "16:00:00",
+        "team_1": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "team_2": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "504b3993-0e2f-4f8f-ae0c-597cebd76262": {
+        "uuid": "504b3993-0e2f-4f8f-ae0c-597cebd76262",
+        "tournament_id": "e01fdbe7-315b-4b39-bf43-9c0af03e5880",
+        "match_date": "2006-05-05",
+        "match_time": "17:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "b127f0e7-02fd-400c-ba4e-e4206885271c": {
+        "uuid": "b127f0e7-02fd-400c-ba4e-e4206885271c",
+        "tournament_id": "e01fdbe7-315b-4b39-bf43-9c0af03e5880",
+        "match_date": "2006-05-06",
+        "match_time": "14:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "8c2469a8-67af-4c4d-800e-d378d8ef28a8": {
+        "uuid": "8c2469a8-67af-4c4d-800e-d378d8ef28a8",
+        "tournament_id": "e01fdbe7-315b-4b39-bf43-9c0af03e5880",
+        "match_date": "2006-05-06",
+        "match_time": "15:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "3e72fb27-30cd-4cc9-bf43-483447679cf6": {
+        "uuid": "3e72fb27-30cd-4cc9-bf43-483447679cf6",
+        "tournament_id": "c099a8c8-4da7-4a12-84d3-2f01dc5ca810",
+        "match_date": "2006-05-05",
+        "match_time": "14:00:00",
+        "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "team_2": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winner": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winning_players": null,
+        "losing_team": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "losing_players": [
+            "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+            "8b368c80-729e-4e76-9341-18d2be561b7c",
+            "57a15dc5-bdb2-46b5-9777-f08d36bffdb9"
+        ]
+    },
+    "ed842939-a404-4c93-811f-8459fe8902c4": {
+        "uuid": "ed842939-a404-4c93-811f-8459fe8902c4",
+        "tournament_id": "c099a8c8-4da7-4a12-84d3-2f01dc5ca810",
+        "match_date": "2006-05-05",
+        "match_time": "15:00:00",
+        "team_1": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+        "team_2": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    },
+    "d9d3d019-393f-49cd-bbac-5bb042c28c01": {
+        "uuid": "d9d3d019-393f-49cd-bbac-5bb042c28c01",
+        "tournament_id": "c099a8c8-4da7-4a12-84d3-2f01dc5ca810",
+        "match_date": "2006-05-05",
+        "match_time": "16:00:00",
+        "team_1": "To be revealed",
+        "team_2": "To be revealed",
+        "winner": null,
+        "winning_players": null,
+        "losing_team": null,
+        "losing_players": null
+    }
+}       '''
         uuid = str(uuid4())
         new_tournament = Tournament(
             uuid,
@@ -247,12 +500,6 @@ class TournamentLL:
         # Changes status from inactive to active
         tournament.status = Tournament.StatusType.active
 
-        # Creates servers for the tournament.
-        for idx, _ in enumerate(tournament.list_servers):
-            new_server = Server(str(uuid4()), "NoMatch")
-            tournament.list_servers[idx] = new_server.uuid
-            DataLayerAPI.store_server(new_server)
-
         # Calculates how many matches are needed for each round.
         number_of_players: int = len(tournament.teams_playing)
         matches_per_round: list[int] = []
@@ -309,6 +556,14 @@ class TournamentLL:
                     team_1 = "To be revealed",
                     team_2 = "To be revealed"
             )
+
+        matches = self._match_logic.get_matches(tournament.uuid)
+
+        # Creates servers for the tournament.
+        for idx, _ in enumerate(tournament.list_servers):
+            new_server = Server(str(uuid4()), matches[idx].uuid)
+            tournament.list_servers[idx] = new_server.uuid
+            DataLayerAPI.store_server(new_server)
     
         # Starts the first round.
         self.next_round(uuid)
