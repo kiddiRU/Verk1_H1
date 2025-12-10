@@ -22,6 +22,7 @@ arguments and calling:
 """
 
 import os
+from UILayer.MenuOptions import MenuOptions # Imported for type hinting
 
 class Drawer():
     """Draws TUI tables"""
@@ -89,7 +90,7 @@ class Drawer():
     
 
 
-    def table(self, table_name: str, table_path: list[str] = [], table_info: list[str] = [], 
+    def table(self, table_name: str, table_path: list[MenuOptions] = [], table_info: list[str] = [], 
               table_options: dict[str, str] = {}, message: str = "") -> str:
         """Creates and returns the UI tables"""
 
@@ -143,7 +144,7 @@ class Drawer():
 
 
 
-    def start_table(self, table_name: str, table_path: list[str] = [], table_options: dict[str, str] = {}) -> str:
+    def start_table(self, table_name: str, table_path: list[MenuOptions] = [], table_options: dict[str, str] = {}) -> str:
         """Creates and returns the UI tables"""
 
 
