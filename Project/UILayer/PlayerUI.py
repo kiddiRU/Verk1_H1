@@ -499,10 +499,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name: \n", "name", "PLAYER")
-
+            new_name = self.utility._input_change(unchanged_message + "\n Enter New Name or 'q' to cancel: \n",
+                                                   "name", "PLAYER")
+            if new_name == "q":
+                return user_path[-2]
             if new_name:
                 name = new_name
+
             self.tui.save_input("Name: " + name)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
@@ -512,10 +515,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle: \n", 
+            new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle or 'q' to cancel: \n", 
                                                   "handle", "PLAYER")
+            if new_handle == "q":
+                return user_path[-2]
             if new_handle:
                 handle = new_handle
+
             self.tui.save_input("Handle: " + handle)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
@@ -525,10 +531,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth: \n", 
+            new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to cancel: \n", 
                                                "date_of_birt", "PLAYER")
+            if new_dob == "q":
+                return user_path[-2]
             if new_dob:
                 dob = new_dob
+
             self.tui.save_input("Date Of Birth: " + dob)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
@@ -538,10 +547,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))        
-            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address: \n", 
+            new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address or 'q' to cancel: \n", 
                                                 "home_address", "PLAYER")
+            if new_addr == "q":
+                return user_path[-2]
             if new_addr:
                 addr = new_addr
+                
             self.tui.save_input("Home Address: " + addr)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
@@ -551,10 +563,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number: \n", 
+            new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number or 'q' to cancel: \n", 
                                                  "phone_number", "PLAYER")
+            if new_phnum == "q":
+                return user_path[-2]
             if new_phnum:
                 phnum = new_phnum
+
             self.tui.save_input("Phone Number: " + phnum)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
@@ -564,10 +579,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email: \n", 
+            new_email = self.utility._input_change(unchanged_message + "\n Enter New Email or 'q' to cancel: \n", 
                                                  "email", "PLAYER")
+            if new_email == "q":
+                return user_path[-2]
             if new_email:
                 email = new_email
+
             self.tui.save_input("Email: " + email)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
@@ -577,9 +595,13 @@ Rank: {current_login_rank}"""]
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            new_url = input(unchanged_message + self.input_color + "\n Enter New URL: \n" + self.reset)
+            new_url = input(unchanged_message + self.input_color + "\n Enter New URL or 'q' to cancel: \n" + self.reset)
+
+            if new_url == "q":
+                return user_path[-2]
             if new_url:
                 url = new_url
+            
             self.tui.save_input("URL: " + url)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
