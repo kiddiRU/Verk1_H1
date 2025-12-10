@@ -19,7 +19,7 @@ class TeamLL():
     def __init__(self) -> None:
         pass
 
-    def add_player(self, player_handle: str, current_player: Player) -> Team:
+    def add_player(self, player_handle: str, current_player: Player) -> Team | str:
         """
         Takes in team uuid and a player,
         First looks through all teams to see if the player uuid is already in a team
@@ -30,21 +30,19 @@ class TeamLL():
         player_uuid: str = get_player_uuid(player_handle)
         team_uuid: str = get_players_team_uuid(current_player.uuid)
         model_teams: list[Team] = DataLayerAPI.load_teams()
-        
-        for team in model_teams:
-            if player_uuid in team.list_player_uuid:
-                raise ValidationError("Player is already in team")
 
 
         for team in model_teams:            
             if team.uuid == team_uuid:
                 if len(team.list_player_uuid) == 5:
-                    raise ValidationError("Max player count in team: 5")
+                    return "Your Team Is Full"
 
                 else:
                     team.list_player_uuid.append(player_uuid)
                     DataLayerAPI.update_team(team_uuid, team)
                     return team
+                
+        return ""
                     
 
 
@@ -191,11 +189,12 @@ class TeamLL():
     
 
     def get_team_club(self, team_name: str) -> str:
-        
-        clubs = self.club_logic.list_clubs()
+        clubll = ClubLL()
+
+        clubs = clubll.list_clubs()
 
         for club in clubs:
-            teams = self.club_logic.get_teams_in_club(club.name)
+            teams = clubll.get_teams_in_club(club.name)
 
             if team_name in teams:
                 return club.name

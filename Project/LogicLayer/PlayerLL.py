@@ -14,6 +14,7 @@ from Models import Player, Team, Club, Match, Tournament#, ValidationError
 from LogicLayer.Validation import validate_attr
 from LogicLayer.LogicUtility import get_player_uuid
 from LogicLayer.MatchLL import MatchLL
+from LogicLayer.TeamLL import TeamLL
 
 class PlayerLL():
     def __init__(self) -> None:
@@ -75,14 +76,6 @@ class PlayerLL():
         Sends updated values to the data layer, and returns and updated Player object.
         '''
 
-        params: dict[str, str] = {k: v for k, v in locals().items() if k not in ('self', 'player')}
-        for attr, value in params.items():
-            if value == '':
-                continue
-
-            validate_attr(attr, value, name_type='PLAYER')
-            setattr(player, attr, value)
-
         DataLayerAPI.update_player(player.uuid, player)
         return player
 
@@ -136,14 +129,14 @@ class PlayerLL():
         players: list[Player] = DataLayerAPI.load_players()
         return players
 
-    def get_player_object(self, player_uuid: str) -> Player | None:
+    def get_player_object(self, player_uuid: str) -> Player | str:
         ''' Takes in a players UUID and returns the players object. '''
 
         players: list[Player] = DataLayerAPI.load_players()
         player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
-            return 
+            return ""
 
         return player
     
@@ -175,11 +168,13 @@ class PlayerLL():
 
     def get_player_team(self, player_handle) -> tuple:
         """Takes in a player handle and returns the name of their team and their rank"""
+        teamll = TeamLL()
+
         player_uuid = get_player_uuid(player_handle)
-        teams = self.team_logic.list_teams()
+        teams = teamll.list_teams()
         
         for team in teams:
-            players = self.team_logic.get_team_members(team.name)
+            players = teamll.get_team_members(team.name)
 
             if player_uuid in players:
                 if team.team_captain_uuid == player_uuid:
@@ -191,7 +186,7 @@ class PlayerLL():
 
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
-    def get_player_wins(self, player_handle):
+    def get_player_wins(self, player_handle) -> str:
         """
         takes in a player handle and finds the player uuid
         loads and looks through all matches 
@@ -201,7 +196,7 @@ class PlayerLL():
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
         player_uuid: str = get_player_uuid(player_handle)
-        win_count = 0
+        win_count: int = 0
 
         for match in model_matches:
             if match.winning_players is None:
@@ -210,10 +205,10 @@ class PlayerLL():
             elif player_uuid in match.winning_players:
                 win_count += 1
 
-        return win_count
+        return str(win_count)
     
 
-    def get_player_points(self, player_handle):
+    def get_player_points(self, player_handle) -> str:
         """
         takes in a player handle and finds the player uuid from handle
         loads and looks through all tournament and takes there uuid

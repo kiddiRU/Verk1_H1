@@ -14,6 +14,8 @@ from UILayer.UtilityUI import UtilityUI
 from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 
+from datetime import date, time
+
 
 class AdminUI:
     """Every admin menu option"""
@@ -75,45 +77,133 @@ class AdminUI:
             MenuOptions.create_tournament,
         ]
         info: list[str] = []
-        options: dict[str, str] = {"c": "Continue"}
+        options: dict[str, str] = {"c": "Continue", "b": "Back"}
         message: str = "You have Created A Tournament!"
 
+        tournament_name: str = ""
+        tournament_date: str = ""
+        tournament_time: str = ""
+        tournament_addr: str = ""
+        tournament_email: str = ""
+        tournament_phnum: str = ""
+
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path))
-        tournament_name: str = self.utility._input_info(
-            "Enter Tournament Name: \n", "handle", "TOURNAMENT"
-        )
-        self.tui.save_input("Tournament Name: " + tournament_name)
 
-        print(self.tui.table(menu, user_path, info))
-        tournament_date: str = self.utility._input_info(
-            "Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n",
-            "date",
-            "TOURNAMENT",
-        )
-        self.tui.save_input("Start And End Dates: " + str(tournament_date))
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_name: str = self.utility._input_info(
+                "Enter Tournament Name: \n", "handle", "TOURNAMENT"
+            )
 
-        print(self.tui.table(menu, user_path, info))
-        tournament_addr: str = self.utility._input_info(
-            "Enter Venue Address: (Streetname 00 Cityname)\n",
-            "address",
-            "Tournament",
-        )
-        self.tui.save_input("Venue Address: " + tournament_addr)
+            self.tui.save_input("Name: " + tournament_name)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
 
-        print(self.tui.table(menu, user_path, info))
-        tournament_email: str = self.utility._input_info(
-            "Enter Contact Email: \n", "email", "PLAYER"
-        )
-        self.tui.save_input("Email: " + tournament_email)
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_date: str = self.utility._input_info(
+                "Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n",
+                "",
+                "TOURNAMENT",
+            )
 
-        print(self.tui.table(menu, user_path, info))
-        tournament_phnum: str = self.utility._input_info(
-            "Enter Contact Phone Number: 123-4567 \n", "phone_number", "PLAYER"
+            self.tui.save_input("Start And End Dates: " + tournament_date)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_time: str = self.utility._input_info(
+                "Enter Start And End Time: (hh:mm hh:mm) \n", "", "TOURNAMENT"
+            )
+
+            self.tui.save_input("Start And End Time: " + tournament_time)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_addr: str = self.utility._input_info(
+                "Enter Venue Address: (Streetname 00 Cityname)\n",
+                "home_address",
+                "TOURNAMENT",
+            )
+
+            self.tui.save_input("Venue Address: " + tournament_addr)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_email: str = self.utility._input_info(
+                "Enter Contact Email: \n", "email", "PLAYER"
+            )
+
+            self.tui.save_input("Email: " + tournament_email)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_phnum: str = self.utility._input_info(
+                "Enter Contact Phone Number: 123-4567 \n",
+                "phone_number",
+                "PLAYER",
+            )
+
+            self.tui.save_input("Phone Number: " + tournament_phnum)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
+        options: dict[str, str] = {
+            "c": "Save Info And Continue",
+            "b": "Discard Info And Go Back",
+        }
+        print(self.tui.table(menu, user_path, info, options, message))
+        con: str = self.utility._prompt_choice(["c", "b"])
+
+        if con.lower() == "b":
+            return MenuOptions.admin_screen
+        
+        date_start, date_end = tournament_date.split()
+        time_start, time_end = tournament_time.split()
+
+        start_date: date = LogicLayerAPI.to_date(date_start)
+        end_date: date = LogicLayerAPI.to_date(date_end)
+        time_frame_start: time = LogicLayerAPI.to_time(time_start)
+        time_frame_end: time = LogicLayerAPI.to_time(time_end)
+
+        LogicLayerAPI.create_tournament(
+            tournament_name,
+            start_date,
+            end_date,
+            time_frame_start,
+            time_frame_end,
+            tournament_addr,
+            tournament_email,
+            tournament_phnum,
         )
-        self.tui.save_input("Phone Number: " + tournament_phnum)
 
         LogicLayerAPI.save_player(tournament_name)
+
         return MenuOptions.manage_inactive_tournament
 
     def manage_tournaments(self) -> MenuOptions:
@@ -138,7 +228,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         find_name: str = input(
-            self.message_color + "Input Team Name: " + self.reset
+            self.message_color + "Input Tournament Name: " + self.reset
         )
         if find_name.lower() == "lo":
             return MenuOptions.logout
@@ -362,7 +452,16 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        tournament_name = LogicLayerAPI.save_player() or "None"
+        # Keep the tournament name from previous screen
+        tournament_name: str = LogicLayerAPI.save_player() or "None"
+
+        # Get tournament Object from name
+        teams_in_tournament: list[str] = [
+            t.name
+            for t in LogicLayerAPI.get_teams_from_tournament_name(
+                tournament_name
+            )
+        ]
 
         tournament_object: Tournament | None = (
             LogicLayerAPI.get_tournament_by_name(tournament_name)
@@ -370,14 +469,15 @@ class AdminUI:
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.start_screen
 
-        menu: str = "Inactive Tournament"
+        menu: str = "Manage Teams"
         user_path: list[str] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
         ]
-        info: list = tournament_object.teams_playing
+
+        info: list = teams_in_tournament
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
@@ -404,24 +504,15 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Tournament data
         tournament_name: str = LogicLayerAPI.save_player() or "None"
-        tournament_object: Tournament | None = (
-            LogicLayerAPI.get_tournament_by_name(tournament_name)
-        )
-        if tournament_object is None:  # Check if None goes through
-            return MenuOptions.start_screen
-
-        tournament_teams_uuid: list[str] = (
-            tournament_object.teams_playing
-        )  # a list of uuid's
-
-        tournament_teams: list[Team] = [
-            LogicLayerAPI.get_team_by_uuid(uuid)
-            for uuid in tournament_teams_uuid
+        teams_in_tournament: list[str] = [
+            t.name
+            for t in LogicLayerAPI.get_teams_from_tournament_name(
+                tournament_name
+            )
         ]
-
-        # Teams in tournament
-        team_names: list[str] = [team.name for team in tournament_teams]
+        all_teams: list[str] = self.utility.team_names()
 
         menu: str = f"Add Team To {tournament_name}"
         user_path: list[str] = [
@@ -430,8 +521,8 @@ class AdminUI:
             MenuOptions.manage_teams,
             MenuOptions.add_team,
         ]
+
         info: list = self.utility.show_main("teams")
-        # options_1: dict[str, str] = {"a": "Add Another Team", "b": "Back"}
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
@@ -441,15 +532,39 @@ class AdminUI:
             self.message_color + "Input Team Name: " + self.reset
         )
 
-        if team_to_add in team_names:
+        # Validate team exists
+        try:
+            team_object: Team | None = LogicLayerAPI.get_team_by_name(
+                team_to_add
+            )
+        except Exception:
+            team_object = None
+
+        if team_object is None:
+            message = "Team Not Found"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["t", "b"])
+
+            match choice:
+                case "t":
+                    return MenuOptions.add_team
+
+            return MenuOptions.manage_teams
+
+        if team_to_add in teams_in_tournament:
             message = f"{team_to_add} Is Already In {tournament_name}"
 
-        if (team_to_add in self.utility.team_names()) and (
-            len(team_to_add) >= 3 and len(team_to_add) <= 5
-        ):  # TODO:
-            LogicLayerAPI.add_team(tournament_name, team_to_add)
+        elif not (3 <= len(team_object.list_player_uuid) <= 5):
+            message = f"{team_to_add} Must Have Between 3 And 5 Players"
 
-        message = f"{team_to_add} Was Not Found"
+        elif team_to_add not in all_teams:
+            message = f"{team_to_add} Is Not A Valid Team"
+
+        else:
+            LogicLayerAPI.add_team(tournament_name, team_to_add)
+            message: str = f"{team_to_add} Was Added To {tournament_name}"
+            options: dict[str, str] = {"t": "Add Another", "b": "Back"}
+
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["t", "b"])
 
@@ -460,11 +575,67 @@ class AdminUI:
         return MenuOptions.manage_teams
 
     def remove_team(self) -> MenuOptions:
-        """Remove team screen, choices: input a team to add or l to list all team
+        # Tournament data
+        tournament_name: str = LogicLayerAPI.save_player() or "None"
 
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
+        # Get tournament Object from name
+        teams_in_tournament: list[str] = [
+            t.name
+            for t in LogicLayerAPI.get_teams_from_tournament_name(
+                tournament_name
+            )
+        ]
+
+        menu: str = f"Add Team To {tournament_name}"
+        user_path: list[str] = [
+            MenuOptions.manage_tournament,
+            MenuOptions.manage_inactive_tournament,
+            MenuOptions.manage_teams,
+            MenuOptions.remove_team,
+        ]
+
+        info: list = teams_in_tournament
+        options: dict[str, str] = {"t": "Try Again", "b": "Back"}
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info))
+
+        team_to_add: str = input(
+            self.message_color + "Input Team Name: " + self.reset
+        )
+
+        # Validate team exists
+        try:
+            team_object: Team | None = LogicLayerAPI.get_team_by_name(
+                team_to_add
+            )
+        except Exception:
+            team_object = None
+
+        if team_object is None:
+            message = "Team Not Found"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["t", "b"])
+
+            match choice:
+                case "t":
+                    return MenuOptions.remove_team
+
+            return MenuOptions.manage_teams
+
+        if team_to_add in teams_in_tournament:
+            LogicLayerAPI.remove_team(tournament_name, team_to_add)
+            message: str = f"{team_to_add} Was Removed From {tournament_name}"
+            options: dict[str, str] = {"t": "Remove Another", "b": "Back"}
+        else:
+            message = f"{team_to_add} Is Not A Valid Team"
+
+        print(self.tui.table(menu, user_path, info, options, message))
+        choice: str = self.utility._prompt_choice(["t", "b"])
+
+        match choice:
+            case "t":
+                return MenuOptions.remove_team
 
         return MenuOptions.manage_teams
 

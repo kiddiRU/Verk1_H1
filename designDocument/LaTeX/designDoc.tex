@@ -17,6 +17,7 @@
 \usepackage{tabularray}
 \usepackage{parskip}
 \usepackage{blindtext}
+\usepackage{varwidth}
 % \geometry{legalpaper, portrait, margin=0.5cm}
 \geometry{
  a4paper,
@@ -26,7 +27,7 @@
  }
 \usepackage{multicol}
 
-
+\newcolumntype{M}{>{\begin{varwidth}{4cm}}l<{\end{varwidth}}}
 \begin{document}
 \setlength\emergencystretch{\hsize}\hbadness=10000
 \input{frontPage.tex}

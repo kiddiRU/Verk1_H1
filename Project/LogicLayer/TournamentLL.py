@@ -417,3 +417,23 @@ class TournamentLL:
                     teams_list.append(LogicUtility.get_team_by_uuid(team_uuid))
 
         return teams_list
+    
+    
+    def to_time(self, value: str) -> time:
+        # Split into parts
+        parts = value.split(":")
+
+        # Fill missing values with "00"
+        while len(parts) < 3:
+            parts.append("00")
+
+        hour, minute, second = parts
+
+        return time(
+            hour=int(hour),
+            minute=int(minute),
+            second=int(second)
+        )
+
+    def to_date(self, value: str) -> date:
+        return datetime.strptime(value, "%Y-%m-%d").date()
