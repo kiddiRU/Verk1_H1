@@ -260,5 +260,18 @@
         "in_tournament": null,
         "url_homepage": "url",
         "ascii_art": "a"
+    },
+    "07b78ef8-46ad-4159-b962-aecb3529b90c": {
+        "uuid": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "name": "FuckersTeam",
+        "list_player_uuid": [
+            "32d89d9f-b555-4311-a104-d8009eec5b76",
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d"
+        ],
+        "team_captain_uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
+        "club_uuid": "269fcfc5-f629-4921-af37-0c592373717c",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
     }
 }
