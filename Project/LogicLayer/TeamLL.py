@@ -96,6 +96,26 @@ class TeamLL():
 
         teams: list[Team] = DataLayerAPI.load_teams()
         return teams
+    
+    
+    def get_team_members_object(self, team_name: str) -> list[Player]:
+        """
+        Takes in team name and gets the list of player uuid in the team
+        loads and looks through all the players
+        and lists all player object that have the player uuid
+        return list of player objects in the team
+        """
+        player_list_uuid: list[str] = self.get_team_members(team_name)
+
+        players = DataLayerAPI.load_players()
+
+        players = [
+            player for player in players
+            if player.uuid in player_list_uuid
+        ]
+
+        return players
+        
 
 
     def get_team_object(self, team_name: str) -> Team:
