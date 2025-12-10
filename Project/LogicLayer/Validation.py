@@ -30,13 +30,14 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     Checks if the name is unique and is between 3-40 char in length
     Used for unique player handle, team tournament and club names
     """
+    unique_name = unique_name.strip()
 
     if len(unique_name) < 3 or len(unique_name) > 40:
         raise ValidationError("Name needs to be between 3 to 40 characters in length")
         
     if type_of_name == "PLAYER":
         player_names: list[str] = [player.handle for player in DataLayerAPI.load_players()]
-        if unique_name in player_names:
+        if unique_name in player_names or unique_name == "admin":
             raise ValidationError(f'The handle \'{unique_name}\' is already taken!')
         return unique_name
     
@@ -69,6 +70,7 @@ def validate_name(name: str) -> str | None:
     """
     Checks if the name is in between 3-40 char in length and has only letters
     """
+    name = name.strip()
     
     if (len(name) < 3 or len(name) > 40):
         raise ValidationError(
@@ -88,7 +90,8 @@ def validate_home_address(home_address: str) -> str | None:
     Checks if home address has street name, street number and area
     (Frostafold 3 Reykjavík)
     """
-    
+    home_address = home_address.strip()
+
     try:
         address_list: list[str] = home_address.split()
         street_name: str = address_list[0]
@@ -115,7 +118,8 @@ def validate_home_address(home_address: str) -> str | None:
 # Players and tournament contact phone number
 def validate_phone_number(phone_number: str) -> str | None: 
     """Checks if phone number is eight in length 7 nums and a dash (123-4567)"""
-    
+    phone_number = phone_number.strip()
+
     if "-" in phone_number:
         phone_number_list: list = phone_number.split("-")
         first_half_phone_nr: str = phone_number_list[0]
@@ -146,6 +150,7 @@ def validate_email(email: str) -> str | None:
     Checks if email has @, and that there is something before and after the @
     can only have one @
     """
+    email = email.strip()
 
     if ("@" in email) and (email.count("@") == 1) :
         email_list: list = email.split("@")
@@ -169,6 +174,7 @@ def validate_date(date_input: str) -> date | ValidationError:
     Splits the string and tries to change the numbers in to int and 
     Checks if date format is correct YYYY-MM-DD
     """
+    date_input = date_input.strip()
 
     try:
         date_list: list = list(map(int, date_input.split("-")))
@@ -186,29 +192,10 @@ def validate_date(date_input: str) -> date | ValidationError:
 
 
 
-# Date frame for tournament
-def validate_date_frame(
-        start_date: str,
-        end_date: str
-        ) -> date | ValidationError:
-    """
-    Checks if date frame is correct, date_1 is before date_2
-    (2025-12-01 -> 2025-12-06)
-    """
-
-    valid_date_start = validate_time(start_date)
-    valid_date_end = validate_time(end_date)
-
-    if valid_date_start <= valid_date_end:
-        return valid_date_start, valid_date_end
-
-    else: 
-        raise ValidationError("Not a valid Date frame")
-
-
 # Time of Match and Tournament time frame
 def validate_time(time_input: str) -> time:
     """Checks if time is format is correct HH:MM (12:00)"""
+    time_input = time_input.strip()
 
     try:
         time_list = list(map(int, time_input.split(":")))
@@ -224,22 +211,9 @@ def validate_time(time_input: str) -> time:
         raise ValidationError("Letters are not allowed in time")
 
 
-# Time frame of tournament
-def validate_time_frame(start_time: str, end_time: str) -> time:
-    """
-    Checks if time frame is correct, time_1 is before time_2 (08:00 -> 16:00)
-    """
-    
-    valid_time_start = validate_time(start_time)
-    valid_time_end = validate_time(end_time)
-
-    if valid_time_start <= valid_time_end:
-        return valid_time_start, valid_time_end
-
-    else: 
-        raise ValidationError("Not a valid Time frame")
-
 def validate_tournament_date(value: str) -> str:
+    value = value.strip()
+
     try: begin, end = value.split()
     except: raise ValidationError("Could not split dates")
 
@@ -252,6 +226,8 @@ def validate_tournament_date(value: str) -> str:
         raise ValidationError("Beginning date happens after end date")
 
 def validate_tournament_time(value: str) -> str:
+    value = value.strip()
+
     try: begin, end = value.split()
     except: raise ValidationError("Could not split time input")
 
@@ -268,6 +244,8 @@ def validate_tournament_time(value: str) -> str:
     return value
 
 def validate_color(value: str) -> str:
+    value = value.strip()
+
     available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
     
     if value in available_colors:
