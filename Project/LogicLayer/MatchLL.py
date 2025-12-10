@@ -92,12 +92,12 @@ class MatchLL():
                 return match
 
     
-    def get_match(self, tournament_id: str, match_team1: str, match_team2: str) -> Match | str:
+    def get_match(self, tournament_id: str, match_team1_uuid: str, match_team2_uuid: str) -> Match | str:
         
         matches: list[Match] = self.get_matches(tournament_id)
 
         for match in matches:
-            if match.team_1 == match_team1 and match.team_2 == match_team2:
+            if match.team_1 == match_team1_uuid and match.team_2 == match_team2_uuid:
                 return match
 
         return ""
