@@ -518,5 +518,15 @@
         "phone_number": "123-3456",
         "handle": "dfg",
         "url": ""
+    },
+    "32d89d9f-b555-4311-a104-d8009eec5b76": {
+        "uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
+        "name": "Isak",
+        "date_of_birth": "2006-10-13",
+        "home_address": "Fuck 99 Reykjav\u00edk",
+        "email": "shit@fuck",
+        "phone_number": "123-4567",
+        "handle": "Fucker",
+        "url": ""
     }
 }

@@ -8,6 +8,7 @@ File that holds all the menus that the admin can access
 from Models.Exceptions import ValidationError
 from Models.Tournament import Tournament
 from Models.Team import Team
+from Models.Match import Match
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -93,9 +94,12 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_name: str = self.utility._input_info(
-                "Enter Tournament Name or 'q' to cancel: \n", "handle", "TOURNAMENT"
+                "Enter Tournament Name or 'q' to cancel: \n",
+                "handle",
+                "TOURNAMENT",
             )
-            if not tournament_name: return user_path[-2]
+            if not tournament_name:
+                return user_path[-2]
 
             self.tui.save_input("Name: " + tournament_name)
             print(self.tui.table(menu, user_path, info, options))
@@ -111,8 +115,11 @@ class AdminUI:
                 "date_of_birth",
                 "TOURNAMENT",
             )
-            if not tournament_name: return user_path[-2]
-            tournament_date: str = "2006-05-05 2006-06-05" #TODO Remove when it works
+            if not tournament_name:
+                return user_path[-2]
+            tournament_date: str = (
+                "2006-05-05 2006-06-05"  # TODO Remove when it works
+            )
 
             self.tui.save_input("Start And End Dates: " + tournament_date)
             print(self.tui.table(menu, user_path, info, options))
@@ -124,10 +131,13 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_time: str = self.utility._input_info(
-                "Enter Start And End Time or 'q' to cancel: (hh:mm hh:mm) \n", "", "TOURNAMENT"
+                "Enter Start And End Time or 'q' to cancel: (hh:mm hh:mm) \n",
+                "",
+                "TOURNAMENT",
             )
-            if not tournament_name: return user_path[-2]
-            tournament_time: str = "14:00 18:00" #TODO Remove when it works
+            if not tournament_name:
+                return user_path[-2]
+            tournament_time: str = "14:00 18:00"  # TODO Remove when it works
 
             self.tui.save_input("Start And End Time: " + tournament_time)
             print(self.tui.table(menu, user_path, info, options))
@@ -143,7 +153,8 @@ class AdminUI:
                 "home_address",
                 "TOURNAMENT",
             )
-            if not tournament_name: return user_path[-2]
+            if not tournament_name:
+                return user_path[-2]
 
             self.tui.save_input("Venue Address: " + tournament_addr)
             print(self.tui.table(menu, user_path, info, options))
@@ -157,7 +168,8 @@ class AdminUI:
             tournament_email: str = self.utility._input_info(
                 "Enter Contact Email or 'q' to cancel: \n", "email", "PLAYER"
             )
-            if not tournament_name: return user_path[-2]
+            if not tournament_name:
+                return user_path[-2]
 
             self.tui.save_input("Email: " + tournament_email)
             print(self.tui.table(menu, user_path, info, options))
@@ -173,7 +185,8 @@ class AdminUI:
                 "phone_number",
                 "PLAYER",
             )
-            if not tournament_name: return user_path[-2]
+            if not tournament_name:
+                return user_path[-2]
 
             self.tui.save_input("Phone Number: " + tournament_phnum)
             print(self.tui.table(menu, user_path, info, options))
@@ -190,7 +203,7 @@ class AdminUI:
 
         if con.lower() == "b":
             return MenuOptions.admin_screen
-        
+
         date_start, date_end = tournament_date.split()
         time_start, time_end = tournament_time.split()
 
@@ -305,7 +318,7 @@ class AdminUI:
         if choice == "lo":
             return MenuOptions.start_screen
 
-        return MenuOptions.manage_tournament
+        return MenuOptions.admin_screen
 
     def matches(self) -> MenuOptions:
         """Matches screen, choices: input to select match
@@ -313,6 +326,21 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Get tournament name from screen before
+        tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name is None: # For type hinting
+            return MenuOptions.start_screen
+        
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+        if tournament_object is None:  # Check if None goes through
+            return MenuOptions.start_screen
+        
+        # Get tournament uuid
+        tournament_uuid: str = tournament_object.uuid
+
+        # TODO: ADD Utility function to list out matches beautifully
 
         menu: str = "Matches"
         user_path: list[MenuOptions] = [
@@ -326,12 +354,7 @@ class AdminUI:
         choice_list = []
         message: str = ""
 
-        matches_list = [
-            "Team 1 vs Team 3",
-            "Team 2 vs Team 4",
-            "Team 5 vs Team 7",
-            "Team 6 vs Team 8",
-        ]
+        matches_list: list[str] = self.utility.list_matches(tournament_uuid)
 
         x = 0
         for match in matches_list:
@@ -426,12 +449,13 @@ class AdminUI:
             "2": "Publish",
             "3": "Edit Tournament",
             "b": "Back",
+            "lo": "Log Out",
         }
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "b"])
+        choice: str = self.utility._prompt_choice(["1", "2", "3", "b", "lo"])
 
         match choice:
             case "1":
@@ -450,7 +474,9 @@ class AdminUI:
             case "3":
                 return MenuOptions.edit_tournament
             case "b":
-                return MenuOptions.manage_tournament
+                return MenuOptions.admin_screen
+            case "lo":
+                return MenuOptions.logout
         return MenuOptions.manage_tournament
 
     def manage_teams(self) -> MenuOptions:
@@ -530,7 +556,7 @@ class AdminUI:
             MenuOptions.add_team,
         ]
 
-        info: list = self.utility.show_main("teams")
+        info: list = self.utility.show_main("teams") #TODO Make it so that only teams not already internment show upp
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()
