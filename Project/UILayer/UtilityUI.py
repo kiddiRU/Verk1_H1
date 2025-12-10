@@ -63,7 +63,7 @@ class UtilityUI:
             try:
                 print(self.message_color + message + self.reset)
                 choice: str = input()
-                if choice == "q":
+                if choice.lower() == "q":
                     return ""
                 valid: str | None = validate(attribute, choice, info_type)
                 return str(valid)
@@ -114,7 +114,7 @@ class UtilityUI:
             try:
                 print(self.message_color + message + self.reset)
                 choice: str = input()
-                if choice == "q":
+                if choice.lower() == "q":
                     return choice
                 if not choice:
                     return choice
@@ -251,14 +251,16 @@ class UtilityUI:
     def list_matches(self, tournament_uuid: str, show_all: bool) -> list[str]:
         """
         Function to show either all matches in a tournament or the next matches
-
-        Args:
-            tournament_uuid (str): The uuid of a tournament
-            show_all (bool): Choose if you want to show all matches in the tournament
-
-        Returns:
-            list[str]: A formatted f-string to be printed out
+        
+        :param self: Description
+        :param tournament_uuid: The uuid of a tournament
+        :type tournament_uuid: str
+        :param show_all: Description
+        :type show_all: Choose if you want to show all matches in the tournament
+        :return: A formatted f-string to be printed out
+        :rtype: list[str]
         """
+
         if show_all:
             match_list: list[Match] = LogicLayerAPI.get_all_matches(
                 tournament_uuid
@@ -268,43 +270,51 @@ class UtilityUI:
                 tournament_uuid
             )
         # Top info
-       
-        line = lambda x : x * 80 
-        # output_list: list[str] = [line("_"), f"{"Team 1":^24}vs{"Team 2":^24}{"Time":^8}{"Winner":^24}",line("-")]
-        output_list: list[str] = [line("—")]
+
+        line = lambda x: x * 80
+        output_list: list[str] = []
 
         for match in match_list:
             if show_all:
                 revealed: str = "To be revealed"
-                if (match.team_1 or match.team_2) == revealed: continue
+                if (match.team_1 or match.team_2) == revealed:
+                    continue
 
                 match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
                 match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
-
 
                 match_name_1: str = match1.name
                 match_name_2: str = match2.name
 
                 output_list.append(
-                    # f"{match_name_1} vs {match_name_2} Time:{str(match.match_time)} Winner:{str(match.winner)}"
-                    # f"{match_name_1:^24}vs{match_name_2:^24}{str(match.match_time):^8}{str(match.winner):^24}"
-                    f"{match_name_1:<79}|"
+                    f"{line('—')}\n"
+                    f"Team 1: {match_name_1:<71}|\n"
+                    f"{'vs':<79}|\n"
+                    f"Team 2: {match_name_2:<71}|\n"
+                    f"Match Time: {str(match.match_time):<67}|\n"
+                    f"Match Winner: {str(match.winner):<65}|"
                 )
- 
+
 
             else:
                 match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
                 match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
 
-
                 match_name_1: str = match1.name
                 match_name_2: str = match2.name
 
                 output_list.append(
-                    f"{match_name_1} vs {match_name_2} Time:{str(match.match_time)} Winner:{str(match.winner)}"
+                    f"{line('—')}\n"
+                    f"Team 1: {match_name_1:<71}|\n"
+                    f"{'vs':<79}|\n"
+                    f"Team 2: {match_name_2:<71}|\n"
+                    f"Match Time: {str(match.match_time):<67}|\n"
+                    f"Match Winner: {str(match.winner):<65}|"
                 )
 
         return output_list
+
+    #TODO Make function to get saved tournament name and convert to uuid (MANLY FOR MATCHES IN ADMIN UI)
 
     # "Created" by Sindri Freysson
     # TODO need write doc string
