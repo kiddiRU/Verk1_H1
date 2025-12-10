@@ -19,8 +19,9 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
     elif attribute == 'email': return validate_email(value)
     elif attribute == 'phone_number': return validate_phone_number(value)
     elif attribute == 'handle': return validate_unique_name(value, name_type)
+    elif attribute == 'tournament_date': return validate_tournament_date(value)
+    elif attribute == 'tournament_time': return validate_tournament_time(value)
     else: return
-    
 
 # Player handle, team name, tour name and club name
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
@@ -237,4 +238,33 @@ def validate_time_frame(start_time: str, end_time: str) -> time:
     else: 
         raise ValidationError("Not a valid Time frame")
 
+def validate_tournament_date(value: str) -> str:
+    try: begin, end = value.split()
+    except: raise ValidationError("Could not split dates")
 
+    begin_date = validate_date(begin)
+    end_date = validate_date(end)
+
+    if begin_date <= end_date:
+        return value
+    else:
+        raise ValidationError("Beginning date happens after end date")
+
+def validate_tournament_time(value: str) -> str:
+    try: begin, end = value.split()
+    except: raise ValidationError("Could not split time input")
+
+    begin_time = validate_time(begin)
+    end_time = validate_time(end)
+
+    if begin_time.minute != end_time.minute:
+        raise ValidationError("Begin and end minutes do not match")
+
+    """
+    if begin_time <= end_time:
+        return value
+    else:
+        raise ValidationError("Begin time happens after end time")
+    """
+
+    return value
