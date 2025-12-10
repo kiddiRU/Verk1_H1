@@ -10,15 +10,17 @@ Functions for player logic.
 # TODO add nessecery imports
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Player, Team, Club, Match, Tournament#, ValidationError
+from Models import Player, Team, Match, Tournament#, ValidationError
 from LogicLayer.Validation import validate_attr
-from LogicLayer.LogicUtility import get_player_uuid
-from LogicLayer.MatchLL import MatchLL
-from LogicLayer.TeamLL import TeamLL
+from LogicLayer import MatchLL, TeamLL
 
 class PlayerLL():
-    def __init__(self) -> None:
-        pass
+    def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
+        self._team_logic = team_logic
+        self._match_logic = match_logic
+
+    def set_team_logic(self, team_logic: TeamLL) -> None:
+        self._team_logic = team_logic
     
     # TODO Alter validation functionality?
     def create_player(self,
@@ -85,29 +87,6 @@ class PlayerLL():
         DataLayerAPI.update_player(player.uuid, player)
         return player
 
-    def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
-        '''
-        Takes in the teams name, its captain, club, url and ascii art.
-
-        Creates a new Team object, sends it the data layer to be stored and returns it.
-        '''
-        teams: list[Team] = DataLayerAPI.load_teams()
-        players_in_teams: list[str] = [uuid for t in teams for uuid in t.list_player_uuid]
-
-        if team_captain.uuid in players_in_teams:
-            raise Exception('You can\'t create a team when you\'re already in one!')
-
-        validate_attr('handle', name, 'TEAM')
-        uuid = str(uuid4())
-
-        clubs: list[Club] = DataLayerAPI.load_clubs()
-        club_uuid = next((c.uuid for c in clubs if c.name == club_name), 'NO_CLUB_UUID') # UUID for no club is ..?
-        
-        new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club_uuid, None, url, ascii_art)
-
-        DataLayerAPI.store_team(new_team)
-        return new_team
-
     # TODO Remove Player objec
     def leave_team(self, team_name: str, player: Player) -> None:
         '''
@@ -128,23 +107,6 @@ class PlayerLL():
 
         team.list_player_uuid.remove(player.uuid)
         DataLayerAPI.update_team(team.uuid, team)
-
-    def list_players(self) -> list[Player]:
-        """ Returns a list of stored players. """
-
-        players: list[Player] = DataLayerAPI.load_players()
-        return players
-
-    def get_player_object(self, player_uuid: str) -> Player | str:
-        ''' Takes in a players UUID and returns the players object. '''
-
-        players: list[Player] = DataLayerAPI.load_players()
-        player = next((p for p in players if p.uuid == player_uuid), None)
-
-        if player is None:
-            return ""
-
-        return player
     
     def promote_captain(self, current_player: Player, handle_to_promote: str) -> None:
         team_to_edit = next((t for t in DataLayerAPI.load_teams() if current_player.uuid == t.team_captain_uuid), None)
@@ -172,15 +134,14 @@ class PlayerLL():
         return self.player
     
 
-    def get_player_team(self, player_handle) -> tuple:
+    def get_player_team_and_rank(self, player_handle: str) -> tuple[str, str]:
         """Takes in a player handle and returns the name of their team and their rank"""
-        teamll = TeamLL()
 
-        player_uuid = get_player_uuid(player_handle)
-        teams = teamll.list_teams()
-        
+        player_uuid: Player | str = self.player_handle_to_uuid(player_handle)
+        teams: list[Team] = self._team_logic.list_all_teams()
+
         for team in teams:
-            players = teamll.get_team_members(team.name)
+            players = self._team_logic.get_team_members(team.name)
 
             if player_uuid in players:
                 if team.team_captain_uuid == player_uuid:
@@ -192,7 +153,7 @@ class PlayerLL():
 
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
-    def get_player_wins(self, player_handle) -> str:
+    def get_player_wins(self, player_handle: str) -> str:
         """
         takes in a player handle and finds the player uuid
         loads and looks through all matches 
@@ -201,7 +162,7 @@ class PlayerLL():
         returns the count        
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
-        player_uuid: str = get_player_uuid(player_handle)
+        player_uuid: str = self.player_handle_to_uuid(player_handle)
         win_count: int = 0
 
         for match in model_matches:
@@ -214,7 +175,7 @@ class PlayerLL():
         return str(win_count)
     
 
-    def get_player_points(self, player_handle) -> str:
+    def get_player_points(self, player_handle: str) -> str:
         """
         takes in a player handle and finds the player uuid from handle
         loads and looks through all tournament and takes there uuid
@@ -226,16 +187,15 @@ class PlayerLL():
         returns points
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        player_uuid = get_player_uuid(player_handle)
-        match = MatchLL()
+        player_uuid: str = self.player_handle_to_uuid(player_handle)
         points = 0
 
         for tournament in model_tournaments:
             try:
-                matches_list: list[Match] = match.get_matches(tournament.uuid)
+                matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
                 tour_final_match: Match = matches_list[-1]
                 winning_players = tour_final_match.winning_players
-                losing_player = tour_final_match.losing_players
+                losing_players = tour_final_match.losing_players
 
                 if winning_players is None:
                     pass
@@ -243,10 +203,56 @@ class PlayerLL():
                 elif player_uuid in winning_players:
                     points += 3
 
-                elif player_uuid in losing_player:
+                elif losing_players and player_uuid in losing_players:
                     points += 1
                 
             except:
                 pass
 
         return str(points)
+
+    def list_all_players(self) -> list[Player]:
+            """ Returns a list of stored players. """
+
+            players: list[Player] = DataLayerAPI.load_players()
+            return players
+
+    def get_player_by_handle(self, player_handle: str) -> Player | str:
+            ''' Takes in a players UUID and returns the players object. '''
+
+            players: list[Player] = self.list_all_players()
+            player = next((p for p in players if p.handle == player_handle), None)
+
+            if player is None:
+                return ""
+
+            return player
+
+    def get_player_by_uuid(self, player_uuid: str) -> Player | str:
+            ''' Takes in a players UUID and returns the players object. '''
+
+            players: list[Player] = self.list_all_players()
+            player = next((p for p in players if p.uuid == player_uuid), None)
+            
+            if player is None:
+                return ""
+
+            return player
+
+    def player_handle_to_uuid(self, player_handle: str) -> str:
+        player: Player | str = self.get_player_by_handle(player_handle)
+        return player.uuid if type(player) == Player else ''
+    
+    def get_players_team_uuid(self, player_uuid: str) -> str:
+        """
+        Takes in player handle
+        looks through all teams until it finds the player in a team
+        and returns the teams uuid
+        If no player is found an error is raised
+        """
+        model_teams: list[Team] = DataLayerAPI.load_teams()
+        for team in model_teams:
+            if player_uuid in team.list_player_uuid:
+                return team.uuid
+            
+        return ""
