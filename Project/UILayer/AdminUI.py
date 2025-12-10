@@ -39,7 +39,7 @@ class AdminUI:
         """
 
         menu: str = "Admin Screen"
-        user_path: list[str] = [MenuOptions.admin_screen]
+        user_path: list[MenuOptions] = [MenuOptions.admin_screen]
         info: list[str] = []
         options: dict[str, str] = {
             "1": "Create Tournament",
@@ -93,7 +93,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_name: str = self.utility._input_info(
-                "Enter Tournament Name: \n", "handle", "TOURNAMENT"
+                "Enter Tournament Name or 'q' to cancel: \n", "handle", "TOURNAMENT"
             )
             if not tournament_name: return user_path[-2]
 
@@ -107,7 +107,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_date: str = self.utility._input_info(
-                "Enter Start And End Date: (yyyy-mm-dd yyyy-mm-dd) \n",
+                "Enter Start And End Date or 'q' to cancel: (yyyy-mm-dd yyyy-mm-dd) \n",
                 "date_of_birth",
                 "TOURNAMENT",
             )
@@ -124,7 +124,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_time: str = self.utility._input_info(
-                "Enter Start And End Time: (hh:mm hh:mm) \n", "", "TOURNAMENT"
+                "Enter Start And End Time or 'q' to cancel: (hh:mm hh:mm) \n", "", "TOURNAMENT"
             )
             if not tournament_name: return user_path[-2]
             tournament_time: str = "14:00 18:00" #TODO Remove when it works
@@ -139,7 +139,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_addr: str = self.utility._input_info(
-                "Enter Venue Address: (Streetname 00 Cityname)\n",
+                "Enter Venue Address or 'q' to cancel: (Streetname 00 Cityname)\n",
                 "home_address",
                 "TOURNAMENT",
             )
@@ -155,7 +155,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_email: str = self.utility._input_info(
-                "Enter Contact Email: \n", "email", "PLAYER"
+                "Enter Contact Email or 'q' to cancel: \n", "email", "PLAYER"
             )
             if not tournament_name: return user_path[-2]
 
@@ -169,7 +169,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_phnum: str = self.utility._input_info(
-                "Enter Contact Phone Number: 123-4567 \n",
+                "Enter Contact Phone Number or 'q' to cancel: 123-4567 \n",
                 "phone_number",
                 "PLAYER",
             )
@@ -222,7 +222,7 @@ class AdminUI:
         """
 
         menu: str = "Manage Tournaments"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
         ]
@@ -283,7 +283,7 @@ class AdminUI:
         tournament_name: str | None = LogicLayerAPI.save_player()
 
         menu: str = "Active Tournament"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
@@ -315,7 +315,7 @@ class AdminUI:
         """
 
         menu: str = "Matches"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
@@ -363,7 +363,7 @@ class AdminUI:
         """
 
         menu: str = "Matches"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
             MenuOptions.select_match,
@@ -414,7 +414,7 @@ class AdminUI:
         amount_teams = len(tournament_object.teams_playing)
 
         menu: str = "Inactive Tournament"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
@@ -478,7 +478,7 @@ class AdminUI:
             return MenuOptions.start_screen
 
         menu: str = "Manage Teams"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.admin_screen,
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
@@ -523,7 +523,7 @@ class AdminUI:
         all_teams: list[str] = self.utility.team_names()
 
         menu: str = f"Add Team To {tournament_name}"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
@@ -595,7 +595,7 @@ class AdminUI:
         ]
 
         menu: str = f"Add Team To {tournament_name}"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
             MenuOptions.manage_teams,
@@ -663,7 +663,7 @@ class AdminUI:
             return MenuOptions.start_screen
 
         menu: str = "Publish"
-        user_path: list[str] = [
+        user_path: list[MenuOptions] = [
             MenuOptions.manage_tournament,
             MenuOptions.manage_inactive_tournament,
             MenuOptions.publish,
