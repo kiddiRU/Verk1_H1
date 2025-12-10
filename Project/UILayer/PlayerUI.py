@@ -391,7 +391,7 @@ Rank: {current_login_rank}"""]
         while con == "b":
             self.tui.clear_saved_data()
             print(self.tui.table(menu, user_path, [], {}, message))
-            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "name", "TEAM")
+            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "handle", "TEAM")
             if not team_name:
                 return user_path[-2]
             self.tui.save_input("Team Name: " + team_name)
