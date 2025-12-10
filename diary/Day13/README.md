@@ -63,6 +63,7 @@
 - Fixed Bug Date somehow in match?
 - Fixed Bug - If end-time smaller then start-time it generates weird datetime.
 ## State of group: 
+Everyone worked quite late today because deadline is 3 days away, except Kristján, who had to leave at 17 because he had work. Most of the project is done, we only need to type hint and make good doc strings using the flake8 format, test for bugs and finalize the project design document.
 ## Divisions:
 - UI / UX: Andri, Ísak
 - System engineer: Elmar, Kristinn, Kristján
