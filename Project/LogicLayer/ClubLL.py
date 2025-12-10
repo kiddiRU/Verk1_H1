@@ -26,7 +26,7 @@ class ClubLL():
         ) -> Club:
         """
         Takes in club info.
-
+        
         Validates the given info and creates a club object. Sends the
         object to the data layer to be stored and returns the new club.
         """
@@ -43,7 +43,7 @@ class ClubLL():
 
 
     def list_clubs(self): 
-        """Returns a list of stored clubs"""
+        """Returns a list of clubs"""
 
         clubs: list[Club] = DataLayerAPI.load_clubs()
         return clubs
@@ -51,9 +51,9 @@ class ClubLL():
         
     def get_teams_in_club(self, club_name: str) -> list[Team]:
         """
-        Takes in club name
-
-        Goes through all teams and appends to a lis every team that is in the club
+        Takes in a club name and gets the club uuid
+        loads and looks through all teams
+        and appends team object to a list of every team that is in the club
         """
 
         teams_in_club: list = []
