@@ -261,13 +261,10 @@ def validate_tournament_time(value: str) -> str:
     if begin_time.minute != end_time.minute:
         raise ValidationError("Begin and end minutes do not match")
 
-    """
-    if begin_time <= end_time:
-        return value
-    else:
+    
+    if begin_time == end_time:
         raise ValidationError("Begin time happens after end time")
-    """
-
+    
     return value
 
 def validate_color(value: str) -> str:

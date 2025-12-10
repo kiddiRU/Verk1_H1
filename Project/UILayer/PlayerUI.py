@@ -977,20 +977,23 @@ Rank: {current_login_rank}"""]
 
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, {}, message))
+        print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["y", "n"])
 
+        options: dict[str, str] = {"c": "Continue"}
         if choice == "n":
             message: str = "Operation Canceled"
             print(self.tui.table(menu, user_path, info, options, message))
             choice: str = self.utility._prompt_choice(["c"])
             return MenuOptions.my_team_not_empty
 
+        if type(current_player) is Player:
+            LogicLayerAPI.remove_player(current_login_handle, current_player)
         message: str = "You Have Sucessfully Left The Team!"
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["c"])
 
-        return MenuOptions.my_team_empty
+        return MenuOptions.player_screen
     
 
 
