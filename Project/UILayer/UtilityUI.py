@@ -246,6 +246,15 @@ class UtilityUI:
         output_list: list[str] = []
 
         for match in match_list:
+
+            match_winner_uuid: str = str(match.winner)
+            if match_winner_uuid != "None":
+                match_winner_team: Team = LogicLayerAPI.get_team_by_uuid(match_winner_uuid)
+                match_winner_name: str = match_winner_team.name
+            else: match_winner_name: str = match_winner_uuid
+
+            
+
             if show_all:
                 revealed: str = "To be revealed"
                 if (match.team_1 or match.team_2) == revealed:
@@ -259,11 +268,12 @@ class UtilityUI:
 
                 output_list.append(
                     f"{line('—')}\n"
+                    f"{f"Date: {match.match_date}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
                     f"{f"Team 1: {match_name_1}":<79}|\n"
                     f"{'vs':<79}|\n"
                     f"{f"Team 2: {match_name_2}":<79}|\n"
-                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
-                    f"{f"Match Winner: {str(match.winner)}":<79}|"
+                    f"{f"Match Winner: {str(match_winner_name)}":<79}|"
                 )
 
 
@@ -276,16 +286,16 @@ class UtilityUI:
 
                 output_list.append(
                     f"{line('—')}\n"
+                    f"{f"Date: {match.match_date}":<79}|\n"
+                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
                     f"{f"Team 1: {match_name_1}":<79}|\n"
                     f"{'vs':<79}|\n"
                     f"{f"Team 2: {match_name_2}":<79}|\n"
-                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
-                    f"{f"Match Winner: {str(match.winner)}":<79}|"
+                    f"{f"Match Winner: {str(match_winner_name)}":<79}|"
                 )
 
         return output_list
 
-    #TODO Make function to get saved tournament name and convert to uuid (MANLY FOR MATCHES IN ADMIN UI)
 
     # "Created" by Sindri Freysson
     # TODO need write doc string
