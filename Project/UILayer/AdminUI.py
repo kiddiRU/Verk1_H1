@@ -245,8 +245,10 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         find_name: str = input(
-            self.message_color + "Input Tournament Name: " + self.reset
+            self.message_color + "Input Tournament Name or 'q' to go back: " + self.reset
         )
+        if find_name.lower() == "q":
+            return user_path[-2]
         if find_name.lower() == "lo":
             return MenuOptions.logout
 
@@ -309,17 +311,22 @@ class AdminUI:
             MenuOptions.manage_tournament,
             MenuOptions.manage_active_tournament,
         ]
-        info: list[str] = [f"- - - - {str(tournament_name)} - - - -"]
+        info: list[str] = [f"{f"- - - - {str(tournament_name)} - - - -": <79}" + "|"]
         options: dict[str, str] = {
             "1": "Input Results Of A Match",
             "b": "Back",
             "lo": "Log Out",
         }
 
-        # list the matches from the f-string given by the utility function
-        info: list[str] = info + self.utility.list_matches(
-            tournament_uuid, True
-        )
+        matches = self.utility.list_matches(tournament_uuid, True)
+
+        ammount_of_lines = len(matches) - 1
+        for match in matches:
+            info.append(match)
+
+            for line in range(ammount_of_lines):
+                info.append("—" * 80)
+                ammount_of_lines -= 1
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))

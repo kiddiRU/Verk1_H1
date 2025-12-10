@@ -287,7 +287,7 @@ class UtilityUI:
                 match_name_2: str = match2.name
 
                 output_list.append(
-                    f"{line('—')}\n"
+                    #f"{line('—')}\n"
                     f"Team 1: {match_name_1:<71}|\n"
                     f"{'vs':<79}|\n"
                     f"Team 2: {match_name_2:<71}|\n"
@@ -304,7 +304,7 @@ class UtilityUI:
                 match_name_2: str = match2.name
 
                 output_list.append(
-                    f"{line('—')}\n"
+                    #f"{line('—')}\n"
                     f"Team 1: {match_name_1:<71}|\n"
                     f"{'vs':<79}|\n"
                     f"Team 2: {match_name_2:<71}|\n"
