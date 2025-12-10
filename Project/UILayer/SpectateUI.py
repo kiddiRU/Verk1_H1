@@ -469,8 +469,6 @@ class SpectateUI:
         :return: Description
         :rtype: MenuOptions
         """
-        # Team chosen previously
-        tournament_name: str = LogicLayerAPI.save_player() or "None"
 
         team_name = self.temp_team
 
