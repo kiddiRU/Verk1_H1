@@ -21,6 +21,7 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
     elif attribute == 'handle': return validate_unique_name(value, name_type)
     elif attribute == 'tournament_date': return validate_tournament_date(value)
     elif attribute == 'tournament_time': return validate_tournament_time(value)
+    elif attribute == 'color': return validate_color(value)
     else: return
 
 # Player handle, team name, tour name and club name
@@ -268,3 +269,11 @@ def validate_tournament_time(value: str) -> str:
     """
 
     return value
+
+def validate_color(value: str) -> str:
+    available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
+    
+    if value in available_colors:
+        return value
+
+    raise ValidationError("Color not one of the available ones.")
