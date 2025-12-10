@@ -798,5 +798,82 @@ class AdminUI:
             MenuOptions: The next menu to navigate to
         """
 
-        print("This is the create club screen")
+        # print("This is the create club screen")
+        menu: str = "Create club"
+        user_path: list[MenuOptions] = [MenuOptions.admin_screen, MenuOptions.create_club]
+        info: list[str]= []
+        options: dict[str, str]= {"c": "Continue", "b": "Back"}
+        message: str = "You Have Created A Club!"
+
+
+        # Python complained if i did not do this
+        club_name = ""
+        club_color = ""
+        club_country = ""
+        club_hometown = ""
+
+        self.tui.clear_saved_data()
+
+        con = "b"
+        while con == "b":
+            print(self.tui.table(menu, user_path, info))  
+            club_name: str = self.utility._input_info("Enter Name or 'q' to cancel: \n", "handle", "CLUB")
+            if not club_name: 
+                return user_path[-2]
+            self.tui.save_input("Club Name: " + club_name)
+
+            print(self.tui.table(menu, user_path, info, options)) 
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con == "b":
+            print(self.tui.table(menu, user_path, info)) 
+            club_color: str = str(self.utility._input_info("Enter Basic color or 'q' to cancel: \n", 
+                                                         "color", "CLUB"))
+            if not club_color: 
+                return user_path[-2]
+            self.tui.save_input("Club Color: " + str(club_color))
+
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con == "b":
+            print(self.tui.table(menu, user_path, info)) 
+            club_country: str = self.utility._input_info("Enter Club country of origin or 'q' to cancel: \n", 
+                                                    "name", "CLUB")
+            if not club_country: 
+                return user_path[-2]
+            self.tui.save_input("Club Country: " + club_country)
+
+            print(self.tui.table(menu, user_path, info, options))  
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con == "b":
+                self.tui.discard_last_input()
+
+        con = "b"
+        while con == "b":
+            print(self.tui.table(menu, user_path, info))
+            club_hometown: str = self.utility._input_info("Enter Club Hometown or 'q' to cancel: \n", "name", "CLUB")
+            if not club_hometown: 
+                return user_path[-2]
+            self.tui.save_input("Club Hometown: " + club_hometown)
+
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con == "b":
+                self.tui.discard_last_input()
+        # Club input done
+        options: dict[str, str]= {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
+        print(self.tui.table(menu, user_path, info, options, message))
+        con: str = self.utility._prompt_choice(["c", "b"])
+
+        if con == "b":
+            return MenuOptions.admin_screen
+
+        LogicLayerAPI.create_club(club_name, club_color, club_country, club_hometown)
         return MenuOptions.admin_screen

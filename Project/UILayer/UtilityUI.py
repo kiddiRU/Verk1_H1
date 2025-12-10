@@ -115,7 +115,7 @@ class UtilityUI:
                 print(self.message_color + message + self.reset)
                 choice: str = input()
                 if choice == "q":
-                    return ""
+                    return choice
                 if not choice:
                     return choice
                 valid: str | None = validate(attribute, choice, info_type)

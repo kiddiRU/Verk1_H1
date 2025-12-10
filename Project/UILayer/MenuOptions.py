@@ -47,9 +47,10 @@ class MenuOptions(StrEnum):
 
     # PlayerScreen
     edit_player_info = "EditPlayerInfo"
-    my_team_empty = "MyTeamEmpty"
-    my_team_not_empty = "MyTeamNotEmpty"
+    my_team_empty = "MyTeam"
+    my_team_not_empty = "MyTeam"
     create_team = "CreateTeam"
+    create_team_in_team = "CreateTeam"
 
     # MyTeam
     edit_team = "EditTeam"

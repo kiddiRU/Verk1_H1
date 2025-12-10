@@ -61,6 +61,7 @@ class MainUI:
             MenuOptions.add_player: self._player_ui.add_player,
             MenuOptions.remove_player: self._player_ui.remove_player,
             MenuOptions.leave_team: self._player_ui.leave_team,
+            MenuOptions.create_team_in_team: self._player_ui.create_team_in_team,
             # ------------------ Spectate Paths ------------------
             MenuOptions.spectate_players: self._spectate_ui.spectate_players,
             MenuOptions.view_player_stats: self._spectate_ui.view_player_stats,
