@@ -79,9 +79,14 @@ def promote_captain(current_player: Player, handle_to_promote: str) -> None:
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
-
 def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
+
+def get_player_wins(player_handle: str) -> str:
+    return player_logic.get_player_wins(player_handle)
+
+def get_player_points(player_handle: str) -> str:
+    return player_logic.get_player_points(player_handle)
 
 
 
@@ -220,6 +225,12 @@ def get_teams_in_club(club_name: str) -> list[Team]:
 def change_club_info(club: Club) -> None:
     pass
 
+def get_club_wins(club_name: str) -> str:
+    return club_logic.get_club_wins(club_name)
+
+def get_club_points(club_name: str) -> str:
+    return club_logic.get_club_points(club_name)
+
 ''' Match API '''
 
 # TODO implement input_match_results and call it
@@ -233,8 +244,8 @@ def input_match_results(match: Match) -> None:
 def get_player_uuid(player_handle: str) -> str:
     return LogicUtility.get_player_uuid(player_handle)
 
-def get_tournament_by_name(tournamnet_name: str) -> Tournament:
-    return LogicUtility.get_tournament_by_name(tournamnet_name)
+def get_tournament_by_name(tournament_name: str) -> Tournament:
+    return LogicUtility.get_tournament_by_name(tournament_name)
 
 def tournament_name_to_uuid(uuid: str) -> str:
     return LogicUtility.tournament_name_to_uuid(uuid)
