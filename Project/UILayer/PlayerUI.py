@@ -821,8 +821,18 @@ Rank: {current_login_rank}"""]
                            MenuOptions.add_player]
         options: dict = {"c": "Continue"}
 
-        list_of_handles: list[str] = self.utility.show_main("players")
-        info: list[str] = list_of_handles
+        # Gets all players that are not in any team
+        not_in_team: list[Player] = LogicLayerAPI.get_all_players_not_in_team()
+
+        # Gets a list of handles from Player objects
+        handles_not_team: list[str] = [p.handle for p in not_in_team]
+        
+        info: list[str] = handles_not_team
+        if len(handles_not_team) == 0:
+                    info.append("No Players To Add To Team")
+
+        #TODO: Make sure that program dosent crash when trying to add "No Players To Add To Team"
+        #TODO: FORMAT SO IT IS NOT SHIT
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
