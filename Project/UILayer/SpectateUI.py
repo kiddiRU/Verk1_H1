@@ -118,7 +118,7 @@ class SpectateUI:
         ]
         # Changed by Sindri Freysson
         info: list[str] = [
-            "Team: " + LogicLayerAPI.get_player_team(player_handle)[0],
+            "Team: " + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
             "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
             "Points: " + LogicLayerAPI.get_player_points(player_handle)
         ]

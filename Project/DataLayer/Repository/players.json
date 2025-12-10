@@ -519,17 +519,6 @@
         "handle": "dfg",
         "url": ""
     },
-<<<<<<< HEAD
-    "b521ba7f-8fae-4bea-a55c-f8ecaad7c024": {
-        "uuid": "b521ba7f-8fae-4bea-a55c-f8ecaad7c024",
-        "name": "",
-        "date_of_birth": "",
-        "home_address": "",
-        "email": "",
-        "phone_number": "",
-        "handle": "",
-        "url": "sillidu.is"
-=======
     "32d89d9f-b555-4311-a104-d8009eec5b76": {
         "uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
         "name": "Isak",
@@ -549,6 +538,5 @@
         "phone_number": "100-1000",
         "handle": "\ud83d\udd1d\ud83d\udd1d\ud83d\udd1d\ud83d\udd1d",
         "url": ""
->>>>>>> a7732082b40adbdd564ba3085ac3baed29cf1ab5
     }
 }

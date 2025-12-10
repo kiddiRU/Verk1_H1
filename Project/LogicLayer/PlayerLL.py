@@ -134,7 +134,7 @@ class PlayerLL():
         return self.player
     
 
-    def get_player_team(self, player_handle: str) -> tuple[str, str]:
+    def get_player_team_and_rank(self, player_handle: str) -> tuple[str, str]:
         """Takes in a player handle and returns the name of their team and their rank"""
 
         player_uuid: Player | str = self.player_handle_to_uuid(player_handle)

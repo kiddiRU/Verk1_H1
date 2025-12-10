@@ -167,7 +167,7 @@ class UtilityUI:
         Returns:
             list[str]: Team names
         """
-        team_list: list[Team] = LogicLayerAPI.list_teams()
+        team_list: list[Team] = LogicLayerAPI.list_all_teams()
         return [x.name for x in team_list]
 
     def club_names(self):
@@ -177,7 +177,7 @@ class UtilityUI:
         Returns:
             list[str]: Club names
         """
-        clubs: list[Club] = LogicLayerAPI.list_clubs()
+        clubs: list[Club] = LogicLayerAPI.list_all_clubs()
         return [x.name for x in clubs]
 
     def player_handles(self) -> list[str]:
@@ -187,7 +187,7 @@ class UtilityUI:
         Returns:
             list[str]: PLayer handles
         """
-        player_list: list[Player] = LogicLayerAPI.list_players()
+        player_list: list[Player] = LogicLayerAPI.list_all_players()
         return [p.handle for p in player_list]
 
     def show_main(self, flag: str) -> list[str]:
