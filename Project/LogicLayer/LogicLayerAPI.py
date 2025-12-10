@@ -107,6 +107,9 @@ def remove_player(player_handle: str, current_player: Player) -> Team:
 def get_team_members(team_name: str) -> list[str]:
     return team_logic.get_team_members(team_name)
 
+def get_team_members_object(team_name: str) -> list[Player]:
+    return team_logic.get_team_members_object(team_name)
+
 def list_teams() -> list[Team]:
     return team_logic.list_teams()
 
