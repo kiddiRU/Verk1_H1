@@ -556,7 +556,7 @@ Rank: {current_login_rank}"""]
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth or 'q' to cancel: \n", 
-                                               "date_of_birt", "PLAYER")
+                                               "date_of_birth", "PLAYER")
             if new_dob == "q":
                 return user_path[-2]
             if new_dob:
