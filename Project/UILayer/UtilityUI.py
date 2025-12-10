@@ -243,9 +243,11 @@ class UtilityUI:
             output_list.append(f"{t.name:<68}>{t.status:^10}|")
         return output_list
     
+    # "Created" by Sindri Freysson
+    # TODO need write doc string
     def show_filtered(self, object_list: list[Player]|list[Team]|list[Club]) -> list[str]:
-        print(object_list)
-        str_list = [x.name for x in object_list]
+        
+        str_list: list[str] = [x.name for x in object_list]
         output_list: list[str] = []  # list that holds each line as a f-string
         length: int = len(str_list)
 
