@@ -196,7 +196,8 @@ class TeamLL():
         for club in clubs:
             teams = clubll.get_teams_in_club(club.name)
 
-            if team_name in teams:
-                return club.name
+            for team in teams:
+                if team_name == team.name:
+                    return club.name
         
         return ""

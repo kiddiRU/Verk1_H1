@@ -68,6 +68,10 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
 
+        """ THIS IS TEMPORARY REMOVE LATER"""
+        player_list = LogicLayerAPI.list_players()
+        abc: str = 1
+
         menu: str = "Login"
         user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.login]
         info: list[str]= []
@@ -94,7 +98,15 @@ class PlayerUI:
         
         print(self.tui.table(menu, user_path, info, options, message))
 
+        """ THIS IS TEMPORARY REMOVE LATER """
+        if login_handle == "handle list":
+            AAAA: int = 1
+            abc: str = 1
+            for player in player_list:
+                print(player.handle)
+
         choice: str = self.utility._prompt_choice(["t", "b"])
+
 
         if choice == "t":
             return MenuOptions.login
@@ -112,7 +124,7 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
+        user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.register]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Created A Player!"
@@ -130,90 +142,107 @@ class PlayerUI:
         self.tui.clear_saved_data()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))  
-            user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
-            if not user_name: return user_path[-2]
+            user_name: str = self.utility._input_info("Enter Name or 'q' to cancel: \n", "unique_name", "PLAYER")
+            if not user_name: 
+                return user_path[-2]
             self.tui.save_input("Name: " + user_name)
 
             print(self.tui.table(menu, user_path, info, options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info)) 
-            user_dob: str = str(self.utility._input_info("Enter Date Of Birth: (yyyy-mm-dd) \n", "date_of_birth", "PLAYER"))
+            user_dob: str = str(self.utility._input_info("Enter Date Of Birth or 'q' to cancel: \n (yyyy-mm-dd) \n", 
+                                                         "date_of_birth", "PLAYER"))
+            if not user_dob: 
+                return user_path[-2]
             self.tui.save_input("Date Of Birth: " + str(user_dob))
 
             print(self.tui.table(menu, user_path, info, options))  
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info)) 
-            user_addr: str = self.utility._input_info("Enter Home Address: (Streetname 00 Cityname)\n", 
+            user_addr: str = self.utility._input_info("Enter Home Address or 'q' to cancel: \n (Streetname 00 Cityname) \n", 
                                                     "home_address", "PLAYER")
+            if not user_addr: 
+                return user_path[-2]
             self.tui.save_input("Home Address: " + user_addr)
 
             print(self.tui.table(menu, user_path, info, options))  
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
-            user_email: str = self.utility._input_info("Enter Email: \n", "email", "PLAYER")
+            user_email: str = self.utility._input_info("Enter Email or 'q' to cancel: \n", "email", "PLAYER")
+            if not user_email: 
+                return user_path[-2]
             self.tui.save_input("Email: " + user_email)
 
             print(self.tui.table(menu, user_path, info, options))
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_phnum: str = self.utility._input_info("Enter Phone Number: 123-4567 \n", "phone_number", "PLAYER")
+            user_phnum: str = self.utility._input_info("Enter Phone Number or 'q' to cancel: \n (123-4567) \n", 
+                                                       "phone_number", "PLAYER")
+            if not user_phnum: 
+                return user_path[-2]
             self.tui.save_input("Phone Number: " + user_phnum)
 
             print(self.tui.table(menu, user_path, info, options))  
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_handle: str = self.utility._input_info("Enter Handle: \n", "handle", "PLAYER")
+            user_handle: str = self.utility._input_info("Enter Handle or 'q' to cancel:  \n", "handle", "PLAYER")
+            if not user_handle: 
+                return user_path[-2]
             self.tui.save_input("Handle: " + user_handle)
 
             print(self.tui.table(menu, user_path, info, options))  
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))   
-            user_url: str = input("Enter URL: (Optional) \n") #TODO: This is just a basic input
+            user_url: str = input(self.message_color + 
+                                  "Enter URL or 'q' to cancel: \n (Optional, /Press Enter To Leave Blank) \n" 
+                                  + self.reset)
+            if user_url.lower() == "q": 
+                return user_path[-2]
             self.tui.save_input("URL: " + user_url)
             print(self.tui.table(menu, user_path, info, options))
 
             print(self.tui.table(menu, user_path, info, options))  
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         options: dict[str, str]= {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
         print(self.tui.table(menu, user_path, info, options, message))
         con: str = self.utility._prompt_choice(["c", "b"])
 
-        if con.lower() == "b":
+        if con == "b":
             return MenuOptions.start_screen
 
         LogicLayerAPI.create_player(user_name, user_dob, user_addr, user_email, user_phnum, user_handle, user_url)
@@ -250,7 +279,7 @@ class PlayerUI:
             club = None
 
         # Need to make sure that no variable can be unbound so that VS code wont complain
-        if player:
+        if type(player) is Player:
             current_login_name = player.name
             current_login_dob = player.date_of_birth
             current_login_addr = player.home_address
@@ -300,9 +329,9 @@ Rank: {current_login_rank}"""]
             case "1":
                 return MenuOptions.edit_player_info
             case "2":
-                if ...:  # TODO: check if team is empty aka if player not in a team
-                    return MenuOptions.my_team_not_empty
-                return MenuOptions.my_team_empty
+                if not team:
+                    return MenuOptions.my_team_empty
+                return MenuOptions.my_team_not_empty
             case "3":
                 # if ...:  # TODO: check if player is already in a team
                 #     print("You are already in a team")
@@ -357,39 +386,41 @@ Rank: {current_login_rank}"""]
             
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             self.tui.clear_saved_data()
             print(self.tui.table(menu, user_path, [], {}, message))
-            team_name: str | None = self.utility._input_info("Enter Team Name: \n", "name", "TEAM")
+            team_name: str | None = self.utility._input_info("Enter Team Name or 'q' to cancel: : \n", "unique_name", "TEAM")
+            if not team_name:
+                return user_path[-2]
             self.tui.save_input("Team Name: " + team_name)
 
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path))
             team_url: str = input("Enter Team URL (Optional): \n") #TODO: This is just a basic input
             self.tui.save_input("Team Url: " + team_url)
 
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path))
-            team_ascii: str = input("Enter Team ASCII Art (Optional): \n") #TODO: This is just a basic input
+            team_ascii: str = input("Enter A Single Line Team ASCII Art (Optional): \n") #TODO: This is just a basic input
             self.tui.save_input("Team ASCII Art: " + team_ascii)
 
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
             message = ""
@@ -405,7 +436,7 @@ Rank: {current_login_rank}"""]
 
                     print(self.tui.table(menu, user_path, [], options)) 
                     con: str = self.utility._prompt_choice(["c", "b"])
-                    if con.lower() == "b":
+                    if con == "b":
                         self.tui.discard_last_input()
 
         options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
@@ -431,16 +462,25 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str | None = LogicLayerAPI.save_player()
-        login_uuid = LogicLayerAPI.get_player_uuid(current_login_handle)
-        current_player = LogicLayerAPI.get_player_object(login_uuid)
+        if type(current_login_handle) is str:
+            login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
+        else: 
+            login_uuid: str  = "" # This should never run, this is just to apease the type hinting gods
 
-        name = current_player.name
-        dob = current_player.date_of_birth
-        addr = current_player.home_address
-        email = current_player.email
-        phnum = current_player.phone_number
-        handle = current_player.handle
-        url = current_player.url
+        current_player: Player | str = LogicLayerAPI.get_player_object(login_uuid)
+
+        if type(current_player) is Player:
+            name: str = current_player.name
+            dob: str  = current_player.date_of_birth
+            addr: str  = current_player.home_address
+            email: str  = current_player.email
+            phnum: str  = current_player.phone_number
+            handle: str  = current_player.handle
+            url: str  = current_player.url
+
+        # This should never run, this is just to apease the type hinting gods
+        else:
+            return MenuOptions.player_screen
 
 
         menu: str = "Edit Player Info"
@@ -455,7 +495,7 @@ Rank: {current_login_rank}"""]
 
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_name = self.utility._input_change(unchanged_message + "\n Enter New Name: \n", "name", "PLAYER")
 
@@ -464,11 +504,11 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("Name: " + name)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_handle = self.utility._input_change(unchanged_message + "\n Enter New Handle: \n", 
                                                   "handle", "PLAYER")
@@ -477,11 +517,11 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("Handle: " + handle)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_dob = self.utility._input_change(unchanged_message + "\n Enter New Date Of Birth: \n", 
                                                "date_of_birt", "PLAYER")
@@ -490,11 +530,11 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("Date Of Birth: " + dob)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))        
             new_addr = self.utility._input_change(unchanged_message + "\n Enter New Home Address: \n", 
                                                 "home_address", "PLAYER")
@@ -503,11 +543,11 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("Home Address: " + addr)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_phnum = self.utility._input_change(unchanged_message + "\n Enter New Phone Number: \n", 
                                                  "phone_number", "PLAYER")
@@ -516,11 +556,11 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("Phone Number: " + phnum)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_email = self.utility._input_change(unchanged_message + "\n Enter New Email: \n", 
                                                  "email", "PLAYER")
@@ -529,11 +569,11 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("Email: " + email)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
-        while con.lower() == "b":
+        while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_url = input(unchanged_message + "\n Enter New URL: \n")
             if new_url:
@@ -541,7 +581,7 @@ Rank: {current_login_rank}"""]
             self.tui.save_input("URL: " + url)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
-            if con.lower() == "b":
+            if con == "b":
                 self.tui.discard_last_input()
         
 
@@ -607,14 +647,16 @@ Rank: {current_login_rank}"""]
 
         for member in team_members: 
             player: Player | str = LogicLayerAPI.get_player_object(member)
-            team, member_rank = LogicLayerAPI.get_player_team(player.handle)
 
-            if member_rank == "Captain":
-                info.append(f"{member_rank} \t {player.handle}")
-            else:
-                info.append(f"{member_rank} \t \t {player.handle}")
-        
-        self.tui.clear_saved_data()
+            if type(player) is Player: # Only there for the type hinting gods
+                team, member_rank = LogicLayerAPI.get_player_team(player.handle)
+
+                if member_rank == "Captain":
+                    info.append(f"{member_rank} \t {player.handle}")
+                else:
+                    info.append(f"{member_rank} \t \t {player.handle}")
+            
+            self.tui.clear_saved_data()
 
         if rank == "Captain":
             print(self.tui.table(menu, user_path, info, options))
@@ -664,18 +706,20 @@ Rank: {current_login_rank}"""]
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team]
         info: list[str]= [f"- - - -{team}- - - -", 
-                    f"{self.underscore + "Rank:"}{"Handle:": >21}{self.reset}"]
+                    f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
         options: dict[str, str]= {"1": "Add Player To Team", "2": "Remove Player From Team", "b": "Back"}
         message: str = ""
 
         for member in team_members: 
             player: Player | str = LogicLayerAPI.get_player_object(member)
-            team, member_rank = LogicLayerAPI.get_player_team(player.handle)
+            
+            if type(player) is Player: # Only there for the type hinting gods
+                team, member_rank = LogicLayerAPI.get_player_team(player.handle)
 
-            if member_rank == "Captain":
-                info.append(f"{member_rank} \t {player.handle}")
-            else:
-                info.append(f"{member_rank} \t \t {player.handle}")
+                if member_rank == "Captain":
+                    info.append(f"{member_rank} \t {player.handle}")
+                else:
+                    info.append(f"{member_rank} \t \t {player.handle}")
         
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -734,11 +778,9 @@ Rank: {current_login_rank}"""]
             current_login_handle: str = str(LogicLayerAPI.save_player())
             current_login_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
             current_player: Player | str = LogicLayerAPI.get_player_object(current_login_uuid)
-            add_player: Player | str = LogicLayerAPI.get_player_object(add_handle)
-            team, rank = LogicLayerAPI.get_player_team(current_login_handle)
-            team_uuid = LogicLayerAPI.get_players_team_uuid(current_login_handle)
 
-            LogicLayerAPI.add_player(add_handle, current_player)
+            if type(current_player) is Player: # Is Only there for the type hinting gods
+                LogicLayerAPI.add_player(add_handle, current_player)
 
 
             message: str = f"{add_handle} Has Been Added To Your Team!"
@@ -767,7 +809,8 @@ Rank: {current_login_rank}"""]
         """
 
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        current_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
 
         menu: str = "Remove Player"
         user_path: list = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.edit_team, 
@@ -778,32 +821,34 @@ Rank: {current_login_rank}"""]
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, ))
-        remove_handle: str = input("Enter A Players Handle To Remove Them: \n")
+        remove_handle: str = input(self.message_color + "Enter A Players Handle To Remove Them: \n" + self.reset)
 
 
         remove_uuid = LogicLayerAPI.get_player_uuid(remove_handle)
         remove_in_team = LogicLayerAPI.get_players_team_uuid(remove_uuid)
         print(remove_uuid, remove_in_team)
 
+        current_team, rank = LogicLayerAPI.get_player_team(remove_handle)
+        remove_player_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
-        if LogicLayerAPI.get_player_team(remove_handle):
-            if ...:
-                message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
-                print(self.tui.table(menu, user_path, info, {}, message))
+        if current_team == remove_player_team:
+            message: str = f"The Player {remove_handle} Was Found, Do You Want To Remove Them From Your Team? Y/N:"
+            print(self.tui.table(menu, user_path, info, {}, message))
 
-                choice: str = self.utility._prompt_choice(["y", "n"])
+            choice: str = self.utility._prompt_choice(["y", "n"])
 
-                if choice == "n":
-                    message: str = "Operation Cancelled"
-                    print(self.tui.table(menu, user_path, info, options, message))
-                    choice: str = self.utility._prompt_choice(["c"])
-                    return MenuOptions.edit_team
-
-
-                message: str = f"{remove_handle} Has Been Removed From Your Team!"
+            if choice == "n":
+                message: str = "Operation Cancelled"
                 print(self.tui.table(menu, user_path, info, options, message))
                 choice: str = self.utility._prompt_choice(["c"])
                 return MenuOptions.edit_team
+
+            if type(current_player) is Player:
+                LogicLayerAPI.remove_player(remove_handle, current_player)
+            message: str = f"{remove_handle} Has Been Removed From Your Team!"
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility._prompt_choice(["c"])
+            return MenuOptions.edit_team
         
 
         message: str = f"The Player {remove_handle} Was Not Found Or Is Not Removeable, Do You Want To Try Again? Y/N:"
@@ -825,28 +870,62 @@ Rank: {current_login_rank}"""]
             MenuOptions: The next menu to navigate to
         """
 
+        current_login_handle: str = str(LogicLayerAPI.save_player())
+        current_uuid: str = LogicLayerAPI.get_player_uuid(current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_object(current_uuid)
+        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+
         menu: str = "Leave Team"
         user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
         info: list[str] = []
-        options: dict[str, str] = {"c": "Continue"}
-        message: str = f"Are You Sure You Want To Leave {"TEAMNAME"}? Y/N"
+        options: dict[str, str] = {"Y": "Yes", "N": "No"}
+        message: str = f"Are You Sure You Want To Leave {team}"
 
-        if ...:  # TODO: check if player is captain
+        if rank == "Captain":
+            message: str = f"Select A New Captain Before Leaving {team}"
+            print(self.tui.table(menu, user_path, info, {}, message))
+            new_captain = input(self.message_color + "Enter A Players Handle To Promote Them To Captain: \n" + self.reset)
+            current_team, rank = LogicLayerAPI.get_player_team(new_captain)
+            new_captain_team, rank = LogicLayerAPI.get_player_team(current_login_handle)
 
-            self.tui.clear_saved_data()
+            if current_team == new_captain_team:
+                message: str = f"The Player {new_captain} Was Found, Do You Want To Promote Them To Captain? Y/N:"
+                print(self.tui.table(menu, user_path, info, {}, message))
+
+                choice: str = self.utility._prompt_choice(["y", "n"])
+
+                if type(current_player) is Player:
+                    if choice == "y":
+                        LogicLayerAPI.promote_captain(current_player, new_captain)
+
+                        LogicLayerAPI.remove_player(current_login_handle, current_player)
+
+                        return MenuOptions.player_screen
+                    return MenuOptions.edit_team
+
+            message: str = "Player Was Not Found Or Not Available, Do You Want To Try Again? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
             choice: str = self.utility._prompt_choice(["y", "n"])
 
             if choice == "n":
-                message: str = "Operation Canceled"
-                print(self.tui.table(menu, user_path, info, options, message))
-                choice: str = self.utility._prompt_choice(["c"])
-                return MenuOptions.my_team_not_empty
+                return MenuOptions.edit_team
 
-            message: str = "You Have Sucessfully Left The Team!"
+            return MenuOptions.leave_team
+
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, {}, message))
+        choice: str = self.utility._prompt_choice(["y", "n"])
+
+        if choice == "n":
+            message: str = "Operation Canceled"
             print(self.tui.table(menu, user_path, info, options, message))
             choice: str = self.utility._prompt_choice(["c"])
-            return MenuOptions.my_team_empty
+            return MenuOptions.my_team_not_empty
+
+        message: str = "You Have Sucessfully Left The Team!"
+        print(self.tui.table(menu, user_path, info, options, message))
+        choice: str = self.utility._prompt_choice(["c"])
 
         return MenuOptions.my_team_empty
     
@@ -956,11 +1035,11 @@ Rank: {current_login_rank}"""]
 
 
         print("""
-                                   MMMMMMMMMMM                                         
-                                 MMMMMMMMMMMMMMMMM                                      
-                             NMMMMMMMMMMMMMMMMMMMMMMMM                                  
-                          MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                              
-                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN                          
+                                     MMMMMMMMMMM                                         
+                                  MMMMMMMMMMMMMMMMM                                      
+                              NMMMMMMMMMMMMMMMMMMMMMMMM                                  
+                           MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                              
+                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN                          
                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                         
                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                        
                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD                       
@@ -1036,4 +1115,5 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMM
         elif like.lower() != "n":
             MenuOptions.start_screen
     
+        print("\033[31m" + "Deleting File And System" + "\033[0m")
         return MenuOptions.quit
