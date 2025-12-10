@@ -455,6 +455,7 @@ Rank: {current_login_rank}"""]
         return MenuOptions.player_screen
 
 
+
     def create_team_in_team(self) -> MenuOptions:
         """ Screen That Is Shown When Player In A Team Tries To Create A New Team 
 
@@ -478,6 +479,7 @@ Rank: {current_login_rank}"""]
             case "b":
                 return MenuOptions.player_screen
         return MenuOptions.player_screen
+
 
 
     def edit_player_info(self) -> MenuOptions:
@@ -527,14 +529,15 @@ Rank: {current_login_rank}"""]
                                                    "name", "PLAYER")
             if new_name == "q":
                 return user_path[-2]
-            if new_name:
-                name = new_name
+            if not new_name:
+                new_name = name
 
-            self.tui.save_input("Name: " + name)
+            self.tui.save_input("Name: " + new_name)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_name = name
 
         con = "b"
         while con == "b":
@@ -543,14 +546,15 @@ Rank: {current_login_rank}"""]
                                                   "handle", "PLAYER")
             if new_handle == "q":
                 return user_path[-2]
-            if new_handle:
-                handle = new_handle
+            if not new_handle:
+                new_handle = handle
 
-            self.tui.save_input("Handle: " + handle)
+            self.tui.save_input("Handle: " + new_handle)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_handle = handle
 
         con = "b"
         while con == "b":
@@ -559,14 +563,15 @@ Rank: {current_login_rank}"""]
                                                "date_of_birth", "PLAYER")
             if new_dob == "q":
                 return user_path[-2]
-            if new_dob:
-                dob = new_dob
+            if not new_dob:
+                new_dob = dob
 
-            self.tui.save_input("Date Of Birth: " + dob)
+            self.tui.save_input("Date Of Birth: " + new_dob)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_dob = dob
 
         con = "b"
         while con == "b":
@@ -575,14 +580,15 @@ Rank: {current_login_rank}"""]
                                                 "home_address", "PLAYER")
             if new_addr == "q":
                 return user_path[-2]
-            if new_addr:
-                addr = new_addr
+            if not new_addr:
+                new_addr = addr
                 
-            self.tui.save_input("Home Address: " + addr)
+            self.tui.save_input("Home Address: " + new_addr)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_addr = addr
 
         con = "b"
         while con == "b":
@@ -591,14 +597,15 @@ Rank: {current_login_rank}"""]
                                                  "phone_number", "PLAYER")
             if new_phnum == "q":
                 return user_path[-2]
-            if new_phnum:
-                phnum = new_phnum
+            if not new_phnum:
+                new_phnum = phnum
 
-            self.tui.save_input("Phone Number: " + phnum)
+            self.tui.save_input("Phone Number: " + new_phnum)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_phnum = phnum
 
         con = "b"
         while con == "b":
@@ -607,14 +614,15 @@ Rank: {current_login_rank}"""]
                                                  "email", "PLAYER")
             if new_email == "q":
                 return user_path[-2]
-            if new_email:
-                email = new_email
+            if not new_email:
+                new_email = email
 
-            self.tui.save_input("Email: " + email)
+            self.tui.save_input("Email: " + new_email)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_email = email
 
         con = "b"
         while con == "b":
@@ -623,14 +631,15 @@ Rank: {current_login_rank}"""]
 
             if new_url == "q":
                 return user_path[-2]
-            if new_url:
-                url = new_url
+            if not new_url:
+                new_url = url
             
-            self.tui.save_input("URL: " + url)
+            self.tui.save_input("URL: " + new_url)
             print(self.tui.table(menu, user_path, [], options)) 
             con: str = self.utility._prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
+                new_url = url
         
 
         options: dict[str, str] = {"c": "Save Info And Continue", "b": "Discard Info And Go Back"}
