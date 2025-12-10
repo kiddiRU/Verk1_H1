@@ -8,7 +8,7 @@ Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility, MatchLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -79,13 +79,15 @@ def promote_captain(current_player: Player, handle_to_promote: str) -> None:
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
-
 def get_player_team(player_handle: str) -> tuple:
     return player_logic.get_player_team(player_handle)
 
-# "Created" by Sindri Freysson
-def get_player_wins(player_handle) -> str:
+def get_player_wins(player_handle: str) -> str:
     return player_logic.get_player_wins(player_handle)
+
+def get_player_points(player_handle: str) -> str:
+    return player_logic.get_player_points(player_handle)
+
 
 # "Created" by Sindri Freysson
 def get_player_points(player_handle) -> str:
@@ -127,6 +129,7 @@ def get_team_club(team_name: str) -> str:
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
+match_logic = MatchLL()
 
 def create_tournament(
     name: str,
@@ -205,6 +208,27 @@ def change_match_winner(
             team_uuid
         )
 
+def get_all_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournaemnt
+
+    Returns a list of all matches in the tournament
+    tied to the uuid given.
+    """
+    return match_logic.get_matches(tournament_uuid)
+
+def get_next_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournament
+
+    Returns a list of matches which are next on the schedule,
+    matches next in the schedule are matches which don't have
+    a winner and there doesn't exist a match which happens
+    before it and needs a winner.
+    """
+    return tournament_logic.next_games(tournament_uuid)
+
+
 # TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
     pass
@@ -236,6 +260,12 @@ def get_teams_in_club(club_name: str) -> list[Team]:
 def change_club_info(club: Club) -> None:
     pass
 
+def get_club_wins(club_name: str) -> str:
+    return club_logic.get_club_wins(club_name)
+
+def get_club_points(club_name: str) -> str:
+    return club_logic.get_club_points(club_name)
+
 ''' Match API '''
 
 # TODO implement input_match_results and call it
@@ -259,8 +289,8 @@ def get_player_uuid(player_handle: str) -> str:
 def get_players_team_uuid(team_name: str) -> str:
     return LogicUtility.get_players_team_uuid(team_name)
 
-def get_tournament_by_name(tournamnet_name: str) -> Tournament:
-    return LogicUtility.get_tournament_by_name(tournamnet_name)
+def get_tournament_by_name(tournament_name: str) -> Tournament:
+    return LogicUtility.get_tournament_by_name(tournament_name)
 
 def tournament_name_to_uuid(uuid: str) -> str:
     return LogicUtility.tournament_name_to_uuid(uuid)

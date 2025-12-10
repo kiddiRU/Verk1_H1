@@ -62,7 +62,7 @@ class ClubLL():
 
         for team in model_teams:
             if team.club_uuid == club_uuid:
-                teams_in_club.append(team.name)
+                teams_in_club.append(team)
 
         return teams_in_club
     
