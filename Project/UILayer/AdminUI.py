@@ -87,6 +87,7 @@ class AdminUI:
         tournament_addr: str = ""
         tournament_email: str = ""
         tournament_phnum: str = ""
+        tournament_servers: str = ""
 
         self.tui.clear_saved_data()
 
@@ -190,6 +191,23 @@ class AdminUI:
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
+        con = "b"
+        while con.lower() == "b":
+            print(self.tui.table(menu, user_path, info))
+            tournament_servers: str = self.utility._input_info(
+                "Enter Amount of Servers or 'q' to cancel\n",
+                "number",
+                "",
+            )
+            if not tournament_servers:
+                return MenuOptions.admin_screen
+
+            self.tui.save_input("Amount Of Servers: " + tournament_servers)
+            print(self.tui.table(menu, user_path, info, options))
+            con: str = self.utility._prompt_choice(["c", "b"])
+            if con.lower() == "b":
+                self.tui.discard_last_input()
+
         options: dict[str, str] = {
             "c": "Save Info And Continue",
             "b": "Discard Info And Go Back",
@@ -217,6 +235,7 @@ class AdminUI:
             tournament_addr,
             tournament_email,
             tournament_phnum,
+            int(tournament_servers)
         )
 
         LogicLayerAPI.save_player(tournament_name)
