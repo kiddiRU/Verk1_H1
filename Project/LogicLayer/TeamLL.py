@@ -7,11 +7,9 @@ Created the TeamLL class and added the functions
 
 from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
-from Models import Team
-from Models import Player
-from Models import Tournament
-from Models import Match
-from LogicLayer import MatchLL, ClubLL, PlayerLL
+from Models import Team, Player, Tournament, Match, Club
+from LogicLayer import MatchLL, ClubLL, PlayerLL, Validation
+from uuid import uuid4
 
 class TeamLL():
     def __init__(self) -> None:
@@ -19,6 +17,32 @@ class TeamLL():
 
     def set_player_logic(self, player_logic: PlayerLL) -> None:
         self._player_logic = player_logic
+
+    def set_club_logic(self, club_logic: ClubLL) -> None:
+        self._club_logic = club_logic
+
+    def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
+        '''
+        Takes in the teams name, its captain, club, url and ascii art.
+
+        Creates a new Team object, sends it the data layer to be stored and returns it.
+        '''
+        teams: list[Team] = DataLayerAPI.load_teams()
+        players_in_teams: list[str] = [uuid for t in teams for uuid in t.list_player_uuid]
+
+        if team_captain.uuid in players_in_teams:
+            raise Exception('You can\'t create a team when you\'re already in one!')
+
+        Validation.validate_attr('handle', name, 'TEAM')
+        uuid = str(uuid4())
+
+        clubs: list[Club] = DataLayerAPI.load_clubs()
+        club_uuid = next((c.uuid for c in clubs if c.name == club_name), 'NO_CLUB_UUID') # UUID for no club is ..?
+        
+        new_team = Team(uuid, name, [team_captain.uuid], team_captain.uuid, club_uuid, None, url, ascii_art)
+
+        DataLayerAPI.store_team(new_team)
+        return new_team
 
     def add_player(self, player_handle: str, current_player: Player) -> Team | str:
         """
@@ -29,7 +53,7 @@ class TeamLL():
         adds the new player uuid to the teams player list 
         """
 
-        player_uuid: str = self._player_logic.get_player_uuid(player_handle)
+        player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
@@ -57,7 +81,7 @@ class TeamLL():
         otherwise removes the player uuid from the teams player list
         try-except for if the player uuid is not in the team 
         """
-        player_uuid: str = self._player_logic.get_player_uuid(player_handle)
+        player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
         model_teams: list[Team] = DataLayerAPI.load_teams()
         
@@ -93,28 +117,11 @@ class TeamLL():
         raise ValidationError("Team not found")
     
 
-    def list_teams(self) -> list[Team]: 
+    def list_all_teams(self) -> list[Team]: 
         """Returns a list of stored clubs"""
 
         teams: list[Team] = DataLayerAPI.load_teams()
         return teams
-
-
-    def get_team_object(self, team_name: str) -> Team:
-        """
-        Takes in the uuid
-        Looks through a list of all the teams and
-        finds the right team uuid and
-        returns the model class of the team
-        """
-        
-        model_teams: list[Team] = DataLayerAPI.load_teams()
-        for team in model_teams:
-            if team.name == team_name:
-                return team
-
-        raise ValidationError("Team not found")
-
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
     def get_team_history(self, team_name: str) -> list[str]:
@@ -125,7 +132,7 @@ class TeamLL():
         returns a list of those tournaments
         """
         teams_history: list[str] = []
-        team_uuid: str = self.get_team_uuid(team_name)
+        team_uuid: str = self.get_team_by_name(team_name).uuid
 
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         for tournament in model_tournaments:
@@ -143,7 +150,7 @@ class TeamLL():
         returns the count
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
-        team_uuid: str = self.get_team_uuid(team_name)
+        team_uuid: str = self.get_team_by_name(team_name).uuid
         win_count = 0
 
         for match in model_matches:
@@ -167,7 +174,7 @@ class TeamLL():
         returns points
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        team_uuid: str = self.get_team_uuid(team_name)
+        team_uuid: str = self.get_team_by_name(team_name).uuid
         match = MatchLL()
         points = 0
 
@@ -191,33 +198,17 @@ class TeamLL():
     
 
     def get_team_club(self, team_name: str) -> str:
-        clubll = ClubLL()
-
-        clubs = clubll.list_clubs()
+        clubs = self._club_logic.list_clubs()
 
         for club in clubs:
-            teams = clubll.get_teams_in_club(club.name)
+            teams_in_club: list[str] = [t.name for t in self._club_logic.get_teams_in_club(club.name)]
 
-            if team_name in teams:
+            if team_name in teams_in_club:
                 return club.name
         
         return ""
 
 # Fra utility
-
-    def get_team_uuid(self, team_name: str) -> str:
-        """
-        Takes in team name
-        looks through all teams until it finds the team name
-        and returns the teams uuid
-        if no team is found an error is raised
-        """
-        model_teams: list[Team] = DataLayerAPI.load_teams()
-        for team in model_teams:
-            if team_name == team.name:
-                return team.uuid
-        
-        raise ValidationError("Team not found")
     
     def get_team_by_name(self, name: str) -> Team:
         teams: list[Team] = DataLayerAPI.load_teams()
@@ -236,3 +227,7 @@ class TeamLL():
             raise Exception(f'No team found with the UUID: {uuid}')
         
         return team
+    
+    def team_name_to_uuid(self, team_name: str) -> str:
+        team = self.get_team_by_name(team_name)
+        return team.uuid

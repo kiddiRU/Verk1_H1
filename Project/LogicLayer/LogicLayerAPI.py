@@ -7,8 +7,8 @@ Minor change: Andri Már Kristjánsson <andrik25@ru.is>
 Logic layer API.
 """
 
-from Models import Club, Match, Player, Server, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
+from Models import Club, Match, Player, Team, Tournament
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, MatchLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -16,8 +16,9 @@ team_logic = TeamLL()
 player_logic = PlayerLL(team_logic)
 team_logic.set_player_logic(player_logic)
 
+match_logic = MatchLL()
+tournament_logic = TournamentLL(team_logic, match_logic)
 
-tournament_logic = TournamentLL(team_logic)
 club_logic =  ClubLL()
 
 ''' Validation API '''
@@ -68,17 +69,8 @@ def update_player_info(
         url
     )
 
-def create_team(name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
-    return player_logic.create_team(name, team_captain, club_name, url, ascii_art)
-
 def leave_team(team_name: str, player: Player) -> None:
     return player_logic.leave_team(team_name, player)
-
-def list_players() -> list[Player]:
-    return player_logic.list_players()
-
-def get_player_object(player_uuid: str) -> Player | str:
-    return player_logic.get_player_object(player_uuid)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     player_logic.promote_captain(current_player, handle_to_promote)
@@ -86,37 +78,47 @@ def promote_captain(current_player: Player, handle_to_promote: str) -> None:
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
-
-def get_player_team(player_handle: str) -> tuple:
+def get_player_team(player_handle: str) -> tuple[str, str]:
     return player_logic.get_player_team(player_handle)
 
-# "Created" by Sindri Freysson
-def get_player_wins(player_handle) -> str:
+def get_player_wins(player_handle: str) -> str:
     return player_logic.get_player_wins(player_handle)
 
 # "Created" by Sindri Freysson
-def get_player_points(player_handle) -> str:
+def get_player_points(player_handle: str) -> str:
     return player_logic.get_player_points(player_handle)
+
+def list_all_players() -> list[Player]:
+    return player_logic.list_all_players()
+
+def get_player_by_handle(player_handle: str) -> Player | str:
+    return player_logic.get_player_by_handle(player_handle)
+
+def get_player_by_uuid(player_uuid: str) -> Player | str:
+    return player_logic.get_player_by_uuid(player_uuid)
+
+def player_handle_to_uuid(player_handle: str) -> str:
+    return player_logic.player_handle_to_uuid(player_handle)
+
+def get_players_team_uuid(player_uuid: str) -> str:
+    return player_logic.get_players_team_uuid(player_uuid)
+
 ''' Team API '''
 
+def create_team(name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
+    return team_logic.create_team(name, team_captain, club_name, url, ascii_art)
 
-# TODO implement add_player and call it
 def add_player(player_handle: str, current_player: Player) -> Team | str:
     return team_logic.add_player(player_handle, current_player)
 
-# TODO implement remove_player and call it
 def remove_player(player_handle: str, current_player: Player) -> Team:
     return team_logic.remove_player(player_handle, current_player)
 
-# TODO implement get_team_members and call it
 def get_team_members(team_name: str) -> list[str]:
     return team_logic.get_team_members(team_name)
 
-def list_teams() -> list[Team]:
-    return team_logic.list_teams()
-
-def get_team_object(team_name: str) -> Team:
-    return team_logic.get_team_object(team_name)
+def list_all_teams() -> list[Team]:
+    return team_logic.list_all_teams()
 
 # TODO implement get_team_history and call it
 def get_team_history(team_name: str) -> list[str]:       
@@ -131,9 +133,16 @@ def get_team_points(team_name: str) -> str:
 def get_team_club(team_name: str) -> str:
     return team_logic.get_team_club(team_name)
 
+def team_name_to_uuid(team_name: str) -> str:
+    return team_logic.team_name_to_uuid(team_name)
+
+def get_team_by_name(team_name: str) -> Team:
+    return team_logic.get_team_by_name(team_name)
+
+def get_team_by_uuid(team_uuid: str) -> Team:
+    return team_logic.get_team_by_uuid(team_uuid)
 
 ''' Tournament API '''
-
 
 def create_tournament(
     name: str,
@@ -212,6 +221,27 @@ def change_match_winner(
             team_uuid
         )
 
+def get_all_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournaemnt
+
+    Returns a list of all matches in the tournament
+    tied to the uuid given.
+    """
+    return match_logic.get_matches(tournament_uuid)
+
+def get_next_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournament
+
+    Returns a list of matches which are next on the schedule,
+    matches next in the schedule are matches which don't have
+    a winner and there doesn't exist a match which happens
+    before it and needs a winner.
+    """
+    return tournament_logic.next_games(tournament_uuid)
+
+
 # TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
     pass
@@ -242,6 +272,16 @@ def get_teams_in_club(club_name: str) -> list[Team]:
 def change_club_info(club: Club) -> None:
     pass
 
+def get_club_wins(club_name: str) -> str:
+    return club_logic.get_club_wins(club_name)
+
+def get_club_points(club_name: str) -> str:
+    return club_logic.get_club_points(club_name)
+
+# Is using depracated UtilityLogic
+def get_club_by_name(club_name) -> Club:
+    return LogicUtility.get_club_by_name(club_name)
+
 ''' Match API '''
 
 # TODO implement input_match_results and call it
@@ -255,25 +295,4 @@ def get_club_wins(club_name) -> str:
 # Created by Sindri
 def get_club_points(club_name) -> str:
     return club_logic.get_club_points(club_name)
-
-
-""" Utility API """
-
-def get_player_uuid(player_handle: str) -> str:
-    return LogicUtility.get_player_uuid(player_handle)
-
-def get_players_team_uuid(team_name: str) -> str:
-    return LogicUtility.get_players_team_uuid(team_name)
-
-def get_tournament_by_name(tournamnet_name: str) -> Tournament:
-    return LogicUtility.get_tournament_by_name(tournamnet_name)
-
-def tournament_name_to_uuid(uuid: str) -> str:
-    return LogicUtility.tournament_name_to_uuid(uuid)
-
-def get_team_by_name(team_name: str) -> Team:
-    return LogicUtility.get_team_by_name(team_name)
-
-def get_team_by_uuid(team_uuid: str) -> Team:
-    return LogicUtility.get_team_by_name(team_uuid)
 

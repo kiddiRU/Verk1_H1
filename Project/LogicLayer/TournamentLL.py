@@ -9,14 +9,13 @@ from Models import Team, Tournament, Server, Match, ValidationError
 from DataLayer import DataLayerAPI
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
-from LogicLayer.MatchLL import MatchLL
-from LogicLayer import TeamLL
+from LogicLayer import MatchLL, TeamLL
 import random
 
 class TournamentLL:
-    def __init__(self, team_logic: TeamLL):
+    def __init__(self, team_logic: TeamLL, match_logic: MatchLL):
         self._team_logic = team_logic
-        self.MatchAPI = MatchLL()
+        self._match_logic = match_logic
         pass
 
     def create_tournament(self,
@@ -171,7 +170,7 @@ class TournamentLL:
             raise ValidationError("Tournament with given uuid not found.")
 
         # Gets all matches tied to the tournament.
-        matches: list[Match] = self.MatchAPI.get_matches(tournament.uuid)
+        matches: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
         if len(matches) == 0:
             raise ValidationError("No matches tied to tournament.")
@@ -292,7 +291,7 @@ class TournamentLL:
 
         # Creates the matches needed.
         for match_datetime in times_used:
-            self.MatchAPI.create_match(
+            self._match_logic.create_match(
                     tournament_id = uuid,
                     date = match_datetime.date(),
                     time = match_datetime.time(),
@@ -330,7 +329,7 @@ class TournamentLL:
             raise ValidationError("Tournament isn't active.")
     
         # Get's all matches tied to the tournament.
-        matches = self.MatchAPI.get_matches(uuid)
+        matches = self._match_logic.get_matches(uuid)
     
         # Ignores all matches which have a winner.
         matches = [match for match in matches if match.winner == None]
@@ -370,9 +369,9 @@ class TournamentLL:
             raise ValidationError("Tournament with given uuid not found.")
 
         # Updates match itself
-        self.MatchAPI.change_match_winner(match_uuid, team_uuid)
+        self._match_logic.change_match_winner(match_uuid, team_uuid)
         
-        matches: list[Match] = self.MatchAPI.get_matches(tournament_uuid)
+        matches: list[Match] = self._match_logic.get_matches(tournament_uuid)
 
         # Finds the updated match in matches list
         i: int = 0
