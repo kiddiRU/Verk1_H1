@@ -37,6 +37,11 @@
 ## ToDo-list:
 - Validations date and time frame needs fixing
 - Create tournament needs work -> Allow user to input date and time
+
+- Add tournament validation
+- Create tournament 
+- Create club
+- edit tournament
 # Evening meeting (Diary)
 ## State of project:
 
