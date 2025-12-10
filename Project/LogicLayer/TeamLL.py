@@ -92,7 +92,7 @@ class TeamLL():
     
 
     def list_teams(self): 
-        """Returns a list of stored clubs"""
+        """Returns a list of teams objects"""
 
         teams: list[Team] = DataLayerAPI.load_teams()
         return teams
