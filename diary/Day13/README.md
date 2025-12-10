@@ -58,12 +58,18 @@
 - Fixed Bug - It is possible to register player admin
 - FixedBug - Handles can be registered as just spaces
 - Fixed Bug - In Tournment create, after inputing and confirming, "q" is valid input
+- Finished flake8 doc-string for DataLayer and functions done by Kristinn.
+- Finished matches archived for viewing
+- Fixed Bug Date somehow in match?
+- Fixed Bug - If end-time smaller then start-time it generates weird datetime.
 ## State of group: 
-
 ## Divisions:
 - UI / UX:
 - System engineer: 
 - QC: Sindri
 ## ToDo-list:
-- Edit tournament
 - Make Kristinn import regex for email "validation"
+- Game schedule
+- Doc-string
+- Int validation
+

@@ -1,654 +1,646 @@
-\section*{ Use Cases }
-
-\begin{multicols}{2}
-\begin{center}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{User logs in as organizer} \\
-  \hline
-
-  Number            & 1 \\
-  Priority          & A \\
-  Precondition      & Program is running\\
-  Base flow         & 1. User selects log in \\
-                    & 2. Inputs the details for the Organizer \\
-                    & \quad \textbullet{ Organizer username } \\
-  Alternative flow  & \\
-  Post condition    & User is now an Organizer and can create and manage tournaments. \\
-  Actors            & User/Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{User registers as player} \\
-  \hline
-
-  Number            & 2 \\
-  Priority          & A \\
-  Precondition      & Program is running\\
-  Base flow         & 1. User selects Sign up \\
-                    & 2. User inputs his information \\
-                    & \quad \textbullet { Full name } \\
-                    & \quad \textbullet { Date of birth} \\
-                    & \quad \textbullet { Address } \\
-                    & \quad \textbullet { Phone } \\
-                    & \quad \textbullet { Email } \\
-                    & \quad \textbullet { Link (optional)} \\
-                    & \quad \textbullet { Handle } \\
-                    & User is now registered as a player \\
-  Alternative flow  & \textbullet { User tries to sign up with an existing account. User needs to login to his account. See use case(3) } \\
-  Post condition    & User is now a player and cannot be registered as a player again. \\
-  Actors            & User/Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{A player logs in} \\
-  \hline
-
-  Number            & 3 \\
-  Priority          & A \\
-  Precondition      & Program is running\\
-  Base flow         & 1. Player selects log in \\
-                    & 2. Player inputs his Handle \\
-                    & 3. Player is now logged in \\
-  Alternative flow  & \textbullet { User doesn't have a player account. User needs to sign up as a player. Use case(2) } \\
-  Post condition    & The player is now logged in and can access information about himself \\
-  Actors            & Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{User enters as spectator} \\
-  \hline
-
-  Number            & 4 \\
-  Priority          & A \\
-  Precondition      & Program is running\\
-  Base flow         & 1. The user selects the Spectator option \\
-                    & 2. Now the user is a spectator \\
-  Alternative flow  & \\
-  Post condition    & The user is now a spectator and can view details from the tournament
-(schedule, match results, clubs, teams and players) \\
-  Actors            & User \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can create a tournament} \\
-  \hline
-
-  Number            & 5 \\
-  Priority          & A \\
-  Precondition      & Logged in as organizer, use case(1) \\
-  Base flow         & 1. Organizer selects Create Tournament \\
-                    & 2. Organizer inputs tournament information \\
-                    & \quad \textbullet { Unique name } \\
-                    & \quad \textbullet { Start date } \\
-                    & \quad \textbullet { End date} \\
-                    & \quad \textbullet { Start time frame } \\
-                    & \quad \textbullet { End time frame } \\
-                    & \quad \textbullet { Max servers} \\
-                    & \quad \textbullet { Venue } \\
-                    & \quad \textbullet { Contact email } \\
-                    & \quad \textbullet { Contact number } \\
-                    & 3. User is now registered as a player \\
-  Alternative flow  & \\
-  Post condition    & Organizer has now created and has access to a new unique tournament\\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer adds team to tournament} \\
-  \hline
-
-  Number            & 6 \\
-  Priority          & A \\
-  Precondition      & Organizer has already created a tournament, use case (5) \\
-  Base flow         & 1. Organizer selects tournament \\
-                    & 2. Organizer selects View Teams. \\
-                    & 3. Organizer selects add team \\
-                    & 4. Organizer inputs team name \\
-  Alternative flow  & \textbullet { No team has been made, a player needs to make a team, use case (10)} \\
-                    & \textbullet { The team doesn't have enough players, the team captain needs to add players to his team, use case (11) } \\
-  Post condition    & That team is now apart of the tournament \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer removes a team from a tournament} \\
-  \hline
-
-  Number            & 7 \\
-  Priority          & A \\
-  Precondition      & A team has to have been added to the Tournament, use case (6) \\
-  Base flow         & 1. Organizer selects tournament \\
-                    & 2. Organizer selects view team \\
-                    & 3. Organizer selects remove team \\
-                    & 4. Organizer inputs team name \\
-  Alternative flow  & \\ 
-  Post condition    & That team is no longer apart of the tournament \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer starts a tournament} \\
-  \hline
-
-  Number            & 8 \\
-  Priority          & A \\
-  Precondition      & The tournament needs to have enough teams. \\
-  Base flow         & 1. Organizer is logged in, case (1) \\
-                    & 2. Organizer selects manage tournaments \\
-                    & 3. Organizer inputs a tournament name \\
-                    & 4. Organizer is now able managing a tournament \\
-  Alternative flow  & \textbullet { Tournament doesn't have enough teams in it, organizer needs to add teams to the tournament, use case(6). } \\
-  Post condition    & The organizer is now viewing the tournament and its info and can edit/manage it (publish, manage teams in the tournament, change name/date)\\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can publish a tournament} \\
-  \hline
-
-  Number            & 9 \\
-  Priority          & A \\
-  Precondition      & The tournament needs to have 16 teams \\
-  Base flow         & 1. Organizer selects a tournament to manage, use case (8)\\
-                    & 2. Organizer selects publish tournament \\
-                    & 3. And confirms \\
-  Alternative flow  & \textbullet { Touranment doesn't have enough teams in it, organizer needs to add teams to touranment, use case (6)}\\
-  Post condition    & Needs post condition!!!\\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer inputs result of a match} \\
-  \hline
-
-  Number            & 10 \\
-  Priority          & A \\
-  Precondition      & A tournament needs to have been published \\
-  Base flow         & 1. Organizer selects a tournament to manage, use case (8) \\
-                    & 2. Organizer selects input match results \\
-                    & 3. Organizer gets a list of all matches and selects matches to input results \\
-                    & 4. Organizer is asked who of the two teams won the match and inputs the team name \\
-                    & 3. Player is now team captain of the newly created team. \\
-  Alternative flow  & \\
-  Post condition    & Results of a specific match have been made so the winner of that match goes to the next round\\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Player creates a team} \\
-  \hline
-
-  Number            & 11 \\
-  Priority          & A \\
-  Precondition      & \\
-  Base flow         & 1. Player logs in, use case (3) \\
-                    & 2. Captain selects Add player to team. \\
-                    & 3. Player inputs team name \\
-                    & 4. Player inputs Club (no input = no club) \\
-                    & 5. (Now the player is the team captain of an empty team) \\
-  Alternative flow  & \textbullet { Player is already a part of a team. Player needs to leave his existing
-team, see case (14) and then create a team } \\
-  Post condition    & Player is now a team captain of a team \\
-  Actors            & Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team captain adds a player to their team} \\
-  \hline
-
-  Number            & 12 \\
-  Priority          & A \\
-  Precondition      & Player must have created a team, use case(10) \\
-  Base flow         & 1. Captain logs in, use case (3)\\
-                    & 2. Captain selects My Team \\
-                    & 3. Captain selects Add Player to Team \\
-                    & 4. Captain inputs Players Handle \\
-                    & 5. That Player is now a part of team \\
-  Alternative flow  & \textbullet { A player is already in another team. That player needs to leave his
-team, see case (14), then the Captain can add that player to his team } \\
-  Post condition    & Team captain has now added a player to his team \\
-  Actors            & Team captain, Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team captain removes a player from their team.} \\
-  \hline
-
-  Number            & 13 \\
-  Priority          & A \\
-  Precondition      & Team captain must have added a player to their team, use case(11)\\
-  Base flow         & 1. Captain logs in, use case (3) \\
-                    & 2. Captain selects view team \\
-                    & 3. Captain selects remove player \\
-                    & 4. Captain inputs Player’s handle \\
-                    & 5. Player has been removed from the team \\
-  Alternative flow  & \textbullet { That player removes himself from the team, use case (14)} \\
-  Post condition    & Team no longer has That Player in their team \\
-  Actors            & Team captain, Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Player leaves their team} \\
-  \hline
-
-  Number            & 14 \\
-  Priority          & A \\
-  Precondition      & Player needs to be in a team. \\
-  Base flow         & 1. Player logs in, use case (3) \\
-                    & 2. Player selects view team \\
-                    & 3. Player selects leave team \\
-                    & 4. (Error message/ confirmation) \\
-                    & 5. Player is no longer a part of any team \\
-  Alternative flow  & \textbullet { Team captain removes player from team, case (12) } \\
-  Post condition    & The player is no longer a part of any team and can now be picked onto a new
-team or create his own \\
-  Actors            & Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team captain leaving his team.} \\
-  \hline
-
-  Number            & 15 \\
-  Priority          & A \\
-  Precondition      & Player needs to be a team captain. \\
-  Base flow         & 1. Captain logs in, use case (3) \\
-                    & 2. Captain selects view team \\
-                    & 3. Captain selects leave team \\
-                    & 4. (Error message/ are you sure) \\
-                    & 5. Captain selects a Player from team to become new Captain \\
-                    & 6. The Captain has left the team \\
-  Alternative flow  & \textbullet { If the team the Captain is leaving has no other players the team is
-archived, but still has its statistics (wins, etc.) } \\
-  Post condition    & TThe Captain is no longer a part of the team and is now has the status of just
-Player (not in team), and the player he selected has the status team Captain of
-that team \\
-  Actors            & Captain, player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Any user can see tournaments} \\
-  \hline
-
-  Number            & 16 \\
-  Priority          & A \\
-  Precondition      & \\
-  Base flow         & 1. User selects Tournaments \\
-                    & 2. User selects which tournament \\
-                    & 3. User is now viewing a specific tournament \\
-  Alternative flow  & \textbullet { There are no tournaments available, the organizer needs to create a
-tournament, use case (5)} \\
-                    & \textbullet { A tournament is not published, so the organizer needs to start the
-tournaments, use case (9) } \\
-  Post condition    & User can now look through that tournament \\
-  Actors            & Any user \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Any user can see tournament schedule} \\
-  \hline
-
-  Number            & 17 \\
-  Priority          & A \\
-  Precondition      & \\
-  Base flow         & 1. User selects a tournament \\
-                    & 2. User selects Schedule \\
-                    & 3. User is now viewing the schedule of a tournament \\
-  Alternative flow  & \\
-  Post condition    & User can view the schedule of the next round of that tournament (or whole tournament, date) \\
-  Actors            & Any user \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Any user can view teams} \\
-  \hline
-
-  Number            & 18 \\
-  Priority          & A \\
-  Precondition      & \\
-  Base flow         & 1. User selects teams (from main menu) \\
-                    & 2. User is viewing a list of all teams \\
-  Alternative flow  & \textbullet { User can select a tournament see use case (XXX), and in that menu
-select teams and then the user is viewing only the teams in that tournament } \\
-  Post condition    &The user is viewing a list of teams that he can select from see that teams
-information (players, statistics) \\
-  Actors            & Any user \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Any user can view players} \\
-  \hline
-
-  Number            & 19 \\
-  Priority          & A \\
-  Precondition      & \\
-  Base flow         & 1. User selects players (in main menu) \\
-                    & 2. User is viewing a list of all registered players \\
-  Alternative flow  & \textbullet { User can select a tournament see use case (XXX), and in that menu
-select players and then the user is viewing only the players in that
-tournament } \\
-                    & \textbullet { User selects a team, use case (XX), and from the team menu the user
-can view a list of that teams player } \\
-  Post condition    & The user is viewing list of players that he can select from to see that players
-information (handle, statistics) \\
-  Actors            & Any user \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can create clubs} \\
-  \hline
-
-  Number            & 20 \\
-  Priority          & B \\
-  Precondition      & \\
-  Base flow         & 1. Organizer selects View Clubs. \\
-                    & 2. Organizer selects add club. \\
-                    & 3. Organizer inputs information. \\
-                    & \quad \textbullet { Name } \\
-                    & \quad \textbullet { Club color } \\
-                    & \quad \textbullet { Hometown } \\
-                    & \quad \textbullet { Country } \\
-  Alternative flow  & \\
-  Post condition    & Organizer has added a new club. \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can choose type of tournament when creating one} \\
-  \hline
-
-  Number            & 21 \\
-  Priority          & B \\
-  Precondition      & \\
-  Base flow         & 1. While Organizer is creating a tournament, use case (5) \\
-                    & 2.Now there is an extra section which asks the organizer what type of
-tournament it is (knockout or double elimination) \\
-  Alternative flow  & \\
-  Post condition    & Organizer has added selected what type of tournament \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can edit time frame of tournament} \\
-  \hline
-
-  Number            & 22 \\
-  Priority          & B \\
-  Precondition      & Tournament has to created and NOT started \\
-  Base flow         & 1. Organizer selects a tournament to manage, use case (8) \\
-                    & 2. Organizer selects Edit Time Frame \\
-                    & 3. Organizer input new: \\
-                    & \quad \textbullet { Start date } \\
-                    & \quad \textbullet { End date } \\
-                    & 4. Organizer selects Edit Time Frame \\
-  Alternative flow  & \\
-  Post condition    & The Time frame has been updated of that tournament \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can delete a tournament} \\
-  \hline
-
-  Number            & 23 \\
-  Priority          & B \\
-  Precondition      & A tournament can NOT be published \\
-  Base flow         & 1. Organizer selects a tournament to manage, use case (8) \\
-                    & 2. Organizer selects Delete \\
-                    & 3. Organizer confirms deletion \\
-  Alternative flow  & \\
-  Post condition    & Now the tournament has been delated and no records of it are left \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Player can edits their information.} \\
-  \hline
-
-  Number            & 24\\
-  Priority          & B \\
-  Precondition      & \\
-  Base flow         & 1. Player logs in, use case (3) \\
-                    & 2. Player selects Edit Information \\
-                    & 3. Player selects the info he wants to edit (all info) \\
-                    & 4. Player has changed his info \\
-                    & 3. Player has changed their information. \\
-  Alternative flow  & \\
-  Post condition    & Player has updated their information. \\
-  Actors            & Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team Captain can make team Player a Captain} \\
-  \hline
-
-  Number            & 25\\
-  Priority          & B \\
-  Precondition      & \\
-  Base flow         & 1. Player logs in, use case (3) \\
-                    & 2. Captain selects My Team \\
-                    & 3. Captain selects transfer authority \\
-                    & 4. Captain inputs players' name to transfer authority to \\
-  Alternative flow  & \\
-  Post condition    & Now that Player is the Team Captain, and the old Team Captain is just a Player
-on the team \\
-  Actors            & Captain, Player \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Any user can view clubs} \\
-  \hline
-
-  Number            & 26 \\
-  Priority          & B \\
-  Precondition      & \\
-  Base flow         & 1. User selects spectator \\
-                    & 2. UUser selects clubs \\
-                    & User is now viewing a list of clubs \\
-  Alternative flow  & \\
-  Post condition    & User can view all the clubs created, and can select any club to see that clubs teams \\
-  Actors            & Any user \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Organizer can cancel a tournament} \\
-  \hline
-
-  Number            & 27\\
-  Priority          & C \\
-  Precondition      & A tournament has to have been published \\
-  Base flow         & 1. Organizer selects a tournament \\
-                    & 2. Organizer selects Cancel tournament \\
-                    & 3. Tournament is now canceled \\
-  Alternative flow  & \\
-  Post condition    & The tournament is cancelled, all records are not kept, the statistics for the
-teams is reverted to the state before the tournament started \\
-  Actors            & Organizer \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team captain can edit team name} \\
-  \hline
-
-  Number            & 28\\
-  Priority          & C \\
-  Precondition      & \\
-  Base flow         & 1. Captain is logged in, and selects View Team \\
-                    & 2. From View Team menu Captain selects Change Team Name \\
-                    & 3. Captain inputs the new team name (has to be unique) \\
-  Alternative flow  & \\
-  Post condition    & Now that teams name has a new name, and new or other teams cannot use that
-name, but can use the previous team name \\
-  Actors            & Team Captain \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team captain can change the teams club} \\
-  \hline
-
-  Number            & 29 \\
-  Priority          & C \\
-  Precondition      & \\
-  Base flow         & 1. Team Captain is logged in, and selects View Team \\
-                    & 2. From View Team menu Captain selects Change Club \\
-                    & 3. Captain has a list of the clubs and can select what his teams new club is \\
-  Alternative flow  & \\
-  Post condition    & Now the Captains team is in a new club, so the team is listened in the their
-new club and no longer in the old club \\
-  Actors            & Team Captain \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-\begin{tabular}{ | p{2cm} | p{4cm} | }
-  \hline
-  \multicolumn{2}{|c|}{Team Captain can add ASCII art to his team (logo)} \\
-  \hline
-
-  Number            & 30 \\
-  Priority          & C \\
-  Precondition      & \\
-  Base flow         & 1. Captain is logged in, and selects View Team\\
-                    & 2. Captain selects add ASCII art \\
-                    & 3. Captina inputs the ASCII art \\
-  Alternative flow  & \\
-  Post condition    & Now the team has ASCII art that can be viewed from any user viewing the team \\
-  Actors            & Team Captain \\
-  Author            & Elmar Sigmarsson \\
-
-  \hline
-\end{tabular}
-
-
-\end{center}
-\end{multicols}
+\section*{Use Cases}
+\setlength{\emergencystretch}{10pt}
+\begin{sloppypar}
+
+  \begin{multicols}{2}
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,8,9,10,11,12},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=3}{l}
+      }
+      User logs in as organizer & 1-2                                                             \\
+      Number                    & 1                                                               \\
+      Priority                  & A                                                               \\
+      Precondition              & Program is running                                              \\
+      Base flow                 & 1. User selects log in                                          \\
+      6-1                       & 2. Inputs the details for the Organizer                         \\
+      7-1                       & \quad \textbullet{ Organizer username }                         \\
+      Alternative flow          &                                                                 \\
+      Post condition            & User is now an Organizer and can create and manage tournaments. \\
+      Actors                    & User/Organizer                                                  \\
+      Author                    & Elmar Sigmarsson                                                \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,14,15,16,17,18,19},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=10}{l}
+      }
+      User registers as player & 1-2                                                                                                                 \\
+      Number                   & 2                                                                                                                   \\
+      Priority                 & A                                                                                                                   \\
+      Precondition             & Program is running                                                                                                  \\
+      Base flow                & 1. User selects Sign up                                                                                             \\
+      6-1                      & 2. User inputs his information                                                                                      \\
+      7-1                      & \quad \textbullet { Full name }                                                                                     \\
+      8-1                      & \quad \textbullet { Date of birth}                                                                                  \\
+      9-1                      & \quad \textbullet { Address }                                                                                       \\
+      10-1                     & \quad \textbullet { Phone }                                                                                         \\
+      11-1                     & \quad \textbullet { Email }                                                                                         \\
+      12-1                     & \quad \textbullet { Link (optional)}                                                                                \\
+      13-1                     & \quad \textbullet { Handle }                                                                                        \\
+      14-1                     & User is now registered as a player                                                                                  \\
+      Alternative flow         & \textbullet { User tries to sign up with an existing account. User needs to login to his account. See use case(3) } \\
+      Post condition           & User is now a player and cannot be registered as a player again.                                                    \\
+      Actors                   & User/Player                                                                                                         \\
+      Author                   & Elmar Sigmarsson                                                                                                    \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=3}{l}
+      }
+      User registers as player & 1-2                                                                                                \\
+      Number                   & 3                                                                                                  \\
+      Priority                 & A                                                                                                  \\
+      Precondition             & Program is running                                                                                 \\
+      Base flow                & 1. Player selects log in                                                                           \\
+      6-1                      & 2. Player inputs his Handle                                                                        \\
+      7-1                      & 3. Player is now logged in                                                                         \\
+      Alternative flow         & \textbullet { User doesn't have a player account. User needs to sign up as a player. Use case(2) } \\
+      Post condition           & The player is now logged in and can access information about himself                               \\
+      Actors                   & Player                                                                                             \\
+      Author                   & Elmar Sigmarsson                                                                                   \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=2}{l}
+      }
+      User enters as spectator & 1-2                                                                                                                       \\
+      Number                   & 4                                                                                                                         \\
+      Priority                 & A                                                                                                                         \\
+      Precondition             & Program is running                                                                                                        \\
+      Base flow                & 1. User selects the Spectator option                                                                                      \\
+      6-1                      & 2. Now the user is a spectator                                                                                            \\
+      Alternative flow         &                                                                                                                           \\
+      Post condition           & The user is now a spectator and can view details from the tournament, (schedule, match results, clubs, teams and players) \\
+      Actors                   & User                                                                                                                      \\
+      Author                   & Elmar Sigmarsson                                                                                                          \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,16,17,18,19,20,21},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=12}{l}
+      }
+      Organizer can create a tournament & 1-2                                                                 \\
+      Number                            & 5                                                                   \\
+      Priority                          & A                                                                   \\
+      Precondition                      & Logged in as organizer, use case(1)                                 \\
+      Base flow                         & 1. Organizer selects Create Tournament                              \\
+      6-1                               & 2. Organizer inputs tournament information                          \\
+      7-1                               & \quad \textbullet { Unique name }                                   \\
+      8-1                               & \quad \textbullet { Start date }                                    \\
+      9-1                               & \quad \textbullet { End date}                                       \\
+      10-1                              & \quad \textbullet { Start time frame }                              \\
+      11-1                              & \quad \textbullet { End time frame }                                \\
+      12-1                              & \quad \textbullet { Max servers}                                    \\
+      13-1                              & \quad \textbullet { Venue }                                         \\
+      14-1                              & \quad \textbullet { Contact email }                                 \\
+      15-1                              & \quad \textbullet { Contact number }                                \\
+      16-1                              & 3. User is now registered as a player                               \\
+      Alternative flow                  &                                                                     \\
+      Post condition                    & Organizer has now created and has access to a new unique tournament \\
+      Actors                            & Organizer                                                           \\
+      Author                            & Elmar Sigmarsson                                                    \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=4}{l}, cell{9}{1}={r=2}{l}
+      }
+      Organizer adds team to tournament & 1-2                                                                                                                    \\
+      Number                            & 6                                                                                                                      \\
+      Priority                          & A                                                                                                                      \\
+      Precondition                      & Organizer has already created a tournament, use case (5)                                                               \\
+      Base flow                         & 1. Organizer selects tournament                                                                                        \\
+      6-1                               & 2. Organizer selects View Teams.                                                                                       \\
+      7-1                               & 3. Organizer selects add team                                                                                          \\
+      8-1                               & 4. Organizer inputs team name                                                                                          \\
+      Alternative flow                  & \textbullet { No team has been made, a player needs to make a team, use case (10)}                                     \\
+      10-1                              & \textbullet { The team doesn't have enough players, the team captain needs to add players to his team, use case (11) } \\
+      Post condition                    & That team is now apart of the tournament                                                                               \\
+      Actors                            & Organizer                                                                                                              \\
+      Author                            & Elmar Sigmarsson                                                                                                       \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=4}{l}
+      }
+      Organizer removes a team from a tournament & 1-2                                                           \\
+      Number                                     & 7                                                             \\
+      Priority                                   & A                                                             \\
+      Precondition                               & A team has to have been added to the Tournament, use case (6) \\
+      Base flow                                  & 1. Organizer selects tournament                               \\
+      6-1                                        & 2. Organizer selects view team                                \\
+      7-1                                        & 3. Organizer selects remove team                              \\
+      8-1                                        & 4. Organizer inputs team name                                 \\
+      Alternative flow                           &                                                               \\
+      Post condition                             & That team is no longer apart of the tournament                \\
+      Actors                                     & Organizer                                                     \\
+      Author                                     & Elmar Sigmarsson                                              \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=4}{l}
+      }
+      Organizer starts a tournament & 1-2                                                                                                                                         \\
+      Number                        & 8                                                                                                                                           \\
+      Priority                      & A                                                                                                                                           \\
+      Precondition                  & The tournament needs to have enough teams.                                                                                                  \\
+      Base flow                     & 1. Organizer is logged in, case (1)                                                                                                         \\
+      6-1                           & 2. Organizer selects manage tournaments                                                                                                     \\
+      7-1                           & 3. Organizer inputs a tournament name                                                                                                       \\
+      8-1                           & 4. Organizer is now able managing a tournament                                                                                              \\
+      Alternative flow              & \textbullet { Tournament doesn't have enough teams in it, organizer needs to add teams to the tournament, use case(6). }                    \\
+      Post condition                & The organizer is now viewing the tournament and its info and can edit/manage it (publish, manage teams in the tournament, change name/date) \\
+      Actors                        & Organizer                                                                                                                                   \\
+      Author                        & Elmar Sigmarsson                                                                                                                            \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=3}{l}
+      }
+      Organizer can publish a tournament & 1-2                                                                                                                 \\
+      Number                             & 9                                                                                                                   \\
+      Priority                           & A                                                                                                                   \\
+      Precondition                       & The tournament needs to have 16 teams                                                                               \\
+      Base flow                          & 1. Organizer selects a tournament to manage, use case (8)                                                           \\
+      6-1                                & 2. Organizer selects publish tournament                                                                             \\
+      7-1                                & 3. And confirms                                                                                                     \\
+      Alternative flow                   & \textbullet { Touranment doesn't have enough teams in it, organizer needs to add teams to touranment, use case (6)} \\
+      Post condition                     & Needs post condition!!!                                                                                             \\
+      Actors                             & Organizer                                                                                                           \\
+      Author                             & Elmar Sigmarsson                                                                                                    \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=5}{l}
+      }
+      Organizer inputs result of a match & 1-2                                                                                           \\
+      Number                             & 10                                                                                            \\
+      Priority                           & A                                                                                             \\
+      Precondition                       & A tournament needs to have been published                                                     \\
+      Base flow                          & 1. Organizer selects a tournament to manage, use case (8)                                     \\
+      6-1                                & 2. Organizer selects input match results                                                      \\
+      7-1                                & 3. Organizer gets a list of all matches and selects matches to input results                  \\
+      8-1                                & 4. Organizer is asked who of the two teams won the match and inputs the team name             \\
+      9-1                                & 5. Player is now team captain of the newly created team.                                      \\
+      Alternative flow                   &                                                                                               \\
+      Post condition                     & Results of a specific match have been made so the winner of that match goes to the next round \\
+      Actors                             & Organizer                                                                                     \\
+      Author                             & Elmar Sigmarsson                                                                              \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=5}{l}
+      }
+      Player creates a team & 1-2 \\
+              Number           & 11                                                                                   \\
+        Priority         & A                                                                                    \\
+        Precondition     &                                                                                      \\
+        Base flow        & 1. Player logs in, use case (3)                                                      \\
+        6-1              & 2. Captain selects Add player to team.                                               \\
+        7-1              & 3. Player inputs team name                                                           \\
+        8-1              & 4. Player inputs Club (no input = no club)                                           \\
+        9-1              & 5. (Now the player is the team captain of an empty team)                             \\
+        Alternative flow & \textbullet { Player is already a part of a team. Player needs to leave his existing
+        team, see case (14) and then create a team }                                                            \\
+        Post condition   & Player is now a team captain of a team                                               \\
+        Actors           & Player                                                                               \\
+        Author           & Elmar Sigmarsson                                                                     \\
+
+    \end{tblr}
+
+    \begin{center}
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team captain adds a player to their team}                                       \\
+        \hline
+
+        Number           & 12                                                                                \\
+        Priority         & A                                                                                 \\
+        Precondition     & Player must have created a team, use case(10)                                     \\
+        Base flow        & 1. Captain logs in, use case (3)                                                  \\
+                         & 2. Captain selects My Team                                                        \\
+                         & 3. Captain selects Add Player to Team                                             \\
+                         & 4. Captain inputs Players Handle                                                  \\
+                         & 5. That Player is now a part of team                                              \\
+        Alternative flow & \textbullet { A player is already in another team. That player needs to leave his
+        team, see case (14), then the Captain can add that player to his team }                              \\
+        Post condition   & Team captain has now added a player to his team                                   \\
+        Actors           & Team captain, Player                                                              \\
+        Author           & Elmar Sigmarsson                                                                  \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team captain removes a player from their team.}                       \\
+        \hline
+
+        Number           & 13                                                                      \\
+        Priority         & A                                                                       \\
+        Precondition     & Team captain must have added a player to their team, use case(11)       \\
+        Base flow        & 1. Captain logs in, use case (3)                                        \\
+                         & 2. Captain selects view team                                            \\
+                         & 3. Captain selects remove player                                        \\
+                         & 4. Captain inputs Player’s handle                                       \\
+                         & 5. Player has been removed from the team                                \\
+        Alternative flow & \textbullet { That player removes himself from the team, use case (14)} \\
+        Post condition   & Team no longer has That Player in their team                            \\
+        Actors           & Team captain, Player                                                    \\
+        Author           & Elmar Sigmarsson                                                        \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Player leaves their team}                                                 \\
+        \hline
+
+        Number           & 14                                                                          \\
+        Priority         & A                                                                           \\
+        Precondition     & Player needs to be in a team.                                               \\
+        Base flow        & 1. Player logs in, use case (3)                                             \\
+                         & 2. Player selects view team                                                 \\
+                         & 3. Player selects leave team                                                \\
+                         & 4. (Error message/ confirmation)                                            \\
+                         & 5. Player is no longer a part of any team                                   \\
+        Alternative flow & \textbullet { Team captain removes player from team, case (12) }            \\
+        Post condition   & The player is no longer a part of any team and can now be picked onto a new
+        team or create his own                                                                         \\
+        Actors           & Player                                                                      \\
+        Author           & Elmar Sigmarsson                                                            \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team captain leaving his team.}                                                 \\
+        \hline
+
+        Number           & 15                                                                                \\
+        Priority         & A                                                                                 \\
+        Precondition     & Player needs to be a team captain.                                                \\
+        Base flow        & 1. Captain logs in, use case (3)                                                  \\
+                         & 2. Captain selects view team                                                      \\
+                         & 3. Captain selects leave team                                                     \\
+                         & 4. (Error message/ are you sure)                                                  \\
+                         & 5. Captain selects a Player from team to become new Captain                       \\
+                         & 6. The Captain has left the team                                                  \\
+        Alternative flow & \textbullet { If the team the Captain is leaving has no other players the team is
+        archived, but still has its statistics (wins, etc.) }                                                \\
+        Post condition   & TThe Captain is no longer a part of the team and is now has the status of just
+        Player (not in team), and the player he selected has the status team Captain of
+        that team                                                                                            \\
+        Actors           & Captain, player                                                                   \\
+        Author           & Elmar Sigmarsson                                                                  \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Any user can see tournaments}                                                   \\
+        \hline
+
+        Number           & 16                                                                                \\
+        Priority         & A                                                                                 \\
+        Precondition     &                                                                                   \\
+        Base flow        & 1. User selects Tournaments                                                       \\
+                         & 2. User selects which tournament                                                  \\
+                         & 3. User is now viewing a specific tournament                                      \\
+        Alternative flow & \textbullet { There are no tournaments available, the organizer needs to create a
+        tournament, use case (5)}                                                                            \\
+                         & \textbullet { A tournament is not published, so the organizer needs to start the
+        tournaments, use case (9) }                                                                          \\
+        Post condition   & User can now look through that tournament                                         \\
+        Actors           & Any user                                                                          \\
+        Author           & Elmar Sigmarsson                                                                  \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Any user can see tournament schedule}                                                     \\
+        \hline
+
+        Number           & 17                                                                                          \\
+        Priority         & A                                                                                           \\
+        Precondition     &                                                                                             \\
+        Base flow        & 1. User selects a tournament                                                                \\
+                         & 2. User selects Schedule                                                                    \\
+                         & 3. User is now viewing the schedule of a tournament                                         \\
+        Alternative flow &                                                                                             \\
+        Post condition   & User can view the schedule of the next round of that tournament (or whole tournament, date) \\
+        Actors           & Any user                                                                                    \\
+        Author           & Elmar Sigmarsson                                                                            \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Any user can view teams}                                                      \\
+        \hline
+
+        Number           & 18                                                                              \\
+        Priority         & A                                                                               \\
+        Precondition     &                                                                                 \\
+        Base flow        & 1. User selects teams (from main menu)                                          \\
+                         & 2. User is viewing a list of all teams                                          \\
+        Alternative flow & \textbullet { User can select a tournament see use case (XXX), and in that menu
+        select teams and then the user is viewing only the teams in that tournament }                      \\
+        Post condition   & The user is viewing a list of teams that he can select from see that teams
+        information (players, statistics)                                                                  \\
+        Actors           & Any user                                                                        \\
+        Author           & Elmar Sigmarsson                                                                \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Any user can view players}                                                      \\
+        \hline
+
+        Number           & 19                                                                                \\
+        Priority         & A                                                                                 \\
+        Precondition     &                                                                                   \\
+        Base flow        & 1. User selects players (in main menu)                                            \\
+                         & 2. User is viewing a list of all registered players                               \\
+        Alternative flow & \textbullet { User can select a tournament see use case (XXX), and in that menu
+          select players and then the user is viewing only the players in that
+        tournament }                                                                                         \\
+                         & \textbullet { User selects a team, use case (XX), and from the team menu the user
+        can view a list of that teams player }                                                               \\
+        Post condition   & The user is viewing list of players that he can select from to see that players
+        information (handle, statistics)                                                                     \\
+        Actors           & Any user                                                                          \\
+        Author           & Elmar Sigmarsson                                                                  \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Organizer can create clubs}    \\
+        \hline
+
+        Number           & 20                               \\
+        Priority         & B                                \\
+        Precondition     &                                  \\
+        Base flow        & 1. Organizer selects View Clubs. \\
+                         & 2. Organizer selects add club.   \\
+                         & 3. Organizer inputs information. \\
+                         & \quad \textbullet { Name }       \\
+                         & \quad \textbullet { Club color } \\
+                         & \quad \textbullet { Hometown }   \\
+                         & \quad \textbullet { Country }    \\
+        Alternative flow &                                  \\
+        Post condition   & Organizer has added a new club.  \\
+        Actors           & Organizer                        \\
+        Author           & Elmar Sigmarsson                 \\
+
+        \hline
+      \end{tabular}
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Organizer can choose type of tournament when creating one}          \\
+        \hline
+
+        Number           & 21                                                                    \\
+        Priority         & B                                                                     \\
+        Precondition     &                                                                       \\
+        Base flow        & 1. While Organizer is creating a tournament, use case (5)             \\
+                         & 2.Now there is an extra section which asks the organizer what type of
+        tournament it is (knockout or double elimination)                                        \\
+        Alternative flow &                                                                       \\
+        Post condition   & Organizer has added selected what type of tournament                  \\
+        Actors           & Organizer                                                             \\
+        Author           & Elmar Sigmarsson                                                      \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Organizer can edit time frame of tournament}            \\
+        \hline
+
+        Number           & 22                                                        \\
+        Priority         & B                                                         \\
+        Precondition     & Tournament has to created and NOT started                 \\
+        Base flow        & 1. Organizer selects a tournament to manage, use case (8) \\
+                         & 2. Organizer selects Edit Time Frame                      \\
+                         & 3. Organizer input new:                                   \\
+                         & \quad \textbullet { Start date }                          \\
+                         & \quad \textbullet { End date }                            \\
+                         & 4. Organizer selects Edit Time Frame                      \\
+        Alternative flow &                                                           \\
+        Post condition   & The Time frame has been updated of that tournament        \\
+        Actors           & Organizer                                                 \\
+        Author           & Elmar Sigmarsson                                          \\
+
+        \hline
+      \end{tabular}
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Organizer can delete a tournament}                              \\
+        \hline
+
+        Number           & 23                                                                \\
+        Priority         & B                                                                 \\
+        Precondition     & A tournament can NOT be published                                 \\
+        Base flow        & 1. Organizer selects a tournament to manage, use case (8)         \\
+                         & 2. Organizer selects Delete                                       \\
+                         & 3. Organizer confirms deletion                                    \\
+        Alternative flow &                                                                   \\
+        Post condition   & Now the tournament has been delated and no records of it are left \\
+        Actors           & Organizer                                                         \\
+        Author           & Elmar Sigmarsson                                                  \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Player can edits their information.}                 \\
+        \hline
+
+        Number           & 24                                                     \\
+        Priority         & B                                                      \\
+        Precondition     &                                                        \\
+        Base flow        & 1. Player logs in, use case (3)                        \\
+                         & 2. Player selects Edit Information                     \\
+                         & 3. Player selects the info he wants to edit (all info) \\
+                         & 4. Player has changed his info                         \\
+                         & 3. Player has changed their information.               \\
+        Alternative flow &                                                        \\
+        Post condition   & Player has updated their information.                  \\
+        Actors           & Player                                                 \\
+        Author           & Elmar Sigmarsson                                       \\
+
+        \hline
+      \end{tabular}
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team Captain can make team Player a Captain}                                 \\
+        \hline
+
+        Number           & 25                                                                             \\
+        Priority         & B                                                                              \\
+        Precondition     &                                                                                \\
+        Base flow        & 1. Player logs in, use case (3)                                                \\
+                         & 2. Captain selects My Team                                                     \\
+                         & 3. Captain selects transfer authority                                          \\
+                         & 4. Captain inputs players' name to transfer authority to                       \\
+        Alternative flow &                                                                                \\
+        Post condition   & Now that Player is the Team Captain, and the old Team Captain is just a Player
+        on the team                                                                                       \\
+        Actors           & Captain, Player                                                                \\
+        Author           & Elmar Sigmarsson                                                               \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Any user can view clubs}                                                           \\
+        \hline
+
+        Number           & 26                                                                                   \\
+        Priority         & B                                                                                    \\
+        Precondition     &                                                                                      \\
+        Base flow        & 1. User selects spectator                                                            \\
+                         & 2. UUser selects clubs                                                               \\
+                         & User is now viewing a list of clubs                                                  \\
+        Alternative flow &                                                                                      \\
+        Post condition   & User can view all the clubs created, and can select any club to see that clubs teams \\
+        Actors           & Any user                                                                             \\
+        Author           & Elmar Sigmarsson                                                                     \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Organizer can cancel a tournament}                                          \\
+        \hline
+
+        Number           & 27                                                                            \\
+        Priority         & C                                                                             \\
+        Precondition     & A tournament has to have been published                                       \\
+        Base flow        & 1. Organizer selects a tournament                                             \\
+                         & 2. Organizer selects Cancel tournament                                        \\
+                         & 3. Tournament is now canceled                                                 \\
+        Alternative flow &                                                                               \\
+        Post condition   & The tournament is cancelled, all records are not kept, the statistics for the
+        teams is reverted to the state before the tournament started                                     \\
+        Actors           & Organizer                                                                     \\
+        Author           & Elmar Sigmarsson                                                              \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team captain can edit team name}                                         \\
+        \hline
+
+        Number           & 28                                                                         \\
+        Priority         & C                                                                          \\
+        Precondition     &                                                                            \\
+        Base flow        & 1. Captain is logged in, and selects View Team                             \\
+                         & 2. From View Team menu Captain selects Change Team Name                    \\
+                         & 3. Captain inputs the new team name (has to be unique)                     \\
+        Alternative flow &                                                                            \\
+        Post condition   & Now that teams name has a new name, and new or other teams cannot use that
+        name, but can use the previous team name                                                      \\
+        Actors           & Team Captain                                                               \\
+        Author           & Elmar Sigmarsson                                                           \\
+
+        \hline
+      \end{tabular}
+
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team captain can change the teams club}                                    \\
+        \hline
+
+        Number           & 29                                                                           \\
+        Priority         & C                                                                            \\
+        Precondition     &                                                                              \\
+        Base flow        & 1. Team Captain is logged in, and selects View Team                          \\
+                         & 2. From View Team menu Captain selects Change Club                           \\
+                         & 3. Captain has a list of the clubs and can select what his teams new club is \\
+        Alternative flow &                                                                              \\
+        Post condition   & Now the Captains team is in a new club, so the team is listened in the their
+        new club and no longer in the old club                                                          \\
+        Actors           & Team Captain                                                                 \\
+        Author           & Elmar Sigmarsson                                                             \\
+
+        \hline
+      \end{tabular}
+
+      \begin{tabular}{ | p{2cm} | p{4cm} | }
+        \hline
+        \multicolumn{2}{|c|}{Team Captain can add ASCII art to his team (logo)}                         \\
+        \hline
+
+        Number           & 30                                                                           \\
+        Priority         & C                                                                            \\
+        Precondition     &                                                                              \\
+        Base flow        & 1. Captain is logged in, and selects View Team                               \\
+                         & 2. Captain selects add ASCII art                                             \\
+                         & 3. Captina inputs the ASCII art                                              \\
+        Alternative flow &                                                                              \\
+        Post condition   & Now the team has ASCII art that can be viewed from any user viewing the team \\
+        Actors           & Team Captain                                                                 \\
+        Author           & Elmar Sigmarsson                                                             \\
+
+        \hline
+      \end{tabular}
+
+
+    \end{center}
+  \end{multicols}
+\end{sloppypar}
 \pagebreak
