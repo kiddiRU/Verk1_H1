@@ -79,6 +79,11 @@ class PlayerUI:
 
         login_handle: str = input(self.message_color + "Input Your Handle: " + self.reset)
 
+        user_uuid = LogicLayerAPI.get_player_uuid(login_handle)
+        if user_uuid:
+            LogicLayerAPI.save_player(login_handle)
+            return MenuOptions.player_screen  
+        
         match login_handle:
             case "admin":
                 return MenuOptions.admin_screen
@@ -86,13 +91,6 @@ class PlayerUI:
                 return MenuOptions.onion
             case "masterpiece":
                 return MenuOptions.masterpiece
-        
-        user_uuid = LogicLayerAPI.get_player_uuid(login_handle)
-        if user_uuid:
-            LogicLayerAPI.save_player(login_handle)
-
-
-            return MenuOptions.player_screen
         
         print(self.tui.table(menu, user_path, info, options, message))
 
