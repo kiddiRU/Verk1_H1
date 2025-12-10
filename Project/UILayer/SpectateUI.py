@@ -386,12 +386,25 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name == None: return MenuOptions.start_screen
+        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        tournament_uuid: str = tournament_object.uuid
 
         menu: str = str(tournament_name) + " Stats"
-        print(menu)
-        # TODO: implement archived tournament screen
-        stopper = input("This is the archived tournaments screen")
+        user_path: list[MenuOptions] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+            MenuOptions.archived_tournament,
+        ]
+        info: list[str] = self.utility.list_matches(tournament_uuid, True)
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
         return MenuOptions.spectate_tournaments
+
 
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
@@ -400,7 +413,25 @@ class SpectateUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-        stopper = input("This is the game schedule screen")
+        tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name == None: return MenuOptions.start_screen
+        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        tournament_uuid: str = tournament_object.uuid
+
+        menu: str = str(tournament_name) + " Stats"
+        user_path: list[MenuOptions] = [
+            MenuOptions.spectate_screen,
+            MenuOptions.spectate_tournaments,
+            MenuOptions.active_tournament,
+            MenuOptions.game_schedule,
+        ]
+        info: list[str] = self.utility.list_matches(tournament_uuid, False)
+        options: dict[str, str] = {}
+        message: str = ""
+
+        self.tui.clear_saved_data()
+        print(self.tui.table(menu, user_path, info, options, message))
+        input("Press Any Key To Go Back")
         return MenuOptions.active_tournament
 
     def teams_in_tournament(self) -> MenuOptions:

@@ -388,7 +388,7 @@ class AdminUI:
         message: str = ""
 
         # Show a list of the matches in the round
-        matches: list[str] = self.utility.list_matches(tournament_uuid, True)
+        matches: list[str] = self.utility.list_matches(tournament_uuid, False)
 
         ammount_of_lines = len(matches) -1
 
@@ -397,12 +397,11 @@ class AdminUI:
             info.append(match)
             x += 1
             choice_list.append(str(x))
-            match = match[81:-162]
+            match = match[243:-81]
             self.options[str(x)] = f"{"Input Results for:":<77}| \n{match}"
             self.options[("—" * 80)] = ""
             ammount_of_lines -= 1
 
-        self.options[("—" * 80) + " "] = ""
         choice_list.append("b")
         self.options["b"] = "Back"
 
@@ -440,8 +439,8 @@ class AdminUI:
         lines: list[str] = match_string.splitlines()
 
         # Filter out the name of the teams
-        match_team_1 = lines[1].replace("Team 1: ", "").rstrip("|")
-        match_team_2 = lines[3].replace("Team 2: ", "").rstrip("|")
+        match_team_1: str = lines[1].replace("Team 1: ", "").rstrip("|")
+        match_team_2: str = lines[3].replace("Team 2: ", "").rstrip("|")
 
         match_team_1 = match_team_1.strip()
         match_team_2 = match_team_2.strip()
@@ -472,13 +471,23 @@ class AdminUI:
         message = f"{winner} Has Won The Round!"
 
         tournament_name: str | None = LogicLayerAPI.save_player()
+        team1 = LogicLayerAPI.get_team_by_name(match_team_1)
+        team2 = LogicLayerAPI.get_team_by_name(match_team_2)
+
+        team1_uuid = team1.uuid
+        team2_uuid = team2.uuid
 
         if type(tournament_name) is str:
             current_tournament: Tournament = LogicLayerAPI.get_tournament_by_name(tournament_name)
             tournament_id: str = current_tournament.uuid
-        # if type()
-        #     current_match: Match = LogicLayerAPI.get_match(tournament_id, match_team_1, match_team_2)
-        #     winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
+
+            current_match: Match | str = LogicLayerAPI.get_match(tournament_id, team1_uuid, team2_uuid)
+            if type(current_match) is Match:
+                match_uuid: str = current_match.uuid
+                if winner is not None:
+                    winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
+
+                    LogicLayerAPI.change_match_winner(tournament_id, match_uuid, winner)
 
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility._prompt_choice(["b"])
