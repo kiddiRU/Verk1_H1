@@ -22,6 +22,7 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
     elif attribute == 'tournament_date': return validate_tournament_date(value)
     elif attribute == 'tournament_time': return validate_tournament_time(value)
     elif attribute == 'color': return validate_color(value)
+    elif attribute == 'number': return validate_number(value)
     else: return
 
 # Player handle, team name, tour name and club name
@@ -31,6 +32,10 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     Used for unique player handle, team tournament and club names
     """
     unique_name = unique_name.strip()
+
+    for char in unique_name:
+        if ord(char) < 32 or ord(char) > 126:
+            raise ValidationError("String contains characters not in ascii range")
 
     if len(unique_name) < 3 or len(unique_name) > 40:
         raise ValidationError("Name needs to be between 3 to 40 characters in length")
@@ -252,3 +257,15 @@ def validate_color(value: str) -> str:
         return value
 
     raise ValidationError("Color not one of the available ones.")
+
+
+def validate_number(number: str) -> str:
+    
+    try:
+        if int(number) <= 0:
+            raise ValidationError("Amount of servers can needs to be 1 or more")
+    
+    except:
+        pass
+
+    return number
