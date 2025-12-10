@@ -37,17 +37,17 @@
 ## ToDo-list:
 - Validations date and time frame needs fixing
 - Create tournament needs work -> Allow user to input date and time
-
 - Add tournament validation
 - Create tournament 
 - Create club
-- Edit club
-- edit tournament
+- Edit tournament
+- Bug - crash happens if Captain removes himself in remove player function
 # Evening meeting (Diary)
 ## State of project:
 - Finished view stats for Player
 - Finished view stats for Team
 - Finished view stats for Club
+- Added Create club to AdminUI
 ## State of group: 
 
 ## Divisions:
@@ -55,3 +55,8 @@
 - System engineer: 
 - QC: 
 ## ToDo-list:
+- Validations date and time frame needs fixing
+- Create tournament needs work -> Allow user to input date and time
+- Add tournament validation
+- Create tournament 
+- Create club
