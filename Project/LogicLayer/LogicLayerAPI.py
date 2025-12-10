@@ -244,6 +244,10 @@ def get_club_wins(club_name: str) -> str:
 def get_club_points(club_name: str) -> str:
     return club_logic.get_club_points(club_name)
 
+# Is using depracated UtilityLogic
+def get_club_by_name(club_name) -> Club:
+    return LogicUtility.get_club_by_name(club_name)
+
 ''' Match API '''
 
 # TODO implement input_match_results and call it
