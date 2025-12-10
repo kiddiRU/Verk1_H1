@@ -278,9 +278,6 @@ class UtilityUI:
                 match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
                 match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
 
-                if match.winner is not None:
-                    continue
-
                 match_name_1: str = match1.name
                 match_name_2: str = match2.name
 

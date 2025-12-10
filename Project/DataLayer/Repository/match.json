@@ -108,8 +108,8 @@
         "tournament_id": "33a78757-110e-4837-89de-065e504968ee",
         "match_date": "2006-05-05",
         "match_time": "14:00:00",
-        "team_1": "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
-        "team_2": "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+        "team_1": "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+        "team_2": "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
         "winner": null,
         "winning_players": null,
         "losing_team": null,
@@ -122,10 +122,14 @@
         "match_time": "15:00:00",
         "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
         "team_2": "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
-        "winner": null,
+        "winner": "Datalab Dominators",
         "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "losing_team": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "losing_players": [
+            "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+            "8b368c80-729e-4e76-9341-18d2be561b7c",
+            "57a15dc5-bdb2-46b5-9777-f08d36bffdb9"
+        ]
     },
     "2e2789ea-5b29-4ad5-8973-c7857355d0ce": {
         "uuid": "2e2789ea-5b29-4ad5-8973-c7857355d0ce",
