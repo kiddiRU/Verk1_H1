@@ -39,7 +39,7 @@ class PlayerUI:
         """
         
         menu: str = "Start Page"
-        user_path: list[str] = [MenuOptions.start_screen]
+        user_path: list[MenuOptions] = [MenuOptions.start_screen]
         options: dict[str, str]= {"1": "Log in", "2": "Register", "3": "Spectate", "q": "Quit program"}
 
         self.tui.clear_saved_data()
@@ -69,7 +69,7 @@ class PlayerUI:
         """
 
         menu: str = "Login"
-        user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login]
+        user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.login]
         info: list[str]= []
         options: dict[str, str]= {"t": "Try Again", "b": "Back"}
         message: str = "Handle Not Found!"
@@ -112,7 +112,7 @@ class PlayerUI:
         # TODO: add fill in option  
         
         menu: str = "Register"
-        user_path: list[str] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
+        user_path: list[MenuOptions] = [MenuOptions.start_screen, MenuOptions.login, MenuOptions.register]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
         message: str = "You Have Created A Player!"
@@ -133,6 +133,7 @@ class PlayerUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))  
             user_name: str = self.utility._input_info("Enter Name: \n", "name", "PLAYER")
+            if not user_name: return user_path[-2]
             self.tui.save_input("Name: " + user_name)
 
             print(self.tui.table(menu, user_path, info, options)) 
@@ -274,7 +275,7 @@ class PlayerUI:
 
 
         menu: str = "Player Page"
-        user_path: list[str] = [MenuOptions.player_screen]
+        user_path: list[MenuOptions] = [MenuOptions.player_screen]
 
         #Temporary info for testing, needs to get info from the actual info files
         info: list[str]= [f"""Handle: {current_login_handle}
@@ -340,7 +341,7 @@ Rank: {current_login_rank}"""]
 
 
         menu: str = "Create Team"
-        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.create_team]
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.create_team]
 
         #temporary info
         info: list[str]= ["- - - -List Of Clubs- - - -"]
@@ -443,7 +444,7 @@ Rank: {current_login_rank}"""]
 
 
         menu: str = "Edit Player Info"
-        user_path: list[str] = [MenuOptions.player_screen, 
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
                                 MenuOptions.edit_player_info]
         info: list[str]= []
         options: dict[str, str]= {"c": "Continue", "b": "Back"}
@@ -564,7 +565,7 @@ Rank: {current_login_rank}"""]
         """
 
         menu: str = "My Team"
-        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_empty]
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_empty]
         info: list[str]= []
         options: dict[str, str]= {"b": "Back"}
         message: str = "You Are Not In A Team!"
@@ -597,7 +598,7 @@ Rank: {current_login_rank}"""]
         team_members = LogicLayerAPI.get_team_members(team)
        
         menu: str = "My Team"
-        user_path: list[str] = [MenuOptions.player_screen, 
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
                                 MenuOptions.my_team_not_empty]
         info: list[str]= [f"- - - -{team}- - - -", 
                     f"{self.underscore + "Rank:"} \t \t Handle:{self.reset}"]
@@ -659,7 +660,7 @@ Rank: {current_login_rank}"""]
         team_members = LogicLayerAPI.get_team_members(team)
 
         menu: str = "Edit Team"
-        user_path: list[str] = [MenuOptions.player_screen, 
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, 
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team]
         info: list[str]= [f"- - - -{team}- - - -", 
@@ -825,7 +826,7 @@ Rank: {current_login_rank}"""]
         """
 
         menu: str = "Leave Team"
-        user_path: list[str] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
+        user_path: list[MenuOptions] = [MenuOptions.player_screen, MenuOptions.my_team_not_empty, MenuOptions.leave_team]
         info: list[str] = []
         options: dict[str, str] = {"c": "Continue"}
         message: str = f"Are You Sure You Want To Leave {"TEAMNAME"}? Y/N"
