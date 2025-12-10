@@ -62,8 +62,6 @@ class UtilityUI:
             try:
                 print(self.message_color + message + self.reset)
                 choice: str = input()
-                if choice.strip().lower() in ["c", "b"]:
-                    return choice
                 valid: str | None = validate(attribute, choice, info_type)
                 return str(valid)
             except ValidationError as e:
