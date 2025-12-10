@@ -21,8 +21,8 @@
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: Yes
-### On site: 9:20
+### Time: 9:20 - 21:40
+### On site: Yes
 
 # Morning meeting (Briefing)
 ## State of project: 
