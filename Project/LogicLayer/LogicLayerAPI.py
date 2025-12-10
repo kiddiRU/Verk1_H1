@@ -12,12 +12,19 @@ from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
+team_logic = TeamLL()
+player_logic = PlayerLL(team_logic)
+team_logic.set_player_logic(player_logic)
+
+
+tournament_logic = TournamentLL()
+club_logic =  ClubLL()
+
 ''' Validation API '''
 def validate(attr: str, value: str, name_type: str):
     return validate_attr(attr, value, name_type)
 
 ''' Player API '''
-player_logic = PlayerLL()
 
 def create_player(
     name: str,
@@ -91,7 +98,7 @@ def get_player_wins(player_handle) -> str:
 def get_player_points(player_handle) -> str:
     return player_logic.get_player_points(player_handle)
 ''' Team API '''
-team_logic = TeamLL()
+
 
 # TODO implement add_player and call it
 def add_player(player_handle: str, current_player: Player) -> Team | str:
@@ -126,7 +133,7 @@ def get_team_club(team_name: str) -> str:
 
 
 ''' Tournament API '''
-tournament_logic = TournamentLL()
+
 
 def create_tournament(
     name: str,
@@ -220,7 +227,6 @@ def to_date(value: str) -> date:
     return tournament_logic.to_date(value)
 
 ''' Club API '''
-club_logic: ClubLL =  ClubLL()
 
 # TODO implement create_club and call it
 def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:

@@ -135,3 +135,20 @@ class ClubLL():
                 pass
 
         return str(points)
+
+# Fra utility
+
+    def get_club_by_name(club_name) -> Club:
+        """
+        Takes in club name
+        looks through all clubs until it finds the right club name
+        and returns the teams uuid
+        if no team is found an error is raised
+        """
+
+        model_clubs: list = DataLayerAPI.load_clubs()
+        for club in model_clubs:
+            if club_name == club.name:
+                return club
+            
+        raise ValidationError("Club not found")
