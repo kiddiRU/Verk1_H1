@@ -8,7 +8,7 @@ Logic layer API.
 """
 
 from Models import Club, Match, Player, Server, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility
+from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, LogicUtility, MatchLL
 from LogicLayer.Validation import validate_attr
 from datetime import date, time
 
@@ -129,6 +129,7 @@ def get_team_club(team_name: str) -> str:
 
 ''' Tournament API '''
 tournament_logic = TournamentLL()
+match_logic = MatchLL()
 
 def create_tournament(
     name: str,
@@ -206,6 +207,27 @@ def change_match_winner(
             match_uuid,
             team_uuid
         )
+
+def get_all_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournaemnt
+
+    Returns a list of all matches in the tournament
+    tied to the uuid given.
+    """
+    return match_logic.get_matches(tournament_uuid)
+
+def get_next_matches(tournament_uuid: str) -> list[Match]:
+    """
+    Parameters: uuid of tournament
+
+    Returns a list of matches which are next on the schedule,
+    matches next in the schedule are matches which don't have
+    a winner and there doesn't exist a match which happens
+    before it and needs a winner.
+    """
+    return tournament_logic.next_games(tournament_uuid)
+
 
 # TODO implement cancel_tournament and call it (C Requirement)
 def cancel_tournament(tournament: Tournament) -> None:
