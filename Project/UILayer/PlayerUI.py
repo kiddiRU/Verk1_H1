@@ -272,7 +272,7 @@ class PlayerUI:
         current_login_handle: str = str(LogicLayerAPI.save_player())
         current_login_uuid = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
         player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
-        team, rank = LogicLayerAPI.get_player_team(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
         club = LogicLayerAPI.get_team_club(team)
 
         if not team:
