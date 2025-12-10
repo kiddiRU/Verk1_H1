@@ -8,6 +8,7 @@ File that holds all the menus that the admin can access
 from Models.Exceptions import ValidationError
 from Models.Tournament import Tournament
 from Models.Team import Team
+from Models.Match import Match
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -325,6 +326,21 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
+        # Get tournament name from screen before
+        tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name is None: # For type hinting
+            return MenuOptions.start_screen
+        
+        tournament_object: Tournament | None = (
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+        if tournament_object is None:  # Check if None goes through
+            return MenuOptions.start_screen
+        
+        # Get tournament uuid
+        tournament_uuid: str = tournament_object.uuid
+
+        # TODO: ADD Utility function to list out matches beautifully
 
         menu: str = "Matches"
         user_path: list[MenuOptions] = [
@@ -338,12 +354,7 @@ class AdminUI:
         choice_list = []
         message: str = ""
 
-        matches_list = [
-            "Team 1 vs Team 3",
-            "Team 2 vs Team 4",
-            "Team 5 vs Team 7",
-            "Team 6 vs Team 8",
-        ]
+        matches_list: list[str] = self.utility.list_matches(tournament_uuid)
 
         x = 0
         for match in matches_list:
@@ -545,7 +556,7 @@ class AdminUI:
             MenuOptions.add_team,
         ]
 
-        info: list = self.utility.show_main("teams")
+        info: list = self.utility.show_main("teams") #TODO Make it so that only teams not already internment show upp
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
 
         self.tui.clear_saved_data()

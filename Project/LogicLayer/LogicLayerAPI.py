@@ -299,5 +299,5 @@ def get_team_by_name(team_name: str) -> Team:
     return LogicUtility.get_team_by_name(team_name)
 
 def get_team_by_uuid(team_uuid: str) -> Team:
-    return LogicUtility.get_team_by_name(team_uuid)
+    return LogicUtility.get_team_by_uuid(team_uuid)
 
