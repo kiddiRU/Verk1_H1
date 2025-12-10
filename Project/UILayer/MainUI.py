@@ -73,7 +73,6 @@ class MainUI:
             MenuOptions.active_tournament: self._spectate_ui.active_tournament,
             MenuOptions.archived_tournament: self._spectate_ui.archived_tournament,
             MenuOptions.game_schedule: self._spectate_ui.game_schedule,
-            MenuOptions.view_bracket: self._spectate_ui.view_bracket,
             MenuOptions.teams_in_tournament: self._spectate_ui.teams_in_tournament,
             MenuOptions.team_tournament_stats: self._spectate_ui.team_tournament_stats,
             # ------------------ Misc Paths ------------------
