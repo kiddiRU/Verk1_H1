@@ -13,6 +13,11 @@ FILE_PATH = "DataLayer/Repository/players.json"
 
 
 def store_player(player: Player) -> None:
+    """Stores new players in a json file to be fetched later.
+
+    :param player:
+        The player object to store.
+    """
     # Changes object player into a dictionary mapping attributes to keys.
     data = player.__dict__
     
@@ -36,6 +41,11 @@ def store_player(player: Player) -> None:
         raise ValidationError("Could not write into player file")
 
 def load_players() -> list[Player]:
+    """Gets a list of all players stored with the store_player function.
+
+    :returns:
+        The list of players.
+    """
     # Reads the json file containing players and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as player_file:
@@ -57,6 +67,17 @@ def load_players() -> list[Player]:
 
 
 def update_player(uuid: str, updated_player: Player) -> None:
+    """Updates a player stored with the store_player function.
+
+    Looks for a player stored with the store_player function which
+    has the same uuid as the given uuid, then updates that player.
+
+    :param uuid:
+        uuid to look up player to update.
+
+    :param updated_player:
+        The player object to update the player to.
+    """
     # Reads the json file containing players and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as player_file:
