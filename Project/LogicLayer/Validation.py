@@ -12,7 +12,12 @@ from datetime import date, time
 from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
 
-def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
+
+    for char in value:
+        if (ord(char) < 32 or ord(char) > 126) and not char.isalpha:
+            raise ValidationError("String contains characters not in ascii range")
+        
     if attribute == 'name': return validate_name(value)
     elif attribute == 'date_of_birth': return validate_date(value)
     elif attribute == 'home_address': return validate_home_address(value)
@@ -32,10 +37,6 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     Used for unique player handle, team tournament and club names
     """
     unique_name = unique_name.strip()
-
-    for char in unique_name:
-        if ord(char) < 32 or ord(char) > 126:
-            raise ValidationError("String contains characters not in ascii range")
 
     if len(unique_name) < 3 or len(unique_name) > 39:
         raise ValidationError("Name needs to be between 3 to 39 characters in length")
@@ -217,45 +218,103 @@ def validate_time(time_input: str) -> time:
 
 
 def validate_tournament_date(value: str) -> str:
-    value = value.strip()
+    """Validates input to be a pair of start and end dates in a tournament.
+    
+    Checks if input can be parsed to a valid pair of start and end date for
+    a tournament. A valid format is "YYYY-MM-DD YYYY-MM-DD".
 
+    :param value:
+        The value to check if it can be changed to start and end date
+    
+    :returns:
+        Returns the same string back if it's valid, otherwise it raises
+        a ValidationError.
+    """
+
+    # Strips the input of its whitespace.
+    value: str = value.strip()
+
+    # Checks whether it can be split into two values.
     try:
+        begin: str
+        end: str
         begin, end = value.split()
     except:
         raise ValidationError("Could not split dates")
 
-    begin_date = validate_date(begin)
-    end_date = validate_date(end)
+    # Validates both dates individually.
+    begin_date: date = validate_date(begin)
+    end_date: date = validate_date(end)
 
+    # Checks whether the end date comes before the beginning date.
     if begin_date <= end_date:
         return value
     else:
         raise ValidationError("Beginning date happens after end date")
 
 def validate_tournament_time(value: str) -> str:
+    """Validates input to be a pair of start and end times in a tournament.
+    
+    Checks if input can be parsed to a valid pair of start and end times for
+    a tournament. A valid format is "HH:MM HH:MM".
+
+    :param value:
+        The value to check if it can be changed to start and end time
+    
+    :returns:
+        Returns the same string back if it's valid, otherwise it raises
+        a ValidationError.
+    """
+    
+    # Strips the input of its whitespace.
     value = value.strip()
 
+    # Checks whether it can be split into two values.
     try:
+        begin: str
+        end: str
         begin, end = value.split()
     except:
         raise ValidationError("Could not split time input")
 
-    begin_time = validate_time(begin)
-    end_time = validate_time(end)
+    # Validates both times individually.
+    begin_time: time = validate_time(begin)
+    end_time: time = validate_time(end)
 
+    # Make sure the minute values are the same
     if begin_time.minute != end_time.minute:
         raise ValidationError("Begin and end minutes do not match")
 
-
+    # Checks to make sure begin and end time aren't the same.
     if begin_time == end_time:
         raise ValidationError("Begin time happens after end time")
 
     return value
 
 def validate_color(value: str) -> str:
+    """Validates input to be a valid color option.
+
+    Valid color options are
+
+    -   red
+    -   green
+    -   yellow
+    -   blue
+    -   pink
+    -   cyan
+
+    :param value:
+        The value being checked
+
+    :returns:
+        Returns the value as is if it's valid, otherwise it raises an error.
+    """
+
+    # Strips the value of its whitespaces.
     value = value.strip().lower()
     available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
 
+    # Checks to see if the given value is in the list of available colors.
     if value in available_colors:
         return value
 

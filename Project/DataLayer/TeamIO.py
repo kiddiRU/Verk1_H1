@@ -12,7 +12,7 @@ from Models import Team, ValidationError
 FILE_PATH = "DataLayer/Repository/teams.json"
 
 def store_team(team: Team) -> None:
-    """Stores new teams in a json file to be fetched later.
+    """Stores new teams in a JSON file to be fetched later.
 
     :param team:
         The team object to store.
@@ -20,7 +20,7 @@ def store_team(team: Team) -> None:
     # Changes object team into a dictionary mapping attributes to keys.
     data = team.__dict__
    
-    # Reads json file containing teams and stores the contents as a
+    # Reads JSON file containing teams and stores the contents as a
     # dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
@@ -45,7 +45,7 @@ def load_teams() -> list[Team]:
     :returns:
         The list of teams.
     """
-    # Reads the json file containing teams and stores it as a dictionary.
+    # Reads the JSON file containing teams and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))
@@ -76,7 +76,7 @@ def update_team(uuid: str, updated_team: Team) -> None:
     :param updated_team:
         The team object to update the team to.
     """
-    # Reads the json file containing teams and stores it as a dictionary.
+    # Reads the JSON file containing teams and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))

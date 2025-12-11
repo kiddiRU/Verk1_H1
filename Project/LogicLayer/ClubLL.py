@@ -13,8 +13,14 @@ from LogicLayer.MatchLL import MatchLL
 class ClubLL:
     ''' Club logic. '''
 
-    def __init__(self) -> None:
-        ''' Initialize the ClubLL instance. '''
+    def __init__(self, match_logic: MatchLL) -> None:
+        ''' Initialize the ClubLL instance.
+        
+        :param match_logic:
+            The logic layer responsible for match operations and validations.
+        :type match_logic: MatchLL
+        '''
+        self._match_logic = match_logic
 
     def create_club(self,
         name: str,
@@ -163,7 +169,6 @@ class ClubLL:
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         model_teams: list[Team] = DataLayerAPI.load_teams()
         club_uuid: str = self.get_club_by_name(club_name).uuid
-        match = MatchLL()
         points: int = 0
 
         # Lists all team's uuid's that are in the club
@@ -174,26 +179,27 @@ class ClubLL:
 
         # Loops through all tournament objects
         for tournament in model_tournaments:
-            try:
-                matches_list: list[Match] = match.get_matches(tournament.uuid)
+            
+            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
-                # gets the final match of the tournament (Finals)
-                tour_final_match: Match = matches_list[-1]
+            # if matches is empty skips tournament
+            if len(matches_list) == 0:
+                continue
 
-                # gets the winning and losing teams
-                winner = tour_final_match.winner
-                loser = tour_final_match.losing_team
+            # gets the final match of the tournament (Finals)
+            tour_final_match: Match = matches_list[-1]
 
-                # if the winning team is in the list of teams in club
-                if winner in teams_in_club:
-                    points += 3
+            # gets the winning and losing teams
+            winner: str = tour_final_match.winner
+            loser: str = tour_final_match.losing_team
 
-                # if the losing team is in the list of teams in club
-                if loser in teams_in_club:
-                    points += 1
+            # if the winning team is in the list of teams in club
+            if winner in teams_in_club:
+                points += 3
 
-            except ValidationError:
-                pass
+            # if the losing team is in the list of teams in club
+            if loser in teams_in_club:
+                points += 1
 
         return str(points)
 

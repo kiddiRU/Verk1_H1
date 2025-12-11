@@ -7,14 +7,14 @@ stored in the ./DataLayer/Repository/touranment.json
 """
 
 import json
-from Models import Tournament, ValidationError
 from datetime import date, datetime
+from Models import Tournament, ValidationError
 
 FILE_PATH = "DataLayer/Repository/tournament.json"
 
 
 def store_tournament(tournament: Tournament) -> None:
-    """Stores new tournaments in a json file to be fetched later.
+    """Stores new tournaments in a JSON file to be fetched later.
 
     :param tournament:
         The tournament object to store.
@@ -22,7 +22,7 @@ def store_tournament(tournament: Tournament) -> None:
     # Changes object tournament into a dictionary, mapping attributes to keys
     data = tournament.__dict__
 
-    # Reads json file containing tournaments and stores the contents as a
+    # Reads JSON file containing tournaments and stores the contents as a
     # dictionary
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
@@ -35,7 +35,7 @@ def store_tournament(tournament: Tournament) -> None:
     file_content[tournament.uuid] = data
 
     # Writes the updated file content into the file containing tournaments.
-    # Changes all non json storable data types into strings with default=str
+    # Changes all non JSON storable data types into strings with default=str
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as tournament_file:
             json.dump(file_content, tournament_file, indent=4, default=str)
@@ -50,7 +50,7 @@ def load_tournaments() -> list[Tournament]:
     :returns:
         The list of tournaments.
     """
-    # Reads the json file containing tournaments and stores it as a dictionary
+    # Reads the JSON file containing tournaments and stores it as a dictionary
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
             file_content = dict(json.load(tournament_file))
@@ -62,7 +62,7 @@ def load_tournaments() -> list[Tournament]:
     tournament_list: list[Tournament] = []
     for value in file_content.values():
 
-        # Changes non json storable data types
+        # Changes non JSON storable data types
         # from string back into their original type.
         try:
             value["start_date"] = date.fromisoformat(value["start_date"])
@@ -99,7 +99,7 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     :param updated_tournament:
         The tournament object to update the tournament to.
     """
-    # Reads the json file containing tournaments adn stores it as a dictionary
+    # Reads the JSON file containing tournaments adn stores it as a dictionary
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
             file_content = dict(json.load(tournament_file))

@@ -11,19 +11,33 @@ from Models.Team import Team
 from DataLayer import DataLayerAPI
 from datetime import date,time
 
-class MatchLL():
+class MatchLL:
     
     def __init__(self) -> None:
         pass
 
     
-    def create_match(self, tournament_id: str, date: date, time: time, team_1: str, team_2: str) -> Match:
+    def create_match(
+            self,
+            tournament_id: str,
+            date: date,
+            time: time,
+            team_1: str,
+            team_2: str
+            ) -> Match:
         """
         takes in tournament id, date, time, team_1 and team_2
         and creates a new match using the info
         """
-        uuid = str(uuid4())
-        new_match = Match(uuid, tournament_id, date, time, team_1, team_2)
+        uuid: str = str(uuid4())
+        new_match: Match = Match(
+            uuid,
+            tournament_id,
+            date,
+            time,
+            team_1,
+            team_2
+            )
         DataLayerAPI.store_match(new_match)
         return new_match
 
@@ -35,12 +49,12 @@ class MatchLL():
         and returns list of Match object sorted by their time
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
-        model_matches = [
+        model_matches: list[Match] = [
             match
             for match in model_matches
             if match.tournament_id == tournament_id
         ]
-        sorted_matches = sorted(
+        sorted_matches: list[Match] = sorted(
             model_matches,
             key = lambda match: (match.match_date, match.match_time)
         )
@@ -79,11 +93,12 @@ class MatchLL():
                     losing_team = match.team_2
                 
                 match.losing_team = losing_team
+
                 # Looks through all teams to find the loser team
-                print(f"Losing Team id: {losing_team}")
                 for l_team in model_teams:
                     if l_team.uuid == losing_team:
                         # Takes a list of the players on the losing team
+                        # stores the losing players
                         losing_players: list[str] = l_team.list_player_uuid
                         match.losing_players = losing_players
                         
@@ -92,12 +107,20 @@ class MatchLL():
                 return match
 
     
-    def get_match(self, tournament_id: str, match_team1_uuid: str, match_team2_uuid: str) -> Match | str:
+    def get_match(
+            self,
+            tournament_id: str,
+            match_team1_uuid: str,
+            match_team2_uuid: str
+            ) -> Match | str:
         
         matches: list[Match] = self.get_matches(tournament_id)
 
         for match in matches:
-            if match.team_1 == match_team1_uuid and match.team_2 == match_team2_uuid:
+            if (
+                match.team_1 == match_team1_uuid 
+                and match.team_2 == match_team2_uuid
+                ):
                 return match
 
         return ""

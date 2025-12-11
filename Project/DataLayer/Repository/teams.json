@@ -272,5 +272,20 @@
         "in_tournament": null,
         "url_homepage": "",
         "ascii_art": ""
+    },
+    "c1037242-2aaf-44fc-a57b-2dfc5d248f4a": {
+        "uuid": "c1037242-2aaf-44fc-a57b-2dfc5d248f4a",
+        "name": "TheCats",
+        "list_player_uuid": [
+            "263fd945-fd44-4bf1-aa35-9b8333856786",
+            "fbb82b6f-d88e-4b05-b9c8-691347223735",
+            "ca6e459a-c570-4fec-92c6-b318a001537c",
+            "47810d97-f871-44e6-aa3e-7fd70afa8e21"
+        ],
+        "team_captain_uuid": "263fd945-fd44-4bf1-aa35-9b8333856786",
+        "club_uuid": "f96115cc-12ee-4a88-9f81-606725b5ab5e",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
     }
 }

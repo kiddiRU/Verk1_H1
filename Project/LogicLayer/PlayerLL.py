@@ -283,30 +283,33 @@ class PlayerLL:
 
         # Loops through all tournaments
         for tournament in model_tournaments:
-            try:
-                matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+            
+            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
-                # gets the final match of the tournament (Finals)
-                tour_final_match: Match = matches_list[-1]
+            # if matches is empty skips tournaments
+            if not matches_list:
+                continue
 
-                # gets the winning and losing players
-                winning_players = tour_final_match.winning_players
-                losing_players = tour_final_match.losing_players
+            # gets the final match of the tournament (Finals)
+            tour_final_match: Match = matches_list[-1]
 
-                # If match is not finished winning players will be None
-                if winning_players is None:
-                    pass
+            # gets the winning and losing players
+            winning_players = tour_final_match.winning_players
+            losing_players = tour_final_match.losing_players
 
-                # If the player is the winner +3 points
-                elif player_uuid in winning_players:
-                    points += 3
-
-                # if the player is the loser +1 point
-                elif player_uuid in losing_players:
-                    points += 1
-
-            except ValidationError:
+            # If match is not finished winning players will be None
+            if winning_players is None:
                 pass
+
+            # If the player is the winner +3 points
+            elif player_uuid in winning_players:
+                points += 3
+
+            # if the player is the loser +1 point
+            elif player_uuid in losing_players:
+                points += 1
+
+
 
         return str(points)
 
@@ -352,7 +355,7 @@ class PlayerLL:
         :rtype: Player | str
         '''
         players: list[Player] = self.list_all_players()
-        player = next((p for p in players if p.uuid == player_uuid), None)
+        player: Player = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
             return ""
