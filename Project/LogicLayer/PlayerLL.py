@@ -9,7 +9,7 @@ Functions for player logic.
 
 from uuid import uuid4
 from DataLayer import DataLayerAPI
-from Models import Player, Team, Match, Tournament#, ValidationError
+from Models import Player, Team, Match, Tournament, ValidationError
 from LogicLayer import MatchLL, TeamLL
 
 class PlayerLL():
@@ -177,7 +177,7 @@ class PlayerLL():
         )
 
         if team_to_edit is None:
-            raise Exception('You are not a captain!')
+            raise ValidationError('You are not a captain!')
 
         players: list[Player] = DataLayerAPI.load_players()
         player_to_promote: Player | None = next(
@@ -186,10 +186,12 @@ class PlayerLL():
         )
 
         if player_to_promote is None:
-            raise Exception(f'No player found with the handle: {handle_to_promote}')
+            raise ValidationError(f'No player found with the handle: {handle_to_promote}')
 
         if player_to_promote.uuid not in team_to_edit.list_player_uuid:
-            raise Exception(f'The player \'{handle_to_promote}\' exists, but is not in your team!')
+            raise ValidationError(
+                f'The player \'{handle_to_promote}\' exists, but is not in your team!'
+            )
 
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
@@ -297,7 +299,7 @@ class PlayerLL():
                 elif player_uuid in losing_players:
                     points += 1
 
-            except:
+            except ValidationError:
                 pass
 
         return str(points)
@@ -366,7 +368,7 @@ class PlayerLL():
         :rtype: str
         '''
         player: Player | str = self.get_player_by_handle(player_handle)
-        return player.uuid if type(player) == Player else ''
+        return player.uuid if isinstance(player, Player) else ''
 
     def get_players_team_uuid(self, player_uuid: str) -> str:
         """Gets the player uuid
