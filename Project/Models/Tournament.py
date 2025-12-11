@@ -29,8 +29,8 @@ class Tournament:
         venue: str,
         email: str,
         phone_number: str,
-        time_frame_start: time = time(hour=8,minute=0),
-        time_frame_end: time = time(hour=16,minute=0),
+        time_frame_start: time = time(hour=8, minute=0),
+        time_frame_end: time = time(hour=16, minute=0),
         status: StatusType = StatusType.inactive,
         number_of_servers: int = 1,
         list_servers: list[str] = [],
@@ -46,23 +46,23 @@ class Tournament:
             end_date (date): End date of the tournament (YYYY-MM-DD)
             venue (str): Location of the tournament
             email (str): Tournament email (length <= 64)
-            phone_number (str): Tournament phone number 
+            phone_number (str): Tournament phone number
                         (length of 8  = 000-0000)
-            time_frame_start (time, optional): Start of the event per day. 
+            time_frame_start (time, optional): Start of the event per day.
                         Defaults to time(hour=8,minute=0).
-            time_frame_end (time, optional): End of the event per day. 
+            time_frame_end (time, optional): End of the event per day.
                         Defaults to time(hour=16,minute=0).
             status (StatusType, optional): Tournament status.
                         Defaults to StatusType.inactive.
             number_of_servers: (int):
                         Defaults to 1. Don't pass if passing list_servers.
-            list_servers (list[str], optional): 
+            list_servers (list[str], optional):
                         List containing uuid's of servers. Defaults to [].
                         Don't pass if passing number_of_servers.
-            teams_playing (list[str], optional): 
+            teams_playing (list[str], optional):
                         List containing uuid's of teams. Defaults to [].
         """
-        
+
         self.uuid = uuid
         self.name = name
         self.start_date = start_date
@@ -78,6 +78,7 @@ class Tournament:
             self.list_servers: list[str] = [
                 "NoServer" for _ in range(number_of_servers)
             ]
-        else: self.list_servers = list_servers
-        
+        else:
+            self.list_servers = list_servers
+
         self.teams_playing = teams_playing
