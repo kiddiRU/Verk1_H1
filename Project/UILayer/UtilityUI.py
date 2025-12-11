@@ -92,8 +92,11 @@ class UtilityUI:
         valid or navigation word is entered
 
         :param message: Message to display - "Enter Your name"
+        :type message: str
         :param attribute: Attribute of a model class - "name"
+        :type attribute: str
         :param info_type: Information type - "PLAYER"
+        :type info_type: str
         :return: Returns the validated input or empty string if 'q' is entered
         :rtype: str
         """

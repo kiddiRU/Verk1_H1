@@ -34,8 +34,8 @@ class AdminUI:
         Sets up the utility UI, drawer interface, and basic formatting
         attributes for displaying admin menus.
         """
-        self.utility = UtilityUI()  # Helper for input and prompts
-        self.tui = Drawer()  # Drawer interface for tables and menus
+        self.utility: UtilityUI = UtilityUI()  # Helper for input and prompts
+        self.tui: Drawer = Drawer()  # Draw interface for tables and menus
         self.message_color: str = "\033[36m"  # Cyan color for messages
         self.reset: str = "\033[0m"  # Reset color
         self.underscore: str = "\033[4m"  # Underline formatting
