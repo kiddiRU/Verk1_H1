@@ -12,7 +12,7 @@ from LogicLayer import MatchLL, ClubLL, PlayerLL, Validation
 
 class TeamLL():
     ''' Team logic. '''
-    
+
     def __init__(self) -> None:
         self._player_logic: PlayerLL
 
@@ -74,21 +74,28 @@ class TeamLL():
             Returns the team object
         :rtype: Team
         """
-
+        # gets players and teams uuid, and load all team models
         player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
-
+        # Loops through all teams
         for team in model_teams:            
             if team.uuid == team_uuid:
+
+                # If there are already 5 players in a team
                 if len(team.list_player_uuid) == 5:
                     return "Your Team Is Full"
 
+                # Else the player is added and team Data is updated
                 else:
                     team.list_player_uuid.append(player_uuid)
                     DataLayerAPI.update_team(team_uuid, team)
                     return team
+
+        # if the team is not found
+        return ""
+                    
 
         return ""
 
@@ -113,17 +120,21 @@ class TeamLL():
         :return: Returns the team object
         :rtype: Team
         """
+        # gets players and teams uuid, and load all team models
         player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
         model_teams: list[Team] = DataLayerAPI.load_teams()
-
+        
+        # Loops through all teams
         for team in model_teams:
             if team.uuid == team_uuid:
                 try:
+                    # Removes the player from the team and the Data is updated
                     team.list_player_uuid.remove(player_uuid)
                     DataLayerAPI.update_team(team_uuid, team)
                     return team
-
+                
+                # If the player to remove is not in the team
                 except ValueError:
                     raise ValidationError("Player not in team")
 
@@ -142,12 +153,18 @@ class TeamLL():
 
         :return: Returns a list of the team members uuid's
         :rtype: list[str]
-        """    
+        """
+        # Loads all team models
         model_teams: list[Team] = DataLayerAPI.load_teams()
+
+        # Loops through all teams
         for team in model_teams:
+
+            # returns the list when it finds the right team
             if team.name == team_name:
                 return team.list_player_uuid 
-
+        
+        # if team is not found
         raise ValidationError("Team not found")
 
 
@@ -157,7 +174,6 @@ class TeamLL():
         :return: Returns a list of all team objects
         :rtype: list[Team]
         """
-
         teams: list[Team] = DataLayerAPI.load_teams()
         return teams
 
@@ -176,11 +192,12 @@ class TeamLL():
         :return: Returns a list of all player objects in a team
         :rtype: list[Player]
         """
+        # gets the list of team members uuid's and loads all player objects
         player_list_uuid: list[str] = self.get_team_members(team_name)
-
         players = DataLayerAPI.load_players()
 
-        players = [
+        # lists all objects of players in the team
+        players: list[Player] = [
             player for player in players
             if player.uuid in player_list_uuid
         ]
@@ -203,11 +220,15 @@ class TeamLL():
         Returns a list of tournament names that the team has participated in
         :rtype: list[str]
         """
+        # Gets team uuid, starts a list, and loads all tournament objects
         teams_history: list[str] = []
         team_uuid: str = self.get_team_by_name(team_name).uuid
-
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+
+        # Loops through all tournaments
         for tournament in model_tournaments:
+
+            # If the team is in a tournament the tournament is added to the list
             if team_uuid in tournament.teams_playing: 
                 teams_history.append(tournament.name)
 
@@ -218,7 +239,7 @@ class TeamLL():
 
         First gets the uuid of the team,
         Then Loads all matches and adds one to the count 
-        when the winner uuid matches the teams uuid
+        when the match winner uuid matches the teams uuid
         
         :param team_name:
             The team name of the team to find the total of won matches
@@ -227,19 +248,20 @@ class TeamLL():
         :return: Returns a string number of the total won matches
         :rtype: str
         """
+        # Loads all matches, gets the teams uuid, and starts a count
         model_matches: list[Match] = DataLayerAPI.load_matches()
         team_uuid: str = self.get_team_by_name(team_name).uuid
-        win_count = 0
+        win_count: int = 0
 
+        # Loops through all matches
         for match in model_matches:
+
+            # adds 1 to count if match winner is the team
             if match.winner == team_uuid:
                 win_count += 1
 
         return str(win_count)
 
-    # TODO Implement so a team gets a point for every match it wins 
-    # and the points increase. Match 1 win: +1, Match 2 win: +2,
-    # Match 3 loss: total 3 points for tournament 
     def get_team_points(self, team_name: str) -> str:
         """Gets the team name
         
@@ -257,20 +279,28 @@ class TeamLL():
         :return: Returns a string number of total points from tournaments
         :rtype: str
         """
+        # Loads all tournaments, gets teams uuid, starts a point counter
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         team_uuid: str = self.get_team_by_name(team_name).uuid
-        points = 0
+        points: int = 0
 
+        # Loops through all tournaments
         for tournament in model_tournaments:
             try:
                 matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+
+                # gets the final match of the tournament (Finals)
                 tour_final_match: Match = matches_list[-1]
+
+                # gets the winning and losing teams
                 winner = tour_final_match.winner
                 loser = tour_final_match.losing_team
 
+                # if the winning team is the wanted team
                 if winner == team_uuid:
                     points += 3
 
+                # if the losing team is the wanted team
                 if loser == team_uuid:
                     points += 1
 

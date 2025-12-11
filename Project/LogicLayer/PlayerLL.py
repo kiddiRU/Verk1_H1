@@ -273,7 +273,7 @@ class PlayerLL():
 
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         player_uuid: str = self.player_handle_to_uuid(player_handle)
-        points = 0
+        points: int = 0
 
         # Loops through all tournaments
         for tournament in model_tournaments:

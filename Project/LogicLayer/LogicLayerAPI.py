@@ -774,23 +774,111 @@ def tournament_name_to_uuid(tournament_name: str) -> str:
 ''' Club API '''
 
 def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
+    """
+    First takes in the info that has already been validated
+    and creates a uuid for the club,
+    Then creates the object using the uuid and info and
+    points the object to Data Layer API to be stored as a club        
+
+    :param name:
+        The name of the club
+    :type name: str
+
+    :param club_color:
+        The color of the club
+    :type club_color: str
+
+    :param country:
+        The country of the club
+    :type country: str
+
+    :param home_town:
+        The home town of the club
+    :type home_town: str
+
+    :return: Returns the newly created club object
+    :rtype: Club
+    """      
     return club_logic.create_club(name,club_color, country, home_town)
 
 def list_all_clubs() -> list[Club]:
+    """
+    Loads a list of all club objects from the Data Layer API
+
+    :return: Returns a list of all club objects
+    :rtype: list[Club]
+    """
     return club_logic.list_all_clubs()
 
 def get_teams_in_club(club_name: str) -> list[Team]:
+    """Gets club name
+
+    First gets the clubs uuid,
+    Then loads all team objects and
+    lists all team objects that have the club uuid of the wanted club
+    
+    :param club_name:
+        club name to find all teams that are in the club
+    :type club_name: str
+
+    :return: Returns a list of team objects that are in the club
+    :rtype: list[Team]
+    """
     return club_logic.get_teams_in_club(club_name)
 
 # Created by Sindri
 def get_club_wins(club_name: str) -> str:
+    """Gets club name
+    
+    First gets the uuid of the club
+    Then Loads all teams and finds all the teams in the club
+    and lists their team uuid's
+
+    Then Loads all matches and if the match winner
+    is in the list of teams in the club one is added to the count
+    
+    :param club_name:
+        The clubs name to find the total won matches
+    :type club_name: str
+
+    :return: 
+    Returns a string number of the total won matches
+    of the teams in the club
+    :rtype: str
+    """
     return club_logic.get_club_wins(club_name)
 
 # Created by Sindri
 def get_club_points(club_name: str) -> str:
+    """Gets the club name
+
+    First gets the uuid of the club,
+    Then Loads all teams and finds all the teams in the club
+    and lists their team uuid's
+
+    Then loads all tournaments and gets a list of all matches in a
+    the tournament with the tournament uuid,
+    Finds the last match of the tournament (Finals) and finds the
+    winning and losing teams of the match, and if the winner is in
+    the list of teams of the club 3 points are added
+    and 1 point for the loser
+
+    :param club_name:
+        The name of the club to find the total points from tournaments
+    :type club_name: str
+
+    :return: Returns a string number of the total points from tournaments
+    :rtype: str
+    """
     return club_logic.get_club_points(club_name)
 
 def get_club_by_name(club_name: str) -> Club:
+    """
+    Takes in club name
+    looks through all clubs until it finds the right club name
+    and returns the teams uuid
+    if no team is found an error is raised
+    """
     return club_logic.get_club_by_name(club_name)
 
 ''' Match API '''
