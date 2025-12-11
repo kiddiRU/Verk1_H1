@@ -218,7 +218,7 @@ class TeamLL:
         """
         # gets the list of team members uuid's and loads all player objects
         player_list_uuid: list[str] = self.get_team_members(team_name)
-        players = DataLayerAPI.load_players()
+        players: list[Player] = DataLayerAPI.load_players()
 
         # lists all objects of players in the team
         players: list[Player] = [
@@ -310,26 +310,28 @@ class TeamLL:
 
         # Loops through all tournaments
         for tournament in model_tournaments:
-            try:
-                matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+            
+            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
-                # gets the final match of the tournament (Finals)
-                tour_final_match: Match = matches_list[-1]
+            # if matches is empty skips tournament
+            if not matches_list:
+                continue
 
-                # gets the winning and losing teams
-                winner = tour_final_match.winner
-                loser = tour_final_match.losing_team
+            # gets the final match of the tournament (Finals)
+            tour_final_match: Match = matches_list[-1]
 
-                # if the winning team is the wanted team
-                if winner == team_uuid:
-                    points += 3
+            # gets the winning and losing teams
+            winner: str = tour_final_match.winner
+            loser: str = tour_final_match.losing_team
 
-                # if the losing team is the wanted team
-                if loser == team_uuid:
-                    points += 1
+            # if the winning team is the wanted team
+            if winner == team_uuid:
+                points += 3
 
-            except ValidationError:
-                pass
+            # if the losing team is the wanted team
+            if loser == team_uuid:
+                points += 1
+
 
         return str(points)
 
@@ -347,7 +349,7 @@ class TeamLL:
         :return: Returns the name of the club that the team is in
         :rtype: str
         """
-        clubs = self._club_logic.list_all_clubs()
+        clubs: list[Club] = self._club_logic.list_all_clubs()
 
         for club in clubs:
             teams_in_club: list[str] = [

@@ -179,26 +179,27 @@ class ClubLL:
 
         # Loops through all tournament objects
         for tournament in model_tournaments:
-            try:
-                matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
-                print(matches_list)
-                # gets the final match of the tournament (Finals)
-                tour_final_match: Match = matches_list[-1]
+            
+            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
-                # gets the winning and losing teams
-                winner = tour_final_match.winner
-                loser = tour_final_match.losing_team
+            # if matches is empty skips tournament
+            if not matches_list:
+                continue
 
-                # if the winning team is in the list of teams in club
-                if winner in teams_in_club:
-                    points += 3
+            # gets the final match of the tournament (Finals)
+            tour_final_match: Match = matches_list[-1]
 
-                # if the losing team is in the list of teams in club
-                if loser in teams_in_club:
-                    points += 1
+            # gets the winning and losing teams
+            winner: str | None = tour_final_match.winner
+            loser: str | None = tour_final_match.losing_team
 
-            except ValidationError:
-                pass
+            # if the winning team is in the list of teams in club
+            if winner in teams_in_club:
+                points += 3
+
+            # if the losing team is in the list of teams in club
+            if loser in teams_in_club:
+                points += 1
 
         return str(points)
 

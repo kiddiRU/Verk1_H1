@@ -872,7 +872,6 @@ Rank: {current_login_rank}"""]
         if len(handles_not_team) == 0 or len(team_members) >= 5:
             message = "No Players To Add To Team Or Team Is Full"
 
-            # TODO: Make sure that program dosent crash when trying to add "No Players To Add To Team"
             # TODO: FORMAT SO IT IS NOT SHIT
 
             self.tui.clear_saved_data()
@@ -886,8 +885,10 @@ Rank: {current_login_rank}"""]
         print(self.tui.table(menu, user_path, info))
         add_handle: str = input(
             self.input_color
-            + "Enter A Players Handle To Add Them: \n"
+            + "Enter A Players Handle To Add Them Or 'q' To Cancel: \n"
             + self.reset)
+        if add_handle.lower() == "q":
+            return MenuOptions.EDIT_TEAM
 
         self.tui.save_input("Player To Add: " + add_handle)
 
@@ -1079,7 +1080,7 @@ Do You Want To Try Again? Y/N:"""
                 if choice == "n":
                     return MenuOptions.EDIT_TEAM
 
-                return MenuOptions.leave_team
+                return MenuOptions.LEAVE_TEAM
 
             message = f"""You Are The Only One Left In The Team"
 If You Leave, the team {team} will never be accessable again"
