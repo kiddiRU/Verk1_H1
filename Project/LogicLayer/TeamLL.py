@@ -247,7 +247,7 @@ class TeamLL():
         # Loads all matches, gets the teams uuid, and starts a count
         model_matches: list[Match] = DataLayerAPI.load_matches()
         team_uuid: str = self.get_team_by_name(team_name).uuid
-        win_count = 0
+        win_count: int = 0
 
         # Loops through all matches
         for match in model_matches:
@@ -280,7 +280,7 @@ class TeamLL():
         # Loads all tournaments, gets teams uuid, starts a point counter
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         team_uuid: str = self.get_team_by_name(team_name).uuid
-        points = 0
+        points: int = 0
 
         # Loops through all tournaments
         for tournament in model_tournaments:
