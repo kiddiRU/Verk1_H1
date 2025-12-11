@@ -8,7 +8,7 @@ Functions for Club logic
 from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models import Club, Team, Match, Tournament, ValidationError
-from LogicLayer.MatchLL import MatchLL
+from LogicLayer import MatchLL
 
 class ClubLL:
     ''' Club logic. '''
@@ -181,7 +181,7 @@ class ClubLL:
         for tournament in model_tournaments:
             try:
                 matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
-
+                print(matches_list)
                 # gets the final match of the tournament (Finals)
                 tour_final_match: Match = matches_list[-1]
 
