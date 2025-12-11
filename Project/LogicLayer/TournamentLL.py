@@ -386,7 +386,11 @@ class TournamentLL:
         # Creates servers for the tournament, adds the first matches into the
         # tournament.
         for idx, _ in enumerate(tournament.list_servers):
-            new_server = Server(str(uuid4()), matches[idx].uuid)
+            # Check to see if servers outnumber the matches.
+            if idx < len(matches):
+                new_server = Server(str(uuid4()), matches[idx].uuid)
+            else:
+                new_server = Server(str(uuid4()), "NoMatch")
             tournament.list_servers[idx] = new_server.uuid
             DataLayerAPI.store_server(new_server)
 
