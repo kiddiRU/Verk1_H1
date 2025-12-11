@@ -30,8 +30,7 @@ class TournamentLL:
         phone_number: str,
         server_amount: int
     ) -> None:
-        '''
-        Creates a new Tournament object and sends it to be stored.
+        '''Creates a new Tournament object and sends it to be stored.
         
         :param name:
             The tournaments name.
@@ -86,8 +85,7 @@ class TournamentLL:
         DataLayerAPI.store_tournament(new_tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
-        '''
-        Adds a team to the list of teams playing in a tournament.
+        '''Adds a team to the list of teams playing in a tournament.
         
         :param tournament_name:
             The name of the tournament.
@@ -109,8 +107,7 @@ class TournamentLL:
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
-        '''
-        Removes a team from the list of teams playing in a tournament.
+        '''Removes a team from the list of teams playing in a tournament.
         
         :param tournament_name:
             The name of the tournament.
@@ -179,8 +176,7 @@ class TournamentLL:
     #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
-        '''
-        Gets a list of all stored tournamnets.
+        '''Gets a list of all stored tournamnets.
         
         :return:
             A list of all Tournament objects.
@@ -498,8 +494,7 @@ class TournamentLL:
 
 
     def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:
-        """
-        Takes in a tournament name
+        """Takes in a tournament name
 
         Returns a list of Team objects
         """
@@ -537,8 +532,7 @@ class TournamentLL:
 # Fra utility
 
     def get_tournament_by_name(self, name: str) -> Tournament:
-        '''
-        Gets a Tournament object by its name.
+        '''Gets a Tournament object by its name.
         
         :param tournament_name:
             The name of the tournament to fetch.
@@ -557,8 +551,7 @@ class TournamentLL:
         return tournament
 
     def get_tournament_by_uuid(self, uuid: str) -> Tournament:
-        '''
-        Gets a Tournament object by its UUID.
+        '''Gets a Tournament object by its UUID.
         
         :param tournament_uuid:
             The UUID of the tournament to fetch.
@@ -577,8 +570,7 @@ class TournamentLL:
         return tournament
 
     def tournament_name_to_uuid(self, name: str) -> str:
-        '''
-        Converts a tournaments name, to its UUID.
+        '''Converts a tournaments name, to its UUID.
         
         :param tournament_name:
             The name of the tournament.
