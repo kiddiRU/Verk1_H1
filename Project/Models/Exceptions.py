@@ -7,4 +7,3 @@ Model classer for when an error is raised
 
 class ValidationError(Exception):
     """Raised when input validation fails"""
-    pass

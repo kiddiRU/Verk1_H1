@@ -187,8 +187,7 @@
             "b855860c-dd67-4f5f-af94-4730fef94e8a",
             "5dbe517b-4715-4f08-aa75-d91bb0d6eae6",
             "398550f8-bb2b-46da-8527-974e6b5bd0d2",
-            "150e7677-fd69-4695-84c7-71a1b07fa31b",
-            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+            "150e7677-fd69-4695-84c7-71a1b07fa31b"
         ],
         "team_captain_uuid": "b855860c-dd67-4f5f-af94-4730fef94e8a",
         "club_uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
@@ -201,8 +200,7 @@
         "name": "Undefined Behavior United",
         "list_player_uuid": [
             "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db",
-            "a7012a45-a21d-4efd-80a2-dc4b20f4ff47",
-            "cb99cd0f-e9c8-42c1-a293-1287317f47b3"
+            "a7012a45-a21d-4efd-80a2-dc4b20f4ff47"
         ],
         "team_captain_uuid": "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db",
         "club_uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
@@ -266,7 +264,8 @@
         "name": "FuckersTeam",
         "list_player_uuid": [
             "32d89d9f-b555-4311-a104-d8009eec5b76",
-            "f0425fa5-8ab1-42a4-a485-2bbba452127d"
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
         ],
         "team_captain_uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
         "club_uuid": "269fcfc5-f629-4921-af37-0c592373717c",
