@@ -243,6 +243,8 @@ class UtilityUI:
         :rtype: list[str]
         """
 
+        tournament_object: Tournament = LogicLayerAPI.
+
         if show_all:
             match_list: list[Match] = LogicLayerAPI.get_all_matches(
                 tournament_uuid
