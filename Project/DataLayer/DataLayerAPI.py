@@ -11,7 +11,7 @@ from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 """ Player API """
 
 def store_player(player: Player) -> None:
-    """Stores new players in a json file to be fetched later.
+    """Stores new players in a JSON file to be fetched later.
 
     :param player:
         The player object to store.
@@ -43,7 +43,7 @@ def update_player(uuid: str, updated_player: Player) -> None:
 """ Team API """
 
 def store_team(team: Team) -> None:
-    """Stores new teams in a json file to be fetched later.
+    """Stores new teams in a JSON file to be fetched later.
 
     :param team:
         The team object to store.
@@ -75,7 +75,7 @@ def update_team(uuid: str, updated_team: Team) -> None:
 """ Club API """
 
 def store_club(club: Club) -> None:
-    """Stores new clubs in a json file to be fetched later.
+    """Stores new clubs in a JSON file to be fetched later.
 
     :param club:
         The club object to store.
@@ -107,7 +107,7 @@ def update_club(uuid: str, updated_club: Club) -> None:
 """ Tournament API """
 
 def store_tournament(tournament: Tournament) -> None:
-    """Stores new tournaments in a json file to be fetched later.
+    """Stores new tournaments in a JSON file to be fetched later.
 
     :param tournament:
         The tournament object to store.
@@ -140,7 +140,7 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
 """ Match API """
 
 def store_match(match: Match) -> None:
-    """Stores new matches in a json file to be fetched later.
+    """Stores new matches in a JSON file to be fetched later.
 
     :param match:
         The match object to store.
@@ -172,7 +172,7 @@ def update_match(uuid: str, updated_match: Match) -> None:
 """ Server API """
 
 def store_server(server: Server) -> None:
-    """Stores new servers in a json file to be fetched later.
+    """Stores new servers in a JSON file to be fetched later.
 
     :param server:
         The server object to store.

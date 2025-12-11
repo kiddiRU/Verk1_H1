@@ -13,32 +13,71 @@ from datetime import date, time
 from Models import ValidationError
 from DataLayer import DataLayerAPI
 
-# def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
+Validator = Callable[[str], str | date | None]
 
-#     for char in value:
-#         if (ord(char) < 32 or ord(char) > 126) and not char.isalpha:
-#             raise ValidationError("String contains characters not in ascii range")
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
+    """Validates all attributes that need validating.
 
-#     if attribute == 'name': return validate_name(value)
-#     elif attribute == 'date_of_birth': return validate_date(value)
-#     elif attribute == 'home_address': return validate_home_address(value)
-#     elif attribute == 'email': return validate_email(value)
-#     elif attribute == 'phone_number': return validate_phone_number(value)
-#     elif attribute == 'handle': return validate_unique_name(value, name_type)
-#     elif attribute == 'tournament_date': return validate_tournament_date(value)
-#     elif attribute == 'tournament_time': return validate_tournament_time(value)
-#     elif attribute == 'color': return validate_color(value)
-#     elif attribute == 'number': return validate_number(value)
-#     else: return
+    :param attribute:
+        The type of attribute which needs validating, available options are
 
-Validator = Callable[[str], str | None]
+        -   name
+        -   date_of_birth
+        -   home_address
+        -   email
+        -   phone_number
+        -   handle
+        -   tournament_date
+        -   tournament_time
+        -   color
+        -   number
 
-def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
-    ''' Docstring '''
+    :param value:
+        The value that needs validating.
 
+    :param name_type:
+        Only used for attribute handle, this determines the type of handle
+        want validated, available options are.
+        
+        -   PLAYER
+        -   TEAM
+        -   TOURNAMENT
+        -   CLUB
+
+    :returns:
+        Returns the same value back if it's valid, otherwise it raises a
+        ValidationError. The only exception is when you call with date
+        attribute, in that case it will return date object if it's valid.
+    """
+
+    # Checks to see if all characters in value are standard printable ascii
+    # characters or in alphabet to allow icelandic letters.
     for char in value:
         if (ord(char) < 32 or ord(char) > 126) and not char.isalpha():
             raise ValidationError("String contains characters not in ascii range")
+
+    # if attribute == 'name':
+    #     return validate_name(value)
+    # elif attribute == 'date_of_birth':
+    #     return validate_date(value)
+    # elif attribute == 'home_address':
+    #     return validate_home_address(value)
+    # elif attribute == 'email':
+    #     return validate_email(value)
+    # elif attribute == 'phone_number':
+    #     return validate_phone_number(value)
+    # elif attribute == 'handle':
+    #     return validate_unique_name(value, name_type)
+    # elif attribute == 'tournament_date':
+    #     return validate_tournament_date(value)
+    # elif attribute == 'tournament_time':
+    #     return validate_tournament_time(value)
+    # elif attribute == 'color':
+    #     return validate_color(value)
+    # elif attribute == 'number':
+    #     return validate_number(value)
+    # else:
+    #     return
 
     validators: dict[str, Validator] = {
         'name': validate_name,
@@ -58,7 +97,6 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
         return None
 
     return validator(value)
-
 
 # Player handle, team name, tour name and club name
 def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
@@ -122,7 +160,7 @@ def validate_name(name: str) -> str | None:
 
 
 # Players home address
-def validate_home_address(home_address: str) -> str | None:
+def validate_home_address(home_address: str) -> str:
     """
     Checks if home address has street name, street number and area
     (Frostafold 3 Reykjavík)
@@ -248,45 +286,103 @@ def validate_time(time_input: str) -> time:
 
 
 def validate_tournament_date(value: str) -> str:
-    value = value.strip()
+    """Validates input to be a pair of start and end dates in a tournament.
+    
+    Checks if input can be parsed to a valid pair of start and end date for
+    a tournament. A valid format is "YYYY-MM-DD YYYY-MM-DD".
 
+    :param value:
+        The value to check if it can be changed to start and end date
+    
+    :returns:
+        Returns the same string back if it's valid, otherwise it raises
+        a ValidationError.
+    """
+
+    # Strips the input of its whitespace.
+    value: str = value.strip()
+
+    # Checks whether it can be split into two values.
     try:
+        begin: str
+        end: str
         begin, end = value.split()
     except:
         raise ValidationError("Could not split dates")
 
-    begin_date = validate_date(begin)
-    end_date = validate_date(end)
+    # Validates both dates individually.
+    begin_date: date = validate_date(begin)
+    end_date: date = validate_date(end)
 
+    # Checks whether the end date comes before the beginning date.
     if begin_date <= end_date:
         return value
     else:
         raise ValidationError("Beginning date happens after end date")
 
 def validate_tournament_time(value: str) -> str:
+    """Validates input to be a pair of start and end times in a tournament.
+    
+    Checks if input can be parsed to a valid pair of start and end times for
+    a tournament. A valid format is "HH:MM HH:MM".
+
+    :param value:
+        The value to check if it can be changed to start and end time
+    
+    :returns:
+        Returns the same string back if it's valid, otherwise it raises
+        a ValidationError.
+    """
+    
+    # Strips the input of its whitespace.
     value = value.strip()
 
+    # Checks whether it can be split into two values.
     try:
+        begin: str
+        end: str
         begin, end = value.split()
     except:
         raise ValidationError("Could not split time input")
 
-    begin_time = validate_time(begin)
-    end_time = validate_time(end)
+    # Validates both times individually.
+    begin_time: time = validate_time(begin)
+    end_time: time = validate_time(end)
 
+    # Make sure the minute values are the same
     if begin_time.minute != end_time.minute:
         raise ValidationError("Begin and end minutes do not match")
 
-
+    # Checks to make sure begin and end time aren't the same.
     if begin_time == end_time:
         raise ValidationError("Begin time happens after end time")
 
     return value
 
 def validate_color(value: str) -> str:
+    """Validates input to be a valid color option.
+
+    Valid color options are
+
+    -   red
+    -   green
+    -   yellow
+    -   blue
+    -   pink
+    -   cyan
+
+    :param value:
+        The value being checked
+
+    :returns:
+        Returns the value as is if it's valid, otherwise it raises an error.
+    """
+
+    # Strips the value of its whitespaces.
     value = value.strip().lower()
     available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
 
+    # Checks to see if the given value is in the list of available colors.
     if value in available_colors:
         return value
 
