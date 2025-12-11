@@ -10,7 +10,7 @@ from DataLayer import DataLayerAPI
 from Models import Club, Team, Match, Tournament, ValidationError
 from LogicLayer.MatchLL import MatchLL
 
-class ClubLL():
+class ClubLL:
 
     def __init__(self) -> None:
         pass

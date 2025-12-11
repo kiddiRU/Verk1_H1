@@ -12,7 +12,7 @@ from DataLayer import DataLayerAPI
 from Models import Player, Team, Match, Tournament, ValidationError
 from LogicLayer import MatchLL, TeamLL
 
-class PlayerLL():
+class PlayerLL:
     ''' Player logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
