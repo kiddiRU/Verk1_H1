@@ -38,7 +38,6 @@ class PlayerLL:
         handle: str,
         url: str
     ) -> Player:
-
         '''Creates a new Player object, sends it to be stored and returns it.
 
         :param name:

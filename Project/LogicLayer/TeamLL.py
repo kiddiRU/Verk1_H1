@@ -16,6 +16,8 @@ class TeamLL:
     def __init__(self) -> None:
         ''' Initialize the TeamLL instance. '''
         self._player_logic: PlayerLL
+        self._club_logic: ClubLL
+        self._match_logic: MatchLL
 
     def set_player_logic(self, player_logic: PlayerLL) -> None:
         '''Inject the player logic.
@@ -245,7 +247,7 @@ class TeamLL:
         for tournament in model_tournaments:
 
             # If the team is in a tournament the tournament is added to the list
-            if team_uuid in tournament.teams_playing: 
+            if team_uuid in tournament.teams_playing:
                 teams_history.append(tournament.name)
 
         return teams_history
