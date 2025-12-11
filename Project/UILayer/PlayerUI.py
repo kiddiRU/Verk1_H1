@@ -359,7 +359,6 @@ class PlayerUI:
 
 
 
-
     def player_screen(self) -> MenuOptions:
         """
         Display the player screen and show player info and available actions.
@@ -461,7 +460,6 @@ class PlayerUI:
                 return MenuOptions.LOGOUT
 
         return MenuOptions.START_SCREEN
-
 
 
 
@@ -592,7 +590,6 @@ class PlayerUI:
             return MenuOptions.MY_TEAM_NOT_EMPTY
 
         return MenuOptions.PLAYER_SCREEN
-
 
 
 
@@ -859,7 +856,6 @@ class PlayerUI:
 
 
 
-
     def my_team_empty(self) -> MenuOptions:
         """
         Display the 'My Team' screen when the player is not part of a team.
@@ -887,7 +883,6 @@ class PlayerUI:
                 return MenuOptions.PLAYER_SCREEN
 
         return MenuOptions.PLAYER_SCREEN
-
 
 
 
@@ -964,8 +959,6 @@ class PlayerUI:
 
 
 
-
-
     def edit_team(self) -> MenuOptions:
         """
         Display the edit team screen, showing the team members and
@@ -1029,7 +1022,6 @@ class PlayerUI:
                 return MenuOptions.MY_TEAM_NOT_EMPTY
 
         return MenuOptions.PLAYER_SCREEN
-
 
 
 
@@ -1140,7 +1132,6 @@ class PlayerUI:
 
 
 
-
     def remove_player(self) -> MenuOptions:
         """
         Display the screen to remove a player from the current team.
@@ -1227,7 +1218,6 @@ class PlayerUI:
             return MenuOptions.EDIT_TEAM
 
         return MenuOptions.REMOVE_PLAYER
-
 
 
 
@@ -1333,7 +1323,6 @@ class PlayerUI:
         print(self.tui.table(menu, user_path, info, final_options, message))
         self.utility.prompt_choice(["c"])
         return MenuOptions.PLAYER_SCREEN
-
 
 
 
