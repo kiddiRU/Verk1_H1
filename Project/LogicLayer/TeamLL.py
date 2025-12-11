@@ -222,7 +222,7 @@ class TeamLL():
 
         First gets the uuid of the team,
         Then Loads all matches and adds one to the count 
-        when the winner uuid matches the teams uuid
+        when the match winner uuid matches the teams uuid
         
         :param team_name:
             The team name of the team to find the total of won matches
