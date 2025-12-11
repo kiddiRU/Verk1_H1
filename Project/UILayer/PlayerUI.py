@@ -176,7 +176,7 @@ class PlayerUI:
 
         # Gets the users information
         # Temprarily saves the data
-         # So that the user can see their inputs before saving the registration
+        # So that the user can see their inputs before saving the registration
         # Allowes the user to cancel the registration an any time by inputing q
 
         # ---------------------- NAME ----------------------
@@ -1446,23 +1446,23 @@ This is how we do it
 
         # This is just to have a bit of fun cus my sanity is fullt drained
         print("""
-                                     MMMMMMMMMMM                                         
-                                  MMMMMMMMMMMMMMMMM                                      
-                              NMMMMMMMMMMMMMMMMMMMMMMMM                                  
-                           MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                              
-                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN                          
-                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                         
-                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                        
-                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD                       
-                       DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                       
-                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                       
-                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                       
-                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                      
-                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM                      
-                     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN                     
-                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN         
-                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN     
-                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN   
+                                     MMMMMMMMMMM
+                                  MMMMMMMMMMMMMMMMM
+                              NMMMMMMMMMMMMMMMMMMMMMMMM
+                           MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                         MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD
+                       DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
 NM                  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMM              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM 
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
