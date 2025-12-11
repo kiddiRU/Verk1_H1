@@ -12,10 +12,20 @@ from DataLayer import DataLayerAPI
 from Models import Player, Team, Match, Tournament, ValidationError
 from LogicLayer import MatchLL, TeamLL
 
-class PlayerLL():
+class PlayerLL:
     ''' Player logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
+        '''Initialize the PlayerLL instance.
+        
+        :param team_logic:
+            The logic layer responsible for team operations and validations.
+        :type team_logic: TeamLL
+
+        :param match_logic:
+            The logic layer responsible for match operations and validations.
+        :type match_logic: MatchLL
+        '''
         self._team_logic = team_logic
         self._match_logic = match_logic
 
@@ -28,10 +38,7 @@ class PlayerLL():
         handle: str,
         url: str
     ) -> Player:
-
-        '''
-        Creates a new Player object, sends it to be stored and
-        returns it.
+        '''Creates a new Player object, sends it to be stored and returns it.
 
         :param name:
             The players name.
@@ -92,8 +99,7 @@ class PlayerLL():
         handle: str,
         url: str
     ) -> Player:
-        '''
-        Takes in a Player object and attribute updates. Applies the updates to
+        '''Takes in a Player object and attribute updates. Applies the updates to
         the object, sends it to be stored and returns the updated Player object.
 
         :param name:
@@ -160,8 +166,7 @@ class PlayerLL():
     #     DataLayerAPI.update_team(team.uuid, team)
 
     def promote_captain(self, current_player: Player, handle_to_promote: str) -> None:
-        '''
-        Promotes a teams player to its captain.
+        '''Promotes a teams player to its captain.
         
         :param current_player:
             The object of the player calling the function.
@@ -197,7 +202,8 @@ class PlayerLL():
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
-        """Takes in a player handle and saves them as the current active user"""
+        """ Takes in a player handle and saves them as the current active user. """
+
         if player_handle is not None:
             self.player = player_handle
 
@@ -273,7 +279,7 @@ class PlayerLL():
 
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         player_uuid: str = self.player_handle_to_uuid(player_handle)
-        points = 0
+        points: int = 0
 
         # Loops through all tournaments
         for tournament in model_tournaments:
@@ -315,8 +321,7 @@ class PlayerLL():
         return players
 
     def get_player_by_handle(self, player_handle: str) -> Player | str:
-        '''
-        Gets a player object by their handle.
+        '''Gets a player object by their handle.
         
         :param player_handle:
             The handle of the player to get.
@@ -335,8 +340,7 @@ class PlayerLL():
         return player
 
     def get_player_by_uuid(self, player_uuid: str) -> Player | str:
-        '''
-        Gets a player object by their UUID.
+        '''Gets a player object by their UUID.
         
         :param player_uuide:
             The UUID of the player to get.
@@ -356,8 +360,7 @@ class PlayerLL():
         return player
 
     def player_handle_to_uuid(self, player_handle: str) -> str:
-        '''
-        Converts a players unique handle, to their UUID.
+        '''Converts a players unique handle, to their UUID.
         
         :param player_handle:
             The handle of the player.
@@ -393,8 +396,7 @@ class PlayerLL():
 
     # Created By Ísak
     def get_all_players_not_in_team(self) -> list[Player]:
-        """
-        Gets all players that are not apart of any teams
+        """Gets all players that are not apart of any teams
         
         :return: A list of Player objects that are not apart of any teams
         :rtype: list[Player]

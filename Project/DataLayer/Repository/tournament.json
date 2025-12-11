@@ -224,6 +224,27 @@
             "07b78ef8-46ad-4159-b962-aecb3529b90c"
         ]
     },
+    "7528f326-dda0-4ca9-b731-02aa313bdc62": {
+        "uuid": "7528f326-dda0-4ca9-b731-02aa313bdc62",
+        "name": "fly",
+        "start_date": "2001-01-10",
+        "end_date": "2001-01-11",
+        "time_frame_start": "23:00:00",
+        "time_frame_end": "01:00:00",
+        "venue": "abc 0 ab",
+        "email": "k@k",
+        "phone_number": "123-1234",
+        "status": "ARCHIVED",
+        "list_servers": [
+            "NoServer"
+        ],
+        "teams_playing": [
+            "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+            "65444a2b-0e9c-43bc-a18b-7de3d231a313",
+            "382f652f-efdf-4298-9d15-922877e5e1b5",
+            "70d87222-aa03-490b-a102-519a69ab967f"
+        ]
+    },
     "78c5c157-1cf0-4091-9dea-c8c287f3889c": {
         "uuid": "78c5c157-1cf0-4091-9dea-c8c287f3889c",
         "name": "FLY",

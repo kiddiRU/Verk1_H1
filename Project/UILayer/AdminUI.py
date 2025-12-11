@@ -867,7 +867,7 @@ class AdminUI:
             print(self.tui.table(menu, user_path, info))
             club_color: str = str(
                 self.utility.input_info(
-                    "Enter Basic color or 'q' to cancel: \n", "color", "CLUB"
+                    "Choose color: Red, Green, yellow, blue, pink, cyan or 'q' to cancel: \n", "color", "CLUB"
                 )
             )
             if not club_color:
