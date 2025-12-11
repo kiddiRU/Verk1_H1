@@ -169,8 +169,8 @@ class PlayerLL:
     #     team.list_player_uuid.remove(player.uuid)
     #     DataLayerAPI.update_team(team.uuid, team)
 
-
-    def promote_captain(self, current_player: Player, handle_to_promote: str) -> None: #TODO: this is being used when captain leaves the team and i put keyerror cur the validation error wasnt working
+#TODO: this is being used when captain leaves the team and i put keyerror cur the validation error wasnt working
+    def promote_captain(self, current_player: Player, handle_to_promote: str) -> None: 
         '''Promotes a teams player to its captain.
 
         :param current_player:

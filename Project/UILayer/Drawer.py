@@ -12,6 +12,7 @@ takes 5 arguments:
 import os
 from UILayer.MenuOptions import MenuOptions # Imported for type hinting
 
+
 class Drawer():
     """Draws TUI tables and banner"""
 
@@ -38,8 +39,6 @@ class Drawer():
 
         self.line: str = 80 * "—" + "\n"
 
-
-
     def clear(self) -> None:
         """Clears the terminal
 
@@ -48,8 +47,6 @@ class Drawer():
         """
         # Use the os import to check what system the user uses and run the appropriate clear command
         os.system("cls" if os.name == "nt" else "clear")
-
-
 
     def banner(self) -> str:
         """Creates the banner
@@ -82,31 +79,29 @@ class Drawer():
 
         return banner
 
-
-
     def table(self, menu: str, user_path: list[MenuOptions] = [], info: list[str] = [], 
               options: dict[str, str] = {}, message: str = "") -> str:
         """Creates the TUI tables
 
         :param menu:
             String of the name of the table
-        :Type menu: str
+        :type menu: str
             
         :param user_path:
             List of the users previous screens
-        :Type user_path: list[MenuOptions]
+        :type user_path: list[MenuOptions]
 
         :param info:
             List of all the info that will be printed in the table
-        :Type info: list[str]
+        :type info: list[str]
             
         :param options:
             Dictionary of all the input options that the user has and what action they correspond to
-        :Type options: dict[str, str]
+        :type options: dict[str, str]
 
         :param message:
             String of the message that will be printed in the table
-        :Type message: str
+        :type message: str
 
         :returns:
             A tripple quoted format string that hold the table 
@@ -173,22 +168,20 @@ class Drawer():
         # Makes the table bold and returns it
         return self.table_color + table + self.reset
 
-
-
     def start_table(self, menu: str, user_path: list[MenuOptions] = [], options: dict[str, str] = {}) -> str:
         """Creates the TUI table for the start screen
 
         :param menu:
             String of the name of the table
-        :Type menu: str
+        :type menu: str
             
         :param user_path:
             List of the users previous screens
-        :Type user_path: list[MenuOptions]
+        :type user_path: list[MenuOptions]
             
         :param options:
             Dictionary of all the input options that the user has and what action they correspond to
-        :Type options: dict[str, str]
+        :type options: dict[str, str]
 
         :returns:
             A tripple quoted format string that hold the table 
@@ -236,15 +229,13 @@ class Drawer():
         # Makes the table bold and returns it
         return self.table_color + table + self.reset
 
-
-
     def save_input(self, user_input: str) -> None:
         """Saves data so that it will be printed at the top of the table
         
         :param user_input:
             String of the info that is to be printed on top of the table along with the user input
             ex. (Name: USERINPUT)
-        :Type user_input: str
+        :type user_input: str
 
         :return:
             Nothing
@@ -262,7 +253,6 @@ class Drawer():
 
         # Pops the last user input so that it can be changed
         self.previous_inputs.pop()
-
 
     def clear_saved_data(self) -> None:
         """Clears all the date that has been saved in the drawer
