@@ -195,7 +195,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_servers: str = self.utility.input_info(
-                "Enter Amount of Servers or 'q' to cancel\n",
+                "Enter Amount of Servers or 'q' to cancel (1-8 servers allowed)\n",
                 "number",
                 "",
             )
@@ -399,8 +399,8 @@ class AdminUI:
             x += 1
             choice_list.append(str(x))
             match = match[243:-81]
-            self.options[str(x)] = f"{"Input Results for:":<77}| \n{match}"
-            self.options[("—" * 80)] = ""
+            self.options[str(x)] = f"{"Input Results for:":<77}| \n{match} \n{"—" * 80}"
+
             ammount_of_lines -= 1
 
         choice_list.append("b")
