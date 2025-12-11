@@ -190,20 +190,20 @@
         "venue": "Mentask\u00f3lavegur 1 Reykjav\u00edk",
         "email": "sindri@sindrifanclub.is",
         "phone_number": "512-0711",
-        "status": "ACTIVE",
+        "status": "ARCHIVED",
         "list_servers": [
-            "928d9648-6eea-4056-a4ed-3fade827b9ea",
-            "6db14342-6cc4-4ab9-84e8-f2b159dc9c47",
-            "76056bda-a063-4fd5-b173-32f8e7f1513c",
-            "b6750df2-2290-444c-bdd2-f7454b3066f4",
-            "0751e9e4-ae18-4182-9304-83e4bd3cbe32",
-            "c4b39406-1d9d-4ba4-b471-747264e82015",
-            "4c4f9a0e-a5f2-4751-b9a3-62ce503d7d90",
-            "98b7362e-ea61-4bb3-80d4-32e359a5ef05",
-            "efd1a955-3f44-43e5-9fa5-d945e9c84735",
-            "bb50cbd3-efb1-4618-ad95-7405663595a2",
-            "0ee35d47-b0c8-40fd-89e0-f3c036b2decb",
-            "a32f00be-e7ff-4864-aebd-fccdb9349544"
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer"
         ],
         "teams_playing": [
             "b6f18db4-e778-4b72-84e6-91aed8125bb4",
@@ -222,6 +222,25 @@
             "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
             "7ffe196a-495e-4e77-b94d-ea6799c2e572",
             "07b78ef8-46ad-4159-b962-aecb3529b90c"
+        ]
+    },
+    "78c5c157-1cf0-4091-9dea-c8c287f3889c": {
+        "uuid": "78c5c157-1cf0-4091-9dea-c8c287f3889c",
+        "name": "FLY",
+        "start_date": "2001-01-01",
+        "end_date": "2001-01-21",
+        "time_frame_start": "12:00:00",
+        "time_frame_end": "14:00:00",
+        "venue": "a 89 a",
+        "email": "k@k",
+        "phone_number": "123-1234",
+        "status": "ARCHIVED",
+        "list_servers": [
+            "NoServer"
+        ],
+        "teams_playing": [
+            "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+            "5b4a4ac3-eebe-456e-a123-8ca0fe90a263"
         ]
     }
 }

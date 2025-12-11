@@ -53,9 +53,6 @@ class MainUI:
             MenuOptions.ADD_TEAM: self._admin_ui.add_team,
             MenuOptions.REMOVE_TEAM: self._admin_ui.remove_team,
             MenuOptions.PUBLISH: self._admin_ui.publish,
-            MenuOptions.EDIT_TOURNAMENT: self._admin_ui.edit_tournament,
-            MenuOptions.EDIT_TOURNAMENT_TIME: self._admin_ui.edit_tournament_time,
-            MenuOptions.EDIT_TOURNAMENT_INFO: self._admin_ui.edit_tournament_info,
             # ------------------ Player Paths ------------------
             MenuOptions.PLAYER_SCREEN: self._player_ui.player_screen,
             MenuOptions.EDIT_PLAYER_INFO: self._player_ui.edit_player_info,

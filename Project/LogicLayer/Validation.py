@@ -12,6 +12,8 @@ A validation file that takes inn all info that would need to be validated
 from Models import ValidationError
 from DataLayer import DataLayerAPI
 
+from datetime import date, time
+
 
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
     if attribute == 'name': return validate_name(value)

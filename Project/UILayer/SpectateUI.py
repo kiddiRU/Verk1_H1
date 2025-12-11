@@ -23,6 +23,7 @@ class SpectateUI:
         self.message_color = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
+        self.green: str = "\033[32m"
 
     def spectate_screen(self) -> MenuOptions:
         """Spectate screen, choices: 1,2,3 and b
@@ -273,15 +274,15 @@ class SpectateUI:
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
         info_b: list[str] = [
-            f"Team Members:\n{80 * '-'}"
+            f"Team Members:\n{80 * '—'}"
         ] + self.utility.string_to_table(
             self.utility.object_to_string(
                 LogicLayerAPI.get_team_members_object(team_name)
             )
         )
         info_c: list[str] = (
-            [f"{80 * '*'}"]
-            + [f"Tournament History:\n{80 * '-'}"]
+            [f"{80 * '—'}"]
+            + [f"Tournament History:\n{80 * '—'}"]
             + self.utility.string_to_table(
                 LogicLayerAPI.get_team_history(team_name)
             )
@@ -414,7 +415,25 @@ class SpectateUI:
             MenuOptions.SPECTATE_TOURNAMENTS,
             MenuOptions.ARCHIVED_TOURNAMENT,
         ]
-        info: list[str] = self.utility.list_matches(tournament_uuid, True)
+
+        match_list: list[str] = self.utility.list_matches(
+            tournament_uuid, True
+        )
+        match_split = match_list[0].split("\n")
+        tournament_winner: str = (
+            match_split[-1].replace("Match Winner: ", "").rstrip("|")
+        )
+        tournament_winner = tournament_winner.strip()
+        tournament_winner_formatted: list[str] = [
+            (80 * "—")
+            + "\n"
+            + f"{f"{self.green}Tournament Winner: {tournament_winner} {self.reset}":<88}|"
+        ]
+
+        info: list[str] = match_list
+
+        info: list[str] = info + tournament_winner_formatted
+
         options: dict[str, str] = {}
         message: str = ""
 

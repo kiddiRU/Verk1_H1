@@ -235,7 +235,7 @@ class AdminUI:
             tournament_addr,
             tournament_email,
             tournament_phnum,
-            int(tournament_servers)
+            int(tournament_servers),
         )
 
         LogicLayerAPI.save_player(tournament_name)
@@ -264,7 +264,9 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         find_name: str = input(
-            self.message_color + "Input Tournament Name or 'q' to go back: \n" + self.reset
+            self.message_color
+            + "Input Tournament Name or 'q' to go back: \n"
+            + self.reset
         )
         if find_name.lower() == "q":
             return user_path[-2]
@@ -275,7 +277,6 @@ class AdminUI:
         if find_name in self.utility.except_status_tournaments(
             Tournament.StatusType.archived
         ):
-
             LogicLayerAPI.save_player(find_name)
 
             tournament_object: Tournament | None = (
@@ -330,7 +331,9 @@ class AdminUI:
             MenuOptions.MANAGE_TOURNAMENT,
             MenuOptions.MANAGE_ACTIVE_TOURNAMENT,
         ]
-        info: list[str] = [f"{f"- - - - {str(tournament_name)} - - - -": <79}" + "|"]
+        info: list[str] = [
+            f"{f'- - - - {str(tournament_name)} - - - -': <79}" + "|"
+        ]
         options: dict[str, str] = {
             "1": "Input Results Of A Match",
             "b": "Back",
@@ -339,10 +342,8 @@ class AdminUI:
 
         matches = self.utility.list_matches(tournament_uuid, True)
 
-        ammount_of_lines = len(matches) - 1
         for match in matches:
             info.append(match)
-
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -375,7 +376,6 @@ class AdminUI:
         # Get tournament uuid
         tournament_uuid: str = tournament_object.uuid
 
-
         # Menu and path for the table
         menu: str = "Matches"
         user_path: list[MenuOptions] = [
@@ -392,16 +392,25 @@ class AdminUI:
         # Show a list of the matches in the round
         matches: list[str] = self.utility.list_matches(tournament_uuid, False)
 
-        ammount_of_lines = len(matches) -1
+        amount_of_lines = len(matches) - 1
 
         x = 0
         for match in matches:
             x += 1
             choice_list.append(str(x))
             match = match[243:-81]
-            self.options[str(x)] = f"{"Input Results for:":<77}| \n{match} \n{"—" * 80}"
+            self.options[str(x)] = (
+                f"{'Input Results for:':<77}|\n{match}\n{'—' * 80}"
+            )
 
-            ammount_of_lines -= 1
+            amount_of_lines -= 1
+
+        # When the tournament is over takes the user to Admin Screen
+        if not self.options:
+            self.tui.clear_saved_data()
+            print(self.tui.table(menu, user_path, [], self.options, message))
+            input("The Tournament Is Over")
+            return MenuOptions.ADMIN_SCREEN
 
         choice_list.append("b")
         self.options["b"] = "Back"
@@ -422,8 +431,6 @@ class AdminUI:
         Returns:
             MenuOptions: The next menu to navigate to
         """
-      
-
 
         menu: str = "Matches"
         user_path: list[MenuOptions] = [
@@ -445,7 +452,7 @@ class AdminUI:
 
         match_team_1 = match_team_1.strip()
         match_team_2 = match_team_2.strip()
-        
+
         # Screen to print
         info: list = ["- - - - List Of Matches - - - -"]
         options: dict[str, str] = {
@@ -479,23 +486,27 @@ class AdminUI:
         team2_uuid = team2.uuid
 
         if isinstance(tournament_name, str):
-            current_tournament: Tournament = LogicLayerAPI.get_tournament_by_name(tournament_name)
+            current_tournament: Tournament = (
+                LogicLayerAPI.get_tournament_by_name(tournament_name)
+            )
             tournament_id: str = current_tournament.uuid
 
             current_match: Match | str = LogicLayerAPI.get_match(
-                tournament_id, team1_uuid, team2_uuid)
+                tournament_id, team1_uuid, team2_uuid
+            )
             if isinstance(current_match, Match):
                 match_uuid: str = current_match.uuid
                 if winner is not None:
                     winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
                     winner_uuid = winner_team.uuid
 
-                    LogicLayerAPI.change_match_winner(tournament_id, match_uuid, winner_uuid)
+                    LogicLayerAPI.change_match_winner(
+                        tournament_id, match_uuid, winner_uuid
+                    )
 
         print(self.tui.table(menu, user_path, info, options, message))
         choice: str = self.utility.prompt_choice(["b"])
 
-        # TODO: function to choose a team that won update the team and match
         return MenuOptions.MANAGE_ACTIVE_TOURNAMENT
 
     def manage_inactive_tournament(self) -> MenuOptions:
@@ -521,7 +532,6 @@ class AdminUI:
         options: dict[str, str] = {
             "1": "Manage Teams",
             "2": "Publish",
-            "3": "Edit Tournament",
             "b": "Back",
             "lo": "Log Out",
         }
@@ -529,7 +539,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
-        choice: str = self.utility.prompt_choice(["1", "2", "3", "b", "lo"])
+        choice: str = self.utility.prompt_choice(["1", "2", "b", "lo"])
 
         match choice:
             case "1":
@@ -545,8 +555,6 @@ class AdminUI:
                     )
                     input("Input Anything To Continue")
                     return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
-            case "3":
-                return MenuOptions.EDIT_TOURNAMENT
             case "b":
                 return MenuOptions.ADMIN_SCREEN
             case "lo":
@@ -563,14 +571,10 @@ class AdminUI:
         # Keep the tournament name from previous screen
         tournament_name: str = LogicLayerAPI.save_player() or "None"
 
-        # Get tournament Object from name
-        teams_in_tournament: list[str] = [
-            t.name for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name)]
-
-
         tournament_object: Tournament | None = (
-            LogicLayerAPI.get_tournament_by_name(tournament_name))
-        
+            LogicLayerAPI.get_tournament_by_name(tournament_name)
+        )
+
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.START_SCREEN
 
@@ -586,12 +590,13 @@ class AdminUI:
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
-            "b": "Back"}
-        
+            "b": "Back",
+        }
+
         x = 0
         for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name):
             x += 1
-            info.append((f"{(str(x) + ". "): <4}" + t.name))
+            info.append((f"{(str(x) + '. '): <4}" + t.name))
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
@@ -630,7 +635,9 @@ class AdminUI:
             MenuOptions.MANAGE_TEAMS,
             MenuOptions.ADD_TEAM,
         ]
-        teams_not_in_tournament: list[str] = [x for x in all_teams if x not in teams_in_tournament]
+        teams_not_in_tournament: list[str] = [
+            x for x in all_teams if x not in teams_in_tournament
+        ]
 
         unique_names: list[str] = teams_not_in_tournament
 
@@ -641,12 +648,11 @@ class AdminUI:
         for value in range(0, len(unique_names), 2):
             left = unique_names[value]
             if value + 1 < length:
-
                 right = unique_names[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         info: list[str] = output_list
 
@@ -656,7 +662,9 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name or 'q' to go back: \n" + self.reset
+            self.message_color
+            + "Input Team Name or 'q' to go back: \n"
+            + self.reset
         )
         if team_to_add.lower() == "q":
             return MenuOptions.MANAGE_TEAMS
@@ -666,7 +674,7 @@ class AdminUI:
             team_object: Team | None = LogicLayerAPI.get_team_by_name(
                 team_to_add
             )
-        except Exception:
+        except ValidationError:
             team_object = None
 
         if team_object is None:
@@ -738,7 +746,7 @@ class AdminUI:
             team_object: Team | None = LogicLayerAPI.get_team_by_name(
                 team_to_add
             )
-        except Exception:
+        except ValidationError:
             team_object = None
 
         if team_object is None:
@@ -813,63 +821,6 @@ class AdminUI:
 
         return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
 
-    def edit_tournament(self) -> MenuOptions:
-        """Edit inactive tournament screen,
-        choices: input a tournament to edit, then choose to edit time or info
-
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-        print("list of inactive tournaments")
-        tournament_name: str = input("Choose tournament to edit")
-
-        # TODO: Check for tournament
-
-        print("1. Edit time/date")
-        print("2. Edit Info")
-
-        choice: str = self.utility.prompt_choice(["1", "2", "b"])
-        match choice:
-            case "1":
-                return MenuOptions.EDIT_TOURNAMENT_TIME
-            case "2":
-                return MenuOptions.EDIT_TOURNAMENT_INFO
-            case "b":
-                return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
-        return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
-
-    def edit_tournament_time(self) -> MenuOptions:
-        """Edit tournament time screen, choices: input a start and end date
-
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-        print("THIS is edit tournament time")
-
-        choice = "a"
-        while choice.lower() != "y" or choice.lower() != "n":
-            choice: str = input("DO YOU WANT TO CONTINUE? Y/N")
-            match choice:
-                case "Y":
-                    print("YOU CHANGED IT")
-                    return MenuOptions.EDIT_TOURNAMENT
-                case "N":
-                    print("CANCELING")
-                    return MenuOptions.EDIT_TOURNAMENT
-
-        return MenuOptions.EDIT_TOURNAMENT
-
-    def edit_tournament_info(self) -> MenuOptions:
-        """Edit tournament info screen, choices: input new name, venue,
-        email and/or phone number
-
-        Returns:
-            MenuOptions: The next menu to navigate to
-        """
-
-        print("THIS IS EDIT TOURNAMENT INFO WINDOW")
-        return MenuOptions.EDIT_TOURNAMENT
-    
     # Created by Sindri
     def create_club(self) -> MenuOptions:
         """Create club screen, choices: fill info with input (name and color)
