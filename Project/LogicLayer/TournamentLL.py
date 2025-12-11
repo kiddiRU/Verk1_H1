@@ -13,7 +13,7 @@ from DataLayer import DataLayerAPI
 from LogicLayer import MatchLL, TeamLL
 
 class TournamentLL:
-    ''' Tournamnet logic. '''
+    ''' Tournament logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL):
         '''Initialize the TournamentLL instance.
