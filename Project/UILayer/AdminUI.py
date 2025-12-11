@@ -29,6 +29,7 @@ class AdminUI:
         self.underscore = "\033[4m"
 
     def admin_screen(self) -> MenuOptions:
+        
         """Admin screen, choices: 1,2,3 and lo
         1: Go to create tournament screen
         2: Go to manage tournaments screen

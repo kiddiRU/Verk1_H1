@@ -88,7 +88,8 @@ class UtilityUI:
         self, message: str, attribute: str, info_type: str
     ) -> str:
         """
-        Helper function that repeats input until it is valid or navigation word is entered
+        Helper function that repeats input until it is
+        valid or navigation word is entered
 
         :param message: Message to display - "Enter Your name"
         :param attribute: Attribute of a model class - "name"
@@ -224,7 +225,8 @@ class UtilityUI:
         self, tournament_status: Tournament.StatusType
     ) -> list[str]:
         """
-        Returns formatted rows of tournaments that do not have the given status.
+        Returns formatted rows of tournaments that
+        do not have the given status.
 
         :param tournament_status: The status to exclude. Possible values are
             "ACTIVE", "INACTIVE", and "ARCHIVED".
@@ -253,12 +255,13 @@ class UtilityUI:
 
     def list_matches(self, tournament_uuid: str, show_all: bool) -> list[str]:
         """
-        Returns formatted match information for a tournament, showing either all
-        matches or only the upcoming ones.
+        Returns formatted match information for a tournament, showing either
+        all matches or only the upcoming ones.
 
         :param tournament_uuid: The UUID of the tournament.
         :type tournament_uuid: str
-        :param show_all: Whether to return all matches or only the next matches.
+        :param show_all: Whether to return all matches or
+        only the next matches.
         :type show_all: bool
         :return: A list of formatted strings containing match information.
         :rtype: list[str]
@@ -315,11 +318,13 @@ class UtilityUI:
     # "Created" by Sindri Freysson
     def string_to_table(self, string_list: list[str]) -> list[str]:
         """
-        A helper function that formats a given list of string into a 2 column table
+        A helper function that formats a given list of
+        string into a 2 column table.
 
-        :param string_list: Takes a list of model objects
+        :param string_list: Takes a list of model objects.
         :type string_list: list[str]
-        :return: A formatted list of strings that when displayed appears as a table
+        :return: A formatted list of strings that when displayed
+        appears as a table.
         :rtype: list[str]
         """
         output_list: list[str] = []  # list that holds each line as a f-string
@@ -347,10 +352,13 @@ class UtilityUI:
         object_list: list[Player] | list[Team] | list[Club] | list[Tournament],
     ) -> list[str]:
         """
-        Converts a list of model objects into a list of their corresponding names.
+        Converts a list of model objects into a list
+        of their corresponding names.
 
-        :param object_list: A list containing Player, Team, Club, or Tournament objects.
-        :type object_list: list[Player] | list[Team] | list[Club] | list[Tournament]
+        :param object_list: A list containing Player, Team, Club,
+        or Tournament objects.
+        :type object_list: list[Player] | list[Team] |
+        list[Club] | list[Tournament]
         :return: A list of names or handles extracted from the model objects.
         :rtype: list[str]
         """
