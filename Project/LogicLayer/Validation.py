@@ -262,10 +262,10 @@ def validate_color(value: str) -> str:
 def validate_number(number: str) -> str:
     
     try:
-        if int(number) <= 0:
-            raise ValidationError("Amount of servers needs to be 1 or more")
+        if int(number) < 1 or int(number) > 8 :
+            raise ValidationError("Amount of servers can be between 1 - 8")
     
     except:
-        raise ValidationError("Amount of servers needs to be 1 or more")
+        raise ValidationError("Amount of servers can be between 1 - 8")
 
     return number
