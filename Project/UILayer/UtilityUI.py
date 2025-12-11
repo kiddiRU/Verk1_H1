@@ -9,8 +9,11 @@ File that holds the UtilityUI class
 which holds functions used in multiple places
 """
 
+from datetime import date
+
 from LogicLayer import LogicLayerAPI
 from LogicLayer.LogicLayerAPI import validate
+
 from Models import ValidationError
 from Models.Club import Club
 from Models.Match import Match
@@ -71,7 +74,9 @@ class UtilityUI:
                     return ""
 
                 # Validate the input before returning
-                valid: str | None = validate(attribute, choice, info_type)
+                valid: str | None | date = validate(
+                    attribute, choice, info_type
+                )
                 return str(valid)
 
             except ValidationError as e:
@@ -107,7 +112,9 @@ class UtilityUI:
                     return choice
 
                 # Validate the input before returning
-                valid: str | None = validate(attribute, choice, info_type)
+                valid: str | None | date = validate(
+                    attribute, choice, info_type
+                )
                 return str(valid)
 
             except ValidationError as e:
