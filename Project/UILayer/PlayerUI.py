@@ -892,7 +892,7 @@ Rank: {current_login_rank}"""]
 
         if add_uuid and not add_in_team:
             message: str = f"""The Player {add_handle} Was Found
-            Do You Want To Add Them To Your Team? Y/N:"""
+Do You Want To Add Them To Your Team? Y/N:"""
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility.prompt_choice(["y", "n"])
@@ -918,7 +918,7 @@ Rank: {current_login_rank}"""]
             return MenuOptions.edit_team
 
         message: str = f"""The Player {add_handle} Was Not Found Or Is Not Available
-        Do You Want To Try Again? Y/N:"""
+Do You Want To Try Again? Y/N:"""
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility.prompt_choice(["y", "n"])
@@ -982,7 +982,7 @@ Rank: {current_login_rank}"""]
         if (current_team == remove_player_team
             and remove_handle != current_login_handle):
             message: str = f"""The Player {remove_handle} Was Found
-            Do You Want To Remove Them From Your Team? Y/N:"""
+Do You Want To Remove Them From Your Team? Y/N:"""
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility.prompt_choice(["y", "n"])
@@ -1001,7 +1001,7 @@ Rank: {current_login_rank}"""]
             return MenuOptions.edit_team
 
         message: str = f"""The Player {remove_handle} Was Not Found Or Is Not Removeable
-        Do You Want To Try Again? Y/N:"""
+Do You Want To Try Again? Y/N:"""
         print(self.tui.table(menu, user_path, info, {}, message))
 
         choice: str = self.utility.prompt_choice(["y", "n"])
@@ -1052,7 +1052,7 @@ Rank: {current_login_rank}"""]
 
                 if current_team == new_captain_team and new_captain != current_login_handle:
                     message: str = f"""The Player {new_captain} Was Found
-                    Do You Want To Promote Them To Captain? Y/N:"""
+Do You Want To Promote Them To Captain? Y/N:"""
                     print(self.tui.table(menu, user_path, info, {}, message))
 
                     choice: str = self.utility.prompt_choice(["y", "n"])
@@ -1067,7 +1067,7 @@ Rank: {current_login_rank}"""]
                         return MenuOptions.edit_team
 
                 message: str = """Player Was Not Found Or Not Available
-                Do You Want To Try Again? Y/N:"""
+Do You Want To Try Again? Y/N:"""
                 print(self.tui.table(menu, user_path, info, {}, message))
                 choice: str = self.utility.prompt_choice(["y", "n"])
 
@@ -1076,7 +1076,21 @@ Rank: {current_login_rank}"""]
 
                 return MenuOptions.leave_team
 
-            # TODO he gets a warnign but can still leave
+            message = f"""You Are The Only One Left In The Team"
+If You Leave, the team {team} will never be accessable again"
+Are You Sure You Want To Leave? Y/N"""
+            print(self.tui.table(menu, user_path, info, options, message))
+            choice: str = self.utility.prompt_choice(["y", "n"])
+            
+            options: dict[str, str] = {"c": "Continue"}
+            if choice == "y":
+                if isinstance(current_player, Player):
+                    LogicLayerAPI.remove_player(current_login_handle, current_player)
+                    message: str = "You Have Sucessfully Left The Team!"
+                    print(self.tui.table(menu, user_path, info, options, message))
+                    choice: str = self.utility.prompt_choice(["c"])
+                    return MenuOptions.player_screen
+
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
