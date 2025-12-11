@@ -365,7 +365,7 @@ class TournamentLL:
                 date = tournament.end_date,
                 time = tournament.time_frame_end
         )
-        
+
         if tournament.time_frame_end < tournament.time_frame_start:
             last_time_slot += one_day
 

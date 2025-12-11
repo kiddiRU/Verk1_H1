@@ -144,6 +144,7 @@ def update_player_info(
 # def leave_team(team_name: str, player: Player) -> None:
 #     return player_logic.leave_team(team_name, player)
 
+# Isn't used?
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     '''
     Promotes a teams player to its captain.
@@ -162,6 +163,17 @@ def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
 def get_player_team_and_rank(player_handle: str) -> tuple[str, str]:
+    '''
+    Gets a players team name and their rank.
+    
+    :param player_handle:
+        The players unique handle.
+    :type player_handle: str
+
+    :return:
+        Returns a tuple of the players team name and their rank.
+    :rtype: tuple[str, str]
+    '''
     return player_logic.get_player_team_and_rank(player_handle)
 
 def get_player_wins(player_handle: str) -> str:
