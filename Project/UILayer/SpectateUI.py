@@ -86,7 +86,7 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_handle: str = input(
-            self.message_color + "Input Handle or 'q' to cancel: " + self.reset
+            self.message_color + "Input Handle or 'q' to cancel:\n" + self.reset
         )
         if find_handle == "q":
             return user_path[-2]
@@ -155,7 +155,7 @@ class SpectateUI:
 
         find_club: str = input(
             self.message_color
-            + "Input Club Name or 'q' to cancel: "
+            + "Input Club Name or 'q' to cancel:\n"
             + self.reset
         )
         if find_club == "q":
@@ -232,7 +232,7 @@ class SpectateUI:
 
         find_handle: str = input(
             self.message_color
-            + "Input Team Name or 'q' to cancel: "
+            + "Input Team Name or 'q' to cancel:\n"
             + self.reset
         )
         if find_handle == "q":
@@ -318,7 +318,7 @@ class SpectateUI:
         # User input
         tournament_name = input(
             self.message_color
-            + "Input Tournament Name or 'q' to cancel: "
+            + "Input Tournament Name or 'q' to cancel:\n"
             + self.reset
         )
         if tournament_name == "q":
@@ -425,9 +425,8 @@ class SpectateUI:
         )
         tournament_winner = tournament_winner.strip()
         tournament_winner_formatted: list[str] = [
-            (80 * "—")
-            + "\n"
-            + f"{f"{self.green}Tournament Winner: {tournament_winner} {self.reset}":<88}|"
+            (80 * "—"),
+            f"{f"{self.green}Tournament Winner: {tournament_winner} {self.reset}":<88}|"
         ]
 
         info: list[str] = match_list
@@ -522,7 +521,7 @@ class SpectateUI:
         # User input
         team_name = input(
             self.message_color
-            + "Input Team Name or 'q' to cancel: "
+            + "Input Team Name or 'q' to cancel:\n"
             + self.reset
         ).strip()
 

@@ -738,8 +738,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name: \n" + self.reset
-        )
+            self.message_color + "Input Team Name: \n" + self.reset)
 
         # Validate team exists
         try:
