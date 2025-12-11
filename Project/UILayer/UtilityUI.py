@@ -306,26 +306,35 @@ class UtilityUI:
         return output_list
 
     # "Created" by Sindri Freysson
-    def show_filtered(
-        self,
-        object_list: list[Player] | list[Team] | list[Club] | list[Tournament],
-    ) -> list[str]:
+    def string_to_table(
+        self, string_list: list[str]) -> list[str]:
         """
-        A helper function that formats a given list of model objects into a 2 column table
+        A helper function that formats a given list of string into a 2 column table
         :param object_list: Takes a list of model objects
         :return: A formatted list of strings that when displayed appears as a table
         """
-        str_list: list[str] = [x.name for x in object_list]
         output_list: list[str] = []
-        length: int = len(str_list)
+        length: int = len(string_list)
 
-        for value in range(0, len(str_list), 2):
-            left = str_list[value]
+        for value in range(0, len(string_list), 2):
+            left = string_list[value]
             if value + 1 < length:
-                right = str_list[value + 1]
+
+                right = string_list[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
                 output_list.append(f"{left:<39}|{' ':<39}|")
 
         return output_list
+
+    def object_to_string(
+        self, object_list: list[Player] | list[Team] | list[Club] | list[Tournament]
+    ) -> list[str]:
+        """
+        Function that converts a list of object to a list of names
+        :param object_list: Takes a list of model objects
+        :return: Names of model objects as a list of strings
+        """
+        str_list: list[str] = [x.name for x in object_list]
+        return str_list
