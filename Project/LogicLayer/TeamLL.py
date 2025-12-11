@@ -80,7 +80,7 @@ class TeamLL():
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
         # Loops through all teams
-        for team in model_teams:            
+        for team in model_teams:
             if team.uuid == team_uuid:
 
                 # If there are already 5 players in a team
@@ -94,9 +94,6 @@ class TeamLL():
                     return team
 
         # if the team is not found
-        return ""
-                    
-
         return ""
 
     def remove_player(self, player_handle: str, current_player: Player) -> Team:
@@ -124,7 +121,7 @@ class TeamLL():
         player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
         model_teams: list[Team] = DataLayerAPI.load_teams()
-        
+
         # Loops through all teams
         for team in model_teams:
             if team.uuid == team_uuid:
@@ -133,10 +130,10 @@ class TeamLL():
                     team.list_player_uuid.remove(player_uuid)
                     DataLayerAPI.update_team(team_uuid, team)
                     return team
-                
+
                 # If the player to remove is not in the team
-                except ValueError:
-                    raise ValidationError("Player not in team")
+                except ValidationError as exc:
+                    raise ValidationError("Player not in team") from exc
 
         raise ValidationError("Team not found")
 
@@ -162,13 +159,13 @@ class TeamLL():
 
             # returns the list when it finds the right team
             if team.name == team_name:
-                return team.list_player_uuid 
-        
+                return team.list_player_uuid
+
         # if team is not found
         raise ValidationError("Team not found")
 
 
-    def list_all_teams(self) -> list[Team]: 
+    def list_all_teams(self) -> list[Team]:
         """Is called to get a list of all teams
         
         :return: Returns a list of all team objects
