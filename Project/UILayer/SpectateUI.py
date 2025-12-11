@@ -133,7 +133,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         input("Press Any Key To Go Back")
-        return MenuOptions.SPECTATE_PLAYERS
+        return MenuOptions.SPECTATE_SCREEN
 
     def spectate_clubs(self) -> MenuOptions:
         """Spectate clubs screen, choices: input a club to view stats
@@ -210,7 +210,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         input("Press Any Key To Go Back")
-        return MenuOptions.SPECTATE_CLUBS
+        return MenuOptions.SPECTATE_SCREEN
 
     def spectate_teams(self) -> MenuOptions:
         """Spectate teams screen, choices: input a team to view stats
@@ -294,7 +294,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         input("Press Any Key To Go Back")
-        return MenuOptions.SPECTATE_TEAMS
+        return MenuOptions.SPECTATE_SCREEN
 
     def spectate_tournaments(self) -> MenuOptions:
         """Spectate tournaments screen, choose a tournament to view."""
@@ -439,7 +439,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         input("Press Any Key To Go Back")
-        return MenuOptions.SPECTATE_TOURNAMENTS
+        return MenuOptions.SPECTATE_SCREEN
 
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
@@ -470,7 +470,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
         input("Press Any Key To Go Back")
-        return MenuOptions.ACTIVE_TOURNAMENT
+        return MenuOptions.SPECTATE_SCREEN
 
     def teams_in_tournament(self) -> MenuOptions:
         """Teams in tournament screen, user types team name to view stats."""

@@ -3,7 +3,6 @@ Defines MenuOptions, an enum containing all valid navigation targets
 used by the UI layer.
 """
 
-
 from enum import StrEnum
 
 
@@ -46,15 +45,10 @@ class MenuOptions(StrEnum):
     # ManageInactiveTournament
     MANAGE_TEAMS = "ManageTeams"
     PUBLISH = "Publish"
-    EDIT_TOURNAMENT = "EditTournament"
 
     # ManageTeam
     ADD_TEAM = "AddTeam"
     REMOVE_TEAM = "RemoveTeam"
-
-    # EditTournament
-    EDIT_TOURNAMENT_TIME = "EditTournamentTime"
-    EDIT_TOURNAMENT_INFO = "EditTournamentInfo"
 
     # PlayerScreen
     EDIT_PLAYER_INFO = "EditPlayerInfo"

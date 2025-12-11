@@ -9,26 +9,76 @@ A validation file that takes inn all info that would need to be validated
 """
 
 from datetime import date, time
-from Models import Team, ValidationError
+from Models import ValidationError
 from DataLayer import DataLayerAPI
 
+<<<<<<< HEAD
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | date:
+=======
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
+    """Validates all attributes that need validating.
+>>>>>>> 5f1d4ae9cc3ff072969a3863c6123f5d4b9a872f
 
+    :param attribute:
+        The type of attribute which needs validating, available options are
+
+        -   name
+        -   date_of_birth
+        -   home_address
+        -   email
+        -   phone_number
+        -   handle
+        -   tournament_date
+        -   tournament_time
+        -   color
+        -   number
+
+    :param value:
+        The value that needs validating.
+
+    :param name_type:
+        Only used for attribute handle, this determines the type of handle
+        want validated, available options are.
+        
+        -   PLAYER
+        -   TEAM
+        -   TOURNAMENT
+        -   CLUB
+
+    :returns:
+        Returns the same value back if it's valid, otherwise it raises a
+        ValidationError. The only exception is when you call with date
+        attribute, in that case it will return date object if it's valid.
+    """
+
+    # Checks to see if all characters in value are standard printable ascii
+    # characters or in alphabet to allow icelandic letters.
     for char in value:
         if (ord(char) < 32 or ord(char) > 126) and not char.isalpha():
             raise ValidationError("String contains characters not in ascii range")
         
-    if attribute == 'name': return validate_name(value)
-    elif attribute == 'date_of_birth': return validate_date(value)
-    elif attribute == 'home_address': return validate_home_address(value)
-    elif attribute == 'email': return validate_email(value)
-    elif attribute == 'phone_number': return validate_phone_number(value)
-    elif attribute == 'handle': return validate_unique_name(value, name_type)
-    elif attribute == 'tournament_date': return validate_tournament_date(value)
-    elif attribute == 'tournament_time': return validate_tournament_time(value)
-    elif attribute == 'color': return validate_color(value)
-    elif attribute == 'number': return validate_number(value)
-    else: raise ValidationError("Attribute not found in list")
+    if attribute == 'name':
+        return validate_name(value)
+    elif attribute == 'date_of_birth':
+        return validate_date(value)
+    elif attribute == 'home_address':
+        return validate_home_address(value)
+    elif attribute == 'email':
+        return validate_email(value)
+    elif attribute == 'phone_number':
+        return validate_phone_number(value)
+    elif attribute == 'handle':
+        return validate_unique_name(value, name_type)
+    elif attribute == 'tournament_date':
+        return validate_tournament_date(value)
+    elif attribute == 'tournament_time':
+        return validate_tournament_time(value)
+    elif attribute == 'color':
+        return validate_color(value)
+    elif attribute == 'number':
+        return validate_number(value)
+    else:
+        raise ValidationError("Attribute not found in list")
 
 
 def validate_unique_name(unique_name: str, type_of_name: str) -> str:
