@@ -9,16 +9,14 @@ File that holds the UtilityUI class
 which holds functions used in multiple places
 """
 
-from Models.Player import Player
-from Models.Club import Club
-from Models.Team import Team
-from Models.Tournament import Tournament
-from Models.Match import Match
-
-from UILayer.MenuOptions import MenuOptions
+from LogicLayer import LogicLayerAPI
 from LogicLayer.LogicLayerAPI import validate
 from Models import ValidationError
-from LogicLayer import LogicLayerAPI
+from Models.Club import Club
+from Models.Match import Match
+from Models.Player import Player
+from Models.Team import Team
+from Models.Tournament import Tournament
 
 
 class UtilityUI:
@@ -31,16 +29,18 @@ class UtilityUI:
 
     def prompt_choice(self, valid_choices: list[str]) -> str:
         """
-        Helper function for allowed choices for the user
+        Helper function that checks for allowed choices
 
-        Args:
-            valid_choices (list[str]): A list of valid choices for the user to input
-
-        Returns:
-            str: _description_
+        :param valid_choices: A list of strings that are allowed to input
+        :type valid_choices: list[str]
+        :return: The choice if it is allowed
+        :rtype: str
         """
+
+        # Make valid choices into lowercase
         valid_choices_lower: list[str] = [x.lower() for x in valid_choices]
 
+        # Loop through until input is valid
         while True:
             choice: str = input("> ").strip().lower()
             if choice in valid_choices_lower:
@@ -54,20 +54,27 @@ class UtilityUI:
     def input_info(self, message: str, attribute: str, info_type: str) -> str:
         """
         Helper function that repeats input until it is valid or navigation word is entered
+
         :param message: message to display - "Enter Your name"
         :param attribute: attribute of a model class - "name"
         :param info_type: information type - "PLAYER"
         :return: Repeats until the input is valid or navigation word is entered
+        :rtype: str
         """
         while True:
             try:
                 print(self.message_color + message + self.reset)
+                # Get input and quit if it is "q"
                 choice: str = input()
                 if choice.lower() == "q":
                     return ""
+
+                # Validate the input before returning
                 valid: str | None = validate(attribute, choice, info_type)
                 return str(valid)
+
             except ValidationError as e:
+                # Display error message and retry
                 print(self.error_color + str(e) + self.reset)
                 continue
 
@@ -76,30 +83,32 @@ class UtilityUI:
     ) -> str:
         """
         Helper function that repeats input until it is valid or navigation word is entered
-        :param message: message to display - "Enter Your name"
-        :param attribute: attribute of a model class - "name"
-        :param info_type: information type - "PLAYER"
-        :return: Repeats until the input is valid or navigation word is entered
+
+        :param message: Message to display - "Enter Your name"
+        :param attribute: Attribute of a model class - "name"
+        :param info_type: Information type - "PLAYER"
+        :return: Returns the validated input or empty string if 'q' is entered
+        :rtype: str
         """
         while True:
             try:
+                # Display the input message
                 print(self.message_color + message + self.reset)
+                # Get input from user
                 choice: str = input()
+                # Return if user enters 'q' to navigate back
                 if choice.lower() == "q":
                     return choice
+                # Return if no input is provided
                 if not choice:
                     return choice
+                # Validate the input before returning
                 valid: str | None = validate(attribute, choice, info_type)
                 return str(valid)
             except ValidationError as e:
+                # Display error message and retry
                 print(self.error_color + str(e) + self.reset)
                 continue
-
-    def screen_not_exist_error(self) -> MenuOptions:
-        """When a screen doesn't exist"""
-        print("Screen doesn't exist")
-        input("Input anything to go back to start: ")
-        return MenuOptions.start_screen
 
     # _____________________________ MODULAR DESIGN ___________________________
 
@@ -107,9 +116,11 @@ class UtilityUI:
         """
         Converts list of Tournament objects to a list of Tournament names
 
-        Returns:
-            list[str]: Tournament names
+        :return: A list of tournament names
+        :rtype: list[str]
         """
+
+        # Loops through Tournaments and gets the names
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments]
 
@@ -117,14 +128,18 @@ class UtilityUI:
         self, tournament_status: Tournament.StatusType
     ) -> list[str]:
         """
-        Returns a list of tournaments that do not have the inputted status
+        Returns the names of all tournaments that do not have the given status.
 
-        Args:
-            tournament_status (Tournament.StatusType): Status that is not supposed to be in the tournament list
+        :param tournament_status: The status to exclude. Possible values are 
+            "ACTIVE", "INACTIVE", and "ARCHIVED".
 
-        Returns:
-            list[str]: list of tournaments without the inputted status
+        :type tournament_status: Tournament.StatusType
+        :return: All tournament names whose status does not match
+        the input.
+        :rtype: list[str]
+
         """
+        # Gets all tournaments and filter out those with the excluded status
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments if x.status != tournament_status]
 
@@ -183,12 +198,11 @@ class UtilityUI:
         for value in range(0, len(unique_names), 2):
             left = unique_names[value]
             if value + 1 < length:
-
                 right = unique_names[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         return output_list
 
@@ -219,7 +233,7 @@ class UtilityUI:
     def list_matches(self, tournament_uuid: str, show_all: bool) -> list[str]:
         """
         Function to show either all matches in a tournament or the next matches
-        
+
         :param self: Description
         :param tournament_uuid: The uuid of a tournament
         :type tournament_uuid: str
@@ -239,18 +253,17 @@ class UtilityUI:
             )
         # Top info
 
-        line = lambda x: x * 80
         output_list: list[str] = []
 
         for match in match_list:
-
             match_winner_uuid: str = str(match.winner)
             if match_winner_uuid != "None":
-                match_winner_team: Team = LogicLayerAPI.get_team_by_uuid(match_winner_uuid)
+                match_winner_team: Team = LogicLayerAPI.get_team_by_uuid(
+                    match_winner_uuid
+                )
                 match_winner_name: str = match_winner_team.name
-            else: match_winner_name: str = match_winner_uuid
-
-            
+            else:
+                match_winner_name: str = match_winner_uuid
 
             if show_all:
                 revealed: str = "To be revealed"
@@ -264,15 +277,14 @@ class UtilityUI:
                 match_name_2: str = match2.name
 
                 output_list.append(
-                    f"{line('—')}\n"
-                    f"{f"Date: {match.match_date}":<79}|\n"
-                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
-                    f"{f"Team 1: {match_name_1}":<79}|\n"
+                    f"{80 * '—'}\n"
+                    f"{f'Date: {match.match_date}':<79}|\n"
+                    f"{f'Match Time: {str(match.match_time)}':<79}|\n"
+                    f"{f'Team 1: {match_name_1}':<79}|\n"
                     f"{'vs':<79}|\n"
-                    f"{f"Team 2: {match_name_2}":<79}|\n"
-                    f"{f"Match Winner: {str(match_winner_name)}":<79}|"
+                    f"{f'Team 2: {match_name_2}':<79}|\n"
+                    f"{f'Match Winner: {str(match_winner_name)}':<79}|"
                 )
-
 
             else:
                 match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
@@ -282,17 +294,16 @@ class UtilityUI:
                 match_name_2: str = match2.name
 
                 output_list.append(
-                    f"{line('—')}\n"
-                    f"{f"Date: {match.match_date}":<79}|\n"
-                    f"{f"Match Time: {str(match.match_time)}":<79}|\n"
-                    f"{f"Team 1: {match_name_1}":<79}|\n"
+                    f"{80 * '—'}\n"
+                    f"{f'Date: {match.match_date}':<79}|\n"
+                    f"{f'Match Time: {str(match.match_time)}':<79}|\n"
+                    f"{f'Team 1: {match_name_1}':<79}|\n"
                     f"{'vs':<79}|\n"
-                    f"{f"Team 2: {match_name_2}":<79}|\n"
-                    f"{f"Match Winner: {str(match_winner_name)}":<79}|"
+                    f"{f'Team 2: {match_name_2}':<79}|\n"
+                    f"{f'Match Winner: {str(match_winner_name)}':<79}|"
                 )
 
         return output_list
-
 
     # "Created" by Sindri Freysson
     def string_to_table(
@@ -313,7 +324,7 @@ class UtilityUI:
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         return output_list
 

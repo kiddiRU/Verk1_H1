@@ -1,87 +1,97 @@
+"""
+Defines MenuOptions, an enum containing all valid navigation targets
+used by the UI layer.
+"""
+
+
 from enum import StrEnum
 
 
 class MenuOptions(StrEnum):
-    """Enum representing the available menu options in the UI layer."""
+    """
+    Enum representing all available menu options in the UI layer.
 
-    start_screen = "StartScreen"
-    quit = "Quit"
-    logout = "LogOut"
+    Each value corresponds to a navigation target used by the
+    application's screen-routing system.
+    """
+
+    START_SCREEN = "StartScreen"
+    QUIT = "Quit"
+    LOGOUT = "LogOut"
 
     # StartScreen
-    login = "LogIn"
-    register = "Register"
-    spectate_screen = "SpectateScreen"
+    LOGIN = "LogIn"
+    REGISTER = "Register"
+    SPECTATE_SCREEN = "SpectateScreen"
 
     # Login
-    admin_screen = "AdminScreen"
+    ADMIN_SCREEN = "AdminScreen"
 
     # Login + Register
-    player_screen = "PlayerScreen"
+    PLAYER_SCREEN = "PlayerScreen"
 
     # AdminScreen
-    create_tournament = "CreateTournament"
-    manage_tournament = "ManageTournament"
-    create_club = "CreateClub"
+    CREATE_TOURNAMENT = "CreateTournament"
+    MANAGE_TOURNAMENT = "ManageTournament"
+    CREATE_CLUB = "CreateClub"
 
     # Manage Tournament
-    manage_active_tournament = "ManageActiveTournament"
-    manage_inactive_tournament = "ManageInactiveTournament"
+    MANAGE_ACTIVE_TOURNAMENT = "ManageActiveTournament"
+    MANAGE_INACTIVE_TOURNAMENT = "ManageInactiveTournament"
 
     # ManageActiveTournament
-    input_results = "InputResults"
-    select_match = "SelectMatch"
+    INPUT_RESULTS = "InputResults"
+    SELECT_MATCH = "SelectMatch"
 
     # ManageInactiveTournament
-    manage_teams = "ManageTeams"
-    publish = "Publish"
-    edit_tournament = "EditTournament"
+    MANAGE_TEAMS = "ManageTeams"
+    PUBLISH = "Publish"
+    EDIT_TOURNAMENT = "EditTournament"
 
     # ManageTeam
-    add_team = "AddTeam"
-    remove_team = "RemoveTeam"
+    ADD_TEAM = "AddTeam"
+    REMOVE_TEAM = "RemoveTeam"
 
     # EditTournament
-    edit_tournament_time = "EditTournamentTime"
-    edit_tournament_info = "EditTournamentInfo"
+    EDIT_TOURNAMENT_TIME = "EditTournamentTime"
+    EDIT_TOURNAMENT_INFO = "EditTournamentInfo"
 
     # PlayerScreen
-    edit_player_info = "EditPlayerInfo"
-    my_team_empty = "MyTeam "
-    my_team_not_empty = "MyTeam"
-    create_team = "CreateTeam "
-    create_team_in_team = "CreateTeam"
+    EDIT_PLAYER_INFO = "EditPlayerInfo"
+    MY_TEAM_EMPTY = "MyTeam "
+    MY_TEAM_NOT_EMPTY = "MyTeam"
+    CREATE_TEAM = "CreateTeam "
+    CREATE_TEAM_IN_TEAM = "CreateTeam"
 
     # MyTeam
-    edit_team = "EditTeam"
-    leave_team = "LeaveTeam"
+    EDIT_TEAM = "EditTeam"
+    LEAVE_TEAM = "LeaveTeam"
 
     # EditTeam
-    add_player = "AddPlayer"
-    remove_player = "RemovePlayer"
+    ADD_PLAYER = "AddPlayer"
+    REMOVE_PLAYER = "RemovePlayer"
 
     # SpectateScreen
-    spectate_players = "SpectatePlayers"
-    view_player_stats = "ViewPlayerStats"
+    SPECTATE_PLAYERS = "SpectatePlayers"
+    VIEW_PLAYER_STATS = "ViewPlayerStats"
 
-    spectate_clubs = "SpectateClubs"
-    view_club_stats = "ViewClubStats"
+    SPECTATE_CLUBS = "SpectateClubs"
+    VIEW_CLUB_STATS = "ViewClubStats"
 
-    spectate_teams = "SpectateTeams"
-    view_team_stats = "ViewTeamStats"
+    SPECTATE_TEAMS = "SpectateTeams"
+    VIEW_TEAM_STATS = "ViewTeamStats"
 
-    spectate_tournaments = "SpectateTournaments"
+    SPECTATE_TOURNAMENTS = "SpectateTournaments"
 
     # TournamentScreen
-    active_tournament = "ActiveTournament"
-    archived_tournament = "ArchivedTournament"
+    ACTIVE_TOURNAMENT = "ActiveTournament"
+    ARCHIVED_TOURNAMENT = "ArchivedTournament"
 
     # ActiveTournamentScreen
-    game_schedule = "GameSchedule"
-    teams_in_tournament = "TeamsInTournament"
-    team_tournament_stats = "TeamTournamentStats"
-
+    GAME_SCHEDULE = "GameSchedule"
+    TEAMS_IN_TOURNAMENT = "TeamsInTournament"
+    TEAM_TOURNAMENT_STATS = "TeamTournamentStats"
 
     # Secret
-    onion = "Onion"
-    masterpiece = "Masterpiece"
+    ONION = "Onion"
+    MASTERPIECE = "Masterpiece"
