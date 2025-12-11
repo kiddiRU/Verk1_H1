@@ -72,10 +72,8 @@ class PlayerLL:
             A new Player object.
         :rtype: Player
         '''
-        # Create a unique UUID.
+        # Create a unique UUID and a new Player object.
         uuid = str(uuid4())
-
-        # Create the new Player object.
         new_player = Player(
             uuid,
             name,

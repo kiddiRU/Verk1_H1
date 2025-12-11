@@ -8,12 +8,9 @@ Minor changes: Andri Már Kristjánsson <andrik25@ru.is>
 A validation file that takes inn all info that would need to be validated
 """
 
-from typing import Callable
 from datetime import date, time
 from Models import ValidationError
 from DataLayer import DataLayerAPI
-
-Validator = Callable[[str], str | date | None]
 
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
     """Validates all attributes that need validating.
@@ -55,48 +52,28 @@ def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None
         if (ord(char) < 32 or ord(char) > 126) and not char.isalpha():
             raise ValidationError("String contains characters not in ascii range")
 
-    # if attribute == 'name':
-    #     return validate_name(value)
-    # elif attribute == 'date_of_birth':
-    #     return validate_date(value)
-    # elif attribute == 'home_address':
-    #     return validate_home_address(value)
-    # elif attribute == 'email':
-    #     return validate_email(value)
-    # elif attribute == 'phone_number':
-    #     return validate_phone_number(value)
-    # elif attribute == 'handle':
-    #     return validate_unique_name(value, name_type)
-    # elif attribute == 'tournament_date':
-    #     return validate_tournament_date(value)
-    # elif attribute == 'tournament_time':
-    #     return validate_tournament_time(value)
-    # elif attribute == 'color':
-    #     return validate_color(value)
-    # elif attribute == 'number':
-    #     return validate_number(value)
-    # else:
-    #     return
-
-    validators: dict[str, Validator] = {
-        'name': validate_name,
-        'date_of_birth': validate_date,
-        'home_address': validate_home_address,
-        'email': validate_email,
-        'phone_number': validate_phone_number,
-        'handle': lambda v: validate_unique_name(v, name_type),
-        'tournament_date': validate_tournament_date,
-        'tournament_time': validate_tournament_time,
-        'color': validate_color,
-        'number': validate_number,
-    }
-
-    validator = validators.get(attribute)
-    if validator is None:
-        return None
-
-    return validator(value)
-
+    if attribute == 'name':
+        return validate_name(value)
+    elif attribute == 'date_of_birth':
+        return validate_date(value)
+    elif attribute == 'home_address':
+        return validate_home_address(value)
+    elif attribute == 'email':
+        return validate_email(value)
+    elif attribute == 'phone_number':
+        return validate_phone_number(value)
+    elif attribute == 'handle':
+        return validate_unique_name(value, name_type)
+    elif attribute == 'tournament_date':
+        return validate_tournament_date(value)
+    elif attribute == 'tournament_time':
+        return validate_tournament_time(value)
+    elif attribute == 'color':
+        return validate_color(value)
+    elif attribute == 'number':
+        return validate_number(value)
+    else:
+        return
 
 def validate_unique_name(unique_name: str, type_of_name: str) -> str:
     """

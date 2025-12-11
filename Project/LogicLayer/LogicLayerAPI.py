@@ -178,7 +178,7 @@ def update_player_info(
 # Isn't used, remove?
 # def promote_captain(current_player: Player, handle_to_promote: str) -> None:
 #     '''Promotes a teams player to its captain.
-    
+
 #     :param current_player:
 #         The object of the player calling the function.
 #     :type current_player: Player
@@ -567,7 +567,7 @@ def create_tournament(
     :type name: str
 
     :param start_date:
-        The tournamnets starting date.
+        The tournaments starting date.
     :type start_date: date
 
     :param end_date:
@@ -669,7 +669,7 @@ def remove_team(tournament_name: str, team_name: str) -> None:
 #     )
 
 def list_tournaments() -> list[Tournament]:
-    '''Gets a list of all stored tournamnets.
+    '''Gets a list of all stored tournaments.
     
     :return:
         A list of all Tournament objects.
