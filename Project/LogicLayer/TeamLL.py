@@ -14,15 +14,34 @@ class TeamLL:
     ''' Team logic. '''
 
     def __init__(self) -> None:
+        ''' Initialize the TeamLL instance. '''
         self._player_logic: PlayerLL
 
     def set_player_logic(self, player_logic: PlayerLL) -> None:
+        '''Inject the player logic.
+
+        :param player_logic:
+            The logic layer responsible for player operations and validations.
+        :type player_logic: PlayerLL
+        '''
         self._player_logic = player_logic
 
     def set_club_logic(self, club_logic: ClubLL) -> None:
+        '''Inject the club logic.
+        
+        :param club_logic: 
+            The logic layer resposible for club operations and validations.
+        :type club_logic: ClubLL
+        '''
         self._club_logic = club_logic
 
     def set_match_logic(self, match_logic: MatchLL) -> None:
+        '''Inject the match logic.
+        
+        :param match_logic:
+            The logic layer responsible for match operations and validations.
+        :type match_logic: MatchLL
+        '''
         self._match_logic = match_logic
 
     def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:

@@ -11,10 +11,8 @@ from Models import Club, Team, Match, Tournament, ValidationError
 from LogicLayer.MatchLL import MatchLL
 
 class ClubLL:
-
     def __init__(self) -> None:
-        pass
-
+        ''' Initialize the ClubLL instance. '''
 
     def create_club(self,
         name: str,

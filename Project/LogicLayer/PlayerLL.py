@@ -16,6 +16,16 @@ class PlayerLL:
     ''' Player logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
+        '''Initialize the PlayerLL instance.
+        
+        :param team_logic:
+            The logic layer responsible for team operations and validations.
+        :type team_logic: TeamLL
+
+        :param match_logic:
+            The logic layer responsible for match operations and validations.
+        :type match_logic: MatchLL
+        '''
         self._team_logic = team_logic
         self._match_logic = match_logic
 
