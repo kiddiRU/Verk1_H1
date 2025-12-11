@@ -24,8 +24,6 @@ class PlayerUI:
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
 
-
-
     def start_screen(self) -> MenuOptions:
         """
         Display the start screen and handle initial navigation choices.
@@ -66,8 +64,6 @@ class PlayerUI:
                 return MenuOptions.QUIT
 
         return MenuOptions.START_SCREEN
-
-
 
     def login_screen(self) -> MenuOptions:
         """
@@ -136,8 +132,6 @@ class PlayerUI:
             return MenuOptions.LOGIN
 
         return MenuOptions.START_SCREEN
-
-
 
     def register_screen(self) -> MenuOptions:
         """
@@ -357,8 +351,6 @@ class PlayerUI:
 
         return MenuOptions.PLAYER_SCREEN
 
-
-
     def player_screen(self) -> MenuOptions:
         """
         Display the player screen and show player info and available actions.
@@ -461,11 +453,10 @@ class PlayerUI:
 
         return MenuOptions.START_SCREEN
 
-
-
     def create_team(self) -> MenuOptions:
         """
-        Display the create team screen and collect team information from the user.
+        Display the create team screen
+        and collect team information from the user.
 
         The user can input:
             - Team Name (required)
@@ -506,7 +497,7 @@ class PlayerUI:
         info.extend(club_names)
 
         options: dict[str, str] = {"c": "Continue", "b": "Back"}
-        message: str = "By Creating A Team You Are Assigned As The Captain Of It!"
+        message: str = "By Creating A Team You Are Assigned As The Captain!"
 
         # Get the team information from the user
         # Temporaraly save the info
@@ -542,12 +533,12 @@ class PlayerUI:
             if con == "b":
                 self.tui.discard_last_input()
 
-        # ---------------------- TEAM ASCII ART (OPTIONAL) ----------------------
+        # ---------------------- TEAM ASCII ART (OPTIONAL) --------------------
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_ascii = input(
-                f"{self.input_color}Enter A Single Line Team ASCII Art (Optional):\n"
+                f"{self.input_color}Enter A Team ASCII Art (Optional):\n"
                 f"{self.reset}"
             )
             self.tui.save_input(f"Team ASCII Art: {team_ascii}")
@@ -591,11 +582,10 @@ class PlayerUI:
 
         return MenuOptions.PLAYER_SCREEN
 
-
-
     def create_team_in_team(self) -> MenuOptions:
         """
-        Display a screen when a player already in a team tries to create a new team.
+        Display a screen when a player already in a team
+        Tries to create a new team.
 
         The user is informed that they cannot create another team while already
         being a member of an existing team. They can only go back.
@@ -622,8 +612,6 @@ class PlayerUI:
                 return MenuOptions.PLAYER_SCREEN
 
         return MenuOptions.PLAYER_SCREEN
-
-
 
     def edit_player_info(self) -> MenuOptions:
         """
@@ -685,7 +673,8 @@ class PlayerUI:
         info: list[str] = []
         options: dict[str, str] = {"c": "Continue", "b": "Back"}
         message: str = "You Have Changed Your Info!"
-        unchanged_message: str = "(Leave Field Empty If You Want To Leave Them Unchanged)"
+        unchanged_message: str = (
+            "(Leave Field Empty If You Want To Leave Them Unchanged)")
 
         # Gets new info from user and temporaraly saves it
         # untill user selects to fully save the changes
@@ -734,7 +723,9 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_dob = self.utility.input_change(
-                f"{unchanged_message}\nEnter New Date Of Birth Or 'q' To Cancel:\n(yyyy-mm-dd)",
+                f"""{unchanged_message}
+Enter New Date Of Birth Or 'q' To Cancel:
+(yyyy-mm-dd)""",  # Line was too long
                 "date_of_birth", "PLAYER"
             )
             if new_dob == "q":
@@ -754,8 +745,9 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_addr = self.utility.input_change(
-                f"""{unchanged_message}\nEnter New Home Address Or 'q' To Cancel:
-                (Streetname 00 Cityname)""", # Line was too long
+                f"""{unchanged_message}
+Enter New Home Address Or 'q' To Cancel:
+(Streetname 00 Cityname)""",  # Line was too long
                 "home_address", "PLAYER"
             )
             if new_addr == "q":
@@ -775,7 +767,9 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_phnum = self.utility.input_change(
-                f"{unchanged_message}\nEnter New Phone Number Or 'q' To Cancel:\n(123-4567)",
+                f"""{unchanged_message}
+Enter New Phone Number Or 'q' To Cancel:
+(123-4567)""",  # Line was too long
                 "phone_number", "PLAYER"
             )
             if new_phnum == "q":
@@ -815,8 +809,9 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             new_url = input(
-                f"""{unchanged_message}\n{self.input_color}Enter New URL Or 'q' To Cancel:
-                {self.reset}""" # Line was a little too long
+                f"""{unchanged_message}
+{self.input_color}Enter New URL Or 'q' To Cancel:
+{self.reset}"""  # Line was a little too long
             )
             if new_url == "q":
                 return user_path[-2]
@@ -854,8 +849,6 @@ class PlayerUI:
 
         return MenuOptions.PLAYER_SCREEN
 
-
-
     def my_team_empty(self) -> MenuOptions:
         """
         Display the 'My Team' screen when the player is not part of a team.
@@ -884,8 +877,6 @@ class PlayerUI:
 
         return MenuOptions.PLAYER_SCREEN
 
-
-
     def my_team_not_empty(self) -> MenuOptions:
         """
         Display the 'My Team' screen when the player is part of a team.
@@ -899,7 +890,8 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to.
         """
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(
+            current_login_handle)
 
         team_members = LogicLayerAPI.get_team_members(team)
 
@@ -922,9 +914,11 @@ class PlayerUI:
 
         # Gets team member info
         for member_uuid in team_members:
-            player: Player | str = LogicLayerAPI.get_player_by_uuid(member_uuid)
+            player: Player | str = LogicLayerAPI.get_player_by_uuid(
+                member_uuid)
             if isinstance(player, Player):
-                _, member_rank = LogicLayerAPI.get_player_team_and_rank(player.handle)
+                _, member_rank = LogicLayerAPI.get_player_team_and_rank(
+                    player.handle)
                 if member_rank == "Captain":
                     info.append(f"{member_rank} \t {player.handle}")
                 else:
@@ -956,8 +950,6 @@ class PlayerUI:
                 return MenuOptions.PLAYER_SCREEN
 
         return MenuOptions.PLAYER_SCREEN
-
-
 
     def edit_team(self) -> MenuOptions:
         """
@@ -999,9 +991,11 @@ class PlayerUI:
 
         # Get team member info
         for member_uuid in team_members:
-            member_player: Player | str = LogicLayerAPI.get_player_by_uuid(member_uuid)
+            member_player: Player | str = LogicLayerAPI.get_player_by_uuid(
+                member_uuid)
             if isinstance(member_player, Player):
-                _, member_rank = LogicLayerAPI.get_player_team_and_rank(member_player.handle)
+                _, member_rank = LogicLayerAPI.get_player_team_and_rank(
+                    member_player.handle)
 
                 # Format the captain and players accordingly
                 if member_rank == "Captain":
@@ -1022,8 +1016,6 @@ class PlayerUI:
                 return MenuOptions.MY_TEAM_NOT_EMPTY
 
         return MenuOptions.PLAYER_SCREEN
-
-
 
     def add_player(self) -> MenuOptions:
         """
@@ -1102,19 +1094,23 @@ class PlayerUI:
 
             if choice == "n":
                 message = "Operation Cancelled"
-                print(self.tui.table(menu, user_path, info, final_options, message))
+                print(self.tui.table(
+                    menu, user_path, info, final_options, message))
                 self.utility.prompt_choice(["c"])
                 return MenuOptions.EDIT_TEAM
 
             current_login_handle = str(LogicLayerAPI.save_player())
-            current_login_uuid = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
-            current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
+            current_login_uuid = LogicLayerAPI.player_handle_to_uuid(
+                current_login_handle)
+            current_player: Player | str = LogicLayerAPI.get_player_by_uuid(
+                current_login_uuid)
 
             if isinstance(current_player, Player):
                 LogicLayerAPI.add_player(add_handle, current_player)
 
             message = f"{add_handle} Has Been Added To Your Team!"
-            print(self.tui.table(menu, user_path, info, final_options, message))
+            print(self.tui.table(
+                menu, user_path, info, final_options, message))
             self.utility.prompt_choice(["c"])
             return MenuOptions.EDIT_TEAM
 
@@ -1130,8 +1126,6 @@ class PlayerUI:
 
         return MenuOptions.ADD_PLAYER
 
-
-
     def remove_player(self) -> MenuOptions:
         """
         Display the screen to remove a player from the current team.
@@ -1143,8 +1137,10 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to.
         """
         current_login_handle: str = str(LogicLayerAPI.save_player())
-        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
-        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
+        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(
+            current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(
+            current_uuid)
         team, _ = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
         team_members = LogicLayerAPI.get_team_members(team)
 
@@ -1164,9 +1160,11 @@ class PlayerUI:
 
         # Get team member info
         for member_uuid in team_members:
-            member_player: Player | str = LogicLayerAPI.get_player_by_uuid(member_uuid)
+            member_player: Player | str = LogicLayerAPI.get_player_by_uuid(
+                member_uuid)
             if isinstance(member_player, Player):
-                _, member_rank = LogicLayerAPI.get_player_team_and_rank(member_player.handle)
+                _, member_rank = LogicLayerAPI.get_player_team_and_rank(
+                    member_player.handle)
                 if member_rank != "Captain":
                     info.append(f"{member_rank} \t \t {member_player.handle}")
 
@@ -1182,10 +1180,12 @@ class PlayerUI:
             return MenuOptions.EDIT_TEAM
 
         current_team, _ = LogicLayerAPI.get_player_team_and_rank(remove_handle)
-        remove_player_team, _ = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+        remove_player_team, _ = LogicLayerAPI.get_player_team_and_rank(
+            current_login_handle)
 
         # Player is in the same team and is not the captain themselves
-        if current_team == remove_player_team and remove_handle != current_login_handle:
+        if (current_team == remove_player_team
+                and remove_handle != current_login_handle):
             message = (
                 f"The Player {remove_handle} Was Found\n"
                 "Do You Want To Remove Them From Your Team? Y/N:"
@@ -1219,8 +1219,6 @@ class PlayerUI:
 
         return MenuOptions.REMOVE_PLAYER
 
-
-
     def leave_team(self) -> MenuOptions:
         """
         Display the leave team screen and handle leaving logic.
@@ -1234,9 +1232,12 @@ class PlayerUI:
         # Turn into a string for the type hinting (VSCode warnings)
         current_login_handle: str = str(LogicLayerAPI.save_player())
 
-        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
-        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_uuid)
-        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+        current_uuid: str = LogicLayerAPI.player_handle_to_uuid(
+            current_login_handle)
+        current_player: Player | str = LogicLayerAPI.get_player_by_uuid(
+            current_uuid)
+        team, rank = LogicLayerAPI.get_player_team_and_rank(
+            current_login_handle)
         team_members = LogicLayerAPI.get_team_members(team)
         number_of_players = len(team_members)
 
@@ -1262,11 +1263,15 @@ class PlayerUI:
                     + self.reset
                 )
 
-                current_team, _ = LogicLayerAPI.get_player_team_and_rank(new_captain)
-                new_captain_team, _ = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+                current_team, _ = LogicLayerAPI.get_player_team_and_rank(
+                    new_captain)
+                new_captain_team, _ = LogicLayerAPI.get_player_team_and_rank(
+                    current_login_handle)
 
-                # Trying to promote someone form the team that is not the current captain
-                if current_team == new_captain_team and new_captain != current_login_handle:
+                # Trying to promote someone form the team
+                # That is not the current captain
+                if ((current_team == new_captain_team
+                        and new_captain != current_login_handle)):
                     message = (
                         f"The Player {new_captain} Was Found\n"
                         "Do You Want To Promote Them To Captain? Y/N:"
@@ -1275,13 +1280,16 @@ class PlayerUI:
 
                     choice: str = self.utility.prompt_choice(["y", "n"])
                     if choice == "y" and isinstance(current_player, Player):
-                        LogicLayerAPI.promote_captain(current_player, new_captain)
-                        LogicLayerAPI.remove_player(current_login_handle, current_player)
+                        LogicLayerAPI.promote_captain(
+                            current_player, new_captain)
+                        LogicLayerAPI.remove_player(
+                            current_login_handle, current_player)
                         return MenuOptions.PLAYER_SCREEN
                     return MenuOptions.EDIT_TEAM
 
                 # Player not found or unavailable
-                message = "Player Was Not Found Or Not Available\nDo You Want To Try Again? Y/N:"
+                message = """Player Was Not Found Or Not Available
+Do You Want To Try Again? Y/N:"""
                 print(self.tui.table(menu, user_path, info, {}, message))
                 choice = self.utility.prompt_choice(["y", "n"])
                 if choice == "n":
@@ -1291,16 +1299,18 @@ class PlayerUI:
             # Captain is the only member
             message = (
                 f"You Are The Only One Left In The Team\n"
-                f"If You Leave, the team {team} will no longer be accessible.\n"
+                f"If You Leave, the team {team} will no longer be accessible\n"
                 "Are You Sure You Want To Leave? Y/N"
             )
             print(self.tui.table(menu, user_path, info, options, message))
             choice: str = self.utility.prompt_choice(["y", "n"])
             final_options: dict[str, str] = {"c": "Continue"}
             if choice == "y" and isinstance(current_player, Player):
-                LogicLayerAPI.remove_player(current_login_handle, current_player)
+                LogicLayerAPI.remove_player(
+                    current_login_handle, current_player)
                 message = "You Have Successfully Left The Team!"
-                print(self.tui.table(menu, user_path, info, final_options, message))
+                print(self.tui.table(
+                    menu, user_path, info, final_options, message))
                 self.utility.prompt_choice(["c"])
                 return MenuOptions.PLAYER_SCREEN
 
@@ -1312,7 +1322,8 @@ class PlayerUI:
 
         if choice == "n":
             message = "Operation Canceled"
-            print(self.tui.table(menu, user_path, info, final_options, message))
+            print(self.tui.table(
+                menu, user_path, info, final_options, message))
             self.utility.prompt_choice(["c"])
             return MenuOptions.MY_TEAM_NOT_EMPTY
 
@@ -1324,15 +1335,12 @@ class PlayerUI:
         self.utility.prompt_choice(["c"])
         return MenuOptions.PLAYER_SCREEN
 
-
-
     def onion(self) -> MenuOptions:
         """This Program Has Layers
-        
+
         :returns:
             MenuOptions: The next menu to navigate to
         """
-
 
         shrek: str = "\033[32m"
         reset: str = "\033[0m"
@@ -1352,74 +1360,75 @@ class PlayerUI:
     ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
     ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
     ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉""" + reset +
-    """         
-    Somebody once told me the world is gonna roll me
-    I ain't the sharpest tool in the shed
-    She was looking kind of dumb with her finger and her thumb
-    In the shape of an "L" on her forehead
-    Well, the years start comin' and they don't stop comin'
-    Fed to the rules and I hit the ground runnin'
-    Didn't make sense not to live for fun
-    Your brain gets smart, but your head gets dumb
-    So much to do, so much to see
-    So, what's wrong with taking the backstreets?
-    You'll never know if you don't go (go)
-    You'll never shine if you don't glow
-    Hey now, you're an all-star
-    Get your game on, go play
-    Hey now, you're a rock star
-    Get the show on, get paid
-    (And all that glitters is gold)
-    Only shootin' stars break the mold
-    It's a cool place, and they say it gets colder
-    You're bundled up now, wait 'til you get older
-    But the meteor men beg to differ
-    Judging by the hole in the satellite picture
-    The ice we skate is gettin' pretty thin
-    The water's gettin' warm, so you might as well swim
-    My world's on fire, how 'bout yours?
-    That's the way I like it, and I'll never get bored
-    Hey now, you're an all-star
-    Get your game on, go play
-    Hey now, you're a rock star
-    Get the show on, get paid
-    (All that glitters is gold)
-    Only shootin' stars break the mold
-    Go for the moon
-    (Go, go, go) go for the moon
-    (Go, go, go) go for the moon
-    Go (go), go for the moon
-    Hey now, you're an all-star
-    Get your game on, go play
-    Hey now, you're a rock star
-    Get the show on, get paid
-    (And all that glitters is gold)
-    Only shooting stars
-    Somebody once asked, "Could I spare some change for gas?
-    I need to get myself away from this place"
-    I said, "Yep, what a concept, I could use a little fuel myself
-    And we could all use a little change"
-    Well, the years start comin' and they don't stop comin'
-    Fed to the rules and I hit the ground runnin'
-    Didn't make sense not to live for fun
-    Your brain gets smart, but your head gets dumb
-    So much to do, so much to see
-    So, what's wrong with taking the backstreets?
-    You'll never know if you don't go (go!)
-    You'll never shine if you don't glow
-    Hey now, you're an all-star
-    Get your game on, go play
-    Hey now, you're a rock star
-    Get the show on, get paid
-    (And all that glitters is gold)
-    Only shootin' stars break the mold
-    Only shootin' stars break the mold
-    Go for the moon
-    Go for the moon
-    Go for the moon
-    This is how we do it
-                    
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+    """ + reset +
+    """
+Somebody once told me the world is gonna roll me
+I ain't the sharpest tool in the shed
+She was looking kind of dumb with her finger and her thumb
+In the shape of an "L" on her forehead
+Well, the years start comin' and they don't stop comin'
+Fed to the rules and I hit the ground runnin'
+Didn't make sense not to live for fun
+Your brain gets smart, but your head gets dumb
+So much to do, so much to see
+So, what's wrong with taking the backstreets?
+You'll never know if you don't go (go)
+You'll never shine if you don't glow
+Hey now, you're an all-star
+Get your game on, go play
+Hey now, you're a rock star
+Get the show on, get paid
+(And all that glitters is gold)
+Only shootin' stars break the mold
+It's a cool place, and they say it gets colder
+You're bundled up now, wait 'til you get older
+But the meteor men beg to differ
+Judging by the hole in the satellite picture
+The ice we skate is gettin' pretty thin
+The water's gettin' warm, so you might as well swim
+My world's on fire, how 'bout yours?
+That's the way I like it, and I'll never get bored
+Hey now, you're an all-star
+Get your game on, go play
+Hey now, you're a rock star
+Get the show on, get paid
+(All that glitters is gold)
+Only shootin' stars break the mold
+Go for the moon
+(Go, go, go) go for the moon
+(Go, go, go) go for the moon
+Go (go), go for the moon
+Hey now, you're an all-star
+Get your game on, go play
+Hey now, you're a rock star
+Get the show on, get paid
+(And all that glitters is gold)
+Only shooting stars
+Somebody once asked, "Could I spare some change for gas?
+I need to get myself away from this place"
+I said, "Yep, what a concept, I could use a little fuel myself
+And we could all use a little change"
+Well, the years start comin' and they don't stop comin'
+Fed to the rules and I hit the ground runnin'
+Didn't make sense not to live for fun
+Your brain gets smart, but your head gets dumb
+So much to do, so much to see
+So, what's wrong with taking the backstreets?
+You'll never know if you don't go (go!)
+You'll never shine if you don't glow
+Hey now, you're an all-star
+Get your game on, go play
+Hey now, you're a rock star
+Get the show on, get paid
+(And all that glitters is gold)
+Only shootin' stars break the mold
+Only shootin' stars break the mold
+Go for the moon
+Go for the moon
+Go for the moon
+This is how we do it
+
                     """)
 
         # *Swamp bubble sounds*
@@ -1429,11 +1438,9 @@ class PlayerUI:
 
         return MenuOptions.ONION
 
-
-
     def masterpiece(self) -> MenuOptions:
         """I think Gylfi will like this one
-        
+
         :returns:
             MenuOptions: The next screen to navigate to"""
 
@@ -1490,7 +1497,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMM
             NMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
-            
+
             """)
         # Unfortunatly could not find any ascii art of a 2 liter pepsi bottle
         print("""
@@ -1512,7 +1519,8 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMM
             + self.reset
         )
 
-        # You better like the art, or else you dont have the privlage of using this program
+        # You better like the art
+        # Or else you dont have the privlage of using this program
         if like.lower() == "y":
             print("YAY")
             input("BYE BYE ⊂(◉‿◉)つ")

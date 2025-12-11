@@ -180,15 +180,15 @@ class Drawer():
 
         :param menu:
             String of the name of the table
-        :Type menu: str
+        :type menu: str
             
         :param user_path:
             List of the users previous screens
-        :Type user_path: list[MenuOptions]
+        :type user_path: list[MenuOptions]
             
         :param options:
             Dictionary of all the input options that the user has and what action they correspond to
-        :Type options: dict[str, str]
+        :type options: dict[str, str]
 
         :returns:
             A tripple quoted format string that hold the table 
