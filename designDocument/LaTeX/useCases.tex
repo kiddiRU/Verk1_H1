@@ -209,137 +209,136 @@
         vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
         cell{1}{1}={c=2}{c}, cell{5}{1}={r=5}{l}
       }
-      Player creates a team & 1-2 \\
-              Number           & 11                                                                                   \\
-        Priority         & A                                                                                    \\
-        Precondition     &                                                                                      \\
-        Base flow        & 1. Player logs in, use case (3)                                                      \\
-        6-1              & 2. Captain selects Add player to team.                                               \\
-        7-1              & 3. Player inputs team name                                                           \\
-        8-1              & 4. Player inputs Club (no input = no club)                                           \\
-        9-1              & 5. (Now the player is the team captain of an empty team)                             \\
-        Alternative flow & \textbullet { Player is already a part of a team. Player needs to leave his existing
-        team, see case (14) and then create a team }                                                            \\
-        Post condition   & Player is now a team captain of a team                                               \\
-        Actors           & Player                                                                               \\
-        Author           & Elmar Sigmarsson                                                                     \\
+      Player creates a team & 1-2                                                                                  \\
+      Number                & 11                                                                                   \\
+      Priority              & A                                                                                    \\
+      Precondition          &                                                                                      \\
+      Base flow             & 1. Player logs in, use case (3)                                                      \\
+      6-1                   & 2. Captain selects Add player to team.                                               \\
+      7-1                   & 3. Player inputs team name                                                           \\
+      8-1                   & 4. Player inputs Club (no input = no club)                                           \\
+      9-1                   & 5. (Now the player is the team captain of an empty team)                             \\
+      Alternative flow      & \textbullet { Player is already a part of a team. Player needs to leave his existing
+      team, see case (14) and then create a team }                                                                 \\
+      Post condition        & Player is now a team captain of a team                                               \\
+      Actors                & Player                                                                               \\
+      Author                & Elmar Sigmarsson                                                                     \\
+    \end{tblr}
 
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=5}{l}
+      }
+      Team captain adds a player to their team & 1-2                                                                               \\
+      Number                                   & 12                                                                                \\
+      Priority                                 & A                                                                                 \\
+      Precondition                             & Player must have created a team, use case(10)                                     \\
+      Base flow                                & 1. Captain logs in, use case (3)                                                  \\
+      6-1                                      & 2. Captain selects My Team                                                        \\
+      7-1                                      & 3. Captain selects Add Player to Team                                             \\
+      8-1                                      & 4. Captain inputs Players Handle                                                  \\
+      9-1                                      & 5. That Player is now a part of team                                              \\
+      Alternative flow                         & \textbullet { A player is already in another team. That player needs to leave his
+      team, see case (14), then the Captain can add that player to his team }                                                      \\
+      Post condition                           & Team captain has now added a player to his team                                   \\
+      Actors                                   & Team captain, Player                                                              \\
+      Author                                   & Elmar Sigmarsson                                                                  \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=5}{l}
+      }
+      Team captain removes a player from their team & 1-2                                                                     \\
+      Number                                        & 13                                                                      \\
+      Priority                                      & A                                                                       \\
+      Precondition                                  & Team captain must have added a player to their team, use case(11)       \\
+      Base flow                                     & 1. Captain logs in, use case (3)                                        \\
+      6-1                                           & 2. Captain selects view team                                            \\
+      7-1                                           & 3. Captain selects remove player                                        \\
+      8-1                                           & 4. Captain inputs Player’s handle                                       \\
+      9-1                                           & 5. Player has been removed from the team                                \\
+      Alternative flow                              & \textbullet { That player removes himself from the team, use case (14)} \\
+      Post condition                                & Team no longer has That Player in their team                            \\
+      Actors                                        & Team captain, Player                                                    \\
+      Author                                        & Elmar Sigmarsson                                                        \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=5}{l}
+      }
+      Player leaves their team & 1-2                                                                         \\
+      Number                   & 14                                                                          \\
+      Priority                 & A                                                                           \\
+      Precondition             & Player needs to be in a team.                                               \\
+      Base flow                & 1. Player logs in, use case (3)                                             \\
+      6-1                      & 2. Player selects view team                                                 \\
+      7-1                      & 3. Player selects leave team                                                \\
+      8-1                      & 4. (Error message/ confirmation)                                            \\
+      9-1                      & 5. Player is no longer a part of any team                                   \\
+      Alternative flow         & \textbullet { Team captain removes player from team, case (12) }            \\
+      Post condition           & The player is no longer a part of any team and can now be picked onto a new
+      team or create his own                                                                                 \\
+      Actors                   & Player                                                                      \\
+      Author                   & Elmar Sigmarsson                                                            \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=6}{l}
+      }
+      Team captain leaving his team & 1-2                                                                               \\
+      Number                        & 15                                                                                \\
+      Priority                      & A                                                                                 \\
+      Precondition                  & Player needs to be a team captain.                                                \\
+      Base flow                     & 1. Captain logs in, use case (3)                                                  \\
+      6-1                           & 2. Captain selects view team                                                      \\
+      7-1                           & 3. Captain selects leave team                                                     \\
+      8-1                           & 4. (Error message/ are you sure)                                                  \\
+      9-1                           & 5. Captain selects a Player from team to become new Captain                       \\
+      10-1                          & 6. The Captain has left the team                                                  \\
+      Alternative flow              & \textbullet { If the team the Captain is leaving has no other players the team is
+      archived, but still has its statistics (wins, etc.) }                                                             \\
+      Post condition                & The Captain is no longer a part of the team and is now has the status of just
+      Player (not in team), and the player he selected has the status team Captain of
+      that team                                                                                                         \\
+      Actors                        & Captain, player                                                                   \\
+      Author                        & Elmar Sigmarsson                                                                  \\
+    \end{tblr}
+
+    \begin{tblr}{
+        colspec = {jX}, columns = {l},
+        vlines, hline{1,2,3,4,5,6,7,8,10,11,12,13,14,15},
+        cell{1}{1}={c=2}{c}, cell{5}{1}={r=3}{l}, cell{8}{1}={r=2}{l}
+      }
+      Any user can see tournaments & 1-2                                                                               \\
+      Number                       & 16                                                                                \\
+      Priority                     & A                                                                                 \\
+      Precondition                 &                                                                                   \\
+      Base flow                    & 1. User selects Tournaments                                                       \\
+      6-1                          & 2. User selects which tournament                                                  \\
+      7-1                          & 3. User is now viewing a specific tournament                                      \\
+      Alternative flow             & \textbullet { There are no tournaments available, the organizer needs to create a
+      tournament, use case (5)}                                                                                        \\
+      9-1                             & \textbullet { A tournament is not published, so the organizer needs to start the
+      tournaments, use case (9) }                                                                                      \\
+      Post condition               & User can now look through that tournament                                         \\
+      Actors                       & Any user                                                                          \\
+      Author                       & Elmar Sigmarsson                                                                  \\
     \end{tblr}
 
     \begin{center}
 
       \begin{tabular}{ | p{2cm} | p{4cm} | }
         \hline
-        \multicolumn{2}{|c|}{Team captain adds a player to their team}                                       \\
+        \multicolumn{2}{|c|}{Any user can see tournaments} \\
         \hline
 
-        Number           & 12                                                                                \\
-        Priority         & A                                                                                 \\
-        Precondition     & Player must have created a team, use case(10)                                     \\
-        Base flow        & 1. Captain logs in, use case (3)                                                  \\
-                         & 2. Captain selects My Team                                                        \\
-                         & 3. Captain selects Add Player to Team                                             \\
-                         & 4. Captain inputs Players Handle                                                  \\
-                         & 5. That Player is now a part of team                                              \\
-        Alternative flow & \textbullet { A player is already in another team. That player needs to leave his
-        team, see case (14), then the Captain can add that player to his team }                              \\
-        Post condition   & Team captain has now added a player to his team                                   \\
-        Actors           & Team captain, Player                                                              \\
-        Author           & Elmar Sigmarsson                                                                  \\
-
-        \hline
-      \end{tabular}
-
-
-      \begin{tabular}{ | p{2cm} | p{4cm} | }
-        \hline
-        \multicolumn{2}{|c|}{Team captain removes a player from their team.}                       \\
-        \hline
-
-        Number           & 13                                                                      \\
-        Priority         & A                                                                       \\
-        Precondition     & Team captain must have added a player to their team, use case(11)       \\
-        Base flow        & 1. Captain logs in, use case (3)                                        \\
-                         & 2. Captain selects view team                                            \\
-                         & 3. Captain selects remove player                                        \\
-                         & 4. Captain inputs Player’s handle                                       \\
-                         & 5. Player has been removed from the team                                \\
-        Alternative flow & \textbullet { That player removes himself from the team, use case (14)} \\
-        Post condition   & Team no longer has That Player in their team                            \\
-        Actors           & Team captain, Player                                                    \\
-        Author           & Elmar Sigmarsson                                                        \\
-
-        \hline
-      \end{tabular}
-
-
-      \begin{tabular}{ | p{2cm} | p{4cm} | }
-        \hline
-        \multicolumn{2}{|c|}{Player leaves their team}                                                 \\
-        \hline
-
-        Number           & 14                                                                          \\
-        Priority         & A                                                                           \\
-        Precondition     & Player needs to be in a team.                                               \\
-        Base flow        & 1. Player logs in, use case (3)                                             \\
-                         & 2. Player selects view team                                                 \\
-                         & 3. Player selects leave team                                                \\
-                         & 4. (Error message/ confirmation)                                            \\
-                         & 5. Player is no longer a part of any team                                   \\
-        Alternative flow & \textbullet { Team captain removes player from team, case (12) }            \\
-        Post condition   & The player is no longer a part of any team and can now be picked onto a new
-        team or create his own                                                                         \\
-        Actors           & Player                                                                      \\
-        Author           & Elmar Sigmarsson                                                            \\
-
-        \hline
-      \end{tabular}
-
-
-      \begin{tabular}{ | p{2cm} | p{4cm} | }
-        \hline
-        \multicolumn{2}{|c|}{Team captain leaving his team.}                                                 \\
-        \hline
-
-        Number           & 15                                                                                \\
-        Priority         & A                                                                                 \\
-        Precondition     & Player needs to be a team captain.                                                \\
-        Base flow        & 1. Captain logs in, use case (3)                                                  \\
-                         & 2. Captain selects view team                                                      \\
-                         & 3. Captain selects leave team                                                     \\
-                         & 4. (Error message/ are you sure)                                                  \\
-                         & 5. Captain selects a Player from team to become new Captain                       \\
-                         & 6. The Captain has left the team                                                  \\
-        Alternative flow & \textbullet { If the team the Captain is leaving has no other players the team is
-        archived, but still has its statistics (wins, etc.) }                                                \\
-        Post condition   & TThe Captain is no longer a part of the team and is now has the status of just
-        Player (not in team), and the player he selected has the status team Captain of
-        that team                                                                                            \\
-        Actors           & Captain, player                                                                   \\
-        Author           & Elmar Sigmarsson                                                                  \\
-
-        \hline
-      \end{tabular}
-
-
-      \begin{tabular}{ | p{2cm} | p{4cm} | }
-        \hline
-        \multicolumn{2}{|c|}{Any user can see tournaments}                                                   \\
-        \hline
-
-        Number           & 16                                                                                \\
-        Priority         & A                                                                                 \\
-        Precondition     &                                                                                   \\
-        Base flow        & 1. User selects Tournaments                                                       \\
-                         & 2. User selects which tournament                                                  \\
-                         & 3. User is now viewing a specific tournament                                      \\
-        Alternative flow & \textbullet { There are no tournaments available, the organizer needs to create a
-        tournament, use case (5)}                                                                            \\
-                         & \textbullet { A tournament is not published, so the organizer needs to start the
-        tournaments, use case (9) }                                                                          \\
-        Post condition   & User can now look through that tournament                                         \\
-        Actors           & Any user                                                                          \\
-        Author           & Elmar Sigmarsson                                                                  \\
 
         \hline
       \end{tabular}

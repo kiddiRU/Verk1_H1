@@ -21,7 +21,7 @@ class PlayerLL():
 
     def set_team_logic(self, team_logic: TeamLL) -> None:
         self._team_logic = team_logic
-    
+
     # TODO Alter validation functionality?
     def create_player(self,
         name: str,
@@ -39,7 +39,7 @@ class PlayerLL():
         Validates the given info and creates a player object. Sends the
         object to the data layer to be stored and returns the new player.
         """
-        
+
         params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
         for attr, value in params.items():
             validate_attr(attr, value.strip(), name_type = 'PLAYER')
@@ -107,10 +107,10 @@ class PlayerLL():
 
         team.list_player_uuid.remove(player.uuid)
         DataLayerAPI.update_team(team.uuid, team)
-    
+
     def promote_captain(self, current_player: Player, handle_to_promote: str) -> None:
         team_to_edit = next((t for t in DataLayerAPI.load_teams() if current_player.uuid == t.team_captain_uuid), None)
-        
+
         if team_to_edit is None:
             raise Exception('You are not a captain!')
 
@@ -119,10 +119,10 @@ class PlayerLL():
 
         if player_to_promote is None:
             raise Exception(f'No player found with the handle: {handle_to_promote}')
-        
+
         if player_to_promote.uuid not in team_to_edit.list_player_uuid:
             raise Exception(f'The player \'{handle_to_promote}\' exists, but is not in your team!')
-        
+
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
@@ -132,7 +132,6 @@ class PlayerLL():
             self.player = player_handle
 
         return self.player
-    
 
     def get_player_team_and_rank(self, player_handle: str) -> tuple[str, str]:
         """Takes in a player handle and returns the name of their team and their rank"""
@@ -147,9 +146,8 @@ class PlayerLL():
                 if team.team_captain_uuid == player_uuid:
                     return team.name, "Captain"
                 return team.name, "Player"
-            
-        return ("","") # This will never be returned (it is just to appease the type hinting gods)
 
+        return ("","") # This will never be returned (it is just to appease the type hinting gods)
 
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
@@ -168,12 +166,11 @@ class PlayerLL():
         for match in model_matches:
             if match.winning_players is None:
                 pass
-            
+
             elif player_uuid in match.winning_players:
                 win_count += 1
 
         return str(win_count)
-    
 
     def get_player_points(self, player_handle: str) -> str:
         """
@@ -205,44 +202,44 @@ class PlayerLL():
 
                 elif losing_players and player_uuid in losing_players:
                     points += 1
-                
+
             except:
                 pass
 
         return str(points)
 
     def list_all_players(self) -> list[Player]:
-            """ Returns a list of stored players. """
+        """ Returns a list of stored players. """
 
-            players: list[Player] = DataLayerAPI.load_players()
-            return players
+        players: list[Player] = DataLayerAPI.load_players()
+        return players
 
     def get_player_by_handle(self, player_handle: str) -> Player | str:
-            ''' Takes in a players UUID and returns the players object. '''
+        ''' Takes in a players UUID and returns the players object. '''
 
-            players: list[Player] = self.list_all_players()
-            player = next((p for p in players if p.handle == player_handle), None)
+        players: list[Player] = self.list_all_players()
+        player = next((p for p in players if p.handle == player_handle), None)
 
-            if player is None:
-                return ""
+        if player is None:
+            return ""
 
-            return player
+        return player
 
     def get_player_by_uuid(self, player_uuid: str) -> Player | str:
-            ''' Takes in a players UUID and returns the players object. '''
+        ''' Takes in a players UUID and returns the players object. '''
 
-            players: list[Player] = self.list_all_players()
-            player = next((p for p in players if p.uuid == player_uuid), None)
-            
-            if player is None:
-                return ""
+        players: list[Player] = self.list_all_players()
+        player = next((p for p in players if p.uuid == player_uuid), None)
 
-            return player
+        if player is None:
+            return ""
+
+        return player
 
     def player_handle_to_uuid(self, player_handle: str) -> str:
         player: Player | str = self.get_player_by_handle(player_handle)
         return player.uuid if type(player) == Player else ''
-    
+
     def get_players_team_uuid(self, player_uuid: str) -> str:
         """
         Takes in player handle
@@ -254,5 +251,34 @@ class PlayerLL():
         for team in model_teams:
             if player_uuid in team.list_player_uuid:
                 return team.uuid
-            
+
         return ""
+
+    # Created By Ísak
+    def get_all_players_not_in_team(self) -> list[Player]:
+        """
+        Gets all players that are not apart of any teams
+        
+        :return: A list of Player objects that are not apart of any teams
+        :rtype: list[Player]
+        """
+
+        # Gets all players and gets all teams
+        all_players: list[Player] = DataLayerAPI.load_players()
+        model_teams: list[Team] = DataLayerAPI.load_teams()
+
+        # Setup set and list to add to when filtering
+        no_team: list[Player] = []
+        players_in_teams: set[str] = set()
+        
+        # Loops through all teams and adds all players to a set
+        for team in model_teams:
+            for player in team.list_player_uuid:
+                players_in_teams.add(player)
+
+        # Loops through all player uuid's and if not in any team then add to list
+        for player in all_players:
+            if player.uuid not in players_in_teams:
+                no_team.append(player)
+
+        return no_team

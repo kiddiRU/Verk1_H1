@@ -457,7 +457,23 @@ class SpectateUI:
             MenuOptions.teams_in_tournament,
         ]
 
-        info: list[str] = teams_in_tournament
+        unique_names: list[str] = teams_in_tournament
+
+        output_list: list[str] = []  # list that holds each line as a f-string
+
+        length: int = len(unique_names)
+
+        for value in range(0, len(unique_names), 2):
+            left = unique_names[value]
+            if value + 1 < length:
+
+                right = unique_names[value + 1]
+                output_list.append(f"{left:<39}|{right:<39}|")
+
+            else:  # odd number, last item has no pair
+                output_list.append(f"{left:<39}|{" ":<39}|")
+
+        info: list[str] = output_list
 
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Team Not Found!"

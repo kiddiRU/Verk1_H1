@@ -104,6 +104,15 @@ def player_handle_to_uuid(player_handle: str) -> str:
 def get_players_team_uuid(player_uuid: str) -> str:
     return player_logic.get_players_team_uuid(player_uuid)
 
+def get_all_players_not_in_team() -> list[Player]:
+    """
+    Gets all players that are not apart of any teams
+    
+    :return: A list of Player objects that are not apart of any teams
+    :rtype: list[Player]
+    """
+    return player_logic.get_all_players_not_in_team()
+
 ''' Team API '''
 
 def create_team(name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
