@@ -247,14 +247,14 @@ Choose Action:
 ```
 
 
-### Manage Unactive Tournament
+### Manage Inactive Tournament
 
 ```
 
 
-ManageTournaments -> ManageUnactiveTournaments
+ManageTournaments -> ManageInactiveTournaments
 ————————————————————————————————————————————————————————————————————————————————
-                         Manage Unactive Tournaments
+                         Manage Inactive Tournaments
 ————————————————————————————————————————————————————————————————————————————————
 - - - -TorunamentName- - - -
 
@@ -313,7 +313,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 
 ```
 
-ManageTournaments -> ManageUnactiveTournament -> Publish
+ManageTournaments -> ManageInactiveTournament -> Publish
 ————————————————————————————————————————————————————————————————————————————————
                                     Publish 
 ————————————————————————————————————————————————————————————————————————————————
@@ -339,7 +339,7 @@ Choose Action:
 ```
 
 
-ManageTournaments -> ManageUnactiveTournament -> EditTournament
+ManageTournaments -> ManageInactiveTournament -> EditTournament
 ————————————————————————————————————————————————————————————————————————————————
 					             Edit Tournament
 ————————————————————————————————————————————————————————————————————————————————
@@ -367,7 +367,7 @@ Choose Action:
 ```
 
 
-ManageTournaments -> ManageUnactiveTournament -> ManageTeams
+ManageTournaments -> ManageInactiveTournament -> ManageTeams
 ————————————————————————————————————————————————————————————————————————————————
                                 Manage Teams
 ————————————————————————————————————————————————————————————————————————————————
@@ -407,7 +407,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 ```
 
 
-ManageTournaments -> ManageUnactiveTournament -> ManageTeams -> AddTeam
+ManageTournaments -> ManageInactiveTournament -> ManageTeams -> AddTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Add Team
 ————————————————————————————————————————————————————————————————————————————————
@@ -453,7 +453,7 @@ makes the program more user forgiving and COULD be easier to save the informatio
 ```
 
 
-ManageTournaments -> ManageUnactiveTournament -> ManageTeams -> RemoveTeam
+ManageTournaments -> ManageInactiveTournament -> ManageTeams -> RemoveTeam
 ————————————————————————————————————————————————————————————————————————————————
                                 Remove Team
 ————————————————————————————————————————————————————————————————————————————————

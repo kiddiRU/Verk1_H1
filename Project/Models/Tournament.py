@@ -6,6 +6,7 @@ Tournament Model Class
 
 Contributor:
     Kristinn Hrafn <kristinnd25@ru.is>
+    Ísak Elí Hauksson <isak25@ru.is>
 """
 
 from enum import StrEnum
@@ -13,7 +14,44 @@ from datetime import date, time
 
 
 class Tournament:
-    """Tournament Model Class"""
+    """
+    Represents a tournament including its schedule, venue, servers, and teams.
+
+    Each tournament has a unique identifier and name. Tracks start/end dates,
+    daily timeframes, contact info, status, list of servers,
+    and participating teams.
+
+    :param uuid: Unique identifier for the tournament
+    :type uuid: str
+    :param name: Unique tournament name
+    :type name: str
+    :param start_date: Tournament start date (YYYY-MM-DD)
+    :type start_date: date
+    :param end_date: Tournament end date (YYYY-MM-DD)
+    :type end_date: date
+    :param venue: Location of the tournament
+    :type venue: str
+    :param email: Tournament email (max 39 characters)
+    :type email: str
+    :param phone_number: Tournament phone number (format: 000-0000)
+    :type phone_number: str
+    :param time_frame_start: Daily start time of tournament, defaults to 08:00
+    :type time_frame_start: time, optional
+    :param time_frame_end: Daily end time of tournament, defaults to 16:00
+    :type time_frame_end: time, optional
+    :param status: Tournament status (active, inactive, archived),
+    defaults to inactive
+    :type status: Tournament.StatusType, optional
+    :param number_of_servers: Number of servers to assign if list_servers
+    is not provided
+    :type number_of_servers: int, optional
+    :param list_servers: List of server UUIDs, defaults to empty list
+    :type list_servers: list[str], optional
+    :param teams_playing: List of team UUIDs participating in
+    tournament, defaults to empty list
+    :type teams_playing: list[str], optional
+    :rtype: None
+    """
 
     class StatusType(StrEnum):
         active = "ACTIVE"
@@ -37,30 +75,29 @@ class Tournament:
         teams_playing: list[str] = [],
     ) -> None:
         """
-        The initialization function of the Tournament model class
+        Initialize a Tournament instance.
 
-        Args:
-            uuid (str): unique identifier
-            name (str): Unique name for the tournament
-            start_date (date): Start date of the tournament (YYYY-MM-DD)
-            end_date (date): End date of the tournament (YYYY-MM-DD)
-            venue (str): Location of the tournament
-            email (str): Tournament email (length <= 64)
-            phone_number (str): Tournament phone number
-                        (length of 8  = 000-0000)
-            time_frame_start (time, optional): Start of the event per day.
-                        Defaults to time(hour=8,minute=0).
-            time_frame_end (time, optional): End of the event per day.
-                        Defaults to time(hour=16,minute=0).
-            status (StatusType, optional): Tournament status.
-                        Defaults to StatusType.inactive.
-            number_of_servers: (int):
-                        Defaults to 1. Don't pass if passing list_servers.
-            list_servers (list[str], optional):
-                        List containing uuid's of servers. Defaults to [].
-                        Don't pass if passing number_of_servers.
-            teams_playing (list[str], optional):
-                        List containing uuid's of teams. Defaults to [].
+        Sets up tournament properties including schedule,
+        servers, teams, and contact info.
+
+        :param uuid: Unique identifier for the tournament
+        :param name: Unique tournament name
+        :param start_date: Tournament start date (YYYY-MM-DD)
+        :param end_date: Tournament end date (YYYY-MM-DD)
+        :param venue: Location of the tournament
+        :param email: Tournament email (max 39 characters)
+        :param phone_number: Tournament phone number (format: 000-0000)
+        :param time_frame_start: Daily start time of tournament,
+        defaults to 08:00
+        :param time_frame_end: Daily end time of tournament, defaults to 16:00
+        :param status: Tournament status (active, inactive, archived),
+        defaults to inactive
+        :param number_of_servers: Number of servers to assign if
+        list_servers is not provided
+        :param list_servers: List of server UUIDs, defaults to empty list
+        :param teams_playing: List of team UUIDs participating in tournament,
+        defaults to empty list
+        :rtype: None
         """
 
         self.uuid = uuid

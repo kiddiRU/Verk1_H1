@@ -43,7 +43,7 @@ interface ManageTournaments{
   b: Back
 }
 
-interface ManageUnactiveTournament{
+interface ManageInactiveTournament{
   1. Manage Teams
   2. Publish
   3. Edit Tournament
@@ -401,14 +401,14 @@ AdminPage "1"-- CreateTournament
 AdminPage "2"-- ManageTournaments
 AdminPage "3"-- CreateClub
 
-CreateTournament "c: Continue"--> ManageUnactiveTournament
+CreateTournament "c: Continue"--> ManageInactiveTournament
 
-ManageTournaments -- ManageUnactiveTournament : if tournament is unactive
+ManageTournaments -- ManageInactiveTournament : if tournament is inactive
 ManageTournaments -- ManageActiveTournament : if tournament is active
 
-ManageUnactiveTournament "1"-- ManageTeams
-ManageUnactiveTournament "2"-- Publish
-ManageUnactiveTournament "3"-- EditTournament
+ManageInactiveTournament "1"-- ManageTeams
+ManageInactiveTournament "2"-- Publish
+ManageInactiveTournament "3"-- EditTournament
 
 ManageTeams "1"-- AddTeam
 ManageTeams "2"-- RemoveTeam
