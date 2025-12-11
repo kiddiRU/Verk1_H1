@@ -122,7 +122,7 @@ class PlayerUI:
                 return MenuOptions.ADMIN_SCREEN
             case "Shrek":
                 return MenuOptions.ONION
-            case "masterpiece":
+            case "Carlos Ray":
                 return MenuOptions.MASTERPIECE
 
         # If handle not found, show error message.
