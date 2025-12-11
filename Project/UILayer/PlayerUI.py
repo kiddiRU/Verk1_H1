@@ -341,7 +341,7 @@ class PlayerUI:
         if final_choice == "b":
             return MenuOptions.START_SCREEN
 
-        # If the user saves the registration 
+        # If the user saves the registration
         # it creates a new player in the system
         LogicLayerAPI.create_player(
             user_name,
@@ -1528,8 +1528,6 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMM
             print("YAY")
             input("BYE BYE ⊂(◉‿◉)つ")
             return MenuOptions.START_SCREEN
-        elif like.lower() != "n":
-            MenuOptions.START_SCREEN
 
         print("\033[31m" + "Deleting File And System" + "\033[0m")
         return MenuOptions.QUIT
