@@ -24,7 +24,7 @@ class TournamentLL:
         start_date: date,
         end_date: date,
         time_frame_start: time,
-        time_frame_end: time, 
+        time_frame_end: time,
         venue: str,
         email: str,
         phone_number: str,
@@ -237,11 +237,11 @@ class TournamentLL:
 
         if len(matches) == 0:
             raise ValidationError("No matches tied to tournament.")
-        
+
         # Finds all teams competing in the tournament which havent lost already.
         # These are the teams which will be competing in the next round.
         competing_teams: list[str] = []
-        
+
         # For each team it will loop through each match, if it doesn't find a
         # match where the team lost then it's a competing team, otherwise it
         # isn't.
@@ -265,10 +265,10 @@ class TournamentLL:
 
         # Shuffles the teams randomly for matchmaking.
         random.shuffle(competing_teams)
-        
+
         # Gets the list of matches which can be used for the next round.
         matches = [match for match in matches if match.winner == None]
-    
+
         # Loops through the competing teams assigning teams next to eachother
         # to compete against eachother, in case of odd number of teams the
         # last team in the list will have a bye round.
@@ -293,7 +293,7 @@ class TournamentLL:
         """
         uuid = self.tournament_name_to_uuid(name)
 
-        tournament = self.get_tournament_by_uuid(uuid) 
+        tournament = self.get_tournament_by_uuid(uuid)
 
         if tournament.status != Tournament.StatusType.inactive:
             raise ValidationError("Tournament isn't inactive.")
@@ -336,7 +336,7 @@ class TournamentLL:
                     times_used.append(current_datetime)
 
                 rounds -= to_use
-                
+
                 # Here I find the next time slot to use.
                 current_datetime += one_hour
                 # If the current time is equal to the end of the tournaments
@@ -347,7 +347,7 @@ class TournamentLL:
                     # for tournaments to be able to run past midnight.
                     if tournament.time_frame_start < tournament.time_frame_end:
                         current_datetime += one_day
-                    
+
                     current_datetime = datetime.combine(
                             date = current_datetime.date(),
                             time = tournament.time_frame_start
@@ -414,7 +414,7 @@ class TournamentLL:
         matches = self._match_logic.get_matches(uuid)
 
         # Ignores all matches which have a winner.
-        matches = [match for match in matches if match.winner == None]
+        matches = [match for match in matches if match.winner is None]
 
         # Ignores all matches which happen after the first match without
         # a winner.
@@ -448,12 +448,12 @@ class TournamentLL:
         :param team_uuid:
             The uuid of the winner.
         """
-        
+
         tournament = self.get_tournament_by_uuid(tournament_uuid)
 
         # Updates the match.
         self._match_logic.change_match_winner(match_uuid, team_uuid)
-        
+
         matches: list[Match] = self._match_logic.get_matches(tournament_uuid)
 
         # Finds the updated match in matches list
@@ -500,8 +500,8 @@ class TournamentLL:
                     teams_list.append(self._team_logic.get_team_by_uuid(team_uuid))
 
         return teams_list
-    
-    
+
+
     def to_time(self, value: str) -> time:
         # Split into parts
         parts = value.split(":")

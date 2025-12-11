@@ -7,9 +7,9 @@ Minor change: Andri Már Kristjánsson <andrik25@ru.is>
 Logic layer API.
 """
 
+from datetime import date, time
 from Models import Club, Match, Player, Team, Tournament
 from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, MatchLL, Validation
-from datetime import date, time
 
 team_logic = TeamLL()
 match_logic = MatchLL()
