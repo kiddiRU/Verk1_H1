@@ -14,7 +14,7 @@ from DataLayer import DataLayerAPI
 from datetime import date,time
 
 
-def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
 
     for char in value:
         if (ord(char) < 32 or ord(char) > 126) and not char.isalpha:
