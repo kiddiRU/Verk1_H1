@@ -188,16 +188,16 @@ class SpectateUI:
             MenuOptions.view_club_stats,
         ]
 
-        infoA: list[str] = [f"Teams:\n{80 * "—"}"] + self.utility.show_filtered(
-            LogicLayerAPI.get_teams_in_club(club_name)
+        info_a: list[str] = [f"Teams:\n{80 * "—"}"] + self.utility.string_to_table(
+            self.utility.object_to_string(LogicLayerAPI.get_teams_in_club(club_name))
         )
-        infoB: list[str] = [
+        info_b: list[str] = [
             f"{80 * "—"}\n"
             f"Color: " + LogicLayerAPI.get_club_by_name(club_name).club_color,
             f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
             f"Points: " + LogicLayerAPI.get_club_points(club_name),
         ]
-        info = infoA + infoB
+        info = info_a + info_b
         options: dict[str, str] = {}
         message: str = ""
 
@@ -262,17 +262,19 @@ class SpectateUI:
             MenuOptions.view_team_stats,
         ]
 
-        infoA: list[str] = [
+        info_a: list[str] = [
             "Club: " + LogicLayerAPI.get_team_club(team_name),
             "Wins: " + LogicLayerAPI.get_team_wins(team_name),
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
-        infoB: list[str] = [
+        info_b: list[str] = [
             f"Team Members:\n{80 * "-"}"
-        ] + self.utility.show_filtered(
-            LogicLayerAPI.get_team_members_object(team_name)
+        ] + self.utility.string_to_table(self.utility.object_to_string(LogicLayerAPI.get_team_members_object(team_name))
         )
-        info: list[str] = infoA + infoB
+        info_c: list[str] = [f"{80 * "*"}"] + [
+            f"Tournament History:\n{80 * "-"}"
+        ] + self.utility.string_to_table(LogicLayerAPI.get_team_history(team_name))
+        info: list[str] = info_a + info_b + info_c
         options: dict[str, str] = {}
         message: str = ""
 
@@ -528,20 +530,21 @@ class SpectateUI:
             MenuOptions.team_tournament_stats,
         ]
 
-        infoA: list[str] = [
+        info_a: list[str] = [
             "Club: " + LogicLayerAPI.get_team_club(team_name),
             "Wins: " + LogicLayerAPI.get_team_wins(team_name),
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
-        infoB: list[str] = [
+        info_b: list[str] = [
             f"Team Members:\n{80 * "-"}"
-        ] + self.utility.show_filtered(
-            LogicLayerAPI.get_team_members_object(team_name)
+        ] + self.utility.string_to_table(
+            self.utility.object_to_string(
+                LogicLayerAPI.get_team_members_object(team_name))
         )
 
         # Table design
 
-        info: list[str] = infoA + infoB
+        info: list[str] = info_a + info_b
         options: dict[str, str] = {}
         message: str = ""
 
