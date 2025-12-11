@@ -45,8 +45,12 @@ class MainUI:
             MenuOptions.CREATE_TOURNAMENT: self._admin_ui.create_tournament,
             MenuOptions.MANAGE_TOURNAMENT: self._admin_ui.manage_tournaments,
             MenuOptions.CREATE_CLUB: self._admin_ui.create_club,
-            MenuOptions.MANAGE_INACTIVE_TOURNAMENT: self._admin_ui.manage_inactive_tournament,
-            MenuOptions.MANAGE_ACTIVE_TOURNAMENT: self._admin_ui.manage_active_tournament,
+            MenuOptions.MANAGE_INACTIVE_TOURNAMENT: (
+                self._admin_ui.manage_inactive_tournament
+            ),
+            MenuOptions.MANAGE_ACTIVE_TOURNAMENT: (
+                self._admin_ui.manage_active_tournament
+            ),
             MenuOptions.SELECT_MATCH: self._admin_ui.matches,
             MenuOptions.INPUT_RESULTS: self._admin_ui.match_results,
             MenuOptions.MANAGE_TEAMS: self._admin_ui.manage_teams,
@@ -63,7 +67,9 @@ class MainUI:
             MenuOptions.ADD_PLAYER: self._player_ui.add_player,
             MenuOptions.REMOVE_PLAYER: self._player_ui.remove_player,
             MenuOptions.LEAVE_TEAM: self._player_ui.leave_team,
-            MenuOptions.CREATE_TEAM_IN_TEAM: self._player_ui.create_team_in_team,
+            MenuOptions.CREATE_TEAM_IN_TEAM: (
+                self._player_ui.create_team_in_team
+            ),
             # ------------------ Spectate Paths ------------------
             MenuOptions.SPECTATE_PLAYERS: self._spectate_ui.spectate_players,
             MenuOptions.VIEW_PLAYER_STATS: self._spectate_ui.view_player_stats,
@@ -71,12 +77,20 @@ class MainUI:
             MenuOptions.VIEW_CLUB_STATS: self._spectate_ui.view_club_stats,
             MenuOptions.SPECTATE_TEAMS: self._spectate_ui.spectate_teams,
             MenuOptions.VIEW_TEAM_STATS: self._spectate_ui.view_team_stats,
-            MenuOptions.SPECTATE_TOURNAMENTS: self._spectate_ui.spectate_tournaments,
+            MenuOptions.SPECTATE_TOURNAMENTS: (
+                self._spectate_ui.spectate_tournaments
+            ),
             MenuOptions.ACTIVE_TOURNAMENT: self._spectate_ui.active_tournament,
-            MenuOptions.ARCHIVED_TOURNAMENT: self._spectate_ui.archived_tournament,
+            MenuOptions.ARCHIVED_TOURNAMENT: (
+                self._spectate_ui.archived_tournament
+            ),
             MenuOptions.GAME_SCHEDULE: self._spectate_ui.game_schedule,
-            MenuOptions.TEAMS_IN_TOURNAMENT: self._spectate_ui.teams_in_tournament,
-            MenuOptions.TEAM_TOURNAMENT_STATS: self._spectate_ui.team_tournament_stats,
+            MenuOptions.TEAMS_IN_TOURNAMENT: (
+                self._spectate_ui.teams_in_tournament
+            ),
+            MenuOptions.TEAM_TOURNAMENT_STATS: (
+                self._spectate_ui.team_tournament_stats
+            ),
             # ------------------ Misc Paths ------------------
             MenuOptions.LOGOUT: self._player_ui.start_screen,
         }
@@ -96,7 +110,10 @@ class MainUI:
         return MenuOptions.START_SCREEN
 
     def run(self) -> None:
-        """Loops through user input and returns the user to the corresponding screen"""
+        """
+        Loops through user input and returns the user
+        to the corresponding screen
+        """
 
         while True:
             if self.screens.get(self.current_screen) is not None:
