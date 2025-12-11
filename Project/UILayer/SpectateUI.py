@@ -389,7 +389,8 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str | None = LogicLayerAPI.save_player()
-        if tournament_name is None: return MenuOptions.START_SCREEN
+        if tournament_name is None:
+            return MenuOptions.START_SCREEN
         tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
         tournament_uuid: str = tournament_object.uuid
 

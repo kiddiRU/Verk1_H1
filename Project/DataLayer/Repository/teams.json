@@ -187,8 +187,7 @@
             "b855860c-dd67-4f5f-af94-4730fef94e8a",
             "5dbe517b-4715-4f08-aa75-d91bb0d6eae6",
             "398550f8-bb2b-46da-8527-974e6b5bd0d2",
-            "150e7677-fd69-4695-84c7-71a1b07fa31b",
-            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+            "150e7677-fd69-4695-84c7-71a1b07fa31b"
         ],
         "team_captain_uuid": "b855860c-dd67-4f5f-af94-4730fef94e8a",
         "club_uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
@@ -265,7 +264,8 @@
         "name": "FuckersTeam",
         "list_player_uuid": [
             "32d89d9f-b555-4311-a104-d8009eec5b76",
-            "f0425fa5-8ab1-42a4-a485-2bbba452127d"
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
         ],
         "team_captain_uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
         "club_uuid": "269fcfc5-f629-4921-af37-0c592373717c",

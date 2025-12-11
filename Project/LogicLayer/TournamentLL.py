@@ -134,54 +134,74 @@ class TournamentLL:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
 
-    def end_tournament(self, uuid: str) -> None:
-        """
-        Parameters: uuid of tournament
+    def uuid_to_tournament(self, uuid: str) -> Tournament:
+        """Looks for a tournament with a specific uuid.
 
-        Archives the tournament tied to the given uuid and releases
-        it's servers.
+        :param uuid:
+            The uuid of the tournament you want to get.
+
+        :returns:
+            The tournament object found.
         """
         
-        #print("debug: got into end tournament")
-        #input()
-
-        # Looks for the tournament with the given uuid.
+        # Loads all tournaments to look through.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+
+        # If a tournament in the list has the same uuid as the uuid given,
+        # then it is returned.
         for item in tournaments:
             if item.uuid == uuid:
-                tournament: Tournament = item
-                break
+                return item
+        
+        # Otherwise I raise an error message to let know it wasn't found.
         else:
             raise ValidationError("Tournament with given uuid not found.")
+
+
+    def end_tournament(self, uuid: str) -> None:
+        """Ends an active tournament.
+
+        Finds the tournament with the same uuid as the uuid given, sets
+        it's status to archived and releases it's servers, the tournament
+        has to be active to be able to end it.
+
+        :param uuid:
+            The uuid of the tournament to update.
+        """
         
+        tournament = self.uuid_to_tournament(uuid)
+
+        # Checking to make sure the tournament is active.
+        if tournament.status != Tournament.StatusType.active:
+            raise ValidationError("Can't end tournaments that aren't active.")
+        
+        # Setting the tournaments status to archived.
         tournament.status = Tournament.StatusType.archived
+
+        # Releasing all servers from the tournament.
         for idx, _ in enumerate(tournament.list_servers):
             tournament.list_servers[idx] = "NoServer"
 
+        # Saves the changes made to the tournament.
         DataLayerAPI.update_tournament(uuid, tournament)
 
 
     def next_round(self, uuid: str) -> None:
+        """Moves a tournament to the next round.
+
+        Moves a tournament to the next round by removing all teams that lost
+        in the current round and pairing the rest of the teams into matches.
+        This is also used to matchmake the first round, if the tournament
+        just finished the last round it will end the tournament.
+
+        :param uuid:
+            The uuid of the tournament that will move to the next round.
         """
-        Parameters: uuid of tournament which will proceed to next round
 
-        This can be called when all matches of current round have a winner
-        and will fill future matches with a teams competing.
-        """
+        tournament = self.uuid_to_tournament(uuid)
 
-        #print("debug: got into next round")
-        #input()
-        
-        # Looks for the tournament with the given uuid.
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        for item in tournaments:
-            if item.uuid == uuid:
-                tournament: Tournament = item
-                break
-        else:
-            raise ValidationError("Tournament with given uuid not found.")
-
-        # Gets all matches tied to the tournament.
+        # Gets all matches tied to the tournament, this list is
+        # in sorted order according to match date and time.
         matches: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
         if len(matches) == 0:
@@ -190,6 +210,10 @@ class TournamentLL:
         # Finds all teams competing in the tournament which havent lost already.
         # These are the teams which will be competing in the next round.
         competing_teams: list[str] = []
+        
+        # For each team it will loop through each match, if it doesn't find a
+        # match where the team lost then it's a competing team, otherwise it
+        # isn't.
         for team in tournament.teams_playing:
             for match in matches:
                 if match.winner == None: continue
@@ -199,12 +223,11 @@ class TournamentLL:
             else:
                 competing_teams.append(team)
 
-        #print("debug", competing_teams)
-        #input()
 
         if len(competing_teams) == 0:
             raise ValidationError("No teams found to compete.")
 
+        # If there is only one team left then the tournament is over.
         if len(competing_teams) == 1:
             self.end_tournament(uuid)
             return None
@@ -212,8 +235,7 @@ class TournamentLL:
         # Shuffles the teams randomly for matchmaking.
         random.shuffle(competing_teams)
         
-        # Gets the list of available matches, matches which haven't
-        # been assigned a winner.
+        # Gets the list of matches which can be used for the next round.
         matches = [match for match in matches if match.winner == None]
     
         # Loops through the competing teams assigning teams next to eachother
@@ -240,15 +262,7 @@ class TournamentLL:
         """
         uuid = self.tournament_name_to_uuid(name)
 
-        # Gets the tournament with the given uuid.
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-
-        for item in tournaments:
-            if item.uuid == uuid:
-                tournament: Tournament = item
-                break
-        else:
-            raise ValidationError("Tournament tied to uuid not found.") 
+        tournament = self.uuid_to_tournament(uuid) 
 
         if tournament.status != Tournament.StatusType.inactive:
             raise ValidationError("Tournament isn't inactive.")
@@ -256,7 +270,9 @@ class TournamentLL:
         # Changes status from inactive to active
         tournament.status = Tournament.StatusType.active
 
-        # Calculates how many matches are needed for each round.
+        # Calculates how many matches are needed for each round
+        # by simulating each round and counting how many matches
+        # are held each round.
         number_of_players: int = len(tournament.teams_playing)
         matches_per_round: list[int] = []
 
@@ -264,10 +280,11 @@ class TournamentLL:
             matches_per_round.append(number_of_players // 2)
             number_of_players -= matches_per_round[-1]
 
-        # Calculates which times should be used for matches in the tournament.
-        # Every match in a certain round should have finished before starting
-        # matches in the next round.
-        # Time slots for matches should respect the tournament time frame.
+
+        # Calculates which timeslots should be used for matches in the
+        # tournament. Every match in a certain round should have finished
+        # before starting matches in the next round. Time slots for matches
+        # should respect the tournament time frame.
         times_used: list[datetime] = []
         one_day: timedelta = timedelta(days=1)
         one_hour: timedelta = timedelta(hours=1)
@@ -278,14 +295,25 @@ class TournamentLL:
 
         for rounds in matches_per_round:
             while 0 < rounds:
+                # If the amount of matches left in a round is less then the
+                # amount of servers then I only have to create that many
+                # matches to finish the round, otherwise I can only create
+                # amount of matches equal to the amount servers in a single
+                # time slot.
                 to_use: int = min(rounds, len(tournament.list_servers))
                 for _ in range(to_use):
                     times_used.append(current_datetime)
 
                 rounds -= to_use
-
+                
+                # Here I find the next time slot to use.
                 current_datetime += one_hour
-                if current_datetime.time() >= tournament.time_frame_end:
+                # If the current time is equal to the end of the tournaments
+                # time frame I have to jump to the next day/timeframe
+                if current_datetime.time() == tournament.time_frame_end:
+                    # Only if the start of the time frame is less than the end
+                    # of the time frame do I have to add a day, this allows
+                    # for tournaments to be able to run past midnight.
                     if tournament.time_frame_start < tournament.time_frame_end:
                         current_datetime += one_day
                     
@@ -294,6 +322,8 @@ class TournamentLL:
                             time = tournament.time_frame_start
                     )
 
+        # Raises an error if no time slots are created or the last time slots
+        # runs past the runtime of the tournament.
         if len(times_used) == 0:
             raise ValidationError("No available time slots to use.")
 
@@ -303,7 +333,8 @@ class TournamentLL:
             ):
             raise ValidationError("Too little time for tournament")
 
-        # Creates the matches needed.
+        # Creates the matches needed, teams will not be filled in until
+        # next_round is called.
         for match_datetime in times_used:
             self._match_logic.create_match(
                     tournament_id = uuid,
@@ -315,7 +346,8 @@ class TournamentLL:
 
         matches = self._match_logic.get_matches(tournament.uuid)
 
-        # Creates servers for the tournament.
+        # Creates servers for the tournament, adds the first matches into the
+        # tournament.
         for idx, _ in enumerate(tournament.list_servers):
             new_server = Server(str(uuid4()), matches[idx].uuid)
             tournament.list_servers[idx] = new_server.uuid
@@ -342,16 +374,8 @@ class TournamentLL:
         :returns:
             The list of matches next on the schedule.
         """
-        
-        # Finds the tournament with a given uuid.
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-
-        for item in tournaments:
-            if item.uuid == uuid:
-                tournament: Tournament = item
-                break
-        else:
-            raise ValidationError("Tournament with given uuid not found.")
+       
+        tournament = self.uuid_to_tournament(uuid)
        
         if tournament.status != Tournament.StatusType.active:
             raise ValidationError("Tournament isn't active.")
@@ -361,8 +385,9 @@ class TournamentLL:
     
         # Ignores all matches which have a winner.
         matches = [match for match in matches if match.winner == None]
-        # Ignores all matches which happen after
-        # the first match without a winner.
+
+        # Ignores all matches which happen after the first match without
+        # a winner.
         matches = [
                 match for match in matches
                 if match.match_date == matches[0].match_date and
@@ -393,17 +418,10 @@ class TournamentLL:
         :param team_uuid:
             The uuid of the winner.
         """
-        # Finds the tournament with a given uuid.
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        
+        tournament = self.uuid_to_tournament(tournament_uuid)
 
-        for item in tournaments:
-            if item.uuid == tournament_uuid:
-                tournament: Tournament = item
-                break
-        else:
-            raise ValidationError("Tournament with given uuid not found.")
-
-        # Updates match itself
+        # Updates the match.
         self._match_logic.change_match_winner(match_uuid, team_uuid)
         
         matches: list[Match] = self._match_logic.get_matches(tournament_uuid)
@@ -417,7 +435,7 @@ class TournamentLL:
         else:
             raise ValidationError("Match with given uuid not found.")
 
-        # Assign a new match to the server that was in use if needed.
+        # Assigns a new match to the server that was in used if needed.
         j: int = i + len(tournament.list_servers)
         servers: list[Server] = DataLayerAPI.load_servers()
         for server in servers:
@@ -431,12 +449,9 @@ class TournamentLL:
         else:
             raise ValidationError("Tournament server error.")
 
-
         # Checks if the finished match results in a new round
         if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
             self.next_round(tournament_uuid)
-
-
 
 
     def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:

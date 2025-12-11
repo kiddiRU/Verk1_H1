@@ -480,12 +480,13 @@ class AdminUI:
         team1_uuid = team1.uuid
         team2_uuid = team2.uuid
 
-        if type(tournament_name) is str:
+        if isinstance(tournament_name, str):
             current_tournament: Tournament = LogicLayerAPI.get_tournament_by_name(tournament_name)
             tournament_id: str = current_tournament.uuid
 
-            current_match: Match | str = LogicLayerAPI.get_match(tournament_id, team1_uuid, team2_uuid)
-            if type(current_match) is Match:
+            current_match: Match | str = LogicLayerAPI.get_match(
+                tournament_id, team1_uuid, team2_uuid)
+            if isinstance(current_match, Match):
                 match_uuid: str = current_match.uuid
                 if winner is not None:
                     winner_team: Team = LogicLayerAPI.get_team_by_name(winner)
@@ -566,15 +567,12 @@ class AdminUI:
 
         # Get tournament Object from name
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
-                tournament_name
-            )
-        ]
+            t.name for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name)]
+
 
         tournament_object: Tournament | None = (
-            LogicLayerAPI.get_tournament_by_name(tournament_name)
-        )
+            LogicLayerAPI.get_tournament_by_name(tournament_name))
+        
         if tournament_object is None:  # Check if None goes through
             return MenuOptions.START_SCREEN
 
@@ -586,12 +584,16 @@ class AdminUI:
             MenuOptions.MANAGE_TEAMS,
         ]
 
-        info: list = teams_in_tournament
+        info: list = []
         options: dict[str, str] = {
             "1": "Add Team",
             "2": "Remove Team",
-            "b": "Back",
-        }
+            "b": "Back"}
+        
+        x = 0
+        for t in LogicLayerAPI.get_teams_from_tournament_name(tournament_name):
+            x += 1
+            info.append((f"{(str(x) + ". "): <4}" + t.name))
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
