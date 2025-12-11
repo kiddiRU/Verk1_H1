@@ -7,7 +7,6 @@ Collaborator: Sindri Freysson <Sindrif25@ru.is>
 File that holds the main state machine.
 """
 
-import os
 from UILayer.UtilityUI import UtilityUI
 from UILayer.AdminUI import AdminUI
 from UILayer.PlayerUI import PlayerUI
@@ -19,7 +18,12 @@ class MainUI:
     """Main UI State Machine"""
 
     def __init__(self) -> None:
-        """Initializes the class"""
+        """
+        Initializes the UI controller.
+
+        Sets up references to all UI classes and creates a mapping from
+        MenuOptions to the corresponding screen-handling functions.
+        """
         self.player_username: str | None = None
         self.team_name: str | None = None
         self._utility_ui: UtilityUI = UtilityUI()
@@ -28,6 +32,7 @@ class MainUI:
         self._spectate_ui: SpectateUI = SpectateUI()
         self.current_screen: MenuOptions = MenuOptions.start_screen
 
+        # Holds a map of corresponding screens
         self.screens = {
             MenuOptions.start_screen: self._player_ui.start_screen,
             MenuOptions.login: self._player_ui.login_screen,
@@ -79,16 +84,24 @@ class MainUI:
             MenuOptions.logout: self._player_ui.start_screen,
         }
 
-    def __clear(self):
-        """Helper function that clears the screen"""
+    def screen_not_exist_error(self) -> MenuOptions:
+        """
+        A screen that shows up if the
+        main ui state machine cant find any screen
+        (NOTE: Should never happen)
 
-        os.system('cls' if os.name == 'nt' else 'clear')
+        :return: The next screen to go to
+        :rtype: MenuOptions
+        """
+
+        print("Screen doesn't exist")
+        input("Input anything to go back to start: ")
+        return MenuOptions.start_screen
 
     def run(self) -> None:
-        """Main navigation loop"""
+        """Loops through user input and returns the user to the corresponding screen"""
 
         while True:
-
             if self.screens.get(self.current_screen) is not None:
                 self.current_screen = self.screens[self.current_screen]()
 
@@ -99,4 +112,4 @@ class MainUI:
                 exit()
 
             else:
-                self.current_screen = self._utility_ui.screen_not_exist_error()
+                self.current_screen = self.screen_not_exist_error()
