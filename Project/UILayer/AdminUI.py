@@ -656,7 +656,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name or 'q' to go back: " + self.reset
+            self.message_color + "Input Team Name or 'q' to go back: \n" + self.reset
         )
         if team_to_add.lower() == "q":
             return MenuOptions.manage_teams
@@ -730,7 +730,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name: " + self.reset
+            self.message_color + "Input Team Name: \n" + self.reset
         )
 
         # Validate team exists
