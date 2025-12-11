@@ -15,6 +15,11 @@ from datetime import date,time
 
 
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
+
+    for char in value:
+        if (ord(char) < 32 or ord(char) > 126) and not char.isalpha:
+            raise ValidationError("String contains characters not in ascii range")
+        
     if attribute == 'name': return validate_name(value)
     elif attribute == 'date_of_birth': return validate_date(value)
     elif attribute == 'home_address': return validate_home_address(value)
@@ -34,10 +39,6 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
     Used for unique player handle, team tournament and club names
     """
     unique_name = unique_name.strip()
-
-    for char in unique_name:
-        if ord(char) < 32 or ord(char) > 126:
-            raise ValidationError("String contains characters not in ascii range")
 
     if len(unique_name) < 3 or len(unique_name) > 39:
         raise ValidationError("Name needs to be between 3 to 39 characters in length")
