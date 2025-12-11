@@ -68,10 +68,6 @@ class PlayerUI:
             MenuOptions: The next menu to navigate to
         """
 
-        """ THIS IS TEMPORARY REMOVE LATER"""
-        player_list = LogicLayerAPI.list_all_players()
-        abc: str = 1
-
         menu: str = "Log In"
         user_path: list[MenuOptions] = [MenuOptions.start_screen, 
                                         MenuOptions.login]
@@ -99,12 +95,6 @@ class PlayerUI:
         message: str = f"{login_handle} Not Found!"
         print(self.tui.table(menu, user_path, info, options, message))
 
-        """ THIS IS TEMPORARY REMOVE LATER """
-        if login_handle == "handle list":
-            AAAA: int = 1
-            abc: str = 1
-            for player in player_list:
-                print(player.handle)
 
         choice: str = self.utility._prompt_choice(["t", "b"])
 
@@ -819,69 +809,81 @@ Rank: {current_login_rank}"""]
                            MenuOptions.my_team_not_empty, 
                            MenuOptions.edit_team, 
                            MenuOptions.add_player]
-        options: dict = {"c": "Continue"}
+        options: dict = {"b": "Back"}
+        message = ""
 
         # Gets all players that are not in any team
         not_in_team: list[Player] = LogicLayerAPI.get_all_players_not_in_team()
 
         # Gets a list of handles from Player objects
         handles_not_team: list[str] = [p.handle for p in not_in_team]
+
+        current_login_handle: str = str(LogicLayerAPI.save_player())
+        team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
+        team_members = LogicLayerAPI.get_team_members(team)
         
         info: list[str] = handles_not_team
-        if len(handles_not_team) == 0:
-                    info.append("No Players To Add To Team")
+        if len(handles_not_team) == 0 or len(team_members) >= 5:
+            message = ("No Players To Add To Team Or Team Is Full")
 
         #TODO: Make sure that program dosent crash when trying to add "No Players To Add To Team"
         #TODO: FORMAT SO IT IS NOT SHIT
 
-        self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info))
+            self.tui.clear_saved_data()
+            print(self.tui.table(menu, user_path, [], options, message))
+            choice: str = self.utility._prompt_choice(["b"])
+            return MenuOptions.edit_team
 
-        # Might add to the message if the search will be implemented
-        add_handle: str = input(self.input_color + "Enter A Players Handle To Add Them: \n" + self.reset)
+            # Might add to the message if the search will be implemented
+        else:
+            self.tui.clear_saved_data()
+            print(self.tui.table(menu, user_path, info))
+            add_handle: str = input(self.input_color + "Enter A Players Handle To Add Them: \n" + self.reset)
 
-        self.tui.save_input("Player To Add: " + add_handle)
+            self.tui.save_input("Player To Add: " + add_handle)
 
-        add_uuid = LogicLayerAPI.player_handle_to_uuid(add_handle)
-        add_in_team = LogicLayerAPI.get_players_team_uuid(add_uuid)
-        print(add_uuid, add_in_team)
+            add_uuid = LogicLayerAPI.player_handle_to_uuid(add_handle)
+            add_in_team = LogicLayerAPI.get_players_team_uuid(add_uuid)
+            print(add_uuid, add_in_team)
 
-        if add_uuid and not add_in_team: 
-            message: str = f"The Player {add_handle} Was Found \nDo You Want To Add Them To Your Team? Y/N:"
+            if add_uuid and not add_in_team: 
+                message: str = f"The Player {add_handle} Was Found \nDo You Want To Add Them To Your Team? Y/N:"
+                print(self.tui.table(menu, user_path, info, {}, message))
+
+                choice: str = self.utility._prompt_choice(["y", "n"])
+
+                options: dict = {"c": "Continue"}
+
+                if choice == "n":
+                    message: str = "Operation Cancelled"
+                    print(self.tui.table(menu, user_path, info, options, message))
+                    choice: str = self.utility._prompt_choice(["c"])
+                    return MenuOptions.edit_team
+
+
+                current_login_handle: str = str(LogicLayerAPI.save_player())
+                current_login_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
+                current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
+
+                if type(current_player) is Player: # Is Only there for the type hinting gods
+                    LogicLayerAPI.add_player(add_handle, current_player)
+
+
+                message: str = f"{add_handle} Has Been Added To Your Team!"
+                print(self.tui.table(menu, user_path, info, options, message))
+                choice: str = self.utility._prompt_choice(["c"])
+                return MenuOptions.edit_team
+            
+
+            message: str = f"The Player {add_handle} Was Not Found Or Is Not Available \nDo You Want To Try Again? Y/N:"
             print(self.tui.table(menu, user_path, info, {}, message))
 
             choice: str = self.utility._prompt_choice(["y", "n"])
 
             if choice == "n":
-                message: str = "Operation Cancelled"
-                print(self.tui.table(menu, user_path, info, options, message))
-                choice: str = self.utility._prompt_choice(["c"])
                 return MenuOptions.edit_team
-
-
-            current_login_handle: str = str(LogicLayerAPI.save_player())
-            current_login_uuid: str = LogicLayerAPI.player_handle_to_uuid(current_login_handle)
-            current_player: Player | str = LogicLayerAPI.get_player_by_uuid(current_login_uuid)
-
-            if type(current_player) is Player: # Is Only there for the type hinting gods
-                LogicLayerAPI.add_player(add_handle, current_player)
-
-
-            message: str = f"{add_handle} Has Been Added To Your Team!"
-            print(self.tui.table(menu, user_path, info, options, message))
-            choice: str = self.utility._prompt_choice(["c"])
-            return MenuOptions.edit_team
-        
-
-        message: str = f"The Player {add_handle} Was Not Found Or Is Not Available \nDo You Want To Try Again? Y/N:"
-        print(self.tui.table(menu, user_path, info, {}, message))
-
-        choice: str = self.utility._prompt_choice(["y", "n"])
-
-        if choice == "n":
-            return MenuOptions.edit_team
-        
-        return MenuOptions.add_player
+            
+            return MenuOptions.add_player
 
 
 
