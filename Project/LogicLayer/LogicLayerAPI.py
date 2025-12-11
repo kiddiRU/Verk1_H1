@@ -175,19 +175,19 @@ def update_player_info(
 # def leave_team(team_name: str, player: Player) -> None:
 #     return player_logic.leave_team(team_name, player)
 
-# Isn't used, remove?
-# def promote_captain(current_player: Player, handle_to_promote: str) -> None:
-#     '''Promotes a teams player to its captain.
 
-#     :param current_player:
-#         The object of the player calling the function.
-#     :type current_player: Player
+def promote_captain(current_player: Player, handle_to_promote: str) -> None:
+    '''Promotes a teams player to its captain.
 
-#     :param handle_to_promote:
-#         The handle of the player to promote.
-#     :type handle_to_promote: str
-#     '''
-#     player_logic.promote_captain(current_player, handle_to_promote)
+    :param current_player:
+        The object of the player calling the function.
+    :type current_player: Player
+
+    :param handle_to_promote:
+        The handle of the player to promote.
+    :type handle_to_promote: str
+    '''
+    player_logic.promote_captain(current_player, handle_to_promote)
 
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
