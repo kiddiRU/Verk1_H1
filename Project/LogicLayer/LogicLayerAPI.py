@@ -13,8 +13,8 @@ from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, MatchLL, Validati
 
 team_logic = TeamLL()
 match_logic = MatchLL()
-club_logic =  ClubLL()
 
+club_logic =  ClubLL(match_logic)
 player_logic = PlayerLL(team_logic, match_logic)
 tournament_logic = TournamentLL(team_logic, match_logic)
 

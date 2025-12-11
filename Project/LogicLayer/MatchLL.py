@@ -11,12 +11,11 @@ from Models.Team import Team
 from DataLayer import DataLayerAPI
 from datetime import date,time
 
-class MatchLL():
+class MatchLL:
     
     def __init__(self) -> None:
         pass
 
-    
     def create_match(self, tournament_id: str, date: date, time: time, team_1: str, team_2: str) -> Match:
         """
         takes in tournament id, date, time, team_1 and team_2

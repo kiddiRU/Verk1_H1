@@ -46,7 +46,13 @@ class TeamLL:
         '''
         self._match_logic = match_logic
 
-    def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
+    def create_team(
+        self, name: str,
+        team_captain: Player,
+        club_name: str,
+        url: str,
+        ascii_art: str
+    ) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
 
@@ -356,6 +362,16 @@ class TeamLL:
 # Fra utility
 
     def get_team_by_name(self, name: str) -> Team:
+        '''Gets a Team object by its name.
+    
+        :param team_name:
+            The name of the team to fetch.
+        :type team_name: str
+
+        :return:
+            The object of the team with the given name.
+        :rtype: Team
+        '''
         teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.name == name), None)
 
@@ -365,6 +381,16 @@ class TeamLL:
         return team
 
     def get_team_by_uuid(self, uuid: str) -> Team:
+        '''Gets a Team object by its UUID.
+    
+        :param team_uuid:
+            The UUID of the team to fetch.
+        :type team_uuid: str
+
+        :return:
+            The object of the team with the given UUID.
+        :rtype: Team
+        '''
         teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.uuid == uuid), None)
 
@@ -374,5 +400,15 @@ class TeamLL:
         return team
 
     def team_name_to_uuid(self, team_name: str) -> str:
+        '''Converts a teams name, to their UUID.
+    
+        :param team_name:
+            The name of the team.
+        :type team_name: str
+
+        :return:
+            Returns the UUID of the team with the given name.
+        :rtype: str
+        '''
         team = self.get_team_by_name(team_name)
         return team.uuid
