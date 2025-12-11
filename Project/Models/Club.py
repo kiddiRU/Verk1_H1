@@ -3,11 +3,31 @@ Author: Elmar Sigmarsson > elmars25@ru.is <
 Date: 2025-12-02
 
 Club model class
+
+Contributor:
+    Ísak Elí Hauksson <isak25@ru.is>
 """
 
 
 class Club:
-    """Club model class"""
+    """
+    Represents a club, including its name, color, country, and hometown.
+
+    Each club has a unique identifier and stores basic information
+    about the club's identity.
+
+    :param uuid: Unique identifier for the club.
+    :type uuid: str
+    :param name: Name of the club (3-39 characters).
+    :type name: str
+    :param club_color: (RED, BLUE, YELLOW, GREEN).
+    :type club_color: str
+    :param country: Country of the club's origin (3-39 characters).
+    :type country: str
+    :param home_town: Club's hometown (3-39 characters).
+    :type home_town: str
+    :rtype: None
+    """
 
     def __init__(
         self,
@@ -18,15 +38,16 @@ class Club:
         home_town: str,
     ) -> None:
         """
-        The initializer for the Club model class
+        Initialize a Club object.
 
-        Args:
-            uuid (str): unique identifier
-            name (str): name of club (3-30 char length)
-            list_teams_uuid (list[str]): list of all teams associated with the club
-            club_color (str): name of the club color (RED, BLUE, YELLOW, GREEN)
-            country (str): clubs home country (3-30 char length)
-            home_town (str): clubs home town (3-30 char length)
+        Stores basic information about a club.
+
+        :param uuid: Unique identifier for the club.
+        :param name: Name of the club.
+        :param club_color: Name of the club color.
+        :param country: Country of origin.
+        :param home_town: Club's hometown.
+        :rtype: None
         """
 
         self.uuid = uuid

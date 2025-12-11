@@ -2,7 +2,7 @@ print()
 a = 0
 while a != "q":
     print("\n" + '''    - - -User Path- - -
-    Admin Page [b ap] -> Manage Tournaments [b mt] -> Manage Unactive Tournament [b mut]
+    Admin Page [b ap] -> Manage Tournaments [b mt] -> Manage Inactive Tournament [b mut]
     ————————————————————————————————————————————————————————————————————————————
                                     Edit Tournament
     ————————————————————————————————————————————————————————————————————————————
@@ -55,7 +55,7 @@ Choose A Tournament To Manage:''')
 
 
     elif a == "b" or a == "b mut":
-        print("\n" + '''Manage Unactive Tournaments
+        print("\n" + '''Manage Inactive Tournaments
 ——————————————————
 - - -TheMuppetsVsDocHopper- - -
 

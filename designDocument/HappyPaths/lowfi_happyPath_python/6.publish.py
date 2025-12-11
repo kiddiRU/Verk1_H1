@@ -3,7 +3,7 @@ you want to publish the tournament.
 The system creates matches between two unique teams.'''
 
 print()
-print('''Manage Unactive Tournaments
+print('''Manage Inactive Tournaments
 ——————————————————
 - - -TheMuppetsVsDocHopper- - -
 

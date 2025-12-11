@@ -7,12 +7,12 @@ print('''Manage Tournaments
 ——————————————————
 - - - -List Of Tournaments - - - -
 
-~~~~~~~~~~~, unactive    
+~~~~~~~~~~~, inactive    
 ~~~~~~~~~~~, active
 ~~~~~~~~~~~, active
 TheMuppetsVsDocHopper, active
 ~~~~~~~~~~~, active
-~~~~~~~~~~~, unactive
+~~~~~~~~~~~, inactive
 ——————————————————
 Choose A Tournament To Manage:''')
 

@@ -21,12 +21,12 @@ print('''Manage Tournaments
 ——————————————————
 - - - -List Of Tournaments - - - -
 
-~~~~~~~~~~~, unactive    
+~~~~~~~~~~~, inactive    
 ~~~~~~~~~~~, active
 ~~~~~~~~~~~, active
-TheMuppetsVsDocHopper, unactive
+TheMuppetsVsDocHopper, inactive
 ~~~~~~~~~~~, active
-~~~~~~~~~~~, unactive
+~~~~~~~~~~~, inactive
 ——————————————————
 Choose A Tournament To Manage:''')
 
@@ -35,7 +35,7 @@ print()
 print()
 
 
-print('''Manage Unactive Tournaments
+print('''Manage Inactive Tournaments
 ——————————————————
 - - -TheMuppetsVsDocHopper- - -
 
