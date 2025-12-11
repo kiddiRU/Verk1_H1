@@ -353,7 +353,7 @@ class PlayerLL:
         :rtype: Player | str
         '''
         players: list[Player] = self.list_all_players()
-        player: Player = next((p for p in players if p.uuid == player_uuid), None)
+        player: Player | None = next((p for p in players if p.uuid == player_uuid), None)
 
         if player is None:
             return ""
