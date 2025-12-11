@@ -23,7 +23,41 @@ team_logic.set_club_logic(club_logic)
 team_logic.set_match_logic(match_logic)
 
 ''' Validation API '''
+
 def validate(attr: str, value: str, name_type: str):
+    """Validates all attributes that need validating.
+
+    :param attribute:
+        The type of attribute which needs validating, available options are
+
+        -   name
+        -   date_of_birth
+        -   home_address
+        -   email
+        -   phone_number
+        -   handle
+        -   tournament_date
+        -   tournament_time
+        -   color
+        -   number
+
+    :param value:
+        The value that needs validating.
+
+    :param name_type:
+        Only used for attribute handle, this determines the type of handle
+        want validated, available options are.
+        
+        -   PLAYER
+        -   TEAM
+        -   TOURNAMENT
+        -   CLUB
+
+    :returns:
+        Returns the same value back if it's valid, otherwise it raises a
+        ValidationError. The only exception is when you call with date
+        attribute, in that case it will return date object if it's valid.
+    """
     return Validation.validate_attr(attr, value, name_type)
 
 ''' Player API '''
