@@ -9,8 +9,8 @@
 ### On site: Yes
 
 ## Ísak Elí
-### Time:
-### On site:
+### Time: 10:05
+### On site: Yes
 
 ## Kristinn Hrafn
 ### Time:
