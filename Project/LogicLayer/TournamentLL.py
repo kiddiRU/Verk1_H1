@@ -352,15 +352,22 @@ class TournamentLL:
                             time = tournament.time_frame_start
                     )
 
-        # Raises an error if no time slots are created or the last time slots
-        # runs past the runtime of the tournament.
+        # Raises an error if no time slots are created.
         if len(times_used) == 0:
             raise ValidationError("No available time slots to use.")
 
-        if times_used[-1] >= datetime.combine(
+        # Calculates the time slot after the last one to check if the
+        # matches went past it, it will raise an error if that's the
+        # case.
+        last_time_slot = datetime.combine(
                 date = tournament.end_date,
                 time = tournament.time_frame_end
-            ):
+        )
+        
+        if tournament.time_frame_end < tournament.time_frame_start:
+            last_time_slot += one_day
+
+        if times_used[-1] >= last_time_slot:
             raise ValidationError("Too little time for tournament")
 
         # Creates the matches needed, teams will not be filled in until
