@@ -472,7 +472,7 @@ def get_team_club(team_name: str) -> str:
 
 def get_team_by_name(team_name: str) -> Team:
     '''
-    Gets a team object by its name.
+    Gets a Team object by its name.
     
     :param team_name:
         The name of the team to fetch.
@@ -486,7 +486,7 @@ def get_team_by_name(team_name: str) -> Team:
 
 def get_team_by_uuid(team_uuid: str) -> Team:
     '''
-    Gets a team object by its UUID.
+    Gets a Team object by its UUID.
     
     :param team_uuid:
         The UUID of the team to fetch.
@@ -718,9 +718,45 @@ def to_date(value: str) -> date:
     return tournament_logic.to_date(value)
 
 def get_tournament_by_name(tournament_name: str) -> Tournament:
+    '''
+    Gets a Tournament object by its name.
+    
+    :param tournament_name:
+        The name of the tournament to fetch.
+    :type tournament_name: str
+
+    :return:
+        The object of the tournament with the given name.
+    :rtype: Tournament
+    '''
     return tournament_logic.get_tournament_by_name(tournament_name)
 
+def get_tournament_by_uuid(tournament_uuid: str) -> Tournament:
+    '''
+    Gets a Tournament object by its UUID.
+    
+    :param tournament_uuid:
+        The UUID of the tournament to fetch.
+    :type tournament_uuid: str
+
+    :return:
+        The object of the tournament with the given UUID.
+    :rtype: Tournament
+    '''
+    return tournament_logic.get_tournament_by_uuid(tournament_uuid)
+
 def tournament_name_to_uuid(tournament_name: str) -> str:
+    '''
+    Converts a tournaments name, to its UUID.
+    
+    :param tournament_name:
+        The name of the tournament.
+    :type tournament_name: str
+
+    :return:
+        Returns the UUID of the tournament with the given name.
+    :rtype: str
+    '''
     return tournament_logic.tournament_name_to_uuid(tournament_name)
 
 ''' Club API '''

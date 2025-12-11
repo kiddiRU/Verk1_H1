@@ -179,32 +179,15 @@ class TournamentLL:
     #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
+        '''
+        Gets a list of all stored tournamnets.
+        
+        :return:
+            A list of all Tournament objects.
+        :rtype: list[Tournament]
+        '''
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
-
-    def uuid_to_tournament(self, uuid: str) -> Tournament:
-        """Looks for a tournament with a specific uuid.
-
-        :param uuid:
-            The uuid of the tournament you want to get.
-
-        :returns:
-            The tournament object found.
-        """
-        
-        # Loads all tournaments to look through.
-        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-
-        # If a tournament in the list has the same uuid as the uuid given,
-        # then it is returned.
-        for item in tournaments:
-            if item.uuid == uuid:
-                return item
-        
-        # Otherwise I raise an error message to let know it wasn't found.
-        else:
-            raise ValidationError("Tournament with given uuid not found.")
-
 
     def end_tournament(self, uuid: str) -> None:
         """Ends an active tournament.
@@ -217,7 +200,7 @@ class TournamentLL:
             The uuid of the tournament to update.
         """
 
-        tournament = self.uuid_to_tournament(uuid)
+        tournament = self.get_tournament_by_uuid(uuid)
 
         # Checking to make sure the tournament is active.
         if tournament.status != Tournament.StatusType.active:
@@ -246,7 +229,7 @@ class TournamentLL:
             The uuid of the tournament that will move to the next round.
         """
 
-        tournament = self.uuid_to_tournament(uuid)
+        tournament = self.get_tournament_by_uuid(uuid)
 
         # Gets all matches tied to the tournament, this list is
         # in sorted order according to match date and time.
@@ -310,7 +293,7 @@ class TournamentLL:
         """
         uuid = self.tournament_name_to_uuid(name)
 
-        tournament = self.uuid_to_tournament(uuid) 
+        tournament = self.get_tournament_by_uuid(uuid) 
 
         if tournament.status != Tournament.StatusType.inactive:
             raise ValidationError("Tournament isn't inactive.")
@@ -407,7 +390,6 @@ class TournamentLL:
         # Starts the first round.
         self.next_round(uuid)
 
-
     def next_games(self, uuid: str) -> list[Match]:
         """Gets the matches next on the schedule in a certain tournament.
 
@@ -421,16 +403,16 @@ class TournamentLL:
 
         :returns:
             The list of matches next on the schedule.
+        :rtype: list[Match]
         """
-       
-        tournament = self.uuid_to_tournament(uuid)
-       
+        tournament = self.get_tournament_by_uuid(uuid)
+
         if tournament.status != Tournament.StatusType.active:
             raise ValidationError("Tournament isn't active.")
-    
+
         # Get's all matches tied to the tournament.
         matches = self._match_logic.get_matches(uuid)
-    
+
         # Ignores all matches which have a winner.
         matches = [match for match in matches if match.winner == None]
 
@@ -443,7 +425,7 @@ class TournamentLL:
         ]
 
         return matches
-    
+
     def change_match_winner(
             self,
             tournament_uuid: str,
@@ -467,7 +449,7 @@ class TournamentLL:
             The uuid of the winner.
         """
         
-        tournament = self.uuid_to_tournament(tournament_uuid)
+        tournament = self.get_tournament_by_uuid(tournament_uuid)
 
         # Updates the match.
         self._match_logic.change_match_winner(match_uuid, team_uuid)
@@ -542,15 +524,56 @@ class TournamentLL:
 # Fra utility
 
     def get_tournament_by_name(self, name: str) -> Tournament:
-            tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-            tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+        '''
+        Gets a Tournament object by its name.
+        
+        :param tournament_name:
+            The name of the tournament to fetch.
+        :type tournament_name: str
 
-            if tournament is None:
-                raise Exception(f'No tournament found named: {name}')
-            
-            return tournament
+        :return:
+            The object of the tournament with the given name.
+        :rtype: Tournament
+        '''
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
 
+        if tournament is None:
+            raise ValidationError(f'No tournament found named: {name}')
+
+        return tournament
+
+    def get_tournament_by_uuid(self, uuid: str) -> Tournament:
+        '''
+        Gets a Tournament object by its UUID.
+        
+        :param tournament_uuid:
+            The UUID of the tournament to fetch.
+        :type tournament_uuid: str
+
+        :return:
+            The object of the tournament with the given UUID.
+        :rtype: Tournament
+        '''
+        tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
+        tournament: Tournament | None = next((t for t in tournaments if t.uuid == uuid), None)
+
+        if tournament is None:
+            raise ValidationError(f'No tournament found with the UUID: {uuid}')
+
+        return tournament
 
     def tournament_name_to_uuid(self, name: str) -> str:
-            tournament = self.get_tournament_by_name(name)
-            return tournament.uuid
+        '''
+        Converts a tournaments name, to its UUID.
+        
+        :param tournament_name:
+            The name of the tournament.
+        :type tournament_name: str
+
+        :return:
+            Returns the UUID of the tournament with the given name.
+        :rtype: str
+        '''
+        tournament = self.get_tournament_by_name(name)
+        return tournament.uuid
