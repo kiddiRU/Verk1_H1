@@ -8,9 +8,11 @@ Minor changes: Andri Már Kristjánsson <andrik25@ru.is>
 A validation file that takes inn all info that would need to be validated
 """
 
-from Models import Team, ValidationError
+
+from Models import ValidationError
 from DataLayer import DataLayerAPI
-from datetime import date, time
+from datetime import date,time
+
 
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
     if attribute == 'name': return validate_name(value)
@@ -249,8 +251,7 @@ def validate_tournament_time(value: str) -> str:
     return value
 
 def validate_color(value: str) -> str:
-    value = value.strip()
-
+    value = value.strip().lower()
     available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
     
     if value in available_colors:
