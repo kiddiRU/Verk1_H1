@@ -201,30 +201,156 @@ def create_team(name: str, team_captain: Player, club_name: str, url: str, ascii
     return team_logic.create_team(name, team_captain, club_name, url, ascii_art)
 
 def add_player(player_handle: str, current_player: Player) -> Team | str:
+    """Gets the handle of the player to add and
+    the player object of the captain
+
+    First checks if the player is already in a team
+    Then finds the team of the captain and
+    adds the player to the team        
+    
+    :param player_handle:
+        The player handle of the player to add to the team
+    :type player_handle: str
+
+    :param current_player:
+        current player is the team captain and
+        is used to get the uuid of the team
+    :type current_player: Player
+
+    :return:
+        Returns the team object
+    :rtype: Team
+    """
     return team_logic.add_player(player_handle, current_player)
 
 def remove_player(player_handle: str, current_player: Player) -> Team:
+    """Gets the handle of the player to add and
+    the player object of the captain
+
+    Looks through all teams to find the team of the captain
+    First checks that the player to remove is not the captain
+    Otherwise it removes the player from the team
+    if the player is not found and error message will be raised 
+    
+    :param player_handle:
+        the player handle of the player to remove from the team
+    :type player_handle: str
+
+    :param current_player
+        the player object of the team captain and
+        is used to get the uuid of the team
+    :type current_player: Player
+
+    :return: Returns the team object
+    :rtype: Team
+    """
     return team_logic.remove_player(player_handle, current_player)
 
 def get_team_members(team_name: str) -> list[str]:
+    """Gets the name of the team
+
+    Looks through all teams to find the correct team object
+    and extracts the list of player uuid in the team
+    
+    :param team_name:
+        The team name is used to find the team object
+    :type team_name: str
+
+    :return: Returns a list of the team members uuid's
+    :rtype: list[str]
+    """    
     return team_logic.get_team_members(team_name)
 
 def list_all_teams() -> list[Team]:
+    """Is called to get a list of all teams
+    
+    :return: Returns a list of all team objects
+    :rtype: list[Team]
+    """
     return team_logic.list_all_teams()
 
 def get_team_members_object(team_name: str) -> list[Player]:
+    """Gets the team name
+
+    First gets the uuid of the players in the team,
+    Then loads all player objects and
+    lists all players objects that have the
+    uuid of the players in the team
+    
+    :param team_name:
+        The team name of the team to get the player objects
+    :type team_name: str
+
+    :return: Returns a list of all player objects in a team
+    :rtype: list[Player]
+    """
     return team_logic.get_team_members_object(team_name)
 
-def get_team_history(team_name: str) -> list[str]:       
+def get_team_history(team_name: str) -> list[str]:  
+    """Gets the team name
+
+    First gets the team uuid, Then loads all Tournaments
+    and lists all tournaments that the teams uuid is in
+    teams playing 
+
+    :param team_name:
+        The team name to find the tournaments they participated in
+    :type team_name: str
+
+    :return:
+    Returns a list of tournament names that the team has participated in
+    :rtype: list[str]
+    """     
     return team_logic.get_team_history(team_name)
 
 def get_team_wins(team_name: str) -> str:
+    """Gets the team name
+
+    First gets the uuid of the team,
+    Then Loads all matches and adds one to the count 
+    when the winner uuid matches the teams uuid
+    
+    :param team_name:
+        The team name of the team to find the total of won matches
+    :type team_name: str
+
+    :return: Returns a string number of the total won matches
+    :rtype: str
+    """
     return team_logic.get_team_wins(team_name)
 
 def get_team_points(team_name: str) -> str:
+    """Gets the team name
+    
+    First gets the teams uuid,
+    Then loads all tournaments and get a list of all matches
+    with the tournament uuid,
+    Finds the last match of the tournament (Finals) and finds the
+    winning and losing team of the match, and if the team is the
+    winner they get 3 points and if the loser gets 1 point
+    
+    :param team_name:
+        The team name of the team to find the total points from tournaments
+    :type team_name: str
+
+    :return: Returns a string number of total points from tournaments
+    :rtype: str
+    """
     return team_logic.get_team_points(team_name)
 
 def get_team_club(team_name: str) -> str:
+    """Gets the team name
+
+    First loads all clubs, and gets a list of all team names in the club
+    and if the team name is in the list it is their club
+    
+    :param team_name:
+        The team name to get the club name from
+    :type team_name: str
+    
+    :return: Returns the name of the club that the team is in
+    :rtype: str
+    """
     return team_logic.get_team_club(team_name)
 
 def get_team_by_name(team_name: str) -> Team:
