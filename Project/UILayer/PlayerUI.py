@@ -134,7 +134,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             user_name: str = self.utility.input_info(
-                "Enter Name Or 'q' To Cancel: \n", "name", "PLAYER")
+                "Enter Name Or 'q' To Cancel:", "name", "PLAYER")
             if not user_name:
                 return user_path[-2]
             self.tui.save_input("Name: " + user_name)
@@ -149,7 +149,7 @@ class PlayerUI:
             print(self.tui.table(menu, user_path, info))
             user_dob: str = str(
                 self.utility.input_info(
-                    "Enter Date Of Birth Or 'q' To Cancel: \n(yyyy-mm-dd) \n",
+                    "Enter Date Of Birth Or 'q' To Cancel: \n(yyyy-mm-dd)",
                     "date_of_birth","PLAYER"))
             if not user_dob:
                 return user_path[-2]
@@ -164,7 +164,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             user_addr: str = self.utility.input_info(
-                "Enter Home Address Or 'q' To Cancel: \n(Streetname 00 Cityname) \n",
+                "Enter Home Address Or 'q' To Cancel: \n(Streetname 00 Cityname)",
                 "home_address","PLAYER")
             if not user_addr:
                 return user_path[-2]
@@ -179,7 +179,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             user_email: str = self.utility.input_info(
-                "Enter Email Or 'q' To Cancel: \n", "email", "PLAYER")
+                "Enter Email Or 'q' To Cancel:", "email", "PLAYER")
             if not user_email:
                 return user_path[-2]
             self.tui.save_input("Email: " + user_email)
@@ -193,7 +193,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             user_phnum: str = self.utility.input_info(
-                "Enter Phone Number Or 'q' To Cancel: \n(123-4567) \n",
+                "Enter Phone Number Or 'q' To Cancel: \n(123-4567)",
                 "phone_number",
                 "PLAYER")
             if not user_phnum:
@@ -224,7 +224,7 @@ class PlayerUI:
             print(self.tui.table(menu, user_path, info))
             user_url: str = input(
                 self.input_color
-                + "Enter URL Or 'q' To Cancel: \n(Optional, Press Enter To Leave Blank) \n"
+                + "Enter URL Or 'q' To Cancel: \n(Optional, Press Enter To Leave Blank)"
                 + self.reset)
             if user_url.lower() == "q":
                 return user_path[-2]
@@ -868,8 +868,20 @@ Rank: {current_login_rank}"""]
 
         # If the team is full or there are not players available to add
         # the captain will get a message and they can not try to add anyone
-        info: list[str] = handles_not_team
-        if len(handles_not_team) == 0 or len(team_members) >= 5:
+        length = len(handles_not_team)
+        handles_not_team_format: list[str] = []
+
+        for value in range(0, len(handles_not_team), 2):
+            left = handles_not_team[value]
+            if value + 1 < length:
+                right = handles_not_team[value + 1]
+                handles_not_team_format.append(f"{left:<39}|{right:<39}|")
+
+            else:  # odd number, last item has no pair
+                handles_not_team_format.append(f"{left:<39}|{' ':<39}|")
+
+        info: list[str] = handles_not_team_format
+        if not handles_not_team or len(team_members) >= 5:
             message = "No Players To Add To Team Or Team Is Full"
 
             # TODO: FORMAT SO IT IS NOT SHIT
@@ -1087,7 +1099,6 @@ If You Leave, the team {team} will never be accessable again"
 Are You Sure You Want To Leave? Y/N"""
             print(self.tui.table(menu, user_path, info, options, message))
             choice: str = self.utility.prompt_choice(["y", "n"])
-            
             options: dict[str, str] = {"c": "Continue"}
             if choice == "y":
                 if isinstance(current_player, Player):
@@ -1119,8 +1130,10 @@ Are You Sure You Want To Leave? Y/N"""
 
     def onion(self) -> MenuOptions:
         """This Program Has Layers"""
+        shrek: str = "\033[32m"
+        reset: str = "\033[0m"
 
-        print("""
+        print(shrek + """
     ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
     ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
     ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
@@ -1135,9 +1148,8 @@ Are You Sure You Want To Leave? Y/N"""
     ⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
     ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
     ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
-                
-                
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉""" + reset +
+    """         
     Somebody once told me the world is gonna roll me
     I ain't the sharpest tool in the shed
     She was looking kind of dumb with her finger and her thumb
