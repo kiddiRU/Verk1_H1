@@ -12,13 +12,8 @@ from datetime import date, time
 from Models import ValidationError
 from DataLayer import DataLayerAPI
 
-<<<<<<< HEAD
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | date:
-=======
-def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
     """Validates all attributes that need validating.
->>>>>>> 5f1d4ae9cc3ff072969a3863c6123f5d4b9a872f
-
     :param attribute:
         The type of attribute which needs validating, available options are
 
