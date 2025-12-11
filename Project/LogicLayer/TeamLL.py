@@ -116,17 +116,13 @@ class TeamLL():
         
         for team in model_teams:
             if team.uuid == team_uuid:
-                if player_uuid == team.team_captain_uuid:
-                    raise ValidationError("Can't remove team captain from team")
+                try:
+                    team.list_player_uuid.remove(player_uuid)
+                    DataLayerAPI.update_team(team_uuid, team)
+                    return team
 
-                else:
-                    try:
-                        team.list_player_uuid.remove(player_uuid)
-                        DataLayerAPI.update_team(team_uuid, team)
-                        return team
-
-                    except ValueError:
-                        raise ValidationError("Player not in team")
+                except ValueError:
+                    raise ValidationError("Player not in team")
 
         raise ValidationError("Team not found")
     

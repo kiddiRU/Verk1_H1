@@ -15,14 +15,12 @@ from LogicLayer.Validation import validate_attr
 from LogicLayer import MatchLL, TeamLL
 
 class PlayerLL():
+    ''' Player logic. '''
+
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
         self._team_logic = team_logic
         self._match_logic = match_logic
 
-    def set_team_logic(self, team_logic: TeamLL) -> None:
-        self._team_logic = team_logic
-
-    # TODO Alter validation functionality?
     def create_player(self,
         name: str,
         date_of_birth: str,
@@ -39,22 +37,17 @@ class PlayerLL():
         Validates the given info and creates a player object. Sends the
         object to the data layer to be stored and returns the new player.
         """
-
-        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        for attr, value in params.items():
-            validate_attr(attr, value.strip(), name_type = 'PLAYER')
-
         uuid = str(uuid4())
 
         new_player = Player(
             uuid,
-            params["name"],
-            params["date_of_birth"],
-            params["home_address"],
-            params["email"],
-            params["phone_number"],
-            params["handle"],
-            params["url"],
+            name,
+            date_of_birth,
+            home_address,
+            email,
+            phone_number,
+            handle,
+            url
         )
 
         DataLayerAPI.store_player(new_player)
@@ -71,7 +64,6 @@ class PlayerLL():
         handle: str,
         url: str
     ) -> Player:
-
         '''
         Takes in a Player object and potential attribute updates.
 
@@ -84,6 +76,7 @@ class PlayerLL():
         player.phone_number = phone_number
         player.handle = handle
         player.url = url
+        
         DataLayerAPI.update_player(player.uuid, player)
         return player
 
@@ -95,7 +88,6 @@ class PlayerLL():
         Removes the player from the team, raises an exception if the player
         is the captain of said team.
         '''
-
         teams: list[Team] = DataLayerAPI.load_teams()
         team = next((t for t in teams if t.name == team_name), None)
 
