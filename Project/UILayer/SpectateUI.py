@@ -121,7 +121,8 @@ class SpectateUI:
         ]
         # Changed by Sindri Freysson
         info: list[str] = [
-            "Team: " + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
+            "Team: "
+            + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
             "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
             "Points: " + LogicLayerAPI.get_player_points(player_handle),
         ]
@@ -188,11 +189,15 @@ class SpectateUI:
             MenuOptions.VIEW_CLUB_STATS,
         ]
 
-        info_a: list[str] = [f"Teams:\n{80 * "—"}"] + self.utility.string_to_table(
-            self.utility.object_to_string(LogicLayerAPI.get_teams_in_club(club_name))
+        info_a: list[str] = [
+            f"Teams:\n{80 * '—'}"
+        ] + self.utility.string_to_table(
+            self.utility.object_to_string(
+                LogicLayerAPI.get_teams_in_club(club_name)
+            )
         )
         info_b: list[str] = [
-            f"{80 * "—"}\n"
+            f"{80 * '—'}\n"
             f"Color: " + LogicLayerAPI.get_club_by_name(club_name).club_color,
             f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
             f"Points: " + LogicLayerAPI.get_club_points(club_name),
@@ -268,12 +273,19 @@ class SpectateUI:
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
         info_b: list[str] = [
-            f"Team Members:\n{80 * "-"}"
-        ] + self.utility.string_to_table(self.utility.object_to_string(LogicLayerAPI.get_team_members_object(team_name))
+            f"Team Members:\n{80 * '-'}"
+        ] + self.utility.string_to_table(
+            self.utility.object_to_string(
+                LogicLayerAPI.get_team_members_object(team_name)
+            )
         )
-        info_c: list[str] = [f"{80 * "*"}"] + [
-            f"Tournament History:\n{80 * "-"}"
-        ] + self.utility.string_to_table(LogicLayerAPI.get_team_history(team_name))
+        info_c: list[str] = (
+            [f"{80 * '*'}"]
+            + [f"Tournament History:\n{80 * '-'}"]
+            + self.utility.string_to_table(
+                LogicLayerAPI.get_team_history(team_name)
+            )
+        )
         info: list[str] = info_a + info_b + info_c
         options: dict[str, str] = {}
         message: str = ""
@@ -391,7 +403,9 @@ class SpectateUI:
         tournament_name: str | None = LogicLayerAPI.save_player()
         if tournament_name is None:
             return MenuOptions.START_SCREEN
-        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        tournament_object = LogicLayerAPI.get_tournament_by_name(
+            tournament_name
+        )
         tournament_uuid: str = tournament_object.uuid
 
         menu: str = str(tournament_name) + " Stats"
@@ -409,7 +423,6 @@ class SpectateUI:
         input("Press Any Key To Go Back")
         return MenuOptions.SPECTATE_TOURNAMENTS
 
-
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
         b: back to active tournament screen
@@ -418,8 +431,11 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str | None = LogicLayerAPI.save_player()
-        if tournament_name is None: return MenuOptions.START_SCREEN
-        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        if tournament_name is None:
+            return MenuOptions.START_SCREEN
+        tournament_object = LogicLayerAPI.get_tournament_by_name(
+            tournament_name
+        )
         tournament_uuid: str = tournament_object.uuid
 
         menu: str = str(tournament_name) + " Stats"
@@ -469,12 +485,11 @@ class SpectateUI:
         for value in range(0, len(unique_names), 2):
             left = unique_names[value]
             if value + 1 < length:
-
                 right = unique_names[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         info: list[str] = output_list
 
@@ -537,10 +552,11 @@ class SpectateUI:
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
         info_b: list[str] = [
-            f"Team Members:\n{80 * "-"}"
+            f"Team Members:\n{80 * '-'}"
         ] + self.utility.string_to_table(
             self.utility.object_to_string(
-                LogicLayerAPI.get_team_members_object(team_name))
+                LogicLayerAPI.get_team_members_object(team_name)
+            )
         )
 
         # Table design

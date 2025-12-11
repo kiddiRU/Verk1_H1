@@ -284,7 +284,7 @@ class AdminUI:
 
             # check status to redirect correctly
             tournament = tournament_object
-            if tournament == None:
+            if tournament is None:
                 return MenuOptions.MANAGE_TOURNAMENT
             if tournament.status == Tournament.StatusType.active:
                 return MenuOptions.MANAGE_ACTIVE_TOURNAMENT
