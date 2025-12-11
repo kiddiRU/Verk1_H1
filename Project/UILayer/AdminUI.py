@@ -19,42 +19,56 @@ from UILayer.UtilityUI import UtilityUI
 
 
 class AdminUI:
-    """Every admin menu option"""
+    """
+    Provides all admin menu options and manages their UI interactions.
+
+    This class initializes the admin utilities and drawer interface,
+    and holds basic formatting settings such as message color and
+    text underscore.
+    """
 
     def __init__(self) -> None:
-        self.utility = UtilityUI()
-        self.tui = Drawer()
-        self.message_color = "\033[36m"
-        self.reset: str = "\033[0m"
-        self.underscore = "\033[4m"
+        """
+        Initialize the AdminUI class.
+
+        Sets up the utility UI, drawer interface, and basic formatting
+        attributes for displaying admin menus.
+        """
+        self.utility = UtilityUI()  # Helper for input and prompts
+        self.tui = Drawer()  # Drawer interface for tables and menus
+        self.message_color = "\033[36m"  # Cyan color for messages
+        self.reset: str = "\033[0m"  # Reset color
+        self.underscore = "\033[4m"  # Underline formatting
 
     def admin_screen(self) -> MenuOptions:
-        
-        """Admin screen, choices: 1,2,3 and lo
-        1: Go to create tournament screen
-        2: Go to manage tournaments screen
-        3: Go to create club screen
-        lo: Log out of admin and go back to start screen
+        """
+        Show the admin screen and handle menu navigation.
 
-        Returns:
-            MenuOptions: The next menu to navigate to
+        :return: The next menu option to navigate to.
+        :rtype: MenuOptions
         """
 
+        # Set up screen title and path for navigation
         menu: str = "Admin Screen"
         user_path: list[MenuOptions] = [MenuOptions.ADMIN_SCREEN]
         info: list[str] = []
+
+        # Define menu options
         options: dict[str, str] = {
             "1": "Create Tournament",
             "2": "Manage Tournaments",
             "3": "Create Club",
             "lo": "Log Out",
         }
-        message = ""
 
+        # Clear previous UI data and print the menu
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path, info, options))
 
+        # Prompt the user to choose an option
         choice: str = self.utility.prompt_choice(["1", "2", "3", "lo"])
+
+        # Map user choice to the next screen
         match choice:
             case "1":
                 return MenuOptions.CREATE_TOURNAMENT
@@ -64,15 +78,21 @@ class AdminUI:
                 return MenuOptions.CREATE_CLUB
             case "lo":
                 return MenuOptions.LOGOUT
+
+        # Fallback to logout if something unexpected happens
         return MenuOptions.LOGOUT
 
     def create_tournament(self) -> MenuOptions:
-        """Create tournament screen, choices: fill info with input
-
-        Returns:
-            MenuOptions: The next menu to navigate to
         """
-        # Main info of table
+        Show the create tournament screen and collect all necessary info.
+
+        Repeats input prompts for name, dates, times, venue, contact info,
+        and server count. User can continue or go back at each step.
+
+        :return: The next menu option to navigate to.
+        :rtype: MenuOptions
+        """
+        # Screen and navigation setup
         menu: str = "Create Tournament"
         user_path: list[MenuOptions] = [
             MenuOptions.ADMIN_SCREEN,
@@ -82,6 +102,7 @@ class AdminUI:
         options: dict[str, str] = {"c": "Continue", "b": "Back"}
         message: str = "You have Created A Tournament!"
 
+        # Initialize tournament input variables
         tournament_name: str = ""
         tournament_date: str = ""
         tournament_time: str = ""
@@ -92,141 +113,101 @@ class AdminUI:
 
         self.tui.clear_saved_data()
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_name: str = self.utility.input_info(
-                "Enter Tournament Name Or 'q' To Cancel \n",
-                "handle",
-                "TOURNAMENT",
-            )
-            if not tournament_name:
-                return MenuOptions.ADMIN_SCREEN
+        # Helper to loop input with option to go back
+        def input_loop(prompt: str, attr: str, info_type: str) -> str:
+            con = "b"
+            value: str = ""
 
-            self.tui.save_input("Name: " + tournament_name)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
+            while con.lower() == "b":
+                print(self.tui.table(menu, user_path, info))
+                value: str = self.utility.input_info(prompt, attr, info_type)
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_date: str = self.utility.input_info(
-                "Enter Start And End Date Or 'q' To Cancel (yyyy-mm-dd yyyy-mm-dd) \n",
-                "tournament_date",
-                "TOURNAMENT",
-            )
-            if not tournament_date:
-                return MenuOptions.ADMIN_SCREEN
+                if not value:
+                    return ""
 
-            self.tui.save_input("Start And End Dates: " + tournament_date)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
+                self.tui.save_input(
+                    f"{attr.replace('_', ' ').title()}: {value}"
+                )
+                print(self.tui.table(menu, user_path, info, options))
+                con = self.utility.prompt_choice(["c", "b"])
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_time: str = self.utility.input_info(
-                "Enter Start And End Time Or 'q' To Cancel (hh:mm hh:mm) \n",
-                "tournament_time",
-                "TOURNAMENT",
-            )
-            if not tournament_time:
-                return MenuOptions.ADMIN_SCREEN
+                if con.lower() == "b":
+                    self.tui.discard_last_input()
+            return value
 
-            self.tui.save_input("Start And End Time: " + tournament_time)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
+        # Collect tournament info
+        tournament_name = input_loop(
+            "Enter Tournament Name Or 'q' To Cancel \n", "handle", "TOURNAMENT"
+        )
+        if not tournament_name:
+            return MenuOptions.ADMIN_SCREEN
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_addr: str = self.utility.input_info(
-                "Enter Venue Address Or 'q' To Cancel (Streetname 00 Cityname)\n",
-                "home_address",
-                "TOURNAMENT",
-            )
-            if not tournament_addr:
-                return MenuOptions.ADMIN_SCREEN
+        tournament_date = input_loop(
+            "Enter Start And End Date Or 'q' To Cancel "
+            "(yyyy-mm-dd yyyy-mm-dd) \n",
+            "tournament_date",
+            "TOURNAMENT",
+        )
+        if not tournament_date:
+            return MenuOptions.ADMIN_SCREEN
 
-            self.tui.save_input("Venue Address: " + tournament_addr)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
+        tournament_time = input_loop(
+            "Enter Start And End Time Or 'q' To Cancel (hh:mm hh:mm) \n",
+            "tournament_time",
+            "TOURNAMENT",
+        )
+        if not tournament_time:
+            return MenuOptions.ADMIN_SCREEN
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_email: str = self.utility.input_info(
-                "Enter Contact Email Or 'q' To Cancel \n", "email", "PLAYER"
-            )
-            if not tournament_email:
-                return MenuOptions.ADMIN_SCREEN
+        tournament_addr = input_loop(
+            "Enter Venue Address Or 'q' To Cancel (Streetname 00 Cityname)\n",
+            "home_address",
+            "TOURNAMENT",
+        )
+        if not tournament_addr:
+            return MenuOptions.ADMIN_SCREEN
 
-            self.tui.save_input("Email: " + tournament_email)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
+        tournament_email = input_loop(
+            "Enter Contact Email Or 'q' To Cancel \n", "email", "PLAYER"
+        )
+        if not tournament_email:
+            return MenuOptions.ADMIN_SCREEN
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_phnum: str = self.utility.input_info(
-                "Enter Contact Phone Number Or 'q' To Cancel 123-4567 \n",
-                "phone_number",
-                "PLAYER",
-            )
-            if not tournament_phnum:
-                return MenuOptions.ADMIN_SCREEN
+        tournament_phnum = input_loop(
+            "Enter Contact Phone Number Or 'q' To Cancel 123-4567 \n",
+            "phone_number",
+            "PLAYER",
+        )
+        if not tournament_phnum:
+            return MenuOptions.ADMIN_SCREEN
 
-            self.tui.save_input("Phone Number: " + tournament_phnum)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
+        tournament_servers = input_loop(
+            "Enter Amount of Servers or 'q' to cancel (1-8 servers allowed)\n",
+            "number",
+            "",
+        )
+        if not tournament_servers:
+            return MenuOptions.ADMIN_SCREEN
 
-        con = "b"
-        while con.lower() == "b":
-            print(self.tui.table(menu, user_path, info))
-            tournament_servers: str = self.utility.input_info(
-                "Enter Amount of Servers or 'q' to cancel (1-8 servers allowed)\n",
-                "number",
-                "",
-            )
-            if not tournament_servers:
-                return MenuOptions.ADMIN_SCREEN
-
-            self.tui.save_input("Amount Of Servers: " + tournament_servers)
-            print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility.prompt_choice(["c", "b"])
-            if con.lower() == "b":
-                self.tui.discard_last_input()
-
-        options: dict[str, str] = {
+        # Final confirmation before saving
+        options = {
             "c": "Save Info And Continue",
             "b": "Discard Info And Go Back",
         }
         print(self.tui.table(menu, user_path, info, options, message))
         con: str = self.utility.prompt_choice(["c", "b"])
-
         if con.lower() == "b":
             return MenuOptions.ADMIN_SCREEN
 
+        # Parse dates and times
         date_start, date_end = tournament_date.split()
         time_start, time_end = tournament_time.split()
-
         start_date: date = LogicLayerAPI.to_date(date_start)
         end_date: date = LogicLayerAPI.to_date(date_end)
         time_frame_start: time = LogicLayerAPI.to_time(time_start)
         time_frame_end: time = LogicLayerAPI.to_time(time_end)
 
+        # Save tournament using logic layer
         LogicLayerAPI.create_tournament(
             tournament_name,
             start_date,
@@ -739,7 +720,8 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name: \n" + self.reset)
+            self.message_color + "Input Team Name: \n" + self.reset
+        )
 
         # Validate team exists
         try:
@@ -867,7 +849,9 @@ class AdminUI:
             print(self.tui.table(menu, user_path, info))
             club_color: str = str(
                 self.utility.input_info(
-                    "Choose color: Red, Green, yellow, blue, pink, cyan Or 'q' To Cancel \n", "color", "CLUB"
+                    "Choose color: Red, Green, yellow, blue, pink, cyan Or 'q' To Cancel \n",
+                    "color",
+                    "CLUB",
                 )
             )
             if not club_color:

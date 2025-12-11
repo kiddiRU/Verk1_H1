@@ -263,5 +263,21 @@
             "b6f18db4-e778-4b72-84e6-91aed8125bb4",
             "5b4a4ac3-eebe-456e-a123-8ca0fe90a263"
         ]
+    },
+    "17578688-0b98-4dac-8ed9-ef0f1bfb494e": {
+        "uuid": "17578688-0b98-4dac-8ed9-ef0f1bfb494e",
+        "name": "Iska",
+        "start_date": "2134-11-11",
+        "end_date": "3214-12-12",
+        "time_frame_start": "02:03:00",
+        "time_frame_end": "03:03:00",
+        "venue": "da 2 cs",
+        "email": "das @gfe",
+        "phone_number": "213-4215",
+        "status": "INACTIVE",
+        "list_servers": [
+            "NoServer"
+        ],
+        "teams_playing": []
     }
 }
