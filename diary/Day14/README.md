@@ -5,8 +5,8 @@
 ### On site: Yes
 
 ## Elmar
-### Time:
-### On site:
+### Time: 9:08
+### On site: Yes
 
 ## Ísak Elí
 ### Time:
@@ -35,7 +35,7 @@
 - QC:
 
 ## ToDo-list:
-
+- Check 
 # Evening meeting (Diary)
 ## State of project:
 
