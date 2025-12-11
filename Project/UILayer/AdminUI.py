@@ -95,7 +95,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_name: str = self.utility.input_info(
-                "Enter Tournament Name or 'q' to cancel: \n",
+                "Enter Tournament Name Or 'q' To Cancel \n",
                 "handle",
                 "TOURNAMENT",
             )
@@ -112,7 +112,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_date: str = self.utility.input_info(
-                "Enter Start And End Date or 'q' to cancel: (yyyy-mm-dd yyyy-mm-dd) \n",
+                "Enter Start And End Date Or 'q' To Cancel (yyyy-mm-dd yyyy-mm-dd) \n",
                 "tournament_date",
                 "TOURNAMENT",
             )
@@ -129,7 +129,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_time: str = self.utility.input_info(
-                "Enter Start And End Time or 'q' to cancel: (hh:mm hh:mm) \n",
+                "Enter Start And End Time Or 'q' To Cancel (hh:mm hh:mm) \n",
                 "tournament_time",
                 "TOURNAMENT",
             )
@@ -146,7 +146,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_addr: str = self.utility.input_info(
-                "Enter Venue Address or 'q' to cancel: (Streetname 00 Cityname)\n",
+                "Enter Venue Address Or 'q' To Cancel (Streetname 00 Cityname)\n",
                 "home_address",
                 "TOURNAMENT",
             )
@@ -163,7 +163,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_email: str = self.utility.input_info(
-                "Enter Contact Email or 'q' to cancel: \n", "email", "PLAYER"
+                "Enter Contact Email Or 'q' To Cancel \n", "email", "PLAYER"
             )
             if not tournament_email:
                 return MenuOptions.ADMIN_SCREEN
@@ -178,7 +178,7 @@ class AdminUI:
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
             tournament_phnum: str = self.utility.input_info(
-                "Enter Contact Phone Number or 'q' to cancel: 123-4567 \n",
+                "Enter Contact Phone Number Or 'q' To Cancel 123-4567 \n",
                 "phone_number",
                 "PLAYER",
             )
@@ -851,7 +851,7 @@ class AdminUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             club_name: str = self.utility.input_info(
-                "Enter Name or 'q' to cancel: \n", "handle", "CLUB"
+                "Enter Name Or 'q' To Cancel \n", "handle", "CLUB"
             )
             if not club_name:
                 return user_path[-2]
@@ -867,7 +867,7 @@ class AdminUI:
             print(self.tui.table(menu, user_path, info))
             club_color: str = str(
                 self.utility.input_info(
-                    "Choose color: Red, Green, yellow, blue, pink, cyan or 'q' to cancel: \n", "color", "CLUB"
+                    "Choose color: Red, Green, yellow, blue, pink, cyan Or 'q' To Cancel \n", "color", "CLUB"
                 )
             )
             if not club_color:
@@ -883,7 +883,7 @@ class AdminUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             club_country: str = self.utility.input_info(
-                "Enter Club country of origin or 'q' to cancel: \n",
+                "Enter Club country of origin Or 'q' To Cancel \n",
                 "name",
                 "CLUB",
             )
@@ -900,7 +900,7 @@ class AdminUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             club_hometown: str = self.utility.input_info(
-                "Enter Club Hometown or 'q' to cancel: \n", "name", "CLUB"
+                "Enter Club Hometown Or 'q' To Cancel \n", "name", "CLUB"
             )
             if not club_hometown:
                 return user_path[-2]
