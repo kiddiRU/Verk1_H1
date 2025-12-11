@@ -2,6 +2,8 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
 
+Author: Andri Már Kristjánsson <andrik25@ru.is>
+
 File that holds all the menus that the admin can access
 """
 

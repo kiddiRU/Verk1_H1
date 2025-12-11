@@ -2,7 +2,7 @@
 Author: Ísak Elí Hauksson <isak25@ru.is>
 Date: 2025-12-04
 
-Co-Author: Andri Már Kristjánsson <andrik25@ru.is>
+Author: Andri Már Kristjánsson <andrik25@ru.is>
 
 File that holds all the menus that the player can access
 """
@@ -176,7 +176,7 @@ class PlayerUI:
 
         # Gets the users information
         # Temprarily saves the data
-            # so that the user can see their inputs before saving the registration
+         # So that the user can see their inputs before saving the registration
         # Allowes the user to cancel the registration an any time by inputing q
 
         # ---------------------- NAME ----------------------
