@@ -471,12 +471,45 @@ def get_team_club(team_name: str) -> str:
     return team_logic.get_team_club(team_name)
 
 def get_team_by_name(team_name: str) -> Team:
+    '''
+    Gets a team object by its name.
+    
+    :param team_name:
+        The name of the team to fetch.
+    :type team_name: str
+
+    :return:
+        The object of the team with the given name.
+    :rtype: Team
+    '''
     return team_logic.get_team_by_name(team_name)
 
 def get_team_by_uuid(team_uuid: str) -> Team:
+    '''
+    Gets a team object by its UUID.
+    
+    :param team_uuid:
+        The UUID of the team to fetch.
+    :type team_uuid: str
+
+    :return:
+        The object of the team with the given UUID.
+    :rtype: Team
+    '''
     return team_logic.get_team_by_uuid(team_uuid)
 
 def team_name_to_uuid(team_name: str) -> str:
+    '''
+    Converts a teams name, to their UUID.
+    
+    :param team_name:
+        The name of the team.
+    :type team_name: str
+
+    :return:
+        Returns the UUID of the team with the given name.
+    :rtype: str
+    '''
     return team_logic.team_name_to_uuid(team_name)
 
 ''' Tournament API '''
@@ -536,7 +569,7 @@ def create_tournament(
         start_date,
         end_date,
         time_frame_start,
-        time_frame_end, 
+        time_frame_end,
         venue,
         email,
         phone_number,
@@ -578,7 +611,7 @@ def remove_team(tournament_name: str, team_name: str) -> None:
 #     email: str,
 #     phone_number: str
 # ) -> None:
-    
+
 #     tournament_logic.update_info(
 #         tournament_name,
 #         venue,
@@ -594,7 +627,7 @@ def remove_team(tournament_name: str, team_name: str) -> None:
 #     time_frame_start: time,
 #     time_frame_end: time,
 # ) -> None:
-    
+
 #     tournament_logic.update_tournament_datetime(
 #         tournament_name,
 #         start_date,
