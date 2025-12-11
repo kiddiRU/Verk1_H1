@@ -5,7 +5,7 @@
 ### On site: Yes
 
 ## Elmar
-### Time: 9:08
+### Time: 9:08 - 17:00
 ### On site: Yes
 
 ## Ísak Elí
@@ -36,10 +36,14 @@
 
 ## ToDo-list:
 - Bug - Match Winner crash 
+- Need to make video - 
+- Show all color options for create club
+- Fix 8 servers in a tournament and 2 teams
 # Evening meeting (Diary)
 ## State of project:
-
+- We are constantly having problems caused by corrupted data. The corruption was caused by inputting bad data for debugging purposes.
 ## State of group: 
+I (Sindri) asked what the name of the group should be besides "Hópur 1" for the video. The first idea and winner by majority (5:1) was "Sindri Fan Club".
 
 ## Divisions:
 - UI / UX:
