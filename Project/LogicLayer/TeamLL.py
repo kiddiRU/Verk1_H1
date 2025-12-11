@@ -47,14 +47,28 @@ class TeamLL():
         DataLayerAPI.store_team(new_team)
         return new_team
 
-    def add_player(self, player_handle: str, current_player: Player) -> Team | str:
+    def add_player(self, player_handle: str, current_player: Player) -> Team:
+        """Gets the handle of the player to add and
+        the player object of the captain
+
+        First checks if the player is already in a team
+        Then finds the team of the captain and
+        adds the player to the team        
+        
+        :param player_handle:
+            The player handle of the player to add to the team
+        :type player_handle: str
+
+        :param current_player:
+            current player is the team captain and
+            is used to get the uuid of the team
+        :type current_player: Player
+
+        :return:
+            Returns the team object
+        :rtype: Team
         """
-        Takes in team uuid and a player,
-        First looks through all teams to see if the player uuid is already in a team
-        then looks through a list of all the teams and 
-        finds the right team uuid and
-        adds the new player uuid to the teams player list 
-        """
+  
 
         player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
@@ -76,13 +90,25 @@ class TeamLL():
 
 
     def remove_player(self, player_handle: str, current_player: Player) -> Team:
-        """
-        Takes in team uuid and a player uuid,
-        Looks through a list of all the teams and 
-        finds the right team uuid and
-        checks if the player is the team captain and if so he can not be removed
-        otherwise removes the player uuid from the teams player list
-        try-except for if the player uuid is not in the team 
+        """Gets the handle of the player to add and
+        the player object of the captain
+
+        Looks through all teams to find the team of the captain
+        First checks that the player to remove is not the captain
+        Otherwise it removes the player from the team
+        if the player is not found and error message will be raised 
+        
+        :param player_handle:
+            the player handle of the player to remove from the team
+        :type player_handle: str
+
+        :param current_player
+            the player object of the team captain and
+            is used to get the uuid of the team
+        :type current_player: Player
+
+        :return: Returns the team object
+        :rtype: Team
         """
         player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
         team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
@@ -106,12 +132,18 @@ class TeamLL():
     
 
     def get_team_members(self, team_name: str) -> list[str]:
-        """
-        Takes in team uuid
-        Looks through a list of all the teams and
-        finds the right team uuid and
-        returns a list of the team members uuid
-        """        
+        """Gets the name of the team
+
+        Looks through all teams to find the correct team object
+        and extracts the list of player uuid in the team
+        
+        :param team_name:
+            The team name is used to find the team object
+        :type team_name: str
+
+        :return: Returns a list of the team members uuid's
+        :rtype: list[str]
+        """    
         model_teams: list[Team] = DataLayerAPI.load_teams()
         for team in model_teams:
             if team.name == team_name:
@@ -121,18 +153,30 @@ class TeamLL():
     
 
     def list_all_teams(self) -> list[Team]: 
-        """Returns a list of stored clubs"""
+        """Is called to get a list of all teams
+        
+        :return: Returns a list of all team objects
+        :rtype: list[Team]
+        """
 
         teams: list[Team] = DataLayerAPI.load_teams()
         return teams
     
     
     def get_team_members_object(self, team_name: str) -> list[Player]:
-        """
-        Takes in team name and gets the list of player uuid in the team
-        loads and looks through all the players
-        and lists all player object that have the player uuid
-        return list of player objects in the team
+        """Gets the team name
+
+        First gets the uuid of the players in the team,
+        Then loads all player objects and
+        lists all players objects that have the
+        uuid of the players in the team
+        
+        :param team_name:
+            The team name of the team to get the player objects
+        :type team_name: str
+
+        :return: Returns a list of all player objects in a team
+        :rtype: list[Player]
         """
         player_list_uuid: list[str] = self.get_team_members(team_name)
 
@@ -166,11 +210,18 @@ class TeamLL():
     
 
     def get_team_wins(self, team_name: str) -> str:
-        """
-        takes in a team name and finds the team uuid from name
-        loads and looks through all matches 
-        and adds one to counter for ever match won
-        returns the count
+        """Gets the team name
+
+        First gets the uuid of the team,
+        Then Loads all matches and adds one to the count 
+        when the winner uuid matches the teams uuid
+        
+        :param team_name:
+            The team name of the team to find the total of won matches
+        :type team_name: str
+
+        :return: Returns a string number of the total won matches
+        :rtype: str
         """
         model_matches: list[Match] = DataLayerAPI.load_matches()
         team_uuid: str = self.get_team_by_name(team_name).uuid
@@ -188,13 +239,21 @@ class TeamLL():
     # and the points increase. Match 1 win: +1, Match 2 win: +2,
     # Match 3 loss: total 3 points for tournament 
     def get_team_points(self, team_name: str) -> str:
-        """
-        takes in a team name and finds the team uuid from name
-        loads and looks through all tournament and takes there uuid
-        looks through every match in tournament and checks the last match
-        if the winning team uuid is the same as the team uuid
-        three points are added
-        returns points
+        """Gets the team name
+        
+        First gets the teams uuid,
+        Then loads all tournaments and get a list of all matches
+        with the tournament uuid,
+        Finds the last match of the tournament (Finals) and finds the
+        winning and losing team of the match, and if the team is the
+        winner they get 3 points and if the loser gets 1 point
+        
+        :param team_name:
+            The team name of the team to find the total points from tournaments
+        :type team_name: str
+
+        :return: Returns a string number of total points from tournaments
+        :rtype: str
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         team_uuid: str = self.get_team_by_name(team_name).uuid
@@ -220,6 +279,18 @@ class TeamLL():
     
     # Changed by Sindri
     def get_team_club(self, team_name: str) -> str:
+        """Gets the team name
+
+        First loads all clubs, and gets a list of all team names in the club
+        and if the team name is in the list it is their club
+        
+        :param team_name:
+            The team name to get the club name from
+        :type team_name: str
+        
+        :return: Returns the name of the club that the team is in
+        :rtype: str
+        """
         clubs = self._club_logic.list_all_clubs()
 
         for club in clubs:

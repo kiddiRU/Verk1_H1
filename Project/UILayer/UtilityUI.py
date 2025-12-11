@@ -295,13 +295,16 @@ class UtilityUI:
 
 
     # "Created" by Sindri Freysson
-    # TODO need write doc string
     def show_filtered(
-        self, object_list: list[Player] | list[Team] | list[Club]
+        self, object_list: list[Player] | list[Team] | list[Club] | list[Tournament]
     ) -> list[str]:
-
+        """
+        A helper function that formats a given list of model objects into a 2 column table
+        :param object_list: Takes a list of model objects
+        :return: A formatted list of strings that when displayed appears as a table
+        """
         str_list: list[str] = [x.name for x in object_list]
-        output_list: list[str] = []  # list that holds each line as a f-string
+        output_list: list[str] = []
         length: int = len(str_list)
 
         for value in range(0, len(str_list), 2):

@@ -35,7 +35,7 @@
 - QC:
 
 ## ToDo-list:
-- Check 
+- Bug - Match Winner crash 
 # Evening meeting (Diary)
 ## State of project:
 
