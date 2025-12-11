@@ -2,6 +2,9 @@
 Author: Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-05
 
+Contributer:
+    Kristinn Hrafn <kristinnd25@ru.is>
+
 Functions for tournament logic.
 '''
 
@@ -47,7 +50,7 @@ class TournamentLL:
         :type name: str
 
         :param start_date:
-            The tournamnets starting date.
+            The tournaments starting date.
         :type start_date: date
 
         :param end_date:
@@ -78,6 +81,7 @@ class TournamentLL:
             The tournaments amount of servers.
         :type amount_of_servers: int
         '''
+        # Generate a unique UUID and a new Tournament object.
         uuid = str(uuid4())
         new_tournament = Tournament(
             uuid,
@@ -105,14 +109,17 @@ class TournamentLL:
             The name of the team to add.
         :type team_name: str
         '''
+        # Get the Tournament and Team object from the given names.
         tournament: Tournament = self.get_tournament_by_name(tournament_name)
         team: Team = self._team_logic.get_team_by_name(team_name)
 
+        # Check if the team is already playing in the tournament.
         if team.uuid in tournament.teams_playing:
             raise ValidationError(
                 f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!'
             )
-
+        
+        # Add the team to the tournament, and store the updated tournament.
         tournament.teams_playing.append(team.uuid)
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
@@ -127,9 +134,11 @@ class TournamentLL:
             The name of the team to remove.
         :type team_name: str
         '''
+        # Get the Tournament and Team object from the given names.
         tournament: Tournament = self.get_tournament_by_name(tournament_name)
         team: Team = self._team_logic.get_team_by_name(team_name)
 
+        # If the team is in the tournament, remove it.
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
 
@@ -186,15 +195,17 @@ class TournamentLL:
     #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
-        '''Gets a list of all stored tournamnets.
+        '''Gets a list of all stored tournaments.
         
         :return:
             A list of all Tournament objects.
         :rtype: list[Tournament]
         '''
+        # Get all stored tournaments as objects, and return them in a list.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def end_tournament(self, uuid: str) -> None:
         """Ends an active tournament.
 
@@ -223,6 +234,7 @@ class TournamentLL:
         DataLayerAPI.update_tournament(uuid, tournament)
 
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def next_round(self, uuid: str) -> None:
         """Moves a tournament to the next round.
 
@@ -286,6 +298,7 @@ class TournamentLL:
             DataLayerAPI.update_match(matches[i//2].uuid, matches[i//2])
 
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def publish(self, name: str) -> None:
         """Publish an inactive tournament.
 
@@ -408,6 +421,7 @@ class TournamentLL:
         # Starts the first round.
         self.next_round(uuid)
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def next_games(self, uuid: str) -> list[Match]:
         """Gets the matches next on the schedule in a certain tournament.
 
@@ -444,6 +458,7 @@ class TournamentLL:
 
         return matches
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def change_match_winner(
             self,
             tournament_uuid: str,
@@ -551,9 +566,11 @@ class TournamentLL:
             The object of the tournament with the given name.
         :rtype: Tournament
         '''
+        # Get an object of the tournament with the given name.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
 
+        # If the tournament doesn't exist, raise an error declaring so.
         if tournament is None:
             raise ValidationError(f'No tournament found named: {name}')
 
@@ -570,9 +587,11 @@ class TournamentLL:
             The object of the tournament with the given UUID.
         :rtype: Tournament
         '''
+        # Get an object of the tournament with the given UUIDe.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.uuid == uuid), None)
 
+        # If the tournament doesn't exist, raise an error declaring so.
         if tournament is None:
             raise ValidationError(f'No tournament found with the UUID: {uuid}')
 
@@ -589,5 +608,6 @@ class TournamentLL:
             Returns the UUID of the tournament with the given name.
         :rtype: str
         '''
+        # Get the name of the tournament with the given UUID, and return it.
         tournament = self.get_tournament_by_name(name)
         return tournament.uuid

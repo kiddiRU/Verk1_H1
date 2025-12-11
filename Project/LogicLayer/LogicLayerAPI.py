@@ -23,7 +23,41 @@ team_logic.set_club_logic(club_logic)
 team_logic.set_match_logic(match_logic)
 
 ''' Validation API '''
+
 def validate(attr: str, value: str, name_type: str):
+    """Validates all attributes that need validating.
+
+    :param attribute:
+        The type of attribute which needs validating, available options are
+
+        -   name
+        -   date_of_birth
+        -   home_address
+        -   email
+        -   phone_number
+        -   handle
+        -   tournament_date
+        -   tournament_time
+        -   color
+        -   number
+
+    :param value:
+        The value that needs validating.
+
+    :param name_type:
+        Only used for attribute handle, this determines the type of handle
+        want validated, available options are.
+        
+        -   PLAYER
+        -   TEAM
+        -   TOURNAMENT
+        -   CLUB
+
+    :returns:
+        Returns the same value back if it's valid, otherwise it raises a
+        ValidationError. The only exception is when you call with date
+        attribute, in that case it will return date object if it's valid.
+    """
     return Validation.validate_attr(attr, value, name_type)
 
 ''' Player API '''
@@ -141,19 +175,19 @@ def update_player_info(
 # def leave_team(team_name: str, player: Player) -> None:
 #     return player_logic.leave_team(team_name, player)
 
-# Isn't used?
-def promote_captain(current_player: Player, handle_to_promote: str) -> None:
-    '''Promotes a teams player to its captain.
-    
-    :param current_player:
-        The object of the player calling the function.
-    :type current_player: Player
+# Isn't used, remove?
+# def promote_captain(current_player: Player, handle_to_promote: str) -> None:
+#     '''Promotes a teams player to its captain.
 
-    :param handle_to_promote:
-        The handle of the player to promote.
-    :type handle_to_promote: str
-    '''
-    player_logic.promote_captain(current_player, handle_to_promote)
+#     :param current_player:
+#         The object of the player calling the function.
+#     :type current_player: Player
+
+#     :param handle_to_promote:
+#         The handle of the player to promote.
+#     :type handle_to_promote: str
+#     '''
+#     player_logic.promote_captain(current_player, handle_to_promote)
 
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
@@ -533,7 +567,7 @@ def create_tournament(
     :type name: str
 
     :param start_date:
-        The tournamnets starting date.
+        The tournaments starting date.
     :type start_date: date
 
     :param end_date:
@@ -635,7 +669,7 @@ def remove_team(tournament_name: str, team_name: str) -> None:
 #     )
 
 def list_tournaments() -> list[Tournament]:
-    '''Gets a list of all stored tournamnets.
+    '''Gets a list of all stored tournaments.
     
     :return:
         A list of all Tournament objects.

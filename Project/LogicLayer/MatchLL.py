@@ -6,10 +6,10 @@ Functions for Match logic
 """
 
 from uuid import uuid4
-from Models.Match import Match
-from Models.Team import Team
+from datetime import date, time
+from Models import Match
+from Models import Team
 from DataLayer import DataLayerAPI
-from datetime import date,time
 
 class MatchLL:
     

@@ -8,7 +8,7 @@ Functions for Club logic
 from uuid import uuid4
 from DataLayer import DataLayerAPI
 from Models import Club, Team, Match, Tournament, ValidationError
-from LogicLayer.MatchLL import MatchLL
+from LogicLayer import MatchLL
 
 class ClubLL:
     ''' Club logic. '''
@@ -183,15 +183,15 @@ class ClubLL:
             matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
             # if matches is empty skips tournament
-            if len(matches_list) == 0:
+            if not matches_list:
                 continue
 
             # gets the final match of the tournament (Finals)
             tour_final_match: Match = matches_list[-1]
 
             # gets the winning and losing teams
-            winner: str = tour_final_match.winner
-            loser: str = tour_final_match.losing_team
+            winner: str | None = tour_final_match.winner
+            loser: str | None = tour_final_match.losing_team
 
             # if the winning team is in the list of teams in club
             if winner in teams_in_club:
