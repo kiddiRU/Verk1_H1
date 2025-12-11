@@ -9,32 +9,96 @@ A validation file that takes inn all info that would need to be validated
 """
 
 from datetime import date, time
-from Models import Team, ValidationError
+from Models import ValidationError
 from DataLayer import DataLayerAPI
 
-def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None | date:
+def validate_attr(attribute: str, value: str, name_type: str = '') -> str | date:
+    """Validates all attributes that need validating.
+    :param attribute:
+        The type of attribute which needs validating, available options are
 
+        -   name
+        -   date_of_birth
+        -   home_address
+        -   email
+        -   phone_number
+        -   handle
+        -   tournament_date
+        -   tournament_time
+        -   color
+        -   number
+
+    :param value:
+        The value that needs validating.
+
+    :param name_type:
+        Only used for attribute handle, this determines the type of handle
+        want validated, available options are.
+        
+        -   PLAYER
+        -   TEAM
+        -   TOURNAMENT
+        -   CLUB
+
+    :returns:
+        Returns the same value back if it's valid, otherwise it raises a
+        ValidationError. The only exception is when you call with date
+        attribute, in that case it will return date object if it's valid.
+    """
+
+    # Checks to see if all characters in value are standard printable ascii
+    # characters or in alphabet to allow icelandic letters.
     for char in value:
-        if (ord(char) < 32 or ord(char) > 126) and not char.isalpha:
+        if (ord(char) < 32 or ord(char) > 126) and not char.isalpha():
             raise ValidationError("String contains characters not in ascii range")
         
-    if attribute == 'name': return validate_name(value)
-    elif attribute == 'date_of_birth': return validate_date(value)
-    elif attribute == 'home_address': return validate_home_address(value)
-    elif attribute == 'email': return validate_email(value)
-    elif attribute == 'phone_number': return validate_phone_number(value)
-    elif attribute == 'handle': return validate_unique_name(value, name_type)
-    elif attribute == 'tournament_date': return validate_tournament_date(value)
-    elif attribute == 'tournament_time': return validate_tournament_time(value)
-    elif attribute == 'color': return validate_color(value)
-    elif attribute == 'number': return validate_number(value)
-    else: return
+    if attribute == 'name':
+        return validate_name(value)
+    elif attribute == 'date_of_birth':
+        return validate_date(value)
+    elif attribute == 'home_address':
+        return validate_home_address(value)
+    elif attribute == 'email':
+        return validate_email(value)
+    elif attribute == 'phone_number':
+        return validate_phone_number(value)
+    elif attribute == 'handle':
+        return validate_unique_name(value, name_type)
+    elif attribute == 'tournament_date':
+        return validate_tournament_date(value)
+    elif attribute == 'tournament_time':
+        return validate_tournament_time(value)
+    elif attribute == 'color':
+        return validate_color(value)
+    elif attribute == 'number':
+        return validate_number(value)
+    else:
+        raise ValidationError("Attribute not found in list")
 
-# Player handle, team name, tour name and club name
-def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
+
+def validate_unique_name(unique_name: str, type_of_name: str) -> str:
     """
-    Checks if the name is unique and is between 3-39 char in length
-    Used for unique player handle, team tournament and club names
+    Checks if the name is in between the allowed character limit 3-39
+    Then Checks what type of name to search through
+
+    Then loads the needed name type and checks if
+    the unique name is already in the data
+    and if so an error is raised
+
+    Only player has an extra check that is that the handle can not be admin
+    
+    :param unique_name:
+        The name to check if it is unique
+    :type unique_name: str
+
+    :param type_of_name:
+        What type of name it is checking (Handle, Team, Club, Tournament)
+        so that it looks through the right data
+    :type type_of_name: str
+
+    :return:
+        Returns the name if it is valid, if not an error is raised
+    :rtype: str
     """
     unique_name = unique_name.strip()
 
@@ -73,10 +137,18 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
 
         return unique_name
 
-# Players full name
-def validate_name(name: str) -> str | None:
+
+def validate_name(name: str) -> str:
     """
-    Checks if the name is in between 3-39 char in length and has only letters
+    Checks if the name is in between 3-39 characters long and has only letters
+    
+    :param name:
+        Real name of player that is being validated
+    :type name: str
+
+    :return:
+        Returns the name if it is valid, otherwise an error is raised
+    :rtype: str
     """
     name = name.strip()
 
@@ -91,35 +163,45 @@ def validate_name(name: str) -> str | None:
     return name
 
 
-# Players home address
-def validate_home_address(home_address: str) -> str | None:
+def validate_home_address(home_address: str) -> str :
     """
-    Checks if home address has street name, street number and area
-    (Frostafold 3 Reykjavík)
+    Checks if the address is spilt into 3 parts, then
+    checks if the first and third parts are letters and
+    checks if the second part is digits and
+    if all are true the address is valid
+
+    (Street_name Street_number, City_name)
+    
+    :param home_address:
+        The address to be validated
+    :type home_address: str
+
+    :return:
+        Returns the address if it is valid, otherwise an error is raised
+    :rtype: str
     """
     home_address = home_address.strip()
 
-    try:
-        address_list: list[str] = home_address.split()
-        street_name: str = address_list[0]
-        street_number: str = address_list[1]
-        area_name: str = address_list[2]
+    address_list: list[str] = home_address.split()
+    if len(address_list) < 3 or len(address_list) > 3:
+        raise ValidationError(f"Invalid address: {home_address}")
 
-        is_string_street_name: bool = street_name.isalpha()
-        is_digit_street_number: bool = street_number.isdigit()
-        is_string_area_name: bool = area_name.isalpha()
+    street_name: str = address_list[0]
+    street_number: str = address_list[1]
+    city_name: str = address_list[2]
 
-        if (is_string_street_name
-            and is_digit_street_number
-            and is_string_area_name):
+    is_string_street_name: bool = street_name.isalpha()
+    is_digit_street_number: bool = street_number.isdigit()
+    is_string_area_name: bool = city_name.isalpha()
 
-            return home_address
+    if (is_string_street_name
+        and is_digit_street_number
+        and is_string_area_name):
 
-        else:
-            raise ValidationError("Invalid address:", home_address)
+        return home_address
 
-    except:
-        raise ValidationError("Invalid address:", home_address)
+    else:
+        raise ValidationError(f"Invalid address: {home_address}")
 
 
 # Players and tournament contact phone number
