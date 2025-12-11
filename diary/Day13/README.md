@@ -1,19 +1,19 @@
 # Diary, 2025-12-10
 
 ## Andri Már
-### Time: 8:15
+### Time: 8:15 - 22:15
 ### On site: Yes
 
 ## Elmar
-### Time: 9:20
+### Time: 9:20 - 22:25
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 9:43
+### Time: 9:43 - 23:00
 ### On site:
 
 ## Kristinn Hrafn
-### Time: 9:00
+### Time: 9:00 - 23:00
 ### On site: Yes
 
 ## Kristján Hagalín
@@ -63,9 +63,10 @@
 - Fixed Bug Date somehow in match?
 - Fixed Bug - If end-time smaller then start-time it generates weird datetime.
 ## State of group: 
+Everyone worked quite late today because deadline is 3 days away, except Kristján, who had to leave at 17 because he had work. Most of the project is done, we only need to type hint and make good doc strings using the flake8 format, test for bugs and finalize the project design document.
 ## Divisions:
-- UI / UX:
-- System engineer: 
+- UI / UX: Andri, Ísak
+- System engineer: Elmar, Kristinn, Kristján
 - QC: Sindri
 ## ToDo-list:
 - Make Kristinn import regex for email "validation"

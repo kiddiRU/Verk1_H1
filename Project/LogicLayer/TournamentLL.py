@@ -141,6 +141,10 @@ class TournamentLL:
         Archives the tournament tied to the given uuid and releases
         it's servers.
         """
+        
+        #print("debug: got into end tournament")
+        #input()
+
         # Looks for the tournament with the given uuid.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         for item in tournaments:
@@ -151,6 +155,10 @@ class TournamentLL:
             raise ValidationError("Tournament with given uuid not found.")
         
         tournament.status = Tournament.StatusType.archived
+        for idx, _ in enumerate(tournament.list_servers):
+            tournament.list_servers[idx] = "NoServer"
+
+        DataLayerAPI.update_tournament(uuid, tournament)
 
 
     def next_round(self, uuid: str) -> None:
@@ -161,6 +169,9 @@ class TournamentLL:
         and will fill future matches with a teams competing.
         """
 
+        #print("debug: got into next round")
+        #input()
+        
         # Looks for the tournament with the given uuid.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         for item in tournaments:
@@ -187,6 +198,9 @@ class TournamentLL:
                         break
             else:
                 competing_teams.append(team)
+
+        #print("debug", competing_teams)
+        #input()
 
         if len(competing_teams) == 0:
             raise ValidationError("No teams found to compete.")
@@ -306,12 +320,13 @@ class TournamentLL:
             new_server = Server(str(uuid4()), matches[idx].uuid)
             tournament.list_servers[idx] = new_server.uuid
             DataLayerAPI.store_server(new_server)
-    
-        # Starts the first round.
-        self.next_round(uuid)
 
         # Stores the newly updated tournament.
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
+
+        # Starts the first round.
+        self.next_round(uuid)
+
 
     def next_games(self, uuid: str) -> list[Match]:
         """Gets the matches next on the schedule in a certain tournament.
@@ -402,10 +417,6 @@ class TournamentLL:
         else:
             raise ValidationError("Match with given uuid not found.")
 
-        # Checks if the finished match results in a new round
-        if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
-            self.next_round(tournament_uuid)
-
         # Assign a new match to the server that was in use if needed.
         j: int = i + len(tournament.list_servers)
         servers: list[Server] = DataLayerAPI.load_servers()
@@ -419,6 +430,13 @@ class TournamentLL:
                 break
         else:
             raise ValidationError("Tournament server error.")
+
+
+        # Checks if the finished match results in a new round
+        if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
+            self.next_round(tournament_uuid)
+
+
 
 
     def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:
