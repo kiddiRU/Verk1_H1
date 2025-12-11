@@ -247,7 +247,9 @@ class TournamentLL:
         # isn't.
         for team in tournament.teams_playing:
             for match in matches:
-                if match.winner == None: continue
+                if match.winner is None:
+                    continue
+
                 if team == match.team_1 or team == match.team_2:
                     if team != match.winner:
                         break
@@ -267,7 +269,7 @@ class TournamentLL:
         random.shuffle(competing_teams)
 
         # Gets the list of matches which can be used for the next round.
-        matches = [match for match in matches if match.winner == None]
+        matches = [match for match in matches if match.winner is None]
 
         # Loops through the competing teams assigning teams next to eachother
         # to compete against eachother, in case of odd number of teams the

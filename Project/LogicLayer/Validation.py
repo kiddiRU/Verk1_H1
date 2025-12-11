@@ -8,10 +8,9 @@ Minor changes: Andri Már Kristjánsson <andrik25@ru.is>
 A validation file that takes inn all info that would need to be validated
 """
 
-
-from Models import ValidationError
+from datetime import date, time
+from Models import Team, ValidationError
 from DataLayer import DataLayerAPI
-
 
 def validate_attr(attribute: str, value: str, name_type: str = '') -> str | None:
     if attribute == 'name': return validate_name(value)
@@ -43,8 +42,10 @@ def validate_unique_name(unique_name: str, type_of_name: str) -> str | None:
         
     if type_of_name == "PLAYER":
         player_names: list[str] = [player.handle for player in DataLayerAPI.load_players()]
+
         if unique_name in player_names or unique_name == "admin":
             raise ValidationError(f'The handle \'{unique_name}\' is already taken!')
+        
         return unique_name
     
     elif type_of_name == "TEAM":
