@@ -250,10 +250,9 @@ def validate_tournament_time(value: str) -> str:
 
 def validate_color(value: str) -> str:
     value = value.strip()
-
     available_colors = ["red", "green", "yellow", "blue", "pink", "cyan"]
     
-    if value in available_colors:
+    if value.lower() in available_colors:
         return value
 
     raise ValidationError("Color not one of the available ones.")
