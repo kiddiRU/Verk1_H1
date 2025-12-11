@@ -22,7 +22,7 @@ team_logic.set_player_logic(player_logic)
 team_logic.set_club_logic(club_logic)
 team_logic.set_match_logic(match_logic)
 
-''' Validation API '''
+# Validation API
 
 def validate(attr: str, value: str, name_type: str):
     """Validates all attributes that need validating.
@@ -60,7 +60,7 @@ def validate(attr: str, value: str, name_type: str):
     """
     return Validation.validate_attr(attr, value, name_type)
 
-''' Player API '''
+# Player API
 
 def create_player(
     name: str,
@@ -318,7 +318,7 @@ def get_all_players_not_in_team() -> list[Player]:
     """
     return player_logic.get_all_players_not_in_team()
 
-''' Team API '''
+# Team API
 
 def create_team(
     name: str,
@@ -547,7 +547,7 @@ def team_name_to_uuid(team_name: str) -> str:
     '''
     return team_logic.team_name_to_uuid(team_name)
 
-''' Tournament API '''
+# Tournament API
 
 def create_tournament(
     name: str,
@@ -787,7 +787,7 @@ def tournament_name_to_uuid(tournament_name: str) -> str:
     '''
     return tournament_logic.tournament_name_to_uuid(tournament_name)
 
-''' Club API '''
+# Club API
 
 def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
     """First takes in the info that has already been validated
@@ -813,7 +813,7 @@ def create_club(name: str, club_color: str, country: str, home_town: str) -> Clu
 
     :return: Returns the newly created club object
     :rtype: Club
-    """      
+    """
     return club_logic.create_club(name,club_color, country, home_town)
 
 def list_all_clubs() -> list[Club]:
@@ -894,7 +894,7 @@ def get_club_by_name(club_name: str) -> Club:
     """
     return club_logic.get_club_by_name(club_name)
 
-''' Match API '''
+# Match API
 
 def get_all_matches(tournament_uuid: str) -> list[Match]:
     """
