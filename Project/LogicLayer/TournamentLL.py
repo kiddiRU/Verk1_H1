@@ -2,6 +2,9 @@
 Author: Kristjan Hagalin <kristjanhj24@ru.is>
 Date: 2025-12-05
 
+Contributer:
+    Kristinn Hrafn <kristinnd25@ru.is>
+
 Functions for tournament logic.
 '''
 
@@ -195,6 +198,7 @@ class TournamentLL:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         return tournaments
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def end_tournament(self, uuid: str) -> None:
         """Ends an active tournament.
 
@@ -223,6 +227,7 @@ class TournamentLL:
         DataLayerAPI.update_tournament(uuid, tournament)
 
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def next_round(self, uuid: str) -> None:
         """Moves a tournament to the next round.
 
@@ -286,6 +291,7 @@ class TournamentLL:
             DataLayerAPI.update_match(matches[i//2].uuid, matches[i//2])
 
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def publish(self, name: str) -> None:
         """Publish an inactive tournament.
 
@@ -408,6 +414,7 @@ class TournamentLL:
         # Starts the first round.
         self.next_round(uuid)
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def next_games(self, uuid: str) -> list[Match]:
         """Gets the matches next on the schedule in a certain tournament.
 
@@ -444,6 +451,7 @@ class TournamentLL:
 
         return matches
 
+    # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def change_match_winner(
             self,
             tournament_uuid: str,
