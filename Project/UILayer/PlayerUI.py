@@ -303,7 +303,7 @@ class PlayerUI:
             user_url: str = input(
                 f"{self.input_color}"
                 "Enter URL Or 'q' To Cancel:\n"
-                "(Optional, press Enter to leave blank)"
+                "(Optional, press Enter to leave blank)\n"
                 f"{self.reset}"
             )
             if user_url.lower() == "q":
