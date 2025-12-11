@@ -23,6 +23,7 @@ class SpectateUI:
         self.message_color = "\033[36m"
         self.reset: str = "\033[0m"
         self.underscore = "\033[4m"
+        self.green: str = "\033[32m"
 
     def spectate_screen(self) -> MenuOptions:
         """Spectate screen, choices: 1,2,3 and b
@@ -85,7 +86,7 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info))
 
         find_handle: str = input(
-            self.message_color + "Input Handle or 'q' to cancel: " + self.reset
+            self.message_color + "Input Handle or 'q' to cancel:\n" + self.reset
         )
         if find_handle == "q":
             return user_path[-2]
@@ -121,7 +122,8 @@ class SpectateUI:
         ]
         # Changed by Sindri Freysson
         info: list[str] = [
-            "Team: " + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
+            "Team: "
+            + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
             "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
             "Points: " + LogicLayerAPI.get_player_points(player_handle),
         ]
@@ -153,7 +155,7 @@ class SpectateUI:
 
         find_club: str = input(
             self.message_color
-            + "Input Club Name or 'q' to cancel: "
+            + "Input Club Name or 'q' to cancel:\n"
             + self.reset
         )
         if find_club == "q":
@@ -188,11 +190,15 @@ class SpectateUI:
             MenuOptions.VIEW_CLUB_STATS,
         ]
 
-        info_a: list[str] = [f"Teams:\n{80 * "—"}"] + self.utility.string_to_table(
-            self.utility.object_to_string(LogicLayerAPI.get_teams_in_club(club_name))
+        info_a: list[str] = [
+            f"Teams:\n{80 * '—'}"
+        ] + self.utility.string_to_table(
+            self.utility.object_to_string(
+                LogicLayerAPI.get_teams_in_club(club_name)
+            )
         )
         info_b: list[str] = [
-            f"{80 * "—"}\n"
+            f"{80 * '—'}\n"
             f"Color: " + LogicLayerAPI.get_club_by_name(club_name).club_color,
             f"Wins: " + LogicLayerAPI.get_club_wins(club_name),
             f"Points: " + LogicLayerAPI.get_club_points(club_name),
@@ -226,7 +232,7 @@ class SpectateUI:
 
         find_handle: str = input(
             self.message_color
-            + "Input Team Name or 'q' to cancel: "
+            + "Input Team Name or 'q' to cancel:\n"
             + self.reset
         )
         if find_handle == "q":
@@ -268,12 +274,19 @@ class SpectateUI:
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
         info_b: list[str] = [
-            f"Team Members:\n{80 * "-"}"
-        ] + self.utility.string_to_table(self.utility.object_to_string(LogicLayerAPI.get_team_members_object(team_name))
+            f"Team Members:\n{80 * '—'}"
+        ] + self.utility.string_to_table(
+            self.utility.object_to_string(
+                LogicLayerAPI.get_team_members_object(team_name)
+            )
         )
-        info_c: list[str] = [f"{80 * "*"}"] + [
-            f"Tournament History:\n{80 * "-"}"
-        ] + self.utility.string_to_table(LogicLayerAPI.get_team_history(team_name))
+        info_c: list[str] = (
+            [f"{80 * '—'}"]
+            + [f"Tournament History:\n{80 * '—'}"]
+            + self.utility.string_to_table(
+                LogicLayerAPI.get_team_history(team_name)
+            )
+        )
         info: list[str] = info_a + info_b + info_c
         options: dict[str, str] = {}
         message: str = ""
@@ -305,7 +318,7 @@ class SpectateUI:
         # User input
         tournament_name = input(
             self.message_color
-            + "Input Tournament Name or 'q' to cancel: "
+            + "Input Tournament Name or 'q' to cancel:\n"
             + self.reset
         )
         if tournament_name == "q":
@@ -391,7 +404,9 @@ class SpectateUI:
         tournament_name: str | None = LogicLayerAPI.save_player()
         if tournament_name is None:
             return MenuOptions.START_SCREEN
-        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        tournament_object = LogicLayerAPI.get_tournament_by_name(
+            tournament_name
+        )
         tournament_uuid: str = tournament_object.uuid
 
         menu: str = str(tournament_name) + " Stats"
@@ -400,7 +415,24 @@ class SpectateUI:
             MenuOptions.SPECTATE_TOURNAMENTS,
             MenuOptions.ARCHIVED_TOURNAMENT,
         ]
-        info: list[str] = self.utility.list_matches(tournament_uuid, True)
+
+        match_list: list[str] = self.utility.list_matches(
+            tournament_uuid, True
+        )
+        match_split = match_list[0].split("\n")
+        tournament_winner: str = (
+            match_split[-1].replace("Match Winner: ", "").rstrip("|")
+        )
+        tournament_winner = tournament_winner.strip()
+        tournament_winner_formatted: list[str] = [
+            (80 * "—"),
+            f"{f"{self.green}Tournament Winner: {tournament_winner} {self.reset}":<88}|"
+        ]
+
+        info: list[str] = match_list
+
+        info: list[str] = info + tournament_winner_formatted
+
         options: dict[str, str] = {}
         message: str = ""
 
@@ -408,7 +440,6 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info, options, message))
         input("Press Any Key To Go Back")
         return MenuOptions.SPECTATE_TOURNAMENTS
-
 
     def game_schedule(self) -> MenuOptions:
         """Game schedule screen, choices: b
@@ -418,8 +449,11 @@ class SpectateUI:
             MenuOptions: The next menu to navigate to
         """
         tournament_name: str | None = LogicLayerAPI.save_player()
-        if tournament_name is None: return MenuOptions.START_SCREEN
-        tournament_object = LogicLayerAPI.get_tournament_by_name(tournament_name)
+        if tournament_name is None:
+            return MenuOptions.START_SCREEN
+        tournament_object = LogicLayerAPI.get_tournament_by_name(
+            tournament_name
+        )
         tournament_uuid: str = tournament_object.uuid
 
         menu: str = str(tournament_name) + " Stats"
@@ -469,12 +503,11 @@ class SpectateUI:
         for value in range(0, len(unique_names), 2):
             left = unique_names[value]
             if value + 1 < length:
-
                 right = unique_names[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         info: list[str] = output_list
 
@@ -488,7 +521,7 @@ class SpectateUI:
         # User input
         team_name = input(
             self.message_color
-            + "Input Team Name or 'q' to cancel: "
+            + "Input Team Name or 'q' to cancel:\n"
             + self.reset
         ).strip()
 
@@ -537,10 +570,11 @@ class SpectateUI:
             "Points: " + LogicLayerAPI.get_team_points(team_name),
         ]
         info_b: list[str] = [
-            f"Team Members:\n{80 * "-"}"
+            f"Team Members:\n{80 * '-'}"
         ] + self.utility.string_to_table(
             self.utility.object_to_string(
-                LogicLayerAPI.get_team_members_object(team_name))
+                LogicLayerAPI.get_team_members_object(team_name)
+            )
         )
 
         # Table design

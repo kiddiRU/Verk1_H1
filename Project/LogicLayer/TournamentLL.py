@@ -16,6 +16,16 @@ class TournamentLL:
     ''' Tournamnet logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL):
+        '''Initialize the TournamentLL instance.
+        
+        :param team_logic:
+            The logic layer responsible for team operations and validations.
+        :type team_logic: TeamLL
+
+        :param match_logic:
+            The logic layer responsible for match operations and validations.
+        :type match_logic: MatchLL
+        '''
         self._team_logic = team_logic
         self._match_logic = match_logic
 
@@ -30,8 +40,7 @@ class TournamentLL:
         phone_number: str,
         server_amount: int
     ) -> None:
-        '''
-        Creates a new Tournament object and sends it to be stored.
+        '''Creates a new Tournament object and sends it to be stored.
         
         :param name:
             The tournaments name.
@@ -86,8 +95,7 @@ class TournamentLL:
         DataLayerAPI.store_tournament(new_tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
-        '''
-        Adds a team to the list of teams playing in a tournament.
+        '''Adds a team to the list of teams playing in a tournament.
         
         :param tournament_name:
             The name of the tournament.
@@ -109,8 +117,7 @@ class TournamentLL:
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
-        '''
-        Removes a team from the list of teams playing in a tournament.
+        '''Removes a team from the list of teams playing in a tournament.
         
         :param tournament_name:
             The name of the tournament.
@@ -179,8 +186,7 @@ class TournamentLL:
     #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
-        '''
-        Gets a list of all stored tournamnets.
+        '''Gets a list of all stored tournamnets.
         
         :return:
             A list of all Tournament objects.
@@ -200,7 +206,7 @@ class TournamentLL:
             The uuid of the tournament to update.
         """
 
-        tournament = self.get_tournament_by_uuid(uuid)
+        tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
         # Checking to make sure the tournament is active.
         if tournament.status != Tournament.StatusType.active:
@@ -229,7 +235,7 @@ class TournamentLL:
             The uuid of the tournament that will move to the next round.
         """
 
-        tournament = self.get_tournament_by_uuid(uuid)
+        tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
         # Gets all matches tied to the tournament, this list is
         # in sorted order according to match date and time.
@@ -247,7 +253,9 @@ class TournamentLL:
         # isn't.
         for team in tournament.teams_playing:
             for match in matches:
-                if match.winner == None: continue
+                if match.winner is None:
+                    continue
+
                 if team == match.team_1 or team == match.team_2:
                     if team != match.winner:
                         break
@@ -267,7 +275,7 @@ class TournamentLL:
         random.shuffle(competing_teams)
 
         # Gets the list of matches which can be used for the next round.
-        matches = [match for match in matches if match.winner == None]
+        matches: list[Match] = [match for match in matches if match.winner is None]
 
         # Loops through the competing teams assigning teams next to eachother
         # to compete against eachother, in case of odd number of teams the
@@ -291,9 +299,9 @@ class TournamentLL:
         :param tournament_name:
             Publishes the tournament with the given name.
         """
-        uuid = self.tournament_name_to_uuid(name)
+        uuid: str = self.tournament_name_to_uuid(name)
 
-        tournament = self.get_tournament_by_uuid(uuid)
+        tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
         if tournament.status != Tournament.StatusType.inactive:
             raise ValidationError("Tournament isn't inactive.")
@@ -347,7 +355,7 @@ class TournamentLL:
                     if tournament.time_frame_start < tournament.time_frame_end:
                         current_datetime += one_day
 
-                    current_datetime = datetime.combine(
+                    current_datetime: datetime = datetime.combine(
                             date = current_datetime.date(),
                             time = tournament.time_frame_start
                     )
@@ -359,11 +367,11 @@ class TournamentLL:
         # Calculates the time slot after the last one to check if the
         # matches went past it, it will raise an error if that's the
         # case.
-        last_time_slot = datetime.combine(
+        last_time_slot: datetime = datetime.combine(
                 date = tournament.end_date,
                 time = tournament.time_frame_end
         )
-        
+
         if tournament.time_frame_end < tournament.time_frame_start:
             last_time_slot += one_day
 
@@ -381,16 +389,16 @@ class TournamentLL:
                     team_2 = "To be revealed"
             )
 
-        matches = self._match_logic.get_matches(tournament.uuid)
+        matches: list[Match] = self._match_logic.get_matches(tournament.uuid)
 
         # Creates servers for the tournament, adds the first matches into the
         # tournament.
         for idx, _ in enumerate(tournament.list_servers):
             # Check to see if servers outnumber the matches.
             if idx < len(matches):
-                new_server = Server(str(uuid4()), matches[idx].uuid)
+                new_server: Server = Server(str(uuid4()), matches[idx].uuid)
             else:
-                new_server = Server(str(uuid4()), "NoMatch")
+                new_server: Server = Server(str(uuid4()), "NoMatch")
             tournament.list_servers[idx] = new_server.uuid
             DataLayerAPI.store_server(new_server)
 
@@ -415,20 +423,20 @@ class TournamentLL:
             The list of matches next on the schedule.
         :rtype: list[Match]
         """
-        tournament = self.get_tournament_by_uuid(uuid)
+        tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
         if tournament.status != Tournament.StatusType.active:
             raise ValidationError("Tournament isn't active.")
 
         # Get's all matches tied to the tournament.
-        matches = self._match_logic.get_matches(uuid)
+        matches: list[Match] = self._match_logic.get_matches(uuid)
 
         # Ignores all matches which have a winner.
-        matches = [match for match in matches if match.winner is None]
+        matches: list[Match] = [match for match in matches if match.winner is None]
 
         # Ignores all matches which happen after the first match without
         # a winner.
-        matches = [
+        matches: list[Match] = [
                 match for match in matches
                 if match.match_date == matches[0].match_date and
                    match.match_time == matches[0].match_time
@@ -459,8 +467,7 @@ class TournamentLL:
             The uuid of the winner.
         """
 
-        tournament = self.get_tournament_by_uuid(tournament_uuid)
-
+        tournament: Tournament = self.get_tournament_by_uuid(tournament_uuid)
 
         # Updates the match.
         self._match_logic.change_match_winner(match_uuid, team_uuid)
@@ -496,8 +503,7 @@ class TournamentLL:
 
 
     def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:
-        """
-        Takes in a tournament name
+        """Takes in a tournament name
 
         Returns a list of Team objects
         """
@@ -506,7 +512,7 @@ class TournamentLL:
 
         for tournament in model_tournaments:
             if tournament_name == tournament.name:
-                teams = tournament.teams_playing
+                teams: list[str] = tournament.teams_playing
                 for team_uuid in teams:
                     teams_list.append(self._team_logic.get_team_by_uuid(team_uuid))
 
@@ -535,8 +541,7 @@ class TournamentLL:
 # Fra utility
 
     def get_tournament_by_name(self, name: str) -> Tournament:
-        '''
-        Gets a Tournament object by its name.
+        '''Gets a Tournament object by its name.
         
         :param tournament_name:
             The name of the tournament to fetch.
@@ -555,8 +560,7 @@ class TournamentLL:
         return tournament
 
     def get_tournament_by_uuid(self, uuid: str) -> Tournament:
-        '''
-        Gets a Tournament object by its UUID.
+        '''Gets a Tournament object by its UUID.
         
         :param tournament_uuid:
             The UUID of the tournament to fetch.
@@ -575,8 +579,7 @@ class TournamentLL:
         return tournament
 
     def tournament_name_to_uuid(self, name: str) -> str:
-        '''
-        Converts a tournaments name, to its UUID.
+        '''Converts a tournaments name, to its UUID.
         
         :param tournament_name:
             The name of the tournament.

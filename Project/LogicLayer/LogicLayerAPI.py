@@ -13,8 +13,8 @@ from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, MatchLL, Validati
 
 team_logic = TeamLL()
 match_logic = MatchLL()
-club_logic =  ClubLL()
 
+club_logic =  ClubLL(match_logic)
 player_logic = PlayerLL(team_logic, match_logic)
 tournament_logic = TournamentLL(team_logic, match_logic)
 
@@ -37,9 +37,7 @@ def create_player(
     handle: str,
     url: str = ''
 ) -> Player:
-    '''
-    Creates a new Player object, sends it to be stored and
-    returns it.
+    '''Creates a new Player object, sends it to be stored and returns it.
 
     :param name:
         The players name.
@@ -93,8 +91,7 @@ def update_player_info(
     handle: str,
     url: str
 ) -> Player:
-    '''
-    Takes in a Player object and attribute updates. Applies the updates to
+    '''Takes in a Player object and attribute updates. Applies the updates to
     the object, sends it to be stored and returns the updated Player object.
 
     :param name:
@@ -144,9 +141,9 @@ def update_player_info(
 # def leave_team(team_name: str, player: Player) -> None:
 #     return player_logic.leave_team(team_name, player)
 
+# Isn't used?
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
-    '''
-    Promotes a teams player to its captain.
+    '''Promotes a teams player to its captain.
     
     :param current_player:
         The object of the player calling the function.
@@ -162,6 +159,16 @@ def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
 def get_player_team_and_rank(player_handle: str) -> tuple[str, str]:
+    '''Gets a players team name and their rank.
+    
+    :param player_handle:
+        The players unique handle.
+    :type player_handle: str
+
+    :return:
+        Returns a tuple of the players team name and their rank.
+    :rtype: tuple[str, str]
+    '''
     return player_logic.get_player_team_and_rank(player_handle)
 
 def get_player_wins(player_handle: str) -> str:
@@ -206,18 +213,19 @@ def get_player_points(player_handle: str) -> str:
 def list_all_players() -> list[Player]:
     """When called loads a list of all player objects
 
-    :return: Returns a list of player objects
+    :return:
+        Returns a list of player objects
     :rtype: list[Player]
     """
     return player_logic.list_all_players()
 
 def get_player_by_handle(player_handle: str) -> Player | str:
-    '''
-    Gets a player object by their handle.
+    '''Gets a player object by their handle.
     
     :param player_handle:
         The handle of the player to get.
     :type player_handle: str
+
     :return:
         Returns a Player object with the given handle, returns an empty string
         if the player isn't found.
@@ -226,8 +234,7 @@ def get_player_by_handle(player_handle: str) -> Player | str:
     return player_logic.get_player_by_handle(player_handle)
 
 def get_player_by_uuid(player_uuid: str) -> Player | str:
-    '''
-    Gets a player object by their UUID.
+    '''Gets a player object by their UUID.
     
     :param player_uuide:
         The UUID of the player to get.
@@ -241,8 +248,7 @@ def get_player_by_uuid(player_uuid: str) -> Player | str:
     return player_logic.get_player_by_uuid(player_uuid)
 
 def player_handle_to_uuid(player_handle: str) -> str:
-    '''
-    Converts a players unique handle, to their UUID.
+    '''Converts a players unique handle, to their UUID.
     
     :param player_handle:
         The handle of the player.
@@ -271,8 +277,7 @@ def get_players_team_uuid(player_uuid: str) -> str:
     return player_logic.get_players_team_uuid(player_uuid)
 
 def get_all_players_not_in_team() -> list[Player]:
-    """
-    Gets all players that are not apart of any teams
+    """Gets all players that are not apart of any teams
     
     :return: A list of Player objects that are not apart of any teams
     :rtype: list[Player]
@@ -288,8 +293,7 @@ def create_team(
     url: str,
     ascii_art: str
 ) -> Team:
-    '''
-    Creates a new team, sends it to be stored and returns the new Team object.
+    '''Creates a new team, sends it to be stored and returns the new Team object.
     
     :param name:
         The name of the team.
@@ -471,8 +475,7 @@ def get_team_club(team_name: str) -> str:
     return team_logic.get_team_club(team_name)
 
 def get_team_by_name(team_name: str) -> Team:
-    '''
-    Gets a Team object by its name.
+    '''Gets a Team object by its name.
     
     :param team_name:
         The name of the team to fetch.
@@ -485,8 +488,7 @@ def get_team_by_name(team_name: str) -> Team:
     return team_logic.get_team_by_name(team_name)
 
 def get_team_by_uuid(team_uuid: str) -> Team:
-    '''
-    Gets a Team object by its UUID.
+    '''Gets a Team object by its UUID.
     
     :param team_uuid:
         The UUID of the team to fetch.
@@ -499,8 +501,7 @@ def get_team_by_uuid(team_uuid: str) -> Team:
     return team_logic.get_team_by_uuid(team_uuid)
 
 def team_name_to_uuid(team_name: str) -> str:
-    '''
-    Converts a teams name, to their UUID.
+    '''Converts a teams name, to their UUID.
     
     :param team_name:
         The name of the team.
@@ -525,8 +526,7 @@ def create_tournament(
     phone_number: str,
     amount_of_servers: int = 1
 ) -> None:
-    '''
-    Creates a new Tournament object and sends it to be stored.
+    '''Creates a new Tournament object and sends it to be stored.
     
     :param name:
         The tournaments name.
@@ -577,8 +577,7 @@ def create_tournament(
     )
 
 def add_team(tournament_name: str, team_name: str) -> None:
-    '''
-    Adds a team to the list of teams playing in a tournament.
+    '''Adds a team to the list of teams playing in a tournament.
     
     :param tournament_name:
         The name of the tournament.
@@ -591,8 +590,7 @@ def add_team(tournament_name: str, team_name: str) -> None:
     tournament_logic.add_team(tournament_name, team_name)
 
 def remove_team(tournament_name: str, team_name: str) -> None:
-    '''
-    Removes a team from the list of teams playing in a tournament.
+    '''Removes a team from the list of teams playing in a tournament.
     
     :param tournament_name:
         The name of the tournament.
@@ -637,8 +635,7 @@ def remove_team(tournament_name: str, team_name: str) -> None:
 #     )
 
 def list_tournaments() -> list[Tournament]:
-    '''
-    Gets a list of all stored tournamnets.
+    '''Gets a list of all stored tournamnets.
     
     :return:
         A list of all Tournament objects.
@@ -718,8 +715,7 @@ def to_date(value: str) -> date:
     return tournament_logic.to_date(value)
 
 def get_tournament_by_name(tournament_name: str) -> Tournament:
-    '''
-    Gets a Tournament object by its name.
+    '''Gets a Tournament object by its name.
     
     :param tournament_name:
         The name of the tournament to fetch.
@@ -732,8 +728,7 @@ def get_tournament_by_name(tournament_name: str) -> Tournament:
     return tournament_logic.get_tournament_by_name(tournament_name)
 
 def get_tournament_by_uuid(tournament_uuid: str) -> Tournament:
-    '''
-    Gets a Tournament object by its UUID.
+    '''Gets a Tournament object by its UUID.
     
     :param tournament_uuid:
         The UUID of the tournament to fetch.
@@ -746,8 +741,7 @@ def get_tournament_by_uuid(tournament_uuid: str) -> Tournament:
     return tournament_logic.get_tournament_by_uuid(tournament_uuid)
 
 def tournament_name_to_uuid(tournament_name: str) -> str:
-    '''
-    Converts a tournaments name, to its UUID.
+    '''Converts a tournaments name, to its UUID.
     
     :param tournament_name:
         The name of the tournament.
@@ -762,8 +756,7 @@ def tournament_name_to_uuid(tournament_name: str) -> str:
 ''' Club API '''
 
 def create_club(name: str, club_color: str, country: str, home_town: str) -> Club:
-    """
-    First takes in the info that has already been validated
+    """First takes in the info that has already been validated
     and creates a uuid for the club,
     Then creates the object using the uuid and info and
     points the object to Data Layer API to be stored as a club        
@@ -790,8 +783,7 @@ def create_club(name: str, club_color: str, country: str, home_town: str) -> Clu
     return club_logic.create_club(name,club_color, country, home_town)
 
 def list_all_clubs() -> list[Club]:
-    """
-    Loads a list of all club objects from the Data Layer API
+    """Loads a list of all club objects from the Data Layer API
 
     :return: Returns a list of all club objects
     :rtype: list[Club]
@@ -861,8 +853,7 @@ def get_club_points(club_name: str) -> str:
     return club_logic.get_club_points(club_name)
 
 def get_club_by_name(club_name: str) -> Club:
-    """
-    Takes in club name
+    """Takes in club name
     looks through all clubs until it finds the right club name
     and returns the teams uuid
     if no team is found an error is raised

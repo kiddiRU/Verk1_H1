@@ -269,10 +269,19 @@
         "match_time": "09:00:00",
         "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
         "team_2": "81edeb0a-e3c8-4efe-b9f2-1329b54266cf",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winning_players": [
+            "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+            "8b368c80-729e-4e76-9341-18d2be561b7c",
+            "57a15dc5-bdb2-46b5-9777-f08d36bffdb9"
+        ],
+        "losing_team": "81edeb0a-e3c8-4efe-b9f2-1329b54266cf",
+        "losing_players": [
+            "b855860c-dd67-4f5f-af94-4730fef94e8a",
+            "5dbe517b-4715-4f08-aa75-d91bb0d6eae6",
+            "398550f8-bb2b-46da-8527-974e6b5bd0d2",
+            "150e7677-fd69-4695-84c7-71a1b07fa31b"
+        ]
     },
     "659ff9a1-e8db-46d0-bd0b-3afdd87667e3": {
         "uuid": "659ff9a1-e8db-46d0-bd0b-3afdd87667e3",
@@ -281,10 +290,18 @@
         "match_time": "09:00:00",
         "team_1": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
         "team_2": "7ffed5fa-83c5-423e-a975-0f67b5782539",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winning_players": [
+            "e9ecf404-a192-48c5-9f61-99387bad32f8",
+            "b2ee9a85-bb85-49d8-bb10-1eddf19a6509",
+            "ae4cb519-d61b-486c-9835-c40ab8b2a4ff"
+        ],
+        "losing_team": "7ffed5fa-83c5-423e-a975-0f67b5782539",
+        "losing_players": [
+            "02b8accc-f1b1-41a2-8754-3c504ea5b5be",
+            "9928427e-b438-46ab-b751-43dc140fcd2e",
+            "be456da3-6cbc-4bc5-91db-03baed4f0b65"
+        ]
     },
     "bab51160-67b2-4ccb-b94a-4488efbdf017": {
         "uuid": "bab51160-67b2-4ccb-b94a-4488efbdf017",
@@ -293,10 +310,17 @@
         "match_time": "09:00:00",
         "team_1": "07b78ef8-46ad-4159-b962-aecb3529b90c",
         "team_2": "d1e510b7-268c-4ffe-b3e9-fad661ba9648",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "winning_players": [
+            "32d89d9f-b555-4311-a104-d8009eec5b76",
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+        ],
+        "losing_team": "d1e510b7-268c-4ffe-b3e9-fad661ba9648",
+        "losing_players": [
+            "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db",
+            "a7012a45-a21d-4efd-80a2-dc4b20f4ff47"
+        ]
     },
     "3fb95a3d-f126-4a75-982e-f574bb008db6": {
         "uuid": "3fb95a3d-f126-4a75-982e-f574bb008db6",
@@ -305,10 +329,18 @@
         "match_time": "09:00:00",
         "team_1": "65444a2b-0e9c-43bc-a18b-7de3d231a313",
         "team_2": "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "65444a2b-0e9c-43bc-a18b-7de3d231a313",
+        "winning_players": [
+            "5dbef562-495e-43a4-8423-edfa24a2c283",
+            "2d5c7c11-cc1a-4c8e-9c75-e891fca96144",
+            "ad6ae792-d42d-49ed-a25b-fbf4e054d5cd"
+        ],
+        "losing_team": "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
+        "losing_players": [
+            "3147a1c5-c69b-4a23-85e0-0837f7f92e6c",
+            "796e0da0-bb2b-45e6-8d85-9d3164e8c7a7",
+            "030d4540-229d-48bd-bcce-6167ad362a7e"
+        ]
     },
     "6efb7ce6-06bb-49c8-bca7-e47398d47f24": {
         "uuid": "6efb7ce6-06bb-49c8-bca7-e47398d47f24",
@@ -317,10 +349,18 @@
         "match_time": "09:00:00",
         "team_1": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
         "team_2": "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winning_players": [
+            "99c607cf-327a-4615-84f5-d47748a3bc79",
+            "269e12c1-68e0-478a-bfd4-b4a79369cd70",
+            "6284c994-a89a-4e15-9e43-c6853230ef30"
+        ],
+        "losing_team": "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
+        "losing_players": [
+            "f223c74d-8abd-44b9-97c2-c656ae9a3cc5",
+            "02e60431-eadb-4c9d-971b-bfd3dbf2f3a5",
+            "d9ade0d0-b7f2-492d-9ba2-0146b9eab8fb"
+        ]
     },
     "23e003c8-5cd6-4217-80aa-e83f6468e8c4": {
         "uuid": "23e003c8-5cd6-4217-80aa-e83f6468e8c4",
@@ -329,10 +369,18 @@
         "match_time": "09:00:00",
         "team_1": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
         "team_2": "70d87222-aa03-490b-a102-519a69ab967f",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+        "winning_players": [
+            "c4c80efe-c482-40d8-a878-dec8452ea757",
+            "570417ec-9f48-4c96-96a5-74f46e69ae9a",
+            "a4b2d1ac-bd6f-495b-be8f-826db79c22f2"
+        ],
+        "losing_team": "70d87222-aa03-490b-a102-519a69ab967f",
+        "losing_players": [
+            "e3b5ceef-c30c-47d4-abf6-0c6f53fb2eed",
+            "b6d2271c-3f4e-410c-938c-77890707b88e",
+            "9b1f8e87-72b3-44ad-a39d-bbda40fa8a15"
+        ]
     },
     "0bff434e-e5c2-4c34-8e42-b43d7b47447c": {
         "uuid": "0bff434e-e5c2-4c34-8e42-b43d7b47447c",
@@ -341,10 +389,18 @@
         "match_time": "09:00:00",
         "team_1": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
         "team_2": "01a9ca63-8ad2-444e-b6f6-ee80e80411c5",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+        "winning_players": [
+            "6e213341-38af-4464-aeca-c26c9e2f1165",
+            "3d7ec336-f2f0-4ac3-8802-eb998b141ff4",
+            "bac40280-22dc-4f52-a028-0416f59a8843"
+        ],
+        "losing_team": "01a9ca63-8ad2-444e-b6f6-ee80e80411c5",
+        "losing_players": [
+            "14746d9e-e98d-4f07-a735-02bcd9281c73",
+            "aa9f6ab5-acf7-4bd6-904c-0b355fe27afa",
+            "4d125159-9d84-44b0-8b26-406c34c304c3"
+        ]
     },
     "56fafd99-ffce-463d-8b65-6689641f8a90": {
         "uuid": "56fafd99-ffce-463d-8b65-6689641f8a90",
@@ -353,93 +409,177 @@
         "match_time": "09:00:00",
         "team_1": "36783b4e-702d-46a9-af31-bcb3891cb095",
         "team_2": "18ab11f0-3069-42bd-bac7-b5b8204c0383",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "winning_players": [
+            "f2b19d6e-9dc0-4914-a8a8-a9354ee00e7a",
+            "fb7cc2f3-6334-4116-9495-1a6adffd740b",
+            "1db9a916-0050-4537-862d-8d56e43e8b0c"
+        ],
+        "losing_team": "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+        "losing_players": [
+            "7b1beaf8-940a-4101-8ac0-9fbb15dff0e6",
+            "9477f9b9-9c44-463d-beb3-2f4087ddb229",
+            "a670dfe2-5540-452c-8e40-bc887d53d83a"
+        ]
     },
     "30eb9f4e-f3c9-40a3-93e9-bd623e1da89e": {
         "uuid": "30eb9f4e-f3c9-40a3-93e9-bd623e1da89e",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "10:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "team_2": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+        "winner": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "winning_players": [
+            "f2b19d6e-9dc0-4914-a8a8-a9354ee00e7a",
+            "fb7cc2f3-6334-4116-9495-1a6adffd740b",
+            "1db9a916-0050-4537-862d-8d56e43e8b0c"
+        ],
+        "losing_team": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+        "losing_players": [
+            "6e213341-38af-4464-aeca-c26c9e2f1165",
+            "3d7ec336-f2f0-4ac3-8802-eb998b141ff4",
+            "bac40280-22dc-4f52-a028-0416f59a8843"
+        ]
     },
     "7e9c4be9-71e9-4452-a456-c636d5228bcd": {
         "uuid": "7e9c4be9-71e9-4452-a456-c636d5228bcd",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "10:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "team_2": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "winner": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winning_players": [
+            "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+            "8b368c80-729e-4e76-9341-18d2be561b7c",
+            "57a15dc5-bdb2-46b5-9777-f08d36bffdb9"
+        ],
+        "losing_team": "7ffe196a-495e-4e77-b94d-ea6799c2e572",
+        "losing_players": [
+            "e9ecf404-a192-48c5-9f61-99387bad32f8",
+            "b2ee9a85-bb85-49d8-bb10-1eddf19a6509",
+            "ae4cb519-d61b-486c-9835-c40ab8b2a4ff"
+        ]
     },
     "c20fc7b0-17b4-422b-9d87-e935995e505e": {
         "uuid": "c20fc7b0-17b4-422b-9d87-e935995e505e",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "10:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "team_2": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winner": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "winning_players": [
+            "32d89d9f-b555-4311-a104-d8009eec5b76",
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+        ],
+        "losing_team": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "losing_players": [
+            "99c607cf-327a-4615-84f5-d47748a3bc79",
+            "269e12c1-68e0-478a-bfd4-b4a79369cd70",
+            "6284c994-a89a-4e15-9e43-c6853230ef30"
+        ]
     },
     "ff331751-5a85-4b72-adcb-8364a958be0a": {
         "uuid": "ff331751-5a85-4b72-adcb-8364a958be0a",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "10:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+        "team_2": "65444a2b-0e9c-43bc-a18b-7de3d231a313",
+        "winner": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+        "winning_players": [
+            "c4c80efe-c482-40d8-a878-dec8452ea757",
+            "570417ec-9f48-4c96-96a5-74f46e69ae9a",
+            "a4b2d1ac-bd6f-495b-be8f-826db79c22f2"
+        ],
+        "losing_team": "65444a2b-0e9c-43bc-a18b-7de3d231a313",
+        "losing_players": [
+            "5dbef562-495e-43a4-8423-edfa24a2c283",
+            "2d5c7c11-cc1a-4c8e-9c75-e891fca96144",
+            "ad6ae792-d42d-49ed-a25b-fbf4e054d5cd"
+        ]
     },
     "b1a4cbe1-b1a3-4df8-b06e-516496638e1f": {
         "uuid": "b1a4cbe1-b1a3-4df8-b06e-516496638e1f",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "11:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "team_2": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winner": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winning_players": [
+            "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+            "8b368c80-729e-4e76-9341-18d2be561b7c",
+            "57a15dc5-bdb2-46b5-9777-f08d36bffdb9"
+        ],
+        "losing_team": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "losing_players": [
+            "32d89d9f-b555-4311-a104-d8009eec5b76",
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+        ]
     },
     "311688dc-9150-4d89-88f9-e8cf97f1343e": {
         "uuid": "311688dc-9150-4d89-88f9-e8cf97f1343e",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "11:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "team_2": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+        "winner": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "winning_players": [
+            "f2b19d6e-9dc0-4914-a8a8-a9354ee00e7a",
+            "fb7cc2f3-6334-4116-9495-1a6adffd740b",
+            "1db9a916-0050-4537-862d-8d56e43e8b0c"
+        ],
+        "losing_team": "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+        "losing_players": [
+            "c4c80efe-c482-40d8-a878-dec8452ea757",
+            "570417ec-9f48-4c96-96a5-74f46e69ae9a",
+            "a4b2d1ac-bd6f-495b-be8f-826db79c22f2"
+        ]
     },
     "18649920-8c1d-42cc-8d4a-2d804be331ff": {
         "uuid": "18649920-8c1d-42cc-8d4a-2d804be331ff",
         "tournament_id": "74396b84-b4f8-470e-8924-8b731f835b57",
         "match_date": "1212-12-12",
         "match_time": "12:00:00",
-        "team_1": "To be revealed",
-        "team_2": "To be revealed",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "team_1": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "team_2": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winner": "382f652f-efdf-4298-9d15-922877e5e1b5",
+        "winning_players": [
+            "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+            "8b368c80-729e-4e76-9341-18d2be561b7c",
+            "57a15dc5-bdb2-46b5-9777-f08d36bffdb9"
+        ],
+        "losing_team": "36783b4e-702d-46a9-af31-bcb3891cb095",
+        "losing_players": [
+            "f2b19d6e-9dc0-4914-a8a8-a9354ee00e7a",
+            "fb7cc2f3-6334-4116-9495-1a6adffd740b",
+            "1db9a916-0050-4537-862d-8d56e43e8b0c"
+        ]
+    },
+    "8b4a298e-df09-4e67-afd0-6dfd0d6a3ac0": {
+        "uuid": "8b4a298e-df09-4e67-afd0-6dfd0d6a3ac0",
+        "tournament_id": "78c5c157-1cf0-4091-9dea-c8c287f3889c",
+        "match_date": "2001-01-01",
+        "match_time": "12:00:00",
+        "team_1": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "team_2": "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
+        "winner": "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+        "winning_players": [
+            "99c607cf-327a-4615-84f5-d47748a3bc79",
+            "269e12c1-68e0-478a-bfd4-b4a79369cd70",
+            "6284c994-a89a-4e15-9e43-c6853230ef30"
+        ],
+        "losing_team": "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
+        "losing_players": [
+            "3147a1c5-c69b-4a23-85e0-0837f7f92e6c",
+            "796e0da0-bb2b-45e6-8d85-9d3164e8c7a7",
+            "030d4540-229d-48bd-bcce-6167ad362a7e"
+        ]
     }
 }

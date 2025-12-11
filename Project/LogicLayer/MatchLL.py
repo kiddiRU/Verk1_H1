@@ -11,7 +11,7 @@ from Models.Team import Team
 from DataLayer import DataLayerAPI
 from datetime import date,time
 
-class MatchLL():
+class MatchLL:
     
     def __init__(self) -> None:
         pass
