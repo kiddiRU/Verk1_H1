@@ -320,5 +320,10 @@ class UtilityUI:
     def object_to_string(
         self, object_list: list[Player] | list[Team] | list[Club] | list[Tournament]
     ) -> list[str]:
+        """
+        Function that converts a list of object to a list of names
+        :param object_list: Takes a list of model objects
+        :return: Names of model objects as a list of strings
+        """
         str_list: list[str] = [x.name for x in object_list]
         return str_list
