@@ -213,7 +213,8 @@ def get_player_points(player_handle: str) -> str:
 def list_all_players() -> list[Player]:
     """When called loads a list of all player objects
 
-    :return: Returns a list of player objects
+    :return:
+        Returns a list of player objects
     :rtype: list[Player]
     """
     return player_logic.list_all_players()
@@ -224,6 +225,7 @@ def get_player_by_handle(player_handle: str) -> Player | str:
     :param player_handle:
         The handle of the player to get.
     :type player_handle: str
+
     :return:
         Returns a Player object with the given handle, returns an empty string
         if the player isn't found.

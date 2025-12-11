@@ -10,11 +10,11 @@ from DataLayer import DataLayerAPI
 from Models import Club, Team, Match, Tournament, ValidationError
 from LogicLayer.MatchLL import MatchLL
 
-class ClubLL():
+class ClubLL:
+    ''' Club logic. '''
 
     def __init__(self) -> None:
-        pass
-
+        ''' Initialize the ClubLL instance. '''
 
     def create_club(self,
         name: str,
@@ -46,7 +46,7 @@ class ClubLL():
 
         :return: Returns the newly created club object
         :rtype: Club
-        """       
+        """
         uuid = str(uuid4())
 
         new_club = Club(uuid, name, club_color, country, home_town)
@@ -55,7 +55,7 @@ class ClubLL():
         return new_club
 
 
-    def list_all_clubs(self) -> list[Club]: 
+    def list_all_clubs(self) -> list[Club]:
         """
         Loads a list of all club objects from the Data Layer API
 
@@ -66,7 +66,6 @@ class ClubLL():
         clubs: list[Club] = DataLayerAPI.load_clubs()
         return clubs
 
-        
     def get_teams_in_club(self, club_name: str) -> list[Team]:
         """Gets club name
 
@@ -86,7 +85,7 @@ class ClubLL():
         club_uuid: str = self.get_club_by_name(club_name).uuid
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
-        # Loops through all team objects 
+        # Loops through all team objects
         for team in model_teams:
 
             # adds a team to the list when the uuid's match
@@ -94,7 +93,7 @@ class ClubLL():
                 teams_in_club.append(team)
 
         return teams_in_club
-    
+
 
     def get_club_wins(self, club_name: str) -> str:
         """Gets club name
@@ -137,8 +136,6 @@ class ClubLL():
                 win_count += 1
 
         return str(win_count)
-        
-
 
     def get_club_points(self, club_name: str) -> str:
         """Gets the club name
@@ -174,9 +171,9 @@ class ClubLL():
             team.uuid for team in model_teams
             if team.club_uuid == club_uuid
             ]
-        
+
         # Loops through all tournament objects
-        for tournament in model_tournaments:           
+        for tournament in model_tournaments:
             try:
                 matches_list: list[Match] = match.get_matches(tournament.uuid)
 
@@ -195,7 +192,7 @@ class ClubLL():
                 if loser in teams_in_club:
                     points += 1
 
-            except:
+            except ValidationError:
                 pass
 
         return str(points)
@@ -214,5 +211,5 @@ class ClubLL():
         for club in model_clubs:
             if club_name == club.name:
                 return club
-            
+
         raise ValidationError("Club not found")
