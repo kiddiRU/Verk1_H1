@@ -785,11 +785,10 @@ Rank: {current_login_rank}"""]
 
         choice: str = self.utility.prompt_choice(["1", "2", "b"])
         match choice:
-            case "1": #TODO: check if player is captain and CAN edit the team
+            case "1":
                 return MenuOptions.add_player
             case "2":
-                if ...:  # TODO: check if player is captain
-                    return MenuOptions.remove_player
+                return MenuOptions.remove_player
             case "b":
                 return MenuOptions.my_team_not_empty
 
@@ -822,6 +821,8 @@ Rank: {current_login_rank}"""]
         team, rank = LogicLayerAPI.get_player_team_and_rank(current_login_handle)
         team_members = LogicLayerAPI.get_team_members(team)
         
+        # If the team is full or there are not players available to add 
+        #the captain will get a message informing them of that fact and they can not try to add anyone
         info: list[str] = handles_not_team
         if len(handles_not_team) == 0 or len(team_members) >= 5:
             message = ("No Players To Add To Team Or Team Is Full")
