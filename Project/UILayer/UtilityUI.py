@@ -130,7 +130,7 @@ class UtilityUI:
         """
         Returns the names of all tournaments that do not have the given status.
 
-        :param tournament_status: The status to exclude. Possible values are 
+        :param tournament_status: The status to exclude. Possible values are
             "ACTIVE", "INACTIVE", and "ARCHIVED".
 
         :type tournament_status: Tournament.StatusType
@@ -251,8 +251,8 @@ class UtilityUI:
             match_list: list[Match] = LogicLayerAPI.get_next_matches(
                 tournament_uuid
             )
-        # Top info
 
+        # Top info
         output_list: list[str] = []
 
         for match in match_list:
@@ -287,6 +287,10 @@ class UtilityUI:
                 )
 
             else:
+                revealed: str = "To be revealed"
+                if (match.team_1 or match.team_2) == revealed:
+                    continue
+                
                 match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
                 match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
 
@@ -306,8 +310,7 @@ class UtilityUI:
         return output_list
 
     # "Created" by Sindri Freysson
-    def string_to_table(
-        self, string_list: list[str]) -> list[str]:
+    def string_to_table(self, string_list: list[str]) -> list[str]:
         """
         A helper function that formats a given list of string into a 2 column table
         :param object_list: Takes a list of model objects
@@ -319,7 +322,6 @@ class UtilityUI:
         for value in range(0, len(string_list), 2):
             left = string_list[value]
             if value + 1 < length:
-
                 right = string_list[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
@@ -329,12 +331,20 @@ class UtilityUI:
         return output_list
 
     def object_to_string(
-        self, object_list: list[Player] | list[Team] | list[Club] | list[Tournament]
+        self,
+        object_list: list[Player] | list[Team] | list[Club] | list[Tournament],
     ) -> list[str]:
         """
         Function that converts a list of object to a list of names
         :param object_list: Takes a list of model objects
         :return: Names of model objects as a list of strings
         """
-        str_list: list[str] = [x.name for x in object_list]
+
+
+        str_list: list[str] = []
+        for obj in object_list:
+            if isinstance(obj, Player):
+                str_list.append(obj.handle)
+            elif hasattr(obj, "name"):
+                str_list.append(obj.name)
         return str_list
