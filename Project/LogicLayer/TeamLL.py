@@ -192,11 +192,19 @@ class TeamLL():
 
     #TODO implement if the team won the tournament add WIN and LOST to if they lost
     def get_team_history(self, team_name: str) -> list[str]:
-        """
-        Takes in team uuid,
-        looks through a list of all the tournaments
-        and finds every tournament the team uuid is in (team played in tournament)
-        returns a list of those tournaments
+        """Gets the team name
+
+        First gets the team uuid, Then loads all Tournaments
+        and lists all tournaments that the teams uuid is in
+        teams playing 
+
+        :param team_name:
+            The team name to find the tournaments they participated in
+        :type team_name: str
+
+        :return:
+        Returns a list of tournament names that the team has participated in
+        :rtype: list[str]
         """
         teams_history: list[str] = []
         team_uuid: str = self.get_team_by_name(team_name).uuid
