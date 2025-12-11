@@ -53,7 +53,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "lo"])
+        choice: str = self.utility.prompt_choice(["1", "2", "3", "lo"])
         match choice:
             case "1":
                 return MenuOptions.create_tournament
@@ -94,7 +94,7 @@ class AdminUI:
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_name: str = self.utility._input_info(
+            tournament_name: str = self.utility.input_info(
                 "Enter Tournament Name or 'q' to cancel: \n",
                 "handle",
                 "TOURNAMENT",
@@ -104,14 +104,14 @@ class AdminUI:
 
             self.tui.save_input("Name: " + tournament_name)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_date: str = self.utility._input_info(
+            tournament_date: str = self.utility.input_info(
                 "Enter Start And End Date or 'q' to cancel: (yyyy-mm-dd yyyy-mm-dd) \n",
                 "tournament_date",
                 "TOURNAMENT",
@@ -121,14 +121,14 @@ class AdminUI:
 
             self.tui.save_input("Start And End Dates: " + tournament_date)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_time: str = self.utility._input_info(
+            tournament_time: str = self.utility.input_info(
                 "Enter Start And End Time or 'q' to cancel: (hh:mm hh:mm) \n",
                 "tournament_time",
                 "TOURNAMENT",
@@ -138,14 +138,14 @@ class AdminUI:
 
             self.tui.save_input("Start And End Time: " + tournament_time)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_addr: str = self.utility._input_info(
+            tournament_addr: str = self.utility.input_info(
                 "Enter Venue Address or 'q' to cancel: (Streetname 00 Cityname)\n",
                 "home_address",
                 "TOURNAMENT",
@@ -155,14 +155,14 @@ class AdminUI:
 
             self.tui.save_input("Venue Address: " + tournament_addr)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_email: str = self.utility._input_info(
+            tournament_email: str = self.utility.input_info(
                 "Enter Contact Email or 'q' to cancel: \n", "email", "PLAYER"
             )
             if not tournament_email:
@@ -170,14 +170,14 @@ class AdminUI:
 
             self.tui.save_input("Email: " + tournament_email)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_phnum: str = self.utility._input_info(
+            tournament_phnum: str = self.utility.input_info(
                 "Enter Contact Phone Number or 'q' to cancel: 123-4567 \n",
                 "phone_number",
                 "PLAYER",
@@ -187,14 +187,14 @@ class AdminUI:
 
             self.tui.save_input("Phone Number: " + tournament_phnum)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con.lower() == "b":
             print(self.tui.table(menu, user_path, info))
-            tournament_servers: str = self.utility._input_info(
+            tournament_servers: str = self.utility.input_info(
                 "Enter Amount of Servers or 'q' to cancel\n",
                 "number",
                 "",
@@ -204,7 +204,7 @@ class AdminUI:
 
             self.tui.save_input("Amount Of Servers: " + tournament_servers)
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con.lower() == "b":
                 self.tui.discard_last_input()
 
@@ -213,7 +213,7 @@ class AdminUI:
             "b": "Discard Info And Go Back",
         }
         print(self.tui.table(menu, user_path, info, options, message))
-        con: str = self.utility._prompt_choice(["c", "b"])
+        con: str = self.utility.prompt_choice(["c", "b"])
 
         if con.lower() == "b":
             return MenuOptions.admin_screen
@@ -293,7 +293,7 @@ class AdminUI:
 
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["t", "b"])
+        choice: str = self.utility.prompt_choice(["t", "b"])
         match choice:
             case "t":
                 return MenuOptions.manage_tournament
@@ -347,7 +347,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
-        choice: str = self.utility._prompt_choice(["1", "b", "lo"])
+        choice: str = self.utility.prompt_choice(["1", "b", "lo"])
 
         if choice == "1":
             return MenuOptions.select_match
@@ -410,7 +410,7 @@ class AdminUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, self.options, message))
-        self.choice: str = self.utility._prompt_choice(choice_list)
+        self.choice: str = self.utility.prompt_choice(choice_list)
 
         match self.choice:
             case "b":
@@ -458,7 +458,7 @@ class AdminUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
-        choice: str = self.utility._prompt_choice(["1", "2", "b"])
+        choice: str = self.utility.prompt_choice(["1", "2", "b"])
 
         winner = None
 
@@ -494,7 +494,7 @@ class AdminUI:
                     LogicLayerAPI.change_match_winner(tournament_id, match_uuid, winner_uuid)
 
         print(self.tui.table(menu, user_path, info, options, message))
-        choice: str = self.utility._prompt_choice(["b"])
+        choice: str = self.utility.prompt_choice(["b"])
 
         # TODO: function to choose a team that won update the team and match
         return MenuOptions.manage_active_tournament
@@ -530,7 +530,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "b", "lo"])
+        choice: str = self.utility.prompt_choice(["1", "2", "3", "b", "lo"])
 
         match choice:
             case "1":
@@ -596,7 +596,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "b"])
+        choice: str = self.utility.prompt_choice(["1", "2", "b"])
 
         match choice:
             case "1":
@@ -656,7 +656,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name or 'q' to go back: " + self.reset
+            self.message_color + "Input Team Name or 'q' to go back: \n" + self.reset
         )
         if team_to_add.lower() == "q":
             return MenuOptions.manage_teams
@@ -672,7 +672,7 @@ class AdminUI:
         if team_object is None:
             message = "Team Not Found"
             print(self.tui.table(menu, user_path, info, options, message))
-            choice: str = self.utility._prompt_choice(["t", "b"])
+            choice: str = self.utility.prompt_choice(["t", "b"])
 
             match choice:
                 case "t":
@@ -695,7 +695,7 @@ class AdminUI:
             options: dict[str, str] = {"t": "Add Another", "b": "Back"}
 
         print(self.tui.table(menu, user_path, info, options, message))
-        choice: str = self.utility._prompt_choice(["t", "b"])
+        choice: str = self.utility.prompt_choice(["t", "b"])
 
         match choice:
             case "t":
@@ -730,7 +730,7 @@ class AdminUI:
         print(self.tui.table(menu, user_path, info))
 
         team_to_add: str = input(
-            self.message_color + "Input Team Name: " + self.reset
+            self.message_color + "Input Team Name: \n" + self.reset
         )
 
         # Validate team exists
@@ -744,7 +744,7 @@ class AdminUI:
         if team_object is None:
             message = "Team Not Found"
             print(self.tui.table(menu, user_path, info, options, message))
-            choice: str = self.utility._prompt_choice(["t", "b"])
+            choice: str = self.utility.prompt_choice(["t", "b"])
 
             match choice:
                 case "t":
@@ -760,7 +760,7 @@ class AdminUI:
             message = f"{team_to_add} Is Not A Valid Team"
 
         print(self.tui.table(menu, user_path, info, options, message))
-        choice: str = self.utility._prompt_choice(["t", "b"])
+        choice: str = self.utility.prompt_choice(["t", "b"])
 
         match choice:
             case "t":
@@ -802,7 +802,7 @@ class AdminUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["Y", "y", "N", "n"])
+        choice: str = self.utility.prompt_choice(["Y", "y", "N", "n"])
 
         if choice.lower() == "y":
             try:
@@ -828,7 +828,7 @@ class AdminUI:
         print("1. Edit time/date")
         print("2. Edit Info")
 
-        choice: str = self.utility._prompt_choice(["1", "2", "b"])
+        choice: str = self.utility.prompt_choice(["1", "2", "b"])
         match choice:
             case "1":
                 return MenuOptions.edit_tournament_time
@@ -899,7 +899,7 @@ class AdminUI:
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            club_name: str = self.utility._input_info(
+            club_name: str = self.utility.input_info(
                 "Enter Name or 'q' to cancel: \n", "handle", "CLUB"
             )
             if not club_name:
@@ -907,7 +907,7 @@ class AdminUI:
             self.tui.save_input("Club Name: " + club_name)
 
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
 
@@ -915,7 +915,7 @@ class AdminUI:
         while con == "b":
             print(self.tui.table(menu, user_path, info))
             club_color: str = str(
-                self.utility._input_info(
+                self.utility.input_info(
                     "Enter Basic color or 'q' to cancel: \n", "color", "CLUB"
                 )
             )
@@ -924,14 +924,14 @@ class AdminUI:
             self.tui.save_input("Club Color: " + str(club_color))
 
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            club_country: str = self.utility._input_info(
+            club_country: str = self.utility.input_info(
                 "Enter Club country of origin or 'q' to cancel: \n",
                 "name",
                 "CLUB",
@@ -941,14 +941,14 @@ class AdminUI:
             self.tui.save_input("Club Country: " + club_country)
 
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
 
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
-            club_hometown: str = self.utility._input_info(
+            club_hometown: str = self.utility.input_info(
                 "Enter Club Hometown or 'q' to cancel: \n", "name", "CLUB"
             )
             if not club_hometown:
@@ -956,7 +956,7 @@ class AdminUI:
             self.tui.save_input("Club Hometown: " + club_hometown)
 
             print(self.tui.table(menu, user_path, info, options))
-            con: str = self.utility._prompt_choice(["c", "b"])
+            con: str = self.utility.prompt_choice(["c", "b"])
             if con == "b":
                 self.tui.discard_last_input()
         # Club input done
@@ -965,7 +965,7 @@ class AdminUI:
             "b": "Discard Info And Go Back",
         }
         print(self.tui.table(menu, user_path, info, options, message))
-        con: str = self.utility._prompt_choice(["c", "b"])
+        con: str = self.utility.prompt_choice(["c", "b"])
 
         if con == "b":
             return MenuOptions.admin_screen

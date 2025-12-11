@@ -51,7 +51,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "3", "4", "b"])
+        choice: str = self.utility.prompt_choice(["1", "2", "3", "4", "b"])
         match choice:
             case "1":
                 return MenuOptions.spectate_players
@@ -96,7 +96,7 @@ class SpectateUI:
 
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["t", "b"])
+        choice: str = self.utility.prompt_choice(["t", "b"])
         match choice:
             case "t":
                 return MenuOptions.spectate_players
@@ -165,7 +165,7 @@ class SpectateUI:
 
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["t", "b"])
+        choice: str = self.utility.prompt_choice(["t", "b"])
         match choice:
             case "t":
                 return MenuOptions.spectate_clubs
@@ -238,7 +238,7 @@ class SpectateUI:
 
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["t", "b"])
+        choice: str = self.utility.prompt_choice(["t", "b"])
         match choice:
             case "t":
                 return MenuOptions.spectate_teams
@@ -336,7 +336,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        match self.utility._prompt_choice(["t", "b"]):
+        match self.utility.prompt_choice(["t", "b"]):
             case "t":
                 return MenuOptions.spectate_tournaments
         return MenuOptions.spectate_screen
@@ -369,7 +369,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        choice: str = self.utility._prompt_choice(["1", "2", "b"])
+        choice: str = self.utility.prompt_choice(["1", "2", "b"])
         match choice:
             case "1":
                 return MenuOptions.game_schedule
@@ -503,7 +503,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        match self.utility._prompt_choice(["t", "b"]):
+        match self.utility.prompt_choice(["t", "b"]):
             case "t":
                 return MenuOptions.teams_in_tournament
 

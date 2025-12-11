@@ -238,10 +238,17 @@
         "match_time": "15:00:00",
         "team_1": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
         "team_2": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
-        "winner": null,
-        "winning_players": null,
-        "losing_team": null,
-        "losing_players": null
+        "winner": "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+        "winning_players": [
+            "6e213341-38af-4464-aeca-c26c9e2f1165",
+            "3d7ec336-f2f0-4ac3-8802-eb998b141ff4",
+            "bac40280-22dc-4f52-a028-0416f59a8843"
+        ],
+        "losing_team": "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+        "losing_players": [
+            "2cc090bc-2351-4c43-bb08-2f578d26154a",
+            "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3"
+        ]
     },
     "d9d3d019-393f-49cd-bbac-5bb042c28c01": {
         "uuid": "d9d3d019-393f-49cd-bbac-5bb042c28c01",

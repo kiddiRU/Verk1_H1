@@ -50,8 +50,7 @@
         ],
         "teams_playing": [
             "7ffe196a-495e-4e77-b94d-ea6799c2e572",
-            "0e86df13-949f-497d-916d-6aee0e329516",
-            "b6f18db4-e778-4b72-84e6-91aed8125bb4"
+            "0e86df13-949f-497d-916d-6aee0e329516"
         ]
     },
     "269675a5-b277-43a0-8449-cda8803190b7": {
@@ -127,7 +126,7 @@
         "venue": "shoit 11 sda",
         "email": "das@fas",
         "phone_number": "213-3421",
-        "status": "ARCHIVED",
+        "status": "ACTIVE",
         "list_servers": [
             "99328d28-62bc-406b-a9c0-8bc615fa84a0"
         ],
@@ -177,9 +176,50 @@
             "NoServer"
         ],
         "teams_playing": [
-            "b26a8d5e-b571-41f8-a657-b5ad616299d2",
+            "b26a8d5e-b571-41f8-a657-b5ad616299d2"
+        ]
+    },
+    "74396b84-b4f8-470e-8924-8b731f835b57": {
+        "uuid": "74396b84-b4f8-470e-8924-8b731f835b57",
+        "name": "Sindri Fan Club Extravaganza",
+        "start_date": "1212-12-12",
+        "end_date": "1313-12-12",
+        "time_frame_start": "09:00:00",
+        "time_frame_end": "23:00:00",
+        "venue": "Mentask\u00f3lavegur 1 Reykjav\u00edk",
+        "email": "sindri@sindrifanclub.is",
+        "phone_number": "512-0711",
+        "status": "INACTIVE",
+        "list_servers": [
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer",
+            "NoServer"
+        ],
+        "teams_playing": [
+            "b6f18db4-e778-4b72-84e6-91aed8125bb4",
             "65444a2b-0e9c-43bc-a18b-7de3d231a313",
-            "36783b4e-702d-46a9-af31-bcb3891cb095"
+            "382f652f-efdf-4298-9d15-922877e5e1b5",
+            "70d87222-aa03-490b-a102-519a69ab967f",
+            "fdedcdfa-4714-4d10-b0db-d5b192b634ec",
+            "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
+            "36783b4e-702d-46a9-af31-bcb3891cb095",
+            "01a9ca63-8ad2-444e-b6f6-ee80e80411c5",
+            "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+            "7ffed5fa-83c5-423e-a975-0f67b5782539",
+            "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+            "81edeb0a-e3c8-4efe-b9f2-1329b54266cf",
+            "d1e510b7-268c-4ffe-b3e9-fad661ba9648",
+            "8bf1dc91-1c70-4829-8224-ba9d2ef398bc",
+            "7ffe196a-495e-4e77-b94d-ea6799c2e572"
         ]
     }
 }
