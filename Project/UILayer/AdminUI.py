@@ -374,7 +374,7 @@ class AdminUI:
 
         # Get tournament uuid
         tournament_uuid: str = tournament_object.uuid
-    
+
 
         # Menu and path for the table
         menu: str = "Matches"
@@ -385,7 +385,6 @@ class AdminUI:
             MenuOptions.SELECT_MATCH,
         ]
 
-        info: list[str] = ["- - - - List Of Matches - - - -"]
         self.options: dict[str, str] = {}
         choice_list = []
         message: str = ""
@@ -397,7 +396,6 @@ class AdminUI:
 
         x = 0
         for match in matches:
-            info.append(match)
             x += 1
             choice_list.append(str(x))
             match = match[243:-81]
@@ -409,7 +407,7 @@ class AdminUI:
         self.options["b"] = "Back"
 
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, self.options, message))
+        print(self.tui.table(menu, user_path, [], self.options, message))
         self.choice: str = self.utility.prompt_choice(choice_list)
 
         match self.choice:
