@@ -165,55 +165,82 @@ class PlayerLL():
     # TODO find a way to get a players wins and points
     # Problem if a player swaps team
     def get_player_wins(self, player_handle: str) -> str:
+        """Gets the player handle
+
+        First gets the players uuid,
+        Then loads all matches and if the players uuid is in the
+        winning players 3 points are added and for losing players
+        1 point is added.
+        If a match is not finished the winning and losing players is none
+        and that match is skipped
+        
+        :param player_handle:
+            The player handle for finding the player in won matches
+        :type player_handle: str
+
+        :return: Returns a string number of the amount of wins in matches
+        :rtype: str
         """
-        takes in a player handle and finds the player uuid
-        loads and looks through all matches 
-        and adds one to counter for every match that the player uuid
-        is in the winning players
-        returns the count        
-        """
+
         model_matches: list[Match] = DataLayerAPI.load_matches()
         player_uuid: str = self.player_handle_to_uuid(player_handle)
         win_count: int = 0
 
+        # Loops all matches
         for match in model_matches:
             if match.winning_players is None:
                 pass
-
+                
+            # If player is a winner in a match adds 1
             elif player_uuid in match.winning_players:
                 win_count += 1
 
         return str(win_count)
 
     def get_player_points(self, player_handle: str) -> str:
+        """Gets the player handle
+
+        First gets the players uuid, 
+        Then loads all tournaments and gets a list of all matches in
+        the tournament with the tournament uuid,
+        Finds the last match of the tournament (Finals) and finds the
+        winning and losing players of the match, and if the player is in
+        winning players he gets 3 points and one points in the losing players
+        
+        :param player_handle:
+            The player handle to find the total points from tournaments
+        :type player_handle: str
+
+        :return: Returns a string number of total points from tournaments
+        :rtype: str
         """
-        takes in a player handle and finds the player uuid from handle
-        loads and looks through all tournament and takes there uuid
-        looks through every match in tournament and checks the last match
-        if the player uuid is in the winning players
-        three points are added
-        if the player uuid is in the losing players
-        one point is added
-        returns points
-        """
+
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         player_uuid: str = self.player_handle_to_uuid(player_handle)
         points = 0
 
+        # Loops through all tournaments
         for tournament in model_tournaments:
             try:
                 matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+
+                # gets the final match of the tournament (Finals)
                 tour_final_match: Match = matches_list[-1]
+
+                # gets the winning and losing players
                 winning_players = tour_final_match.winning_players
                 losing_players = tour_final_match.losing_players
 
+                # If match is not finished winning players will be None
                 if winning_players is None:
                     pass
-
+                
+                # If the player is the winner +3 points
                 elif player_uuid in winning_players:
                     points += 3
 
-                elif losing_players and player_uuid in losing_players:
+                # if the player is the loser +1 point
+                elif player_uuid in losing_players:
                     points += 1
 
             except:
@@ -222,7 +249,11 @@ class PlayerLL():
         return str(points)
 
     def list_all_players(self) -> list[Player]:
-        """ Returns a list of stored players. """
+        """When called loads a list of all player objects
+
+        :return: Returns a list of player objects
+        :rtype: list[Player]
+        """
 
         players: list[Player] = DataLayerAPI.load_players()
         return players
@@ -254,11 +285,18 @@ class PlayerLL():
         return player.uuid if type(player) == Player else ''
 
     def get_players_team_uuid(self, player_uuid: str) -> str:
-        """
-        Takes in player handle
-        looks through all teams until it finds the player in a team
-        and returns the teams uuid
-        If no player is found an error is raised
+        """Gets the player uuid
+
+        First loads all team objects,
+        Then finds the team object where the players uuid is
+        listed in the teams player list
+        
+        :param player_uuid:
+            The players uuid to find his team uuid
+        :type player_uuid: str
+
+        :return: Returns a teams uuid
+        :rtype: str
         """
         model_teams: list[Team] = DataLayerAPI.load_teams()
         for team in model_teams:

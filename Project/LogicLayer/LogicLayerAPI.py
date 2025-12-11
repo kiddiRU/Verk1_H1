@@ -165,13 +165,50 @@ def get_player_team_and_rank(player_handle: str) -> tuple[str, str]:
     return player_logic.get_player_team_and_rank(player_handle)
 
 def get_player_wins(player_handle: str) -> str:
+    """Gets the player handle
+
+    First gets the players uuid,
+    Then loads all matches and if the players uuid is in the
+    winning players 3 points are added and for losing players
+    1 point is added.
+    If a match is not finished the winning and losing players is none
+    and that match is skipped
+    
+    :param player_handle:
+        The player handle for finding the player in won matches
+    :type player_handle: str
+
+    :return: Returns a string number of the amount of wins in matches
+    :rtype: str
+    """
     return player_logic.get_player_wins(player_handle)
 
 # "Created" by Sindri Freysson
 def get_player_points(player_handle: str) -> str:
+    """Gets the player handle
+
+    First gets the players uuid, 
+    Then loads all tournaments and gets a list of all matches in
+    the tournament with the tournament uuid,
+    Finds the last match of the tournament (Finals) and finds the
+    winning and losing players of the match, and if the player is in
+    winning players he gets 3 points and one points in the losing players
+    
+    :param player_handle:
+        The player handle to find the total points from tournaments
+    :type player_handle: str
+
+    :return: Returns a string number of total points from tournaments
+    :rtype: str
+    """
     return player_logic.get_player_points(player_handle)
 
 def list_all_players() -> list[Player]:
+    """When called loads a list of all player objects
+
+    :return: Returns a list of player objects
+    :rtype: list[Player]
+    """
     return player_logic.list_all_players()
 
 def get_player_by_handle(player_handle: str) -> Player | str:
@@ -184,6 +221,19 @@ def player_handle_to_uuid(player_handle: str) -> str:
     return player_logic.player_handle_to_uuid(player_handle)
 
 def get_players_team_uuid(player_uuid: str) -> str:
+    """Gets the player uuid
+
+    First loads all team objects,
+    Then finds the team object where the players uuid is
+    listed in the teams player list
+    
+    :param player_uuid:
+        The players uuid to find his team uuid
+    :type player_uuid: str
+
+    :return: Returns a teams uuid
+    :rtype: str
+    """
     return player_logic.get_players_team_uuid(player_uuid)
 
 def get_all_players_not_in_team() -> list[Player]:
