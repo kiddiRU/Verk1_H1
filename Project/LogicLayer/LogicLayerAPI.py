@@ -30,14 +30,49 @@ def validate(attr: str, value: str, name_type: str):
 
 def create_player(
     name: str,
-    date_of_birth: str, 
+    date_of_birth: str,
     home_address: str,
     email: str,
-    phone_number: str, 
-    handle: str, 
+    phone_number: str,
+    handle: str,
     url: str = ''
 ) -> Player:
+    '''
+    Creates a new Player object, sends it to be stored and
+    returns it.
 
+    :param name:
+        The players name.
+    :type name: str
+
+    :param date_of_birth:
+        The players date of birth.
+    :type date_of_birth: str
+
+    :param home_address:
+        The players address.
+    :type home_address: str
+
+    :param email:
+        The players email.
+    :type email: str
+
+    :param phone_number:
+        The players phone number.
+    :type phone_number: str
+
+    :param handle:
+        The players unique user handle.
+    :type handle: str
+
+    :param url:
+        The players personal URL
+    :type url: str
+
+    :returns:
+        A new Player object.
+    :rtype: Player
+    '''
     return player_logic.create_player(
         name,
         date_of_birth,
@@ -57,9 +92,44 @@ def update_player_info(
     phone_number: str,
     handle: str,
     url: str
-) -> None:
-    
-    player_logic.update_player_info(
+) -> Player:
+    '''
+    Takes in a Player object and attribute updates. Applies the updates to
+    the object, sends it to be stored and returns the updated Player object.
+
+    :param name:
+        The players name.
+    :type name: str
+
+    :param date_of_birth:
+        The players date of birth.
+    :type date_of_birth: str
+
+    :param home_address:
+        The players address.
+    :type home_address: str
+
+    :param email:
+        The players email.
+    :type email: str
+
+    :param phone_number:
+        The players phone number.
+    :type phone_number: str
+
+    :param handle:
+        The players unique user handle.
+    :type handle: str
+
+    :param url:
+        The players personal URL
+    :type url: str
+
+    :returns:
+        An updated Player object.
+    :rtype: Player
+    '''
+    return player_logic.update_player_info(
         player,
         name,
         date_of_birth,
@@ -70,10 +140,22 @@ def update_player_info(
         url
     )
 
-def leave_team(team_name: str, player: Player) -> None:
-    return player_logic.leave_team(team_name, player)
+# Isn't used, remove?
+# def leave_team(team_name: str, player: Player) -> None:
+#     return player_logic.leave_team(team_name, player)
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
+    '''
+    Promotes a teams player to its captain.
+    
+    :param current_player:
+        The object of the player calling the function.
+    :type current_player: Player
+
+    :param handle_to_promote:
+        The handle of the player to promote.
+    :type handle_to_promote: str
+    '''
     player_logic.promote_captain(current_player, handle_to_promote)
 
 def save_player(player_handle: str | None = None) -> str | None:

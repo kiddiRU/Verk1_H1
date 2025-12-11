@@ -40,21 +40,33 @@ class PlayerLL():
         object to the data layer to be stored and returns the new player.
         """
 
-        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        for attr, value in params.items():
-            validate_attr(attr, value.strip(), name_type = 'PLAYER')
+        # params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
+        # for attr, value in params.items():
+        #     validate_attr(attr, value.strip(), name_type = 'PLAYER')
 
         uuid = str(uuid4())
 
+        # new_player = Player(
+        #     uuid,
+        #     params["name"],
+        #     params["date_of_birth"],
+        #     params["home_address"],
+        #     params["email"],
+        #     params["phone_number"],
+        #     params["handle"],
+        #     params["url"],
+        # )
+
+        
         new_player = Player(
             uuid,
-            params["name"],
-            params["date_of_birth"],
-            params["home_address"],
-            params["email"],
-            params["phone_number"],
-            params["handle"],
-            params["url"],
+            name,
+            date_of_birth,
+            home_address,
+            email,
+            phone_number,
+            handle,
+            url
         )
 
         DataLayerAPI.store_player(new_player)
@@ -84,6 +96,7 @@ class PlayerLL():
         player.phone_number = phone_number
         player.handle = handle
         player.url = url
+        
         DataLayerAPI.update_player(player.uuid, player)
         return player
 
