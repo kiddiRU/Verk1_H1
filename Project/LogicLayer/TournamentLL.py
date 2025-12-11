@@ -5,18 +5,19 @@ Date: 2025-12-05
 Functions for tournament logic.
 '''
 
-from Models import Team, Tournament, Server, Match, ValidationError
-from DataLayer import DataLayerAPI
+import random
 from uuid import uuid4
 from datetime import date, time, timedelta, datetime
+from Models import Team, Tournament, Server, Match, ValidationError
+from DataLayer import DataLayerAPI
 from LogicLayer import MatchLL, TeamLL
-import random
 
 class TournamentLL:
+    ''' Tournamnet logic. '''
+
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL):
         self._team_logic = team_logic
         self._match_logic = match_logic
-        pass
 
     def create_tournament(self,
         name: str,
@@ -29,7 +30,45 @@ class TournamentLL:
         phone_number: str,
         server_amount: int
     ) -> None:
+        '''
+        Creates a new Tournament object and sends it to be stored.
+        
+        :param name:
+            The tournaments name.
+        :type name: str
 
+        :param start_date:
+            The tournamnets starting date.
+        :type start_date: date
+
+        :param end_date:
+            The tournaments ending date.
+        :type end_date: date
+
+        :param time_frame_start:
+            The start of the tournaments time frame.
+        :type time_frame_start: time
+
+        :param time_frame_end:
+            The end of the tournaments time frame.
+        :type time_frame_end: time
+
+        :param venue:
+            The tournaments venue.
+        :type venue: str
+
+        :param email:
+            The tournaments contact email.
+        :type email: str
+
+        :param phone_number:
+            The tournaments contact phone number.
+        :type phone_number: str
+
+        :param amount_of_servers:
+            The tournaments amount of servers.
+        :type amount_of_servers: int
+        '''
         uuid = str(uuid4())
         new_tournament = Tournament(
             uuid,
@@ -48,87 +87,96 @@ class TournamentLL:
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
         '''
-        Takes in a tournament and team name.
+        Adds a team to the list of teams playing in a tournament.
+        
+        :param tournament_name:
+            The name of the tournament.
+        :type tournament_name: str
 
-        Adds the teams UUID to the teams_playing list in the tournament.
+        :param team_name:
+            The name of the team to add.
+        :type team_name: str
         '''
         tournament: Tournament = self.get_tournament_by_name(tournament_name)
         team: Team = self._team_logic.get_team_by_name(team_name)
-        
+
         if team.uuid in tournament.teams_playing:
-            raise Exception(f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!')
-        
+            raise ValidationError(
+                f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!'
+            )
+
         tournament.teams_playing.append(team.uuid)
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
         '''
-        Takes in a tournament and team name.
+        Removes a team from the list of teams playing in a tournament.
+        
+        :param tournament_name:
+            The name of the tournament.
+        :type tournament_name: str
 
-        Removes the teams UUID from the teams_playing list in the tournament.
+        :param team_name:
+            The name of the team to remove.
+        :type team_name: str
         '''
         tournament: Tournament = self.get_tournament_by_name(tournament_name)
         team: Team = self._team_logic.get_team_by_name(team_name)
-        
+
         if team.uuid in tournament.teams_playing:
             tournament.teams_playing.remove(team.uuid)
 
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
-    def update_info(
-        self,
-        name: str,
-        venue: str,
-        email: str,
-        phone_number: str
-    ) -> None:
-        '''
-        Takes in a tournaments name, venue, email and phone number.
+    # Isn't used, remove?
+    # def update_info(
+    #     self,
+    #     name: str,
+    #     venue: str,
+    #     email: str,
+    #     phone_number: str
+    # ) -> None:
+    #     '''
+    #     Takes in a tournaments name, venue, email and phone number.
 
-        Takes the given info and applies it a tournament. Performs
-        no validation on the given info.
-        '''
-        
-        #params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        tournament: Tournament = self.get_tournament_by_name(name)
+    #     Takes the given info and applies it a tournament. Performs
+    #     no validation on the given info.
+    #     '''
+    #     tournament: Tournament = self.get_tournament_by_name(name)
 
-        # for attr, value in params.items():
-        #     if value == '':
-        #         continue
-        
-        #     setattr(tournament, attr, value)
+    #     tournament.name = name
+    #     tournament.venue = venue
+    #     tournament.email = email
+    #     tournament.phone_number = phone_number
 
-        tournament.name = name
-        tournament.venue = venue
-        tournament.email = email
-        tournament.phone_number = phone_number
+    #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
-        DataLayerAPI.update_tournament(tournament.uuid, tournament)
-    
-    def update_tournament_datetime(
-        self,
-        name: str,
-        start_date: date,
-        end_date: date,
-        time_frame_start: time,
-        time_frame_end: time
-    ) -> None:
-        '''
-        Takes in a start date, end date, time frame start, and a time frame end.
+    # Isn't used, remove?
+    # def update_tournament_datetime(
+    #     self,
+    #     name: str,
+    #     start_date: date,
+    #     end_date: date,
+    #     time_frame_start: time,
+    #     time_frame_end: time
+    # ) -> None:
+    #     '''
+    #     Takes in a start date, end date, time frame start, and a time frame end.
 
-        Takes the given info and applies it a tournament. Performs no validation
-        on the given info.
-        '''
-        params: dict[str, str] = {k: v for k, v in locals().copy().items() if not k == 'self'}
-        tournament: Tournament = self.get_tournament_by_name(name)
+    #     Takes the given info and applies it a tournament. Performs no validation
+    #     on the given info.
+    #     '''
+    #     tournament: Tournament = self.get_tournament_by_name(name)
 
-        if tournament.status == Tournament.StatusType.active:
-            raise Exception('You can\'t change the time of an active tournament!')
+    #     if tournament.status == Tournament.StatusType.active:
+    #         raise ValidationError('You can\'t change the time of an active tournament!')
 
-        for attr, value in params.items():
-            setattr(tournament, attr, value)
+    #     tournament.start_date = start_date
+    #     tournament.end_date = end_date
+    #     tournament.time_frame_start = time_frame_start
+    #     tournament.time_frame_end = time_frame_end
 
-        DataLayerAPI.update_tournament(tournament.uuid, tournament)
+    #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
@@ -168,13 +216,13 @@ class TournamentLL:
         :param uuid:
             The uuid of the tournament to update.
         """
-        
+
         tournament = self.uuid_to_tournament(uuid)
 
         # Checking to make sure the tournament is active.
         if tournament.status != Tournament.StatusType.active:
             raise ValidationError("Can't end tournaments that aren't active.")
-        
+
         # Setting the tournaments status to archived.
         tournament.status = Tournament.StatusType.archived
 
