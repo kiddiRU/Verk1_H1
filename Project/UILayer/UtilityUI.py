@@ -29,7 +29,7 @@ class UtilityUI:
         self.message_color: str = "\033[36m"
         self.reset: str = "\033[0m"
 
-    def _prompt_choice(self, valid_choices: list[str]) -> str:
+    def prompt_choice(self, valid_choices: list[str]) -> str:
         """
         Helper function for allowed choices for the user
 
@@ -51,7 +51,7 @@ class UtilityUI:
             )
 
     # Created by Sindri
-    def _input_info(self, message: str, attribute: str, info_type: str) -> str:
+    def input_info(self, message: str, attribute: str, info_type: str) -> str:
         """
         Helper function that repeats input until it is valid or navigation word is entered
         :param message: message to display - "Enter Your name"
@@ -71,7 +71,7 @@ class UtilityUI:
                 print(self.error_color + str(e) + self.reset)
                 continue
 
-    def _input_change(
+    def input_change(
         self, message: str, attribute: str, info_type: str
     ) -> str:
         """
