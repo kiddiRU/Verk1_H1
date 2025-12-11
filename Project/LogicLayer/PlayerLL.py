@@ -169,42 +169,42 @@ class PlayerLL:
     #     team.list_player_uuid.remove(player.uuid)
     #     DataLayerAPI.update_team(team.uuid, team)
 
-    # Isn't used, remove?
-    # def promote_captain(self, current_player: Player, handle_to_promote: str) -> None:
-    #     '''Promotes a teams player to its captain.
 
-    #     :param current_player:
-    #         The object of the player calling the function.
-    #     :type current_player: Player
+    def promote_captain(self, current_player: Player, handle_to_promote: str) -> None: #TODO: this is being used when captain leaves the team and i put keyerror cur the validation error wasnt working
+        '''Promotes a teams player to its captain.
 
-    #     :param handle_to_promote:
-    #         The handle of the player to promote.
-    #     :type handle_to_promote: str
-    #     '''
-    #     team_to_edit = next(
-    #         (t for t in DataLayerAPI.load_teams() if current_player.uuid == t.team_captain_uuid),
-    #         None
-    #     )
+        :param current_player:
+            The object of the player calling the function.
+        :type current_player: Player
 
-    #     if team_to_edit is None:
-    #         raise ValidationError('You are not a captain!')
+        :param handle_to_promote:
+            The handle of the player to promote.
+        :type handle_to_promote: str
+        '''
+        team_to_edit = next(
+            (t for t in DataLayerAPI.load_teams() if current_player.uuid == t.team_captain_uuid),
+            None
+        )
 
-    #     players: list[Player] = DataLayerAPI.load_players()
-    #     player_to_promote: Player | None = next(
-    #         (p for p in players if p.handle == handle_to_promote),
-    #         None
-    #     )
+        if team_to_edit is None:
+            raise KeyError('You are not a captain!')
 
-    #     if player_to_promote is None:
-    #         raise ValidationError(f'No player found with the handle: {handle_to_promote}')
+        players: list[Player] = DataLayerAPI.load_players()
+        player_to_promote: Player | None = next(
+            (p for p in players if p.handle == handle_to_promote),
+            None
+        )
 
-    #     if player_to_promote.uuid not in team_to_edit.list_player_uuid:
-    #         raise ValidationError(
-    #             f'The player \'{handle_to_promote}\' exists, but is not in your team!'
-    #         )
+        if player_to_promote is None:
+            raise KeyError(f'No player found with the handle: {handle_to_promote}')
 
-    #     team_to_edit.team_captain_uuid = player_to_promote.uuid
-    #     DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
+        if player_to_promote.uuid not in team_to_edit.list_player_uuid:
+            raise KeyError(
+                f'The player \'{handle_to_promote}\' exists, but is not in your team!'
+            )
+
+        team_to_edit.team_captain_uuid = player_to_promote.uuid
+        DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
     def save_player(self, player_handle: str | None = None):
         """ Takes in a player handle and saves them as the current active user. """
