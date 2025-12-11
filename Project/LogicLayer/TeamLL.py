@@ -46,7 +46,13 @@ class TeamLL:
         '''
         self._match_logic = match_logic
 
-    def create_team(self, name: str, team_captain: Player, club_name: str, url: str, ascii_art: str) -> Team:
+    def create_team(
+        self, name: str,
+        team_captain: Player,
+        club_name: str,
+        url: str,
+        ascii_art: str
+    ) -> Team:
         '''
         Takes in the teams name, its captain, club, url and ascii art.
 
