@@ -225,8 +225,6 @@ class PlayerLL:
 
         return ("","") # This will never be returned (it is just to appease the type hinting gods)
 
-    # TODO find a way to get a players wins and points
-    # Problem if a player swaps team
     def get_player_wins(self, player_handle: str) -> str:
         """Gets the player handle
 
