@@ -304,7 +304,8 @@ class TeamLL:
             # If the team is in a tournament
             # the tournament is added to the list
             if team_uuid in tournament.teams_playing:
-                teams_history.append(tournament.name)
+                if tournament.status == ("ACTIVE" or "ARCHIVED"):
+                    teams_history.append(tournament.name)
 
         return teams_history
 

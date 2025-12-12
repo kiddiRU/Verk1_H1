@@ -202,6 +202,7 @@ def validate_name(name: str) -> str:
 def validate_home_address(home_address: str) -> str:
     """Validates input to a valid home address
 
+    - Checks that address is not longer the 39 characters
     - Checks if the address is spilt into 3 parts
     - Checks if the first and third parts are letters
     - Checks if the second part is digits and
@@ -218,6 +219,12 @@ def validate_home_address(home_address: str) -> str:
     :rtype: str
     """
     home_address = home_address.strip()
+
+    # Checks if address is longer then 39
+    if len(home_address) > 39:
+        raise ValidationError(
+            "Address can't be longer then 39 characters long"
+        )
 
     # Splits the address into parts and check that there are only three parts
     address_list: list[str] = home_address.split()
