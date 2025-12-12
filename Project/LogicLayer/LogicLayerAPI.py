@@ -751,8 +751,18 @@ def change_match_winner(
         )
 
 
-# TODO docstring
 def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
+    """Gets a list of teams playing in a tournament.
+
+        :param tournament_name:
+            The name of tournament to get teams from.
+        :type tournament_name: str
+
+        :return:
+            Returns a list of team objects playing in the tournament with the
+            given name.
+        :rtype: list[Team]
+        """
     return tournament_logic.get_teams_from_tournament_name(tournament_name)
 
 

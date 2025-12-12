@@ -193,10 +193,11 @@ class PlayerLL:
                 f'No player found with the handle: {handle_to_promote}'
             )
 
-        # If the player to promote is not in the captains team, declare so.
+        # If the player to promote is not in the captains team, raise an error.
         if player_to_promote.uuid not in team_to_edit.list_player_uuid:
             raise KeyError(
-                f'The player \'{handle_to_promote}\' exists, but is not in your team!'
+                f'''The player \'{handle_to_promote}\'exists, but is
+                not in your team!'''
             )
 
         # Set the player with the given handle as the
@@ -304,7 +305,9 @@ class PlayerLL:
 
         # Loops through all tournaments
         for tournament in model_tournaments:
-            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+            matches_list: list[Match] = self._match_logic.get_matches(
+                tournament.uuid
+            )
 
             # if matches is empty skips tournaments
             if not matches_list:
@@ -318,7 +321,7 @@ class PlayerLL:
             losing_players = tour_final_match.losing_players
 
             # If match is not finished winning players will be None
-            if winning_players is None:
+            if winning_players is None or losing_players is None:
                 pass
 
             # If the player is the winner +3 points
@@ -352,11 +355,12 @@ class PlayerLL:
             empty string if the player isn't found.
         :rtype: Player | str
         '''
-        # Get list of all stored players, and find the player with the given handle.
+        # Get list of all stored players, and find the player with
+        # the given handle.
         players: list[Player] = self.list_all_players()
         player = next((p for p in players if p.handle == player_handle), None)
 
-        # If the no player exists with the given handle, return an empty string.
+        # If the no player exists with thegivenhandle, return an empty string.
         if player is None:
             return ""
 
@@ -370,11 +374,12 @@ class PlayerLL:
         :type player_uuid: str
 
         :return:
-            Returns a Player object with the given UUID, returns an empty string
-            if the player isn't found.
+            Returns a Player object with the given UUID, returns an empty
+            string if the player isn't found.
         :rtype: Player | str
         '''
-        # Get list of all stored players, and find the player with the given UUID.
+        # Get list of all stored players, and find the player with
+        # the given UUID.
         players: list[Player] = self.list_all_players()
         player: Player | None = next(
             (p for p in players if p.uuid == player_uuid),
@@ -449,7 +454,8 @@ class PlayerLL:
             for player in team.list_player_uuid:
                 players_in_teams.add(player)
 
-        # Loops through all player uuid's and if not in any team then add to list
+        # Loops through all player uuid's and if not in any team then
+        # add to list
         for player in all_players:
             if player.uuid not in players_in_teams:
                 no_team.append(player)
