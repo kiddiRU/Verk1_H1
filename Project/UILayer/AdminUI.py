@@ -913,7 +913,7 @@ class AdminUI:
             MenuOptions.PUBLISH,
         ]
         # Confirmation message
-        question: str = "Do you want to publish"
+        question: str = "Do you want to publish "
         info: list[str] = [
             f"{question}{self.message_color}"
             f"{tournament_object.name}{self.reset}? Y/N"
