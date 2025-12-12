@@ -502,8 +502,15 @@ class TournamentLL:
 
         return teams_list
 
-    # TODO docstring
     def to_time(self, value: str) -> time:
+        """
+        Converts a string of time into time object.
+
+        :param value: String of time
+        :type value: str
+        :return: A time object of the string
+        :rtype: time
+        """
         # Split into parts
         parts = value.split(":")
 
@@ -519,8 +526,15 @@ class TournamentLL:
             second=int(second)
         )
 
-    # TODO docstring
     def to_date(self, value: str) -> date:
+        """
+        Converts a string of date into date object.
+
+        :param value: String of date
+        :type value: str
+        :return: A date object of the string
+        :rtype: date
+        """
         return datetime.strptime(value, "%Y-%m-%d").date()
 
     def get_tournament_by_name(self, name: str) -> Tournament:

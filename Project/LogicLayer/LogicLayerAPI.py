@@ -768,10 +768,26 @@ def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
 
 # TO help create a Tournament
 def to_time(value: str) -> time:
+    """
+    Converts a string of time into time object.
+
+    :param value: String of time
+    :type value: str
+    :return: A time object of the string
+    :rtype: time
+    """
     return tournament_logic.to_time(value)
 
 
 def to_date(value: str) -> date:
+    """
+    Converts a string of date into date object.
+
+    :param value: String of date
+    :type value: str
+    :return: A date object of the string
+    :rtype: date
+    """
     return tournament_logic.to_date(value)
 
 
@@ -927,19 +943,25 @@ def get_club_points(club_name: str) -> str:
     return club_logic.get_club_points(club_name)
 
 
-# TODO fix docstring
 def get_club_by_name(club_name: str) -> Club:
-    """Takes in club name
+    """Given a name, finds the club with the same name.
+
     looks through all clubs until it finds the right club name
     and returns the teams uuid
     if no team is found an error is raised
+
+    :param club_name:
+        The name of the club to find.
+
+    :returns:
+        The club found.
     """
     return club_logic.get_club_by_name(club_name)
 
 
 # Match API
 
-# TODO docstring
+
 def get_all_matches(tournament_uuid: str) -> list[Match]:
     """
     Parameters: uuid of tournaemnt
@@ -950,6 +972,31 @@ def get_all_matches(tournament_uuid: str) -> list[Match]:
     return match_logic.get_matches(tournament_uuid)
 
 
-# TODO docstring?
-def get_match(tournament_id: str, match_team1: str, match_team2: str) -> Match | str:
+def get_match(
+    tournament_id: str,
+    match_team1: str,
+    match_team2: str
+) -> Match | str:
+    """Gets tournament uuid and both teams uuid's
+
+    Loads all matches and searches for a match that has
+    both teams in the match
+
+    :param tournament_id:
+        asdf
+    :type tournament_id: str
+
+    :param match_team1_uuid:
+        asdf
+    :type match_team1_uuid: str
+
+    :param match_team2_uuid:
+        asdf
+    :type match_team2_uuid: str
+
+    :return:
+        Returns the Match object,
+        if no match is found with those teams and empty string is returned
+    :rtype: Match | str
+    """
     return match_logic.get_match(tournament_id, match_team1, match_team2)

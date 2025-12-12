@@ -11,22 +11,22 @@ from Models import Match
 from Models import Team
 from DataLayer import DataLayerAPI
 
-# TODO docstring calss
+
 class MatchLL:
-    """ Match Logic"""
+    """ Match logic."""
 
     def __init__(self) -> None:
         pass
 
     # TODO fix docstring
     def create_match(
-            self,
-            tournament_id: str,
-            date: date,
-            time: time,
-            team_1: str,
-            team_2: str
-            ) -> Match:
+        self,
+        tournament_id: str,
+        date: date,
+        time: time,
+        team_1: str,
+        team_2: str
+    ) -> Match:
         """
         First takes in the info that has already been validated
         and creates a uuid for the match,
@@ -149,11 +149,11 @@ class MatchLL:
 
     # TODO docstring
     def get_match(
-            self,
-            tournament_id: str,
-            match_team1_uuid: str,
-            match_team2_uuid: str
-            ) -> Match | str:
+        self,
+        tournament_id: str,
+        match_team1_uuid: str,
+        match_team2_uuid: str
+    ) -> Match | str:
         """Gets tournament uuid and both teams uuid's
 
         Loads all matches and searches for a match that has
