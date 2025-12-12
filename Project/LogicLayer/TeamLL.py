@@ -47,7 +47,6 @@ class TeamLL:
         '''
         self._match_logic = match_logic
 
-    # TODO comment
     def create_team(
         self, name: str,
         team_captain: Player,
@@ -55,12 +54,34 @@ class TeamLL:
         url: str,
         ascii_art: str
     ) -> Team:
-        '''
-        Takes in the teams name, its captain, club, url and ascii art.
+        '''Creates a new team, sends it to be
+        stored and returns the new Team object.
 
-        Creates a new Team object,
-        sends it the data layer to be stored and returns it.
+        :param name:
+            The name of the team.
+        :type name: str
+
+        :param team_captain:
+            The object of the player creating the team.
+        :type team_captain: Player
+
+        :param club_name:
+            The name of teams club.
+        :type club_name: str
+
+        :param url:
+            The teams URL.
+        :type url: str
+
+        :param ascii_art:
+            The teams ASCII art.
+        :type ascii_art: str
+
+        :return:
+            A new Team object.
+        :rtype: Team
         '''
+        # Gets a list of all players that are in teams.
         teams: list[Team] = DataLayerAPI.load_teams()
         players_in_teams: list[str] = [
             uuid for t in teams for uuid in t.list_player_uuid

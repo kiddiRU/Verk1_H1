@@ -43,6 +43,7 @@ class AdminUI:
         self.underscore: str = "\033[4m"  # Underline formatting
         self.options: dict[str, str] = {}  # Remember options
         self.choice: str = ""  # Remember choice
+        self.red: str = "\033[31m"
 
     def admin_screen(self) -> MenuOptions:
         """
@@ -602,7 +603,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{f"{idx}.":<4}{team.name}")
+            info.append(f"{f'{idx}.':<4}{team.name}")
 
         # Options for next screen
         options: dict[str, str] = {
@@ -626,9 +627,12 @@ class AdminUI:
                 if amount_teams > 1:
                     return MenuOptions.PUBLISH
                 print(
+                    self.red +
                     "There Need To 2 Or More Teams In A Tournament To Publish."
+                    + self.reset
                 )
-                input("Input Anything To Continue")
+
+                input("Press Enter To Continue")
                 return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
             case "b":
                 return MenuOptions.ADMIN_SCREEN
@@ -676,7 +680,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{f"{idx}.":<4}{team.name}")
+            info.append(f"{f'{idx}.':<4}{team.name}")
 
         options: dict[str, str] = {
             "1": "Add Team",
@@ -786,7 +790,7 @@ class AdminUI:
         # Validate team membership rules
         if team_to_add in teams_in_tournament:
             message = f"{team_to_add} Is Already In {tournament_name}"
-        elif not (3 <= len(team_object.list_player_uuid) <= 5):
+        elif not 3 <= len(team_object.list_player_uuid) <= 5:
             message = f"{team_to_add} Must Have Between 3 And 5 Players"
         elif team_to_add not in all_teams:
             message = f"{team_to_add} Is Not A Valid Team"
@@ -930,7 +934,7 @@ class AdminUI:
                 LogicLayerAPI.publish(tournament_name)
                 return MenuOptions.MANAGE_TOURNAMENT
             except ValidationError as ex:
-                input(f"Error: {ex} \nInput anything to go back")
+                input(f"Error: {ex} \nPress enter to go back")
 
         return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
 
