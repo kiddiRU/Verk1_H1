@@ -62,7 +62,7 @@ class MatchLL:
             match_time,
             team_1,
             team_2
-            )
+        )
 
         # Send the new Match object to be stored, and return it.
         DataLayerAPI.store_match(new_match)

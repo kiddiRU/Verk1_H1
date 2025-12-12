@@ -368,7 +368,7 @@ def validate_date(date_input: str) -> date:
             valid_date = date(date_list[0], date_list[1], date_list[2])
             return valid_date
 
-        except ValueError:
+        except (ValueError, IndexError):
             raise ValidationError("Invalid date")
 
     except ValueError:

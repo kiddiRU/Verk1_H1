@@ -120,6 +120,8 @@ class PlayerUI:
                 return MenuOptions.ONION
             case "Carlos Ray":
                 return MenuOptions.MASTERPIECE
+            case "Sindri Fan Club":
+                return MenuOptions.SINDRI_FC
 
         # If handle not found, show error message.
         message: str = f"{login_handle} Not Found!"
@@ -175,9 +177,9 @@ class PlayerUI:
         self.tui.clear_saved_data()
 
         # Gets the users information
-        # Temprarily saves the data
+        # Temporarily saves the data
         # So that the user can see their inputs before saving the registration
-        # Allowes the user to cancel the registration an any time by inputing q
+        # Allowed the user to cancel the registration by inputting q
 
         # ---------------------- NAME ----------------------
         con: str = "b"
@@ -198,7 +200,7 @@ class PlayerUI:
             if con == "b":
                 self.tui.discard_last_input()
 
-        # ---------------------- DATE OF BIRT ----------------------
+        # ---------------------- DATE OF BIRTH ----------------------
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
@@ -379,7 +381,7 @@ class PlayerUI:
         club = LogicLayerAPI.get_team_club(team)
 
         # If the Player is not in a team
-        # this will set the variables to the approptiate info
+        # this will set the variables to the appropriate info
         if not team:
             team = None
             rank = "Player"
@@ -500,7 +502,7 @@ class PlayerUI:
         message: str = "By Creating A Team You Are Assigned As The Captain!"
 
         # Get the team information from the user
-        # Temporaraly save the info
+        # Temporarily save the info
         # Allows the user to cancel the team creation whenever by pressing q
 
         # ---------------------- TEAM NAME ----------------------
@@ -525,8 +527,11 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_url = input(
-                f"{self.input_color}Enter Team URL (Optional):\n{self.reset}"
+                f"""{self.input_color}Enter Team URL Or 'q' To Cancel:
+(Optional){self.reset}\n"""
             )
+            if team_url == "q":
+                return user_path[-2]
             self.tui.save_input(f"Team Url: {team_url}")
             print(self.tui.table(menu, user_path, [], options))
             con = self.utility.prompt_choice(["c", "b"])
@@ -538,10 +543,13 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_ascii = input(
-                f"""{self.input_color}Enter A Single Line Team ASCII Art
-                (Optional):\n"""
+                f"{self.input_color}Enter A Single Line Team ASCII Art" +
+                """Or 'q' To Cancel:
+(Optional)\n"""
                 f"{self.reset}"
             )
+            if team_ascii == "q":
+                return user_path[-2]
             self.tui.save_input(f"Team ASCII Art: {team_ascii}")
             print(self.tui.table(menu, user_path, [], options))
             con = self.utility.prompt_choice(["c", "b"])
@@ -553,8 +561,11 @@ class PlayerUI:
         while team_club not in club_names:
             print(self.tui.table(menu, user_path, info, {}, message))
             team_club = input(
-                f"{self.input_color}Choose A Club To Join:\n{self.reset}"
+                f"{self.input_color}Choose A Club To Join" +
+                f"Or 'q' To Cancel:{self.reset}\n"
             )
+            if team_club == "q":
+                return user_path[-2]
             if team_club not in club_names:
                 message = f"{team_club} Does Not Exist Or Is Not Available"
             else:
@@ -603,7 +614,7 @@ class PlayerUI:
         options: dict[str, str] = {"b": "Back"}
         message: str = "You Are Already In A Team!"
 
-        # Shows a mesage letting the user know that they are in a team
+        # Shows a message letting the user know that they are in a team
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
@@ -677,8 +688,8 @@ class PlayerUI:
         unchanged_message: str = (
             "(Leave Field Empty If You Want To Leave Them Unchanged)")
 
-        # Gets new info from user and temporaraly saves it
-        # untill user selects to fully save the changes
+        # Gets new info from user and temporarily saves it
+        # until user selects to fully save the changes
         # ---------------------- NAME ----------------------
         con: str = "b"
         while con == "b":
@@ -1059,7 +1070,7 @@ Enter New Phone Number Or 'q' To Cancel:
 
         info: list[str] = handles_not_team_format
 
-        # Check if the team is full or ther are no players to add
+        # Check if the team is full or there are no players to add
         if not handles_not_team or len(team_members) >= 5:
             message = "No Players To Add To Team Or Team Is Full"
             self.tui.clear_saved_data()
@@ -1159,7 +1170,7 @@ Enter New Phone Number Or 'q' To Cancel:
         options: dict[str, str] = {"c": "Continue"}
         message: str = ""
 
-        # Get team members exept for the captain
+        # Get team members except for the captain
         for member_uuid in team_members:
             member_player: Player | str = LogicLayerAPI.get_player_by_uuid(
                 member_uuid)
@@ -1261,7 +1272,7 @@ Enter New Phone Number Or 'q' To Cancel:
                     f"{self.underscore + 'Rank:'} \t \t Handle:{self.reset}",
                 ]
 
-                # Get team members exept for the captain
+                # Get team members except for the captain
                 for member_uuid in team_members:
                     member_player: Player | str = (
                         LogicLayerAPI.get_player_by_uuid(member_uuid))
@@ -1361,7 +1372,7 @@ Do You Want To Try Again? Y/N:"""
             MenuOptions: The next menu to navigate to
         """
 
-        # Well ogres arent white, are they?
+        # Well ogres aren't white, are they?
         shrek: str = "\033[32m"
         reset: str = "\033[0m"
 
@@ -1465,8 +1476,8 @@ This is how we do it
         :returns:
             MenuOptions: The next screen to navigate to"""
 
-        # This is just to have a bit of fun cus my sanity is fullt drained
-        # His hat is a bit messed up because it broke the 79 character limmit
+        # This is just to have a bit of fun cus my sanity is fully drained
+        # His hat is a bit messed up because it broke the 79 character limit
         print("""
                                      MMMMMMMMMMM
                                   MMMMMMMMMMMMMMMMM
@@ -1521,7 +1532,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
 
 
             """)
-        # Unfortunatly could not find any ascii art of a 2 liter pepsi bottle
+        # Unfortunately could not find any ascii art of a 2 liter pepsi bottle
         print("""
             ⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀
@@ -1542,7 +1553,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
         )
 
         # You better like the art
-        # Or else you dont have the privlage of using this program
+        # Or else you dont have the privilege of using this program
         if like.lower() == "y":
             print("YAY")
             input("BYE BYE ⊂(◉‿◉)つ")
@@ -1550,3 +1561,62 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
 
         print("\033[31m" + "Deleting File And System" + "\033[0m")
         return MenuOptions.QUIT
+
+    def sindri_fc(self) -> MenuOptions:
+        """Just a photo of our amazing group leader
+
+        :return:
+            MenuOptions: The next screen to navigate to"""
+
+        print("""
+                                           %%%%%%%%
+                                  %%%=+:==#%%%%%%%%%####
+                                %%%%%*: .-*#%%%%%%%%%%%###*
+                              %%%%%%%%%%%######%%%%%%%%#%####
+                           %%%%%%%%%%%%%%%%%%%%%#%%%%%%%%%%#**#
+                          %%%%%%%%%%%:      +%%%%%%%%%####***#*
+                          %%%%%%=                .%%##########*#
+                          %%%%==%%-.                  %#########
+                          %%%%%%%                        =%#####
+                          %%%%. .+%%%#+=   ......           ####
+                           %.%+..      .      . .         .  ##
+                         % %*...:----=--=-:               . . #
+                         %==-*#+=++****+=--::      :---=:     -
+                           %%#:..-+#*=:.:.    . .=-======-
+                        %%%%%%*#%%%%+=+++=+***+++++   ====
+                        %* %%%%**.*%#-====-   :-=+*+++==-:
+                      =%=# %%#%=+ %%%-::=--:-==-==+=+++===- .---
+                       %   %%%%%%%%%:::--====+++++-=======----::+
+                           %%%%%+%%=:::-:====++*++========--:--:
+                          %%%%+%%%#===-::=================--:.-=
+                           %%%%%% %*.  =:-++++++++========---:-
+                           %%%%%%%%%*:::--=***++++========---=
+                           %%%%%%%%%%===-==+****+++=======-
+                           %%%%%%%%#::::==+++***+++++======
+        % =-:..+           %%%%%:%%%#-:..  -=++++++=++=====
+    %#.                    %    %%#++++==---=****+++++++==
+                #      *%-+-+=%%*#%%+++**+++=+******+++===
+     =::        .   :    -%%%%%%%%#**+==+++++++****++++==-+
+     #::         .           %%%%%#+++====+++******++==--:+*
+     %--         .   .%       %%%%%#+=++++++******++=--:.+**+
+     %--         - %          %%%%#%%*******###*++=-:::.+###*+++
+      ::         -%          %%%%%%%%%%%%%%%%#*=--:::::#***#+**+=*+
+      -=         %%%%%%%%%%%%%%%%*::-*####*=--------=*#######+*+=**-       #%%%
+    %%%+..+%%%%%%%%%%%%-:=%%%%%+%%-.:-+##**+=-----:%*#*###*%%=##:-+-     :%%%%%
+ %%%%%%%%%%%%%%%%%%% .:=%%%%*##.%%=::--+*%%%%#+==*%%:%##%%%##%%#%-++     .*%%%%
+%%%%%%%%%%%%%%%%%% :.-%%%%*+*%%-%%-.::--+#%%%%%%%%%=..+= -.%%+%%%%++     ..%%%%
+%%%%%%%%%%#%%%%%. .+-%%%*=+*%%%#%# .::--=+#%%%%%%%#+-%#:-%-=%%:-%%%#   ....%%%%
+%%%%%%%%%#%%%% ...#%%%%%%%%%%%%%%*+:.::--=%%#%%%#**%%%+-%%+*%%%%%%%%* ...::-%%%
+%%#%%%%#%%%%+  :+%%%%%%%%%%%%%%%%#%+:..:%*%%%%%+%%%%%%+%%%*+%%%%%%%%%..:::--=%%
+%#%%%%%%%%%  .= %%%%%%%%%%%%%%%%%%%%*  #%%%%%#%%%%%%%**%%%%*%%%%%%%%%+.::----%%
+%%%%%%%%%%  .:*%%%%#%%%%%%%%%%%%%%%%%*-%%%%%%%%%%%%%#+%%%%%#%%%%%%%%%%::---==+%
+%%%%%%%%*:..+%%%%%%%%#%%%%%%%%%%%%%%%%#+%%%%%%%%%%%#*#%%%%%%%%%%%%%%%%%:-=-+++#
+%%%%%%%-  :.%%%%%%*%#*#%%%%%%##%%%%%%%#=+#%%%%%%%%%*+%%%%%%%%%%%%%%%%%%*-===++*
+%%%%%%-..  %%%%%%%%%%+%%%%%%%*#%%%%%%%%+=*#%%%%%%%%++%%%%%%%%%%%%%%%%%%%--=+***
+%%%%%* :: %%%%%%%%*=%%%%%%%%#*%%%%%%%%===**%%%%%%%#++%%%%%%%%%%%%%%%%%%%#-=+**#
+%%%%%  : %%%%%%%%%+%%%%%%%%%%##%%%%%%%==+*%%%%%%%%#+#%%%%%%%%%#%%%%%%%%%%==+*##
+%%%% .- %%%%%%%%%#*%%%%%%%%#%%%%%%%%%%==**%%%%%%%%*+%%%%%%%%%%%%%%%%%%%%%%++*##
+""")
+
+        input()
+        return MenuOptions.START_SCREEN
