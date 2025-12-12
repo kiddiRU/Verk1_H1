@@ -8,7 +8,8 @@ Data layer API
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 
-""" Player API """
+# Player API
+
 
 def store_player(player: Player) -> None:
     """Stores new players in a JSON file to be fetched later.
@@ -18,6 +19,7 @@ def store_player(player: Player) -> None:
     """
     PlayerIO.store_player(player)
 
+
 def load_players() -> list[Player]:
     """Gets a list of all players stored with the store_player function.
 
@@ -25,6 +27,7 @@ def load_players() -> list[Player]:
         The list of players.
     """
     return PlayerIO.load_players()
+
 
 def update_player(uuid: str, updated_player: Player) -> None:
     """Updates a player stored with the store_player function.
@@ -40,7 +43,8 @@ def update_player(uuid: str, updated_player: Player) -> None:
     """
     PlayerIO.update_player(uuid, updated_player)
 
-""" Team API """
+# Team API
+
 
 def store_team(team: Team) -> None:
     """Stores new teams in a JSON file to be fetched later.
@@ -50,6 +54,7 @@ def store_team(team: Team) -> None:
     """
     TeamIO.store_team(team)
 
+
 def load_teams() -> list[Team]:
     """Gets a list of all teams stored with the store_team function.
 
@@ -57,6 +62,7 @@ def load_teams() -> list[Team]:
         The list of teams.
     """
     return TeamIO.load_teams()
+
 
 def update_team(uuid: str, updated_team: Team) -> None:
     """Updates a team stored with the store_team function.
@@ -72,7 +78,9 @@ def update_team(uuid: str, updated_team: Team) -> None:
     """
     TeamIO.update_team(uuid, updated_team)
 
-""" Club API """
+
+# Club API
+
 
 def store_club(club: Club) -> None:
     """Stores new clubs in a JSON file to be fetched later.
@@ -82,6 +90,7 @@ def store_club(club: Club) -> None:
     """
     ClubIO.store_club(club)
 
+
 def load_clubs() -> list[Club]:
     """Gets a list of all clubs stored with the store_club function.
 
@@ -89,6 +98,7 @@ def load_clubs() -> list[Club]:
         The list of clubs.
     """
     return ClubIO.load_club()
+
 
 def update_club(uuid: str, updated_club: Club) -> None:
     """Updates a club stored with the store_club function.
@@ -104,7 +114,9 @@ def update_club(uuid: str, updated_club: Club) -> None:
     """
     ClubIO.update_club(uuid, updated_club)
 
-""" Tournament API """
+
+# Tournament API
+
 
 def store_tournament(tournament: Tournament) -> None:
     """Stores new tournaments in a JSON file to be fetched later.
@@ -114,6 +126,7 @@ def store_tournament(tournament: Tournament) -> None:
     """
     TournamentIO.store_tournament(tournament)
 
+
 def load_tournaments() -> list[Tournament]:
     """Gets a list of all tournaments stored with the store_tournament
     function.
@@ -122,6 +135,7 @@ def load_tournaments() -> list[Tournament]:
         The list of tournaments.
     """
     return TournamentIO.load_tournaments()
+
 
 def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     """Updates a tournament stored with the store_tournament function.
@@ -137,7 +151,9 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     """
     TournamentIO.update_tournament(uuid, updated_tournament)
 
-""" Match API """
+
+# Match API
+
 
 def store_match(match: Match) -> None:
     """Stores new matches in a JSON file to be fetched later.
@@ -147,6 +163,7 @@ def store_match(match: Match) -> None:
     """
     MatchIO.store_match(match)
 
+
 def load_matches() -> list[Match]:
     """Gets a list of all matches stored with the store_match function.
 
@@ -154,6 +171,7 @@ def load_matches() -> list[Match]:
         The list of matches.
     """
     return MatchIO.load_match()
+
 
 def update_match(uuid: str, updated_match: Match) -> None:
     """Updates a match stored with the store_match function.
@@ -169,7 +187,8 @@ def update_match(uuid: str, updated_match: Match) -> None:
     """
     MatchIO.update_match(uuid, updated_match)
 
-""" Server API """
+# Server API
+
 
 def store_server(server: Server) -> None:
     """Stores new servers in a JSON file to be fetched later.
@@ -179,13 +198,15 @@ def store_server(server: Server) -> None:
     """
     ServerIO.store_server(server)
 
+
 def load_servers() -> list[Server]:
     """Gets a list of all servers stored with the store_server function.
-    
+
     :returns:
         The list of servers.
     """
     return ServerIO.load_server()
+
 
 def update_server(uuid: str, updated_server: Server) -> None:
     """Updates the server stored with the store_server function.
