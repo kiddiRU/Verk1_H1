@@ -39,7 +39,7 @@ class Tournament:
     :type time_frame_start: time, optional
     :param time_frame_end: Daily end time of tournament, defaults to 16:00
     :type time_frame_end: time, optional
-    :param status: Tournament status (active, inactive, archived),
+    :param status: Tournament status (ACTIVE, INACTIVE, ARCHIVED),
     defaults to inactive
     :type status: Tournament.StatusType, optional
     :param number_of_servers: Number of servers to assign if list_servers
