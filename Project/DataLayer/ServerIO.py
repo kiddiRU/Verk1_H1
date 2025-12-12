@@ -11,6 +11,7 @@ from Models import Server, ValidationError
 
 FILE_PATH = "DataLayer/Repository/server.json"
 
+
 def store_server(server: Server) -> None:
     """Stores new servers in a JSON file to be fetched later.
 
@@ -25,24 +26,24 @@ def store_server(server: Server) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as server_file:
             file_content = dict(json.load(server_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read server file.")
 
     # Adds the new server into the dictionary mapping it's uuid to the
     # object for easy lookup.
     file_content[server.uuid] = data
-    
+
     # Writes the updated file content int the JSON file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as server_file:
             json.dump(file_content, server_file, indent=4)
-    except:
+    except Exception:
         raise ValidationError("Could not write into server file.")
 
 
 def load_server() -> list[Server]:
     """Gets a list of all servers stored with the store_server function.
-    
+
     :returns:
         The list of servers.
     """
@@ -50,7 +51,7 @@ def load_server() -> list[Server]:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as server_file:
             file_content = dict(json.load(server_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read server file.")
 
     # Creates a list of all server in the server file.
@@ -60,8 +61,10 @@ def load_server() -> list[Server]:
         # Uses **value to unpack the dictionary into a Server model object.
         try:
             server_list.append(Server(**value))
-        except:
-            raise ValidationError("Could not change file content into Server object.")
+        except Exception:
+            raise ValidationError(
+                "Could not change file content into Server object."
+            )
 
     return server_list
 
@@ -82,19 +85,19 @@ def update_server(uuid: str, updated_server: Server) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as server_file:
             file_content = dict(json.load(server_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read server file.")
-   
+
     # Overwrites the object tied to the given uuid to the object
     # given after checking if it exists to prevent key error.
     if uuid in file_content:
         file_content[uuid] = updated_server.__dict__
     else:
         raise ValidationError("Could not find server with given uuid.")
-    
+
     # Writes the updated dictionary into the server file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as server_file:
             json.dump(file_content, server_file, indent=4)
-    except:
+    except Exception:
         raise ValidationError("Could not write into server file.")
