@@ -599,7 +599,7 @@ class SpectateUI:
         ]
         # Retrieve the list of matches for the tournament
         match_list: list[str] = self.utility.list_matches(
-            tournament_uuid, False
+            tournament_uuid, True
         )
 
         info: list[str] = match_list
