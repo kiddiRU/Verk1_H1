@@ -180,7 +180,6 @@ class Drawer():
             table += self.reset + self.line
             table += self.options_color + "Choose Action:" + self.reset
 
-
         # Makes the table bold and returns it
         return self.table_color + table + self.reset
 
