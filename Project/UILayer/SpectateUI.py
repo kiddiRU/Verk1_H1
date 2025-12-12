@@ -307,7 +307,7 @@ class SpectateUI:
         # Prompt the user to input a team name or cancel
         find_team: str = input(
             self.message_color
-            + "Input Team Name or 'q' to cancel:\n"
+            + "Input Team Name Or 'q' To Cancel:\n"
             + self.reset
         )
         if find_team == "q":
@@ -423,7 +423,7 @@ class SpectateUI:
         # User input
         tournament_name = input(
             self.message_color
-            + "Input Tournament Name or 'q' to cancel:\n"
+            + "Input Tournament Name Or 'q' To Cancel:\n"
             + self.reset
         )
         if tournament_name == "q":
@@ -682,7 +682,7 @@ class SpectateUI:
         ]
 
         # Menu UI
-        menu: str = f"Teams in {tournament_name}"
+        menu: str = f"Teams In {tournament_name}"
         user_path: list[MenuOptions] = [
             MenuOptions.SPECTATE_SCREEN,
             MenuOptions.SPECTATE_TOURNAMENTS,
