@@ -939,7 +939,7 @@ def get_club_by_name(club_name: str) -> Club:
 
 # Match API
 
-
+# TODO docstring
 def get_all_matches(tournament_uuid: str) -> list[Match]:
     """
     Parameters: uuid of tournaemnt
