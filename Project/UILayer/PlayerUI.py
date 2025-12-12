@@ -525,8 +525,11 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_url = input(
-                f"{self.input_color}Enter Team URL (Optional):\n{self.reset}"
+                f"""{self.input_color}Enter Team URL Or 'q' To Cancel:
+(Optional){self.reset}\n"""
             )
+            if team_url == "q":
+                return user_path[-2]
             self.tui.save_input(f"Team Url: {team_url}")
             print(self.tui.table(menu, user_path, [], options))
             con = self.utility.prompt_choice(["c", "b"])
@@ -538,10 +541,13 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_ascii = input(
-                f"""{self.input_color}Enter A Single Line Team ASCII Art
-                (Optional):\n"""
+                f"{self.input_color}Enter A Single Line Team ASCII Art" +
+                """Or 'q' To Cancel:
+(Optional)\n"""
                 f"{self.reset}"
             )
+            if team_ascii == "q":
+                return user_path[-2]
             self.tui.save_input(f"Team ASCII Art: {team_ascii}")
             print(self.tui.table(menu, user_path, [], options))
             con = self.utility.prompt_choice(["c", "b"])
@@ -553,8 +559,11 @@ class PlayerUI:
         while team_club not in club_names:
             print(self.tui.table(menu, user_path, info, {}, message))
             team_club = input(
-                f"{self.input_color}Choose A Club To Join:\n{self.reset}"
+                f"{self.input_color}Choose A Club To Join" +
+                f"Or 'q' To Cancel:{self.reset}\n"
             )
+            if team_club == "q":
+                return user_path[-2]
             if team_club not in club_names:
                 message = f"{team_club} Does Not Exist Or Is Not Available"
             else:

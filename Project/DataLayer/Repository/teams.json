@@ -222,5 +222,21 @@
         "in_tournament": null,
         "url_homepage": "https://example.com/pepsimax_overflow",
         "ascii_art": null
+    },
+    "8dc24d54-0def-4474-84bb-6f492f4a7398": {
+        "uuid": "8dc24d54-0def-4474-84bb-6f492f4a7398",
+        "name": "The Loafing Purrfections",
+        "list_player_uuid": [
+            "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+            "0cf35482-b97e-470c-aa26-c1dacc644381",
+            "ad76d722-06bf-4d8e-830d-0cd18910e6ff",
+            "8abe3edd-1a72-4e9d-804e-d51800d6bd06",
+            "d0e359f7-22cc-430a-9dc3-b2035304c575"
+        ],
+        "team_captain_uuid": "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+        "club_uuid": "e4a2b64d-f6f1-4f6a-8a52-a012d196a35f",
+        "in_tournament": null,
+        "url_homepage": "https//:wikihow.com/how-to-loaf",
+        "ascii_art": "><((((>"
     }
 }
