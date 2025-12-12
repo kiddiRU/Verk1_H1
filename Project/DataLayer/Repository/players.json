@@ -478,5 +478,55 @@
         "phone_number": "611-0048",
         "handle": "StackCanarySif",
         "url": "https://twitter.com/StackCanarySif"
+    },
+    "c8c6b964-4c56-47b8-baf9-b0cdb3e57581": {
+        "uuid": "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+        "name": "Meowrio",
+        "date_of_birth": "1234-12-12",
+        "home_address": "Loaf 123 Hiss",
+        "email": "ball@yarn.com",
+        "phone_number": "123-1234",
+        "handle": "^._.^",
+        "url": "https://meow.com"
+    },
+    "0cf35482-b97e-470c-aa26-c1dacc644381": {
+        "uuid": "0cf35482-b97e-470c-aa26-c1dacc644381",
+        "name": "Purrlock Holmes",
+        "date_of_birth": "1234-12-12",
+        "home_address": "a\u00e6lkdfj 12 \u00e6kjsdfn",
+        "email": "ball@yarn",
+        "phone_number": "123-4567",
+        "handle": "^o.o^",
+        "url": "https://meow.com"
+    },
+    "ad76d722-06bf-4d8e-830d-0cd18910e6ff": {
+        "uuid": "ad76d722-06bf-4d8e-830d-0cd18910e6ff",
+        "name": "Furrnando",
+        "date_of_birth": "1234-12-12",
+        "home_address": "\u00e6lskdfj 12 \u00e6kjdsfn",
+        "email": "ball@yar",
+        "phone_number": "123-1234",
+        "handle": "^o_0^",
+        "url": "https://meow.com"
+    },
+    "8abe3edd-1a72-4e9d-804e-d51800d6bd06": {
+        "uuid": "8abe3edd-1a72-4e9d-804e-d51800d6bd06",
+        "name": "Catpernicus",
+        "date_of_birth": "1234-12-12",
+        "home_address": "alskdfj 12 kjasdfn",
+        "email": "ball@yarn",
+        "phone_number": "123-1234",
+        "handle": "^-_-^ zZ",
+        "url": "https://meow.com"
+    },
+    "d0e359f7-22cc-430a-9dc3-b2035304c575": {
+        "uuid": "d0e359f7-22cc-430a-9dc3-b2035304c575",
+        "name": "Purrcules",
+        "date_of_birth": "1234-12-12",
+        "home_address": "kjdsfhg 12 ljhsdbf",
+        "email": "ball@yarn",
+        "phone_number": "123-1234",
+        "handle": "^\u00f3.\u00f2^",
+        "url": "https://meow.com"
     }
 }
