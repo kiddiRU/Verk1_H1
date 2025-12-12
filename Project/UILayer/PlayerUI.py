@@ -7,11 +7,12 @@ Author: Andri Már Kristjánsson <andrik25@ru.is>
 File that holds all the menus that the player can access
 """
 
-from UILayer.MenuOptions import MenuOptions
-from UILayer.UtilityUI import UtilityUI
-from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 from Models.Player import Player
+
+from UILayer.Drawer import Drawer
+from UILayer.MenuOptions import MenuOptions
+from UILayer.UtilityUI import UtilityUI
 
 
 class PlayerUI:
@@ -1082,7 +1083,7 @@ Enter New Phone Number Or 'q' To Cancel:
         print(self.tui.table(menu, user_path, info))
         add_handle: str = input(
             self.input_color
-            + "Enter a player's handle to add them or 'q' to cancel:\n"
+            + "Enter A Player's Handle To Add Them Or 'q' To Cancel:\n"
             + self.reset
         )
         if add_handle.lower() == "q":
@@ -1285,11 +1286,12 @@ Enter New Phone Number Or 'q' To Cancel:
                                 f"{member_rank} \t \t {member_player.handle}")
 
                 # Select new captain
-                message = f"Select a new captain before leaving {team}"
+                message = f"Select A New Captain Before Leaving {team}"
                 print(self.tui.table(menu, user_path, info, {}, message))
                 new_captain = input(
                     self.input_color
-                    + "Enter a player's handle to promote them to captain:\n"
+                    + "Enter A Player's Handle To Promote Them To Captain "
+                    + "Or 'q' To Cancel:\n"
                     + self.reset
                 )
 
@@ -1329,7 +1331,7 @@ Do You Want To Try Again? Y/N:"""
             # Captain is the only member
             message = (
                 f"You Are The Only One Left In The Team\n"
-                f"If You Leave, the team {team} will no longer be accessible\n"
+                f"If You Leave, The Team {team} Will No Longer Be Accessible\n"
                 "Are You Sure You Want To Leave? Y/N"
             )
             print(self.tui.table(menu, user_path, [], options, message))

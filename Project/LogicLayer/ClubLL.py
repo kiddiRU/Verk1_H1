@@ -6,8 +6,10 @@ Functions for Club logic
 """
 
 from uuid import uuid4
+
 from DataLayer import DataLayerAPI
-from Models import Club, Team, Match, Tournament, ValidationError
+from Models import Club, Match, Team, Tournament, ValidationError
+
 from LogicLayer import MatchLL
 
 

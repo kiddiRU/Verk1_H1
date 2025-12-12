@@ -911,14 +911,14 @@ class AdminUI:
             MenuOptions.PUBLISH,
         ]
         # Confirmation message
-        question: str = "Do you want to publish "
+        question: str = "Do You Want To Publish "
         info: list[str] = [
             f"{question}{self.message_color}"
             f"{tournament_object.name}{self.reset}? Y/N"
         ]
 
         options: dict[str, str] = {"Y:": "Yes", "N:": "No"}
-        message: str = "Publishing cannot be reverted!"
+        message: str = "Publishing Cannot Be Reverted!"
 
         # Display UI table
         self.tui.clear_saved_data()
@@ -932,7 +932,7 @@ class AdminUI:
                 LogicLayerAPI.publish(tournament_name)
                 return MenuOptions.MANAGE_TOURNAMENT
             except ValidationError as ex:
-                input(f"Error: {ex} \nPress enter to go back")
+                input(f"Error: {ex} \nPress Enter To Go Back")
 
         return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
 

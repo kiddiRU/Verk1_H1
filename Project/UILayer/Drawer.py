@@ -264,7 +264,7 @@ class Drawer():
         # that is then used when creating a table
         self.previous_inputs.append(user_input)
 
-    def discard_last_input(self):
+    def discard_last_input(self) -> None:
         """Discards the previous input from the user
 
         :return:
