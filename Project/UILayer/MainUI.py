@@ -123,9 +123,9 @@ class MainUI:
 
             # ------------------ Misc Paths ------------------
             # stop when quit
-            elif self.current_screen == MenuOptions.QUIT:
+            elif self.current_screen is MenuOptions.QUIT:
                 print("Quitting Program")
-                exit()
+                break
 
             else:
                 self.current_screen = self.screen_not_exist_error()
