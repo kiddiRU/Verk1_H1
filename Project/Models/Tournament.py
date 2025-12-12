@@ -54,9 +54,20 @@ class Tournament:
     """
 
     class StatusType(StrEnum):
-        active = "ACTIVE"
-        inactive = "INACTIVE"
-        archived = "ARCHIVED"
+        """
+        Enumeration of possible tournament status values.
+
+        Defines the allowed states a tournament can be in during its lifecycle.
+
+        ACTIVE: Tournament is currently running
+        INACTIVE: Tournament is created but not running
+        ARCHIVED: Tournament is completed and stored as historical data
+
+        :rtype: None
+        """
+        ACTIVE = "ACTIVE"
+        INACTIVE = "INACTIVE"
+        ARCHIVED = "ARCHIVED"
 
     def __init__(
         self,
@@ -67,9 +78,9 @@ class Tournament:
         venue: str,
         email: str,
         phone_number: str,
-        time_frame_start: time = time(hour=8, minute=0),
-        time_frame_end: time = time(hour=16, minute=0),
-        status: StatusType = StatusType.inactive,
+        time_frame_start: time,
+        time_frame_end: time,
+        status: StatusType = StatusType.INACTIVE,
         number_of_servers: int = 1,
         list_servers: list[str] = [],
         teams_playing: list[str] = [],

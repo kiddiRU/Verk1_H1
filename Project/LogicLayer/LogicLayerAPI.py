@@ -47,7 +47,7 @@ def validate(attr: str, value: str, name_type: str):
     :param name_type:
         Only used for attribute handle, this determines the type of handle
         want validated, available options are.
-        
+
         -   PLAYER
         -   TEAM
         -   TOURNAMENT
@@ -60,8 +60,8 @@ def validate(attr: str, value: str, name_type: str):
     """
     return Validation.validate_attr(attr, value, name_type)
 
-# Player API
 
+# Player API
 def create_player(
     name: str,
     date_of_birth: str,

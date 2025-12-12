@@ -184,7 +184,7 @@ class TournamentLL:
     #     '''
     #     tournament: Tournament = self.get_tournament_by_name(name)
 
-    #     if tournament.status == Tournament.StatusType.active:
+    #     if tournament.status == Tournament.StatusType.ACTIVE:
     #         raise ValidationError('You can\'t change the time of an active tournament!')
 
     #     tournament.start_date = start_date
@@ -220,11 +220,11 @@ class TournamentLL:
         tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
         # Checking to make sure the tournament is active.
-        if tournament.status != Tournament.StatusType.active:
+        if tournament.status != Tournament.StatusType.ACTIVE:
             raise ValidationError("Can't end tournaments that aren't active.")
 
         # Setting the tournaments status to archived.
-        tournament.status = Tournament.StatusType.archived
+        tournament.status = Tournament.StatusType.ARCHIVED
 
         # Releasing all servers from the tournament.
         for idx, _ in enumerate(tournament.list_servers):
@@ -316,11 +316,11 @@ class TournamentLL:
 
         tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
-        if tournament.status != Tournament.StatusType.inactive:
+        if tournament.status != Tournament.StatusType.INACTIVE:
             raise ValidationError("Tournament isn't inactive.")
 
         # Changes status from inactive to active
-        tournament.status = Tournament.StatusType.active
+        tournament.status = Tournament.StatusType.ACTIVE
 
         # Calculates how many matches are needed for each round
         # by simulating each round and counting how many matches
@@ -439,7 +439,7 @@ class TournamentLL:
         """
         tournament: Tournament = self.get_tournament_by_uuid(uuid)
 
-        if tournament.status != Tournament.StatusType.active:
+        if tournament.status != Tournament.StatusType.ACTIVE:
             raise ValidationError("Tournament isn't active.")
 
         # Get's all matches tied to the tournament.
