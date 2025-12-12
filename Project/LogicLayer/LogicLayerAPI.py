@@ -768,10 +768,26 @@ def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
 
 # TO help create a Tournament
 def to_time(value: str) -> time:
+    """
+    Converts a string of time into time object.
+
+    :param value: String of time
+    :type value: str
+    :return: A time object of the string
+    :rtype: time
+    """
     return tournament_logic.to_time(value)
 
 
 def to_date(value: str) -> date:
+    """
+    Converts a string of date into date object.
+
+    :param value: String of date
+    :type value: str
+    :return: A date object of the string
+    :rtype: date
+    """
     return tournament_logic.to_date(value)
 
 
