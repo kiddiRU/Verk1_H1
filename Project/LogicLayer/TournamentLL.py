@@ -15,12 +15,13 @@ from Models import Team, Tournament, Server, Match, ValidationError
 from DataLayer import DataLayerAPI
 from LogicLayer import MatchLL, TeamLL
 
+
 class TournamentLL:
     ''' Tournament logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL):
         '''Initialize the TournamentLL instance.
-        
+
         :param team_logic:
             The logic layer responsible for team operations and validations.
         :type team_logic: TeamLL
@@ -32,7 +33,8 @@ class TournamentLL:
         self._team_logic = team_logic
         self._match_logic = match_logic
 
-    def create_tournament(self,
+    def create_tournament(
+        self,
         name: str,
         start_date: date,
         end_date: date,
@@ -44,7 +46,7 @@ class TournamentLL:
         server_amount: int
     ) -> None:
         '''Creates a new Tournament object and sends it to be stored.
-        
+
         :param name:
             The tournaments name.
         :type name: str
@@ -93,14 +95,14 @@ class TournamentLL:
             phone_number,
             time_frame_start,
             time_frame_end,
-            number_of_servers = server_amount
+            number_of_servers=server_amount
         )
 
         DataLayerAPI.store_tournament(new_tournament)
 
     def add_team(self, tournament_name: str, team_name: str) -> None:
         '''Adds a team to the list of teams playing in a tournament.
-        
+
         :param tournament_name:
             The name of the tournament.
         :type tournament_name: str
@@ -116,16 +118,17 @@ class TournamentLL:
         # Check if the team is already playing in the tournament.
         if team.uuid in tournament.teams_playing:
             raise ValidationError(
-                f'The team \'{team_name}\' is already in the tournament \'{tournament_name}\'!'
+                f'The team \'{team_name}\' is already in'
+                f'the tournament \'{tournament_name}\'!'
             )
-        
+
         # Add the team to the tournament, and store the updated tournament.
         tournament.teams_playing.append(team.uuid)
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def remove_team(self, tournament_name: str, team_name: str) -> None:
         '''Removes a team from the list of teams playing in a tournament.
-        
+
         :param tournament_name:
             The name of the tournament.
         :type tournament_name: str
@@ -144,10 +147,9 @@ class TournamentLL:
 
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
-
     def list_tournaments(self) -> list[Tournament]:
         '''Gets a list of all stored tournaments.
-        
+
         :return:
             A list of all Tournament objects.
         :rtype: list[Tournament]
@@ -184,7 +186,6 @@ class TournamentLL:
         # Saves the changes made to the tournament.
         DataLayerAPI.update_tournament(uuid, tournament)
 
-
     # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def next_round(self, uuid: str) -> None:
         """Moves a tournament to the next round.
@@ -207,8 +208,9 @@ class TournamentLL:
         if len(matches) == 0:
             raise ValidationError("No matches tied to tournament.")
 
-        # Finds all teams competing in the tournament which havent lost already.
-        # These are the teams which will be competing in the next round.
+        # Finds all teams competing in the tournament which havent lost
+        # already. These are the teams which will be competing in the
+        # next round.
         competing_teams: list[str] = []
 
         # For each team it will loop through each match, if it doesn't find a
@@ -225,7 +227,6 @@ class TournamentLL:
             else:
                 competing_teams.append(team)
 
-
         if len(competing_teams) == 0:
             raise ValidationError("No teams found to compete.")
 
@@ -238,7 +239,10 @@ class TournamentLL:
         random.shuffle(competing_teams)
 
         # Gets the list of matches which can be used for the next round.
-        matches: list[Match] = [match for match in matches if match.winner is None]
+        matches: list[Match] = [
+            match for match in matches
+            if match.winner is None
+        ]
 
         # Loops through the competing teams assigning teams next to eachother
         # to compete against eachother, in case of odd number of teams the
@@ -248,13 +252,12 @@ class TournamentLL:
             matches[i//2].team_2 = competing_teams[i]
             DataLayerAPI.update_match(matches[i//2].uuid, matches[i//2])
 
-
     # Created by Kristinn Hrafn <kristinnd25@ru.is>
     def publish(self, name: str) -> None:
         """Publish an inactive tournament.
 
         Call to publish an inactive tournament, this will...
-        
+
         -   Create a match schedule according to tournament time and date.
         -   Assign teams to the first round of matches.
         -   Create servers to host the matches.
@@ -283,7 +286,6 @@ class TournamentLL:
             matches_per_round.append(number_of_players // 2)
             number_of_players -= matches_per_round[-1]
 
-
         # Calculates which timeslots should be used for matches in the
         # tournament. Every match in a certain round should have finished
         # before starting matches in the next round. Time slots for matches
@@ -292,8 +294,8 @@ class TournamentLL:
         one_day: timedelta = timedelta(days=1)
         one_hour: timedelta = timedelta(hours=1)
         current_datetime: datetime = datetime.combine(
-                date = tournament.start_date,
-                time = tournament.time_frame_start
+                date=tournament.start_date,
+                time=tournament.time_frame_start
         )
 
         for rounds in matches_per_round:
@@ -320,8 +322,8 @@ class TournamentLL:
                         current_datetime += one_day
 
                     current_datetime: datetime = datetime.combine(
-                            date = current_datetime.date(),
-                            time = tournament.time_frame_start
+                            date=current_datetime.date(),
+                            time=tournament.time_frame_start
                     )
 
         # Raises an error if no time slots are created.
@@ -332,8 +334,8 @@ class TournamentLL:
         # matches went past it, it will raise an error if that's the
         # case.
         last_time_slot: datetime = datetime.combine(
-                date = tournament.end_date,
-                time = tournament.time_frame_end
+                date=tournament.end_date,
+                time=tournament.time_frame_end
         )
 
         if tournament.time_frame_end < tournament.time_frame_start:
@@ -346,11 +348,11 @@ class TournamentLL:
         # next_round is called.
         for match_datetime in times_used:
             self._match_logic.create_match(
-                    tournament_id = uuid,
-                    date = match_datetime.date(),
-                    time = match_datetime.time(),
-                    team_1 = "To be revealed",
-                    team_2 = "To be revealed"
+                    tournament_id=uuid,
+                    date=match_datetime.date(),
+                    time=match_datetime.time(),
+                    team_1="To be revealed",
+                    team_2="To be revealed"
             )
 
         matches: list[Match] = self._match_logic.get_matches(tournament.uuid)
@@ -397,14 +399,17 @@ class TournamentLL:
         matches: list[Match] = self._match_logic.get_matches(uuid)
 
         # Ignores all matches which have a winner.
-        matches: list[Match] = [match for match in matches if match.winner is None]
+        matches: list[Match] = [
+            match for match in matches
+            if match.winner is None
+        ]
 
         # Ignores all matches which happen after the first match without
         # a winner.
         matches: list[Match] = [
                 match for match in matches
-                if match.match_date == matches[0].match_date and
-                   match.match_time == matches[0].match_time
+                if match.match_date == matches[0].match_date
+                and match.match_time == matches[0].match_time
         ]
 
         return matches
@@ -415,13 +420,13 @@ class TournamentLL:
             tournament_uuid: str,
             match_uuid: str,
             team_uuid: str
-        ) -> None:
+    ) -> None:
         """Updates match winner of a specific match in a specific tournament.
 
-        Given the uuid of a specific tournament and the uuid of a specific match,
-        will update the winner of this match, will set a new match into the server
-        used if needed, will move onto next round of tournament if needed and will
-        archive tournament if needed.
+        Given the uuid of a specific tournament and the uuid of a specific
+        match, will update the winner of this match, will set a new match
+        into the server used if needed, will move onto next round of
+        tournament if needed and will archive tournament if needed.
 
         :param tournament_uuid:
             The uuid of the tournament which the match belongs to.
@@ -445,7 +450,7 @@ class TournamentLL:
         while i < len(matches):
             if matches[i].uuid == match_uuid:
                 break
-            i+=1
+            i += 1
         else:
             raise ValidationError("Match with given uuid not found.")
 
@@ -470,7 +475,10 @@ class TournamentLL:
             self.next_round(tournament_uuid)
 
     # TODO docstring
-    def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:
+    def get_teams_from_tournament_name(
+        self,
+        tournament_name: str
+    ) -> list[Team]:
         """Takes in a tournament name
 
         Returns a list of Team objects
@@ -482,7 +490,9 @@ class TournamentLL:
             if tournament_name == tournament.name:
                 teams: list[str] = tournament.teams_playing
                 for team_uuid in teams:
-                    teams_list.append(self._team_logic.get_team_by_uuid(team_uuid))
+                    teams_list.append(
+                        self._team_logic.get_team_by_uuid(team_uuid)
+                    )
 
         return teams_list
 
@@ -509,7 +519,7 @@ class TournamentLL:
 
     def get_tournament_by_name(self, name: str) -> Tournament:
         '''Gets a Tournament object by its name.
-        
+
         :param tournament_name:
             The name of the tournament to fetch.
         :type tournament_name: str
@@ -530,7 +540,7 @@ class TournamentLL:
 
     def get_tournament_by_uuid(self, uuid: str) -> Tournament:
         '''Gets a Tournament object by its UUID.
-        
+
         :param tournament_uuid:
             The UUID of the tournament to fetch.
         :type tournament_uuid: str
@@ -540,6 +550,7 @@ class TournamentLL:
         :rtype: Tournament
         '''
         # Get an object of the tournament with the given UUIDe.
+        # TODO Fix code
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         tournament: Tournament | None = next((t for t in tournaments if t.uuid == uuid), None)
 
@@ -551,7 +562,7 @@ class TournamentLL:
 
     def tournament_name_to_uuid(self, name: str) -> str:
         '''Converts a tournaments name, to its UUID.
-        
+
         :param tournament_name:
             The name of the tournament.
         :type tournament_name: str
