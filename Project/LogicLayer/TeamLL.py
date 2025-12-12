@@ -100,8 +100,13 @@ class TeamLL:
         # Get the the UUID of the club with the given name.
         clubs: list[Club] = DataLayerAPI.load_clubs()
         club_uuid: str | None = next(
-            c.uuid for c in clubs if c.name == club_name
+            (c.uuid for c in clubs if c.name == club_name),
+            None
         )
+
+        # If the no club is found with the given name, raise an error.
+        if club_uuid is None:
+            raise ValidationError(f'No club found with the name: {club_name}!')
 
         # Create a new Team object.
         new_team = Team(
@@ -208,7 +213,7 @@ class TeamLL:
                     return team
 
                 # If the player to remove is not in the team
-                except ValidationError as exc:
+                except ValueError as exc:
                     raise ValidationError("Player not in team") from exc
 
         raise ValidationError("Team not found")
