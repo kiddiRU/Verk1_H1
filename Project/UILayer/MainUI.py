@@ -7,11 +7,11 @@ Collaborator: Sindri Freysson <Sindrif25@ru.is>
 File that holds the main state machine.
 """
 
-from UILayer.UtilityUI import UtilityUI
 from UILayer.AdminUI import AdminUI
+from UILayer.MenuOptions import MenuOptions
 from UILayer.PlayerUI import PlayerUI
 from UILayer.SpectateUI import SpectateUI
-from UILayer.MenuOptions import MenuOptions
+from UILayer.UtilityUI import UtilityUI
 
 
 class MainUI:

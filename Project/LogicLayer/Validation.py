@@ -10,8 +10,9 @@ A validation file that takes inn all info that would need to be validated
 
 from datetime import date, time
 from typing import Callable
-from Models import ValidationError
+
 from DataLayer import DataLayerAPI
+from Models import ValidationError
 
 Validator = Callable[[str], str | date]
 

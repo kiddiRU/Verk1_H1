@@ -7,11 +7,12 @@ Author: Andri Már Kristjánsson <andrik25@ru.is>
 File that holds all the menus that the player can access
 """
 
-from UILayer.MenuOptions import MenuOptions
-from UILayer.UtilityUI import UtilityUI
-from UILayer.Drawer import Drawer
 from LogicLayer import LogicLayerAPI
 from Models.Player import Player
+
+from UILayer.Drawer import Drawer
+from UILayer.MenuOptions import MenuOptions
+from UILayer.UtilityUI import UtilityUI
 
 
 class PlayerUI:

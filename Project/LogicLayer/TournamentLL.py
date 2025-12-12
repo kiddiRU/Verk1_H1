@@ -9,10 +9,12 @@ Functions for tournament logic.
 '''
 
 import random
+from datetime import date, datetime, time, timedelta
 from uuid import uuid4
-from datetime import date, time, timedelta, datetime
-from Models import Team, Tournament, Server, Match, ValidationError
+
 from DataLayer import DataLayerAPI
+from Models import Match, Server, Team, Tournament, ValidationError
+
 from LogicLayer import MatchLL, TeamLL
 
 

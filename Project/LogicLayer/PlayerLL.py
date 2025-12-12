@@ -9,8 +9,10 @@ Functions for player logic.
 """
 
 from uuid import uuid4
+
 from DataLayer import DataLayerAPI
-from Models import Player, Team, Match, Tournament
+from Models import Match, Player, Team, Tournament
+
 from LogicLayer import MatchLL, TeamLL
 
 
@@ -205,7 +207,7 @@ class PlayerLL:
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
-    def save_player(self, player_handle: str | None = None):
+    def save_player(self, player_handle: str | None = None) -> str | None:
         """ Takes in a player handle and saves them as the current active user.
 
         :param player_handle:
