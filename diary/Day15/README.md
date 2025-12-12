@@ -5,16 +5,16 @@
 ### On site: Yes
 
 ## Elmar
-### Time:
-### On site:
+### Time: 9:40
+### On site: Yes
 
 ## Ísak Elí
-### Time:
-### On site:
+### Time: 9:40
+### On site: Yes
 
 ## Kristinn Hrafn
-### Time:
-### On site:
+### Time: 9:30
+### On site: Yes
 
 ## Kristján Hagalín
 ### Time:
@@ -38,7 +38,7 @@ Last day....
 
 # Evening meeting (Diary)
 ## State of project:
-
+- Fixed Bug - Team members Max is 4, should 5 -> The bug was caused by corrupted data. 
 ## State of group: 
 
 ## Divisions:
