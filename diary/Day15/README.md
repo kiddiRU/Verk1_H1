@@ -1,27 +1,27 @@
 # Diary, 2025-12-12
 
 ## Andri Már
-### Time: 9:00
+### Time: 9:00 - 23:30
 ### On site: Yes
 
 ## Elmar
-### Time: 9:40
+### Time: 9:40 - 23:30
 ### On site: Yes
 
 ## Ísak Elí
-### Time: 9:40
+### Time: 9:40 - 23:30
 ### On site: Yes
 
 ## Kristinn Hrafn
-### Time: 9:30
+### Time: 9:30 - 23:30
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time: 11:20
+### Time: 11:20 - 23:30
 ### On site: Yes
 
 ## Sindri Freysson
-### Time: 8:30
+### Time: 8:30 - 23:30
 ### On site: Yes
 
 # Morning meeting (Briefing)
