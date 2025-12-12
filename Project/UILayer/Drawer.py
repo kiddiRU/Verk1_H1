@@ -81,7 +81,9 @@ class Drawer():
                                                     ██
                                                   ▀▀▀
 {self.reset}
-{self.banner_border}{self.line}{self.reset} \n\n"""
+{self.banner_border}{self.line}{self.reset}"""
+
+        banner += self.bold + "\nMade By 'Sindri Fan Club'\n\n" + self.reset
 
         return banner
 
@@ -177,6 +179,7 @@ class Drawer():
 
             table += self.reset + self.line
             table += self.options_color + "Choose Action:" + self.reset
+
 
         # Makes the table bold and returns it
         return self.table_color + table + self.reset
