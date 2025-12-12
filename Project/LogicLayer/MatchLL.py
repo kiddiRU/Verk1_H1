@@ -13,19 +13,19 @@ from DataLayer import DataLayerAPI
 
 
 class MatchLL:
-    """ Match Logic"""
+    """ Match logic."""
 
     def __init__(self) -> None:
         pass
 
     def create_match(
-            self,
-            tournament_id: str,
-            date: date,
-            time: time,
-            team_1: str,
-            team_2: str
-            ) -> Match:
+        self,
+        tournament_id: str,
+        date: date,
+        time: time,
+        team_1: str,
+        team_2: str
+    ) -> Match:
         """
         First takes in the info that has already been validated
         and creates a uuid for the match,
@@ -52,6 +52,7 @@ class MatchLL:
             The uuid of the other team playing in the match
         :type team_2: str
         """
+        # Create a new Match object with a unique UUID.
         uuid: str = str(uuid4())
         new_match: Match = Match(
             uuid,
@@ -61,6 +62,8 @@ class MatchLL:
             team_1,
             team_2
             )
+
+        # Send the new Match object to be stored, and return it.
         DataLayerAPI.store_match(new_match)
         return new_match
 
@@ -145,11 +148,11 @@ class MatchLL:
                 return match
 
     def get_match(
-            self,
-            tournament_id: str,
-            match_team1_uuid: str,
-            match_team2_uuid: str
-            ) -> Match | str:
+        self,
+        tournament_id: str,
+        match_team1_uuid: str,
+        match_team2_uuid: str
+    ) -> Match | str:
         """Gets tournament uuid and both teams uuid's
 
         Loads all matches and searches for a match that has

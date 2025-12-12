@@ -65,6 +65,7 @@ class Tournament:
 
         :rtype: None
         """
+
         ACTIVE = "ACTIVE"
         INACTIVE = "INACTIVE"
         ARCHIVED = "ARCHIVED"

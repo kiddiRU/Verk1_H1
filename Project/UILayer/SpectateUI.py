@@ -8,6 +8,8 @@ File that holds all the menus that the spectator can access
 """
 
 from Models.Tournament import Tournament
+from Models.Player import Player
+from Models.Team import Team
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -142,6 +144,11 @@ class SpectateUI:
 
         # Retrieve the handle of the player selected previously
         player_handle: str | None = LogicLayerAPI.save_player()
+        player: Player | str = LogicLayerAPI.get_player_by_handle(
+            str(player_handle))
+        if not isinstance(player, Player):
+            return MenuOptions.SPECTATE_TEAMS
+
         if player_handle is None:
             return MenuOptions.SPECTATE_SCREEN
 
@@ -157,6 +164,7 @@ class SpectateUI:
         info: list[str] = [
             "Team: "
             + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
+            "URL: " + str(player.url),
             "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
             "Points: " + LogicLayerAPI.get_player_points(player_handle),
         ]
@@ -331,6 +339,7 @@ class SpectateUI:
 
         # Remembers what player chosen in spectate_players
         team_name: str | None = LogicLayerAPI.save_player()
+        team: Team = LogicLayerAPI.get_team_by_name(str(team_name))
         if team_name is None:
             return MenuOptions.SPECTATE_SCREEN
 
@@ -344,6 +353,8 @@ class SpectateUI:
 
         # Stats: Clubs, Wins and Points
         info_stats: list[str] = [
+            "ASCII Art: " + str(team.ascii_art),
+            "URL: " + str(team.url_homepage),
             "Club: " + LogicLayerAPI.get_team_club(team_name),
             "Wins: " + LogicLayerAPI.get_team_wins(team_name),
             "Points: " + LogicLayerAPI.get_team_points(team_name),

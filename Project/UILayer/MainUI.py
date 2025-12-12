@@ -40,6 +40,7 @@ class MainUI:
             MenuOptions.SPECTATE_SCREEN: self._spectate_ui.spectate_screen,
             MenuOptions.ONION: self._player_ui.onion,
             MenuOptions.MASTERPIECE: self._player_ui.masterpiece,
+            MenuOptions.SINDRI_FC: self._player_ui.sindi_fc,
             # ------------------ Admin Paths ------------------
             MenuOptions.ADMIN_SCREEN: self._admin_ui.admin_screen,
             MenuOptions.CREATE_TOURNAMENT: self._admin_ui.create_tournament,

@@ -89,3 +89,4 @@ class MenuOptions(StrEnum):
     # Secret
     ONION = "Onion"
     MASTERPIECE = "Masterpiece"
+    SINDRI_FC = "Sindri Fan Club"

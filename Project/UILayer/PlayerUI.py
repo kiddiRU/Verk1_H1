@@ -120,6 +120,8 @@ class PlayerUI:
                 return MenuOptions.ONION
             case "Carlos Ray":
                 return MenuOptions.MASTERPIECE
+            case "Sindri Fan Club":
+                return MenuOptions.SINDRI_FC
 
         # If handle not found, show error message.
         message: str = f"{login_handle} Not Found!"
@@ -525,8 +527,11 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_url = input(
-                f"{self.input_color}Enter Team URL (Optional):\n{self.reset}"
+                f"""{self.input_color}Enter Team URL Or 'q' To Cancel:
+(Optional){self.reset}\n"""
             )
+            if team_url == "q":
+                return user_path[-2]
             self.tui.save_input(f"Team Url: {team_url}")
             print(self.tui.table(menu, user_path, [], options))
             con = self.utility.prompt_choice(["c", "b"])
@@ -538,10 +543,13 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_ascii = input(
-                f"""{self.input_color}Enter A Single Line Team ASCII Art
-                (Optional):\n"""
+                f"{self.input_color}Enter A Single Line Team ASCII Art" +
+                """Or 'q' To Cancel:
+(Optional)\n"""
                 f"{self.reset}"
             )
+            if team_ascii == "q":
+                return user_path[-2]
             self.tui.save_input(f"Team ASCII Art: {team_ascii}")
             print(self.tui.table(menu, user_path, [], options))
             con = self.utility.prompt_choice(["c", "b"])
@@ -553,8 +561,11 @@ class PlayerUI:
         while team_club not in club_names:
             print(self.tui.table(menu, user_path, info, {}, message))
             team_club = input(
-                f"{self.input_color}Choose A Club To Join:\n{self.reset}"
+                f"{self.input_color}Choose A Club To Join" +
+                f"Or 'q' To Cancel:{self.reset}\n"
             )
+            if team_club == "q":
+                return user_path[-2]
             if team_club not in club_names:
                 message = f"{team_club} Does Not Exist Or Is Not Available"
             else:
@@ -1159,7 +1170,7 @@ Enter New Phone Number Or 'q' To Cancel:
         options: dict[str, str] = {"c": "Continue"}
         message: str = ""
 
-        # Get team member info
+        # Get team members exept for the captain
         for member_uuid in team_members:
             member_player: Player | str = LogicLayerAPI.get_player_by_uuid(
                 member_uuid)
@@ -1248,13 +1259,31 @@ Enter New Phone Number Or 'q' To Cancel:
             MenuOptions.MY_TEAM_NOT_EMPTY,
             MenuOptions.LEAVE_TEAM,
         ]
-        info: list[str] = []
+
         options: dict[str, str] = {"Y": "Yes", "N": "No"}
         message: str = f"Are You Sure You Want To Leave {team}?"
 
         # Captain leaving
         if rank == "Captain":
             if number_of_players > 1:
+
+                info: list[str] = [
+                    f"- - - -{team}- - - -",
+                    f"{self.underscore + 'Rank:'} \t \t Handle:{self.reset}",
+                ]
+
+                # Get team members exept for the captain
+                for member_uuid in team_members:
+                    member_player: Player | str = (
+                        LogicLayerAPI.get_player_by_uuid(member_uuid))
+                    if isinstance(member_player, Player):
+                        _, member_rank = (
+                            LogicLayerAPI.get_player_team_and_rank(
+                                member_player.handle))
+                        if member_rank != "Captain":
+                            info.append(
+                                f"{member_rank} \t \t {member_player.handle}")
+
                 # Select new captain
                 message = f"Select a new captain before leaving {team}"
                 print(self.tui.table(menu, user_path, info, {}, message))
@@ -1303,7 +1332,7 @@ Do You Want To Try Again? Y/N:"""
                 f"If You Leave, the team {team} will no longer be accessible\n"
                 "Are You Sure You Want To Leave? Y/N"
             )
-            print(self.tui.table(menu, user_path, info, options, message))
+            print(self.tui.table(menu, user_path, [], options, message))
             choice: str = self.utility.prompt_choice(["y", "n"])
             final_options: dict[str, str] = {"c": "Continue"}
             if choice == "y" and isinstance(current_player, Player):
@@ -1311,20 +1340,20 @@ Do You Want To Try Again? Y/N:"""
                     current_login_handle, current_player)
                 message = "You Have Successfully Left The Team!"
                 print(self.tui.table(
-                    menu, user_path, info, final_options, message))
+                    menu, user_path, [], final_options, message))
                 self.utility.prompt_choice(["c"])
                 return MenuOptions.PLAYER_SCREEN
 
         # Non-captain leaving and confirmation
         self.tui.clear_saved_data()
-        print(self.tui.table(menu, user_path, info, options, message))
+        print(self.tui.table(menu, user_path, [], options, message))
         choice: str = self.utility.prompt_choice(["y", "n"])
         final_options = {"c": "Continue"}
 
         if choice == "n":
             message = "Operation Canceled"
             print(self.tui.table(
-                menu, user_path, info, final_options, message))
+                menu, user_path, [], final_options, message))
             self.utility.prompt_choice(["c"])
             return MenuOptions.MY_TEAM_NOT_EMPTY
 
@@ -1332,7 +1361,7 @@ Do You Want To Try Again? Y/N:"""
             LogicLayerAPI.remove_player(current_login_handle, current_player)
 
         message = "You Have Successfully Left The Team!"
-        print(self.tui.table(menu, user_path, info, final_options, message))
+        print(self.tui.table(menu, user_path, [], final_options, message))
         self.utility.prompt_choice(["c"])
         return MenuOptions.PLAYER_SCREEN
 
@@ -1532,3 +1561,62 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
 
         print("\033[31m" + "Deleting File And System" + "\033[0m")
         return MenuOptions.QUIT
+
+    def sindi_fc(self) -> MenuOptions:
+        """Just a photo of our amazing group leader
+
+        :return:
+            MenuOptions: The next screen to navigate to"""
+
+        print("""
+                                           %%%%%%%%
+                                  %%%=+:==#%%%%%%%%%####
+                                %%%%%*: .-*#%%%%%%%%%%%###*
+                              %%%%%%%%%%%######%%%%%%%%#%####
+                           %%%%%%%%%%%%%%%%%%%%%#%%%%%%%%%%#**#
+                          %%%%%%%%%%%:      +%%%%%%%%%####***#*
+                          %%%%%%=                .%%##########*#
+                          %%%%==%%-.                  %#########
+                          %%%%%%%                        =%#####
+                          %%%%. .+%%%#+=   ......           ####
+                           %.%+..      .      . .         .  ##
+                         % %*...:----=--=-:               . . #
+                         %==-*#+=++****+=--::      :---=:     -
+                           %%#:..-+#*=:.:.    . .=-======-
+                        %%%%%%*#%%%%+=+++=+***+++++   ====
+                        %* %%%%**.*%#-====-   :-=+*+++==-:
+                      =%=# %%#%=+ %%%-::=--:-==-==+=+++===- .---
+                       %   %%%%%%%%%:::--====+++++-=======----::+
+                           %%%%%+%%=:::-:====++*++========--:--:
+                          %%%%+%%%#===-::=================--:.-=
+                           %%%%%% %*.  =:-++++++++========---:-
+                           %%%%%%%%%*:::--=***++++========---=
+                           %%%%%%%%%%===-==+****+++=======-
+                           %%%%%%%%#::::==+++***+++++======
+        % =-:..+           %%%%%:%%%#-:..  -=++++++=++=====
+    %#.                    %    %%#++++==---=****+++++++==
+                #      *%-+-+=%%*#%%+++**+++=+******+++===
+     =::        .   :    -%%%%%%%%#**+==+++++++****++++==-+
+     #::         .           %%%%%#+++====+++******++==--:+*
+     %--         .   .%       %%%%%#+=++++++******++=--:.+**+
+     %--         - %          %%%%#%%*******###*++=-:::.+###*+++
+      ::         -%          %%%%%%%%%%%%%%%%#*=--:::::#***#+**+=*+
+      -=         %%%%%%%%%%%%%%%%*::-*####*=--------=*#######+*+=**-       #%%%
+    %%%+..+%%%%%%%%%%%%-:=%%%%%+%%-.:-+##**+=-----:%*#*###*%%=##:-+-     :%%%%%
+ %%%%%%%%%%%%%%%%%%% .:=%%%%*##.%%=::--+*%%%%#+==*%%:%##%%%##%%#%-++     .*%%%%
+%%%%%%%%%%%%%%%%%% :.-%%%%*+*%%-%%-.::--+#%%%%%%%%%=..+= -.%%+%%%%++     ..%%%%
+%%%%%%%%%%#%%%%%. .+-%%%*=+*%%%#%# .::--=+#%%%%%%%#+-%#:-%-=%%:-%%%#   ....%%%%
+%%%%%%%%%#%%%% ...#%%%%%%%%%%%%%%*+:.::--=%%#%%%#**%%%+-%%+*%%%%%%%%* ...::-%%%
+%%#%%%%#%%%%+  :+%%%%%%%%%%%%%%%%#%+:..:%*%%%%%+%%%%%%+%%%*+%%%%%%%%%..:::--=%%
+%#%%%%%%%%%  .= %%%%%%%%%%%%%%%%%%%%*  #%%%%%#%%%%%%%**%%%%*%%%%%%%%%+.::----%%
+%%%%%%%%%%  .:*%%%%#%%%%%%%%%%%%%%%%%*-%%%%%%%%%%%%%#+%%%%%#%%%%%%%%%%::---==+%
+%%%%%%%%*:..+%%%%%%%%#%%%%%%%%%%%%%%%%#+%%%%%%%%%%%#*#%%%%%%%%%%%%%%%%%:-=-+++#
+%%%%%%%-  :.%%%%%%*%#*#%%%%%%##%%%%%%%#=+#%%%%%%%%%*+%%%%%%%%%%%%%%%%%%*-===++*
+%%%%%%-..  %%%%%%%%%%+%%%%%%%*#%%%%%%%%+=*#%%%%%%%%++%%%%%%%%%%%%%%%%%%%--=+***
+%%%%%* :: %%%%%%%%*=%%%%%%%%#*%%%%%%%%===**%%%%%%%#++%%%%%%%%%%%%%%%%%%%#-=+**#
+%%%%%  : %%%%%%%%%+%%%%%%%%%%##%%%%%%%==+*%%%%%%%%#+#%%%%%%%%%#%%%%%%%%%%==+*##
+%%%% .- %%%%%%%%%#*%%%%%%%%#%%%%%%%%%%==**%%%%%%%%*+%%%%%%%%%%%%%%%%%%%%%%++*##
+""")
+
+        input()
+        return MenuOptions.START_SCREEN

@@ -47,7 +47,6 @@ class TeamLL:
         '''
         self._match_logic = match_logic
 
-    # TODO comment
     def create_team(
         self, name: str,
         team_captain: Player,
@@ -55,12 +54,34 @@ class TeamLL:
         url: str,
         ascii_art: str
     ) -> Team:
-        '''
-        Takes in the teams name, its captain, club, url and ascii art.
+        '''Creates a new team, sends it to be
+        stored and returns the new Team object.
 
-        Creates a new Team object,
-        sends it the data layer to be stored and returns it.
+        :param name:
+            The name of the team.
+        :type name: str
+
+        :param team_captain:
+            The object of the player creating the team.
+        :type team_captain: Player
+
+        :param club_name:
+            The name of teams club.
+        :type club_name: str
+
+        :param url:
+            The teams URL.
+        :type url: str
+
+        :param ascii_art:
+            The teams ASCII art.
+        :type ascii_art: str
+
+        :return:
+            A new Team object.
+        :rtype: Team
         '''
+        # Gets a list of all players that are in teams.
         teams: list[Team] = DataLayerAPI.load_teams()
         players_in_teams: list[str] = [
             uuid for t in teams for uuid in t.list_player_uuid
@@ -76,19 +97,20 @@ class TeamLL:
         Validation.validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
 
-        # TODO No club is in the list, dont hard code the uuid in.
+        # Get the the UUID of the club with the given name.
         clubs: list[Club] = DataLayerAPI.load_clubs()
-        club_uuid = next(
-            (c.uuid for c in clubs if c.name == club_name),
-            'b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa'
+        club_uuid: str | None = next(
+            c.uuid for c in clubs if c.name == club_name
         )
 
+        # Create a new Team object.
         new_team = Team(
             uuid, name,
             [team_captain.uuid], team_captain.uuid, club_uuid,
             None, url, ascii_art
         )
 
+        # Send the new Team object to be stored, and return it.
         DataLayerAPI.store_team(new_team)
         return new_team
 
@@ -351,8 +373,8 @@ class TeamLL:
             tour_final_match: Match = matches_list[-1]
 
             # gets the winning and losing teams
-            winner: str = tour_final_match.winner
-            loser: str = tour_final_match.losing_team
+            winner: str | None = tour_final_match.winner
+            loser: str | None = tour_final_match.losing_team
 
             # if the winning team is the wanted team
             if winner == team_uuid:
@@ -404,8 +426,10 @@ class TeamLL:
         teams: list[Team] = DataLayerAPI.load_teams()
 
         # Finds the team with the given name.
-        # TODO fix code?
-        team: Team | None = next((t for t in teams if t.name == name), None)
+        team: Team | None = next(
+            (t for t in teams if t.name == name),
+            None
+        )
 
         # Raises an error if team isn't found.
         if team is None:
@@ -413,7 +437,6 @@ class TeamLL:
 
         return team
 
-    # TODO comment
     def get_team_by_uuid(self, uuid: str) -> Team:
         '''Gets a Team object by its UUID.
 
@@ -425,9 +448,11 @@ class TeamLL:
             The object of the team with the given UUID.
         :rtype: Team
         '''
+        # Get an object of the team with the given UUID.
         teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.uuid == uuid), None)
 
+        # If no team is found, raise an error.
         if team is None:
             raise ValidationError(f'No team found with the UUID: {uuid}')
 
