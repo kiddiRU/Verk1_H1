@@ -987,7 +987,7 @@ def get_match(
     team1_uuid: str,
     team2_uuid: str
 ) -> Match | str:
-    """Finds the match of two teams competing in a tounrnament.
+    """Finds the match of two teams competing in a tournament.
 
     :param tournament_uuid:
         The UUID of the tournament the teams are competing in.
