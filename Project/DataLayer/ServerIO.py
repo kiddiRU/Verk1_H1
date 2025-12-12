@@ -17,6 +17,7 @@ def store_server(server: Server) -> None:
 
     :param server:
         The server object to store.
+    :type server: Server
     """
     # Changes object Server into a dictionary mapping attributes to keys.
     data = server.__dict__
@@ -46,6 +47,7 @@ def load_server() -> list[Server]:
 
     :returns:
         The list of servers.
+    :rtype: list[Server]
     """
     # Reads the JSON file containing servers and stores it as a dictionary.
     try:
@@ -77,9 +79,11 @@ def update_server(uuid: str, updated_server: Server) -> None:
 
     :param uuid:
         uuid to look up the server to update.
+    :type uuid: str
 
     :param updated_server:
         The server object to update the server to.
+    :type updated_server: Club
     """
     # Reads the JSON file containing server and stores it as a dictionary.
     try:

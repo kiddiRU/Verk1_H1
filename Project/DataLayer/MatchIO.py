@@ -18,6 +18,7 @@ def store_match(match: Match) -> None:
 
     :param match:
         The match object to store.
+    :type match: Match
     """
     # Changes object Match into a dictionary mapping attributes to keys.
     data = match.__dict__
@@ -47,6 +48,7 @@ def load_match() -> list[Match]:
 
     :returns:
         The list of matches.
+    :rtype: list[Match]
     """
     # Reads the JSON file containing matches and stores it as a dictionary.
     try:
@@ -89,9 +91,11 @@ def update_match(uuid: str, updated_match: Match) -> None:
 
     :param uuid:
         uuid to look up the match to update.
+    :type uuid: str
 
     :param updated_match:
         The match object to update the match to.
+    :type updated_match: Match
     """
     # Reads the JSON file containing matches and stores it as a dictionary.
     try:

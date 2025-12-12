@@ -18,6 +18,7 @@ def store_tournament(tournament: Tournament) -> None:
 
     :param tournament:
         The tournament object to store.
+    :type tournament: Tournament
     """
     # Changes object tournament into a dictionary, mapping attributes to keys
     data = tournament.__dict__
@@ -49,6 +50,7 @@ def load_tournaments() -> list[Tournament]:
 
     :returns:
         The list of tournaments.
+    :rtype: list[Tournament]
     """
     # Reads the JSON file containing tournaments and stores it as a dictionary
     try:
@@ -99,9 +101,11 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
 
     :param uuid:
         uuid to look up the tournament to update.
+    :type uuid: str
 
     :param updated_tournament:
         The tournament object to update the tournament to.
+    :param updated_tournament: Tournament
     """
     # Reads the JSON file containing tournaments adn stores it as a dictionary
     try:

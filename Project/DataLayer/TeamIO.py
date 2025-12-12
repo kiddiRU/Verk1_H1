@@ -17,6 +17,7 @@ def store_team(team: Team) -> None:
 
     :param team:
         The team object to store.
+    :type team: Team
     """
     # Changes object team into a dictionary mapping attributes to keys.
     data = team.__dict__
@@ -46,6 +47,7 @@ def load_teams() -> list[Team]:
 
     :returns:
         The list of teams.
+    :rtype: list[Team]
     """
     # Reads the JSON file containing teams and stores it as a dictionary.
     try:
@@ -77,9 +79,11 @@ def update_team(uuid: str, updated_team: Team) -> None:
 
     :param uuid:
         uuid to look up the team to update.
+    :type uuid: str
 
     :param updated_team:
         The team object to update the team to.
+    :type updated_team: Team
     """
     # Reads the JSON file containing teams and stores it as a dictionary.
     try:

@@ -17,6 +17,7 @@ def store_player(player: Player) -> None:
 
     :param player:
         The player object to store.
+    :type player: Player
     """
     # Changes object player into a dictionary mapping attributes to keys.
     data = player.__dict__
@@ -46,6 +47,7 @@ def load_players() -> list[Player]:
 
     :returns:
         The list of players.
+    :rtype: list[Player]
     """
     # Reads the JSON file containing players and stores it as a dictionary.
     try:
@@ -77,9 +79,11 @@ def update_player(uuid: str, updated_player: Player) -> None:
 
     :param uuid:
         uuid to look up player to update.
+    :type uuid: str
 
     :param updated_player:
         The player object to update the player to.
+    :param updated_player: Player
     """
     # Reads the JSON file containing players and stores it as a dictionary.
     try:

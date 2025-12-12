@@ -17,6 +17,7 @@ def store_club(club: Club) -> None:
 
     :param club:
         The club object to store.
+    :type club: Club
     """
     # Changes object club into a dictionary mapping attributes to keys.
     data = club.__dict__
@@ -46,6 +47,7 @@ def load_club() -> list[Club]:
 
     :returns:
         The list of clubs.
+    :rtype: list[Club]
     """
     # Reads the JSON file containing clubs and stores it as a dictionary.
     try:
@@ -77,9 +79,11 @@ def update_club(uuid: str, updated_club: Club) -> None:
 
     :param uuid:
         uuid to look up the club to update.
+    :type uuid: str
 
     :param updated_club:
         The club object to update the team to.
+    :type updated_club: Club
     """
     # Reads the JSON file containing clubs and stores it as a dictionary.
     try:

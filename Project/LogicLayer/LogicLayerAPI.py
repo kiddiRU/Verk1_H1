@@ -33,7 +33,7 @@ team_logic.set_match_logic(match_logic)
 # Validation API
 
 
-def validate(attr: str, value: str, name_type: str):
+def validate(attr: str, value: str, name_type: str) -> str | date:
     """Validates all attributes that need validating.
 
     :param attribute:
@@ -49,9 +49,11 @@ def validate(attr: str, value: str, name_type: str):
         -   tournament_time
         -   color
         -   number
+    :type attribute: str
 
     :param value:
         The value that needs validating.
+    :type vlaue: str
 
     :param name_type:
         Only used for attribute handle, this determines the type of handle
@@ -61,11 +63,13 @@ def validate(attr: str, value: str, name_type: str):
         -   TEAM
         -   TOURNAMENT
         -   CLUB
+    :type name_type: str
 
     :returns:
         Returns the same value back if it's valid, otherwise it raises a
         ValidationError. The only exception is when you call with date
         attribute, in that case it will return date object if it's valid.
+    :rtype: str | date
     """
     return Validation.validate_attr(attr, value, name_type)
 
@@ -761,15 +765,15 @@ def change_match_winner(
 def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
     """Gets a list of teams playing in a tournament.
 
-        :param tournament_name:
-            The name of tournament to get teams from.
-        :type tournament_name: str
+    :param tournament_name:
+        The name of tournament to get teams from.
+    :type tournament_name: str
 
-        :return:
-            Returns a list of team objects playing in the tournament with the
-            given name.
-        :rtype: list[Team]
-        """
+    :return:
+        Returns a list of team objects playing in the tournament with the
+        given name.
+    :rtype: list[Team]
+    """
     return tournament_logic.get_teams_from_tournament_name(tournament_name)
 
 
@@ -957,9 +961,11 @@ def get_club_by_name(club_name: str) -> Club:
 
     :param club_name:
         The name of the club to find.
+    :type club_name: str
 
     :returns:
         The club found.
+    :rtype: Club
     """
     return club_logic.get_club_by_name(club_name)
 
