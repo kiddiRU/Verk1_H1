@@ -9,12 +9,12 @@
         "venue": "Sun 102 Reykjavik",
         "email": "prof.esport@ru.is",
         "phone_number": "123-4567",
-        "status": "INACTIVE",
+        "status": "ACTIVE",
         "list_servers": [
-            "NoServer",
-            "NoServer",
-            "NoServer",
-            "NoServer"
+            "a7eb109e-7b81-49b9-a274-eaaf6d12d4f5",
+            "e7a173ed-69e7-41ea-ae4c-7d86c99818ad",
+            "e6667c66-6f0a-4a72-acad-cf094fdff17b",
+            "68c31959-310b-4c1f-bb10-30c3e6f6bf44"
         ],
         "teams_playing": [
             "3c4b2f6f-d4f4-469d-801f-7e590aaa4edc",

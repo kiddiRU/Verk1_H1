@@ -257,6 +257,7 @@ def validate_home_address(home_address: str) -> str:
 def validate_phone_number(phone_number: str) -> str:
     """Validates input to a valid phone number
 
+    - Check the length of the number
     - Checks if there is a dash in the string
     - Splits the string by the dash
     - Checks that both parts are all numbers and that
@@ -273,6 +274,10 @@ def validate_phone_number(phone_number: str) -> str:
     :rtype: str
     """
     phone_number = phone_number.strip()
+
+    # Checks the length of the phone number
+    if len(phone_number) != 8:
+        raise ValidationError("Invalid phone number")
 
     # Checks if a dash is in the string and splits it by the dash
     if "-" in phone_number:
