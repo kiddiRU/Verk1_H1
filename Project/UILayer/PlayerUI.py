@@ -177,9 +177,9 @@ class PlayerUI:
         self.tui.clear_saved_data()
 
         # Gets the users information
-        # Temprarily saves the data
+        # Temporarily saves the data
         # So that the user can see their inputs before saving the registration
-        # Allowes the user to cancel the registration an any time by inputing q
+        # Allowed the user to cancel the registration by inputting q
 
         # ---------------------- NAME ----------------------
         con: str = "b"
@@ -200,7 +200,7 @@ class PlayerUI:
             if con == "b":
                 self.tui.discard_last_input()
 
-        # ---------------------- DATE OF BIRT ----------------------
+        # ---------------------- DATE OF BIRTH ----------------------
         con = "b"
         while con == "b":
             print(self.tui.table(menu, user_path, info))
@@ -381,7 +381,7 @@ class PlayerUI:
         club = LogicLayerAPI.get_team_club(team)
 
         # If the Player is not in a team
-        # this will set the variables to the approptiate info
+        # this will set the variables to the appropriate info
         if not team:
             team = None
             rank = "Player"
@@ -502,7 +502,7 @@ class PlayerUI:
         message: str = "By Creating A Team You Are Assigned As The Captain!"
 
         # Get the team information from the user
-        # Temporaraly save the info
+        # Temporarily save the info
         # Allows the user to cancel the team creation whenever by pressing q
 
         # ---------------------- TEAM NAME ----------------------
@@ -614,7 +614,7 @@ class PlayerUI:
         options: dict[str, str] = {"b": "Back"}
         message: str = "You Are Already In A Team!"
 
-        # Shows a mesage letting the user know that they are in a team
+        # Shows a message letting the user know that they are in a team
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
@@ -688,8 +688,8 @@ class PlayerUI:
         unchanged_message: str = (
             "(Leave Field Empty If You Want To Leave Them Unchanged)")
 
-        # Gets new info from user and temporaraly saves it
-        # untill user selects to fully save the changes
+        # Gets new info from user and temporarily saves it
+        # until user selects to fully save the changes
         # ---------------------- NAME ----------------------
         con: str = "b"
         while con == "b":
@@ -1070,7 +1070,7 @@ Enter New Phone Number Or 'q' To Cancel:
 
         info: list[str] = handles_not_team_format
 
-        # Check if the team is full or ther are no players to add
+        # Check if the team is full or there are no players to add
         if not handles_not_team or len(team_members) >= 5:
             message = "No Players To Add To Team Or Team Is Full"
             self.tui.clear_saved_data()
@@ -1170,7 +1170,7 @@ Enter New Phone Number Or 'q' To Cancel:
         options: dict[str, str] = {"c": "Continue"}
         message: str = ""
 
-        # Get team members exept for the captain
+        # Get team members except for the captain
         for member_uuid in team_members:
             member_player: Player | str = LogicLayerAPI.get_player_by_uuid(
                 member_uuid)
@@ -1272,7 +1272,7 @@ Enter New Phone Number Or 'q' To Cancel:
                     f"{self.underscore + 'Rank:'} \t \t Handle:{self.reset}",
                 ]
 
-                # Get team members exept for the captain
+                # Get team members except for the captain
                 for member_uuid in team_members:
                     member_player: Player | str = (
                         LogicLayerAPI.get_player_by_uuid(member_uuid))
@@ -1372,7 +1372,7 @@ Do You Want To Try Again? Y/N:"""
             MenuOptions: The next menu to navigate to
         """
 
-        # Well ogres arent white, are they?
+        # Well ogres aren't white, are they?
         shrek: str = "\033[32m"
         reset: str = "\033[0m"
 
@@ -1476,8 +1476,8 @@ This is how we do it
         :returns:
             MenuOptions: The next screen to navigate to"""
 
-        # This is just to have a bit of fun cus my sanity is fullt drained
-        # His hat is a bit messed up because it broke the 79 character limmit
+        # This is just to have a bit of fun cus my sanity is fully drained
+        # His hat is a bit messed up because it broke the 79 character limit
         print("""
                                      MMMMMMMMMMM
                                   MMMMMMMMMMMMMMMMM
@@ -1532,7 +1532,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
 
 
             """)
-        # Unfortunatly could not find any ascii art of a 2 liter pepsi bottle
+        # Unfortunately could not find any ascii art of a 2 liter pepsi bottle
         print("""
             ⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀
@@ -1553,7 +1553,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
         )
 
         # You better like the art
-        # Or else you dont have the privlage of using this program
+        # Or else you dont have the privilege of using this program
         if like.lower() == "y":
             print("YAY")
             input("BYE BYE ⊂(◉‿◉)つ")
@@ -1562,7 +1562,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMM
         print("\033[31m" + "Deleting File And System" + "\033[0m")
         return MenuOptions.QUIT
 
-    def sindi_fc(self) -> MenuOptions:
+    def sindri_fc(self) -> MenuOptions:
         """Just a photo of our amazing group leader
 
         :return:
