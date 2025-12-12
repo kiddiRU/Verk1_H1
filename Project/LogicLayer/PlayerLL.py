@@ -30,7 +30,7 @@ class PlayerLL:
         '''
         self._team_logic = team_logic
         self._match_logic = match_logic
-        self.player: str
+        self.player: str | None = None
 
     def create_player(
         self,

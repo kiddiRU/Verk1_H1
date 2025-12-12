@@ -368,15 +368,16 @@ def validate_date(date_input: str) -> date:
             valid_date = date(date_list[0], date_list[1], date_list[2])
             return valid_date
 
-        except (ValueError, IndexError):
-            raise ValidationError("Invalid date")
+        except (ValueError, IndexError) as exc:
+            raise ValidationError("Invalid date") from exc
 
     except ValueError:
         raise ValidationError("Invalid date")
 
 
 def validate_time(time_input: str) -> time:
-    """Validates input to a valid time
+    """Validates input to a valid time, checks if
+    time is format is correct HH:MM (12:00)
 
     Checks if input can be parsed to a valid pair of Hours and Minuets
     - Checks if the string can be split by the colon (:)
@@ -392,7 +393,6 @@ def validate_time(time_input: str) -> time:
         otherwise an error is raised
     :rtype: time
     """
-    """Checks if time is format is correct HH:MM (12:00)"""
     time_input = time_input.strip()
 
     # Checks if the string can be split by the colon (:)
