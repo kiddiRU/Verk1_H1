@@ -1,6 +1,7 @@
 # HR e-Sport Extravaganza
 
 ## General guide to running this program.
+Youtube link: https://youtu.be/QDJU7cx0wmI
 
 ### Imports
 All imports are in the Python Standard Library thus no requirements.txt is
@@ -40,7 +41,7 @@ standard terminal and executing "python3 main.py" or however you interpret
 python programs on your system.
 
 ### Admin
-Admins can create and host tournaments aswell as create clubs, to login in as
+Admins can create and host tournaments as well as create clubs, to login in as
 admin you open the login screen and when prompted for a handle, you input 
 "admin".
 
