@@ -222,5 +222,49 @@
         "in_tournament": null,
         "url_homepage": "https://example.com/pepsimax_overflow",
         "ascii_art": null
+    },
+    "8dc24d54-0def-4474-84bb-6f492f4a7398": {
+        "uuid": "8dc24d54-0def-4474-84bb-6f492f4a7398",
+        "name": "The Loafing Purrfections",
+        "list_player_uuid": [
+            "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+            "0cf35482-b97e-470c-aa26-c1dacc644381",
+            "ad76d722-06bf-4d8e-830d-0cd18910e6ff",
+            "8abe3edd-1a72-4e9d-804e-d51800d6bd06",
+            "d0e359f7-22cc-430a-9dc3-b2035304c575"
+        ],
+        "team_captain_uuid": "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+        "club_uuid": "e4a2b64d-f6f1-4f6a-8a52-a012d196a35f",
+        "in_tournament": null,
+        "url_homepage": "https//:wikihow.com/how-to-loaf",
+        "ascii_art": "><((((>"
+    },
+    "e56368da-18cf-45e1-bc01-cb1e21520d52": {
+        "uuid": "e56368da-18cf-45e1-bc01-cb1e21520d52",
+        "name": "TheMuppets",
+        "list_player_uuid": [
+            "9bd6f0e5-4ff4-4881-96cb-4328343495be",
+            "3750ccc0-235f-4ca7-b74d-b857f1037ee3",
+            "27b0ac44-dd42-4aa2-901d-547cee4cafeb"
+        ],
+        "team_captain_uuid": "9bd6f0e5-4ff4-4881-96cb-4328343495be",
+        "club_uuid": "bfc4aed2-8aa6-410f-98a7-a4263da0cef4",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
+    },
+    "61853a34-12be-4fa9-b803-f1eef1e368a1": {
+        "uuid": "61853a34-12be-4fa9-b803-f1eef1e368a1",
+        "name": "DocHopper",
+        "list_player_uuid": [
+            "3e98c2ec-2bbe-4a32-8543-a30021a7b00e",
+            "6889d62e-ef3f-4983-b9f0-5b12eccf11e5",
+            "96679dec-e0be-428b-8d14-c4352059a364"
+        ],
+        "team_captain_uuid": "3e98c2ec-2bbe-4a32-8543-a30021a7b00e",
+        "club_uuid": "bfc4aed2-8aa6-410f-98a7-a4263da0cef4",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
     }
 }

@@ -19,5 +19,12 @@
         "club_color": "BLUE",
         "country": "Iceland",
         "home_town": "Reykjavik"
+    },
+    "bfc4aed2-8aa6-410f-98a7-a4263da0cef4": {
+        "uuid": "bfc4aed2-8aa6-410f-98a7-a4263da0cef4",
+        "name": "Disney",
+        "club_color": "blue",
+        "country": "United States",
+        "home_town": "California"
     }
 }

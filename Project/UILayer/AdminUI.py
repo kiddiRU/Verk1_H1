@@ -846,8 +846,11 @@ class AdminUI:
 
         # Prompt admin for team name
         team_to_add: str = input(
-            self.message_color + "Input Team Name: \n" + self.reset
+            self.message_color +
+            "Input Team Name Or 'q' To Cancel:\n" + self.reset
         )
+        if team_to_add.lower() == "q":
+            return user_path[-2]
 
         # Validate team exists
         try:

@@ -543,7 +543,7 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_ascii = input(
-                f"{self.input_color}Enter A Single Line Team ASCII Art" +
+                f"{self.input_color}Enter A Single Line Team ASCII Art " +
                 """Or 'q' To Cancel:
 (Optional)\n"""
                 f"{self.reset}"
@@ -557,8 +557,8 @@ class PlayerUI:
                 self.tui.discard_last_input()
 
         # ---------------------- TEAM CLUB ----------------------
-        message = ""
-        while team_club not in club_names:
+        con = "b"
+        while con == "b":
             print(self.tui.table(menu, user_path, info, {}, message))
             team_club = input(
                 f"{self.input_color}Choose A Club To Join " +
