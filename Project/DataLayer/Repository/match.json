@@ -1,1 +1,22 @@
-{}
+{
+    "0bf69edb-f574-49fe-99ae-30f49d742fca": {
+        "uuid": "0bf69edb-f574-49fe-99ae-30f49d742fca",
+        "tournament_id": "5d01bfb6-7799-4227-8583-627e64204c3c",
+        "match_date": "2025-11-27",
+        "match_time": "10:00:00",
+        "team_1": "e56368da-18cf-45e1-bc01-cb1e21520d52",
+        "team_2": "61853a34-12be-4fa9-b803-f1eef1e368a1",
+        "winner": "e56368da-18cf-45e1-bc01-cb1e21520d52",
+        "winning_players": [
+            "9bd6f0e5-4ff4-4881-96cb-4328343495be",
+            "3750ccc0-235f-4ca7-b74d-b857f1037ee3",
+            "27b0ac44-dd42-4aa2-901d-547cee4cafeb"
+        ],
+        "losing_team": "61853a34-12be-4fa9-b803-f1eef1e368a1",
+        "losing_players": [
+            "3e98c2ec-2bbe-4a32-8543-a30021a7b00e",
+            "6889d62e-ef3f-4983-b9f0-5b12eccf11e5",
+            "96679dec-e0be-428b-8d14-c4352059a364"
+        ]
+    }
+}
