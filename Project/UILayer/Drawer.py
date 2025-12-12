@@ -43,6 +43,8 @@ class Drawer():
     def clear(self) -> None:
         """Clears the terminal
 
+        Runs the appropriate clear command depending on the users system
+
         :returns:
             Nothing
         """
@@ -52,6 +54,8 @@ class Drawer():
 
     def banner(self) -> str:
         """Creates the banner
+
+        Creates a colored banner with the name of our system
 
         :returns:
             A tripple quoted format string that holds the colored banner

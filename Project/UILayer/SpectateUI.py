@@ -133,7 +133,7 @@ class SpectateUI:
         Display the selected player's statistics.
 
         Shows the team, wins, and points of the player previously selected
-        in the spectate menu. User can press any key to return to the
+        in the spectate menu. User can press enter to return to the
         Spectate Players screen.
 
         :return: The next menu option to navigate to.
@@ -168,7 +168,7 @@ class SpectateUI:
         print(self.tui.table(menu, user_path, info, options, message))
 
         # Wait for user input before returning
-        input("Press Any Key To Go Back")
+        input("Press Enter To Go Back")
         return MenuOptions.SPECTATE_SCREEN
 
     def spectate_clubs(self) -> MenuOptions:
@@ -264,7 +264,7 @@ class SpectateUI:
 
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
-        input("Press Any Key To Go Back")
+        input("Press Enter To Go Back")
 
         return MenuOptions.SPECTATE_SCREEN
 
@@ -323,7 +323,7 @@ class SpectateUI:
         Display detailed statistics for a selected team.
 
         Shows the team's club, wins, points, members, and tournament history.
-        Spectator can view this information and press any key to return.
+        Spectator can view this information and press enter to return.
 
         :return: The next menu option to navigate to.
         :rtype: MenuOptions
@@ -375,7 +375,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options))
 
-        input("Press Any Key To Go Back")
+        input("Press Enter To Go Back")
         return MenuOptions.SPECTATE_SCREEN
 
     def spectate_tournaments(self) -> MenuOptions:
@@ -552,7 +552,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info, options, message))
 
-        input("Press Any Key To Go Back")
+        input("Press Enter To Go Back")
 
         return MenuOptions.SPECTATE_SCREEN
 
@@ -596,7 +596,7 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        input("Press Any Key To Go Back")
+        input("Press Enter To Go Back")
 
         return MenuOptions.SPECTATE_SCREEN
 
@@ -725,6 +725,6 @@ class SpectateUI:
         self.tui.clear_saved_data()
         print(self.tui.table(menu, user_path, info))
 
-        input("Press Any Key To Go Back")
+        input("Press Enter To Go Back")
 
         return MenuOptions.TEAMS_IN_TOURNAMENT

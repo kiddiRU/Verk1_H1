@@ -602,7 +602,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{idx:<4}{team.name}")
+            info.append(f"{f"{idx}.":<4}{team.name}")
 
         # Options for next screen
         options: dict[str, str] = {
@@ -676,7 +676,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{idx:<4}{team.name}")
+            info.append(f"{f"{idx}.":<4}{team.name}")
 
         options: dict[str, str] = {
             "1": "Add Team",
