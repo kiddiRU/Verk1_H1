@@ -714,8 +714,8 @@ class AdminUI:
         # Retrieve tournament and current teams
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
+            team.name
+            for team in LogicLayerAPI.get_teams_from_tournament_name(
                 tournament_name
             )
         ]
@@ -723,7 +723,7 @@ class AdminUI:
 
         # Get teams that are not already in the tournament
         teams_not_in_tournament: list[str] = [
-            x for x in all_teams if x not in teams_in_tournament
+            team for team in all_teams if team not in teams_in_tournament
         ]
         unique_names: list[str] = teams_not_in_tournament
 
@@ -818,8 +818,8 @@ class AdminUI:
         # Retrieve tournament and current teams
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
+            team.name
+            for team in LogicLayerAPI.get_teams_from_tournament_name(
                 tournament_name
             )
         ]
