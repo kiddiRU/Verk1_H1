@@ -5,16 +5,16 @@
 \contentsline {section}{\numberline {3}User Group Analysis}{6}{section.3}%
 \contentsline {section}{\numberline {4}Use Cases}{7}{section.4}%
 \contentsline {section}{\numberline {5} Class Diagrams}{16}{section.5}%
-\contentsline {section}{\numberline {6}UI-Design}{21}{section.6}%
-\contentsline {subsection}{\numberline {6.1}UI-Tree}{21}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Tasks}{24}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Happy path}{24}{subsection.6.3}%
-\contentsline {section}{\numberline {7}conclusion}{30}{section.7}%
-\contentsline {section}{\numberline {8}Appendix}{31}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Archives}{31}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Publish Tournament}{31}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Search Bar}{31}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}Logic to use for multiple instances}{31}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}States (For diagrams)}{31}{subsection.8.5}%
-\contentsline {subsection}{\numberline {8.6}Player/Team Notes}{31}{subsection.8.6}%
+\contentsline {section}{\numberline {6}UI-Design}{30}{section.6}%
+\contentsline {subsection}{\numberline {6.1}UI-Tree}{30}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Tasks}{33}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Happy path}{33}{subsection.6.3}%
+\contentsline {section}{\numberline {7}conclusion}{39}{section.7}%
+\contentsline {section}{\numberline {8}Appendix}{40}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Archives}{40}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Publish Tournament}{40}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Search Bar}{40}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Logic to use for multiple instances}{40}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}States (For diagrams)}{40}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Player/Team Notes}{40}{subsection.8.6}%
 \contentsfinish 
