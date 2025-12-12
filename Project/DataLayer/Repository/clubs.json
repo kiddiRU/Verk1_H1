@@ -1,30 +1,23 @@
 {
-    "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa": {
-        "uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
+    "d60a0aa8-f464-402c-8a48-d1f48892d4d5": {
+        "uuid": "d60a0aa8-f464-402c-8a48-d1f48892d4d5",
         "name": "NoClub",
         "club_color": "RED",
         "country": "",
         "home_town": ""
     },
-    "269fcfc5-f629-4921-af37-0c592373717c": {
-        "uuid": "269fcfc5-f629-4921-af37-0c592373717c",
+    "8f6c2127-2fff-45bf-a302-24fa543644d2": {
+        "uuid": "8f6c2127-2fff-45bf-a302-24fa543644d2",
         "name": "Matrix",
         "club_color": "GREEN",
         "country": "Canada",
         "home_town": "Toronto"
     },
-    "506657f8-0e54-42a7-ba1a-be401dc9b39b": {
-        "uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
+    "c7cfc2b3-72fd-4577-be74-56c5687d18f3": {
+        "uuid": "c7cfc2b3-72fd-4577-be74-56c5687d18f3",
         "name": "Tviund",
         "club_color": "BLUE",
         "country": "Iceland",
         "home_town": "Reykjavik"
-    },
-    "f96115cc-12ee-4a88-9f81-606725b5ab5e": {
-        "uuid": "f96115cc-12ee-4a88-9f81-606725b5ab5e",
-        "name": "Sindri Fan Club",
-        "club_color": "red",
-        "country": "Iceland",
-        "home_town": "K\u00f3pavogur"
     }
 }
