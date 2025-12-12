@@ -13,10 +13,15 @@ FILE_PATH = "DataLayer/Repository/players.json"
 
 
 def store_player(player: Player) -> None:
+    """Stores new players in a JSON file to be fetched later.
+
+    :param player:
+        The player object to store.
+    """
     # Changes object player into a dictionary mapping attributes to keys.
     data = player.__dict__
     
-    # Reads json file containing players and stores the contents as a
+    # Reads JSON file containing players and stores the contents as a
     # dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as player_file:
@@ -28,7 +33,7 @@ def store_player(player: Player) -> None:
     # object for easy lookup.  
     file_content[player.uuid] = data
     
-    # Writes the updated file content back into the json file.
+    # Writes the updated file content back into the JSON file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as player_file:
             json.dump(file_content, player_file, indent=4)
@@ -36,7 +41,12 @@ def store_player(player: Player) -> None:
         raise ValidationError("Could not write into player file")
 
 def load_players() -> list[Player]:
-    # Reads the json file containing players and stores it as a dictionary.
+    """Gets a list of all players stored with the store_player function.
+
+    :returns:
+        The list of players.
+    """
+    # Reads the JSON file containing players and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as player_file:
             file_content = dict(json.load(player_file))
@@ -57,7 +67,18 @@ def load_players() -> list[Player]:
 
 
 def update_player(uuid: str, updated_player: Player) -> None:
-    # Reads the json file containing players and stores it as a dictionary.
+    """Updates a player stored with the store_player function.
+
+    Looks for a player stored with the store_player function which
+    has the same uuid as the given uuid, then updates that player.
+
+    :param uuid:
+        uuid to look up player to update.
+
+    :param updated_player:
+        The player object to update the player to.
+    """
+    # Reads the JSON file containing players and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as player_file:
             file_content = dict(json.load(player_file))

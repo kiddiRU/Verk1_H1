@@ -9,16 +9,17 @@ File that holds the UtilityUI class
 which holds functions used in multiple places
 """
 
-from Models.Player import Player
+from datetime import date
+
+from LogicLayer import LogicLayerAPI
+from LogicLayer.LogicLayerAPI import validate
+
+from Models import ValidationError
 from Models.Club import Club
+from Models.Match import Match
+from Models.Player import Player
 from Models.Team import Team
 from Models.Tournament import Tournament
-from Models.Match import Match
-
-from UILayer.MenuOptions import MenuOptions
-from LogicLayer.LogicLayerAPI import validate
-from Models import ValidationError
-from LogicLayer import LogicLayerAPI
 
 
 class UtilityUI:
@@ -29,18 +30,20 @@ class UtilityUI:
         self.message_color: str = "\033[36m"
         self.reset: str = "\033[0m"
 
-    def _prompt_choice(self, valid_choices: list[str]) -> str:
+    def prompt_choice(self, valid_choices: list[str]) -> str:
         """
-        Helper function for allowed choices for the user
+        Helper function that checks for allowed choices
 
-        Args:
-            valid_choices (list[str]): A list of valid choices for the user to input
-
-        Returns:
-            str: _description_
+        :param valid_choices: A list of strings that are allowed to input
+        :type valid_choices: list[str]
+        :return: The choice if it is allowed
+        :rtype: str
         """
+
+        # Make valid choices into lowercase
         valid_choices_lower: list[str] = [x.lower() for x in valid_choices]
 
+        # Loop through until input is valid
         while True:
             choice: str = input("> ").strip().lower()
             if choice in valid_choices_lower:
@@ -51,176 +54,173 @@ class UtilityUI:
             )
 
     # Created by Sindri
-    def _input_info(self, message: str, attribute: str, info_type: str) -> str:
+    def input_info(self, message: str, attribute: str, info_type: str) -> str:
         """
-        Helper function that repeats input until it is valid or navigation word is entered
+        Helper function that repeats input until it is valid
+        or navigation word is entered
+
         :param message: message to display - "Enter Your name"
         :param attribute: attribute of a model class - "name"
         :param info_type: information type - "PLAYER"
         :return: Repeats until the input is valid or navigation word is entered
+        :rtype: str
         """
         while True:
             try:
                 print(self.message_color + message + self.reset)
+                # Get input and quit if it is "q"
                 choice: str = input()
-                if choice == "q":
+                if choice.lower() == "q":
                     return ""
-                valid: str | None = validate(attribute, choice, info_type)
+
+                # Validate the input before returning
+                valid: str | None | date = validate(
+                    attribute, choice, info_type
+                )
                 return str(valid)
+
             except ValidationError as e:
+                # Display error message and retry
                 print(self.error_color + str(e) + self.reset)
                 continue
 
-    # Created by Sindri Freysson
-    def prompt_builder(options: list[str]) -> dict[int, str]:
-        """
-        Helper function that takes in list of MenuOptions and returns an enumerated dictionary of options
-        Use dict.update after building if you want to add extra options to the menu
-        :param options: List of strings representing the options that the user can use
-        :return: Dictionary of options -> string
-        """
-        prompt_dict: dict[int | str, str] = {}
-        for i, choice in enumerate(options, start=1):
-            prompt_dict[i] = choice
-        return prompt_dict
-
-    # Created by Sindri Freysson
-    def prompt_choice(self, valid_choices: dict[int | str, str]) -> str:
-        """
-        Takes in a list of valid choices and returns a string representing the choice
-        :param self:
-        :param valid_choices: Dictionary of valid choices that the user can input
-        :return: Returns a string of the allowed choice
-        """
-        while True:
-            choice: str = input("> ").strip().lower()
-            if choice in valid_choices:
-                return valid_choices[choice]
-            print(
-                self.error_color + "Not a valid option try again" + self.reset
-            )
-
-    def _input_change(
+    def input_change(
         self, message: str, attribute: str, info_type: str
     ) -> str:
         """
-        Helper function that repeats input until it is valid or navigation word is entered
-        :param message: message to display - "Enter Your name"
-        :param attribute: attribute of a model class - "name"
-        :param info_type: information type - "PLAYER"
-        :return: Repeats until the input is valid or navigation word is entered
+        Helper function that repeats input until it is
+        valid or navigation word is entered
+
+        :param message: Message to display - "Enter Your name"
+        :type message: str
+        :param attribute: Attribute of a model class - "name"
+        :type attribute: str
+        :param info_type: Information type - "PLAYER"
+        :type info_type: str
+        :return: Returns the validated input or empty string if 'q' is entered
+        :rtype: str
         """
         while True:
             try:
+                # Display the input message
                 print(self.message_color + message + self.reset)
+                # Get input from user
                 choice: str = input()
-                if choice == "q":
-                    return ""
+
+                # Return if user enters 'q' to navigate back
+                if choice.lower() == "q":
+                    return choice
+
+                # Return if no input is provided
                 if not choice:
                     return choice
-                valid: str | None = validate(attribute, choice, info_type)
+
+                # Validate the input before returning
+                valid: str | None | date = validate(
+                    attribute, choice, info_type
+                )
                 return str(valid)
+
             except ValidationError as e:
+                # Display error message and retry
                 print(self.error_color + str(e) + self.reset)
                 continue
-
-    def screen_not_exist_error(self) -> MenuOptions:
-        """When a screen doesn't exist"""
-        print("Screen doesn't exist")
-        input("Input anything to go back to start: ")
-        return MenuOptions.start_screen
-
-    def show_schedule(self):
-        pass
-
-    # _____________________________ MODULAR DESIGN ___________________________
-
-    def tournaments_name(self) -> list[str]:
-        """
-        Converts list of Tournament objects to a list of Tournament names
-
-        Returns:
-            list[str]: Tournament names
-        """
-        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
-        return [x.name for x in tournaments]
 
     def except_status_tournaments(
         self, tournament_status: Tournament.StatusType
     ) -> list[str]:
         """
-        Returns a list of tournaments that do not have the inputted status
+        Returns the names of all tournaments that do not have the given status.
 
-        Args:
-            tournament_status (Tournament.StatusType): Status that is not supposed to be in the tournament list
+        :param tournament_status: The status to exclude. Possible values are
+            "ACTIVE", "INACTIVE", and "ARCHIVED".
+        :type tournament_status: Tournament.StatusType
+        :return: All tournament names whose status does not match
+        the input.
+        :rtype: list[str]
 
-        Returns:
-            list[str]: list of tournaments without the inputted status
         """
+        # Gets all tournaments and filter out those with the excluded status
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
         return [x.name for x in tournaments if x.status != tournament_status]
 
     def team_names(self) -> list[str]:
         """
-        Converts list of Team objects to a list of Team names
+        Get a list of all team names
 
-        Returns:
-            list[str]: Team names
+        :return: A list of team names
+        :rtype: list[str]
         """
-        team_list: list[Team] = LogicLayerAPI.list_teams()
+
+        # Create a list of team names from Club objects
+        team_list: list[Team] = LogicLayerAPI.list_all_teams()
         return [x.name for x in team_list]
 
-    def club_names(self):
+    def club_names(self) -> list[str]:
         """
-        Converts list of Club objects to a list of Club names
+        Get a list of all club names
 
-        Returns:
-            list[str]: Club names
+        :return: A list of club names
+        :rtype: list[str]
         """
-        clubs: list[Club] = LogicLayerAPI.list_clubs()
+        # Create a list of club names from Club objects
+        clubs: list[Club] = LogicLayerAPI.list_all_clubs()
         return [x.name for x in clubs]
 
     def player_handles(self) -> list[str]:
         """
-        Converts list of Player objects to a list of Player handles
+        Get a list of all player handles
 
-        Returns:
-            list[str]: PLayer handles
+        :return: A list of player handles
+        :rtype: list[str]
         """
-        player_list: list[Player] = LogicLayerAPI.list_players()
+        # Create a list of player handles from Player objects
+        player_list: list[Player] = LogicLayerAPI.list_all_players()
         return [p.handle for p in player_list]
 
     def show_main(self, flag: str) -> list[str]:
         """
-        Modular design to make a list of players, clubs and teams
+        Returns a formatted list of player handles, club names, or team names.
 
-        Args:
-            flag (str): "players", "clubs", "teams"
+        Produces a two-column table layout where each line contains one or
+        two names aligned with fixed-width formatting.
 
-        Returns:
-            list[str]: A list of f-strings for printing
+        :param flag: Determines which model class to list. Possible values are
+            "payers", "clubs", and "teams".
+        :type flag: str
+        :return: A formatted f-string for printing
+        :rtype: list[str]
         """
+
+        # Get which model class to show
         flag_dict = {
             "players": self.player_handles(),
             "clubs": self.club_names(),
             "teams": self.team_names(),
         }
 
-        unique_names: list[str] = flag_dict[flag]
+        # For developers in case of spelling mistake
+        if flag not in flag_dict:
+            return ["Flag is not correct"]
 
+        unique_names: list[str] = flag_dict[flag]  # get all names or handles
         output_list: list[str] = []  # list that holds each line as a f-string
 
         length: int = len(unique_names)
 
+        # Loop through and append each line of the
         for value in range(0, len(unique_names), 2):
-            left = unique_names[value]
-            if value + 1 < length:
+            # Get left side item
+            left: str = unique_names[value]
 
-                right = unique_names[value + 1]
+            if value + 1 < length:
+                # get right side item
+                right: str = unique_names[value + 1]
+
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         return output_list
 
@@ -228,58 +228,151 @@ class UtilityUI:
         self, tournament_status: Tournament.StatusType
     ) -> list[str]:
         """
-        An f-string to show tournaments that do not have the status
+        Returns formatted rows of tournaments that
+        do not have the given status.
 
-        Args:
-            tournament_status (Tournament.StatusType): active, inactive, archived
-
-        Returns:
-            list[str]: a list of f-strings to show tournaments without specific status
+        :param tournament_status: The status to exclude. Possible values are
+            "ACTIVE", "INACTIVE", and "ARCHIVED".
+        :type tournament_status: Tournament.StatusType
+        :return: A list of formatted strings for tournaments without the
+            specified status.
+        :rtype: list[str]
         """
+
+        # Fetch all tournaments from the logic layer
         tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
 
-        output_list: list[str] = []  # list that holds each line as a f-string
+        # Holds each formatted table row
+        output_list: list[str] = []
 
+        # Build a formatted row for each tournament whose status does not match
         for tournament in tournaments:
             if tournament.status == tournament_status:
                 continue
+
             output_list.append(
                 f"{tournament.name:<68}>{tournament.status:^10}|"
             )
+
         return output_list
 
-    def list_matches(self, tournament_uuid: str) -> list[str]:
-        match_list: list[Match] = LogicLayerAPI.get_next_matches(tournament_uuid)
-        output_list: list[str] = []
+    def list_matches(self, tournament_uuid: str, show_all: bool) -> list[str]:
+        """
+        Returns formatted match information for a tournament, showing either
+        all matches or only the upcoming ones.
+
+        :param tournament_uuid: The UUID of the tournament.
+        :type tournament_uuid: str
+        :param show_all: Whether to return all matches or
+        only the next matches.
+        :type show_all: bool
+        :return: A list of formatted strings containing match information.
+        :rtype: list[str]
+        """
+
+        # Chooses the appropriate match list
+        if show_all:
+            match_list: list[Match] = LogicLayerAPI.get_all_matches(
+                tournament_uuid
+            )
+        else:
+            match_list: list[Match] = LogicLayerAPI.get_next_matches(
+                tournament_uuid
+            )
+
+        output_list: list[str] = []  # Holds each formatted match block
+        revealed: str = "To be revealed"
 
         for match in match_list:
+            # Determine the match winner name (None / UUID / Team)
+            match_winner_uuid: str = str(match.winner)
+            if match_winner_uuid != "None":
+                match_winner_team: Team = LogicLayerAPI.get_team_by_uuid(
+                    match_winner_uuid
+                )
+                match_winner_name: str = match_winner_team.name
+            else:
+                match_winner_name: str = match_winner_uuid
 
+            # Skip unrevealed matches
+            if (match.team_1 or match.team_2) == revealed:
+                continue
+
+            # Resolve team objects and names
             match1: Team = LogicLayerAPI.get_team_by_uuid(match.team_1)
             match2: Team = LogicLayerAPI.get_team_by_uuid(match.team_2)
 
             match_name_1: str = match1.name
             match_name_2: str = match2.name
 
-            output_list.append(f"{match_name_1} vs {match_name_2} {str(match.match_time)} {str(match.winner)}")
+            # Add formatted match block
+            output_list.append(
+                f"{80 * '—'}\n"
+                f"{f'Date: {match.match_date}':<79}|\n"
+                f"{f'Match Time: {str(match.match_time)}':<79}|\n"
+                f"{f'Team 1: {match_name_1}':<79}|\n"
+                f"{'vs':<79}|\n"
+                f"{f'Team 2: {match_name_2}':<79}|\n"
+                f"{f'Match Winner: {str(match_winner_name)}':<79}|"
+            )
 
         return output_list
-    
+
     # "Created" by Sindri Freysson
-    # TODO need write doc string
-    def show_filtered(self, object_list: list[Player]|list[Team]|list[Club]) -> list[str]:
-        
-        str_list: list[str] = [x.name for x in object_list]
+    def string_to_table(self, string_list: list[str]) -> list[str]:
+        """
+        A helper function that formats a given list of
+        string into a 2 column table.
+
+        :param string_list: Takes a list of model objects.
+        :type string_list: list[str]
+        :return: A formatted list of strings that when displayed
+        appears as a table.
+        :rtype: list[str]
+        """
         output_list: list[str] = []  # list that holds each line as a f-string
-        length: int = len(str_list)
 
-        for value in range(0, len(str_list), 2):
-            left = str_list[value]
+        length: int = len(string_list)
+
+        # Loop through and append each line of the
+        for value in range(0, len(string_list), 2):
+            # Get left side item
+            left: str = string_list[value]
+
             if value + 1 < length:
+                # get right side item
+                right: str = string_list[value + 1]
 
-                right = str_list[value + 1]
                 output_list.append(f"{left:<39}|{right:<39}|")
 
             else:  # odd number, last item has no pair
-                output_list.append(f"{left:<39}|{" ":<39}|")
+                output_list.append(f"{left:<39}|{' ':<39}|")
 
         return output_list
+
+    def object_to_string(
+        self,
+        object_list: list[Player] | list[Team] | list[Club] | list[Tournament],
+    ) -> list[str]:
+        """
+        Converts a list of model objects into a list
+        of their corresponding names.
+
+        :param object_list: A list containing Player, Team, Club,
+        or Tournament objects.
+        :type object_list: list[Player] | list[Team] |
+        list[Club] | list[Tournament]
+        :return: A list of names or handles extracted from the model objects.
+        :rtype: list[str]
+        """
+
+        str_list: list[str] = []
+
+        # Extract the correct string attribute depending on the model type
+        for obj in object_list:
+            if isinstance(obj, Player):
+                str_list.append(obj.handle)
+            elif hasattr(obj, "name"):  # Teams, Clubs, Tournaments
+                str_list.append(obj.name)
+
+        return str_list

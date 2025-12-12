@@ -12,10 +12,15 @@ from Models import Team, ValidationError
 FILE_PATH = "DataLayer/Repository/teams.json"
 
 def store_team(team: Team) -> None:
+    """Stores new teams in a JSON file to be fetched later.
+
+    :param team:
+        The team object to store.
+    """
     # Changes object team into a dictionary mapping attributes to keys.
     data = team.__dict__
    
-    # Reads json file containing teams and stores the contents as a
+    # Reads JSON file containing teams and stores the contents as a
     # dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
@@ -35,7 +40,12 @@ def store_team(team: Team) -> None:
         raise ValidationError("Could not write into team file.")
 
 def load_teams() -> list[Team]:
-    # Reads the json file containing teams and stores it as a dictionary.
+    """Gets a list of all teams stored with the store_team function.
+
+    :returns:
+        The list of teams.
+    """
+    # Reads the JSON file containing teams and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))
@@ -55,7 +65,18 @@ def load_teams() -> list[Team]:
     return team_list
 
 def update_team(uuid: str, updated_team: Team) -> None:
-    # Reads the json file containing teams and stores it as a dictionary.
+    """Updates a team stored with the store_team function.
+
+    Looks for a team stored with the store_team function which
+    has the same uuid as the given uuid, then updates that team.
+
+    :param uuid:
+        uuid to look up the team to update.
+
+    :param updated_team:
+        The team object to update the team to.
+    """
+    # Reads the JSON file containing teams and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))

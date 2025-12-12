@@ -14,10 +14,15 @@ FILE_PATH = "DataLayer/Repository/match.json"
 
 
 def store_match(match: Match) -> None:
+    """Stores new matches in a JSON file to be fetched later.
+
+    :param match:
+        The match object to store.
+    """
     # Changes object Match into a dictionary mapping attributes to keys.
     data = match.__dict__
 
-    # Reads json file containing matches and stores the contents as a
+    # Reads JSON file containing matches and stores the contents as a
     # dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
@@ -29,7 +34,7 @@ def store_match(match: Match) -> None:
     # object for easy lookup.
     file_content[match.uuid] = data
     
-    # Writes the updated file content back into the json file.
+    # Writes the updated file content back into the JSON file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as match_file:
             json.dump(file_content, match_file, indent=4, default=str)
@@ -38,7 +43,12 @@ def store_match(match: Match) -> None:
 
 
 def load_match() -> list[Match]:
-    # Reads the json file containing matches and stores it as a dictionary.
+    """Gets a list of all matches stored with the store_match function.
+
+    :returns:
+        The list of matches.
+    """
+    # Reads the JSON file containing matches and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
             file_content = dict(json.load(match_file))
@@ -49,7 +59,7 @@ def load_match() -> list[Match]:
     # Each match is stored as a Match model object in the list.
     match_list: list[Match] = []
     for value in file_content.values():
-        # Changes non json storable data types
+        # Changes non JSON storable data types
         # from string back into their original type.
         try:
             value["match_date"] = date.fromisoformat(value["match_date"])
@@ -70,7 +80,18 @@ def load_match() -> list[Match]:
 
 
 def update_match(uuid: str, updated_match: Match) -> None:
-    # Reads the json file containing matches and stores it as a dictionary.
+    """Updates a match stored with the store_match function.
+
+    Looks for a match stored with the store_match function which
+    has the same uuid as the given uuid, then updates that match.
+
+    :param uuid:
+        uuid to look up the match to update.
+
+    :param updated_match:
+        The match object to update the match to.
+    """
+    # Reads the JSON file containing matches and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
             file_content = dict(json.load(match_file))

@@ -4,7 +4,6 @@
         "name": "SegFault Spartans",
         "list_player_uuid": [
             "2cc090bc-2351-4c43-bb08-2f578d26154a",
-            "35e63bfc-3349-4131-b197-c569d71d6b90",
             "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3"
         ],
         "team_captain_uuid": "2cc090bc-2351-4c43-bb08-2f578d26154a",
@@ -187,7 +186,8 @@
         "list_player_uuid": [
             "b855860c-dd67-4f5f-af94-4730fef94e8a",
             "5dbe517b-4715-4f08-aa75-d91bb0d6eae6",
-            "398550f8-bb2b-46da-8527-974e6b5bd0d2"
+            "398550f8-bb2b-46da-8527-974e6b5bd0d2",
+            "150e7677-fd69-4695-84c7-71a1b07fa31b"
         ],
         "team_captain_uuid": "b855860c-dd67-4f5f-af94-4730fef94e8a",
         "club_uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
@@ -200,8 +200,7 @@
         "name": "Undefined Behavior United",
         "list_player_uuid": [
             "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db",
-            "a7012a45-a21d-4efd-80a2-dc4b20f4ff47",
-            "cb99cd0f-e9c8-42c1-a293-1287317f47b3"
+            "a7012a45-a21d-4efd-80a2-dc4b20f4ff47"
         ],
         "team_captain_uuid": "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db",
         "club_uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
@@ -239,12 +238,55 @@
         "uuid": "0e86df13-949f-497d-916d-6aee0e329516",
         "name": "Hello",
         "list_player_uuid": [
-            "150e7677-fd69-4695-84c7-71a1b07fa31b",
             "bc18ed47-6abd-4868-b0ad-b8343b820bac",
-            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+            "b2276050-996a-4c26-a366-4d75682961ba",
+            "a60d5579-1c2b-4f4d-b353-ec6901e74483",
+            "cb99cd0f-e9c8-42c1-a293-1287317f47b3",
+            "fe002490-5473-42f1-a286-9aef6f300799"
         ],
         "team_captain_uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
         "club_uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
+    },
+    "e8ccb2e2-c0bc-4d9b-b1ce-80af3a2ec01e": {
+        "uuid": "e8ccb2e2-c0bc-4d9b-b1ce-80af3a2ec01e",
+        "name": "team",
+        "list_player_uuid": [
+            "35e63bfc-3349-4131-b197-c569d71d6b90"
+        ],
+        "team_captain_uuid": "35e63bfc-3349-4131-b197-c569d71d6b90",
+        "club_uuid": "506657f8-0e54-42a7-ba1a-be401dc9b39b",
+        "in_tournament": null,
+        "url_homepage": "url",
+        "ascii_art": "a"
+    },
+    "07b78ef8-46ad-4159-b962-aecb3529b90c": {
+        "uuid": "07b78ef8-46ad-4159-b962-aecb3529b90c",
+        "name": "FuckersTeam",
+        "list_player_uuid": [
+            "32d89d9f-b555-4311-a104-d8009eec5b76",
+            "f0425fa5-8ab1-42a4-a485-2bbba452127d",
+            "592bd9bc-99c8-473e-af2e-d7ec53fc9897"
+        ],
+        "team_captain_uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
+        "club_uuid": "269fcfc5-f629-4921-af37-0c592373717c",
+        "in_tournament": null,
+        "url_homepage": "",
+        "ascii_art": ""
+    },
+    "c1037242-2aaf-44fc-a57b-2dfc5d248f4a": {
+        "uuid": "c1037242-2aaf-44fc-a57b-2dfc5d248f4a",
+        "name": "TheCats",
+        "list_player_uuid": [
+            "263fd945-fd44-4bf1-aa35-9b8333856786",
+            "fbb82b6f-d88e-4b05-b9c8-691347223735",
+            "ca6e459a-c570-4fec-92c6-b318a001537c",
+            "47810d97-f871-44e6-aa3e-7fd70afa8e21"
+        ],
+        "team_captain_uuid": "263fd945-fd44-4bf1-aa35-9b8333856786",
+        "club_uuid": "f96115cc-12ee-4a88-9f81-606725b5ab5e",
         "in_tournament": null,
         "url_homepage": "",
         "ascii_art": ""

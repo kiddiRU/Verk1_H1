@@ -11,167 +11,192 @@ from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 """ Player API """
 
 def store_player(player: Player) -> None:
-    """
-    Args: Model class Player
-    
-    Store new players in a json file to be fetched later.
+    """Stores new players in a JSON file to be fetched later.
+
+    :param player:
+        The player object to store.
     """
     PlayerIO.store_player(player)
 
 def load_players() -> list[Player]:
-    """
-    Args: None
+    """Gets a list of all players stored with the store_player function.
 
-    Returns a list of all players stored with the store_player function
-    as a model class Player object.
+    :returns:
+        The list of players.
     """
     return PlayerIO.load_players()
 
 def update_player(uuid: str, updated_player: Player) -> None:
-    """
-    Args: uuid and model class Player
+    """Updates a player stored with the store_player function.
 
-    Looks up the player with given uuid and updates them to the given
-    Player object.
+    Looks for a player stored with the store_player function which
+    has the same uuid as the given uuid, then updates that player.
+
+    :param uuid:
+        uuid to look up player to update.
+
+    :param updated_player:
+        The player object to update the player to.
     """
     PlayerIO.update_player(uuid, updated_player)
 
 """ Team API """
 
 def store_team(team: Team) -> None:
-    """
-    Args: Model class Team
+    """Stores new teams in a JSON file to be fetched later.
 
-    Store new teams in a json file to be fetched later.
+    :param team:
+        The team object to store.
     """
     TeamIO.store_team(team)
 
 def load_teams() -> list[Team]:
-    """
-    Args: None
+    """Gets a list of all teams stored with the store_team function.
 
-    Returns a list of all teams stored with the store_team function
-    as a model class Team object.
+    :returns:
+        The list of teams.
     """
     return TeamIO.load_teams()
 
 def update_team(uuid: str, updated_team: Team) -> None:
-    """
-    Args: uuid and model class Team
+    """Updates a team stored with the store_team function.
 
-    Looks up the team with given uuid and updates them to the given
-    Team object.
+    Looks for a team stored with the store_team function which
+    has the same uuid as the given uuid, then updates that team.
+
+    :param uuid:
+        uuid to look up the team to update.
+
+    :param updated_team:
+        The team object to update the team to.
     """
     TeamIO.update_team(uuid, updated_team)
 
 """ Club API """
 
 def store_club(club: Club) -> None:
-    """
-    Args: Model class Club
+    """Stores new clubs in a JSON file to be fetched later.
 
-    Store new clubs in a json file to be fetched later.
+    :param club:
+        The club object to store.
     """
     ClubIO.store_club(club)
 
 def load_clubs() -> list[Club]:
-    """
-    Args: None
+    """Gets a list of all clubs stored with the store_club function.
 
-    Returns a list of all clubs stored with the store_club function
-    as a model class Club object.
+    :returns:
+        The list of clubs.
     """
     return ClubIO.load_club()
 
 def update_club(uuid: str, updated_club: Club) -> None:
-    """
-    Args: uuid and Model class Club
+    """Updates a club stored with the store_club function.
 
-    Looks up the club with given uuid and updates them to the given
-    Club object.
+    Looks for a club stored with the store_club function which
+    has the same uuid as the given uuid, then updates that tournament.
+
+    :param uuid:
+        uuid to look up the club to update.
+
+    :param updated_club:
+        The club object to update the team to.
     """
     ClubIO.update_club(uuid, updated_club)
 
 """ Tournament API """
 
 def store_tournament(tournament: Tournament) -> None:
-    """
-    Args: Model class Tournament
+    """Stores new tournaments in a JSON file to be fetched later.
 
-    Store new tournaments in a json file to be fetched later.
+    :param tournament:
+        The tournament object to store.
     """
     TournamentIO.store_tournament(tournament)
 
 def load_tournaments() -> list[Tournament]:
-    """
-    Args: None
+    """Gets a list of all tournaments stored with the store_tournament
+    function.
 
-    Returns a list of all tournaments stored with the store_tournament function
-    as a Model class Tournament object.
+    :returns:
+        The list of tournaments.
     """
     return TournamentIO.load_tournaments()
 
 def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
-    """
-    Args: uuid and model class Tournament
+    """Updates a tournament stored with the store_tournament function.
 
-    Looks up the Tournament with given uuid and updates them to the given
-    Tournament object.
+    Looks for a tournament stored with the store_tournament function which
+    has the same uuid as the given uuid, then updates that tournament.
+
+    :param uuid:
+        uuid to look up the tournament to update.
+
+    :param updated_tournament:
+        The tournament object to update the tournament to.
     """
     TournamentIO.update_tournament(uuid, updated_tournament)
 
 """ Match API """
 
 def store_match(match: Match) -> None:
-    """
-    Args: Model class Match
+    """Stores new matches in a JSON file to be fetched later.
 
-    Store new matches in a json file to be fetched later.
+    :param match:
+        The match object to store.
     """
     MatchIO.store_match(match)
 
 def load_matches() -> list[Match]:
-    """
-    Args: None
+    """Gets a list of all matches stored with the store_match function.
 
-    Returns a list of all matches stored with the store_match function
-    as a model class Match object.
+    :returns:
+        The list of matches.
     """
     return MatchIO.load_match()
 
 def update_match(uuid: str, updated_match: Match) -> None:
-    """
-    Args: uuid and model class Match
+    """Updates a match stored with the store_match function.
 
-    Looks up the Match with given uuid and updates them to the given
-    Match object.
+    Looks for a match stored with the store_match function which
+    has the same uuid as the given uuid, then updates that match.
+
+    :param uuid:
+        uuid to look up the match to update.
+
+    :param updated_match:
+        The match object to update the match to.
     """
     MatchIO.update_match(uuid, updated_match)
 
 """ Server API """
 
 def store_server(server: Server) -> None:
-    """
-    Args: Model class Server
+    """Stores new servers in a JSON file to be fetched later.
 
-    Store new servers in a json file to be fetched later.
+    :param server:
+        The server object to store.
     """
     ServerIO.store_server(server)
 
 def load_servers() -> list[Server]:
-    """
-    Args: None
-
-    Returns a list of all servers stored with the store_server function
-    as a model class Server object.
+    """Gets a list of all servers stored with the store_server function.
+    
+    :returns:
+        The list of servers.
     """
     return ServerIO.load_server()
 
 def update_server(uuid: str, updated_server: Server) -> None:
-    """
-    Args: uuid and model class Server
+    """Updates the server stored with the store_server function.
 
-    Looks up the server with given uuid and updates them to the given
-    Match object.
+    Looks for a servers stored with the store_server function which
+    has the same uuid as the given uuid, then updates that server.
+
+    :param uuid:
+        uuid to look up the server to update.
+
+    :param updated_server:
+        The server object to update the server to.
     """
     ServerIO.update_server(uuid, updated_server)

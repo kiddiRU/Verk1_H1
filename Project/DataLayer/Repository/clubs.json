@@ -19,5 +19,12 @@
         "club_color": "BLUE",
         "country": "Iceland",
         "home_town": "Reykjavik"
+    },
+    "f96115cc-12ee-4a88-9f81-606725b5ab5e": {
+        "uuid": "f96115cc-12ee-4a88-9f81-606725b5ab5e",
+        "name": "Sindri Fan Club",
+        "club_color": "red",
+        "country": "Iceland",
+        "home_town": "K\u00f3pavogur"
     }
 }

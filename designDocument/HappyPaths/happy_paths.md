@@ -95,7 +95,7 @@
 - User goes back to the admin menu and inputs "2" in prder to manage their tournaments
 <img src="happy_path_images/path_5.3.jpeg" width="50%">
 
-- User is met with a list of all their tournaments and if they are active or unactive and user inputs the name of the tournament they want to manage
+- User is met with a list of all their tournaments and if they are active or inactive and user inputs the name of the tournament they want to manage
 <img src="happy_path_images/path_5.4.jpeg" width="50%">
 
 - User inputs "1" to manage the teams in the tournament
