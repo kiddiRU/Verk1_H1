@@ -1,0 +1,22 @@
+\contentsline {section}{\numberline {1}Requirement List}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Functional Requirements}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Non-functional Requirements}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Use Cases}{4}{section.2}%
+\contentsline {section}{\numberline {3} Class Diagrams}{13}{section.3}%
+\contentsline {section}{\numberline {4}User Group Analysis}{16}{section.4}%
+\contentsline {section}{\numberline {5}UI-Design}{17}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Tasks}{17}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Happy path}{17}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Extra Notes}{25}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Archives}{25}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Tournament}{25}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Team}{25}{subsubsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.2}Publish Tournament}{25}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Search Bar}{25}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Example: Searching for available players for teams}{25}{subsubsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.4}Logic to use for multiple instances}{25}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}States (For diagrams)}{25}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Player/Team Notes}{25}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Json Formatting}{26}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}User Terminal navigation}{26}{subsection.6.8}%
+\contentsfinish 

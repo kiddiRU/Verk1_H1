@@ -203,14 +203,19 @@ class ClubLL:
 
         return str(points)
 
-# Fra utility
 
     def get_club_by_name(self, club_name: str) -> Club:
-        """
-        Takes in club name
+        """Given a name, finds the club with the same name.
+
         looks through all clubs until it finds the right club name
         and returns the teams uuid
         if no team is found an error is raised
+
+        :param club_name:
+            The name of the club to find.
+
+        :returns:
+            The club found.
         """
 
         model_clubs: list[Club] = DataLayerAPI.load_clubs()

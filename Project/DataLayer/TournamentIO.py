@@ -27,7 +27,7 @@ def store_tournament(tournament: Tournament) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
             file_content = dict(json.load(tournament_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read tournament file.")
 
     # Adds the new tournament into the dictionary mapping it's uuid to the
@@ -39,7 +39,7 @@ def store_tournament(tournament: Tournament) -> None:
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as tournament_file:
             json.dump(file_content, tournament_file, indent=4, default=str)
-    except:
+    except Exception:
         raise ValidationError("Could not write into tournament file.")
 
 
@@ -54,7 +54,7 @@ def load_tournaments() -> list[Tournament]:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
             file_content = dict(json.load(tournament_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read tournament file.")
 
     # Creates a list of all teams in the tournament file.
@@ -76,13 +76,17 @@ def load_tournaments() -> list[Tournament]:
                 "%H:%M:%S"
             ).time()
             value["status"] = Tournament.StatusType(value["status"])
-        except:
-            raise ValidationError("Could not change attributes into original data types.")
+        except Exception:
+            raise ValidationError(
+                "Could not change attributes into original data types."
+            )
         # Uses **value to unpack the dictionary into a Tournament model object
         try:
             tournament_list.append(Tournament(**value))
-        except:
-            raise ValidationError("Could not change file content into tournament object.")
+        except Exception:
+            raise ValidationError(
+                "Could not change file content into tournament object."
+            )
 
     return tournament_list
 
@@ -103,7 +107,7 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as tournament_file:
             file_content = dict(json.load(tournament_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read tournament file.")
 
     # Overwrites the object tied to the given uuid to the object
@@ -112,10 +116,10 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
         file_content[uuid] = updated_tournament.__dict__
     else:
         raise ValidationError("Could not find tournament with given uuid.")
-    
+
     # Writes the updated dictionary into the tournament file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as tournament_file:
             json.dump(file_content, tournament_file, indent=4, default=str)
-    except:
+    except Exception:
         raise ValidationError("Could not write into tournament file.")
