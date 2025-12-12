@@ -1,20 +1,20 @@
 {
-    "ad9d533c-2cc0-4f00-9e79-eafc6cd92ec8": {
-        "uuid": "ad9d533c-2cc0-4f00-9e79-eafc6cd92ec8",
+    "8e6cccaa-2c78-4b97-9ad0-22a4a867e261": {
+        "uuid": "8e6cccaa-2c78-4b97-9ad0-22a4a867e261",
         "name": "NoClub",
         "club_color": "RED",
         "country": "",
         "home_town": ""
     },
-    "e4a2b64d-f6f1-4f6a-8a52-a012d196a35f": {
-        "uuid": "e4a2b64d-f6f1-4f6a-8a52-a012d196a35f",
+    "4e7876b4-e368-4592-b8d6-e99e73508350": {
+        "uuid": "4e7876b4-e368-4592-b8d6-e99e73508350",
         "name": "Matrix",
         "club_color": "GREEN",
         "country": "Canada",
         "home_town": "Toronto"
     },
-    "7729d0fb-3146-4de9-ab0e-f0b715481238": {
-        "uuid": "7729d0fb-3146-4de9-ab0e-f0b715481238",
+    "ddbf9261-0d46-4529-a966-4b8aaa2fd244": {
+        "uuid": "ddbf9261-0d46-4529-a966-4b8aaa2fd244",
         "name": "Tviund",
         "club_color": "BLUE",
         "country": "Iceland",

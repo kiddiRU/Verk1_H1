@@ -1,18 +1,1 @@
-{
-    "a7eb109e-7b81-49b9-a274-eaaf6d12d4f5": {
-        "uuid": "a7eb109e-7b81-49b9-a274-eaaf6d12d4f5",
-        "match_in_server": "e802253d-1a62-45a7-b17c-d46b0fd65866"
-    },
-    "e7a173ed-69e7-41ea-ae4c-7d86c99818ad": {
-        "uuid": "e7a173ed-69e7-41ea-ae4c-7d86c99818ad",
-        "match_in_server": "53e50fd2-9d83-482f-9c7e-e13ed14a37ff"
-    },
-    "e6667c66-6f0a-4a72-acad-cf094fdff17b": {
-        "uuid": "e6667c66-6f0a-4a72-acad-cf094fdff17b",
-        "match_in_server": "14df8ab5-967b-4740-b170-69fde94f7942"
-    },
-    "68c31959-310b-4c1f-bb10-30c3e6f6bf44": {
-        "uuid": "68c31959-310b-4c1f-bb10-30c3e6f6bf44",
-        "match_in_server": "3a98c9d9-3292-4ab0-b327-4954747e4bdc"
-    }
-}
+{}
