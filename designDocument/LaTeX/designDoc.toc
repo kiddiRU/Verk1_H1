@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Requirement List}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Functional Requirements}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Non-functional Requirements}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}User Group Analysis}{5}{section.3}%
+\contentsline {section}{\numberline {4}Use Cases}{6}{section.4}%
+\contentsline {section}{\numberline {5} Class Diagrams}{15}{section.5}%
+\contentsline {section}{\numberline {6}UI-Design}{23}{section.6}%
+\contentsline {subsection}{\numberline {6.1}UI-Tree}{23}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Tasks}{26}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Happy path}{26}{subsection.6.3}%
+\contentsline {section}{\numberline {7}conclusion}{32}{section.7}%
+\contentsline {section}{\numberline {8}Appendix}{33}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Archives}{33}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Publish Tournament}{33}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Search Bar}{33}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Logic to use for multiple instances}{33}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}States (For diagrams)}{33}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Player/Team Notes}{33}{subsection.8.6}%
+\contentsfinish 
