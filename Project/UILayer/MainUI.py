@@ -15,7 +15,7 @@ from UILayer.MenuOptions import MenuOptions
 
 
 class MainUI:
-    """Main UI State Machine"""
+    """Main UI state machine controlling all screen transitions."""
 
     def __init__(self) -> None:
         """
@@ -112,8 +112,9 @@ class MainUI:
 
     def run(self) -> None:
         """
-        Loops through user input and returns the user
-        to the corresponding screen
+        Main application loop.
+
+        Handles user input and transitions to the appropriate screen.
         """
 
         while True:
@@ -122,9 +123,9 @@ class MainUI:
 
             # ------------------ Misc Paths ------------------
             # stop when quit
-            elif self.current_screen == MenuOptions.QUIT:
+            elif self.current_screen is MenuOptions.QUIT:
                 print("Quitting Program")
-                exit()
+                break
 
             else:
                 self.current_screen = self.screen_not_exist_error()
