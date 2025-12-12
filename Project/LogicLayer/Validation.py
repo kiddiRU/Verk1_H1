@@ -9,15 +9,18 @@ A validation file that takes inn all info that would need to be validated
 """
 
 from datetime import date, time
+from typing import Callable
 from Models import ValidationError
 from DataLayer import DataLayerAPI
 
+Validator = Callable[[str], str | date]
+
 
 def validate_attr(
-        attribute: str,
-        value: str,
-        name_type: str = ''
-        ) -> str | date:
+    attribute: str,
+    value: str,
+    name_type: str = ''
+) -> str | date:
     """Validates all attributes that need validating.
     :param attribute:
         The type of attribute which needs validating, available options are
@@ -59,28 +62,24 @@ def validate_attr(
                 "String contains characters not in ascii range"
             )
 
-    if attribute == 'name':
-        return validate_name(value)
-    elif attribute == 'date_of_birth':
-        return validate_date(value)
-    elif attribute == 'home_address':
-        return validate_home_address(value)
-    elif attribute == 'email':
-        return validate_email(value)
-    elif attribute == 'phone_number':
-        return validate_phone_number(value)
-    elif attribute == 'handle':
-        return validate_unique_name(value, name_type)
-    elif attribute == 'tournament_date':
-        return validate_tournament_date(value)
-    elif attribute == 'tournament_time':
-        return validate_tournament_time(value)
-    elif attribute == 'color':
-        return validate_color(value)
-    elif attribute == 'number':
-        return validate_number(value)
-    else:
-        raise ValidationError("attribute not found in list")
+    validators: dict[str, Validator] = {
+        'name': validate_name,
+        'date_of_birth': validate_date,
+        'home_address': validate_home_address,
+        'email': validate_email,
+        'phone_number': validate_phone_number,
+        'handle': lambda v: validate_unique_name(v, name_type),
+        'tournament_date': validate_tournament_date,
+        'tournament_time': validate_tournament_time,
+        'color': validate_color,
+        'number': validate_number,
+    }
+
+    validator = validators.get(attribute)
+    if validator is None:
+        raise ValidationError("Attribute not found in list!")
+
+    return validator(value)
 
 
 def validate_unique_name(unique_name: str, type_of_name: str) -> str:
@@ -369,22 +368,21 @@ def validate_date(date_input: str) -> date:
         otherwise an error is raised
     :rtype: date
     """
-    date_input = date_input.strip()
+    # Split the input by '-' into a list of strings.
+    input_date: list[str] = date_input.strip().split('-')
 
-    # Checks if the date can be split by the dashes (-) and are numbers
+    # If input_date contains more than 3 values, raise an error.
+    if len(input_date) != 3:
+        raise ValidationError("Invalid date!")
+
+    # Try to return a valid date.
     try:
-        date_list: list[int] = list(map(int, date_input.split("-")))
+        year, month, day = map(int, input_date)
+        return date(year, month, day)
 
-        # Check if the date is valid
-        try:
-            valid_date = date(date_list[0], date_list[1], date_list[2])
-            return valid_date
-
-        except (ValueError, IndexError) as exc:
-            raise ValidationError("Invalid date") from exc
-
-    except ValueError:
-        raise ValidationError("Invalid date")
+    # Raise an exception in the case of an error.
+    except ValueError as exc:
+        raise ValidationError("Invalid date!") from exc
 
 
 def validate_time(time_input: str) -> time:
@@ -405,22 +403,21 @@ def validate_time(time_input: str) -> time:
         otherwise an error is raised
     :rtype: time
     """
-    time_input = time_input.strip()
+    # Split the input by ':' into a list of strings.
+    input_time = time_input.strip().split(':')
 
-    # Checks if the string can be split by the colon (:)
+    # If input_date contains more than 2 values, raise an error.
+    if len(input_time) != 2:
+        raise ValidationError('Invalid time!')
+
+    # Try to return a valid time.
     try:
-        time_list = list(map(int, time_input.split(":")))
+        hour, minute = map(int, input_time)
+        return time(hour, minute)
 
-        # Checks if the time is valid
-        try:
-            valid_time = time(time_list[0], time_list[1])
-            return valid_time
-
-        except ValueError:
-            raise ValidationError("Invalid time")
-
-    except ValueError:
-        raise ValidationError("Invalid time")
+    # Raise an exception in the case of an error.
+    except ValueError as exc:
+        raise ValidationError("Invalid time") from exc
 
 
 def validate_tournament_date(value: str) -> str:
@@ -494,7 +491,7 @@ def validate_tournament_time(value: str) -> str:
 
     # Checks to make sure begin and end time aren't the same.
     if begin_time == end_time:
-        raise ValidationError("Begin time happens after end time")
+        raise ValidationError("Begin time must be before end time")
 
     return value
 
