@@ -239,7 +239,10 @@
         "name": "Hello",
         "list_player_uuid": [
             "bc18ed47-6abd-4868-b0ad-b8343b820bac",
-            "01af76e7-6baa-496c-90c4-0dfb3a208a95"
+            "b2276050-996a-4c26-a366-4d75682961ba",
+            "a60d5579-1c2b-4f4d-b353-ec6901e74483",
+            "cb99cd0f-e9c8-42c1-a293-1287317f47b3",
+            "fe002490-5473-42f1-a286-9aef6f300799"
         ],
         "team_captain_uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
         "club_uuid": "b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa",
