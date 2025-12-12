@@ -530,7 +530,10 @@ class TournamentLL:
         '''
         # Get an object of the tournament with the given name.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+        tournament: Tournament | None = next(
+            (t for t in tournaments if t.name == name),
+            None
+        )
 
         # If the tournament doesn't exist, raise an error declaring so.
         if tournament is None:
@@ -552,7 +555,10 @@ class TournamentLL:
         # Get an object of the tournament with the given UUIDe.
         # TODO Fix code
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.uuid == uuid), None)
+        tournament: Tournament | None = next(
+            (t for t in tournaments if t.uuid == uuid),
+            None
+        )
 
         # If the tournament doesn't exist, raise an error declaring so.
         if tournament is None:

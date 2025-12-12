@@ -13,12 +13,13 @@ from DataLayer import DataLayerAPI
 from Models import Player, Team, Match, Tournament
 from LogicLayer import MatchLL, TeamLL
 
+
 class PlayerLL:
     ''' Player logic. '''
 
     def __init__(self, team_logic: TeamLL, match_logic: MatchLL) -> None:
         '''Initialize the PlayerLL instance.
-        
+
         :param team_logic:
             The logic layer responsible for team operations and validations.
         :type team_logic: TeamLL
@@ -29,8 +30,10 @@ class PlayerLL:
         '''
         self._team_logic = team_logic
         self._match_logic = match_logic
+        self.player: str
 
-    def create_player(self,
+    def create_player(
+        self,
         name: str,
         date_of_birth: str,
         home_address: str,
@@ -101,8 +104,9 @@ class PlayerLL:
         handle: str,
         url: str
     ) -> Player:
-        '''Takes in a Player object and attribute updates. Applies the updates to
-        the object, sends it to be stored and returns the updated Player object.
+        '''Takes in a Player object and attribute updates. Applies the
+        updates to the object, sends it to be stored and returns the
+        updated Player object.
 
         :param name:
             The players name.
@@ -149,9 +153,12 @@ class PlayerLL:
         # Store and return the updated player.
         DataLayerAPI.update_player(player.uuid, player)
         return player
- 
-    # TODO comment
-    def promote_captain(self, current_player: Player, handle_to_promote: str) -> None: 
+
+    def promote_captain(
+        self,
+        current_player: Player,
+        handle_to_promote: str
+    ) -> None:
         '''Promotes a teams player to its captain.
 
         :param current_player:
@@ -162,35 +169,48 @@ class PlayerLL:
             The handle of the player to promote.
         :type handle_to_promote: str
         '''
+        # Get the captains team.
+        teams: list[Team] = DataLayerAPI.load_teams()
         team_to_edit = next(
-            (t for t in DataLayerAPI.load_teams() if current_player.uuid == t.team_captain_uuid),
+            (t for t in teams if current_player.uuid == t.team_captain_uuid),
             None
         )
 
+        # If no team is found, raise an error.
         if team_to_edit is None:
             raise KeyError('You are not a captain!')
 
+        # Get an object of the player with the given handle.
         players: list[Player] = DataLayerAPI.load_players()
         player_to_promote: Player | None = next(
             (p for p in players if p.handle == handle_to_promote),
             None
         )
 
+        # If no player is found, raise an error.
         if player_to_promote is None:
-            raise KeyError(f'No player found with the handle: {handle_to_promote}')
+            raise KeyError(
+                f'No player found with the handle: {handle_to_promote}'
+            )
 
+        # If the player to promote is not in the captains team, declare so.
         if player_to_promote.uuid not in team_to_edit.list_player_uuid:
             raise KeyError(
                 f'The player \'{handle_to_promote}\' exists, but is not in your team!'
             )
 
+        # Set the player with the given handle as the
+        # captain of the team, and store the update.
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
-    # TODO docstring
     def save_player(self, player_handle: str | None = None):
-        """ Takes in a player handle and saves them as the current active user. """
+        """ Takes in a player handle and saves them as the current active user.
 
+        :param player_handle:
+            The handle of the current player.
+        :type player_handle: str
+        """
         if player_handle is not None:
             self.player = player_handle
 
@@ -198,7 +218,7 @@ class PlayerLL:
 
     def get_player_team_and_rank(self, player_handle: str) -> tuple[str, str]:
         '''Gets a players team and rank.
-        
+
         :param player_handle:
             The players unique handle.
         :type player_handle: str
@@ -237,7 +257,7 @@ class PlayerLL:
         1 point is added.
         If a match is not finished the winning and losing players is none
         and that match is skipped
-        
+
         :param player_handle:
             The player handle for finding the player in won matches
         :type player_handle: str
@@ -263,13 +283,13 @@ class PlayerLL:
     def get_player_points(self, player_handle: str) -> str:
         """Gets the player handle
 
-        First gets the players uuid, 
+        First gets the players uuid,
         Then loads all tournaments and gets a list of all matches in
         the tournament with the tournament uuid,
         Finds the last match of the tournament (Finals) and finds the
         winning and losing players of the match, and if the player is in
         winning players he gets 3 points and one points in the losing players
-        
+
         :param player_handle:
             The player handle to find the total points from tournaments
         :type player_handle: str
@@ -323,13 +343,13 @@ class PlayerLL:
 
     def get_player_by_handle(self, player_handle: str) -> Player | str:
         '''Gets a player object by their handle.
-        
+
         :param player_handle:
             The handle of the player to get.
         :type player_handle: str
         :return:
-            Returns a Player object with the given handle, returns an empty string
-            if the player isn't found.
+            Returns a Player object with the given handle, returns an
+            empty string if the player isn't found.
         :rtype: Player | str
         '''
         # Get list of all stored players, and find the player with the given handle.
@@ -344,7 +364,7 @@ class PlayerLL:
 
     def get_player_by_uuid(self, player_uuid: str) -> Player | str:
         '''Gets a player object by their UUID.
-        
+
         :param player_uuide:
             The UUID of the player to get.
         :type player_uuid: str
@@ -356,7 +376,10 @@ class PlayerLL:
         '''
         # Get list of all stored players, and find the player with the given UUID.
         players: list[Player] = self.list_all_players()
-        player: Player | None = next((p for p in players if p.uuid == player_uuid), None)
+        player: Player | None = next(
+            (p for p in players if p.uuid == player_uuid),
+            None
+        )
 
         # If the no player exists with the given UUID, return an empty string.
         if player is None:
@@ -366,7 +389,7 @@ class PlayerLL:
 
     def player_handle_to_uuid(self, player_handle: str) -> str:
         '''Converts a players unique handle, to their UUID.
-        
+
         :param player_handle:
             The handle of the player.
         :type player_handle: str
@@ -386,7 +409,7 @@ class PlayerLL:
         First loads all team objects,
         Then finds the team object where the players uuid is
         listed in the teams player list
-        
+
         :param player_uuid:
             The players uuid to find his team uuid
         :type player_uuid: str
@@ -408,7 +431,7 @@ class PlayerLL:
     # Created By Ísak
     def get_all_players_not_in_team(self) -> list[Player]:
         """Gets all players that are not apart of any teams
-        
+
         :return: A list of Player objects that are not apart of any teams
         :rtype: list[Player]
         """
