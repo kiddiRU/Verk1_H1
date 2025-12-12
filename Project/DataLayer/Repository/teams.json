@@ -1,1 +1,242 @@
-{}
+{
+    "2f0a282a-87e0-41ee-b0af-13faeff3bd72": {
+        "uuid": "2f0a282a-87e0-41ee-b0af-13faeff3bd72",
+        "name": "SegFault Spartans",
+        "list_player_uuid": [
+            "bb80ac0d-2649-4dab-8f98-c4e61335e1e0",
+            "5da33990-b5c0-435c-983c-2f70d087d2bb",
+            "1ba6371a-9350-405d-a93d-d428db70185d"
+        ],
+        "team_captain_uuid": "bb80ac0d-2649-4dab-8f98-c4e61335e1e0",
+        "club_uuid": "d0f6ea1b-f9fe-46a4-90c4-427e0edc17c7",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/segfault_spartans",
+        "ascii_art": null
+    },
+    "7a9b7dbe-caff-44e7-bd07-866f9dcd28db": {
+        "uuid": "7a9b7dbe-caff-44e7-bd07-866f9dcd28db",
+        "name": "NullPointer Ninjas",
+        "list_player_uuid": [
+            "ba7c2ea9-d1cc-4d54-84f0-be8b6655e6b2",
+            "98d8269c-aef3-4856-8043-9ddc4868c574",
+            "9728d69c-2edd-4d8f-a507-e844ad976abe"
+        ],
+        "team_captain_uuid": "ba7c2ea9-d1cc-4d54-84f0-be8b6655e6b2",
+        "club_uuid": "783e1695-5598-4158-b0ef-baf460c47f75",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/nullpointer_ninjas",
+        "ascii_art": null
+    },
+    "baded4e3-a772-4e41-a0de-aa51f2f32b69": {
+        "uuid": "baded4e3-a772-4e41-a0de-aa51f2f32b69",
+        "name": "OffByOne Offense",
+        "list_player_uuid": [
+            "956b0159-2c8d-4a45-8018-34b85a16854d",
+            "02df2375-02ef-4a2e-aef7-be4aecf96d37",
+            "68ac31e1-6687-464e-a67a-a9ed56022865"
+        ],
+        "team_captain_uuid": "956b0159-2c8d-4a45-8018-34b85a16854d",
+        "club_uuid": "4286dcfc-cf21-4556-b593-83e69946291a",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/offbyone_offense",
+        "ascii_art": null
+    },
+    "6c0877be-e8d3-4984-ac9b-e344d02bd051": {
+        "uuid": "6c0877be-e8d3-4984-ac9b-e344d02bd051",
+        "name": "Pepsi Max Punishers",
+        "list_player_uuid": [
+            "f99cfd83-5c28-4997-ae02-6dd8e83176bb",
+            "eba19be8-c04f-4c9d-b634-35e0aeba9061",
+            "91718634-abe2-4b32-bd20-82102a76f7f1"
+        ],
+        "team_captain_uuid": "f99cfd83-5c28-4997-ae02-6dd8e83176bb",
+        "club_uuid": "d0f6ea1b-f9fe-46a4-90c4-427e0edc17c7",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/pepsimax_punishers",
+        "ascii_art": null
+    },
+    "089c3471-d08e-4adc-99f6-ff4d50f702b2": {
+        "uuid": "089c3471-d08e-4adc-99f6-ff4d50f702b2",
+        "name": "Chuck Norris Fan Club",
+        "list_player_uuid": [
+            "948e9788-c697-482f-b2af-7275d69af4af",
+            "17e4a9f5-3924-458f-82e6-22364929a0cd",
+            "80eef75c-e28c-4adf-9517-608337f3e9dd"
+        ],
+        "team_captain_uuid": "948e9788-c697-482f-b2af-7275d69af4af",
+        "club_uuid": "783e1695-5598-4158-b0ef-baf460c47f75",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/chuck_fan_club",
+        "ascii_art": null
+    },
+    "f5def147-793c-4b5c-a2af-535f897debb1": {
+        "uuid": "f5def147-793c-4b5c-a2af-535f897debb1",
+        "name": "IndentationError Invaders",
+        "list_player_uuid": [
+            "56f30d93-53dd-4d28-9120-ea6734fd2e5e",
+            "78fc64a3-362e-4c4e-a516-9d4db4fedee0",
+            "942e6cc0-2cca-407a-9dc4-c27d4e2147d1"
+        ],
+        "team_captain_uuid": "56f30d93-53dd-4d28-9120-ea6734fd2e5e",
+        "club_uuid": "4286dcfc-cf21-4556-b593-83e69946291a",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/indent_invaders",
+        "ascii_art": null
+    },
+    "32e397f4-3e0f-40a7-b3dc-830c31c7b004": {
+        "uuid": "32e397f4-3e0f-40a7-b3dc-830c31c7b004",
+        "name": "Assembly Avengers",
+        "list_player_uuid": [
+            "08249938-de84-4880-aa4f-918ed22dfd9c",
+            "ce52ca9a-7061-4ae1-821f-1eac3b9e4335",
+            "1cce5a52-b847-4fbb-987b-c4fc681c8749"
+        ],
+        "team_captain_uuid": "08249938-de84-4880-aa4f-918ed22dfd9c",
+        "club_uuid": "d0f6ea1b-f9fe-46a4-90c4-427e0edc17c7",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/assembly_avengers",
+        "ascii_art": null
+    },
+    "80da6714-a5a1-46f0-b4cc-9636910b1ae2": {
+        "uuid": "80da6714-a5a1-46f0-b4cc-9636910b1ae2",
+        "name": "Datalab Dominators",
+        "list_player_uuid": [
+            "50f2ed17-b039-4a21-bebd-8974ce972d8f",
+            "65f09ffe-6186-441d-bb4d-ee050a45c71b",
+            "ca17d2b0-1f33-458d-ad2b-5d3f4f266dc3"
+        ],
+        "team_captain_uuid": "50f2ed17-b039-4a21-bebd-8974ce972d8f",
+        "club_uuid": "783e1695-5598-4158-b0ef-baf460c47f75",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/datalab_dominators",
+        "ascii_art": null
+    },
+    "5066d6b5-e1ea-43ed-af7f-fc47e4b21602": {
+        "uuid": "5066d6b5-e1ea-43ed-af7f-fc47e4b21602",
+        "name": "Bomblab Bombers",
+        "list_player_uuid": [
+            "115c7bc3-5af4-4d11-a5c0-9f364ffffd6a",
+            "696e2806-0f5f-4ad0-a68c-54c71b04d430",
+            "747556db-10dd-40c7-9d78-32a93a18a7aa"
+        ],
+        "team_captain_uuid": "115c7bc3-5af4-4d11-a5c0-9f364ffffd6a",
+        "club_uuid": "4286dcfc-cf21-4556-b593-83e69946291a",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/bomblab_bombers",
+        "ascii_art": null
+    },
+    "20ed4394-8be4-4918-8174-761c30f50d7e": {
+        "uuid": "20ed4394-8be4-4918-8174-761c30f50d7e",
+        "name": "StackOverflow Stackers",
+        "list_player_uuid": [
+            "79f1f635-f9b7-42da-b894-e9d521b772c3",
+            "d0c3da47-33aa-4c73-bad8-38b8de8583d4",
+            "5445114c-6a26-499c-94ae-a8c1a37d0fa6"
+        ],
+        "team_captain_uuid": "79f1f635-f9b7-42da-b894-e9d521b772c3",
+        "club_uuid": "d0f6ea1b-f9fe-46a4-90c4-427e0edc17c7",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/stackoverflow_stackers",
+        "ascii_art": null
+    },
+    "03d4a1e4-bf4a-47be-8db5-a9a0da173d54": {
+        "uuid": "03d4a1e4-bf4a-47be-8db5-a9a0da173d54",
+        "name": "CacheHit Crusaders",
+        "list_player_uuid": [
+            "bd0c1b27-b4bd-4a0b-9eb7-4d316525b6b5",
+            "e40f4e6c-9067-4931-ace5-8ac68473db5f",
+            "797d94c4-7acf-46cb-a4f8-ab2c522b1ef9"
+        ],
+        "team_captain_uuid": "bd0c1b27-b4bd-4a0b-9eb7-4d316525b6b5",
+        "club_uuid": "783e1695-5598-4158-b0ef-baf460c47f75",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/cachehit_crusaders",
+        "ascii_art": null
+    },
+    "67d3f44f-80b6-4946-9857-33091d7cbdcc": {
+        "uuid": "67d3f44f-80b6-4946-9857-33091d7cbdcc",
+        "name": "WhileTrue Tryhards",
+        "list_player_uuid": [
+            "1081e90f-75e0-4c41-ad06-a979ebd22e35",
+            "fabdc23e-a155-47fc-a2ef-4c91a0423a67",
+            "d6339cf1-937d-460e-860d-c97b13be0922"
+        ],
+        "team_captain_uuid": "1081e90f-75e0-4c41-ad06-a979ebd22e35",
+        "club_uuid": "4286dcfc-cf21-4556-b593-83e69946291a",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/whiletrue_tryhards",
+        "ascii_art": null
+    },
+    "0fa9f87b-b336-4bac-b1db-60513dca230a": {
+        "uuid": "0fa9f87b-b336-4bac-b1db-60513dca230a",
+        "name": "Segmentation Foul",
+        "list_player_uuid": [
+            "b1909640-2f08-445b-a93e-b88fdf92aa62",
+            "31423898-c8ae-42f3-a995-73f433dbbbdf",
+            "3ccf66fc-d115-4033-8a3d-9aa1934b2f5d"
+        ],
+        "team_captain_uuid": "b1909640-2f08-445b-a93e-b88fdf92aa62",
+        "club_uuid": "d0f6ea1b-f9fe-46a4-90c4-427e0edc17c7",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/segmentation_foul",
+        "ascii_art": null
+    },
+    "f52807b1-0493-4c6f-9a39-1de524e7100e": {
+        "uuid": "f52807b1-0493-4c6f-9a39-1de524e7100e",
+        "name": "RaceCondition Racers",
+        "list_player_uuid": [
+            "087795cb-08d9-4cbd-8515-78f0b870d933",
+            "64abf333-aa5e-4d2c-8bbb-1afb1e2381a3",
+            "cd6fdeeb-f1a1-4780-83e5-8dbaf9b0354d"
+        ],
+        "team_captain_uuid": "087795cb-08d9-4cbd-8515-78f0b870d933",
+        "club_uuid": "783e1695-5598-4158-b0ef-baf460c47f75",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/racecondition_racers",
+        "ascii_art": null
+    },
+    "be0b9996-3260-46c4-94c4-0b88bbaa5ad9": {
+        "uuid": "be0b9996-3260-46c4-94c4-0b88bbaa5ad9",
+        "name": "Undefined Behavior United",
+        "list_player_uuid": [
+            "31b21911-dfa9-490e-b769-bc4594a2146f",
+            "1fdac7b3-d25b-4b92-af76-d6c324a64345",
+            "1c02dcd2-f994-477b-8274-26f1aaee2ef5"
+        ],
+        "team_captain_uuid": "31b21911-dfa9-490e-b769-bc4594a2146f",
+        "club_uuid": "4286dcfc-cf21-4556-b593-83e69946291a",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/ub_united",
+        "ascii_art": null
+    },
+    "089e2bd8-99b8-4f3d-a484-59ac7858acbf": {
+        "uuid": "089e2bd8-99b8-4f3d-a484-59ac7858acbf",
+        "name": "Pepsi Max Overflow",
+        "list_player_uuid": [
+            "d4a6622b-3397-40e4-ac95-12dec01e669f",
+            "2ae9c60a-9183-408a-ba24-2345412d2c05",
+            "ed556409-ae5f-4705-a952-86d833fc0465"
+        ],
+        "team_captain_uuid": "d4a6622b-3397-40e4-ac95-12dec01e669f",
+        "club_uuid": "d0f6ea1b-f9fe-46a4-90c4-427e0edc17c7",
+        "in_tournament": null,
+        "url_homepage": "https://example.com/pepsimax_overflow",
+        "ascii_art": null
+    },
+    "8dc24d54-0def-4474-84bb-6f492f4a7398": {
+        "uuid": "8dc24d54-0def-4474-84bb-6f492f4a7398",
+        "name": "The Loafing Purrfections",
+        "list_player_uuid": [
+            "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+            "0cf35482-b97e-470c-aa26-c1dacc644381",
+            "ad76d722-06bf-4d8e-830d-0cd18910e6ff",
+            "8abe3edd-1a72-4e9d-804e-d51800d6bd06",
+            "d0e359f7-22cc-430a-9dc3-b2035304c575"
+        ],
+        "team_captain_uuid": "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+        "club_uuid": "e4a2b64d-f6f1-4f6a-8a52-a012d196a35f",
+        "in_tournament": null,
+        "url_homepage": "https//:wikihow.com/how-to-loaf",
+        "ascii_art": "><((((>"
+    }
+}
