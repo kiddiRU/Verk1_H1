@@ -398,7 +398,12 @@ class AdminUI:
         choice_list: list[str] = []
 
         # Get matches for the tournament (only upcoming matches)
-        matches: list[str] = self.utility.list_matches(tournament_uuid, False)
+        try:
+            matches: list[str] = self.utility.list_matches(
+                tournament_uuid, False
+            )
+        except ValidationError:
+            matches: list[str] = []
 
         # Populate options for each match
         for idx, match_str in enumerate(matches, start=1):
@@ -565,33 +570,23 @@ class AdminUI:
         ]
         info: list = [f"- - - - {str(tournament_name)} - - - -"]
 
-        def formatter(key: str, value: str) -> str:
-            """
-            Format a key-value pair into a fixed-width
-            string for table display.
-
-            :param key: The label or field name to display.
-            :param value: The corresponding value to display.
-            :return: A formatted string with the key and value aligned.
-            :rtype: str
-            """
-            front: int = 24  # Width for the key column
-            back: int = 40  # Width for the key column
-            return f"{key:<{front}} {value:<{back}}"
-
         # Add tournament details using the formatter
         info.extend(
             [
-                formatter("Start Date:", str(tournament_object.start_date)),
-                formatter("End Date:", str(tournament_object.end_date)),
-                formatter(
+                self.utility.formatter(
+                    "Start Date:", str(tournament_object.start_date)
+                ),
+                self.utility.formatter(
+                    "End Date:", str(tournament_object.end_date)
+                ),
+                self.utility.formatter(
                     "Start Timeframe:", str(tournament_object.time_frame_start)
                 ),
-                formatter(
+                self.utility.formatter(
                     "End Timeframe:", str(tournament_object.time_frame_end)
                 ),
-                formatter("Venue:", str(tournament_object.venue)),
-                formatter("Email:", str(tournament_object.email)),
+                self.utility.formatter("Venue:", str(tournament_object.venue)),
+                self.utility.formatter("Email:", str(tournament_object.email)),
             ]
         )
 

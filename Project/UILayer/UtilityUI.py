@@ -382,3 +382,17 @@ class UtilityUI:
                 str_list.append(obj.name)
 
         return str_list
+
+    def formatter(self, key: str, value: str) -> str:
+        """
+        Format a key-value pair into a fixed-width
+        string for table display.
+
+        :param key: The label or field name to display.
+        :param value: The corresponding value to display.
+        :return: A formatted string with the key and value aligned.
+        :rtype: str
+        """
+        front: int = 24  # Width for the key column
+        back: int = 40  # Width for the key column
+        return f"{key:<{front}} {value:<{back}}"
