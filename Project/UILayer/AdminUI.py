@@ -248,7 +248,7 @@ class AdminUI:
 
         # List all tournaments that are not archived
         info: list[str] = self.utility.show_tournaments_except_status(
-            Tournament.StatusType.archived
+            Tournament.StatusType.ARCHIVED
         )
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Tournament Not Found!"
@@ -271,7 +271,7 @@ class AdminUI:
 
         # Check if the tournament exists and is not archived
         if find_name in self.utility.except_status_tournaments(
-            Tournament.StatusType.archived
+            Tournament.StatusType.ARCHIVED
         ):
             LogicLayerAPI.save_player(find_name)
 
@@ -284,9 +284,9 @@ class AdminUI:
             # Redirect based on tournament status
             if tournament is None:
                 return MenuOptions.MANAGE_TOURNAMENT
-            if tournament.status == Tournament.StatusType.active:
+            if tournament.status == Tournament.StatusType.ACTIVE:
                 return MenuOptions.MANAGE_ACTIVE_TOURNAMENT
-            if tournament.status == Tournament.StatusType.inactive:
+            if tournament.status == Tournament.StatusType.INACTIVE:
                 return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
 
         # If tournament not found, show message and options
