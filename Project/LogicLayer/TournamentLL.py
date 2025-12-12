@@ -168,6 +168,7 @@ class TournamentLL:
 
         :param uuid:
             The uuid of the tournament to update.
+        :type uuid: str
         """
 
         tournament: Tournament = self.get_tournament_by_uuid(uuid)
@@ -197,6 +198,7 @@ class TournamentLL:
 
         :param uuid:
             The uuid of the tournament that will move to the next round.
+        :type uuid: str
         """
 
         tournament: Tournament = self.get_tournament_by_uuid(uuid)
@@ -265,6 +267,7 @@ class TournamentLL:
 
         :param tournament_name:
             Publishes the tournament with the given name.
+        :type tournament_name: Tournament
         """
         uuid: str = self.tournament_name_to_uuid(name)
 
@@ -430,12 +433,15 @@ class TournamentLL:
 
         :param tournament_uuid:
             The uuid of the tournament which the match belongs to.
+        :type tournament_uuid: str
 
         :param match_uuid:
             The uuid of the match you want to update.
+        :type match_uuid: str
 
         :param team_uuid:
             The uuid of the winner.
+        :type team_uuid: str
         """
 
         tournament: Tournament = self.get_tournament_by_uuid(tournament_uuid)
