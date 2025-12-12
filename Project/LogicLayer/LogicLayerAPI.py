@@ -9,7 +9,14 @@ Logic layer API.
 
 from datetime import date, time
 from Models import Club, Match, Player, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, MatchLL, Validation
+from LogicLayer import (
+    PlayerLL,
+    TeamLL,
+    TournamentLL,
+    ClubLL,
+    MatchLL,
+    Validation
+)
 
 team_logic = TeamLL()
 match_logic = MatchLL()
@@ -345,7 +352,7 @@ def create_team(
     ascii_art: str
 ) -> Team:
     '''Creates a new team, sends it to be
-    stored andreturns the new Team object.
+    stored and returns the new Team object.
 
     :param name:
         The name of the team.
@@ -768,8 +775,7 @@ def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
 
 # TO help create a Tournament
 def to_time(value: str) -> time:
-    """
-    Converts a string of time into time object.
+    """Converts a string of time into time object.
 
     :param value: String of time
     :type value: str
@@ -780,8 +786,7 @@ def to_time(value: str) -> time:
 
 
 def to_date(value: str) -> date:
-    """
-    Converts a string of date into date object.
+    """Converts a string of date into date object.
 
     :param value: String of date
     :type value: str
