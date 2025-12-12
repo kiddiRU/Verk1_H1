@@ -53,6 +53,7 @@ class MatchLL:
             The uuid of the other team playing in the match
         :type team_2: str
         """
+        # Create a new Match object with a unique UUID.
         uuid: str = str(uuid4())
         new_match: Match = Match(
             uuid,
@@ -62,6 +63,8 @@ class MatchLL:
             team_1,
             team_2
             )
+
+        # Send the new Match object to be stored, and return it.
         DataLayerAPI.store_match(new_match)
         return new_match
 
