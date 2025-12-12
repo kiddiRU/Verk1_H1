@@ -538,7 +538,8 @@ class PlayerUI:
         while con == "b":
             print(self.tui.table(menu, user_path))
             team_ascii = input(
-                f"{self.input_color}Enter A Team ASCII Art (Optional):\n"
+                f"""{self.input_color}Enter A Single Line Team ASCII Art
+                (Optional):\n"""
                 f"{self.reset}"
             )
             self.tui.save_input(f"Team ASCII Art: {team_ascii}")
