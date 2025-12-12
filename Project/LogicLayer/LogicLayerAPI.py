@@ -47,7 +47,7 @@ def validate(attr: str, value: str, name_type: str):
     :param name_type:
         Only used for attribute handle, this determines the type of handle
         want validated, available options are.
-        
+
         -   PLAYER
         -   TEAM
         -   TOURNAMENT
@@ -60,8 +60,8 @@ def validate(attr: str, value: str, name_type: str):
     """
     return Validation.validate_attr(attr, value, name_type)
 
-# Player API
 
+# Player API
 def create_player(
     name: str,
     date_of_birth: str,
@@ -171,10 +171,6 @@ def update_player_info(
         url
     )
 
-# Isn't used, remove?
-# def leave_team(team_name: str, player: Player) -> None:
-#     return player_logic.leave_team(team_name, player)
-
 
 def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     '''Promotes a teams player to its captain.
@@ -189,6 +185,7 @@ def promote_captain(current_player: Player, handle_to_promote: str) -> None:
     '''
     player_logic.promote_captain(current_player, handle_to_promote)
 
+# TODO add doc string
 def save_player(player_handle: str | None = None) -> str | None:
     return player_logic.save_player(player_handle)
 
@@ -636,38 +633,6 @@ def remove_team(tournament_name: str, team_name: str) -> None:
     '''
     tournament_logic.remove_team(tournament_name, team_name)
 
-# Isn't used, remove?
-# def update_tournament_info(
-#     tournament_name: str,
-#     venue: str,
-#     email: str,
-#     phone_number: str
-# ) -> None:
-
-#     tournament_logic.update_info(
-#         tournament_name,
-#         venue,
-#         email,
-#         phone_number
-#     )
-
-# Isn't used, remove?
-# def update_tournament_datetime(
-#     tournament_name: str,
-#     start_date: date,
-#     end_date: date,
-#     time_frame_start: time,
-#     time_frame_end: time,
-# ) -> None:
-
-#     tournament_logic.update_tournament_datetime(
-#         tournament_name,
-#         start_date,
-#         end_date,
-#         time_frame_start,
-#         time_frame_end
-#     )
-
 def list_tournaments() -> list[Tournament]:
     '''Gets a list of all stored tournaments.
     
@@ -738,6 +703,7 @@ def change_match_winner(
             team_uuid
         )
 
+# TODO docstring
 def get_teams_from_tournament_name(tournament_name: str) -> list[Team]:
     return tournament_logic.get_teams_from_tournament_name(tournament_name)
 
@@ -886,6 +852,7 @@ def get_club_points(club_name: str) -> str:
     """
     return club_logic.get_club_points(club_name)
 
+# TODO fix docstring
 def get_club_by_name(club_name: str) -> Club:
     """Takes in club name
     looks through all clubs until it finds the right club name
@@ -906,10 +873,7 @@ def get_all_matches(tournament_uuid: str) -> list[Match]:
     return match_logic.get_matches(tournament_uuid)
 
 
-# TODO implement input_match_results and call it
-def input_match_results(match: Match) -> None:
-    pass
-
+# TODO docstring?
 def get_match(tournament_id: str, match_team1: str, match_team2: str) -> Match | str:
     return match_logic.get_match(tournament_id, match_team1, match_team2)
 

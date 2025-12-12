@@ -26,19 +26,20 @@ def store_club(club: Club) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as club_file:
             file_content = dict(json.load(club_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read club file.")
 
     # Adds the new club into the dictionary mapping it's uuid to the
     # object for easy lookup.
     file_content[club.uuid] = data
-    
+
     # Writes the updated file content back into the JSON file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as club_file:
             json.dump(file_content, club_file, indent=4)
-    except:
+    except Exception:
         raise ValidationError("Could not write into club file")
+
 
 def load_club() -> list[Club]:
     """Gets a list of all clubs stored with the store_club function.
@@ -50,7 +51,7 @@ def load_club() -> list[Club]:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as club_file:
             file_content = dict(json.load(club_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read club file")
 
     # Creates a list of all clubs in the club file.
@@ -58,10 +59,12 @@ def load_club() -> list[Club]:
     club_list: list[Club] = []
     for value in file_content.values():
         # Uses **value to unpack the dictionary into a Club model object.
-        try: 
+        try:
             club_list.append(Club(**value))
-        except:
-            raise ValidationError("Could not change file content into Club object.")
+        except Exception:
+            raise ValidationError(
+                "Could not change file content into Club object."
+            )
 
     return club_list
 
@@ -82,7 +85,7 @@ def update_club(uuid: str, updated_club: Club) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as club_file:
             file_content = dict(json.load(club_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read Club file.")
 
     # Overwrites the object tied to the given uuid to the object
@@ -91,10 +94,10 @@ def update_club(uuid: str, updated_club: Club) -> None:
         file_content[uuid] = updated_club.__dict__
     else:
         raise ValidationError("Could not find club with given uuid.")
-    
+
     # Writes the updated dictionary into the club file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as club_file:
             json.dump(file_content, club_file, indent=4)
-    except:
+    except Exception:
         raise ValidationError("Could not write into club file.")

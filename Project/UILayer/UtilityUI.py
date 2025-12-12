@@ -41,7 +41,9 @@ class UtilityUI:
         """
 
         # Make valid choices into lowercase
-        valid_choices_lower: list[str] = [x.lower() for x in valid_choices]
+        valid_choices_lower: list[str] = [
+            item.lower() for item in valid_choices
+        ]
 
         # Loop through until input is valid
         while True:
@@ -141,8 +143,12 @@ class UtilityUI:
 
         """
         # Gets all tournaments and filter out those with the excluded status
-        tournaments: list[Tournament] = LogicLayerAPI.list_tournaments()
-        return [x.name for x in tournaments if x.status != tournament_status]
+        tournament_list: list[Tournament] = LogicLayerAPI.list_tournaments()
+        return [
+            tournament.name
+            for tournament in tournament_list
+            if tournament.status != tournament_status
+        ]
 
     def team_names(self) -> list[str]:
         """
@@ -154,7 +160,7 @@ class UtilityUI:
 
         # Create a list of team names from Club objects
         team_list: list[Team] = LogicLayerAPI.list_all_teams()
-        return [x.name for x in team_list]
+        return [team.name for team in team_list]
 
     def club_names(self) -> list[str]:
         """
@@ -165,7 +171,7 @@ class UtilityUI:
         """
         # Create a list of club names from Club objects
         clubs: list[Club] = LogicLayerAPI.list_all_clubs()
-        return [x.name for x in clubs]
+        return [club.name for club in clubs]
 
     def player_handles(self) -> list[str]:
         """
@@ -176,7 +182,7 @@ class UtilityUI:
         """
         # Create a list of player handles from Player objects
         player_list: list[Player] = LogicLayerAPI.list_all_players()
-        return [p.handle for p in player_list]
+        return [player.handle for player in player_list]
 
     def show_main(self, flag: str) -> list[str]:
         """

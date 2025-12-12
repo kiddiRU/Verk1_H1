@@ -47,6 +47,7 @@ class TeamLL:
         '''
         self._match_logic = match_logic
 
+    # TODO comment
     def create_team(
         self, name: str,
         team_captain: Player,
@@ -65,14 +66,17 @@ class TeamLL:
             uuid for t in teams for uuid in t.list_player_uuid
         ]
 
+        # Checks to make sure player isn't already in a team.
         if team_captain.uuid in players_in_teams:
             raise ValidationError(
                 'You can\'t create a team when you\'re already in one!'
             )
 
+        # Validates the attributes given before creating the player.
         Validation.validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
 
+        # TODO No club is in the list, dont hard code the uuid in.
         clubs: list[Club] = DataLayerAPI.load_clubs()
         club_uuid = next(
             (c.uuid for c in clubs if c.name == club_name),
@@ -386,8 +390,6 @@ class TeamLL:
 
         return ""
 
-# Fra utility
-
     def get_team_by_name(self, name: str) -> Team:
         '''Gets a Team object by its name.
 
@@ -400,13 +402,18 @@ class TeamLL:
         :rtype: Team
         '''
         teams: list[Team] = DataLayerAPI.load_teams()
+
+        # Finds the team with the given name.
+        # TODO fix code?
         team: Team | None = next((t for t in teams if t.name == name), None)
 
+        # Raises an error if team isn't found.
         if team is None:
             raise ValidationError(f'No team found named: {name}')
 
         return team
 
+    # TODO comment
     def get_team_by_uuid(self, uuid: str) -> Team:
         '''Gets a Team object by its UUID.
 

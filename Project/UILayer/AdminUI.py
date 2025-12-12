@@ -248,7 +248,7 @@ class AdminUI:
 
         # List all tournaments that are not archived
         info: list[str] = self.utility.show_tournaments_except_status(
-            Tournament.StatusType.archived
+            Tournament.StatusType.ARCHIVED
         )
         options: dict[str, str] = {"t": "Try Again", "b": "Back"}
         message: str = "Tournament Not Found!"
@@ -271,7 +271,7 @@ class AdminUI:
 
         # Check if the tournament exists and is not archived
         if find_name in self.utility.except_status_tournaments(
-            Tournament.StatusType.archived
+            Tournament.StatusType.ARCHIVED
         ):
             LogicLayerAPI.save_player(find_name)
 
@@ -284,9 +284,9 @@ class AdminUI:
             # Redirect based on tournament status
             if tournament is None:
                 return MenuOptions.MANAGE_TOURNAMENT
-            if tournament.status == Tournament.StatusType.active:
+            if tournament.status == Tournament.StatusType.ACTIVE:
                 return MenuOptions.MANAGE_ACTIVE_TOURNAMENT
-            if tournament.status == Tournament.StatusType.inactive:
+            if tournament.status == Tournament.StatusType.INACTIVE:
                 return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
 
         # If tournament not found, show message and options
@@ -602,7 +602,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{idx:<4}{team.name}")
+            info.append(f"{f"{idx}.":<4}{team.name}")
 
         # Options for next screen
         options: dict[str, str] = {
@@ -676,7 +676,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{idx:<4}{team.name}")
+            info.append(f"{f"{idx}.":<4}{team.name}")
 
         options: dict[str, str] = {
             "1": "Add Team",
@@ -714,8 +714,8 @@ class AdminUI:
         # Retrieve tournament and current teams
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
+            team.name
+            for team in LogicLayerAPI.get_teams_from_tournament_name(
                 tournament_name
             )
         ]
@@ -723,7 +723,7 @@ class AdminUI:
 
         # Get teams that are not already in the tournament
         teams_not_in_tournament: list[str] = [
-            x for x in all_teams if x not in teams_in_tournament
+            team for team in all_teams if team not in teams_in_tournament
         ]
         unique_names: list[str] = teams_not_in_tournament
 
@@ -818,8 +818,8 @@ class AdminUI:
         # Retrieve tournament and current teams
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
+            team.name
+            for team in LogicLayerAPI.get_teams_from_tournament_name(
                 tournament_name
             )
         ]
