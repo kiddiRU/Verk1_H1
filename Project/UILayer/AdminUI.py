@@ -841,8 +841,11 @@ class AdminUI:
 
         # Prompt admin for team name
         team_to_add: str = input(
-            self.message_color + "Input Team Name: \n" + self.reset
+            self.message_color +
+            "Input Team Name Or 'q' To Cancel:\n" + self.reset
         )
+        if team_to_add.lower() == "q":
+            return user_path[-2]
 
         # Validate team exists
         try:
@@ -908,7 +911,7 @@ class AdminUI:
             MenuOptions.PUBLISH,
         ]
         # Confirmation message
-        question: str = "Do you want to publish"
+        question: str = "Do you want to publish "
         info: list[str] = [
             f"{question}{self.message_color}"
             f"{tournament_object.name}{self.reset}? Y/N"
