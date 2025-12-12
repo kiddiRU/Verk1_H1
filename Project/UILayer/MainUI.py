@@ -15,7 +15,7 @@ from UILayer.MenuOptions import MenuOptions
 
 
 class MainUI:
-    """Main UI State Machine"""
+    """Main UI state machine controlling all screen transitions."""
 
     def __init__(self) -> None:
         """
@@ -40,6 +40,7 @@ class MainUI:
             MenuOptions.SPECTATE_SCREEN: self._spectate_ui.spectate_screen,
             MenuOptions.ONION: self._player_ui.onion,
             MenuOptions.MASTERPIECE: self._player_ui.masterpiece,
+            MenuOptions.SINDRI_FC: self._player_ui.sindri_fc,
             # ------------------ Admin Paths ------------------
             MenuOptions.ADMIN_SCREEN: self._admin_ui.admin_screen,
             MenuOptions.CREATE_TOURNAMENT: self._admin_ui.create_tournament,
@@ -111,8 +112,9 @@ class MainUI:
 
     def run(self) -> None:
         """
-        Loops through user input and returns the user
-        to the corresponding screen
+        Main application loop.
+
+        Handles user input and transitions to the appropriate screen.
         """
 
         while True:
@@ -121,9 +123,9 @@ class MainUI:
 
             # ------------------ Misc Paths ------------------
             # stop when quit
-            elif self.current_screen == MenuOptions.QUIT:
+            elif self.current_screen is MenuOptions.QUIT:
                 print("Quitting Program")
-                exit()
+                break
 
             else:
                 self.current_screen = self.screen_not_exist_error()

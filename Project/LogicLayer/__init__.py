@@ -1,3 +1,15 @@
+"""
+Logic layer of the HR Esports Extravaganza system.
+
+Contains business logic for:
+- Players
+- Teams
+- Tournaments
+- Clubs
+- Matches
+
+Responsible for validation and business rules.
+"""
 from LogicLayer.PlayerLL import PlayerLL
 from LogicLayer.TeamLL import TeamLL
 from LogicLayer.TournamentLL import TournamentLL

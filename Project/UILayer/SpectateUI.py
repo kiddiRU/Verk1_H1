@@ -8,6 +8,8 @@ File that holds all the menus that the spectator can access
 """
 
 from Models.Tournament import Tournament
+from Models.Player import Player
+from Models.Team import Team
 
 from UILayer.MenuOptions import MenuOptions
 from UILayer.UtilityUI import UtilityUI
@@ -142,6 +144,12 @@ class SpectateUI:
 
         # Retrieve the handle of the player selected previously
         player_handle: str | None = LogicLayerAPI.save_player()
+        player: Player | str = LogicLayerAPI.get_player_by_handle(
+            str(player_handle)
+        )
+        if not isinstance(player, Player):
+            return MenuOptions.SPECTATE_TEAMS
+
         if player_handle is None:
             return MenuOptions.SPECTATE_SCREEN
 
@@ -157,6 +165,7 @@ class SpectateUI:
         info: list[str] = [
             "Team: "
             + LogicLayerAPI.get_player_team_and_rank(player_handle)[0],
+            "URL: " + str(player.url),
             "Wins: " + LogicLayerAPI.get_player_wins(player_handle),
             "Points: " + LogicLayerAPI.get_player_points(player_handle),
         ]
@@ -331,6 +340,7 @@ class SpectateUI:
 
         # Remembers what player chosen in spectate_players
         team_name: str | None = LogicLayerAPI.save_player()
+        team: Team = LogicLayerAPI.get_team_by_name(str(team_name))
         if team_name is None:
             return MenuOptions.SPECTATE_SCREEN
 
@@ -344,6 +354,8 @@ class SpectateUI:
 
         # Stats: Clubs, Wins and Points
         info_stats: list[str] = [
+            "ASCII Art: " + str(team.ascii_art),
+            "URL: " + str(team.url_homepage),
             "Club: " + LogicLayerAPI.get_team_club(team_name),
             "Wins: " + LogicLayerAPI.get_team_wins(team_name),
             "Points: " + LogicLayerAPI.get_team_points(team_name),
@@ -463,6 +475,13 @@ class SpectateUI:
 
         # Get the currently selected tournament name
         tournament_name: str | None = LogicLayerAPI.save_player()
+        if tournament_name is None:
+            return MenuOptions.START_SCREEN
+
+        # Get the tournament object and its UUID
+        tournament_object = LogicLayerAPI.get_tournament_by_name(
+            tournament_name
+        )
 
         # UI Setup
         menu: str = str(tournament_name) + " Stats"
@@ -472,6 +491,25 @@ class SpectateUI:
             MenuOptions.ACTIVE_TOURNAMENT,
         ]
         info: list[str] = []
+        # Get stats of the tournament
+        info.extend(
+            [
+                self.utility.formatter(
+                    "Start Date:", str(tournament_object.start_date)
+                ),
+                self.utility.formatter(
+                    "End Date:", str(tournament_object.end_date)
+                ),
+                self.utility.formatter(
+                    "Start Timeframe:", str(tournament_object.time_frame_start)
+                ),
+                self.utility.formatter(
+                    "End Timeframe:", str(tournament_object.time_frame_end)
+                ),
+                self.utility.formatter("Venue:", str(tournament_object.venue)),
+                self.utility.formatter("Email:", str(tournament_object.email)),
+            ]
+        )
         options: dict[str, str] = {
             "1": "Game Info And Schedule",
             "2": "Teams",
@@ -542,8 +580,29 @@ class SpectateUI:
             f"{f'{self.green}{win} {tournament_winner} {self.reset}':<88}|",
         ]
 
+        info: list[str] = []
+        # Get Tournament stats
+        info.extend(
+            [
+                self.utility.formatter(
+                    "Start Date:", str(tournament_object.start_date)
+                ),
+                self.utility.formatter(
+                    "End Date:", str(tournament_object.end_date)
+                ),
+                self.utility.formatter(
+                    "Start Timeframe:", str(tournament_object.time_frame_start)
+                ),
+                self.utility.formatter(
+                    "End Timeframe:", str(tournament_object.time_frame_end)
+                ),
+                self.utility.formatter("Venue:", str(tournament_object.venue)),
+                self.utility.formatter("Email:", str(tournament_object.email)),
+            ]
+        )
+
         # Combine match list with winner display
-        info: list[str] = match_list + tournament_winner_formatted
+        info.extend(match_list + tournament_winner_formatted)
 
         options: dict[str, str] = {}
         message: str = ""
@@ -588,9 +647,8 @@ class SpectateUI:
         ]
         # Retrieve the list of matches for the tournament
         match_list: list[str] = self.utility.list_matches(
-            tournament_uuid, False
+            tournament_uuid, True
         )
-
         info: list[str] = match_list
 
         self.tui.clear_saved_data()
@@ -598,7 +656,7 @@ class SpectateUI:
 
         input("Press Enter To Go Back")
 
-        return MenuOptions.SPECTATE_SCREEN
+        return MenuOptions.ACTIVE_TOURNAMENT
 
     def teams_in_tournament(self) -> MenuOptions:
         """

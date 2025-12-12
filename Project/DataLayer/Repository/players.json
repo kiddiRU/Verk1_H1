@@ -1,622 +1,532 @@
 {
-    "2cc090bc-2351-4c43-bb08-2f578d26154a": {
-        "uuid": "2cc090bc-2351-4c43-bb08-2f578d26154a",
+    "bb80ac0d-2649-4dab-8f98-c4e61335e1e0": {
+        "uuid": "bb80ac0d-2649-4dab-8f98-c4e61335e1e0",
         "name": "Sam Segfault",
         "date_of_birth": "2003-04-12",
         "home_address": "Studentagata 1 Reykjavik",
         "email": "segfault.sam@example.com",
-        "phone_number": "+3546110001",
+        "phone_number": "611-0001",
         "handle": "SegFaultSam",
         "url": "https://twitch.tv/SegFaultSam"
     },
-    "35e63bfc-3349-4131-b197-c569d71d6b90": {
-        "uuid": "35e63bfc-3349-4131-b197-c569d71d6b90",
+    "5da33990-b5c0-435c-983c-2f70d087d2bb": {
+        "uuid": "5da33990-b5c0-435c-983c-2f70d087d2bb",
         "name": "Sara Stacksmash",
         "date_of_birth": "2004-09-23",
         "home_address": "Studentagata 2 Reykjavik",
         "email": "stacksmash.sara@example.com",
-        "phone_number": "+3546110002",
+        "phone_number": "611-0002",
         "handle": "StackSmashSara",
         "url": "https://github.com/StackSmashSara"
     },
-    "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3": {
-        "uuid": "7d45cca7-bbe1-47e9-9855-63ec8e01f4a3",
+    "1ba6371a-9350-405d-a93d-d428db70185d": {
+        "uuid": "1ba6371a-9350-405d-a93d-d428db70185d",
         "name": "Karl Coredump",
         "date_of_birth": "2005-01-08",
         "home_address": "Studentagata 3 Reykjavik",
         "email": "core.karl@example.com",
-        "phone_number": "+3546110003",
+        "phone_number": "611-0003",
         "handle": "CoreDumpKarl",
         "url": "https://twitter.com/CoreDumpKarl"
     },
-    "e9ecf404-a192-48c5-9f61-99387bad32f8": {
-        "uuid": "e9ecf404-a192-48c5-9f61-99387bad32f8",
+    "ba7c2ea9-d1cc-4d54-84f0-be8b6655e6b2": {
+        "uuid": "ba7c2ea9-d1cc-4d54-84f0-be8b6655e6b2",
         "name": "Nina Null",
         "date_of_birth": "2004-02-10",
         "home_address": "Kennarabraut 1 Reykjavik",
         "email": "nina.null@example.com",
-        "phone_number": "+3546110004",
+        "phone_number": "611-0004",
         "handle": "NullPointerNina",
         "url": "https://twitch.tv/NullPointerNina"
     },
-    "b2ee9a85-bb85-49d8-bb10-1eddf19a6509": {
-        "uuid": "b2ee9a85-bb85-49d8-bb10-1eddf19a6509",
+    "98d8269c-aef3-4856-8043-9ddc4868c574": {
+        "uuid": "98d8269c-aef3-4856-8043-9ddc4868c574",
         "name": "Dan Dangling",
         "date_of_birth": "2003-11-30",
         "home_address": "Kennarabraut 2 Reykjavik",
         "email": "dan.dangling@example.com",
-        "phone_number": "+3546110005",
+        "phone_number": "611-0005",
         "handle": "DanglingPtrDan",
         "url": "https://github.com/DanglingPtrDan"
     },
-    "ae4cb519-d61b-486c-9835-c40ab8b2a4ff": {
-        "uuid": "ae4cb519-d61b-486c-9835-c40ab8b2a4ff",
+    "9728d69c-2edd-4d8f-a507-e844ad976abe": {
+        "uuid": "9728d69c-2edd-4d8f-a507-e844ad976abe",
         "name": "Val Void",
         "date_of_birth": "2005-06-21",
         "home_address": "Kennarabraut 3 Reykjavik",
         "email": "val.void@example.com",
-        "phone_number": "+3546110006",
+        "phone_number": "611-0006",
         "handle": "VoidStarVal",
         "url": "https://twitter.com/VoidStarVal"
     },
-    "99c607cf-327a-4615-84f5-d47748a3bc79": {
-        "uuid": "99c607cf-327a-4615-84f5-d47748a3bc79",
+    "956b0159-2c8d-4a45-8018-34b85a16854d": {
+        "uuid": "956b0159-2c8d-4a45-8018-34b85a16854d",
         "name": "Olaf Offby",
         "date_of_birth": "2003-07-19",
         "home_address": "Sundurvegur 1 Kopavogur",
         "email": "olaf.offby@example.com",
-        "phone_number": "+3546110007",
+        "phone_number": "611-0007",
         "handle": "OffByOneOlaf",
         "url": "https://twitch.tv/OffByOneOlaf"
     },
-    "269e12c1-68e0-478a-bfd4-b4a79369cd70": {
-        "uuid": "269e12c1-68e0-478a-bfd4-b4a79369cd70",
+    "02df2375-02ef-4a2e-aef7-be4aecf96d37": {
+        "uuid": "02df2375-02ef-4a2e-aef7-be4aecf96d37",
         "name": "Frida Fencepost",
         "date_of_birth": "2004-12-03",
         "home_address": "Sundurvegur 2 Kopavogur",
         "email": "frida.fencepost@example.com",
-        "phone_number": "+3546110008",
+        "phone_number": "611-0008",
         "handle": "FencepostFrida",
         "url": "https://github.com/FencepostFrida"
     },
-    "6284c994-a89a-4e15-9e43-c6853230ef30": {
-        "uuid": "6284c994-a89a-4e15-9e43-c6853230ef30",
+    "68ac31e1-6687-464e-a67a-a9ed56022865": {
+        "uuid": "68ac31e1-6687-464e-a67a-a9ed56022865",
         "name": "Ian Index",
         "date_of_birth": "2005-03-15",
         "home_address": "Sundurvegur 3 Kopavogur",
         "email": "ian.index@example.com",
-        "phone_number": "+3546110009",
+        "phone_number": "611-0009",
         "handle": "IndexMinusOne",
         "url": "https://twitter.com/IndexMinusOne"
     },
-    "5dbef562-495e-43a4-8423-edfa24a2c283": {
-        "uuid": "5dbef562-495e-43a4-8423-edfa24a2c283",
+    "f99cfd83-5c28-4997-ae02-6dd8e83176bb": {
+        "uuid": "f99cfd83-5c28-4997-ae02-6dd8e83176bb",
         "name": "Palli Pepsi",
         "date_of_birth": "2003-05-05",
         "home_address": "LANgata 1 Reykjavik",
         "email": "palli.pepsi@example.com",
-        "phone_number": "+3546110010",
+        "phone_number": "611-0010",
         "handle": "PepsiMaxPalli",
         "url": "https://twitch.tv/PepsiMaxPalli"
     },
-    "2d5c7c11-cc1a-4c8e-9c75-e891fca96144": {
-        "uuid": "2d5c7c11-cc1a-4c8e-9c75-e891fca96144",
+    "eba19be8-c04f-4c9d-b634-35e0aeba9061": {
+        "uuid": "eba19be8-c04f-4c9d-b634-35e0aeba9061",
         "name": "Asta Aspartame",
         "date_of_birth": "2004-08-17",
         "home_address": "LANgata 2 Reykjavik",
         "email": "asta.aspartame@example.com",
-        "phone_number": "+3546110011",
+        "phone_number": "611-0011",
         "handle": "AspartameAssassin",
         "url": "https://github.com/AspartameAssassin"
     },
-    "ad6ae792-d42d-49ed-a25b-fbf4e054d5cd": {
-        "uuid": "ad6ae792-d42d-49ed-a25b-fbf4e054d5cd",
+    "91718634-abe2-4b32-bd20-82102a76f7f1": {
+        "uuid": "91718634-abe2-4b32-bd20-82102a76f7f1",
         "name": "Sigurjon Zero",
         "date_of_birth": "2005-10-29",
         "home_address": "LANgata 3 Reykjavik",
         "email": "sigurjon.zero@example.com",
-        "phone_number": "+3546110012",
+        "phone_number": "611-0012",
         "handle": "ZeroSugarZeroSkill",
         "url": "https://twitter.com/ZeroSugarZeroSkill"
     },
-    "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68": {
-        "uuid": "0b8ea6ae-1acf-45f9-9b05-fe1c85973e68",
+    "948e9788-c697-482f-b2af-7275d69af4af": {
+        "uuid": "948e9788-c697-482f-b2af-7275d69af4af",
         "name": "Rik Roundhouse",
         "date_of_birth": "2003-09-09",
         "home_address": "Turnhut 1 Reykjavik",
         "email": "rik.roundhouse@example.com",
-        "phone_number": "+3546110013",
+        "phone_number": "611-0013",
         "handle": "RoundhouseRik",
         "url": "https://twitch.tv/RoundhouseRik"
     },
-    "8b368c80-729e-4e76-9341-18d2be561b7c": {
-        "uuid": "8b368c80-729e-4e76-9341-18d2be561b7c",
+    "17e4a9f5-3924-458f-82e6-22364929a0cd": {
+        "uuid": "17e4a9f5-3924-458f-82e6-22364929a0cd",
         "name": "Nora Norris",
         "date_of_birth": "2004-01-14",
         "home_address": "Turnhut 2 Reykjavik",
         "email": "nora.norris@example.com",
-        "phone_number": "+3546110014",
+        "phone_number": "611-0014",
         "handle": "ChuckNorrisMain",
         "url": "https://github.com/ChuckNorrisMain"
     },
-    "57a15dc5-bdb2-46b5-9777-f08d36bffdb9": {
-        "uuid": "57a15dc5-bdb2-46b5-9777-f08d36bffdb9",
+    "80eef75c-e28c-4adf-9517-608337f3e9dd": {
+        "uuid": "80eef75c-e28c-4adf-9517-608337f3e9dd",
         "name": "Steini SpinKick",
         "date_of_birth": "2005-02-22",
         "home_address": "Turnhut 3 Reykjavik",
         "email": "steini.spinkick@example.com",
-        "phone_number": "+3546110015",
+        "phone_number": "611-0015",
         "handle": "SegfaultByRoundhouse",
         "url": "https://twitter.com/SegfaultByRoundhouse"
     },
-    "e3b5ceef-c30c-47d4-abf6-0c6f53fb2eed": {
-        "uuid": "e3b5ceef-c30c-47d4-abf6-0c6f53fb2eed",
+    "56f30d93-53dd-4d28-9120-ea6734fd2e5e": {
+        "uuid": "56f30d93-53dd-4d28-9120-ea6734fd2e5e",
         "name": "Ina Indent",
         "date_of_birth": "2003-11-01",
         "home_address": "Pythonvegur 1 Reykjavik",
         "email": "ina.indent@example.com",
-        "phone_number": "+3546110016",
+        "phone_number": "611-0016",
         "handle": "IndentationErrorIna",
         "url": "https://twitch.tv/IndentationErrorIna"
     },
-    "b6d2271c-3f4e-410c-938c-77890707b88e": {
-        "uuid": "b6d2271c-3f4e-410c-938c-77890707b88e",
+    "78fc64a3-362e-4c4e-a516-9d4db4fedee0": {
+        "uuid": "78fc64a3-362e-4c4e-a516-9d4db4fedee0",
         "name": "Kjartan Key",
         "date_of_birth": "2004-04-04",
         "home_address": "Pythonvegur 2 Reykjavik",
         "email": "kjartan.key@example.com",
-        "phone_number": "+3546110017",
+        "phone_number": "611-0017",
         "handle": "KeyErrorKjartan",
         "url": "https://github.com/KeyErrorKjartan"
     },
-    "9b1f8e87-72b3-44ad-a39d-bbda40fa8a15": {
-        "uuid": "9b1f8e87-72b3-44ad-a39d-bbda40fa8a15",
+    "942e6cc0-2cca-407a-9dc4-c27d4e2147d1": {
+        "uuid": "942e6cc0-2cca-407a-9dc4-c27d4e2147d1",
         "name": "Tinna Type",
         "date_of_birth": "2005-07-07",
         "home_address": "Pythonvegur 3 Reykjavik",
         "email": "tinna.type@example.com",
-        "phone_number": "+3546110018",
+        "phone_number": "611-0018",
         "handle": "TypeErrorTinna",
         "url": "https://twitter.com/TypeErrorTinna"
     },
-    "6e213341-38af-4464-aeca-c26c9e2f1165": {
-        "uuid": "6e213341-38af-4464-aeca-c26c9e2f1165",
+    "08249938-de84-4880-aa4f-918ed22dfd9c": {
+        "uuid": "08249938-de84-4880-aa4f-918ed22dfd9c",
         "name": "Maria Movax",
         "date_of_birth": "2003-03-03",
         "home_address": "Asmstraeti 1 Reykjavik",
         "email": "maria.movax@example.com",
-        "phone_number": "+3546110019",
+        "phone_number": "611-0019",
         "handle": "MovAxMaria",
         "url": "https://twitch.tv/MovAxMaria"
     },
-    "3d7ec336-f2f0-4ac3-8802-eb998b141ff4": {
-        "uuid": "3d7ec336-f2f0-4ac3-8802-eb998b141ff4",
+    "ce52ca9a-7061-4ae1-821f-1eac3b9e4335": {
+        "uuid": "ce52ca9a-7061-4ae1-821f-1eac3b9e4335",
         "name": "Jon Jump",
         "date_of_birth": "2004-06-16",
         "home_address": "Asmstraeti 2 Reykjavik",
         "email": "jon.jump@example.com",
-        "phone_number": "+3546110020",
+        "phone_number": "611-0020",
         "handle": "JumpIfCarryJon",
         "url": "https://github.com/JumpIfCarryJon"
     },
-    "bac40280-22dc-4f52-a028-0416f59a8843": {
-        "uuid": "bac40280-22dc-4f52-a028-0416f59a8843",
+    "1cce5a52-b847-4fbb-987b-c4fc681c8749": {
+        "uuid": "1cce5a52-b847-4fbb-987b-c4fc681c8749",
         "name": "Siggi Syscall",
         "date_of_birth": "2005-09-27",
         "home_address": "Asmstraeti 3 Reykjavik",
         "email": "siggi.syscall@example.com",
-        "phone_number": "+3546110021",
+        "phone_number": "611-0021",
         "handle": "Syscall1337Siggi",
         "url": "https://twitter.com/Syscall1337Siggi"
     },
-    "3147a1c5-c69b-4a23-85e0-0837f7f92e6c": {
-        "uuid": "3147a1c5-c69b-4a23-85e0-0837f7f92e6c",
+    "50f2ed17-b039-4a21-bebd-8974ce972d8f": {
+        "uuid": "50f2ed17-b039-4a21-bebd-8974ce972d8f",
         "name": "Bjarni Bit",
         "date_of_birth": "2003-01-19",
         "home_address": "Datalabvegur 1 Reykjavik",
         "email": "bjarni.bit@example.com",
-        "phone_number": "+3546110022",
+        "phone_number": "611-0022",
         "handle": "BitTwiddlerBjarni",
         "url": "https://twitch.tv/BitTwiddlerBjarni"
     },
-    "796e0da0-bb2b-45e6-8d85-9d3164e8c7a7": {
-        "uuid": "796e0da0-bb2b-45e6-8d85-9d3164e8c7a7",
+    "65f09ffe-6186-441d-bb4d-ee050a45c71b": {
+        "uuid": "65f09ffe-6186-441d-bb4d-ee050a45c71b",
         "name": "Tora TwoComp",
         "date_of_birth": "2004-10-10",
         "home_address": "Datalabvegur 2 Reykjavik",
         "email": "tora.twocomp@example.com",
-        "phone_number": "+3546110023",
+        "phone_number": "611-0023",
         "handle": "TwoCompWizardTora",
         "url": "https://github.com/TwoCompWizardTora"
     },
-    "030d4540-229d-48bd-bcce-6167ad362a7e": {
-        "uuid": "030d4540-229d-48bd-bcce-6167ad362a7e",
+    "ca17d2b0-1f33-458d-ad2b-5d3f4f266dc3": {
+        "uuid": "ca17d2b0-1f33-458d-ad2b-5d3f4f266dc3",
         "name": "Mia Mask",
         "date_of_birth": "2005-12-12",
         "home_address": "Datalabvegur 3 Reykjavik",
         "email": "mia.mask@example.com",
-        "phone_number": "+3546110024",
+        "phone_number": "611-0024",
         "handle": "MaskAndShiftMia",
         "url": "https://twitter.com/MaskAndShiftMia"
     },
-    "f2b19d6e-9dc0-4914-a8a8-a9354ee00e7a": {
-        "uuid": "f2b19d6e-9dc0-4914-a8a8-a9354ee00e7a",
+    "115c7bc3-5af4-4d11-a5c0-9f364ffffd6a": {
+        "uuid": "115c7bc3-5af4-4d11-a5c0-9f364ffffd6a",
         "name": "Dori Defusal",
         "date_of_birth": "2003-02-02",
         "home_address": "Bomblabstigur 1 Reykjavik",
         "email": "dori.defusal@example.com",
-        "phone_number": "+3546110025",
+        "phone_number": "611-0025",
         "handle": "BombDefusalDori",
         "url": "https://twitch.tv/BombDefusalDori"
     },
-    "fb7cc2f3-6334-4116-9495-1a6adffd740b": {
-        "uuid": "fb7cc2f3-6334-4116-9495-1a6adffd740b",
+    "696e2806-0f5f-4ad0-a68c-54c71b04d430": {
+        "uuid": "696e2806-0f5f-4ad0-a68c-54c71b04d430",
         "name": "Eydis Phase",
         "date_of_birth": "2004-05-15",
         "home_address": "Bomblabstigur 2 Reykjavik",
         "email": "eydis.phase@example.com",
-        "phone_number": "+3546110026",
+        "phone_number": "611-0026",
         "handle": "Phase4EnjoyerEydis",
         "url": "https://github.com/Phase4EnjoyerEydis"
     },
-    "1db9a916-0050-4537-862d-8d56e43e8b0c": {
-        "uuid": "1db9a916-0050-4537-862d-8d56e43e8b0c",
+    "747556db-10dd-40c7-9d78-32a93a18a7aa": {
+        "uuid": "747556db-10dd-40c7-9d78-32a93a18a7aa",
         "name": "Gunnar Gdb",
         "date_of_birth": "2005-08-18",
         "home_address": "Bomblabstigur 3 Reykjavik",
         "email": "gunnar.gdb@example.com",
-        "phone_number": "+3546110027",
+        "phone_number": "611-0027",
         "handle": "GdbNinjaGunnar",
         "url": "https://twitter.com/GdbNinjaGunnar"
     },
-    "14746d9e-e98d-4f07-a735-02bcd9281c73": {
-        "uuid": "14746d9e-e98d-4f07-a735-02bcd9281c73",
+    "79f1f635-f9b7-42da-b894-e9d521b772c3": {
+        "uuid": "79f1f635-f9b7-42da-b894-e9d521b772c3",
         "name": "Kalli CopyPaste",
         "date_of_birth": "2003-03-30",
         "home_address": "Overflowhagi 1 Reykjavik",
         "email": "kalli.copy@example.com",
-        "phone_number": "+3546110028",
+        "phone_number": "611-0028",
         "handle": "CopyPasteKalli",
         "url": "https://twitch.tv/CopyPasteKalli"
     },
-    "aa9f6ab5-acf7-4bd6-904c-0b355fe27afa": {
-        "uuid": "aa9f6ab5-acf7-4bd6-904c-0b355fe27afa",
+    "d0c3da47-33aa-4c73-bad8-38b8de8583d4": {
+        "uuid": "d0c3da47-33aa-4c73-bad8-38b8de8583d4",
         "name": "Reykur Recursion",
         "date_of_birth": "2004-09-01",
         "home_address": "Overflowhagi 2 Reykjavik",
         "email": "reykur.recursion@example.com",
-        "phone_number": "+3546110029",
+        "phone_number": "611-0029",
         "handle": "RecursionReykur",
         "url": "https://github.com/RecursionReykur"
     },
-    "4d125159-9d84-44b0-8b26-406c34c304c3": {
-        "uuid": "4d125159-9d84-44b0-8b26-406c34c304c3",
+    "5445114c-6a26-499c-94ae-a8c1a37d0fa6": {
+        "uuid": "5445114c-6a26-499c-94ae-a8c1a37d0fa6",
         "name": "Tanja Tabs",
         "date_of_birth": "2005-11-11",
         "home_address": "Overflowhagi 3 Reykjavik",
         "email": "tanja.tabs@example.com",
-        "phone_number": "+3546110030",
+        "phone_number": "611-0030",
         "handle": "TooManyTabsTanja",
         "url": "https://twitter.com/TooManyTabsTanja"
     },
-    "7b1beaf8-940a-4101-8ac0-9fbb15dff0e6": {
-        "uuid": "7b1beaf8-940a-4101-8ac0-9fbb15dff0e6",
+    "bd0c1b27-b4bd-4a0b-9eb7-4d316525b6b5": {
+        "uuid": "bd0c1b27-b4bd-4a0b-9eb7-4d316525b6b5",
         "name": "Lara L1",
         "date_of_birth": "2003-06-06",
         "home_address": "Cachegata 1 Reykjavik",
         "email": "lara.l1@example.com",
-        "phone_number": "+3546110031",
+        "phone_number": "611-0031",
         "handle": "L1CacheLara",
         "url": "https://twitch.tv/L1CacheLara"
     },
-    "9477f9b9-9c44-463d-beb3-2f4087ddb229": {
-        "uuid": "9477f9b9-9c44-463d-beb3-2f4087ddb229",
+    "e40f4e6c-9067-4931-ace5-8ac68473db5f": {
+        "uuid": "e40f4e6c-9067-4931-ace5-8ac68473db5f",
         "name": "Toti TLB",
         "date_of_birth": "2004-02-20",
         "home_address": "Cachegata 2 Reykjavik",
         "email": "toti.tlb@example.com",
-        "phone_number": "+3546110032",
+        "phone_number": "611-0032",
         "handle": "TLBmissToti",
         "url": "https://github.com/TLBmissToti"
     },
-    "a670dfe2-5540-452c-8e40-bc887d53d83a": {
-        "uuid": "a670dfe2-5540-452c-8e40-bc887d53d83a",
+    "797d94c4-7acf-46cb-a4f8-ab2c522b1ef9": {
+        "uuid": "797d94c4-7acf-46cb-a4f8-ab2c522b1ef9",
         "name": "Palli Prefetch",
         "date_of_birth": "2005-05-25",
         "home_address": "Cachegata 3 Reykjavik",
         "email": "palli.prefetch@example.com",
-        "phone_number": "+3546110033",
+        "phone_number": "611-0033",
         "handle": "PrefetchPalli",
         "url": "https://twitter.com/PrefetchPalli"
     },
-    "02b8accc-f1b1-41a2-8754-3c504ea5b5be": {
-        "uuid": "02b8accc-f1b1-41a2-8754-3c504ea5b5be",
+    "1081e90f-75e0-4c41-ad06-a979ebd22e35": {
+        "uuid": "1081e90f-75e0-4c41-ad06-a979ebd22e35",
         "name": "Wendy While",
         "date_of_birth": "2003-01-01",
         "home_address": "Lykkjugata 1 Reykjavik",
         "email": "wendy.while@example.com",
-        "phone_number": "+3546110034",
+        "phone_number": "611-0034",
         "handle": "WhileTrueWendy",
         "url": "https://twitch.tv/WhileTrueWendy"
     },
-    "9928427e-b438-46ab-b751-43dc140fcd2e": {
-        "uuid": "9928427e-b438-46ab-b751-43dc140fcd2e",
+    "fabdc23e-a155-47fc-a2ef-4c91a0423a67": {
+        "uuid": "fabdc23e-a155-47fc-a2ef-4c91a0423a67",
         "name": "Bensi Break",
         "date_of_birth": "2004-03-13",
         "home_address": "Lykkjugata 2 Reykjavik",
         "email": "bensi.break@example.com",
-        "phone_number": "+3546110035",
+        "phone_number": "611-0035",
         "handle": "BreakConditionBensi",
         "url": "https://github.com/BreakConditionBensi"
     },
-    "be456da3-6cbc-4bc5-91db-03baed4f0b65": {
-        "uuid": "be456da3-6cbc-4bc5-91db-03baed4f0b65",
+    "d6339cf1-937d-460e-860d-c97b13be0922": {
+        "uuid": "d6339cf1-937d-460e-860d-c97b13be0922",
         "name": "Ida IndexError",
         "date_of_birth": "2005-07-27",
         "home_address": "Lykkjugata 3 Reykjavik",
         "email": "ida.index@example.com",
-        "phone_number": "+3546110036",
+        "phone_number": "611-0036",
         "handle": "IndexErrorIda",
         "url": "https://twitter.com/IndexErrorIda"
     },
-    "c4c80efe-c482-40d8-a878-dec8452ea757": {
-        "uuid": "c4c80efe-c482-40d8-a878-dec8452ea757",
+    "b1909640-2f08-445b-a93e-b88fdf92aa62": {
+        "uuid": "b1909640-2f08-445b-a93e-b88fdf92aa62",
         "name": "Stebbi Segfoul",
         "date_of_birth": "2003-09-15",
         "home_address": "Signalbraut 1 Reykjavik",
         "email": "stebbi.segfoul@example.com",
-        "phone_number": "+3546110037",
+        "phone_number": "611-0037",
         "handle": "SegmentationFoulStebbi",
         "url": "https://twitch.tv/SegmentationFoulStebbi"
     },
-    "570417ec-9f48-4c96-96a5-74f46e69ae9a": {
-        "uuid": "570417ec-9f48-4c96-96a5-74f46e69ae9a",
+    "31423898-c8ae-42f3-a995-73f433dbbbdf": {
+        "uuid": "31423898-c8ae-42f3-a995-73f433dbbbdf",
         "name": "Oli OutOfBounds",
         "date_of_birth": "2004-12-21",
         "home_address": "Signalbraut 2 Reykjavik",
         "email": "oli.outofbounds@example.com",
-        "phone_number": "+3546110038",
+        "phone_number": "611-0038",
         "handle": "OutOfBoundsOli",
         "url": "https://github.com/OutOfBoundsOli"
     },
-    "a4b2d1ac-bd6f-495b-be8f-826db79c22f2": {
-        "uuid": "a4b2d1ac-bd6f-495b-be8f-826db79c22f2",
+    "3ccf66fc-d115-4033-8a3d-9aa1934b2f5d": {
+        "uuid": "3ccf66fc-d115-4033-8a3d-9aa1934b2f5d",
         "name": "Brynja Bus",
         "date_of_birth": "2005-10-05",
         "home_address": "Signalbraut 3 Reykjavik",
         "email": "brynja.bus@example.com",
-        "phone_number": "+3546110039",
+        "phone_number": "611-0039",
         "handle": "BusErrorBrynja",
         "url": "https://twitter.com/BusErrorBrynja"
     },
-    "b855860c-dd67-4f5f-af94-4730fef94e8a": {
-        "uuid": "b855860c-dd67-4f5f-af94-4730fef94e8a",
+    "087795cb-08d9-4cbd-8515-78f0b870d933": {
+        "uuid": "087795cb-08d9-4cbd-8515-78f0b870d933",
         "name": "Ragnhildur Race",
         "date_of_birth": "2003-04-04",
         "home_address": "Threadgata 1 Reykjavik",
         "email": "ragnhildur.race@example.com",
-        "phone_number": "+3546110040",
+        "phone_number": "611-0040",
         "handle": "RaceConditionRagnhildur",
         "url": "https://twitch.tv/RaceConditionRagnhildur"
     },
-    "5dbe517b-4715-4f08-aa75-d91bb0d6eae6": {
-        "uuid": "5dbe517b-4715-4f08-aa75-d91bb0d6eae6",
+    "64abf333-aa5e-4d2c-8bbb-1afb1e2381a3": {
+        "uuid": "64abf333-aa5e-4d2c-8bbb-1afb1e2381a3",
         "name": "Max Mutex",
         "date_of_birth": "2004-06-26",
         "home_address": "Threadgata 2 Reykjavik",
         "email": "max.mutex@example.com",
-        "phone_number": "+3546110041",
+        "phone_number": "611-0041",
         "handle": "MutexMax",
         "url": "https://github.com/MutexMax"
     },
-    "398550f8-bb2b-46da-8527-974e6b5bd0d2": {
-        "uuid": "398550f8-bb2b-46da-8527-974e6b5bd0d2",
+    "cd6fdeeb-f1a1-4780-83e5-8dbaf9b0354d": {
+        "uuid": "cd6fdeeb-f1a1-4780-83e5-8dbaf9b0354d",
         "name": "Danni Deadlock",
         "date_of_birth": "2005-09-09",
         "home_address": "Threadgata 3 Reykjavik",
         "email": "danni.deadlock@example.com",
-        "phone_number": "+3546110042",
+        "phone_number": "611-0042",
         "handle": "DeadlockDanni",
         "url": "https://twitter.com/DeadlockDanni"
     },
-    "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db": {
-        "uuid": "37dd40d4-fb13-44b2-bbdb-b6a0e236d4db",
+    "31b21911-dfa9-490e-b769-bc4594a2146f": {
+        "uuid": "31b21911-dfa9-490e-b769-bc4594a2146f",
         "name": "Ulfar UB",
         "date_of_birth": "2003-02-14",
         "home_address": "UBgata 1 Reykjavik",
         "email": "ulfar.ub@example.com",
-        "phone_number": "+3546110043",
+        "phone_number": "611-0043",
         "handle": "UBUnitedUlfar",
         "url": "https://twitch.tv/UBUnitedUlfar"
     },
-    "a7012a45-a21d-4efd-80a2-dc4b20f4ff47": {
-        "uuid": "a7012a45-a21d-4efd-80a2-dc4b20f4ff47",
+    "1fdac7b3-d25b-4b92-af76-d6c324a64345": {
+        "uuid": "1fdac7b3-d25b-4b92-af76-d6c324a64345",
         "name": "Sara StrictAlias",
         "date_of_birth": "2004-05-19",
         "home_address": "UBgata 2 Reykjavik",
         "email": "sara.strictalias@example.com",
-        "phone_number": "+3546110044",
+        "phone_number": "611-0044",
         "handle": "StrictAliasSara",
         "url": "https://github.com/StrictAliasSara"
     },
-    "cb99cd0f-e9c8-42c1-a293-1287317f47b3": {
-        "uuid": "cb99cd0f-e9c8-42c1-a293-1287317f47b3",
+    "1c02dcd2-f994-477b-8274-26f1aaee2ef5": {
+        "uuid": "1c02dcd2-f994-477b-8274-26f1aaee2ef5",
         "name": "Vala Volatile",
         "date_of_birth": "2005-08-28",
         "home_address": "UBgata 3 Reykjavik",
         "email": "vala.volatile@example.com",
-        "phone_number": "+3546110045",
+        "phone_number": "611-0045",
         "handle": "VolatileVala",
         "url": "https://twitter.com/VolatileVala"
     },
-    "f223c74d-8abd-44b9-97c2-c656ae9a3cc5": {
-        "uuid": "f223c74d-8abd-44b9-97c2-c656ae9a3cc5",
+    "d4a6622b-3397-40e4-ac95-12dec01e669f": {
+        "uuid": "d4a6622b-3397-40e4-ac95-12dec01e669f",
         "name": "Petra PepsiOverflow",
         "date_of_birth": "2003-07-07",
         "home_address": "Fizzgata 1 Reykjavik",
         "email": "petra.pepsioverflow@example.com",
-        "phone_number": "+3546110046",
+        "phone_number": "611-0046",
         "handle": "PepsiMaxOverflowPetra",
         "url": "https://twitch.tv/PepsiMaxOverflowPetra"
     },
-    "02e60431-eadb-4c9d-971b-bfd3dbf2f3a5": {
-        "uuid": "02e60431-eadb-4c9d-971b-bfd3dbf2f3a5",
+    "2ae9c60a-9183-408a-ba24-2345412d2c05": {
+        "uuid": "2ae9c60a-9183-408a-ba24-2345412d2c05",
         "name": "Bogi Buffer",
         "date_of_birth": "2004-01-25",
         "home_address": "Fizzgata 2 Reykjavik",
         "email": "bogi.buffer@example.com",
-        "phone_number": "+3546110047",
+        "phone_number": "611-0047",
         "handle": "BufferOverflowBogi",
         "url": "https://github.com/BufferOverflowBogi"
     },
-    "d9ade0d0-b7f2-492d-9ba2-0146b9eab8fb": {
-        "uuid": "d9ade0d0-b7f2-492d-9ba2-0146b9eab8fb",
+    "ed556409-ae5f-4705-a952-86d833fc0465": {
+        "uuid": "ed556409-ae5f-4705-a952-86d833fc0465",
         "name": "Sif Canary",
         "date_of_birth": "2005-03-29",
         "home_address": "Fizzgata 3 Reykjavik",
         "email": "sif.canary@example.com",
-        "phone_number": "+3546110048",
+        "phone_number": "611-0048",
         "handle": "StackCanarySif",
         "url": "https://twitter.com/StackCanarySif"
     },
-    "bc18ed47-6abd-4868-b0ad-b8343b820bac": {
-        "uuid": "bc18ed47-6abd-4868-b0ad-b8343b820bac",
-        "name": "Andri M\u00e1r Kristj\u00e1nsson",
-        "date_of_birth": "2006-06-27",
-        "home_address": "Menntask\u00f3lavegur 2 Reykjav\u00edk",
-        "email": "andrik25@ru.is",
-        "phone_number": "581-2345",
-        "handle": "Andrizx",
-        "url": "www.mcdonalds.com"
-    },
-    "67bbafe9-4add-4c84-a5e0-8b7060e6f353": {
-        "uuid": "67bbafe9-4add-4c84-a5e0-8b7060e6f353",
-        "name": "Katla ",
-        "date_of_birth": "2016-01-14",
-        "home_address": "Gar\u00f0urinn 53 Hafnarfj\u00f6r\u00f0ur",
-        "email": "borker@dyralif.is",
-        "phone_number": "567-7477",
-        "handle": "MsDawg",
-        "url": "www.dyralif.is"
-    },
-    "150e7677-fd69-4695-84c7-71a1b07fa31b": {
-        "uuid": "150e7677-fd69-4695-84c7-71a1b07fa31b",
-        "name": "Perla",
-        "date_of_birth": "2014-03-14",
-        "home_address": "Gar\u00f0urinn 53 Hafnarfj\u00f6r\u00f0ur",
-        "email": "dog@dog.is",
-        "phone_number": "123-4567",
-        "handle": "Hunter",
-        "url": ""
-    },
-    "592bd9bc-99c8-473e-af2e-d7ec53fc9897": {
-        "uuid": "592bd9bc-99c8-473e-af2e-d7ec53fc9897",
-        "name": "balli",
+    "c8c6b964-4c56-47b8-baf9-b0cdb3e57581": {
+        "uuid": "c8c6b964-4c56-47b8-baf9-b0cdb3e57581",
+        "name": "Meowrio",
         "date_of_birth": "1234-12-12",
-        "home_address": "s 00 h",
-        "email": "bda@sfg.fgh",
-        "phone_number": "123-3456",
-        "handle": "dfg",
-        "url": ""
-    },
-    "32d89d9f-b555-4311-a104-d8009eec5b76": {
-        "uuid": "32d89d9f-b555-4311-a104-d8009eec5b76",
-        "name": "Isak",
-        "date_of_birth": "2006-10-13",
-        "home_address": "Fuck 99 Reykjav\u00edk",
-        "email": "shit@fuck",
-        "phone_number": "123-4567",
-        "handle": "Fucker",
-        "url": ""
-    },
-    "f0425fa5-8ab1-42a4-a485-2bbba452127d": {
-        "uuid": "f0425fa5-8ab1-42a4-a485-2bbba452127d",
-        "name": "shit",
-        "date_of_birth": "2222-01-01",
-        "home_address": "dsa 2 ds",
-        "email": "dasqdqa@+s",
-        "phone_number": "231-3213",
-        "handle": "shit",
-        "url": "d"
-    },
-    "b2276050-996a-4c26-a366-4d75682961ba": {
-        "uuid": "b2276050-996a-4c26-a366-4d75682961ba",
-        "name": "Testing",
-        "date_of_birth": "1212-12-12",
-        "home_address": "Sta\u00dfename 10 Statdname",
-        "email": "email@email.com",
-        "phone_number": "123-4567",
-        "handle": "VerdammtSheisse",
-        "url": ""
-    },
-    "263fd945-fd44-4bf1-aa35-9b8333856786": {
-        "uuid": "263fd945-fd44-4bf1-aa35-9b8333856786",
-        "name": "CatOne",
-        "date_of_birth": "1212-12-12",
-        "home_address": "ladjsfg 12 kp\u00f0bdfj",
-        "email": "\u00e6alskdf@\u00e6akjlsdf",
-        "phone_number": "123-4567",
-        "handle": "^._.^",
-        "url": "https:idfk.com"
-    },
-    "fbb82b6f-d88e-4b05-b9c8-691347223735": {
-        "uuid": "fbb82b6f-d88e-4b05-b9c8-691347223735",
-        "name": "CatTwo",
-        "date_of_birth": "1212-12-12",
-        "home_address": "s\u00e6alkdf 12 s\u00e6akdfj",
-        "email": "\u00e6laskdfj@l\u00e6kdfj",
-        "phone_number": "123-4567",
-        "handle": "^o_o^",
-        "url": ""
-    },
-    "ca6e459a-c570-4fec-92c6-b318a001537c": {
-        "uuid": "ca6e459a-c570-4fec-92c6-b318a001537c",
-        "name": "CatThree",
-        "date_of_birth": "1212-12-12",
-        "home_address": "sadkl\u00e6fj 12 \u00e6adsfh",
-        "email": "l\u00e6akfsdj@a\u00e6kdsjf",
-        "phone_number": "123-4567",
-        "handle": "^-_-^",
-        "url": ""
-    },
-    "47810d97-f871-44e6-aa3e-7fd70afa8e21": {
-        "uuid": "47810d97-f871-44e6-aa3e-7fd70afa8e21",
-        "name": "CatFour",
-        "date_of_birth": "1212-12-12",
-        "home_address": "ls\u00e6fdjhk 12 \u00e6ksdjf",
-        "email": "\u00e6laskdfj@k\u00e6lsajdfh",
-        "phone_number": "123-4567",
-        "handle": ">^-.o^<",
-        "url": ""
-    },
-    "2ed45a00-7e11-458a-a1da-055f883699c7": {
-        "uuid": "2ed45a00-7e11-458a-a1da-055f883699c7",
-        "name": "email",
-        "date_of_birth": "0001-01-01",
-        "home_address": "email 00 eamil",
-        "email": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee@eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        "phone_number": "111-1111",
-        "handle": "email",
-        "url": "email"
-    },
-    "a60d5579-1c2b-4f4d-b353-ec6901e74483": {
-        "uuid": "a60d5579-1c2b-4f4d-b353-ec6901e74483",
-        "name": "Andrixz",
-        "date_of_birth": "1234-12-12",
-        "home_address": "asdgf 12 asdf",
-        "email": "asdfljk@kdshjf",
+        "home_address": "Loaf 123 Hiss",
+        "email": "ball@yarn.com",
         "phone_number": "123-1234",
-        "handle": "Andrixz",
-        "url": ""
+        "handle": "^._.^",
+        "url": "https://meow.com"
     },
-    "fe002490-5473-42f1-a286-9aef6f300799": {
-        "uuid": "fe002490-5473-42f1-a286-9aef6f300799",
-        "name": "asdf",
+    "0cf35482-b97e-470c-aa26-c1dacc644381": {
+        "uuid": "0cf35482-b97e-470c-aa26-c1dacc644381",
+        "name": "Purrlock Holmes",
         "date_of_birth": "1234-12-12",
-        "home_address": "asdf 12 asdf",
-        "email": "asdf@asdf",
-        "phone_number": "213-1234",
-        "handle": "asdf",
-        "url": "asdf"
+        "home_address": "a\u00e6lkdfj 12 \u00e6kjsdfn",
+        "email": "ball@yarn",
+        "phone_number": "123-4567",
+        "handle": "^o.o^",
+        "url": "https://meow.com"
+    },
+    "ad76d722-06bf-4d8e-830d-0cd18910e6ff": {
+        "uuid": "ad76d722-06bf-4d8e-830d-0cd18910e6ff",
+        "name": "Furrnando",
+        "date_of_birth": "1234-12-12",
+        "home_address": "\u00e6lskdfj 12 \u00e6kjdsfn",
+        "email": "ball@yar",
+        "phone_number": "123-1234",
+        "handle": "^o_0^",
+        "url": "https://meow.com"
+    },
+    "8abe3edd-1a72-4e9d-804e-d51800d6bd06": {
+        "uuid": "8abe3edd-1a72-4e9d-804e-d51800d6bd06",
+        "name": "Catpernicus",
+        "date_of_birth": "1234-12-12",
+        "home_address": "alskdfj 12 kjasdfn",
+        "email": "ball@yarn",
+        "phone_number": "123-1234",
+        "handle": "^-_-^ zZ",
+        "url": "https://meow.com"
+    },
+    "d0e359f7-22cc-430a-9dc3-b2035304c575": {
+        "uuid": "d0e359f7-22cc-430a-9dc3-b2035304c575",
+        "name": "Purrcules",
+        "date_of_birth": "1234-12-12",
+        "home_address": "kjdsfhg 12 ljhsdbf",
+        "email": "ball@yarn",
+        "phone_number": "123-1234",
+        "handle": "^\u00f3.\u00f2^",
+        "url": "https://meow.com"
     }
 }

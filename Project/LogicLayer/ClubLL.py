@@ -10,29 +10,31 @@ from DataLayer import DataLayerAPI
 from Models import Club, Team, Match, Tournament, ValidationError
 from LogicLayer import MatchLL
 
+
 class ClubLL:
     ''' Club logic. '''
 
     def __init__(self, match_logic: MatchLL) -> None:
         ''' Initialize the ClubLL instance.
-        
+
         :param match_logic:
             The logic layer responsible for match operations and validations.
         :type match_logic: MatchLL
         '''
         self._match_logic = match_logic
 
-    def create_club(self,
+    def create_club(
+        self,
         name: str,
         club_color: str,
         country: str,
         home_town: str
-        ) -> Club:
+    ) -> Club:
         """
         First takes in the info that has already been validated
         and creates a uuid for the club,
         Then creates the object using the uuid and info and
-        points the object to Data Layer API to be stored as a club        
+        points the object to Data Layer API to be stored as a club.
 
         :param name:
             The name of the club
@@ -60,7 +62,6 @@ class ClubLL:
         DataLayerAPI.store_club(new_club)
         return new_club
 
-
     def list_all_clubs(self) -> list[Club]:
         """
         Loads a list of all club objects from the Data Layer API
@@ -68,7 +69,6 @@ class ClubLL:
         :return: Returns a list of all club objects
         :rtype: list[Club]
         """
-
         clubs: list[Club] = DataLayerAPI.load_clubs()
         return clubs
 
@@ -78,7 +78,7 @@ class ClubLL:
         First gets the clubs uuid,
         Then loads all team objects and
         lists all team objects that have the club uuid of the wanted club
-        
+
         :param club_name:
             club name to find all teams that are in the club
         :type club_name: str
@@ -100,22 +100,21 @@ class ClubLL:
 
         return teams_in_club
 
-
     def get_club_wins(self, club_name: str) -> str:
         """Gets club name
-        
+
         First gets the uuid of the club
         Then Loads all teams and finds all the teams in the club
         and lists their team uuid's
 
         Then Loads all matches and if the match winner
         is in the list of teams in the club one is added to the count
-        
+
         :param club_name:
             The clubs name to find the total won matches
         :type club_name: str
 
-        :return: 
+        :return:
         Returns a string number of the total won matches
         of the teams in the club
         :rtype: str
@@ -179,8 +178,10 @@ class ClubLL:
 
         # Loops through all tournament objects
         for tournament in model_tournaments:
-            
-            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+
+            matches_list: list[Match] = self._match_logic.get_matches(
+                tournament.uuid
+            )
 
             # if matches is empty skips tournament
             if not matches_list:
@@ -203,14 +204,18 @@ class ClubLL:
 
         return str(points)
 
-# Fra utility
-
     def get_club_by_name(self, club_name: str) -> Club:
-        """
-        Takes in club name
+        """Given a name, finds the club with the same name.
+
         looks through all clubs until it finds the right club name
         and returns the teams uuid
         if no team is found an error is raised
+
+        :param club_name:
+            The name of the club to find.
+
+        :returns:
+            The club found.
         """
 
         model_clubs: list[Club] = DataLayerAPI.load_clubs()

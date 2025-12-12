@@ -18,6 +18,7 @@ def store_match(match: Match) -> None:
 
     :param match:
         The match object to store.
+    :type match: Match
     """
     # Changes object Match into a dictionary mapping attributes to keys.
     data = match.__dict__
@@ -27,18 +28,18 @@ def store_match(match: Match) -> None:
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
             file_content = dict(json.load(match_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read match file.")
 
     # Adds the new match into the dictionary mapping it's uuid to the
     # object for easy lookup.
     file_content[match.uuid] = data
-    
+
     # Writes the updated file content back into the JSON file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as match_file:
             json.dump(file_content, match_file, indent=4, default=str)
-    except:
+    except Exception:
         raise ValidationError("Could not write into match file.")
 
 
@@ -47,12 +48,13 @@ def load_match() -> list[Match]:
 
     :returns:
         The list of matches.
+    :rtype: list[Match]
     """
     # Reads the JSON file containing matches and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
             file_content = dict(json.load(match_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read match file")
 
     # Creates a list of all matches in the server file.
@@ -67,14 +69,16 @@ def load_match() -> list[Match]:
                 value["match_time"],
                 "%H:%M:%S"
             ).time()
-        except:
+        except Exception:
             raise ValidationError("Could not change attributes back")
 
         # Uses **value to unpack the dictionary into a Match model object.
         try:
             match_list.append(Match(**value))
-        except:
-            raise ValidationError("Could change file content back into Match object")
+        except Exception:
+            raise ValidationError(
+                "Could change file content back into Match object"
+            )
 
     return match_list
 
@@ -87,15 +91,17 @@ def update_match(uuid: str, updated_match: Match) -> None:
 
     :param uuid:
         uuid to look up the match to update.
+    :type uuid: str
 
     :param updated_match:
         The match object to update the match to.
+    :type updated_match: Match
     """
     # Reads the JSON file containing matches and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as match_file:
             file_content = dict(json.load(match_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read match file")
 
     # Overwrites the object tied to the given uuid to the object
@@ -104,10 +110,10 @@ def update_match(uuid: str, updated_match: Match) -> None:
         file_content[uuid] = updated_match.__dict__
     else:
         raise ValidationError("Could not find match with given uuid.")
-    
+
     # Writes the updated dictionary into the match file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as match_file:
             json.dump(file_content, match_file, indent=4, default=str)
-    except:
+    except Exception:
         raise ValidationError("Could not write into match file.")

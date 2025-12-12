@@ -17,8 +17,8 @@
 ### On site: Yes
 
 ## Kristján Hagalín
-### Time:
-### On site:
+### Time: 11:20
+### On site: Yes
 
 ## Sindri Freysson
 ### Time: 8:30
@@ -29,20 +29,23 @@
 Last day...
 ## State of group: 
 Last day....
-## Divisions: 
-- UI / UX:
-- System engineer:
-- QC:
-
 ## ToDo-list:
-
+- Kill bugs
+- Test with users
+- Finish polishing docstring and type hinting
+- Finilize design document
+- Finish project
 # Evening meeting (Diary)
 ## State of project:
 - Fixed Bug - Team members Max is 4, should 5 -> The bug was caused by corrupted data. 
+- Completed type hinting
+- Completed scuffed sphinx-style doc-string
+- Completed project
+- Completed project latex design document
+- Completed video introduction
+- Conducted user tests
+- Added Sindri to project
 ## State of group: 
-
-## Divisions:
-- UI / UX:
-- System engineer: 
-- QC: 
+Its finally over... We are all happy with this project. 
 ## ToDo-list:
+Celebrate

@@ -43,6 +43,7 @@ class AdminUI:
         self.underscore: str = "\033[4m"  # Underline formatting
         self.options: dict[str, str] = {}  # Remember options
         self.choice: str = ""  # Remember choice
+        self.red: str = "\033[31m"
 
     def admin_screen(self) -> MenuOptions:
         """
@@ -397,7 +398,12 @@ class AdminUI:
         choice_list: list[str] = []
 
         # Get matches for the tournament (only upcoming matches)
-        matches: list[str] = self.utility.list_matches(tournament_uuid, False)
+        try:
+            matches: list[str] = self.utility.list_matches(
+                tournament_uuid, False
+            )
+        except ValidationError:
+            matches: list[str] = []
 
         # Populate options for each match
         for idx, match_str in enumerate(matches, start=1):
@@ -564,33 +570,23 @@ class AdminUI:
         ]
         info: list = [f"- - - - {str(tournament_name)} - - - -"]
 
-        def formatter(key: str, value: str) -> str:
-            """
-            Format a key-value pair into a fixed-width
-            string for table display.
-
-            :param key: The label or field name to display.
-            :param value: The corresponding value to display.
-            :return: A formatted string with the key and value aligned.
-            :rtype: str
-            """
-            front: int = 24  # Width for the key column
-            back: int = 40  # Width for the key column
-            return f"{key:<{front}} {value:<{back}}"
-
         # Add tournament details using the formatter
         info.extend(
             [
-                formatter("Start Date:", str(tournament_object.start_date)),
-                formatter("End Date:", str(tournament_object.end_date)),
-                formatter(
+                self.utility.formatter(
+                    "Start Date:", str(tournament_object.start_date)
+                ),
+                self.utility.formatter(
+                    "End Date:", str(tournament_object.end_date)
+                ),
+                self.utility.formatter(
                     "Start Timeframe:", str(tournament_object.time_frame_start)
                 ),
-                formatter(
+                self.utility.formatter(
                     "End Timeframe:", str(tournament_object.time_frame_end)
                 ),
-                formatter("Venue:", str(tournament_object.venue)),
-                formatter("Email:", str(tournament_object.email)),
+                self.utility.formatter("Venue:", str(tournament_object.venue)),
+                self.utility.formatter("Email:", str(tournament_object.email)),
             ]
         )
 
@@ -602,7 +598,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{f"{idx}.":<4}{team.name}")
+            info.append(f"{f'{idx}.':<4}{team.name}")
 
         # Options for next screen
         options: dict[str, str] = {
@@ -626,9 +622,12 @@ class AdminUI:
                 if amount_teams > 1:
                     return MenuOptions.PUBLISH
                 print(
+                    self.red +
                     "There Need To 2 Or More Teams In A Tournament To Publish."
+                    + self.reset
                 )
-                input("Input Anything To Continue")
+
+                input("Press Enter To Continue")
                 return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
             case "b":
                 return MenuOptions.ADMIN_SCREEN
@@ -676,7 +675,7 @@ class AdminUI:
             LogicLayerAPI.get_teams_from_tournament_name(tournament_name),
             start=1,
         ):
-            info.append(f"{f"{idx}.":<4}{team.name}")
+            info.append(f"{f'{idx}.':<4}{team.name}")
 
         options: dict[str, str] = {
             "1": "Add Team",
@@ -714,8 +713,8 @@ class AdminUI:
         # Retrieve tournament and current teams
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
+            team.name
+            for team in LogicLayerAPI.get_teams_from_tournament_name(
                 tournament_name
             )
         ]
@@ -723,7 +722,7 @@ class AdminUI:
 
         # Get teams that are not already in the tournament
         teams_not_in_tournament: list[str] = [
-            x for x in all_teams if x not in teams_in_tournament
+            team for team in all_teams if team not in teams_in_tournament
         ]
         unique_names: list[str] = teams_not_in_tournament
 
@@ -786,7 +785,7 @@ class AdminUI:
         # Validate team membership rules
         if team_to_add in teams_in_tournament:
             message = f"{team_to_add} Is Already In {tournament_name}"
-        elif not (3 <= len(team_object.list_player_uuid) <= 5):
+        elif not 3 <= len(team_object.list_player_uuid) <= 5:
             message = f"{team_to_add} Must Have Between 3 And 5 Players"
         elif team_to_add not in all_teams:
             message = f"{team_to_add} Is Not A Valid Team"
@@ -818,8 +817,8 @@ class AdminUI:
         # Retrieve tournament and current teams
         tournament_name: str = LogicLayerAPI.save_player() or "None"
         teams_in_tournament: list[str] = [
-            t.name
-            for t in LogicLayerAPI.get_teams_from_tournament_name(
+            team.name
+            for team in LogicLayerAPI.get_teams_from_tournament_name(
                 tournament_name
             )
         ]
@@ -842,8 +841,11 @@ class AdminUI:
 
         # Prompt admin for team name
         team_to_add: str = input(
-            self.message_color + "Input Team Name: \n" + self.reset
+            self.message_color +
+            "Input Team Name Or 'q' To Cancel:\n" + self.reset
         )
+        if team_to_add.lower() == "q":
+            return user_path[-2]
 
         # Validate team exists
         try:
@@ -909,7 +911,7 @@ class AdminUI:
             MenuOptions.PUBLISH,
         ]
         # Confirmation message
-        question: str = "Do you want to publish"
+        question: str = "Do you want to publish "
         info: list[str] = [
             f"{question}{self.message_color}"
             f"{tournament_object.name}{self.reset}? Y/N"
@@ -930,7 +932,7 @@ class AdminUI:
                 LogicLayerAPI.publish(tournament_name)
                 return MenuOptions.MANAGE_TOURNAMENT
             except ValidationError as ex:
-                input(f"Error: {ex} \nInput anything to go back")
+                input(f"Error: {ex} \nPress enter to go back")
 
         return MenuOptions.MANAGE_INACTIVE_TOURNAMENT
 

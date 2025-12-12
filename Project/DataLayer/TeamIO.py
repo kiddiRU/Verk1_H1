@@ -11,45 +11,49 @@ from Models import Team, ValidationError
 
 FILE_PATH = "DataLayer/Repository/teams.json"
 
+
 def store_team(team: Team) -> None:
     """Stores new teams in a JSON file to be fetched later.
 
     :param team:
         The team object to store.
+    :type team: Team
     """
     # Changes object team into a dictionary mapping attributes to keys.
     data = team.__dict__
-   
+
     # Reads JSON file containing teams and stores the contents as a
     # dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read team file.")
-   
+
     # Adds the new team into the dictionary mapping it's uuid to the
     # object for easy lookup.
     file_content[team.uuid] = data
-    
+
     # Writes the updated file content into the file containing teams.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as team_file:
             json.dump(file_content, team_file, indent=4)
-    except:
+    except Exception:
         raise ValidationError("Could not write into team file.")
+
 
 def load_teams() -> list[Team]:
     """Gets a list of all teams stored with the store_team function.
 
     :returns:
         The list of teams.
+    :rtype: list[Team]
     """
     # Reads the JSON file containing teams and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read team file.")
 
     # Creates a list of all teams in the team file.
@@ -59,10 +63,13 @@ def load_teams() -> list[Team]:
         # Uses **value to unpack the dictionary into a Team model object.
         try:
             team_list.append(Team(**value))
-        except:
-            raise ValidationError("Could not change file content into Team object.")
+        except Exception:
+            raise ValidationError(
+                "Could not change file content into Team object."
+            )
 
     return team_list
+
 
 def update_team(uuid: str, updated_team: Team) -> None:
     """Updates a team stored with the store_team function.
@@ -72,15 +79,17 @@ def update_team(uuid: str, updated_team: Team) -> None:
 
     :param uuid:
         uuid to look up the team to update.
+    :type uuid: str
 
     :param updated_team:
         The team object to update the team to.
+    :type updated_team: Team
     """
     # Reads the JSON file containing teams and stores it as a dictionary.
     try:
         with open(FILE_PATH, "r", encoding='utf-8') as team_file:
             file_content = dict(json.load(team_file))
-    except:
+    except Exception:
         raise ValidationError("Could not read team file.")
 
     # Overwrites the object tied to the given uuid to the object
@@ -89,10 +98,10 @@ def update_team(uuid: str, updated_team: Team) -> None:
         file_content[uuid] = updated_team.__dict__
     else:
         raise ValidationError("Could not find team with given uuid")
-    
+
     # Writes the updated dictionary into the team file.
     try:
         with open(FILE_PATH, "w", encoding='utf-8') as team_file:
             json.dump(file_content, team_file, indent=4)
-    except:
+    except Exception:
         raise ValidationError("Could not write into team file.")

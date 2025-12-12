@@ -8,23 +8,29 @@ Data layer API
 from Models import Club, Match, Player, Server, Team, Tournament
 from DataLayer import PlayerIO, TeamIO, TournamentIO, ClubIO, MatchIO, ServerIO
 
-""" Player API """
+
+# Player API
+
 
 def store_player(player: Player) -> None:
     """Stores new players in a JSON file to be fetched later.
 
     :param player:
         The player object to store.
+    :type player: Player
     """
     PlayerIO.store_player(player)
+
 
 def load_players() -> list[Player]:
     """Gets a list of all players stored with the store_player function.
 
     :returns:
         The list of players.
+    :rtype: list[Player]
     """
     return PlayerIO.load_players()
+
 
 def update_player(uuid: str, updated_player: Player) -> None:
     """Updates a player stored with the store_player function.
@@ -34,29 +40,37 @@ def update_player(uuid: str, updated_player: Player) -> None:
 
     :param uuid:
         uuid to look up player to update.
+    :type uuid: str
 
     :param updated_player:
         The player object to update the player to.
+    :type updated_player: Player
     """
     PlayerIO.update_player(uuid, updated_player)
 
-""" Team API """
+
+# Team API
+
 
 def store_team(team: Team) -> None:
     """Stores new teams in a JSON file to be fetched later.
 
     :param team:
         The team object to store.
+    :type team: Team
     """
     TeamIO.store_team(team)
+
 
 def load_teams() -> list[Team]:
     """Gets a list of all teams stored with the store_team function.
 
     :returns:
         The list of teams.
+    :rtype: list[Team]
     """
     return TeamIO.load_teams()
+
 
 def update_team(uuid: str, updated_team: Team) -> None:
     """Updates a team stored with the store_team function.
@@ -66,29 +80,37 @@ def update_team(uuid: str, updated_team: Team) -> None:
 
     :param uuid:
         uuid to look up the team to update.
+    :type uuid: str
 
     :param updated_team:
         The team object to update the team to.
+    :type updated_team: Team
     """
     TeamIO.update_team(uuid, updated_team)
 
-""" Club API """
+
+# Club API
+
 
 def store_club(club: Club) -> None:
     """Stores new clubs in a JSON file to be fetched later.
 
     :param club:
         The club object to store.
+    :type club: Club
     """
     ClubIO.store_club(club)
+
 
 def load_clubs() -> list[Club]:
     """Gets a list of all clubs stored with the store_club function.
 
     :returns:
         The list of clubs.
+    :rtype: list[Club]
     """
     return ClubIO.load_club()
+
 
 def update_club(uuid: str, updated_club: Club) -> None:
     """Updates a club stored with the store_club function.
@@ -98,21 +120,27 @@ def update_club(uuid: str, updated_club: Club) -> None:
 
     :param uuid:
         uuid to look up the club to update.
+    :type uuid: str
 
     :param updated_club:
         The club object to update the team to.
+    :type updated_club: Club
     """
     ClubIO.update_club(uuid, updated_club)
 
-""" Tournament API """
+
+# Tournament API
+
 
 def store_tournament(tournament: Tournament) -> None:
     """Stores new tournaments in a JSON file to be fetched later.
 
     :param tournament:
         The tournament object to store.
+    :type tournament: Tournament
     """
     TournamentIO.store_tournament(tournament)
+
 
 def load_tournaments() -> list[Tournament]:
     """Gets a list of all tournaments stored with the store_tournament
@@ -120,8 +148,10 @@ def load_tournaments() -> list[Tournament]:
 
     :returns:
         The list of tournaments.
+    :rtype: list[Tournament]
     """
     return TournamentIO.load_tournaments()
+
 
 def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
     """Updates a tournament stored with the store_tournament function.
@@ -131,29 +161,37 @@ def update_tournament(uuid: str, updated_tournament: Tournament) -> None:
 
     :param uuid:
         uuid to look up the tournament to update.
+    :type uuid: str
 
     :param updated_tournament:
         The tournament object to update the tournament to.
+    :type updated_tournament: Tournament
     """
     TournamentIO.update_tournament(uuid, updated_tournament)
 
-""" Match API """
+
+# Match API
+
 
 def store_match(match: Match) -> None:
     """Stores new matches in a JSON file to be fetched later.
 
     :param match:
         The match object to store.
+    :type match: Match
     """
     MatchIO.store_match(match)
+
 
 def load_matches() -> list[Match]:
     """Gets a list of all matches stored with the store_match function.
 
     :returns:
         The list of matches.
+    :rtype: list[Match]
     """
     return MatchIO.load_match()
+
 
 def update_match(uuid: str, updated_match: Match) -> None:
     """Updates a match stored with the store_match function.
@@ -163,29 +201,37 @@ def update_match(uuid: str, updated_match: Match) -> None:
 
     :param uuid:
         uuid to look up the match to update.
+    :type uuid: str
 
     :param updated_match:
         The match object to update the match to.
+    :type updated_match: Match
     """
     MatchIO.update_match(uuid, updated_match)
 
-""" Server API """
+
+# Server API
+
 
 def store_server(server: Server) -> None:
     """Stores new servers in a JSON file to be fetched later.
 
     :param server:
         The server object to store.
+    :type server: Server
     """
     ServerIO.store_server(server)
 
+
 def load_servers() -> list[Server]:
     """Gets a list of all servers stored with the store_server function.
-    
+
     :returns:
         The list of servers.
+    :rtype: list[Server]
     """
     return ServerIO.load_server()
+
 
 def update_server(uuid: str, updated_server: Server) -> None:
     """Updates the server stored with the store_server function.
@@ -195,8 +241,10 @@ def update_server(uuid: str, updated_server: Server) -> None:
 
     :param uuid:
         uuid to look up the server to update.
+    :type uuid: str
 
     :param updated_server:
         The server object to update the server to.
+    :type updated_server: Server
     """
     ServerIO.update_server(uuid, updated_server)

@@ -10,6 +10,7 @@ from DataLayer import DataLayerAPI
 from Models import Team, Player, Tournament, Match, Club, ValidationError
 from LogicLayer import MatchLL, ClubLL, PlayerLL, Validation
 
+
 class TeamLL:
     ''' Team logic. '''
 
@@ -30,8 +31,8 @@ class TeamLL:
 
     def set_club_logic(self, club_logic: ClubLL) -> None:
         '''Inject the club logic.
-        
-        :param club_logic: 
+
+        :param club_logic:
             The logic layer resposible for club operations and validations.
         :type club_logic: ClubLL
         '''
@@ -39,7 +40,7 @@ class TeamLL:
 
     def set_match_logic(self, match_logic: MatchLL) -> None:
         '''Inject the match logic.
-        
+
         :param match_logic:
             The logic layer responsible for match operations and validations.
         :type match_logic: MatchLL
@@ -53,41 +54,82 @@ class TeamLL:
         url: str,
         ascii_art: str
     ) -> Team:
-        '''
-        Takes in the teams name, its captain, club, url and ascii art.
+        '''Creates a new team, sends it to be
+        stored and returns the new Team object.
 
-        Creates a new Team object, sends it the data layer to be stored and returns it.
+        :param name:
+            The name of the team.
+        :type name: str
+
+        :param team_captain:
+            The object of the player creating the team.
+        :type team_captain: Player
+
+        :param club_name:
+            The name of teams club.
+        :type club_name: str
+
+        :param url:
+            The teams URL.
+        :type url: str
+
+        :param ascii_art:
+            The teams ASCII art.
+        :type ascii_art: str
+
+        :return:
+            A new Team object.
+        :rtype: Team
         '''
+        # Gets a list of all players that are in teams.
         teams: list[Team] = DataLayerAPI.load_teams()
-        players_in_teams: list[str] = [uuid for t in teams for uuid in t.list_player_uuid]
+        players_in_teams: list[str] = [
+            uuid for t in teams for uuid in t.list_player_uuid
+        ]
 
+        # Checks to make sure player isn't already in a team.
         if team_captain.uuid in players_in_teams:
-            raise ValidationError('You can\'t create a team when you\'re already in one!')
+            raise ValidationError(
+                'You can\'t create a team when you\'re already in one!'
+            )
 
+        # Validates the attributes given before creating the player.
         Validation.validate_attr('handle', name, 'TEAM')
         uuid = str(uuid4())
 
+        # Get the the UUID of the club with the given name.
         clubs: list[Club] = DataLayerAPI.load_clubs()
-        club_uuid = next(
+        club_uuid: str | None = next(
             (c.uuid for c in clubs if c.name == club_name),
-            'b66ba594-d6a5-4af0-ac3b-f0cc94ca61fa'
+            None
         )
 
+        # If the no club is found with the given name, raise an error.
+        if club_uuid is None:
+            raise ValidationError(f'No club found with the name: {club_name}!')
+
+        # Create a new Team object.
         new_team = Team(
-            uuid, name, [team_captain.uuid], team_captain.uuid, club_uuid, None, url, ascii_art
+            uuid, name,
+            [team_captain.uuid], team_captain.uuid, club_uuid,
+            None, url, ascii_art
         )
 
+        # Send the new Team object to be stored, and return it.
         DataLayerAPI.store_team(new_team)
         return new_team
 
-    def add_player(self, player_handle: str, current_player: Player) -> Team | str:
+    def add_player(
+            self, player_handle: str,
+            current_player: Player
+            ) -> Team | str:
         """Gets the handle of the player to add and
         the player object of the captain
 
         First checks if the player is already in a team
         Then finds the team of the captain and
-        adds the player to the team        
-        
+        adds the player to the team
+
         :param player_handle:
             The player handle of the player to add to the team
         :type player_handle: str
@@ -102,8 +144,12 @@ class TeamLL:
         :rtype: Team
         """
         # gets players and teams uuid, and load all team models
-        player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
-        team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
+        player_uuid: str = self._player_logic.player_handle_to_uuid(
+            player_handle
+            )
+        team_uuid: str = self._player_logic.get_players_team_uuid(
+            current_player.uuid
+            )
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
         # Loops through all teams
@@ -123,15 +169,19 @@ class TeamLL:
         # if the team is not found
         return ""
 
-    def remove_player(self, player_handle: str, current_player: Player) -> Team:
+    def remove_player(
+            self,
+            player_handle: str,
+            current_player: Player
+            ) -> Team:
         """Gets the handle of the player to add and
         the player object of the captain
 
         Looks through all teams to find the team of the captain
         First checks that the player to remove is not the captain
         Otherwise it removes the player from the team
-        if the player is not found and error message will be raised 
-        
+        if the player is not found and error message will be raised
+
         :param player_handle:
             the player handle of the player to remove from the team
         :type player_handle: str
@@ -145,8 +195,12 @@ class TeamLL:
         :rtype: Team
         """
         # gets players and teams uuid, and load all team models
-        player_uuid: str = self._player_logic.player_handle_to_uuid(player_handle)
-        team_uuid: str = self._player_logic.get_players_team_uuid(current_player.uuid)
+        player_uuid: str = self._player_logic.player_handle_to_uuid(
+            player_handle
+            )
+        team_uuid: str = self._player_logic.get_players_team_uuid(
+            current_player.uuid
+            )
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
         # Loops through all teams
@@ -159,18 +213,20 @@ class TeamLL:
                     return team
 
                 # If the player to remove is not in the team
-                except ValidationError as exc:
+                except ValueError as exc:
                     raise ValidationError("Player not in team") from exc
 
         raise ValidationError("Team not found")
 
-
-    def get_team_members(self, team_name: str) -> list[str]:
+    def get_team_members(
+            self,
+            team_name: str
+            ) -> list[str]:
         """Gets the name of the team
 
         Looks through all teams to find the correct team object
         and extracts the list of player uuid in the team
-        
+
         :param team_name:
             The team name is used to find the team object
         :type team_name: str
@@ -191,10 +247,9 @@ class TeamLL:
         # if team is not found
         raise ValidationError("Team not found")
 
-
     def list_all_teams(self) -> list[Team]:
         """Is called to get a list of all teams
-        
+
         :return: Returns a list of all team objects
         :rtype: list[Team]
         """
@@ -208,7 +263,7 @@ class TeamLL:
         Then loads all player objects and
         lists all players objects that have the
         uuid of the players in the team
-        
+
         :param team_name:
             The team name of the team to get the player objects
         :type team_name: str
@@ -228,13 +283,12 @@ class TeamLL:
 
         return players
 
-    #TODO implement if the team won the tournament add WIN and LOST to if they lost
     def get_team_history(self, team_name: str) -> list[str]:
         """Gets the team name
 
         First gets the team uuid, Then loads all Tournaments
         and lists all tournaments that the teams uuid is in
-        teams playing 
+        teams playing
 
         :param team_name:
             The team name to find the tournaments they participated in
@@ -252,9 +306,11 @@ class TeamLL:
         # Loops through all tournaments
         for tournament in model_tournaments:
 
-            # If the team is in a tournament the tournament is added to the list
+            # If the team is in a tournament
+            # the tournament is added to the list
             if team_uuid in tournament.teams_playing:
-                teams_history.append(tournament.name)
+                if tournament.status == ("ACTIVE" or "ARCHIVED"):
+                    teams_history.append(tournament.name)
 
         return teams_history
 
@@ -262,9 +318,9 @@ class TeamLL:
         """Gets the team name
 
         First gets the uuid of the team,
-        Then Loads all matches and adds one to the count 
+        Then Loads all matches and adds one to the count
         when the match winner uuid matches the teams uuid
-        
+
         :param team_name:
             The team name of the team to find the total of won matches
         :type team_name: str
@@ -288,14 +344,14 @@ class TeamLL:
 
     def get_team_points(self, team_name: str) -> str:
         """Gets the team name
-        
+
         First gets the teams uuid,
         Then loads all tournaments and get a list of all matches
         with the tournament uuid,
         Finds the last match of the tournament (Finals) and finds the
         winning and losing team of the match, and if the team is the
         winner they get 3 points and if the loser gets 1 point
-        
+
         :param team_name:
             The team name of the team to find the total points from tournaments
         :type team_name: str
@@ -310,8 +366,10 @@ class TeamLL:
 
         # Loops through all tournaments
         for tournament in model_tournaments:
-            
-            matches_list: list[Match] = self._match_logic.get_matches(tournament.uuid)
+
+            matches_list: list[Match] = self._match_logic.get_matches(
+                tournament.uuid
+                )
 
             # if matches is empty skips tournament
             if not matches_list:
@@ -321,8 +379,8 @@ class TeamLL:
             tour_final_match: Match = matches_list[-1]
 
             # gets the winning and losing teams
-            winner: str = tour_final_match.winner
-            loser: str = tour_final_match.losing_team
+            winner: str | None = tour_final_match.winner
+            loser: str | None = tour_final_match.losing_team
 
             # if the winning team is the wanted team
             if winner == team_uuid:
@@ -332,7 +390,6 @@ class TeamLL:
             if loser == team_uuid:
                 points += 1
 
-
         return str(points)
 
     # Changed by Sindri
@@ -341,11 +398,11 @@ class TeamLL:
 
         First loads all clubs, and gets a list of all team names in the club
         and if the team name is in the list it is their club
-        
+
         :param team_name:
             The team name to get the club name from
         :type team_name: str
-        
+
         :return: Returns the name of the club that the team is in
         :rtype: str
         """
@@ -361,11 +418,9 @@ class TeamLL:
 
         return ""
 
-# Fra utility
-
     def get_team_by_name(self, name: str) -> Team:
         '''Gets a Team object by its name.
-    
+
         :param team_name:
             The name of the team to fetch.
         :type team_name: str
@@ -375,8 +430,14 @@ class TeamLL:
         :rtype: Team
         '''
         teams: list[Team] = DataLayerAPI.load_teams()
-        team: Team | None = next((t for t in teams if t.name == name), None)
 
+        # Finds the team with the given name.
+        team: Team | None = next(
+            (t for t in teams if t.name == name),
+            None
+        )
+
+        # Raises an error if team isn't found.
         if team is None:
             raise ValidationError(f'No team found named: {name}')
 
@@ -384,7 +445,7 @@ class TeamLL:
 
     def get_team_by_uuid(self, uuid: str) -> Team:
         '''Gets a Team object by its UUID.
-    
+
         :param team_uuid:
             The UUID of the team to fetch.
         :type team_uuid: str
@@ -393,9 +454,11 @@ class TeamLL:
             The object of the team with the given UUID.
         :rtype: Team
         '''
+        # Get an object of the team with the given UUID.
         teams: list[Team] = DataLayerAPI.load_teams()
         team: Team | None = next((t for t in teams if t.uuid == uuid), None)
 
+        # If no team is found, raise an error.
         if team is None:
             raise ValidationError(f'No team found with the UUID: {uuid}')
 
@@ -403,7 +466,7 @@ class TeamLL:
 
     def team_name_to_uuid(self, team_name: str) -> str:
         '''Converts a teams name, to their UUID.
-    
+
         :param team_name:
             The name of the team.
         :type team_name: str

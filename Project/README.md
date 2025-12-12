@@ -1,30 +1,46 @@
-# Project folder
-The project expects to run from Project folder
-## Coding standard
+# HR e-Sport Extravaganza
 
-### Python standard
-- Using Pep 8 
-- snake case 
-- Type hinting
-- Branch when creating a new feature
-- Report all problems to Sindri or group
-- Author of code should write comments with their name, email and date in the first lines of that file. 
-- Using Flake8 docstring
-- If you add and/or change existing code, then write #Created/Changed by "name" above that class or function.
-- If you rewrite an existing function, and significant changes were made, then your use #Created by "name"
-- Comment code if it is important or might have consequences if changed
-- If you create or change code you must write a new comment if it conflicts with the original comment.
-### Project standard
-- CRUD naming conventions for 3-tiered functions
-- UILayer: Add, show, edit, Remove
-- LogicLayer: Create, get, change, Delete
-- DataLayer: Store, load, Update, Discard
+## General guide to running this program.
 
-### Header of file
-- Author: Full Name
-- Date: YYYY-MM-DD
-- Description of purpose
+### Imports
+All imports are in the Python Standard Library thus no requirements.txt is
+provided. A list of imports used in the project is shown below.
+- datetime
+- enum
+- json
+- os
+- uuid
 
-## TODO
+### Python version
+This program was tested on and guaranteed to work on python version 3.13,
+other python versions 3.x > 3.4 should work but not guaranteed.
 
+### Data
+In the Project/DataLayer/Repository/ you should find the following files.
+- clubs.json
+- match.json
+- players.json
+- server.json
+- teams.json
+- tournament.json
+Initially, these files should only contain "{}", as you use the program creating
+clubs, players, teams, tournaments, etc, these files will store the information.
+Tampering with these files manually could break the system and is strongly
+advised against.
+
+We provide dummy data for clubs, players, teams and tournaments for testing,
+these files can be found in the DummyData/ directory and the contents of these
+files can be copied to the other files in the Project/DataLayer/Repository.
+The other files which do not receive dummy data should remain as described
+above.
+
+### Running the program
+Running the program is as simple as moving to the Project/ directory in any
+standard terminal and executing "python3 main.py" or however you interpret
+python programs on your system.
+
+### Admin
+Admins can create and host tournaments aswell as create clubs, to login in as
+admin you open the login screen and when prompted for a handle, you input 
+"admin".
 
