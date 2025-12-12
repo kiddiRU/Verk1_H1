@@ -202,6 +202,7 @@ def validate_name(name: str) -> str:
 def validate_home_address(home_address: str) -> str:
     """Validates input to a valid home address
 
+    - Checks that address is not longer the 39 characters
     - Checks if the address is spilt into 3 parts
     - Checks if the first and third parts are letters
     - Checks if the second part is digits and
@@ -218,6 +219,12 @@ def validate_home_address(home_address: str) -> str:
     :rtype: str
     """
     home_address = home_address.strip()
+
+    # Checks if address is longer then 39
+    if len(home_address) > 39:
+        raise ValidationError(
+            "Address can't be longer then 39 characters long"
+        )
 
     # Splits the address into parts and check that there are only three parts
     address_list: list[str] = home_address.split()
@@ -250,6 +257,7 @@ def validate_home_address(home_address: str) -> str:
 def validate_phone_number(phone_number: str) -> str:
     """Validates input to a valid phone number
 
+    - Check the length of the number
     - Checks if there is a dash in the string
     - Splits the string by the dash
     - Checks that both parts are all numbers and that
@@ -266,6 +274,10 @@ def validate_phone_number(phone_number: str) -> str:
     :rtype: str
     """
     phone_number = phone_number.strip()
+
+    # Checks the length of the phone number
+    if len(phone_number) != 8:
+        raise ValidationError("Invalid phone number")
 
     # Checks if a dash is in the string and splits it by the dash
     if "-" in phone_number:
