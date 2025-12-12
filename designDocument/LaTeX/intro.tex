@@ -4,3 +4,13 @@ and managing an e-sport tournament event, followed by user testing of the softwa
 allows organizers to create and manage tournaments and input match results.
 
 Write about project 
+
+The goal of this project is to create an esports tournament managing system, the system supports
+three user groups, organizer, player and spectators. The organizer can create and manage tournaments
+and create clubs, players can be registered and after registering log in and manage and create teams,
+and spectators can view information about players, teams, clubs and tournament.
+
+The system is built using a three-tier-design with UI layer, logic layer and data layer. It also includes
+a logic layer API and a data layer API. The UI only communicates with logic layer API, that communicates
+with the logic layer which then communicate the data layer API that communicates with the data layer,
+so the UI should never directly communicate with either the data layer or data layer API.
