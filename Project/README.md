@@ -28,8 +28,8 @@ clubs, players, teams, tournaments, etc, these files will store the information.
 Tampering with these files manually could break the system and is strongly
 advised against.
 
-We provide dummy data for clubs, players and tournaments for testing, these
-files can be found in the DummyData/ directory and the contents of these
+We provide dummy data for clubs, players, teams and tournaments for testing,
+these files can be found in the DummyData/ directory and the contents of these
 files can be copied to the other files in the Project/DataLayer/Repository.
 The other files which do not receive dummy data should remain as described
 above.
