@@ -1,8 +1,8 @@
 # Diary, 2025-12-12
 
 ## Andri Már
-### Time: 
-### On site: 
+### Time: 9:00
+### On site: Yes
 
 ## Elmar
 ### Time:
