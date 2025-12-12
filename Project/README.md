@@ -24,7 +24,7 @@ In the Project/DataLayer/Repository/ you should find the following files.
 - teams.json
 - tournament.json
 Initially, these files should only contain "{}", as you use the program creating
-players, teams, tournaments, etc, these files will store the information.
+clubs, players, teams, tournaments, etc, these files will store the information.
 Tampering with these files manually could break the system and is strongly
 advised against.
 
