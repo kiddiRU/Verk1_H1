@@ -561,7 +561,7 @@ class PlayerUI:
         while team_club not in club_names:
             print(self.tui.table(menu, user_path, info, {}, message))
             team_club = input(
-                f"{self.input_color}Choose A Club To Join" +
+                f"{self.input_color}Choose A Club To Join " +
                 f"Or 'q' To Cancel:{self.reset}\n"
             )
             if team_club == "q":
