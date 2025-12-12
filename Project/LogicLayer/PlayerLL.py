@@ -187,9 +187,19 @@ class PlayerLL:
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
-    # TODO docstring
     def save_player(self, player_handle: str | None = None):
-        """ Takes in a player handle and saves them as the current active user. """
+        """Takes in a player handle and saves them as the current active user.
+
+        :param player_handle:
+            The current users unique handle
+        :type player_handle: str | None
+
+        :return:
+            Returns the unique handle if the method has been called before
+            If function has not been called before
+            and no handle is put into the method the function will return None
+        :rtype: str | None
+        """
 
         if player_handle is not None:
             self.player = player_handle

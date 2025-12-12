@@ -187,6 +187,18 @@ def promote_captain(current_player: Player, handle_to_promote: str) -> None:
 
 # TODO add doc string
 def save_player(player_handle: str | None = None) -> str | None:
+    """Takes in a player handle and saves them as the current active user.
+
+    :param player_handle:
+        The current users unique handle
+    :type player_handle: str | None
+
+    :return:
+        Returns the unique handle if the method has been called before
+        If function has not been called before
+        and no handle is put into the method the function will return None
+    :rtype: str | None
+    """
     return player_logic.save_player(player_handle)
 
 def get_player_team_and_rank(player_handle: str) -> tuple[str, str]:
