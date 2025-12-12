@@ -568,7 +568,7 @@ class SpectateUI:
         )
 
         # Extract tournament winner from the last match
-        match_split = match_list[0].split("\n")
+        match_split = match_list[-1].split("\n")
         tournament_winner: str = (
             match_split[-1].replace("Match Winner: ", "").rstrip("|").strip()
         )
