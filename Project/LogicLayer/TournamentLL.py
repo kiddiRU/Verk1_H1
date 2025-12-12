@@ -503,8 +503,7 @@ class TournamentLL:
         return teams_list
 
     def to_time(self, value: str) -> time:
-        """
-        Converts a string of time into time object.
+        """Converts a string of time into time object.
 
         :param value: String of time
         :type value: str
@@ -527,8 +526,7 @@ class TournamentLL:
         )
 
     def to_date(self, value: str) -> date:
-        """
-        Converts a string of date into date object.
+        """Converts a string of date into date object.
 
         :param value: String of date
         :type value: str
