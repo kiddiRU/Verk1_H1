@@ -18,48 +18,48 @@ class MatchLL:
     def __init__(self) -> None:
         pass
 
-    # TODO fix docstring
     def create_match(
         self,
         tournament_id: str,
-        date: date,
-        time: time,
+        match_date: date,
+        match_time: time,
         team_1: str,
         team_2: str
     ) -> Match:
-        """
-        First takes in the info that has already been validated
-        and creates a uuid for the match,
-        Then creates the object using the uuid and info and
-        points the object to the Data Layer API to be stored as a match
+        """Creates new Match object, sends it to be
+        stored and returns the new Match object.
 
         :param tournament_id:
-            The uuid of the tournament that the match belongs to
+            The UUID of the tournament the match should belong to.
         :type tournament_id: str
 
         :param date:
-            The date of the match
+            The date of the match.
         :type date: date
 
         :param time:
-            The time of the match
+            The time of the match.
         :type time: time
 
         :param team_1:
-            The uuid of one of the teams playing in the match
+            The UUID of one team playing in the match.
         :type team_1: str
 
         :param team_2:
-            The uuid of the other team playing in the match
+            The UUID of the other team playing in the match.
         :type team_2: str
+
+        :return:
+            Returns the new Match object.
+        :rtype: Match
         """
         # Create a new Match object with a unique UUID.
         uuid: str = str(uuid4())
         new_match: Match = Match(
             uuid,
             tournament_id,
-            date,
-            time,
+            match_date,
+            match_time,
             team_1,
             team_2
             )
@@ -68,19 +68,16 @@ class MatchLL:
         DataLayerAPI.store_match(new_match)
         return new_match
 
-    # TODO fix docstring
-    def get_matches(self, tournament_id: str) -> list[Match]:
-        """Gets the tournament uuid to get matches from
+    def get_matches(self, tournament_uuid: str) -> list[Match]:
+        """Gets a list of all matches in the tournament
+        with the given UUID, sorted by their date and time.
 
-        Loads all matches and lists the matches in a specific tournament,
-        then sorts the matches by their date and time
-
-        :param tournament_id:
+        :param tournament_uuid:
             The tournament uuid to get all matches from
-        :type tournament_id: str
+        :type tournament_uuid: str
 
         :return:
-            Returns a list of list of match objects
+            Returns a list of Match objects.
         :rtype: list[Match]
         """
         # Loads all matches and lists the matches in a specific tournament
@@ -88,7 +85,7 @@ class MatchLL:
         model_matches: list[Match] = [
             match
             for match in model_matches
-            if match.tournament_id == tournament_id
+            if match.tournament_id == tournament_uuid
         ]
 
         # Sorts the list of matches by their date and time
@@ -99,20 +96,28 @@ class MatchLL:
 
         return sorted_matches
 
-    # TODO fix docstring
-    def change_match_winner(self, match_uuid: str, team_uuid: str) -> Match:
-        """Gets the match uuid and the team uuid of the winner
+    def change_match_winner(
+        self,
+        match_uuid: str,
+        team_uuid: str
+    ) -> Match | None:
+        """Updates match winner of a specific match in a specific tournament.
 
-        Docstring for change_match_winner
+        Given the uuid of a specific tournament and the uuid of a
+        specific match, will update the winner of this match, will set a new
+        match into the server used if needed, will move onto next round of
+        tournament if needed and will archive tournament if needed.
+
+        :param tournament_uuid:
+            The uuid of the tournament which the match belongs to.
 
         :param match_uuid:
-            The match uuid of the match to change the winners and losers
-        :type match_uuid: str
+            The uuid of the match you want to update.
 
         :param team_uuid:
-            The teams uuid of the winning team
-        :type team_uuid: str
+            The uuid of the winner.
         """
+        # Get lists of matches and teams.
         model_matches: list[Match] = DataLayerAPI.load_matches()
         model_teams: list[Team] = DataLayerAPI.load_teams()
 
@@ -150,37 +155,33 @@ class MatchLL:
 
                 return match
 
-    # TODO docstring
     def get_match(
         self,
-        tournament_id: str,
+        tournament_uuid: str,
         match_team1_uuid: str,
         match_team2_uuid: str
     ) -> Match | str:
-        """Gets tournament uuid and both teams uuid's
+        """Finds the match of two teams competing in a tounrnament.
 
-        Loads all matches and searches for a match that has
-        both teams in the match
+        :param tournament_uuid:
+            The UUID of the tournament the teams are competing in.
+        :type tournament_uuid: str
 
-        :param tournament_id:
-            asdf
-        :type tournament_id: str
+        :param team1_uuid:
+            The UUID of one team.
+        :type team1_uuid: str
 
-        :param match_team1_uuid:
-            asdf
-        :type match_team1_uuid: str
-
-        :param match_team2_uuid:
-            asdf
-        :type match_team2_uuid: str
+        :param team2_uuid:
+            The UUID of the other team.
+        :type team2_uui: str
 
         :return:
-            Returns the Match object,
-            if no match is found with those teams and empty string is returned
+            If a match is found with the two teams, an object of that match
+            is returned, else an empty string.
         :rtype: Match | str
         """
         # Loads all match objects in a tournament
-        matches: list[Match] = self.get_matches(tournament_id)
+        matches: list[Match] = self.get_matches(tournament_uuid)
 
         # Looks for a match with both teams in it
         for match in matches:

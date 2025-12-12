@@ -349,8 +349,8 @@ class TournamentLL:
         for match_datetime in times_used:
             self._match_logic.create_match(
                     tournament_id=uuid,
-                    date=match_datetime.date(),
-                    time=match_datetime.time(),
+                    match_date=match_datetime.date(),
+                    match_time=match_datetime.time(),
                     team_1="To be revealed",
                     team_2="To be revealed"
             )

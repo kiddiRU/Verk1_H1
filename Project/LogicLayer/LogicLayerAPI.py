@@ -968,40 +968,42 @@ def get_club_by_name(club_name: str) -> Club:
 
 
 def get_all_matches(tournament_uuid: str) -> list[Match]:
-    """
-    Parameters: uuid of tournaemnt
+    """Gets a list of all matches in the tournament
+    with the given UUID, sorted by their date and time.
 
-    Returns a list of all matches in the tournament
-    tied to the uuid given.
+    :param tournament_uuid:
+        The tournament uuid to get all matches from
+    :type tournament_uuid: str
+
+    :return:
+        Returns a list of Match objects.
+    :rtype: list[Match]
     """
     return match_logic.get_matches(tournament_uuid)
 
 
 def get_match(
-    tournament_id: str,
-    match_team1: str,
-    match_team2: str
+    tournament_uuid: str,
+    team1_uuid: str,
+    team2_uuid: str
 ) -> Match | str:
-    """Gets tournament uuid and both teams uuid's
+    """Finds the match of two teams competing in a tounrnament.
 
-    Loads all matches and searches for a match that has
-    both teams in the match
+    :param tournament_uuid:
+        The UUID of the tournament the teams are competing in.
+    :type tournament_uuid: str
 
-    :param tournament_id:
-        asdf
-    :type tournament_id: str
+    :param team1_uuid:
+        The UUID of one team.
+    :type team1_uuid: str
 
-    :param match_team1_uuid:
-        asdf
-    :type match_team1_uuid: str
-
-    :param match_team2_uuid:
-        asdf
-    :type match_team2_uuid: str
+    :param team2_uuid:
+        The UUID of the other team.
+    :type team2_uui: str
 
     :return:
-        Returns the Match object,
-        if no match is found with those teams and empty string is returned
+        If a match is found with the two teams, an object of that match
+        is returned, else an empty string.
     :rtype: Match | str
     """
-    return match_logic.get_match(tournament_id, match_team1, match_team2)
+    return match_logic.get_match(tournament_uuid, team1_uuid, team2_uuid)
