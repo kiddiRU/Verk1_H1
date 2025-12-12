@@ -474,14 +474,20 @@ class TournamentLL:
         if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
             self.next_round(tournament_uuid)
 
-    # TODO docstring
     def get_teams_from_tournament_name(
         self,
         tournament_name: str
     ) -> list[Team]:
-        """Takes in a tournament name
+        """Gets a list of teams playing in a tournament.
 
-        Returns a list of Team objects
+        :param tournament_name:
+            The name of tournament to get teams from.
+        :type tournament_name: str
+
+        :return:
+            Returns a list of team objects playing in the tournament with the
+            given name.
+        :rtype: list[Team]
         """
         model_tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
         teams_list: list[Team] = []
@@ -544,7 +550,10 @@ class TournamentLL:
         '''
         # Get an object of the tournament with the given name.
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.name == name), None)
+        tournament: Tournament | None = next(
+            (t for t in tournaments if t.name == name),
+            None
+        )
 
         # If the tournament doesn't exist, raise an error declaring so.
         if tournament is None:
@@ -564,9 +573,11 @@ class TournamentLL:
         :rtype: Tournament
         '''
         # Get an object of the tournament with the given UUIDe.
-        # TODO Fix code
         tournaments: list[Tournament] = DataLayerAPI.load_tournaments()
-        tournament: Tournament | None = next((t for t in tournaments if t.uuid == uuid), None)
+        tournament: Tournament | None = next(
+            (t for t in tournaments if t.uuid == uuid),
+            None
+        )
 
         # If the tournament doesn't exist, raise an error declaring so.
         if tournament is None:
