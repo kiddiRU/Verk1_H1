@@ -2,6 +2,18 @@
 % Author: Ísak
 % Co-author: Elmar
 \section{Requirement List}
+The requirement list includes all intended requirements, both completed and uncompleted. Each requirement is assigned a priority of either A, B or C, where A represents the crucial functionality of
+the program for it to operate, and C represents features that are mainly optional or for presentation. Completed requirements are marked with a green check and uncompleted requirements are marked
+with a red X. Not all requirements were finished within the given timeframe, and for those unfinished, the decision was made to focus on refining and improving the requirements that had been implemented.
+
+Inputted user information is validated to ensure that all inputs follow the correct format required by the system. Below are some of the more specific validations that were implemented.
+
+-For legal names of the players, only alphabetic characters are allowed
+-For unique names (handle, team, club, tournament) the system checks that no name of that type is already in use.
+-For email the system checks that there is an @ and that there is something before and after it that is not just empty space
+-For phone number the required format is three digits followed by a dash followed by four digits, so the system only accepts icelandic phone numbers
+-For address we require the user inputs a street name, street number and a city name, the street name and city name must contain only letters, while the street number contains only digits.
+
 \subsection{Functional Requirements}
 \setcounter{mycnta}{0}
 \begin{tblr}{|p{0.5cm}|p{9cm}|l|l|l|}
