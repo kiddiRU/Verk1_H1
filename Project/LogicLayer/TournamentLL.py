@@ -144,55 +144,6 @@ class TournamentLL:
 
         DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
-    # Isn't used, remove?
-    # def update_info(
-    #     self,
-    #     name: str,
-    #     venue: str,
-    #     email: str,
-    #     phone_number: str
-    # ) -> None:
-    #     '''
-    #     Takes in a tournaments name, venue, email and phone number.
-
-    #     Takes the given info and applies it a tournament. Performs
-    #     no validation on the given info.
-    #     '''
-    #     tournament: Tournament = self.get_tournament_by_name(name)
-
-    #     tournament.name = name
-    #     tournament.venue = venue
-    #     tournament.email = email
-    #     tournament.phone_number = phone_number
-
-    #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
-
-    # Isn't used, remove?
-    # def update_tournament_datetime(
-    #     self,
-    #     name: str,
-    #     start_date: date,
-    #     end_date: date,
-    #     time_frame_start: time,
-    #     time_frame_end: time
-    # ) -> None:
-    #     '''
-    #     Takes in a start date, end date, time frame start, and a time frame end.
-
-    #     Takes the given info and applies it a tournament. Performs no validation
-    #     on the given info.
-    #     '''
-    #     tournament: Tournament = self.get_tournament_by_name(name)
-
-    #     if tournament.status == Tournament.StatusType.ACTIVE:
-    #         raise ValidationError('You can\'t change the time of an active tournament!')
-
-    #     tournament.start_date = start_date
-    #     tournament.end_date = end_date
-    #     tournament.time_frame_start = time_frame_start
-    #     tournament.time_frame_end = time_frame_end
-
-    #     DataLayerAPI.update_tournament(tournament.uuid, tournament)
 
     def list_tournaments(self) -> list[Tournament]:
         '''Gets a list of all stored tournaments.
@@ -503,6 +454,8 @@ class TournamentLL:
         servers: list[Server] = DataLayerAPI.load_servers()
         for server in servers:
             if server.match_in_server == match_uuid:
+                # If this server is needed it will assign a new match to
+                # it, otherwise assign no match to it.
                 if j < len(matches):
                     server.match_in_server = matches[j].uuid
                 else:
@@ -516,7 +469,7 @@ class TournamentLL:
         if i == len(matches) - 1 or matches[i+1].team_1 == "To be revealed":
             self.next_round(tournament_uuid)
 
-
+    # TODO docstring
     def get_teams_from_tournament_name(self, tournament_name:str) -> list[Team]:
         """Takes in a tournament name
 
@@ -533,7 +486,7 @@ class TournamentLL:
 
         return teams_list
 
-
+    # TODO docstring
     def to_time(self, value: str) -> time:
         # Split into parts
         parts = value.split(":")
@@ -550,10 +503,9 @@ class TournamentLL:
             second=int(second)
         )
 
+    # TODO docstring
     def to_date(self, value: str) -> date:
         return datetime.strptime(value, "%Y-%m-%d").date()
-
-# Fra utility
 
     def get_tournament_by_name(self, name: str) -> Tournament:
         '''Gets a Tournament object by its name.

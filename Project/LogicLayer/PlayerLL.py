@@ -149,28 +149,8 @@ class PlayerLL:
         # Store and return the updated player.
         DataLayerAPI.update_player(player.uuid, player)
         return player
-
-    # Isn't used, remove?
-    # def leave_team(self, team_name: str, player: Player) -> None:
-    #     '''
-    #     Takes in a teams UUID and a Player object.
-
-    #     Removes the player from the team, raises an exception if the player
-    #     is the captain of said team.
-    #     '''
-    #     teams: list[Team] = DataLayerAPI.load_teams()
-    #     team = next((t for t in teams if t.name == team_name), None)
-
-    #     if team is None:
-    #         raise Exception('Team not found!')
-
-    #     if team.team_captain_uuid == player.uuid:
-    #         raise Exception('You must promote a new captain before leaving your team!')
-
-    #     team.list_player_uuid.remove(player.uuid)
-    #     DataLayerAPI.update_team(team.uuid, team)
-
-#TODO: this is being used when captain leaves the team and i put keyerror cur the validation error wasnt working
+ 
+    # TODO comment
     def promote_captain(self, current_player: Player, handle_to_promote: str) -> None: 
         '''Promotes a teams player to its captain.
 
@@ -207,6 +187,7 @@ class PlayerLL:
         team_to_edit.team_captain_uuid = player_to_promote.uuid
         DataLayerAPI.update_team(team_to_edit.uuid, team_to_edit)
 
+    # TODO docstring
     def save_player(self, player_handle: str | None = None):
         """ Takes in a player handle and saves them as the current active user. """
 
