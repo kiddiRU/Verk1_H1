@@ -61,7 +61,6 @@ with open(team_csv, "r") as file:
         
         line.pop("team_id")
         line.pop("captain_handle")
-        line.pop("logo")
 
         dl_api.store_team(Team(**line))
 
