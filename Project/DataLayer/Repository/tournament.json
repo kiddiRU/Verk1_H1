@@ -223,7 +223,18 @@
         "list_servers": [
             "NoServer"
         ],
-        "teams_playing": []
+        "teams_playing": [
+            "c1037242-2aaf-44fc-a57b-2dfc5d248f4a",
+            "b6f18db4-e778-4b72-84e6-91aed8125bb4",
+            "70d87222-aa03-490b-a102-519a69ab967f",
+            "65444a2b-0e9c-43bc-a18b-7de3d231a313",
+            "7ffed5fa-83c5-423e-a975-0f67b5782539",
+            "cde9b285-b55b-4788-bb6c-f40bfe9d765f",
+            "01a9ca63-8ad2-444e-b6f6-ee80e80411c5",
+            "18ab11f0-3069-42bd-bac7-b5b8204c0383",
+            "5b4a4ac3-eebe-456e-a123-8ca0fe90a263",
+            "36783b4e-702d-46a9-af31-bcb3891cb095"
+        ]
     },
     "46ef9433-b934-4398-86da-09707d52e229": {
         "uuid": "46ef9433-b934-4398-86da-09707d52e229",
