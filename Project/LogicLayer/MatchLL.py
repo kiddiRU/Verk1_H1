@@ -12,14 +12,12 @@ from Models import Team
 from DataLayer import DataLayerAPI
 
 
-# TODO docstring calss
 class MatchLL:
     """ Match Logic"""
 
     def __init__(self) -> None:
         pass
 
-    # TODO fix docstring
     def create_match(
             self,
             tournament_id: str,
@@ -66,7 +64,6 @@ class MatchLL:
         DataLayerAPI.store_match(new_match)
         return new_match
 
-    # TODO fix docstring
     def get_matches(self, tournament_id: str) -> list[Match]:
         """Gets the tournament uuid to get matches from
 
@@ -97,7 +94,6 @@ class MatchLL:
 
         return sorted_matches
 
-    # TODO fix docstring
     def change_match_winner(self, match_uuid: str, team_uuid: str) -> Match:
         """Gets the match uuid and the team uuid of the winner
 
@@ -148,7 +144,6 @@ class MatchLL:
 
                 return match
 
-    # TODO docstring
     def get_match(
             self,
             tournament_id: str,
