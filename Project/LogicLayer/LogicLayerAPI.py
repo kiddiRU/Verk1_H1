@@ -9,7 +9,14 @@ Logic layer API.
 
 from datetime import date, time
 from Models import Club, Match, Player, Team, Tournament
-from LogicLayer import PlayerLL, TeamLL, TournamentLL, ClubLL, MatchLL, Validation
+from LogicLayer import (
+    PlayerLL,
+    TeamLL,
+    TournamentLL,
+    ClubLL,
+    MatchLL,
+    Validation
+)
 
 team_logic = TeamLL()
 match_logic = MatchLL()
@@ -345,7 +352,7 @@ def create_team(
     ascii_art: str
 ) -> Team:
     '''Creates a new team, sends it to be
-    stored andreturns the new Team object.
+    stored and returns the new Team object.
 
     :param name:
         The name of the team.
